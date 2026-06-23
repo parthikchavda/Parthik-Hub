@@ -23,8 +23,8 @@ const GITHUB_OWNER  = 'parthikchavda';   // e.g. 'parthik'
 const GITHUB_REPO   = 'first-aid-kit-hub';          // your repo name
 const GITHUB_BRANCH = 'main';                   // 'main' or 'master'
 
-const SITE_TITLE = 'First Aid Kit Hub';
-const SITE_SUBTITLE = 'Guides & reference sheets';
+const SITE_TITLE = 'Parthik Hub';
+const SITE_SUBTITLE = 'Explore, Learn & Enjoy All Resources';
 
 // Extensions this hub will list & open. Add more if you need them.
 const FILE_TYPES = {
