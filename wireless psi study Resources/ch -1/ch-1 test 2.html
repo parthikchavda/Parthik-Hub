@@ -1,0 +1,3575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electronics MCQ • Wireless PSI</title>
+  <style>
+    /* ===== BLUE THEME: CSS VARIABLES ===== */
+    :root {
+      --bg: #f0f5ff;
+      --bg2: #e4eeff;
+      --card: #ffffff;
+      --card2: #f5f8ff;
+      --text: #0f1f3d;
+      --text2: #3a5080;
+      --text-light: #7a95c0;
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --primary-dark: #1d4ed8;
+      --primary-glow: rgba(37,99,235,0.18);
+      --accent: #0ea5e9;
+      --accent2: #06b6d4;
+      --success: #16a34a;
+      --success-light: #dcfce7;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --warning: #d97706;
+      --warning-light: #fef3c7;
+      --bookmark: #f59e0b;
+      --bookmark-light: #fef3c7;
+      --border: #bfdbfe;
+      --border2: #93c5fd;
+      --shadow: 0 2px 8px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-lg: 0 8px 32px rgba(37,99,235,0.13), 0 2px 8px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --grad: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+      --grad2: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+    }
+    [data-theme="dark"] {
+      --bg: #0a1628;
+      --bg2: #0f1f3a;
+      --card: #13243d;
+      --card2: #182d4a;
+      --text: #e0eaff;
+      --text2: #7ba4d4;
+      --text-light: #3d6090;
+      --primary: #3b82f6;
+      --primary-light: #1e3a5f;
+      --primary-dark: #60a5fa;
+      --primary-glow: rgba(59,130,246,0.22);
+      --accent: #38bdf8;
+      --accent2: #22d3ee;
+      --success: #22c55e;
+      --success-light: #052e16;
+      --danger: #f87171;
+      --danger-light: #2d0a0a;
+      --warning: #fbbf24;
+      --warning-light: #2a1800;
+      --bookmark: #fcd34d;
+      --bookmark-light: #2a1f00;
+      --border: #1e3a5f;
+      --border2: #2a5080;
+      --shadow: 0 2px 8px rgba(0,0,0,0.4), 0 4px 16px rgba(59,130,246,0.1);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.5), 0 4px 16px rgba(59,130,246,0.15);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+    body::before {
+      content:'';
+      position:fixed;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--grad);
+      z-index: 9999;
+    }
+
+    /* ===== FOCUS MODE ===== */
+    body.focus-mode header, body.focus-mode .sidebar { display: none !important; }
+    body.focus-mode .page-wrap { padding: 0; max-width: 100%; }
+    body.focus-mode .quiz-wrap { width: 100%; }
+    body.focus-mode .quiz-card { border-radius: 0; border: none; min-height: 100vh; box-shadow: none; padding: clamp(1.25rem, 5vw, 2.5rem) clamp(1rem, 8vw, 4rem); }
+    .focus-exit-btn {
+      display: none;
+      position: fixed; top: 12px; right: 12px; z-index: 999;
+      background: var(--card); border: 1px solid var(--border); border-radius: 50px;
+      padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 700; color: var(--text);
+      cursor: pointer; box-shadow: var(--shadow-lg); gap: 0.4rem; align-items: center; transition: all 0.2s;
+    }
+    body.focus-mode .focus-exit-btn { display: flex; }
+    .focus-exit-btn:hover { background: var(--danger-light); color: var(--danger); }
+
+    /* ===== HEADER ===== */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: var(--shadow);
+    }
+    .header-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0.65rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.75rem; flex-wrap: wrap;
+    }
+    .header-left { display:flex; align-items:center; gap:0.6rem; }
+    .header-logo {
+      width:34px; height:34px; border-radius:10px;
+      background: var(--grad); display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; flex-shrink:0; box-shadow:0 2px 8px var(--primary-glow);
+    }
+    .header-left h1 { font-size: clamp(0.82rem, 2.2vw, 1.05rem); font-weight: 700; color: var(--text); line-height: 1.2; }
+    .header-left p { font-size: 0.68rem; color: var(--text-light); margin-top: 1px; }
+    .header-right { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+
+    /* Stats */
+    .stats-bar { display: flex; gap: 0.4rem; align-items: center; }
+    .stat-chip {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.22rem 0.55rem; min-width: 46px;
+    }
+    .stat-chip .val { font-size: 0.95rem; font-weight: 800; color: var(--primary); line-height: 1; }
+    .stat-chip .lbl { font-size: 0.58rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.04em; }
+    .stat-chip.correct-stat .val { color: var(--success); }
+    .stat-chip.score-stat .val { color: var(--warning); }
+
+    /* Timer */
+    .timer-chip {
+      display: flex; align-items: center; gap: 0.35rem;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.22rem 0.7rem; cursor: pointer;
+      font-size: 0.9rem; font-weight: 800; color: var(--text2); transition: all 0.2s;
+      user-select: none; font-family: 'Courier New', monospace; white-space: nowrap;
+    }
+    .timer-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .timer-chip.running { color: var(--success); border-color: var(--success); background: var(--success-light); }
+    .timer-chip.running .timer-dot { background: var(--success); animation: blink 1s infinite; }
+    .timer-chip.paused { color: var(--warning); border-color: var(--warning); background: var(--warning-light); }
+    .timer-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-light); flex-shrink: 0; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    /* Header buttons */
+    .hdr-btn {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.35rem 0.65rem; cursor: pointer; font-size: 0.8rem; color: var(--text);
+      transition: all 0.2s; display: flex; align-items: center; gap: 0.3rem;
+      white-space: nowrap; font-weight: 600;
+    }
+    .hdr-btn:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .hdr-btn.active, .hdr-btn.focus-active { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .hdr-btn.danger:hover { background: var(--danger-light); border-color: var(--danger); color: var(--danger); }
+    .hdr-btn.edit-active { background: #fff3e0; border-color: var(--warning); color: var(--warning); }
+
+    /* Progress strip */
+    .progress-strip { height: 3px; background: var(--border); }
+    .progress-fill { height: 100%; background: var(--grad); width: 0%; transition: width 0.5s ease; }
+
+    /* ===== LAYOUT ===== */
+    .page-wrap { max-width: 1280px; margin: 0 auto; padding: 1.25rem; display: flex; gap: 1.25rem; align-items: flex-start; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 252px; flex-shrink: 0; background: var(--card);
+      border-radius: var(--radius); border: 1px solid var(--border);
+      box-shadow: var(--shadow); position: sticky; top: 62px;
+      max-height: calc(100vh - 76px); overflow-y: auto; scrollbar-width: thin;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+    .sidebar-head {
+      padding: 0.7rem 1rem; font-weight: 700; font-size: 0.78rem; color: var(--text2);
+      text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: var(--card); z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .legend { display: flex; gap: 0.4rem; padding: 0.45rem 0.85rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.62rem; color: var(--text-light); }
+    .legend-dot { width: 9px; height: 9px; border-radius: 3px; }
+    .legend-dot.un { background: var(--bg2); border: 1px solid var(--border2); }
+    .legend-dot.ans { background: var(--primary-light); border: 1px solid var(--primary); }
+    .legend-dot.ok { background: var(--success-light); border: 1px solid var(--success); }
+    .legend-dot.no { background: var(--danger-light); border: 1px solid var(--danger); }
+    .legend-dot.bm { background: var(--bookmark-light); border: 1px solid var(--bookmark); }
+
+    .q-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; padding: 0.7rem; }
+    .q-btn {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--border); border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 0.72rem; cursor: pointer; transition: all 0.15s;
+      background: var(--card2); color: var(--text2); user-select: none; position: relative;
+    }
+    .q-btn:hover { border-color: var(--primary); color: var(--primary); transform: scale(1.1); }
+    .q-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+    .q-btn.answered { background: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
+    .q-btn.correct { background: var(--success-light); border-color: var(--success); color: var(--success); }
+    .q-btn.wrong { background: var(--danger-light); border-color: var(--danger); color: var(--danger); }
+    .q-btn.active.correct { background: var(--success); color: #fff; border-color: var(--success); }
+    .q-btn.active.wrong { background: var(--danger); color: #fff; border-color: var(--danger); }
+    .q-btn.bookmarked::after { content: '🔖'; position: absolute; top: -4px; right: -4px; font-size: 0.52rem; line-height: 1; }
+
+    /* ===== MAIN QUIZ AREA ===== */
+    .quiz-wrap { flex: 1; min-width: 0; }
+    .quiz-card {
+      background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg); padding: clamp(1.25rem, 4vw, 2rem);
+      display: flex; flex-direction: column; min-height: calc(100vh - 95px);
+    }
+
+    /* Question header row */
+    .q-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .q-header-left { display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; }
+    .q-header-right { display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap; }
+
+    .q-counter {
+      font-size: 0.78rem; font-weight: 700; color: var(--primary);
+      background: var(--primary-light); padding: 0.25rem 0.65rem; border-radius: 20px; white-space: nowrap;
+    }
+    .q-progress-bar { width: 80px; height: 7px; background: var(--bg2); border-radius: 99px; overflow: hidden; flex-shrink:0; }
+    .q-progress-fill { height: 100%; background: var(--grad); transition: width 0.4s ease; border-radius: 99px; }
+    .level-tag {
+      font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.52rem; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
+    }
+    .level-hard { background: #fee2e2; color: #b91c1c; }
+    .level-medium { background: #fef3c7; color: #92400e; }
+    .level-normal { background: #dcfce7; color: #166534; }
+    .level-current { background: #dbeafe; color: #1d4ed8; }
+    [data-theme="dark"] .level-hard { background: var(--danger-light); color: #fca5a5; }
+    [data-theme="dark"] .level-medium { background: var(--warning-light); color: #fcd34d; }
+    [data-theme="dark"] .level-normal { background: var(--success-light); color: #86efac; }
+    [data-theme="dark"] .level-current { background: var(--primary-light); color: var(--primary-dark); }
+
+    /* Bookmark btn */
+    .q-bookmark-btn {
+      background: none; border: 2px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.2rem 0.48rem; cursor: pointer; font-size: 0.95rem; color: var(--text-light);
+      transition: all 0.2s; line-height: 1; white-space: nowrap;
+    }
+    .q-bookmark-btn:hover { border-color: var(--bookmark); background: var(--bookmark-light); }
+    .q-bookmark-btn.bookmarked { border-color: var(--bookmark); background: var(--bookmark-light); color: var(--bookmark); }
+
+    /* Copy button */
+    .q-copy-btn {
+      background: none; border: 2px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.2rem 0.55rem; cursor: pointer; font-size: 0.72rem; color: var(--text-light);
+      transition: all 0.2s; line-height: 1.4; white-space: nowrap; font-weight: 600;
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .q-copy-btn:hover { border-color: var(--accent2); background: #e0f7fa; color: var(--accent2); }
+    .q-copy-btn.copied { border-color: var(--success); background: var(--success-light); color: var(--success); }
+    [data-theme="dark"] .q-copy-btn:hover { background: #0a2030; }
+    [data-theme="dark"] .q-copy-btn.copied { background: var(--success-light); }
+
+    /* Question text */
+    .q-text { font-size: clamp(1rem, 2.4vw, 1.2rem); font-weight: 600; line-height: 1.55; color: var(--text); margin-bottom: 0.45rem; }
+    .q-guj {
+      font-size: clamp(0.82rem, 2vw, 0.97rem); color: var(--text2); line-height: 1.6;
+      margin-bottom: 1.1rem; padding: 0.6rem 0.85rem; background: var(--bg2);
+      border-radius: var(--radius-sm); border-left: 3px solid var(--primary);
+    }
+
+    /* Options */
+    .options-list { display: flex; flex-direction: column; gap: 9px; }
+    .option-item {
+      display: flex; align-items: flex-start; gap: 11px;
+      padding: 0.8rem 0.95rem; border: 2px solid var(--border); border-radius: var(--radius-sm);
+      cursor: pointer; transition: all 0.18s; background: var(--card); position: relative; overflow: hidden;
+    }
+    .option-item::before {
+      content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--grad);
+      transform:scaleY(0); transition:transform 0.18s; border-radius:2px 0 0 2px;
+    }
+    .option-item:hover:not(.locked):not(.disabled-unselected) { border-color: var(--primary); background: var(--primary-light); transform: translateX(4px); }
+    .option-item:hover:not(.locked):not(.disabled-unselected)::before { transform:scaleY(1); }
+    .option-item.selected { border-color: var(--primary); background: var(--primary-light); }
+    .option-item.selected::before { transform:scaleY(1); }
+    .option-item.correct { border-color: var(--success); background: var(--success-light); }
+    .option-item.correct::before { background:var(--success); transform:scaleY(1); }
+    .option-item.wrong { border-color: var(--danger); background: var(--danger-light); }
+    .option-item.wrong::before { background:var(--danger); transform:scaleY(1); }
+    .option-item.locked, .option-item.disabled-unselected { cursor: default; }
+    .option-item.disabled-unselected { opacity: 0.5; }
+
+    .opt-badge {
+      width: 28px; height: 28px; min-width: 28px; border-radius: 50%;
+      background: var(--bg2); color: var(--text2);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.78rem; border: 2px solid var(--border);
+      transition: all 0.18s; flex-shrink: 0;
+    }
+    .option-item.selected .opt-badge { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .option-item.correct .opt-badge { background: var(--success); color: #fff; border-color: var(--success); }
+    .option-item.wrong .opt-badge { background: var(--danger); color: #fff; border-color: var(--danger); }
+    .opt-text { flex: 1; }
+    .opt-en { font-size: clamp(0.86rem, 2vw, 0.98rem); font-weight: 500; color: var(--text); line-height: 1.4; }
+    .opt-guj { font-size: clamp(0.73rem, 1.8vw, 0.84rem); color: var(--text2); margin-top: 2px; }
+    .opt-icon { margin-left: auto; font-size: 1.1rem; flex-shrink: 0; padding-left: 8px; }
+
+    /* Explanation */
+    .explain-box {
+      margin-top: 1rem; padding: 0.9rem 1.1rem; border-radius: var(--radius-sm);
+      display: none; animation: slideDown 0.25s ease;
+    }
+    .explain-box.show { display: block; }
+    .explain-box.correct-exp { background: var(--success-light); border-left: 4px solid var(--success); }
+    .explain-box.wrong-exp { background: var(--danger-light); border-left: 4px solid var(--danger); }
+    @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+    .exp-verdict { font-weight: 800; font-size: 0.97rem; margin-bottom: 0.35rem; }
+    .exp-verdict.ok { color: var(--success); }
+    .exp-verdict.no { color: var(--danger); }
+    .exp-body { font-size: 0.86rem; color: var(--text2); line-height: 1.6; }
+    .correct-ans-label { font-size: 0.78rem; font-weight: 700; color: var(--success); margin-top: 0.4rem; }
+
+    /* Short cause badge — NEW */
+    .short-cause {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      margin-top: 0.5rem; padding: 0.28rem 0.7rem;
+      background: var(--bg2); border: 1px solid var(--border2);
+      border-radius: 20px; font-size: 0.72rem; font-weight: 600; color: var(--text2);
+    }
+    .short-cause-dot { width:6px; height:6px; border-radius:50%; background:var(--primary); flex-shrink:0; }
+
+    /* Nav buttons */
+    .nav-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: auto; padding-top: 1.15rem; border-top: 1px solid var(--border);
+      gap: 0.5rem; flex-wrap: wrap;
+    }
+    .nav-bar-left { display: flex; gap: 0.5rem; align-items: center; }
+    .nav-bar-right { display: flex; gap: 0.5rem; align-items: center; }
+    button {
+      padding: 0.58rem 1.05rem; border-radius: var(--radius-sm); font-weight: 700;
+      font-size: 0.86rem; cursor: pointer; border: none; transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .btn-prev { background: var(--bg2); color: var(--text2); border: 1px solid var(--border); }
+    .btn-prev:hover { background: var(--border); color: var(--text); }
+    .btn-next { background: var(--grad); color: #fff; box-shadow: 0 2px 10px var(--primary-glow); }
+    .btn-next:hover { opacity:0.9; transform: translateY(-1px); }
+    .btn-submit { background: linear-gradient(135deg, var(--success), var(--accent2)); color: #fff; box-shadow: 0 2px 10px rgba(0,192,101,0.3); }
+    .btn-submit:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+    /* ===== MCQ EDITOR PANEL ===== */
+    .editor-panel {
+      display: none; margin-top: 1.25rem; background: var(--card);
+      border-radius: var(--radius); border: 1px solid var(--warning);
+      box-shadow: 0 4px 24px rgba(255,159,67,0.12); overflow: hidden;
+    }
+    .editor-panel.show { display: block; }
+    .editor-head {
+      padding: 0.85rem 1.2rem; background: var(--warning-light); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+    }
+    .editor-head h3 { font-size: 0.9rem; font-weight: 700; color: var(--warning); display:flex; align-items:center; gap:0.4rem; }
+    .editor-body { padding: 1.25rem; }
+    .editor-textarea {
+      width: 100%; min-height: 200px; font-family: 'Courier New', monospace; font-size: 0.78rem;
+      padding: 0.75rem; border: 1px solid var(--border2); border-radius: var(--radius-sm);
+      background: var(--bg2); color: var(--text); line-height: 1.5; resize: vertical;
+      outline: none; transition: border-color 0.2s;
+    }
+    .editor-textarea:focus { border-color: var(--primary); }
+    .editor-actions { display: flex; gap: 0.6rem; margin-top: 0.75rem; flex-wrap: wrap; }
+    .btn-apply { background: var(--success); color: #fff; }
+    .btn-apply:hover { filter: brightness(1.08); }
+    .btn-reset-editor { background: var(--bg2); color: var(--text2); border: 1px solid var(--border); }
+    .btn-reset-editor:hover { border-color: var(--danger); color: var(--danger); }
+    .editor-hint { font-size: 0.72rem; color: var(--text-light); margin-top: 0.5rem; line-height: 1.5; }
+
+    /* ===== REVIEW PANEL ===== */
+    .review-panel {
+      display: none; margin-top: 1.5rem; background: var(--card);
+      border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-lg); overflow: hidden;
+    }
+    .review-panel.show { display: block; }
+    .review-tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .review-tab {
+      flex: 1; padding: 0.8rem; font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      border: none; background: none; color: var(--text2); transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      border-bottom: 3px solid transparent;
+    }
+    .review-tab:hover { color: var(--text); background: var(--border); }
+    .review-tab.active { color: var(--primary); border-bottom-color: var(--primary); background: var(--card); }
+    .review-tab.tab-wrong.active { color: var(--danger); border-bottom-color: var(--danger); }
+    .review-tab.tab-empty.active { color: var(--warning); border-bottom-color: var(--warning); }
+    .review-tab.tab-bm.active { color: var(--bookmark); border-bottom-color: var(--bookmark); }
+    .review-count {
+      background: var(--bg2); border-radius: 99px; padding: 0.08rem 0.42rem;
+      font-size: 0.7rem; font-weight: 800; border: 1px solid var(--border);
+    }
+    .review-tab.active .review-count { background: currentColor; color: #fff; border-color: currentColor; }
+    .review-body { padding: 0.9rem; max-height: 420px; overflow-y: auto; }
+    .review-item {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      padding: 0.8rem 0.9rem; border-radius: var(--radius-sm); margin-bottom: 0.55rem;
+      cursor: pointer; border: 1px solid var(--border); background: var(--card2); transition: all 0.15s;
+    }
+    .review-item:hover { border-color: var(--primary); background: var(--primary-light); transform: translateX(3px); }
+    .review-item:last-child { margin-bottom: 0; }
+    .review-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.78rem; flex-shrink: 0;
+    }
+    .review-num.wrong { background: var(--danger-light); color: var(--danger); border: 2px solid var(--danger); }
+    .review-num.empty { background: var(--warning-light); color: var(--warning); border: 2px solid var(--warning); }
+    .review-num.bm { background: var(--bookmark-light); color: var(--bookmark); border: 2px solid var(--bookmark); }
+    .review-q-text { font-size: 0.86rem; color: var(--text); line-height: 1.4; flex: 1; }
+    .review-q-sub { font-size: 0.73rem; color: var(--text-light); margin-top: 2px; }
+    .review-arrow { color: var(--text-light); font-size: 1rem; margin-left: auto; flex-shrink: 0; }
+    .review-empty-state { text-align: center; padding: 2rem 1rem; color: var(--text-light); }
+    .review-empty-state .big-emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .review-empty-state p { font-size: 0.88rem; }
+
+    /* ===== SCORE MODAL ===== */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,10,30,0.75); z-index: 999;
+      align-items: center; justify-content: center; padding: 1rem;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--card); border-radius: 22px; padding: 2.2rem 1.75rem;
+      max-width: 420px; width: 100%; text-align: center;
+      box-shadow: 0 25px 60px rgba(108,71,255,0.25);
+      animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 1px solid var(--border);
+    }
+    @keyframes modalIn { from{opacity:0;transform:scale(0.82)} to{opacity:1;transform:scale(1)} }
+    .modal-emoji { font-size: 3.5rem; margin-bottom: 0.5rem; }
+    .modal-title { font-size: 1.45rem; font-weight: 800; margin-bottom: 0.35rem; }
+    .modal-score { font-size: 3rem; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip:text; line-height: 1; margin: 0.6rem 0; }
+    .modal-sub { color: var(--text2); font-size: 0.88rem; margin-bottom: 1.2rem; }
+    .modal-stats-row { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.4rem; }
+    .modal-stat { text-align: center; }
+    .modal-stat-val { font-size: 1.35rem; font-weight: 800; }
+    .modal-stat-lbl { font-size: 0.68rem; color: var(--text-light); text-transform: uppercase; }
+    .modal-btns { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+    .btn-review-modal { background: var(--grad); color: #fff; padding: 0.68rem 1.2rem; border-radius: var(--radius-sm); }
+    .btn-review-modal:hover { opacity:0.9; }
+    .btn-redo { background: var(--bg2); color: var(--text); border: 1px solid var(--border); padding: 0.68rem 1.2rem; border-radius: var(--radius-sm); }
+    .btn-redo:hover { background: var(--border); }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--card); border: 1px solid var(--border); border-radius: 50px;
+      padding: 0.58rem 1.15rem; font-size: 0.81rem; font-weight: 600;
+      box-shadow: var(--shadow-lg); z-index: 9999; opacity: 0; transition: all 0.3s;
+      pointer-events: none; color: var(--text); white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ===== KBD HINT ===== */
+    .kbd-hint { text-align: center; color: var(--text-light); font-size: 0.66rem; margin-top: 0.4rem; padding-bottom: 0.4rem; }
+    .kbd { display: inline-block; background: var(--bg2); border: 1px solid var(--border2); border-radius: 4px; padding: 0 4px; font-family: monospace; font-size: 0.66rem; }
+
+    /* ===== OPTION ENTRANCE ANIMATION ===== */
+    .options-list .option-item { opacity: 0; transform: translateY(6px); animation: optIn 0.2s ease forwards; }
+    .options-list .option-item:nth-child(1) { animation-delay: 0.03s; }
+    .options-list .option-item:nth-child(2) { animation-delay: 0.08s; }
+    .options-list .option-item:nth-child(3) { animation-delay: 0.13s; }
+    .options-list .option-item:nth-child(4) { animation-delay: 0.18s; }
+    @keyframes optIn { to{opacity:1;transform:none} }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .page-wrap { flex-direction: column; }
+      .sidebar { width: 100%; position: static; max-height: 250px; top: 0; }
+      .q-grid { grid-template-columns: repeat(10, 1fr); }
+      .quiz-card { min-height: auto; }
+    }
+    @media (max-width: 600px) {
+      .page-wrap { padding: 0.7rem; gap: 0.7rem; }
+      .header-inner { padding: 0.45rem 0.7rem; }
+      .q-grid { grid-template-columns: repeat(8, 1fr); }
+      .stats-bar { gap: 0.3rem; }
+      .stat-chip { padding: 0.18rem 0.4rem; min-width: 38px; }
+      .stat-chip .val { font-size: 0.84rem; }
+      .nav-bar { padding-top: 0.8rem; }
+      button { padding: 0.48rem 0.75rem; font-size: 0.78rem; }
+      .quiz-card { padding: 0.9rem; }
+      .hdr-btn span { display: none; }
+      .q-header { gap: 0.35rem; }
+    }
+    @media (max-width: 400px) {
+      .q-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- FOCUS MODE EXIT BTN -->
+<button class="focus-exit-btn" onclick="toggleFocusMode()">✕ Exit Focus</button>
+
+<!-- HEADER -->
+<header id="main-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">⚡</div>
+      <div>
+        <h1>Electronics Components, Devices &amp; Circuits</h1>
+        <p>Wireless PSI Exam • 105 MCQs • English + Gujarati</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="timer-chip" id="timer-chip" onclick="toggleTimer()" title="Click to Start/Pause Timer">
+        <span class="timer-dot" id="timer-dot"></span>
+        <span id="timer-display">00:00</span>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-chip"><span class="val" id="stat-ans">0</span><span class="lbl">Done</span></div>
+        <div class="stat-chip correct-stat"><span class="val" id="stat-cor">0</span><span class="lbl">✓ Right</span></div>
+        <div class="stat-chip score-stat"><span class="val" id="stat-score">0%</span><span class="lbl">Score</span></div>
+      </div>
+      <button class="hdr-btn" id="edit-btn" onclick="toggleEditor()" title="Edit MCQ Questions">✏️ <span>Edit MCQ</span></button>
+      <button class="hdr-btn" id="focus-btn" onclick="toggleFocusMode()" title="Toggle Focus Mode (F)">🎯 <span>Focus</span></button>
+      <button class="hdr-btn" onclick="toggleTheme()" id="theme-btn" title="Toggle Theme">🌙 <span>Dark</span></button>
+      <button class="hdr-btn danger" onclick="resetAll()" title="Reset all answers">🔄 <span>Reset</span></button>
+    </div>
+  </div>
+  <div class="progress-strip"><div class="progress-fill" id="header-progress"></div></div>
+</header>
+
+<!-- MAIN -->
+<div class="page-wrap">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="main-sidebar">
+    <div class="sidebar-head">
+      <span>Questions</span>
+      <span id="sidebar-count" style="font-size:0.7rem;color:var(--text-light);font-weight:500;"></span>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot un"></span>Unanswered</div>
+      <div class="legend-item"><span class="legend-dot ans"></span>Answered</div>
+      <div class="legend-item"><span class="legend-dot ok"></span>Correct</div>
+      <div class="legend-item"><span class="legend-dot no"></span>Wrong</div>
+      <div class="legend-item"><span class="legend-dot bm"></span>Bookmarked</div>
+    </div>
+    <div class="q-grid" id="q-grid"></div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="quiz-wrap" id="quiz-wrap">
+    <div class="quiz-card" id="quiz-card">
+
+      <!-- Q header -->
+      <div class="q-header">
+        <div class="q-header-left">
+          <div class="q-counter" id="q-counter">Q 1 / 105</div>
+          <div class="q-progress-bar"><div class="q-progress-fill" id="q-progress"></div></div>
+          <span class="level-tag" id="q-level">Hard</span>
+        </div>
+        <div class="q-header-right">
+          <button class="q-copy-btn" id="q-copy-btn" onclick="copyQuestion()" title="Copy question + options">
+            📋 <span>Copy Q</span>
+          </button>
+          <button class="q-bookmark-btn" id="q-bookmark-btn" onclick="toggleBookmark()" title="Bookmark (B)">🔖</button>
+        </div>
+      </div>
+
+      <!-- Question text -->
+      <div class="q-text" id="q-text">Loading...</div>
+      <div class="q-guj" id="q-guj"></div>
+
+      <!-- Options -->
+      <div class="options-list" id="options-list"></div>
+
+      <!-- Explanation -->
+      <div class="explain-box" id="explain-box">
+        <div class="exp-verdict" id="exp-verdict"></div>
+        <div class="exp-body" id="exp-body"></div>
+        <div class="correct-ans-label" id="correct-ans-label"></div>
+        <div class="short-cause" id="short-cause" style="display:none">
+          <span class="short-cause-dot"></span>
+          <span id="short-cause-text"></span>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div class="nav-bar">
+        <div class="nav-bar-left">
+          <button class="btn-prev" onclick="goQuestion(currentIdx - 1)">← Prev</button>
+        </div>
+        <div class="nav-bar-right">
+          <button class="btn-next" id="btn-next" onclick="goQuestion(currentIdx + 1)">Next →</button>
+          <button class="btn-submit" id="btn-submit" onclick="submitQuiz()" style="display:none">Submit 🎯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MCQ EDITOR PANEL -->
+    <div class="editor-panel" id="editor-panel">
+      <div class="editor-head">
+        <h3>✏️ Edit MCQ Array</h3>
+        <button class="hdr-btn" onclick="toggleEditor()" style="font-size:0.75rem;">✕ Close</button>
+      </div>
+      <div class="editor-body">
+        <p style="font-size:0.8rem;color:var(--text2);margin-bottom:0.6rem;">Paste your updated questions array below and click Apply. Keep the same JSON structure.</p>
+        <textarea class="editor-textarea" id="mcq-editor" spellcheck="false" placeholder='[
+  { id: 1, level: "hard", q: "Question text?", gq: "ગુજરાતી પ્રશ્ન?",
+    opts: ["Option A", "Option B", "Option C", "Option D"],
+    gOpts: ["A gu", "B gu", "C gu", "D gu"],
+    ans: 0, exp: "Explanation here." },
+  ...
+]'></textarea>
+        <div class="editor-actions">
+          <button class="btn-apply" onclick="applyEditor()">✅ Apply Questions</button>
+          <button class="btn-reset-editor" onclick="resetEditorToOriginal()">↩ Restore Original</button>
+        </div>
+        <p class="editor-hint">💡 Tip: <code>ans</code> is the 0-based index of the correct option (0=A, 1=B, 2=C, 3=D). Level: "hard" | "medium" | "normal" | "current"</p>
+      </div>
+    </div>
+
+    <!-- REVIEW PANEL (shown after submit) -->
+    <div class="review-panel" id="review-panel">
+      <div class="review-tabs">
+        <button class="review-tab tab-wrong active" onclick="switchReviewTab('wrong')" id="tab-wrong">
+          ❌ Wrong <span class="review-count" id="cnt-wrong">0</span>
+        </button>
+        <button class="review-tab tab-empty" onclick="switchReviewTab('empty')" id="tab-empty">
+          ⬜ Skipped <span class="review-count" id="cnt-empty">0</span>
+        </button>
+        <button class="review-tab tab-bm" onclick="switchReviewTab('bookmarks')" id="tab-bm">
+          🔖 Bookmarks <span class="review-count" id="cnt-bm">0</span>
+        </button>
+      </div>
+      <div class="review-body" id="review-body"></div>
+    </div>
+
+    <div class="kbd-hint">
+      <kbd class="kbd">←</kbd><kbd class="kbd">→</kbd> navigate &nbsp;|&nbsp;
+      <kbd class="kbd">1</kbd>–<kbd class="kbd">4</kbd> select &nbsp;|&nbsp;
+      <kbd class="kbd">B</kbd> bookmark &nbsp;|&nbsp;
+      <kbd class="kbd">C</kbd> copy &nbsp;|&nbsp;
+      <kbd class="kbd">F</kbd> focus &nbsp;|&nbsp;
+      <kbd class="kbd">T</kbd> timer
+    </div>
+  </div>
+
+</div>
+
+<!-- SCORE MODAL -->
+<div class="modal-overlay" id="score-modal">
+  <div class="modal">
+    <div class="modal-emoji" id="modal-emoji">🎉</div>
+    <div class="modal-title" id="modal-title">Test Complete!</div>
+    <div class="modal-score" id="modal-score">--/--</div>
+    <div class="modal-stats-row">
+      <div class="modal-stat"><div class="modal-stat-val" id="ms-correct" style="color:var(--success)">0</div><div class="modal-stat-lbl">Correct</div></div>
+      <div class="modal-stat"><div class="modal-stat-val" id="ms-wrong" style="color:var(--danger)">0</div><div class="modal-stat-lbl">Wrong</div></div>
+      <div class="modal-stat"><div class="modal-stat-val" id="ms-skip" style="color:var(--warning)">0</div><div class="modal-stat-lbl">Skipped</div></div>
+      <div class="modal-stat"><div class="modal-stat-val" id="ms-time" style="color:var(--primary)">--</div><div class="modal-stat-lbl">Time</div></div>
+    </div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <div class="modal-btns">
+      <button class="btn-review-modal" onclick="closeModal()">📋 Review Answers</button>
+      <button class="btn-redo" onclick="resetAll()">🔄 Redo Test</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  
+// const questions = [
+//     { id: 1, level: 'hard', q: 'The mobility of holes in a p-type semiconductor is related to which parameter?', gq: 'p-type semiconductor માં holes ની mobility કઈ parameter સાથે સંબંધિત છે?', opts: ['Effective mass of holes', 'Lattice constant only', 'Doping concentration squared', 'Band gap energy directly'], gOpts: ['Holes ની effective mass', 'ફક્ત Lattice constant', 'Doping concentration squared', 'Band gap energy સીધી'], ans: 0, exp: 'Mobility μ = eτ/m*, where m* is effective mass. Higher effective mass = lower mobility.' },
+//     { id: 2, level: 'hard', q: 'In a BJT, the Early effect is caused by:', gq: 'BJT માં Early effect કેના કારણે થાય છે?', opts: ['Base width modulation by collector voltage', 'Emitter depletion layer widening', 'Recombination in emitter junction', 'Avalanche breakdown at base'], gOpts: ['Collector voltage દ્વારા Base width modulation', 'Emitter depletion layer ચોડી થવી', 'Emitter junction માં Recombination', 'Base પર Avalanche breakdown'], ans: 0, exp: 'Early effect: As VCE increases, collector depletion region widens, narrowing effective base width.' },
+//     { id: 3, level: 'hard', q: 'The h-parameter hfe of a transistor represents:', gq: 'transistor નો h-parameter hfe શું represent કરે છે?', opts: ['Short-circuit current gain', 'Open-circuit voltage gain', 'Input impedance', 'Reverse voltage ratio'], gOpts: ['Short-circuit current gain', 'Open-circuit voltage gain', 'Input impedance', 'Reverse voltage ratio'], ans: 0, exp: 'hfe = ΔIC/ΔIB with VCE constant — forward current transfer ratio (short-circuit current gain).' },
+//     { id: 4, level: 'hard', q: 'Miller effect in an amplifier causes the input capacitance to appear:', gq: 'Amplifier માં Miller effect ના કારણે input capacitance કેવી દેખાય છે?', opts: ['Multiplied by (1+Av)', 'Divided by voltage gain', 'Unchanged', 'Equal to output capacitance'], gOpts: ['(1+Av) ગણી વધી', 'Voltage gain વડે ભાગી', 'અપરિવર્તિત', 'Output capacitance જેટલી'], ans: 0, exp: 'Miller capacitance = C(1+Av). This reduces high-frequency response significantly.' },
+//     { id: 5, level: 'hard', q: 'In a class B push-pull amplifier, crossover distortion is minimized by:', gq: 'Class B push-pull amplifier માં crossover distortion કઈ રીતે ઓછી થાય?', opts: ['Using class AB biasing with small forward bias', 'Increasing signal amplitude', 'Using high β transistors', 'Reducing supply voltage'], gOpts: ['Class AB biasing નાની forward bias સાથે', 'Signal amplitude વધારી', 'ઊંચા β transistors વાપરી', 'Supply voltage ઘટાડી'], ans: 0, exp: 'Class AB provides slight forward bias so both transistors are never fully OFF simultaneously.' },
+//     { id: 6, level: 'hard', q: 'The Barkhausen criterion for oscillation requires loop gain to be:', gq: 'Oscillation માટે Barkhausen criterion અનુસાર loop gain કેટલો હોવો જોઈએ?', opts: ['Exactly 1 with phase shift of 0° or 360°', 'Greater than 1 with 90° phase shift', 'Less than 1 at all frequencies', 'Zero at resonance'], gOpts: ['0° અથવા 360° phase shift સાથે ઠીક 1', '90° phase shift સાથે 1 થી વધારે', 'બધી frequencies પર 1 થી ઓછો', 'Resonance પર Zero'], ans: 0, exp: '|Aβ| = 1 and ∠Aβ = 0° (or 360°) — these are the necessary conditions for sustained oscillations.' },
+//     { id: 7, level: 'hard', q: 'In a JFET, pinch-off voltage VP is defined as:', gq: 'JFET માં pinch-off voltage VP ની definition શું છે?', opts: ['Gate voltage that reduces drain current to near zero', 'Drain voltage causing channel current saturation', 'Breakdown voltage of the gate junction', 'Threshold voltage for inversion layer'], gOpts: ['Drain current ને લગભગ zero કરતો Gate voltage', 'Channel current saturation કરતો Drain voltage', 'Gate junction નો breakdown voltage', 'Inversion layer માટે threshold voltage'], ans: 0, exp: 'VP is the gate-source voltage at which the channel is completely pinched off and ID → 0.' },
+//     { id: 8, level: 'hard', q: 'Negative feedback in amplifiers primarily affects:', gq: 'Amplifiers માં negative feedback મુખ્યત્વે શું affect કરે?', opts: ['Reduces gain, improves bandwidth, stability and linearity', 'Increases gain and reduces bandwidth', 'Increases distortion at high frequencies', 'Reduces input impedance of voltage amplifiers'], gOpts: ['Gain ઘટાડે, bandwidth, stability & linearity સુધારે', 'Gain વધારે અને bandwidth ઘટાડે', 'High frequencies પર distortion વધારે', 'Voltage amplifiers ની input impedance ઘટાડે'], ans: 0, exp: 'NFB: Gain reduces by (1+Aβ), bandwidth increases by same factor, distortion and noise decrease.' },
+//     { id: 9, level: 'hard', q: 'The transconductance gm of a MOSFET in saturation region is proportional to:', gq: 'Saturation region માં MOSFET ની transconductance gm કોના proportional છે?', opts: ['Square root of drain current √ID', 'Drain current ID directly', 'Gate oxide thickness', 'Channel length squared'], gOpts: ['Drain current √ID ના square root ને', 'Drain current ID સીધો', 'Gate oxide thickness', 'Channel length squared'], ans: 0, exp: 'gm = √(2μnCox(W/L)ID), proportional to √ID in saturation.' },
+//     { id: 10, level: 'hard', q: 'In a regulated power supply, the line regulation is defined as:', gq: 'Regulated power supply માં line regulation ની definition શું છે?', opts: ['Change in output voltage per unit change in input voltage', 'Change in output voltage per unit change in load current', 'Maximum output current capability', 'Ripple factor of the supply'], gOpts: ['Input voltage ના unit change દીઠ output voltage ની change', 'Load current ના unit change દીઠ output voltage ની change', 'Maximum output current capability', 'Supply નો ripple factor'], ans: 0, exp: 'Line regulation = ΔVOUT/ΔVIN — measures supply rejection of input voltage variations.' },
+//     { id: 11, level: 'hard', q: 'A phase shift oscillator using RC network produces oscillation at:', gq: 'RC network વાળો phase shift oscillator ક્યારે oscillation produce કરે?', opts: ['f = 1/(2π√6 RC)', 'f = 1/(2πRC)', 'f = 1/(πRC)', 'f = √6/(2πRC)'], gOpts: ['f = 1/(2π√6 RC)', 'f = 1/(2πRC)', 'f = 1/(πRC)', 'f = √6/(2πRC)'], ans: 0, exp: 'Each RC section provides 60° phase shift; three sections give 180°. Frequency = 1/(2π√6 RC).' },
+//     { id: 12, level: 'hard', q: 'The input impedance of a common-gate FET amplifier is:', gq: 'Common-gate FET amplifier ની input impedance કેટલી હોય?', opts: ['Very low (approximately 1/gm)', 'Very high (MΩ range)', 'Equal to drain resistance', 'Infinite'], gOpts: ['ખૂબ ઓછી (આશરે 1/gm)', 'ખૂબ ઊંચી (MΩ range)', 'Drain resistance જેટલી', 'Infinite'], ans: 0, exp: 'Common-gate input impedance ≈ 1/gm (typically few hundred ohms) — similar to common-base BJT.' },
+//     { id: 13, level: 'hard', q: 'Zener diode acts as voltage regulator because in breakdown region:', gq: 'Zener diode voltage regulator તરીકે કેમ કામ કરે? breakdown region માં:', opts: ['Voltage remains nearly constant despite large current changes', 'Current remains constant for varying voltage', 'Resistance becomes zero', 'Capacitance increases sharply'], gOpts: ['મોટા current changes છતાં voltage લગભગ constant રહે', 'Varying voltage માટે current constant રહે', 'Resistance zero થઈ જાય', 'Capacitance અચાનક વધે'], ans: 0, exp: 'In breakdown, the VI characteristic is nearly vertical — small ΔV for large ΔI, ideal for regulation.' },
+//     { id: 14, level: 'hard', q: 'In a Colpitts oscillator, the frequency is determined by:', gq: 'Colpitts oscillator માં frequency શું નક્કી કરે?', opts: ['Inductor and two series capacitors C1, C2', 'Single LC tank circuit only', 'RC time constant', 'Crystal resonance only'], gOpts: ['Inductor અને બે series capacitors C1, C2', 'ફક્ત Single LC tank circuit', 'RC time constant', 'ફક્ત Crystal resonance'], ans: 0, exp: 'f = 1/(2π√(L·Ceq)) where Ceq = C1C2/(C1+C2) — two capacitors in series with one inductor.' },
+//     { id: 15, level: 'hard', q: 'Thermal runaway in a transistor amplifier occurs when:', gq: 'Transistor amplifier માં thermal runaway ક્યારે થાય?', opts: ['dPD/dTJ > 1/θJA (heat cannot be dissipated fast enough)', 'Supply voltage increases suddenly', 'Signal amplitude becomes very large', 'Base current exceeds collector current'], gOpts: ['dPD/dTJ > 1/θJA (heat ઝડપથી dissipate ન થઈ શકે)', 'Supply voltage અચાનક વધે', 'Signal amplitude ખૂબ મોટો થઈ જાય', 'Base current, collector current કરતાં વધી જાય'], ans: 0, exp: 'Thermal runaway: if rate of power increase > rate of heat dissipation, temperature spirals uncontrollably.' },
+//     { id: 16, level: 'hard', q: 'The slope of the load line on IC-VCE characteristics equals:', gq: 'IC-VCE characteristics પર load line ની slope કેટલી?', opts: ['-1/RC', '-RC', 'RC', '1/RC'], gOpts: ['-1/RC', '-RC', 'RC', '1/RC'], ans: 0, exp: 'IC = (VCC - VCE)/RC → rearranging gives slope = -1/RC on the IC vs VCE graph.' },
+//     { id: 17, level: 'hard', q: 'In an op-amp integrator circuit, if input is a square wave, the output is:', gq: 'Op-amp integrator circuit માં input square wave હોય તો output:', opts: ['Triangular wave', 'Sine wave', 'Square wave with phase shift', 'Differentiated spike waveform'], gOpts: ['Triangular wave', 'Sine wave', 'Phase shift સાથે Square wave', 'Differentiated spike waveform'], ans: 0, exp: 'Integration of a constant (square wave top/bottom) = ramp. So triangular wave results.' },
+//     { id: 18, level: 'hard', q: 'The CMRR of an op-amp is defined as:', gq: 'Op-amp ની CMRR ની definition:', opts: ['20 log(AD/ACM)', 'AD × ACM', 'ACM/AD', 'AD + ACM'], gOpts: ['20 log(AD/ACM)', 'AD × ACM', 'ACM/AD', 'AD + ACM'], ans: 0, exp: 'CMRR = 20 log(Differential gain/Common-mode gain) in dB. Higher CMRR = better noise rejection.' },
+//     { id: 19, level: 'hard', q: 'In a full-wave bridge rectifier, the PIV rating of each diode must be at least:', gq: 'Full-wave bridge rectifier માં દરેક diode ની PIV rating ઓછામાં ઓછી કેટલી?', opts: ['Vm (peak of secondary voltage)', '2Vm', 'Vm/2', '√2·Vm'], gOpts: ['Vm (secondary voltage ની peak)', '2Vm', 'Vm/2', '√2·Vm'], ans: 0, exp: 'Bridge rectifier: PIV per diode = Vm (only one diode blocks at a time in each half cycle).' },
+//     { id: 20, level: 'hard', q: 'Hybrid π model of a BJT at high frequencies includes:', gq: 'High frequencies પર BJT ના Hybrid π model માં શું સામેલ છે?', opts: ['Cπ (diffusion capacitance) and Cμ (junction capacitance)', 'Only base resistance rbb\'', 'Only transconductance gm', 'DC biasing resistors only'], gOpts: ['Cπ (diffusion capacitance) અને Cμ (junction capacitance)', 'ફક્ત base resistance rbb\'', 'ફક્ત transconductance gm', 'ફક્ત DC biasing resistors'], ans: 0, exp: 'Hybrid-π high-frequency model adds Cπ across rπ and Cμ (feedback from C to B) to account for transit time.' },
+//     { id: 21, level: 'hard', q: 'In voltage series negative feedback, the input impedance:', gq: 'Voltage series negative feedback માં input impedance:', opts: ['Increases by factor (1+Aβ)', 'Decreases by factor (1+Aβ)', 'Remains unchanged', 'Becomes zero'], gOpts: ['(1+Aβ) ગણો વધે', '(1+Aβ) ગણો ઘટે', 'અપરિવર્તિત રહે', 'Zero થઈ જાય'], ans: 0, exp: 'Series feedback samples input voltage → input impedance increases: Zin(f) = Zin(1+Aβ).' },
+//     { id: 22, level: 'hard', q: 'A Schmitt trigger circuit is used for:', gq: 'Schmitt trigger circuit નો ઉપયોગ:', opts: ['Waveform squaring and noise immunity via hysteresis', 'Signal amplification only', 'Frequency multiplication', 'Phase shifting only'], gOpts: ['Hysteresis દ્વારા waveform squaring અને noise immunity', 'ફક્ত Signal amplification', 'Frequency multiplication', 'ફક્ત Phase shifting'], ans: 0, exp: 'Schmitt trigger uses hysteresis (two threshold voltages) to convert noisy signals to clean square waves.' },
+//     { id: 23, level: 'hard', q: 'In a monostable multivibrator, the quasi-stable state duration depends on:', gq: 'Monostable multivibrator માં quasi-stable state ની duration કોના પર depend કરે?', opts: ['RC time constant of the timing network', 'Supply voltage only', 'Transistor β value', 'Input trigger frequency'], gOpts: ['Timing network ની RC time constant', 'ફક્ત Supply voltage', 'Transistor ની β value', 'Input trigger frequency'], ans: 0, exp: 'Pulse width T ≈ 0.693RC for standard monostable — independent of trigger, depends only on RC.' },
+//     { id: 24, level: 'hard', q: 'The gain-bandwidth product of an op-amp is:', gq: 'Op-amp ની gain-bandwidth product:', opts: ['Constant at all frequencies (unity-gain bandwidth)', 'Increases with frequency', 'Decreases with increasing gain', 'Equal to slew rate'], gOpts: ['બધી frequencies પર constant (unity-gain bandwidth)', 'Frequency સાથે વધે', 'Gain વધવાથી ઘટે', 'Slew rate ની સમાન'], ans: 0, exp: 'GBW = Av × BW = constant. This is why gain and bandwidth trade off inversely in op-amps.' },
+//     { id: 25, level: 'hard', q: 'In power amplifiers, efficiency η of class A is approximately:', gq: 'Power amplifiers માં class A ની efficiency η આશરે:', opts: ['25% (resistive load) to 50% (transformer coupled)', '78.5%', '100%', '63%'], gOpts: ['25% (resistive load) થી 50% (transformer coupled)', '78.5%', '100%', '63%'], ans: 0, exp: 'Class A max efficiency: 25% resistive load, 50% with transformer coupling. Most power wasted as heat.' },
+//     { id: 26, level: 'hard', q: 'The slew rate of an op-amp limits its performance at:', gq: 'Op-amp ની slew rate ક્યારે performance limit કરે?', opts: ['High frequencies with large signal swings', 'Low frequency small signal operation', 'DC amplification', 'Input offset conditions'], gOpts: ['Large signal swings સાથે high frequencies', 'Low frequency small signal operation', 'DC amplification', 'Input offset conditions'], ans: 0, exp: 'Slew rate = max dVO/dt. For large signals at high frequency, output cannot keep up → distortion.' },
+//     { id: 27, level: 'hard', q: 'Avalanche breakdown in a p-n junction is due to:', gq: 'p-n junction માં Avalanche breakdown ના કારણ:', opts: ['Impact ionization by accelerated carriers in strong electric field', 'Quantum mechanical tunneling of carriers', 'Thermal generation of carriers', 'Forward bias current excess'], gOpts: ['Strong electric field માં accelerated carriers દ્વારા impact ionization', 'Carriers ની quantum mechanical tunneling', 'Carriers ની thermal generation', 'Forward bias current excess'], ans: 0, exp: 'Avalanche: high-field accelerated carriers collide with lattice atoms, creating electron-hole pairs (impact ionization).' },
+//     { id: 28, level: 'hard', q: 'In a differential amplifier, CMRR can be improved by:', gq: 'Differential amplifier માં CMRR સુધારવા:', opts: ['Using a large tail current source (high impedance)', 'Reducing supply voltage', 'Increasing input signal amplitude', 'Using mismatched transistors'], gOpts: ['Large tail current source (high impedance) વાપરવો', 'Supply voltage ઘટાડવો', 'Input signal amplitude વધારવો', 'Mismatched transistors વાપરવા'], ans: 0, exp: 'A high-impedance current source as tail improves CMRR by rejecting common-mode signals effectively.' },
+//     { id: 29, level: 'hard', q: 'The 3 dB frequency of a single-stage RC coupled amplifier is determined by:', gq: 'Single-stage RC coupled amplifier ની 3 dB frequency:', opts: ['Both lower cutoff (coupling/bypass caps) and upper cutoff (device capacitances)', 'Only by the coupling capacitor', 'Only by the transistor β', 'Supply voltage and load resistance'], gOpts: ['Lower cutoff (coupling/bypass caps) અને upper cutoff (device capacitances) બંને', 'ફક્ત coupling capacitor', 'ફક્ট transistor β', 'Supply voltage અને load resistance'], ans: 0, exp: 'Lower 3dB by coupling & bypass caps; upper 3dB by transistor junction capacitances and stray capacitances.' },
+//     { id: 30, level: 'hard', q: 'Ferromagnetic materials are characterized by:', gq: 'Ferromagnetic materials ની ખાસિયત:', opts: ['Magnetic domains and very high relative permeability (μr >> 1)', 'Negative susceptibility', 'μr slightly greater than 1', 'Random domain alignment at all temperatures'], gOpts: ['Magnetic domains અને ખૂબ ઊંચી relative permeability (μr >> 1)', 'Negative susceptibility', 'μr 1 થી સહેજ વધારે', 'બધા temperatures પર Random domain alignment'], ans: 0, exp: 'Ferromagnetics have magnetic domains (aligned dipoles), high μr (hundreds to thousands), and exhibit hysteresis.' },
+//     { id: 31, level: 'medium', q: 'The ripple factor of a half-wave rectifier is:', gq: 'Half-wave rectifier નો ripple factor:', opts: ['1.21', '0.48', '0.812', '2.0'], gOpts: ['1.21', '0.48', '0.812', '2.0'], ans: 0, exp: 'Ripple factor γ = √[(Irms/Idc)² - 1] = 1.21 for half-wave rectifier.' },
+//     { id: 32, level: 'medium', q: 'A transistor is connected in common-emitter configuration. If IB = 50 μA and IC = 5 mA, then β =', gq: 'Common-emitter transistor: IB = 50 μA, IC = 5 mA, તો β =', opts: ['100', '50', '150', '200'], gOpts: ['100', '50', '150', '200'], ans: 0, exp: 'β = IC/IB = 5mA/50μA = 100.' },
+//     { id: 33, level: 'medium', q: 'In a voltage divider bias circuit, stability is achieved because:', gq: 'Voltage divider bias circuit માં stability શા માટે?', opts: ['The bias voltage is largely independent of β and temperature', 'The collector current is fixed by VCC only', 'The emitter resistor is absent', 'Base current controls biasing directly'], gOpts: ['Bias voltage β અને temperature થી મોટે ભાગ independent', 'Collector current ફક્ત VCC દ્વારા fixed', 'Emitter resistor absent', 'Base current biasing control કરે'], ans: 0, exp: 'Stiff voltage divider makes VB ≈ constant; with RE, VBEQ and ICQ are stabilized against β variation.' },
+//     { id: 34, level: 'medium', q: 'The function of a bypass capacitor CE in an amplifier circuit is to:', gq: 'Amplifier circuit માં bypass capacitor CE નું કામ:', opts: ['Short-circuit RE at signal frequencies to restore gain', 'Block DC from the output', 'Filter the power supply ripple', 'Provide feedback'], gOpts: ['Signal frequencies પર RE ને short-circuit કરી gain restore', 'Output થી DC block', 'Power supply ripple filter', 'Feedback provide'], ans: 0, exp: 'Without CE, RE introduces negative feedback reducing gain. CE shorts RE at AC → gain = -RC/re.' },
+//     { id: 35, level: 'medium', q: 'Which semiconductor material has a direct bandgap suitable for LEDs?', gq: 'કઈ semiconductor material ની direct bandgap LEDs માટે suitable છે?', opts: ['GaAs (Gallium Arsenide)', 'Silicon (Si)', 'Germanium (Ge)', 'Carbon (Diamond)'], gOpts: ['GaAs (Gallium Arsenide)', 'Silicon (Si)', 'Germanium (Ge)', 'Carbon (Diamond)'], ans: 0, exp: 'GaAs is direct bandgap — electrons recombine directly emitting photons. Si/Ge are indirect bandgap.' },
+//     { id: 36, level: 'medium', q: 'The Q-point (quiescent point) of a transistor amplifier is:', gq: 'Transistor amplifier ની Q-point (quiescent point):', opts: ['DC operating point with no AC signal applied', 'Peak AC signal operating point', 'Point of maximum gain', 'Breakdown point of transistor'], gOpts: ['AC signal વગર DC operating point', 'Peak AC signal operating point', 'Maximum gain નો point', 'Transistor નો breakdown point'], ans: 0, exp: 'Q-point defines the DC bias conditions (ICQ, VCEQ) — the resting point around which the signal swings.' },
+//     { id: 37, level: 'medium', q: 'In a full-wave centre-tap rectifier, if the transformer secondary voltage is 2Vm, the PIV of each diode is:', gq: 'Full-wave centre-tap rectifier: transformer secondary voltage 2Vm, દરેક diode ની PIV:', opts: ['2Vm', 'Vm', 'Vm/2', '4Vm'], gOpts: ['2Vm', 'Vm', 'Vm/2', '4Vm'], ans: 0, exp: 'PIV = 2Vm for centre-tap — when one diode conducts, the other is reverse biased by full secondary voltage.' },
+//     { id: 38, level: 'medium', q: 'The input resistance of a common-collector (emitter follower) amplifier is:', gq: 'Common-collector (emitter follower) amplifier ની input resistance:', opts: ['High (β+1)(RE||RL)', 'Very low approximately re', 'Equal to hie only', 'Same as common-emitter'], gOpts: ['ઊંચી (β+1)(RE||RL)', 'ખૂબ ઓછી approximately re', 'ફક્ત hie', 'Common-emitter જેટલી'], ans: 0, exp: 'Rin = rπ + (β+1)(RE||RL) — high input resistance is the main feature of emitter follower.' },
+//     { id: 39, level: 'medium', q: 'A p-n junction diode in forward bias has:', gq: 'Forward bias માં p-n junction diode:', opts: ['Narrow depletion region and exponential current rise', 'Wide depletion region', 'Zero current always', 'Constant voltage across it'], gOpts: ['સાંકળી depletion region અને exponential current rise', 'Wide depletion region', 'Zero current', 'Constant voltage'], ans: 0, exp: 'Forward bias: reduces potential barrier, narrows depletion region, current rises as I = Is(e^(V/VT) - 1).' },
+//     { id: 40, level: 'medium', q: 'The voltage gain of a common-emitter amplifier without bypass capacitor is:', gq: 'Bypass capacitor વગર common-emitter amplifier નો voltage gain:', opts: ['-RC/(RE+re)', '-RC/re', '-β·RC', 'β·RE/RC'], gOpts: ['-RC/(RE+re)', '-RC/re', '-β·RC', 'β·RE/RC'], ans: 0, exp: 'Without CE: Av = -RC/(RE+re). RE reduces gain but improves stability and linearity.' },
+//     { id: 41, level: 'medium', q: 'In an n-type semiconductor, the majority carriers are:', gq: 'n-type semiconductor માં majority carriers:', opts: ['Electrons', 'Holes', 'Positive ions', 'Neutral atoms'], gOpts: ['Electrons', 'Holes', 'Positive ions', 'Neutral atoms'], ans: 0, exp: 'N-type: donor atoms donate electrons, making electrons the majority carriers.' },
+//     { id: 42, level: 'medium', q: 'The filter capacitor in a power supply works by:', gq: 'Power supply માં filter capacitor:', opts: ['Charging during peaks and discharging into load between peaks', 'Blocking AC completely', 'Amplifying the ripple', 'Converting DC to AC'], gOpts: ['Peaks દરમ્યાન charging, peaks વચ્ચે load માં discharging', 'AC ને સંપૂર્ण block', 'Ripple amplify', 'DC ને AC convert'], ans: 0, exp: 'Capacitor stores charge at peaks, releases during intervals, smoothing the pulsating DC.' },
+//     { id: 43, level: 'medium', q: 'The relation between α and β of a transistor is:', gq: 'Transistor ના α અને β ની relation:', opts: ['β = α/(1-α)', 'α = β/(1+β)... both are same', 'β = 1/α', 'α = β'], gOpts: ['β = α/(1-α)', 'α = β/(1+β)... બંને same', 'β = 1/α', 'α = β'], ans: 0, exp: 'β = α/(1-α) and α = β/(1+β). Since α < 1, β can be large (50-500).' },
+//     { id: 44, level: 'medium', q: 'Intrinsic semiconductor at absolute zero temperature (0K) behaves as:', gq: 'Absolute zero (0K) પર intrinsic semiconductor:', opts: ['Perfect insulator (no free carriers)', 'Perfect conductor', 'Good semiconductor', 'Metallic conductor'], gOpts: ['Perfect insulator (free carriers નહીં)', 'Perfect conductor', 'Good semiconductor', 'Metallic conductor'], ans: 0, exp: 'At 0K, all electrons are in valence band. No thermal energy to excite to conduction band → insulator-like.' },
+//     { id: 45, level: 'medium', q: 'The cut-off frequency of a low-pass RC filter is:', gq: 'Low-pass RC filter ની cut-off frequency:', opts: ['1/(2πRC)', '2πRC', '1/(πRC)', 'RC/2π'], gOpts: ['1/(2πRC)', '2πRC', '1/(πRC)', 'RC/2π'], ans: 0, exp: 'fc = 1/(2πRC) — at this frequency, output voltage drops to 1/√2 (≈0.707) of input value.' },
+//     { id: 46, level: 'medium', q: 'In a Hartley oscillator, the frequency determining elements are:', gq: 'Hartley oscillator માં frequency determine કરતા elements:', opts: ['Two inductors (or tapped inductor) and one capacitor', 'Two capacitors and one inductor', 'RC network only', 'Crystal alone'], gOpts: ['બે inductors (અથવা tapped inductor) અને એક capacitor', 'બે capacitors અને એક inductor', 'ફક્ત RC network', 'ફક્ত Crystal'], ans: 0, exp: 'Hartley: f = 1/(2π√((L1+L2)C)). Uses tapped inductor for feedback.' },
+//     { id: 47, level: 'medium', q: 'Which biasing method provides best stability for a BJT?', gq: 'BJT માટે best stability કઈ biasing method આપે?', opts: ['Voltage divider bias (self-bias)', 'Fixed bias', 'Collector-to-base bias', 'Emitter bias only'], gOpts: ['Voltage divider bias (self-bias)', 'Fixed bias', 'Collector-to-base bias', 'ફક્ત Emitter bias'], ans: 0, exp: 'Voltage divider + emitter resistor provides both self-stabilization and β-independent biasing.' },
+//     { id: 48, level: 'medium', q: 'The primary function of an emitter follower (CC) is:', gq: 'Emitter follower (CC) નું primary function:', opts: ['Impedance matching (high to low Zin to Zout)', 'Voltage amplification', 'Current attenuation', 'Phase inversion of signal'], gOpts: ['Impedance matching (high to low Zin to Zout)', 'Voltage amplification', 'Current attenuation', 'Signal ની Phase inversion'], ans: 0, exp: 'Emitter follower: Av ≈ 1 (unity gain), high Zin, low Zout — ideal for impedance transformation.' },
+//     { id: 49, level: 'medium', q: 'The knee voltage of a silicon diode is approximately:', gq: 'Silicon diode ની knee voltage આશરે:', opts: ['0.6 to 0.7 V', '0.2 to 0.3 V', '1.1 V', '1.4 V'], gOpts: ['0.6 to 0.7 V', '0.2 to 0.3 V', '1.1 V', '1.4 V'], ans: 0, exp: 'Silicon diode threshold (knee) voltage ≈ 0.6-0.7V. Germanium ≈ 0.2-0.3V.' },
+//     { id: 50, level: 'medium', q: 'The efficiency of a class B push-pull amplifier at maximum output is approximately:', gq: 'Maximum output પર class B push-pull amplifier ની efficiency:', opts: ['78.5%', '25%', '50%', '100%'], gOpts: ['78.5%', '25%', '50%', '100%'], ans: 0, exp: 'Class B max efficiency = π/4 × 100% ≈ 78.5%. Much better than class A\'s 25-50%.' },
+//     { id: 51, level: 'medium', q: 'A Zener diode is normally operated in:', gq: 'Zener diode સામાન્ય રીতે ક્યાં operate થાય?', opts: ['Reverse breakdown region', 'Forward bias region', 'Zero bias condition', 'Saturation region'], gOpts: ['Reverse breakdown region', 'Forward bias region', 'Zero bias condition', 'Saturation region'], ans: 0, exp: 'Zener operates in controlled reverse breakdown — maintains nearly constant voltage across it.' },
+//     { id: 52, level: 'medium', q: 'The gain of an inverting op-amp amplifier is:', gq: 'Inverting op-amp amplifier નો gain:', opts: ['-Rf/Rin', '+Rf/Rin', '1 + Rf/Rin', 'Rin/Rf'], gOpts: ['-Rf/Rin', '+Rf/Rin', '1 + Rf/Rin', 'Rin/Rf'], ans: 0, exp: 'Inverting configuration: Av = -Rf/Rin. Negative sign indicates 180° phase inversion.' },
+//     { id: 53, level: 'medium', q: 'In which region does a BJT act as a switch in OFF state?', gq: 'BJT switch OFF state માં ક્યા region માં હોય?', opts: ['Cut-off region', 'Saturation region', 'Active region', 'Breakdown region'], gOpts: ['Cut-off region', 'Saturation region', 'Active region', 'Breakdown region'], ans: 0, exp: 'Cut-off: both junctions reverse biased, IC ≈ 0 → switch OFF. Saturation → switch ON.' },
+//     { id: 54, level: 'medium', q: 'The depletion region of a p-n junction is formed due to:', gq: 'p-n junction ની depletion region ના formation નું કારણ:', opts: ['Diffusion of majority carriers across junction creating fixed ions', 'Thermal excitation of minority carriers', 'Applied external voltage', 'Light absorption'], gOpts: ['Junction across majority carriers ની diffusion, fixed ions create', 'Minority carriers ની thermal excitation', 'Applied external voltage', 'Light absorption'], ans: 0, exp: 'Electrons from n-side diffuse to p-side recombining with holes, leaving fixed positive/negative ions → depletion.' },
+//     { id: 55, level: 'medium', q: 'MOSFET differs from JFET mainly in that MOSFET:', gq: 'MOSFET, JFET થી mainly કેવી રીতે different?', opts: ['Has insulated gate (oxide layer) giving near-infinite input resistance', 'Has lower transconductance', 'Requires forward biased gate', 'Is only available as n-channel'], gOpts: ['Insulated gate (oxide layer) near-infinite input resistance', 'Lower transconductance', 'Forward biased gate જોઈએ', 'ફક્ત n-channel available'], ans: 0, exp: 'MOSFET gate is insulated by SiO2 → gate draws essentially zero DC current → Rin ≈ 10^12 Ω or more.' },
+//     { id: 56, level: 'medium', q: 'Magnetic hysteresis in a ferromagnetic material represents:', gq: 'Ferromagnetic material માં magnetic hysteresis:', opts: ['Energy loss per magnetization cycle (area of B-H loop)', 'Linear B-H relationship', 'Absence of magnetic domains', 'Diamagnetic behavior'], gOpts: ['Magnetization cycle દીઠ energy loss (B-H loop ની area)', 'Linear B-H relationship', 'Magnetic domains ની absence', 'Diamagnetic behavior'], ans: 0, exp: 'Hysteresis loop area = energy dissipated as heat per cycle. Important for transformer core selection.' },
+//     { id: 57, level: 'medium', q: 'The input offset voltage of an ideal op-amp is:', gq: 'Ideal op-amp ની input offset voltage:', opts: ['Zero', 'Infinite', 'Equal to supply voltage', 'Depends on load'], gOpts: ['Zero', 'Infinite', 'Supply voltage ની સમાન', 'Load પર depend'], ans: 0, exp: 'Ideal op-amp: Vos = 0, Aol = ∞, Zin = ∞, Zout = 0, BW = ∞, CMRR = ∞.' },
+//     { id: 58, level: 'medium', q: 'What happens to the depletion region when reverse bias is applied to a diode?', gq: 'Diode ને reverse bias apply કરે ત્યારે depletion region:', opts: ['Widens (increases)', 'Narrows (decreases)', 'Remains same', 'Disappears completely'], gOpts: ['Wide (વધે)', 'Narrow (ઘટે)', 'Same', 'સંપૂર્ણ disappear'], ans: 0, exp: 'Reverse bias: external field aids built-in field, pulling carriers away → depletion region widens.' },
+//     { id: 59, level: 'medium', q: 'The main advantage of a crystal oscillator over LC oscillator is:', gq: 'LC oscillator ની સરખામણીમાં crystal oscillator નો main advantage:', opts: ['Extremely high frequency stability (high Q factor)', 'Much wider frequency range', 'Simpler circuit', 'Lower cost'], gOpts: ['ખૂબ ઊંચી frequency stability (high Q factor)', 'Much wider frequency range', 'Simpler circuit', 'Lower cost'], ans: 0, exp: 'Crystal Q factors of 10^4 to 10^6 give extremely stable frequency, unlike LC (Q ≈ 100-200).' },
+//     { id: 60, level: 'medium', q: 'In a transistor amplifier, the stability factor S is defined for which parameter?', gq: 'Transistor amplifier માં stability factor S ક્યા parameter માટે define?', opts: ['S = ∂IC/∂ICBO (sensitivity of IC to reverse saturation current)', 'S = IC/IB', 'S = VCE/IC', 'S = β/α'], gOpts: ['S = ∂IC/∂ICBO (IC ની ICBO પ્રત્યે sensitivity)', 'S = IC/IB', 'S = VCE/IC', 'S = β/α'], ans: 0, exp: 'Stability factor S = ∂IC/∂ICBO. Smaller S = more stable bias. Ideal S = 1.' },
+//     { id: 61, level: 'normal', q: 'What does LED stand for?', gq: 'LED નું full form શું છે?', opts: ['Light Emitting Diode', 'Low Energy Device', 'Light Energy Detector', 'Luminous Emission Diode'], gOpts: ['Light Emitting Diode', 'Low Energy Device', 'Light Energy Detector', 'Luminous Emission Diode'], ans: 0, exp: 'LED = Light Emitting Diode. It emits light when forward biased.' },
+//     { id: 62, level: 'normal', q: 'Semiconductors have how many valence electrons?', gq: 'Semiconductors માં valence electrons કેટલા?', opts: ['4', '2', '6', '8'], gOpts: ['4', '2', '6', '8'], ans: 0, exp: 'Semiconductor atoms (Si, Ge) have 4 valence electrons — they can bond with 4 neighbors.' },
+//     { id: 63, level: 'normal', q: 'Which of the following is an insulating material?', gq: 'નીચેમાંથી ક્યો insulating material છે?', opts: ['Mica', 'Silicon', 'Copper', 'Germanium'], gOpts: ['Mica', 'Silicon', 'Copper', 'Germanium'], ans: 0, exp: 'Mica has very high resistivity (10^11 to 10^15 Ω·m) — excellent insulator used in electronics.' },
+//     { id: 64, level: 'normal', q: 'A diode allows current to flow in:', gq: 'Diode ક્યા direction માં current flow allow કરે?', opts: ['One direction only (forward)', 'Both directions', 'No direction', 'Only reverse direction'], gOpts: ['ફક્ત એક direction (forward)', 'બંને directions', 'કોઈ direction નહીં', 'ફક્ત reverse direction'], ans: 0, exp: 'A diode is a one-way valve for current — conducts in forward bias, blocks in reverse bias.' },
+//     { id: 65, level: 'normal', q: 'The three terminals of a BJT transistor are:', gq: 'BJT transistor ના ત્રણ terminals:', opts: ['Base, Collector, Emitter', 'Gate, Source, Drain', 'Anode, Cathode, Gate', 'Input, Output, Ground'], gOpts: ['Base, Collector, Emitter', 'Gate, Source, Drain', 'Anode, Cathode, Gate', 'Input, Output, Ground'], ans: 0, exp: 'BJT: Base (B), Collector (C), Emitter (E). MOSFET/JFET: Gate, Drain, Source.' },
+//     { id: 66, level: 'normal', q: 'What is the main function of a rectifier?', gq: 'Rectifier નું main function:', opts: ['Convert AC to DC', 'Convert DC to AC', 'Amplify signals', 'Store electrical energy'], gOpts: ['AC ને DC convert', 'DC ને AC convert', 'Signals amplify', 'Electrical energy store'], ans: 0, exp: 'A rectifier converts alternating current (AC) to direct current (DC) using diodes.' },
+//     { id: 67, level: 'normal', q: 'Silicon (Si) is preferred over Germanium (Ge) for transistors because:', gq: 'Transistors માટે Germanium (Ge) ની જગ્યાએ Silicon (Si) prefer:', opts: ['Higher operating temperature range and lower leakage current', 'Lower cost only', 'Better electrical conductivity', 'Higher electron mobility'], gOpts: ['ઊંચી operating temperature range અને ઓછો leakage current', 'ફક્ત Lower cost', 'Better electrical conductivity', 'Higher electron mobility'], ans: 0, exp: 'Si max temp ≈ 150°C vs Ge ≈ 85°C. Si leakage current is much smaller — better for practical use.' },
+//     { id: 68, level: 'normal', q: 'In a common-emitter amplifier, the output signal is:', gq: 'Common-emitter amplifier માં output signal:', opts: ['180° out of phase with input', 'In phase with input', '90° out of phase', 'Same amplitude as input'], gOpts: ['Input ની 180° out of phase', 'Input ની in phase', '90° out of phase', 'Input ની same amplitude'], ans: 0, exp: 'CE amplifier introduces 180° phase inversion between input (base) and output (collector).' },
+//     { id: 69, level: 'normal', q: 'The unit of electrical conductivity is:', gq: 'Electrical conductivity નો unit:', opts: ['Siemens per meter (S/m)', 'Ohm-meter (Ω·m)', 'Farad (F)', 'Henry (H)'], gOpts: ['Siemens per meter (S/m)', 'Ohm-meter (Ω·m)', 'Farad (F)', 'Henry (H)'], ans: 0, exp: 'Conductivity σ = 1/ρ, unit = S/m (Siemens per metre). Resistivity ρ unit = Ω·m.' },
+//     { id: 70, level: 'normal', q: 'A transformer is used in a power supply to:', gq: 'Power supply માં transformer:', opts: ['Step up or step down AC voltage before rectification', 'Convert AC to DC directly', 'Amplify the current only', 'Store electrical energy'], gOpts: ['Rectification પહેલાં AC voltage step up/down', 'સીધો AC ને DC convert', 'ફક્ত current amplify', 'Electrical energy store'], ans: 0, exp: 'Transformer changes AC voltage level (V2/V1 = N2/N1) while keeping frequency constant.' },
+//     { id: 71, level: 'normal', q: 'Which component stores charge and opposes change in voltage?', gq: 'ક્યો component charge store કરે અને voltage change oppose?', opts: ['Capacitor', 'Resistor', 'Inductor', 'Diode'], gOpts: ['Capacitor', 'Resistor', 'Inductor', 'Diode'], ans: 0, exp: 'Capacitor stores electric charge (Q = CV) and opposes sudden voltage changes.' },
+//     { id: 72, level: 'normal', q: 'The process of adding impurities to a pure semiconductor is called:', gq: 'Pure semiconductor માં impurities add કરવાની process:', opts: ['Doping', 'Annealing', 'Diffusion', 'Epitaxy'], gOpts: ['Doping', 'Annealing', 'Diffusion', 'Epitaxy'], ans: 0, exp: 'Doping: adding tiny amounts of pentavalent (n-type) or trivalent (p-type) impurities to intrinsic semiconductor.' },
+//     { id: 73, level: 'normal', q: 'The Fermi level in an intrinsic semiconductor lies:', gq: 'Intrinsic semiconductor માં Fermi level ક્યાં?', opts: ['Near the middle of the bandgap', 'At the conduction band edge', 'At the valence band edge', 'Above the conduction band'], gOpts: ['Bandgap ની middle ની નજીક', 'Conduction band edge', 'Valence band edge', 'Conduction band ની ઉપર'], ans: 0, exp: 'Intrinsic semiconductor: Fermi level is approximately at the center of the energy bandgap.' },
+//     { id: 74, level: 'normal', q: 'A resistor color code with bands: Brown, Black, Red, Gold has value:', gq: 'Brown, Black, Red, Gold color code resistor ની value:', opts: ['1 kΩ ±5%', '10 kΩ ±5%', '100 Ω ±5%', '1 MΩ ±5%'], gOpts: ['1 kΩ ±5%', '10 kΩ ±5%', '100 Ω ±5%', '1 MΩ ±5%'], ans: 0, exp: 'Brown=1, Black=0, Red=×100 → 10×100=1000Ω=1kΩ. Gold=±5%.' },
+//     { id: 75, level: 'normal', q: 'In p-type semiconductor, which are majority carriers?', gq: 'p-type semiconductor માં majority carriers:', opts: ['Holes', 'Electrons', 'Protons', 'Neutrons'], gOpts: ['Holes', 'Electrons', 'Protons', 'Neutrons'], ans: 0, exp: 'P-type: trivalent dopant creates holes (missing electrons) as majority carriers.' },
+//     { id: 76, level: 'normal', q: 'The unit of magnetic flux density (B) is:', gq: 'Magnetic flux density (B) નો unit:', opts: ['Tesla (T)', 'Weber (Wb)', 'Henry (H)', 'Ampere/meter (A/m)'], gOpts: ['Tesla (T)', 'Weber (Wb)', 'Henry (H)', 'Ampere/meter (A/m)'], ans: 0, exp: 'B (flux density) = Tesla = Wb/m². Weber = total flux Φ. H field unit = A/m.' },
+//     { id: 77, level: 'normal', q: 'An NPN transistor in active mode: the emitter-base junction is:', gq: 'Active mode NPN transistor: emitter-base junction:', opts: ['Forward biased', 'Reverse biased', 'Zero biased', 'Breakdown biased'], gOpts: ['Forward biased', 'Reverse biased', 'Zero biased', 'Breakdown biased'], ans: 0, exp: 'Active mode: E-B forward biased, C-B reverse biased. This allows transistor to amplify.' },
+//     { id: 78, level: 'normal', q: 'The main advantage of negative feedback in amplifiers is:', gq: 'Amplifiers માં negative feedback નો main advantage:', opts: ['Reduced distortion and improved stability', 'Increased gain', 'Increased distortion', 'Lower bandwidth'], gOpts: ['Reduced distortion અને improved stability', 'Increased gain', 'Increased distortion', 'Lower bandwidth'], ans: 0, exp: 'NFB improves linearity, stability, bandwidth and reduces distortion — though it sacrifices some gain.' },
+//     { id: 79, level: 'normal', q: 'A capacitor blocks:', gq: 'Capacitor ક્યો signal block કરે?', opts: ['DC signals (low frequency → zero frequency)', 'High frequency AC', 'All electrical signals', 'Radio frequency only'], gOpts: ['DC signals (low frequency → zero frequency)', 'High frequency AC', 'બધા electrical signals', 'ફક્ت Radio frequency'], ans: 0, exp: 'Capacitor reactance XC = 1/(2πfC) → infinite at f=0 (DC), so it blocks DC and passes AC.' },
+//     { id: 80, level: 'normal', q: 'In class A amplifier, the transistor conducts for:', gq: 'Class A amplifier માં transistor ક્યારે conduct?', opts: ['360° (entire input cycle)', '180° (half cycle)', '90° (quarter cycle)', 'Less than 180°'], gOpts: ['360° (entire input cycle)', '180° (half cycle)', '90° (quarter cycle)', '180° થી ઓછા'], ans: 0, exp: 'Class A: transistor remains ON for full 360° of input cycle — linear but inefficient.' },
+//     { id: 81, level: 'normal', q: 'Insulating materials have resistivity in the range of:', gq: 'Insulating materials ની resistivity range:', opts: ['10^8 to 10^18 Ω·m', '10^-8 to 10^-6 Ω·m', '1 to 10^3 Ω·m', '10^-3 to 1 Ω·m'], gOpts: ['10^8 to 10^18 Ω·m', '10^-8 to 10^-6 Ω·m', '1 to 10^3 Ω·m', '10^-3 to 1 Ω·m'], ans: 0, exp: 'Insulators: ρ = 10^8 to 10^18 Ω·m. Conductors: 10^-8 to 10^-6. Semiconductors: in between.' },
+//     { id: 82, level: 'normal', q: 'The output voltage of a non-inverting op-amp is:', gq: 'Non-inverting op-amp ની output voltage:', opts: ['(1 + Rf/Rin) × Vin', '-Rf/Rin × Vin', 'Vin only', 'Rf/Rin × Vin'], gOpts: ['(1 + Rf/Rin) × Vin', '-Rf/Rin × Vin', 'ફક્ت Vin', 'Rf/Rin × Vin'], ans: 0, exp: 'Non-inverting: Av = 1 + Rf/Rin. Always positive gain, no phase inversion.' },
+//     { id: 83, level: 'normal', q: 'Which type of transistor is voltage-controlled?', gq: 'ક્યા type નો transistor voltage-controlled?', opts: ['FET (Field Effect Transistor)', 'BJT (Bipolar Junction Transistor)', 'UJT', 'SCR'], gOpts: ['FET (Field Effect Transistor)', 'BJT (Bipolar Junction Transistor)', 'UJT', 'SCR'], ans: 0, exp: 'FET is voltage-controlled (gate voltage controls drain current). BJT is current-controlled.' },
+//     { id: 84, level: 'normal', q: 'The function of a capacitor filter in a power supply is to:', gq: 'Power supply માં capacitor filter:', opts: ['Smooth the pulsating DC output', 'Increase the output voltage', 'Block DC component', 'Provide regulation'], gOpts: ['Pulsating DC output smooth', 'Output voltage increase', 'DC component block', 'Regulation provide'], ans: 0, exp: 'Capacitor charges to peak voltage, discharges slowly through load — smoothing the DC output.' },
+//     { id: 85, level: 'normal', q: 'Which of these is a conducting material?', gq: 'નીચેમાંથી ક્યો conducting material?', opts: ['Copper (Cu)', 'Glass', 'Rubber', 'Mica'], gOpts: ['Copper (Cu)', 'Glass', 'Rubber', 'Mica'], ans: 0, exp: 'Copper has very low resistivity (1.7×10^-8 Ω·m) — best common conductor for wiring.' },
+//     { id: 86, level: 'normal', q: 'The maximum efficiency of a half-wave rectifier is:', gq: 'Half-wave rectifier ની maximum efficiency:', opts: ['40.6%', '81.2%', '78.5%', '100%'], gOpts: ['40.6%', '81.2%', '78.5%', '100%'], ans: 0, exp: 'Half-wave rectifier max efficiency = 40.6%. Full-wave = 81.2%. Class B amplifier = 78.5%.' },
+//     { id: 87, level: 'normal', q: 'The forward resistance of an ideal diode is:', gq: 'Ideal diode ની forward resistance:', opts: ['Zero', 'Infinite', '50 Ω', 'Depends on current'], gOpts: ['Zero', 'Infinite', '50 Ω', 'Current પર depend'], ans: 0, exp: 'Ideal diode: forward resistance = 0 (short circuit), reverse resistance = ∞ (open circuit).' },
+//     { id: 88, level: 'normal', q: 'Which material is used as gate insulator in MOSFET?', gq: 'MOSFET માં gate insulator ક્યો material?', opts: ['Silicon Dioxide (SiO2)', 'Germanium', 'Copper', 'Mica'], gOpts: ['Silicon Dioxide (SiO2)', 'Germanium', 'Copper', 'Mica'], ans: 0, exp: 'SiO2 (silicon dioxide / quartz glass) insulates the gate electrode — basis of IGFET/MOSFET structure.' },
+//     { id: 89, level: 'normal', q: 'A tunnel diode is used in applications requiring:', gq: 'Tunnel diode ક્યા applications માં?', opts: ['High-frequency oscillation (negative resistance region)', 'High voltage regulation', 'High power switching', 'Low-frequency filtering'], gOpts: ['High-frequency oscillation (negative resistance region)', 'High voltage regulation', 'High power switching', 'Low-frequency filtering'], ans: 0, exp: 'Tunnel diode exhibits negative resistance — enables high-frequency oscillators and microwave amplifiers.' },
+//     { id: 90, level: 'normal', q: 'Germanium diode forward voltage drop is approximately:', gq: 'Germanium diode ની forward voltage drop:', opts: ['0.2–0.3 V', '0.6–0.7 V', '1.2 V', '5 V'], gOpts: ['0.2–0.3 V', '0.6–0.7 V', '1.2 V', '5 V'], ans: 0, exp: 'Ge diode: Vf ≈ 0.2-0.3V. Si diode: Vf ≈ 0.6-0.7V. GaAs LED: Vf ≈ 1.4V.' },
+//     { id: 91, level: 'current', q: 'In modern smartphones, which type of transistor is predominantly used?', gq: 'Modern smartphones માં ક્યો transistor predominantly use?', opts: ['FinFET (Fin Field-Effect Transistor)', 'Planar MOSFET', 'BJT NPN', 'JFET'], gOpts: ['FinFET (Fin Field-Effect Transistor)', 'Planar MOSFET', 'BJT NPN', 'JFET'], ans: 0, exp: 'FinFETs (3D gate structure) dominate at sub-10nm nodes — better control, lower leakage than planar MOSFET.' },
+//     { id: 92, level: 'current', q: '5G wireless systems use which frequency bands?', gq: '5G wireless systems ક્યા frequency bands use?', opts: ['Sub-6 GHz and mmWave (24-100 GHz)', 'Only AM radio bands (530-1700 kHz)', 'Infrared only', 'Below 1 MHz only'], gOpts: ['Sub-6 GHz અને mmWave (24-100 GHz)', 'ફક્ت AM radio bands', 'ફક્ત Infrared', 'ફક્ت 1 MHz ની નીચે'], ans: 0, exp: '5G uses sub-6GHz for coverage and mmWave bands (24-100GHz) for extremely high data rates.' },
+//     { id: 93, level: 'current', q: 'IoT sensors typically use which low-power wireless protocol?', gq: 'IoT sensors ક્યો low-power wireless protocol use?', opts: ['Zigbee or BLE (Bluetooth Low Energy)', '5G only', 'Satellite communication', 'Dial-up modem'], gOpts: ['Zigbee અથવા BLE (Bluetooth Low Energy)', 'ફક્ત 5G', 'Satellite communication', 'Dial-up modem'], ans: 0, exp: 'IoT devices use BLE (Bluetooth 5.x), Zigbee, Z-Wave, LoRa — all designed for ultra-low-power operation.' },
+//     { id: 94, level: 'current', q: 'GaN (Gallium Nitride) transistors in modern power electronics offer:', gq: 'Modern power electronics માં GaN transistors:', opts: ['Higher switching speed and efficiency vs silicon at high voltages', 'Lower frequency operation only', 'Less efficiency than Si', 'Only for low voltage under 5V'], gOpts: ['High voltage પર silicon ની સરખામણીએ higher switching speed અને efficiency', 'ફક્ત Lower frequency operation', 'Si કરતાં ઓછી efficiency', 'ફક્ت 5V ની નીચે low voltage'], ans: 0, exp: 'GaN wide bandgap (3.4eV) allows higher voltage, temperature, frequency with far better efficiency.' },
+//     { id: 95, level: 'current', q: 'Which integrated circuit architecture powers modern AI chips (like NPUs)?', gq: 'Modern AI chips (NPUs) ક્યો IC architecture use?', opts: ['Massively parallel VLSI with specialized matrix multiply units', 'Simple 555 timer based circuits', 'Basic op-amp arrays', 'Single BJT transistor arrays'], gOpts: ['Specialized matrix multiply units સાથે Massively parallel VLSI', 'Simple 555 timer based circuits', 'Basic op-amp arrays', 'Single BJT transistor arrays'], ans: 0, exp: 'AI/ML chips use VLSI with hundreds of parallel MACs (multiply-accumulate units) for tensor operations.' },
+//     { id: 96, level: 'current', q: 'In modern wireless chargers, which principle is used?', gq: 'Modern wireless chargers ક્યો principle use?', opts: ['Resonant inductive coupling (magnetic resonance)', 'Capacitive coupling only', 'Radio wave rectification', 'Optical power transfer'], gOpts: ['Resonant inductive coupling (magnetic resonance)', 'ફક્ત Capacitive coupling', 'Radio wave rectification', 'Optical power transfer'], ans: 0, exp: 'Qi standard wireless charging uses resonant magnetic induction (loosely coupled LC resonators at ~100-200kHz).' },
+//     { id: 97, level: 'current', q: 'Silicon Carbide (SiC) power devices are used in EVs because:', gq: 'EVs માં Silicon Carbide (SiC) power devices:', opts: ['Handle higher voltages (800V+) and temperatures with lower switching losses', 'Only handle low voltages below 12V', 'Are cheaper than silicon', 'Work only at room temperature'], gOpts: ['Lower switching losses સાથે higher voltages (800V+) અને temperatures handle', 'ફક્ت 12V ની નીચે low voltages', 'Silicon કરતાં સસ્તા', 'ફક્ત room temperature'], ans: 0, exp: 'SiC enables 800V EV architectures, faster charging, higher efficiency power inverters with smaller heat sinks.' },
+//     { id: 98, level: 'current', q: 'In WiFi 6 (802.11ax), what modulation scheme is used for highest data rates?', gq: 'WiFi 6 (802.11ax) highest data rates માટે ક્યો modulation?', opts: ['1024-QAM (Quadrature Amplitude Modulation)', 'AM only', 'FM only', 'BPSK only'], gOpts: ['1024-QAM (Quadrature Amplitude Modulation)', 'ફક્ત AM', 'ફક્ત FM', 'ફક્ત BPSK'], ans: 0, exp: 'WiFi 6 uses 1024-QAM encoding 10 bits per symbol — 25% more data than WiFi 5\'s 256-QAM.' },
+//     { id: 99, level: 'current', q: 'Lithium-ion battery management systems use which type of circuit?', gq: 'Lithium-ion battery management systems ક્યો circuit?', opts: ['Mixed-signal ICs with ADC, protection FETs, and microcontrollers', 'Simple relay switches', 'Basic transformer circuits', 'Single diode rectifiers'], gOpts: ['ADC, protection FETs અને microcontrollers સાથે Mixed-signal ICs', 'Simple relay switches', 'Basic transformer circuits', 'Single diode rectifiers'], ans: 0, exp: 'BMS ICs monitor cell voltage/current/temperature via ADC, control charge/discharge via power FETs.' },
+//     { id: 100, level: 'current', q: 'RFID technology used in smart cards operates by:', gq: 'Smart cards માં RFID technology:', opts: ['Electromagnetic induction — reader energizes passive card antenna to power IC', 'Battery-powered radio transmission', 'Optical data reading (like barcode)', 'Infrared signal exchange'], gOpts: ['Electromagnetic induction — reader passive card antenna energize', 'Battery-powered radio transmission', 'Optical data reading (barcode like)', 'Infrared signal exchange'], ans: 0, exp: 'Passive RFID: reader coil induces voltage in card coil (transformer action), powering the IC to respond.' },
+//     { id: 101, level: 'current', q: 'Which type of amplifier is used in hearing aids today for ultra-low power?', gq: 'Hearing aids માં ultra-low power માટે ક્યો amplifier?', opts: ['Class D switching amplifier with PWM', 'Class A linear amplifier', 'Class B push-pull only', 'Vacuum tube amplifier'], gOpts: ['PWM સાથે Class D switching amplifier', 'Class A linear amplifier', 'ફક્ત Class B push-pull', 'Vacuum tube amplifier'], ans: 0, exp: 'Class D: efficiency 90-95% using PWM switching — essential for battery-powered hearing aids.' },
+//     { id: 102, level: 'current', q: 'In satellite communication downlink receivers, LNA stands for:', gq: 'Satellite communication downlink receivers: LNA =', opts: ['Low Noise Amplifier', 'Large Noise Attenuator', 'Linear Network Amplifier', 'Load Neutral Amplifier'], gOpts: ['Low Noise Amplifier', 'Large Noise Attenuator', 'Linear Network Amplifier', 'Load Neutral Amplifier'], ans: 0, exp: 'LNA (Low Noise Amplifier) at the receiver front-end amplifies weak satellite signals with minimal added noise.' },
+//     { id: 103, level: 'current', q: 'Phased array antennas in modern radar and 5G use:', gq: 'Modern radar અને 5G phased array antennas:', opts: ['Electronically steered beams via phase shifters without mechanical movement', 'Mechanical rotation only', 'Fixed single-beam radiation', 'Omnidirectional radiation always'], gOpts: ['Mechanical movement વગર phase shifters દ્વારા electronically steered beams', 'ફક્ت Mechanical rotation', 'Fixed single-beam radiation', 'Always Omnidirectional'], ans: 0, exp: 'Phased arrays steer beams electronically by controlling phase of each antenna element — key to 5G beamforming.' },
+//     { id: 104, level: 'current', q: 'In modern SDR (Software Defined Radio), the key component is:', gq: 'Modern SDR (Software Defined Radio) ની key component:', opts: ['High-speed ADC converting RF directly to digital for software processing', 'Fixed hardware filters only', 'Analog mixing circuits only', 'Crystal oscillator banks'], gOpts: ['Software processing માટે RF ને directly digital convert high-speed ADC', 'ફક્ત Fixed hardware filters', 'ફક્ত Analog mixing circuits', 'Crystal oscillator banks'], ans: 0, exp: 'SDR digitizes RF signals with fast ADCs, then demodulation/filtering done in software (DSP/FPGA).' },
+//     { id: 105, level: 'current', q: 'The main semiconductor material being researched to replace silicon for ultra-fast electronics is:', gq: 'Ultra-fast electronics માટે silicon replace research material:', opts: ['Graphene and 2D materials like MoS2', 'Pure copper', 'Iron oxide', 'Glass'], gOpts: ['Graphene અને MoS2 જેવા 2D materials', 'Pure copper', 'Iron oxide', 'Glass'], ans: 0, exp: 'Graphene has electron mobility 100× higher than Si; MoS2 enables ultra-thin channels for future transistors.' },
+//   ];
+ 
+ 
+  
+  const questions = [
+    {
+        "id": 1,
+        "level": "hard",
+        "q": "The mobility of holes in a p-type semiconductor is related to which parameter?",
+        "gq": "p-type semiconductor માં holes ની mobility કઈ parameter સાથે સંબંધિત છે?",
+        "opts": [
+            "Lattice constant only",
+            "Effective mass of holes",
+            "Doping concentration squared",
+            "Band gap energy directly"
+        ],
+        "gOpts": [
+            "ફક્ત Lattice constant",
+            "Holes ની effective mass",
+            "Doping concentration squared",
+            "Band gap energy સીધી"
+        ],
+        "ans": 1,
+        "exp": "Mobility μ = eτ/m*, where m* is effective mass. Higher effective mass = lower mobility."
+    },
+    {
+        "id": 2,
+        "level": "hard",
+        "q": "In a BJT, the Early effect is caused by:",
+        "gq": "BJT માં Early effect કેના કારણે થાય છે?",
+        "opts": [
+            "Emitter depletion layer widening",
+            "Recombination in emitter junction",
+            "Avalanche breakdown at base",
+            "Base width modulation by collector voltage"
+        ],
+        "gOpts": [
+            "Emitter depletion layer ચોડી થવી",
+            "Emitter junction માં Recombination",
+            "Base પર Avalanche breakdown",
+            "Collector voltage દ્વારા Base width modulation"
+        ],
+        "ans": 3,
+        "exp": "Early effect: As VCE increases, collector depletion region widens, narrowing effective base width."
+    },
+    {
+        "id": 3,
+        "level": "hard",
+        "q": "The h-parameter hfe of a transistor represents:",
+        "gq": "transistor નો h-parameter hfe શું represent કરે છે?",
+        "opts": [
+            "Input impedance",
+            "Open-circuit voltage gain",
+            "Reverse voltage ratio",
+            "Short-circuit current gain"
+        ],
+        "gOpts": [
+            "Input impedance",
+            "Open-circuit voltage gain",
+            "Reverse voltage ratio",
+            "Short-circuit current gain"
+        ],
+        "ans": 3,
+        "exp": "hfe = ΔIC/ΔIB with VCE constant — forward current transfer ratio (short-circuit current gain)."
+    },
+    {
+        "id": 4,
+        "level": "hard",
+        "q": "Miller effect in an amplifier causes the input capacitance to appear:",
+        "gq": "Amplifier માં Miller effect ના કારણે input capacitance કેવી દેખાય છે?",
+        "opts": [
+            "Multiplied by (1+Av)",
+            "Equal to output capacitance",
+            "Unchanged",
+            "Divided by voltage gain"
+        ],
+        "gOpts": [
+            "(1+Av) ગણી વધી",
+            "Output capacitance જેટલી",
+            "અપરિવર્તિત",
+            "Voltage gain વડે ભાગી"
+        ],
+        "ans": 0,
+        "exp": "Miller capacitance = C(1+Av). This reduces high-frequency response significantly."
+    },
+    {
+        "id": 5,
+        "level": "hard",
+        "q": "In a class B push-pull amplifier, crossover distortion is minimized by:",
+        "gq": "Class B push-pull amplifier માં crossover distortion કઈ રીતે ઓછી થાય?",
+        "opts": [
+            "Using class AB biasing with small forward bias",
+            "Reducing supply voltage",
+            "Increasing signal amplitude",
+            "Using high β transistors"
+        ],
+        "gOpts": [
+            "Class AB biasing નાની forward bias સાથે",
+            "Supply voltage ઘટાડી",
+            "Signal amplitude વધારી",
+            "ઊંચા β transistors વાપરી"
+        ],
+        "ans": 0,
+        "exp": "Class AB provides slight forward bias so both transistors are never fully OFF simultaneously."
+    },
+    {
+        "id": 6,
+        "level": "hard",
+        "q": "The Barkhausen criterion for oscillation requires loop gain to be:",
+        "gq": "Oscillation માટે Barkhausen criterion અનુસાર loop gain કેટલો હોવો જોઈએ?",
+        "opts": [
+            "Greater than 1 with 90° phase shift",
+            "Exactly 1 with phase shift of 0° or 360°",
+            "Less than 1 at all frequencies",
+            "Zero at resonance"
+        ],
+        "gOpts": [
+            "90° phase shift સાથે 1 થી વધારે",
+            "0° અથવા 360° phase shift સાથે ઠીક 1",
+            "બધી frequencies પર 1 થી ઓછો",
+            "Resonance પર Zero"
+        ],
+        "ans": 1,
+        "exp": "|Aβ| = 1 and ∠Aβ = 0° (or 360°) — these are the necessary conditions for sustained oscillations."
+    },
+    {
+        "id": 7,
+        "level": "hard",
+        "q": "In a JFET, pinch-off voltage VP is defined as:",
+        "gq": "JFET માં pinch-off voltage VP ની definition શું છે?",
+        "opts": [
+            "Threshold voltage for inversion layer",
+            "Gate voltage that reduces drain current to near zero",
+            "Drain voltage causing channel current saturation",
+            "Breakdown voltage of the gate junction"
+        ],
+        "gOpts": [
+            "Inversion layer માટે threshold voltage",
+            "Drain current ને લગભગ zero કરતો Gate voltage",
+            "Channel current saturation કરતો Drain voltage",
+            "Gate junction નો breakdown voltage"
+        ],
+        "ans": 1,
+        "exp": "VP is the gate-source voltage at which the channel is completely pinched off and ID → 0."
+    },
+    {
+        "id": 8,
+        "level": "hard",
+        "q": "Negative feedback in amplifiers primarily affects:",
+        "gq": "Amplifiers માં negative feedback મુખ્યત્વે શું affect કરે?",
+        "opts": [
+            "Reduces input impedance of voltage amplifiers",
+            "Increases distortion at high frequencies",
+            "Increases gain and reduces bandwidth",
+            "Reduces gain, improves bandwidth, stability and linearity"
+        ],
+        "gOpts": [
+            "Voltage amplifiers ની input impedance ઘટાડે",
+            "High frequencies પર distortion વધારે",
+            "Gain વધારે અને bandwidth ઘટાડે",
+            "Gain ઘટાડે, bandwidth, stability & linearity સુધારે"
+        ],
+        "ans": 3,
+        "exp": "NFB: Gain reduces by (1+Aβ), bandwidth increases by same factor, distortion and noise decrease."
+    },
+    {
+        "id": 9,
+        "level": "hard",
+        "q": "The transconductance gm of a MOSFET in saturation region is proportional to:",
+        "gq": "Saturation region માં MOSFET ની transconductance gm કોના proportional છે?",
+        "opts": [
+            "Drain current ID directly",
+            "Channel length squared",
+            "Square root of drain current √ID",
+            "Gate oxide thickness"
+        ],
+        "gOpts": [
+            "Drain current ID સીધો",
+            "Channel length squared",
+            "Drain current √ID ના square root ને",
+            "Gate oxide thickness"
+        ],
+        "ans": 2,
+        "exp": "gm = √(2μnCox(W/L)ID), proportional to √ID in saturation."
+    },
+    {
+        "id": 10,
+        "level": "hard",
+        "q": "In a regulated power supply, the line regulation is defined as:",
+        "gq": "Regulated power supply માં line regulation ની definition શું છે?",
+        "opts": [
+            "Ripple factor of the supply",
+            "Maximum output current capability",
+            "Change in output voltage per unit change in load current",
+            "Change in output voltage per unit change in input voltage"
+        ],
+        "gOpts": [
+            "Supply નો ripple factor",
+            "Maximum output current capability",
+            "Load current ના unit change દીઠ output voltage ની change",
+            "Input voltage ના unit change દીઠ output voltage ની change"
+        ],
+        "ans": 3,
+        "exp": "Line regulation = ΔVOUT/ΔVIN — measures supply rejection of input voltage variations."
+    },
+    {
+        "id": 11,
+        "level": "hard",
+        "q": "A phase shift oscillator using RC network produces oscillation at:",
+        "gq": "RC network વાળો phase shift oscillator ક્યારે oscillation produce કરે?",
+        "opts": [
+            "f = 1/(2π√6 RC)",
+            "f = 1/(πRC)",
+            "f = 1/(2πRC)",
+            "f = √6/(2πRC)"
+        ],
+        "gOpts": [
+            "f = 1/(2π√6 RC)",
+            "f = 1/(πRC)",
+            "f = 1/(2πRC)",
+            "f = √6/(2πRC)"
+        ],
+        "ans": 0,
+        "exp": "Each RC section provides 60° phase shift; three sections give 180°. Frequency = 1/(2π√6 RC)."
+    },
+    {
+        "id": 12,
+        "level": "hard",
+        "q": "The input impedance of a common-gate FET amplifier is:",
+        "gq": "Common-gate FET amplifier ની input impedance કેટલી હોય?",
+        "opts": [
+            "Very low (approximately 1/gm)",
+            "Infinite",
+            "Very high (MΩ range)",
+            "Equal to drain resistance"
+        ],
+        "gOpts": [
+            "ખૂબ ઓછી (આશરે 1/gm)",
+            "Infinite",
+            "ખૂબ ઊંચી (MΩ range)",
+            "Drain resistance જેટલી"
+        ],
+        "ans": 0,
+        "exp": "Common-gate input impedance ≈ 1/gm (typically few hundred ohms) — similar to common-base BJT."
+    },
+    {
+        "id": 13,
+        "level": "hard",
+        "q": "Zener diode acts as voltage regulator because in breakdown region:",
+        "gq": "Zener diode voltage regulator તરીકે કેમ કામ કરે? breakdown region માં:",
+        "opts": [
+            "Resistance becomes zero",
+            "Current remains constant for varying voltage",
+            "Capacitance increases sharply",
+            "Voltage remains nearly constant despite large current changes"
+        ],
+        "gOpts": [
+            "Resistance zero થઈ જાય",
+            "Varying voltage માટે current constant રહે",
+            "Capacitance અચાનક વધે",
+            "મોટા current changes છતાં voltage લગભગ constant રહે"
+        ],
+        "ans": 3,
+        "exp": "In breakdown, the VI characteristic is nearly vertical — small ΔV for large ΔI, ideal for regulation."
+    },
+    {
+        "id": 14,
+        "level": "hard",
+        "q": "In a Colpitts oscillator, the frequency is determined by:",
+        "gq": "Colpitts oscillator માં frequency શું નક્કી કરે?",
+        "opts": [
+            "Inductor and two series capacitors C1, C2",
+            "RC time constant",
+            "Single LC tank circuit only",
+            "Crystal resonance only"
+        ],
+        "gOpts": [
+            "Inductor અને બે series capacitors C1, C2",
+            "RC time constant",
+            "ફક્ત Single LC tank circuit",
+            "ફક્ત Crystal resonance"
+        ],
+        "ans": 0,
+        "exp": "f = 1/(2π√(L·Ceq)) where Ceq = C1C2/(C1+C2) — two capacitors in series with one inductor."
+    },
+    {
+        "id": 15,
+        "level": "hard",
+        "q": "Thermal runaway in a transistor amplifier occurs when:",
+        "gq": "Transistor amplifier માં thermal runaway ક્યારે થાય?",
+        "opts": [
+            "Supply voltage increases suddenly",
+            "Base current exceeds collector current",
+            "Signal amplitude becomes very large",
+            "dPD/dTJ > 1/θJA (heat cannot be dissipated fast enough)"
+        ],
+        "gOpts": [
+            "Supply voltage અચાનક વધે",
+            "Base current, collector current કરતાં વધી જાય",
+            "Signal amplitude ખૂબ મોટો થઈ જાય",
+            "dPD/dTJ > 1/θJA (heat ઝડપથી dissipate ન થઈ શકે)"
+        ],
+        "ans": 3,
+        "exp": "Thermal runaway: if rate of power increase > rate of heat dissipation, temperature spirals uncontrollably."
+    },
+    {
+        "id": 16,
+        "level": "hard",
+        "q": "The slope of the load line on IC-VCE characteristics equals:",
+        "gq": "IC-VCE characteristics પર load line ની slope કેટલી?",
+        "opts": [
+            "1/RC",
+            "-1/RC",
+            "-RC",
+            "RC"
+        ],
+        "gOpts": [
+            "1/RC",
+            "-1/RC",
+            "-RC",
+            "RC"
+        ],
+        "ans": 1,
+        "exp": "IC = (VCC - VCE)/RC → rearranging gives slope = -1/RC on the IC vs VCE graph."
+    },
+    {
+        "id": 17,
+        "level": "hard",
+        "q": "In an op-amp integrator circuit, if input is a square wave, the output is:",
+        "gq": "Op-amp integrator circuit માં input square wave હોય તો output:",
+        "opts": [
+            "Sine wave",
+            "Differentiated spike waveform",
+            "Square wave with phase shift",
+            "Triangular wave"
+        ],
+        "gOpts": [
+            "Sine wave",
+            "Differentiated spike waveform",
+            "Phase shift સાથે Square wave",
+            "Triangular wave"
+        ],
+        "ans": 3,
+        "exp": "Integration of a constant (square wave top/bottom) = ramp. So triangular wave results."
+    },
+    {
+        "id": 18,
+        "level": "hard",
+        "q": "The CMRR of an op-amp is defined as:",
+        "gq": "Op-amp ની CMRR ની definition:",
+        "opts": [
+            "20 log(AD/ACM)",
+            "ACM/AD",
+            "AD + ACM",
+            "AD × ACM"
+        ],
+        "gOpts": [
+            "20 log(AD/ACM)",
+            "ACM/AD",
+            "AD + ACM",
+            "AD × ACM"
+        ],
+        "ans": 0,
+        "exp": "CMRR = 20 log(Differential gain/Common-mode gain) in dB. Higher CMRR = better noise rejection."
+    },
+    {
+        "id": 19,
+        "level": "hard",
+        "q": "In a full-wave bridge rectifier, the PIV rating of each diode must be at least:",
+        "gq": "Full-wave bridge rectifier માં દરેક diode ની PIV rating ઓછામાં ઓછી કેટલી?",
+        "opts": [
+            "2Vm",
+            "√2·Vm",
+            "Vm/2",
+            "Vm (peak of secondary voltage)"
+        ],
+        "gOpts": [
+            "2Vm",
+            "√2·Vm",
+            "Vm/2",
+            "Vm (secondary voltage ની peak)"
+        ],
+        "ans": 3,
+        "exp": "Bridge rectifier: PIV per diode = Vm (only one diode blocks at a time in each half cycle)."
+    },
+    {
+        "id": 20,
+        "level": "hard",
+        "q": "Hybrid π model of a BJT at high frequencies includes:",
+        "gq": "High frequencies પર BJT ના Hybrid π model માં શું સામેલ છે?",
+        "opts": [
+            "Only base resistance rbb'",
+            "Only transconductance gm",
+            "Cπ (diffusion capacitance) and Cμ (junction capacitance)",
+            "DC biasing resistors only"
+        ],
+        "gOpts": [
+            "ફક્ત base resistance rbb'",
+            "ફક્ત transconductance gm",
+            "Cπ (diffusion capacitance) અને Cμ (junction capacitance)",
+            "ફક્ત DC biasing resistors"
+        ],
+        "ans": 2,
+        "exp": "Hybrid-π high-frequency model adds Cπ across rπ and Cμ (feedback from C to B) to account for transit time."
+    },
+    {
+        "id": 21,
+        "level": "hard",
+        "q": "In voltage series negative feedback, the input impedance:",
+        "gq": "Voltage series negative feedback માં input impedance:",
+        "opts": [
+            "Decreases by factor (1+Aβ)",
+            "Increases by factor (1+Aβ)",
+            "Becomes zero",
+            "Remains unchanged"
+        ],
+        "gOpts": [
+            "(1+Aβ) ગણો ઘટે",
+            "(1+Aβ) ગણો વધે",
+            "Zero થઈ જાય",
+            "અપરિવર્તિત રહે"
+        ],
+        "ans": 1,
+        "exp": "Series feedback samples input voltage → input impedance increases: Zin(f) = Zin(1+Aβ)."
+    },
+    {
+        "id": 22,
+        "level": "hard",
+        "q": "A Schmitt trigger circuit is used for:",
+        "gq": "Schmitt trigger circuit નો ઉપયોગ:",
+        "opts": [
+            "Signal amplification only",
+            "Waveform squaring and noise immunity via hysteresis",
+            "Frequency multiplication",
+            "Phase shifting only"
+        ],
+        "gOpts": [
+            "ફક્ત Signal amplification",
+            "Hysteresis દ્વારા waveform squaring અને noise immunity",
+            "Frequency multiplication",
+            "ફક્ત Phase shifting"
+        ],
+        "ans": 1,
+        "exp": "Schmitt trigger uses hysteresis (two threshold voltages) to convert noisy signals to clean square waves."
+    },
+    {
+        "id": 23,
+        "level": "hard",
+        "q": "In a monostable multivibrator, the quasi-stable state duration depends on:",
+        "gq": "Monostable multivibrator માં quasi-stable state ની duration કોના પર depend કરે?",
+        "opts": [
+            "Supply voltage only",
+            "Input trigger frequency",
+            "RC time constant of the timing network",
+            "Transistor β value"
+        ],
+        "gOpts": [
+            "ફક્ત Supply voltage",
+            "Input trigger frequency",
+            "Timing network ની RC time constant",
+            "Transistor ની β value"
+        ],
+        "ans": 2,
+        "exp": "Pulse width T ≈ 0.693RC for standard monostable — independent of trigger, depends only on RC."
+    },
+    {
+        "id": 24,
+        "level": "hard",
+        "q": "The gain-bandwidth product of an op-amp is:",
+        "gq": "Op-amp ની gain-bandwidth product:",
+        "opts": [
+            "Equal to slew rate",
+            "Decreases with increasing gain",
+            "Constant at all frequencies (unity-gain bandwidth)",
+            "Increases with frequency"
+        ],
+        "gOpts": [
+            "Slew rate ની સમાન",
+            "Gain વધવાથી ઘટે",
+            "બધી frequencies પર constant (unity-gain bandwidth)",
+            "Frequency સાથે વધે"
+        ],
+        "ans": 2,
+        "exp": "GBW = Av × BW = constant. This is why gain and bandwidth trade off inversely in op-amps."
+    },
+    {
+        "id": 25,
+        "level": "hard",
+        "q": "In power amplifiers, efficiency η of class A is approximately:",
+        "gq": "Power amplifiers માં class A ની efficiency η આશરે:",
+        "opts": [
+            "63%",
+            "100%",
+            "78.5%",
+            "25% (resistive load) to 50% (transformer coupled)"
+        ],
+        "gOpts": [
+            "63%",
+            "100%",
+            "78.5%",
+            "25% (resistive load) થી 50% (transformer coupled)"
+        ],
+        "ans": 3,
+        "exp": "Class A max efficiency: 25% resistive load, 50% with transformer coupling. Most power wasted as heat."
+    },
+    {
+        "id": 26,
+        "level": "hard",
+        "q": "The slew rate of an op-amp limits its performance at:",
+        "gq": "Op-amp ની slew rate ક્યારે performance limit કરે?",
+        "opts": [
+            "DC amplification",
+            "Low frequency small signal operation",
+            "Input offset conditions",
+            "High frequencies with large signal swings"
+        ],
+        "gOpts": [
+            "DC amplification",
+            "Low frequency small signal operation",
+            "Input offset conditions",
+            "Large signal swings સાથે high frequencies"
+        ],
+        "ans": 3,
+        "exp": "Slew rate = max dVO/dt. For large signals at high frequency, output cannot keep up → distortion."
+    },
+    {
+        "id": 27,
+        "level": "hard",
+        "q": "Avalanche breakdown in a p-n junction is due to:",
+        "gq": "p-n junction માં Avalanche breakdown ના કારણ:",
+        "opts": [
+            "Impact ionization by accelerated carriers in strong electric field",
+            "Quantum mechanical tunneling of carriers",
+            "Thermal generation of carriers",
+            "Forward bias current excess"
+        ],
+        "gOpts": [
+            "Strong electric field માં accelerated carriers દ્વારા impact ionization",
+            "Carriers ની quantum mechanical tunneling",
+            "Carriers ની thermal generation",
+            "Forward bias current excess"
+        ],
+        "ans": 0,
+        "exp": "Avalanche: high-field accelerated carriers collide with lattice atoms, creating electron-hole pairs (impact ionization)."
+    },
+    {
+        "id": 28,
+        "level": "hard",
+        "q": "In a differential amplifier, CMRR can be improved by:",
+        "gq": "Differential amplifier માં CMRR સુધારવા:",
+        "opts": [
+            "Increasing input signal amplitude",
+            "Using mismatched transistors",
+            "Using a large tail current source (high impedance)",
+            "Reducing supply voltage"
+        ],
+        "gOpts": [
+            "Input signal amplitude વધારવો",
+            "Mismatched transistors વાપરવા",
+            "Large tail current source (high impedance) વાપરવો",
+            "Supply voltage ઘટાડવો"
+        ],
+        "ans": 2,
+        "exp": "A high-impedance current source as tail improves CMRR by rejecting common-mode signals effectively."
+    },
+    {
+        "id": 29,
+        "level": "hard",
+        "q": "The 3 dB frequency of a single-stage RC coupled amplifier is determined by:",
+        "gq": "Single-stage RC coupled amplifier ની 3 dB frequency:",
+        "opts": [
+            "Supply voltage and load resistance",
+            "Only by the coupling capacitor",
+            "Only by the transistor β",
+            "Both lower cutoff (coupling/bypass caps) and upper cutoff (device capacitances)"
+        ],
+        "gOpts": [
+            "Supply voltage અને load resistance",
+            "ફક્ત coupling capacitor",
+            "ફક્ટ transistor β",
+            "Lower cutoff (coupling/bypass caps) અને upper cutoff (device capacitances) બંને"
+        ],
+        "ans": 3,
+        "exp": "Lower 3dB by coupling & bypass caps; upper 3dB by transistor junction capacitances and stray capacitances."
+    },
+    {
+        "id": 30,
+        "level": "hard",
+        "q": "Ferromagnetic materials are characterized by:",
+        "gq": "Ferromagnetic materials ની ખાસિયત:",
+        "opts": [
+            "μr slightly greater than 1",
+            "Random domain alignment at all temperatures",
+            "Magnetic domains and very high relative permeability (μr >> 1)",
+            "Negative susceptibility"
+        ],
+        "gOpts": [
+            "μr 1 થી સહેજ વધારે",
+            "બધા temperatures પર Random domain alignment",
+            "Magnetic domains અને ખૂબ ઊંચી relative permeability (μr >> 1)",
+            "Negative susceptibility"
+        ],
+        "ans": 2,
+        "exp": "Ferromagnetics have magnetic domains (aligned dipoles), high μr (hundreds to thousands), and exhibit hysteresis."
+    },
+    {
+        "id": 31,
+        "level": "medium",
+        "q": "The ripple factor of a half-wave rectifier is:",
+        "gq": "Half-wave rectifier નો ripple factor:",
+        "opts": [
+            "0.48",
+            "2.0",
+            "1.21",
+            "0.812"
+        ],
+        "gOpts": [
+            "0.48",
+            "2.0",
+            "1.21",
+            "0.812"
+        ],
+        "ans": 2,
+        "exp": "Ripple factor γ = √[(Irms/Idc)² - 1] = 1.21 for half-wave rectifier."
+    },
+    {
+        "id": 32,
+        "level": "medium",
+        "q": "A transistor is connected in common-emitter configuration. If IB = 50 μA and IC = 5 mA, then β =",
+        "gq": "Common-emitter transistor: IB = 50 μA, IC = 5 mA, તો β =",
+        "opts": [
+            "200",
+            "100",
+            "150",
+            "50"
+        ],
+        "gOpts": [
+            "200",
+            "100",
+            "150",
+            "50"
+        ],
+        "ans": 1,
+        "exp": "β = IC/IB = 5mA/50μA = 100."
+    },
+    {
+        "id": 33,
+        "level": "medium",
+        "q": "In a voltage divider bias circuit, stability is achieved because:",
+        "gq": "Voltage divider bias circuit માં stability શા માટે?",
+        "opts": [
+            "Base current controls biasing directly",
+            "The collector current is fixed by VCC only",
+            "The emitter resistor is absent",
+            "The bias voltage is largely independent of β and temperature"
+        ],
+        "gOpts": [
+            "Base current biasing control કરે",
+            "Collector current ફક્ત VCC દ્વારા fixed",
+            "Emitter resistor absent",
+            "Bias voltage β અને temperature થી મોટે ભાગ independent"
+        ],
+        "ans": 3,
+        "exp": "Stiff voltage divider makes VB ≈ constant; with RE, VBEQ and ICQ are stabilized against β variation."
+    },
+    {
+        "id": 34,
+        "level": "medium",
+        "q": "The function of a bypass capacitor CE in an amplifier circuit is to:",
+        "gq": "Amplifier circuit માં bypass capacitor CE નું કામ:",
+        "opts": [
+            "Block DC from the output",
+            "Provide feedback",
+            "Short-circuit RE at signal frequencies to restore gain",
+            "Filter the power supply ripple"
+        ],
+        "gOpts": [
+            "Output થી DC block",
+            "Feedback provide",
+            "Signal frequencies પર RE ને short-circuit કરી gain restore",
+            "Power supply ripple filter"
+        ],
+        "ans": 2,
+        "exp": "Without CE, RE introduces negative feedback reducing gain. CE shorts RE at AC → gain = -RC/re."
+    },
+    {
+        "id": 35,
+        "level": "medium",
+        "q": "Which semiconductor material has a direct bandgap suitable for LEDs?",
+        "gq": "કઈ semiconductor material ની direct bandgap LEDs માટે suitable છે?",
+        "opts": [
+            "Germanium (Ge)",
+            "Silicon (Si)",
+            "GaAs (Gallium Arsenide)",
+            "Carbon (Diamond)"
+        ],
+        "gOpts": [
+            "Germanium (Ge)",
+            "Silicon (Si)",
+            "GaAs (Gallium Arsenide)",
+            "Carbon (Diamond)"
+        ],
+        "ans": 2,
+        "exp": "GaAs is direct bandgap — electrons recombine directly emitting photons. Si/Ge are indirect bandgap."
+    },
+    {
+        "id": 36,
+        "level": "medium",
+        "q": "The Q-point (quiescent point) of a transistor amplifier is:",
+        "gq": "Transistor amplifier ની Q-point (quiescent point):",
+        "opts": [
+            "DC operating point with no AC signal applied",
+            "Breakdown point of transistor",
+            "Peak AC signal operating point",
+            "Point of maximum gain"
+        ],
+        "gOpts": [
+            "AC signal વગર DC operating point",
+            "Transistor નો breakdown point",
+            "Peak AC signal operating point",
+            "Maximum gain નો point"
+        ],
+        "ans": 0,
+        "exp": "Q-point defines the DC bias conditions (ICQ, VCEQ) — the resting point around which the signal swings."
+    },
+    {
+        "id": 37,
+        "level": "medium",
+        "q": "In a full-wave centre-tap rectifier, if the transformer secondary voltage is 2Vm, the PIV of each diode is:",
+        "gq": "Full-wave centre-tap rectifier: transformer secondary voltage 2Vm, દરેક diode ની PIV:",
+        "opts": [
+            "Vm",
+            "Vm/2",
+            "2Vm",
+            "4Vm"
+        ],
+        "gOpts": [
+            "Vm",
+            "Vm/2",
+            "2Vm",
+            "4Vm"
+        ],
+        "ans": 2,
+        "exp": "PIV = 2Vm for centre-tap — when one diode conducts, the other is reverse biased by full secondary voltage."
+    },
+    {
+        "id": 38,
+        "level": "medium",
+        "q": "The input resistance of a common-collector (emitter follower) amplifier is:",
+        "gq": "Common-collector (emitter follower) amplifier ની input resistance:",
+        "opts": [
+            "Same as common-emitter",
+            "High (β+1)(RE||RL)",
+            "Equal to hie only",
+            "Very low approximately re"
+        ],
+        "gOpts": [
+            "Common-emitter જેટલી",
+            "ઊંચી (β+1)(RE||RL)",
+            "ફક્ત hie",
+            "ખૂબ ઓછી approximately re"
+        ],
+        "ans": 1,
+        "exp": "Rin = rπ + (β+1)(RE||RL) — high input resistance is the main feature of emitter follower."
+    },
+    {
+        "id": 39,
+        "level": "medium",
+        "q": "A p-n junction diode in forward bias has:",
+        "gq": "Forward bias માં p-n junction diode:",
+        "opts": [
+            "Zero current always",
+            "Narrow depletion region and exponential current rise",
+            "Wide depletion region",
+            "Constant voltage across it"
+        ],
+        "gOpts": [
+            "Zero current",
+            "સાંકળી depletion region અને exponential current rise",
+            "Wide depletion region",
+            "Constant voltage"
+        ],
+        "ans": 1,
+        "exp": "Forward bias: reduces potential barrier, narrows depletion region, current rises as I = Is(e^(V/VT) - 1)."
+    },
+    {
+        "id": 40,
+        "level": "medium",
+        "q": "The voltage gain of a common-emitter amplifier without bypass capacitor is:",
+        "gq": "Bypass capacitor વગર common-emitter amplifier નો voltage gain:",
+        "opts": [
+            "-RC/(RE+re)",
+            "-β·RC",
+            "-RC/re",
+            "β·RE/RC"
+        ],
+        "gOpts": [
+            "-RC/(RE+re)",
+            "-β·RC",
+            "-RC/re",
+            "β·RE/RC"
+        ],
+        "ans": 0,
+        "exp": "Without CE: Av = -RC/(RE+re). RE reduces gain but improves stability and linearity."
+    },
+    {
+        "id": 41,
+        "level": "medium",
+        "q": "In an n-type semiconductor, the majority carriers are:",
+        "gq": "n-type semiconductor માં majority carriers:",
+        "opts": [
+            "Neutral atoms",
+            "Holes",
+            "Electrons",
+            "Positive ions"
+        ],
+        "gOpts": [
+            "Neutral atoms",
+            "Holes",
+            "Electrons",
+            "Positive ions"
+        ],
+        "ans": 2,
+        "exp": "N-type: donor atoms donate electrons, making electrons the majority carriers."
+    },
+    {
+        "id": 42,
+        "level": "medium",
+        "q": "The filter capacitor in a power supply works by:",
+        "gq": "Power supply માં filter capacitor:",
+        "opts": [
+            "Charging during peaks and discharging into load between peaks",
+            "Converting DC to AC",
+            "Blocking AC completely",
+            "Amplifying the ripple"
+        ],
+        "gOpts": [
+            "Peaks દરમ્યાન charging, peaks વચ્ચે load માં discharging",
+            "DC ને AC convert",
+            "AC ને સંપૂર્ण block",
+            "Ripple amplify"
+        ],
+        "ans": 0,
+        "exp": "Capacitor stores charge at peaks, releases during intervals, smoothing the pulsating DC."
+    },
+    {
+        "id": 43,
+        "level": "medium",
+        "q": "The relation between α and β of a transistor is:",
+        "gq": "Transistor ના α અને β ની relation:",
+        "opts": [
+            "α = β/(1+β)... both are same",
+            "α = β",
+            "β = α/(1-α)",
+            "β = 1/α"
+        ],
+        "gOpts": [
+            "α = β/(1+β)... બંને same",
+            "α = β",
+            "β = α/(1-α)",
+            "β = 1/α"
+        ],
+        "ans": 2,
+        "exp": "β = α/(1-α) and α = β/(1+β). Since α < 1, β can be large (50-500)."
+    },
+    {
+        "id": 44,
+        "level": "medium",
+        "q": "Intrinsic semiconductor at absolute zero temperature (0K) behaves as:",
+        "gq": "Absolute zero (0K) પર intrinsic semiconductor:",
+        "opts": [
+            "Perfect conductor",
+            "Perfect insulator (no free carriers)",
+            "Good semiconductor",
+            "Metallic conductor"
+        ],
+        "gOpts": [
+            "Perfect conductor",
+            "Perfect insulator (free carriers નહીં)",
+            "Good semiconductor",
+            "Metallic conductor"
+        ],
+        "ans": 1,
+        "exp": "At 0K, all electrons are in valence band. No thermal energy to excite to conduction band → insulator-like."
+    },
+    {
+        "id": 45,
+        "level": "medium",
+        "q": "The cut-off frequency of a low-pass RC filter is:",
+        "gq": "Low-pass RC filter ની cut-off frequency:",
+        "opts": [
+            "RC/2π",
+            "1/(πRC)",
+            "1/(2πRC)",
+            "2πRC"
+        ],
+        "gOpts": [
+            "RC/2π",
+            "1/(πRC)",
+            "1/(2πRC)",
+            "2πRC"
+        ],
+        "ans": 2,
+        "exp": "fc = 1/(2πRC) — at this frequency, output voltage drops to 1/√2 (≈0.707) of input value."
+    },
+    {
+        "id": 46,
+        "level": "medium",
+        "q": "In a Hartley oscillator, the frequency determining elements are:",
+        "gq": "Hartley oscillator માં frequency determine કરતા elements:",
+        "opts": [
+            "Two capacitors and one inductor",
+            "Crystal alone",
+            "RC network only",
+            "Two inductors (or tapped inductor) and one capacitor"
+        ],
+        "gOpts": [
+            "બે capacitors અને એક inductor",
+            "ફક્ત Crystal",
+            "ફક્ત RC network",
+            "બે inductors (અથવા tapped inductor) અને એક capacitor"
+        ],
+        "ans": 3,
+        "exp": "Hartley: f = 1/(2π√((L1+L2)C)). Uses tapped inductor for feedback."
+    },
+    {
+        "id": 47,
+        "level": "medium",
+        "q": "Which biasing method provides best stability for a BJT?",
+        "gq": "BJT માટે best stability કઈ biasing method આપે?",
+        "opts": [
+            "Collector-to-base bias",
+            "Emitter bias only",
+            "Voltage divider bias (self-bias)",
+            "Fixed bias"
+        ],
+        "gOpts": [
+            "Collector-to-base bias",
+            "ફક્ત Emitter bias",
+            "Voltage divider bias (self-bias)",
+            "Fixed bias"
+        ],
+        "ans": 2,
+        "exp": "Voltage divider + emitter resistor provides both self-stabilization and β-independent biasing."
+    },
+    {
+        "id": 48,
+        "level": "medium",
+        "q": "The primary function of an emitter follower (CC) is:",
+        "gq": "Emitter follower (CC) નું primary function:",
+        "opts": [
+            "Phase inversion of signal",
+            "Impedance matching (high to low Zin to Zout)",
+            "Current attenuation",
+            "Voltage amplification"
+        ],
+        "gOpts": [
+            "Signal ની Phase inversion",
+            "Impedance matching (high to low Zin to Zout)",
+            "Current attenuation",
+            "Voltage amplification"
+        ],
+        "ans": 1,
+        "exp": "Emitter follower: Av ≈ 1 (unity gain), high Zin, low Zout — ideal for impedance transformation."
+    },
+    {
+        "id": 49,
+        "level": "medium",
+        "q": "The knee voltage of a silicon diode is approximately:",
+        "gq": "Silicon diode ની knee voltage આશરે:",
+        "opts": [
+            "1.4 V",
+            "1.1 V",
+            "0.6 to 0.7 V",
+            "0.2 to 0.3 V"
+        ],
+        "gOpts": [
+            "1.4 V",
+            "1.1 V",
+            "0.6 to 0.7 V",
+            "0.2 to 0.3 V"
+        ],
+        "ans": 2,
+        "exp": "Silicon diode threshold (knee) voltage ≈ 0.6-0.7V. Germanium ≈ 0.2-0.3V."
+    },
+    {
+        "id": 50,
+        "level": "medium",
+        "q": "The efficiency of a class B push-pull amplifier at maximum output is approximately:",
+        "gq": "Maximum output પર class B push-pull amplifier ની efficiency:",
+        "opts": [
+            "50%",
+            "25%",
+            "100%",
+            "78.5%"
+        ],
+        "gOpts": [
+            "50%",
+            "25%",
+            "100%",
+            "78.5%"
+        ],
+        "ans": 3,
+        "exp": "Class B max efficiency = π/4 × 100% ≈ 78.5%. Much better than class A's 25-50%."
+    },
+    {
+        "id": 51,
+        "level": "medium",
+        "q": "A Zener diode is normally operated in:",
+        "gq": "Zener diode સામાન્ય રીતે ક્યાં operate થાય?",
+        "opts": [
+            "Saturation region",
+            "Reverse breakdown region",
+            "Zero bias condition",
+            "Forward bias region"
+        ],
+        "gOpts": [
+            "Saturation region",
+            "Reverse breakdown region",
+            "Zero bias condition",
+            "Forward bias region"
+        ],
+        "ans": 1,
+        "exp": "Zener operates in controlled reverse breakdown — maintains nearly constant voltage across it."
+    },
+    {
+        "id": 52,
+        "level": "medium",
+        "q": "The gain of an inverting op-amp amplifier is:",
+        "gq": "Inverting op-amp amplifier નો gain:",
+        "opts": [
+            "1 + Rf/Rin",
+            "Rin/Rf",
+            "-Rf/Rin",
+            "+Rf/Rin"
+        ],
+        "gOpts": [
+            "1 + Rf/Rin",
+            "Rin/Rf",
+            "-Rf/Rin",
+            "+Rf/Rin"
+        ],
+        "ans": 2,
+        "exp": "Inverting configuration: Av = -Rf/Rin. Negative sign indicates 180° phase inversion."
+    },
+    {
+        "id": 53,
+        "level": "medium",
+        "q": "In which region does a BJT act as a switch in OFF state?",
+        "gq": "BJT switch OFF state માં ક્યા region માં હોય?",
+        "opts": [
+            "Saturation region",
+            "Active region",
+            "Breakdown region",
+            "Cut-off region"
+        ],
+        "gOpts": [
+            "Saturation region",
+            "Active region",
+            "Breakdown region",
+            "Cut-off region"
+        ],
+        "ans": 3,
+        "exp": "Cut-off: both junctions reverse biased, IC ≈ 0 → switch OFF. Saturation → switch ON."
+    },
+    {
+        "id": 54,
+        "level": "medium",
+        "q": "The depletion region of a p-n junction is formed due to:",
+        "gq": "p-n junction ની depletion region ના formation નું કારણ:",
+        "opts": [
+            "Applied external voltage",
+            "Thermal excitation of minority carriers",
+            "Light absorption",
+            "Diffusion of majority carriers across junction creating fixed ions"
+        ],
+        "gOpts": [
+            "Applied external voltage",
+            "Minority carriers ની thermal excitation",
+            "Light absorption",
+            "Junction across majority carriers ની diffusion, fixed ions create"
+        ],
+        "ans": 3,
+        "exp": "Electrons from n-side diffuse to p-side recombining with holes, leaving fixed positive/negative ions → depletion."
+    },
+    {
+        "id": 55,
+        "level": "medium",
+        "q": "MOSFET differs from JFET mainly in that MOSFET:",
+        "gq": "MOSFET, JFET થી mainly કેવી રીતે different?",
+        "opts": [
+            "Has insulated gate (oxide layer) giving near-infinite input resistance",
+            "Requires forward biased gate",
+            "Is only available as n-channel",
+            "Has lower transconductance"
+        ],
+        "gOpts": [
+            "Insulated gate (oxide layer) near-infinite input resistance",
+            "Forward biased gate જોઈએ",
+            "ફક્ત n-channel available",
+            "Lower transconductance"
+        ],
+        "ans": 0,
+        "exp": "MOSFET gate is insulated by SiO2 → gate draws essentially zero DC current → Rin ≈ 10^12 Ω or more."
+    },
+    {
+        "id": 56,
+        "level": "medium",
+        "q": "Magnetic hysteresis in a ferromagnetic material represents:",
+        "gq": "Ferromagnetic material માં magnetic hysteresis:",
+        "opts": [
+            "Absence of magnetic domains",
+            "Energy loss per magnetization cycle (area of B-H loop)",
+            "Linear B-H relationship",
+            "Diamagnetic behavior"
+        ],
+        "gOpts": [
+            "Magnetic domains ની absence",
+            "Magnetization cycle દીઠ energy loss (B-H loop ની area)",
+            "Linear B-H relationship",
+            "Diamagnetic behavior"
+        ],
+        "ans": 1,
+        "exp": "Hysteresis loop area = energy dissipated as heat per cycle. Important for transformer core selection."
+    },
+    {
+        "id": 57,
+        "level": "medium",
+        "q": "The input offset voltage of an ideal op-amp is:",
+        "gq": "Ideal op-amp ની input offset voltage:",
+        "opts": [
+            "Equal to supply voltage",
+            "Depends on load",
+            "Zero",
+            "Infinite"
+        ],
+        "gOpts": [
+            "Supply voltage ની સમાન",
+            "Load પર depend",
+            "Zero",
+            "Infinite"
+        ],
+        "ans": 2,
+        "exp": "Ideal op-amp: Vos = 0, Aol = ∞, Zin = ∞, Zout = 0, BW = ∞, CMRR = ∞."
+    },
+    {
+        "id": 58,
+        "level": "medium",
+        "q": "What happens to the depletion region when reverse bias is applied to a diode?",
+        "gq": "Diode ને reverse bias apply કરે ત્યારે depletion region:",
+        "opts": [
+            "Widens (increases)",
+            "Narrows (decreases)",
+            "Disappears completely",
+            "Remains same"
+        ],
+        "gOpts": [
+            "Wide (વધે)",
+            "Narrow (ઘટે)",
+            "સંપૂર્ણ disappear",
+            "Same"
+        ],
+        "ans": 0,
+        "exp": "Reverse bias: external field aids built-in field, pulling carriers away → depletion region widens."
+    },
+    {
+        "id": 59,
+        "level": "medium",
+        "q": "The main advantage of a crystal oscillator over LC oscillator is:",
+        "gq": "LC oscillator ની સરખામણીમાં crystal oscillator નો main advantage:",
+        "opts": [
+            "Much wider frequency range",
+            "Extremely high frequency stability (high Q factor)",
+            "Simpler circuit",
+            "Lower cost"
+        ],
+        "gOpts": [
+            "Much wider frequency range",
+            "ખૂબ ઊંચી frequency stability (high Q factor)",
+            "Simpler circuit",
+            "Lower cost"
+        ],
+        "ans": 1,
+        "exp": "Crystal Q factors of 10^4 to 10^6 give extremely stable frequency, unlike LC (Q ≈ 100-200)."
+    },
+    {
+        "id": 60,
+        "level": "medium",
+        "q": "In a transistor amplifier, the stability factor S is defined for which parameter?",
+        "gq": "Transistor amplifier માં stability factor S ક્યા parameter માટે define?",
+        "opts": [
+            "S = IC/IB",
+            "S = ∂IC/∂ICBO (sensitivity of IC to reverse saturation current)",
+            "S = VCE/IC",
+            "S = β/α"
+        ],
+        "gOpts": [
+            "S = IC/IB",
+            "S = ∂IC/∂ICBO (IC ની ICBO પ્રત્યે sensitivity)",
+            "S = VCE/IC",
+            "S = β/α"
+        ],
+        "ans": 1,
+        "exp": "Stability factor S = ∂IC/∂ICBO. Smaller S = more stable bias. Ideal S = 1."
+    },
+    {
+        "id": 61,
+        "level": "normal",
+        "q": "What does LED stand for?",
+        "gq": "LED નું full form શું છે?",
+        "opts": [
+            "Light Energy Detector",
+            "Low Energy Device",
+            "Light Emitting Diode",
+            "Luminous Emission Diode"
+        ],
+        "gOpts": [
+            "Light Energy Detector",
+            "Low Energy Device",
+            "Light Emitting Diode",
+            "Luminous Emission Diode"
+        ],
+        "ans": 2,
+        "exp": "LED = Light Emitting Diode. It emits light when forward biased."
+    },
+    {
+        "id": 62,
+        "level": "normal",
+        "q": "Semiconductors have how many valence electrons?",
+        "gq": "Semiconductors માં valence electrons કેટલા?",
+        "opts": [
+            "2",
+            "6",
+            "4",
+            "8"
+        ],
+        "gOpts": [
+            "2",
+            "6",
+            "4",
+            "8"
+        ],
+        "ans": 2,
+        "exp": "Semiconductor atoms (Si, Ge) have 4 valence electrons — they can bond with 4 neighbors."
+    },
+    {
+        "id": 63,
+        "level": "normal",
+        "q": "Which of the following is an insulating material?",
+        "gq": "નીચેમાંથી ક્યો insulating material છે?",
+        "opts": [
+            "Silicon",
+            "Germanium",
+            "Mica",
+            "Copper"
+        ],
+        "gOpts": [
+            "Silicon",
+            "Germanium",
+            "Mica",
+            "Copper"
+        ],
+        "ans": 2,
+        "exp": "Mica has very high resistivity (10^11 to 10^15 Ω·m) — excellent insulator used in electronics."
+    },
+    {
+        "id": 64,
+        "level": "normal",
+        "q": "A diode allows current to flow in:",
+        "gq": "Diode ક્યા direction માં current flow allow કરે?",
+        "opts": [
+            "One direction only (forward)",
+            "No direction",
+            "Both directions",
+            "Only reverse direction"
+        ],
+        "gOpts": [
+            "ફક્ત એક direction (forward)",
+            "કોઈ direction નહીં",
+            "બંને directions",
+            "ફક્ત reverse direction"
+        ],
+        "ans": 0,
+        "exp": "A diode is a one-way valve for current — conducts in forward bias, blocks in reverse bias."
+    },
+    {
+        "id": 65,
+        "level": "normal",
+        "q": "The three terminals of a BJT transistor are:",
+        "gq": "BJT transistor ના ત્રણ terminals:",
+        "opts": [
+            "Input, Output, Ground",
+            "Anode, Cathode, Gate",
+            "Gate, Source, Drain",
+            "Base, Collector, Emitter"
+        ],
+        "gOpts": [
+            "Input, Output, Ground",
+            "Anode, Cathode, Gate",
+            "Gate, Source, Drain",
+            "Base, Collector, Emitter"
+        ],
+        "ans": 3,
+        "exp": "BJT: Base (B), Collector (C), Emitter (E). MOSFET/JFET: Gate, Drain, Source."
+    },
+    {
+        "id": 66,
+        "level": "normal",
+        "q": "What is the main function of a rectifier?",
+        "gq": "Rectifier નું main function:",
+        "opts": [
+            "Convert DC to AC",
+            "Store electrical energy",
+            "Amplify signals",
+            "Convert AC to DC"
+        ],
+        "gOpts": [
+            "DC ને AC convert",
+            "Electrical energy store",
+            "Signals amplify",
+            "AC ને DC convert"
+        ],
+        "ans": 3,
+        "exp": "A rectifier converts alternating current (AC) to direct current (DC) using diodes."
+    },
+    {
+        "id": 67,
+        "level": "normal",
+        "q": "Silicon (Si) is preferred over Germanium (Ge) for transistors because:",
+        "gq": "Transistors માટે Germanium (Ge) ની જગ્યાએ Silicon (Si) prefer:",
+        "opts": [
+            "Higher electron mobility",
+            "Better electrical conductivity",
+            "Higher operating temperature range and lower leakage current",
+            "Lower cost only"
+        ],
+        "gOpts": [
+            "Higher electron mobility",
+            "Better electrical conductivity",
+            "ઊંચી operating temperature range અને ઓછો leakage current",
+            "ફક્ત Lower cost"
+        ],
+        "ans": 2,
+        "exp": "Si max temp ≈ 150°C vs Ge ≈ 85°C. Si leakage current is much smaller — better for practical use."
+    },
+    {
+        "id": 68,
+        "level": "normal",
+        "q": "In a common-emitter amplifier, the output signal is:",
+        "gq": "Common-emitter amplifier માં output signal:",
+        "opts": [
+            "90° out of phase",
+            "Same amplitude as input",
+            "In phase with input",
+            "180° out of phase with input"
+        ],
+        "gOpts": [
+            "90° out of phase",
+            "Input ની same amplitude",
+            "Input ની in phase",
+            "Input ની 180° out of phase"
+        ],
+        "ans": 3,
+        "exp": "CE amplifier introduces 180° phase inversion between input (base) and output (collector)."
+    },
+    {
+        "id": 69,
+        "level": "normal",
+        "q": "The unit of electrical conductivity is:",
+        "gq": "Electrical conductivity નો unit:",
+        "opts": [
+            "Farad (F)",
+            "Ohm-meter (Ω·m)",
+            "Siemens per meter (S/m)",
+            "Henry (H)"
+        ],
+        "gOpts": [
+            "Farad (F)",
+            "Ohm-meter (Ω·m)",
+            "Siemens per meter (S/m)",
+            "Henry (H)"
+        ],
+        "ans": 2,
+        "exp": "Conductivity σ = 1/ρ, unit = S/m (Siemens per metre). Resistivity ρ unit = Ω·m."
+    },
+    {
+        "id": 70,
+        "level": "normal",
+        "q": "A transformer is used in a power supply to:",
+        "gq": "Power supply માં transformer:",
+        "opts": [
+            "Store electrical energy",
+            "Amplify the current only",
+            "Convert AC to DC directly",
+            "Step up or step down AC voltage before rectification"
+        ],
+        "gOpts": [
+            "Electrical energy store",
+            "ફક્ત current amplify",
+            "સીધો AC ને DC convert",
+            "Rectification પહેલાં AC voltage step up/down"
+        ],
+        "ans": 3,
+        "exp": "Transformer changes AC voltage level (V2/V1 = N2/N1) while keeping frequency constant."
+    },
+    {
+        "id": 71,
+        "level": "normal",
+        "q": "Which component stores charge and opposes change in voltage?",
+        "gq": "ક્યો component charge store કરે અને voltage change oppose?",
+        "opts": [
+            "Resistor",
+            "Inductor",
+            "Diode",
+            "Capacitor"
+        ],
+        "gOpts": [
+            "Resistor",
+            "Inductor",
+            "Diode",
+            "Capacitor"
+        ],
+        "ans": 3,
+        "exp": "Capacitor stores electric charge (Q = CV) and opposes sudden voltage changes."
+    },
+    {
+        "id": 72,
+        "level": "normal",
+        "q": "The process of adding impurities to a pure semiconductor is called:",
+        "gq": "Pure semiconductor માં impurities add કરવાની process:",
+        "opts": [
+            "Diffusion",
+            "Annealing",
+            "Epitaxy",
+            "Doping"
+        ],
+        "gOpts": [
+            "Diffusion",
+            "Annealing",
+            "Epitaxy",
+            "Doping"
+        ],
+        "ans": 3,
+        "exp": "Doping: adding tiny amounts of pentavalent (n-type) or trivalent (p-type) impurities to intrinsic semiconductor."
+    },
+    {
+        "id": 73,
+        "level": "normal",
+        "q": "The Fermi level in an intrinsic semiconductor lies:",
+        "gq": "Intrinsic semiconductor માં Fermi level ક્યાં?",
+        "opts": [
+            "Near the middle of the bandgap",
+            "Above the conduction band",
+            "At the valence band edge",
+            "At the conduction band edge"
+        ],
+        "gOpts": [
+            "Bandgap ની middle ની નજીક",
+            "Conduction band ની ઉપર",
+            "Valence band edge",
+            "Conduction band edge"
+        ],
+        "ans": 0,
+        "exp": "Intrinsic semiconductor: Fermi level is approximately at the center of the energy bandgap."
+    },
+    {
+        "id": 74,
+        "level": "normal",
+        "q": "A resistor color code with bands: Brown, Black, Red, Gold has value:",
+        "gq": "Brown, Black, Red, Gold color code resistor ની value:",
+        "opts": [
+            "10 kΩ ±5%",
+            "1 MΩ ±5%",
+            "1 kΩ ±5%",
+            "100 Ω ±5%"
+        ],
+        "gOpts": [
+            "10 kΩ ±5%",
+            "1 MΩ ±5%",
+            "1 kΩ ±5%",
+            "100 Ω ±5%"
+        ],
+        "ans": 2,
+        "exp": "Brown=1, Black=0, Red=×100 → 10×100=1000Ω=1kΩ. Gold=±5%."
+    },
+    {
+        "id": 75,
+        "level": "normal",
+        "q": "In p-type semiconductor, which are majority carriers?",
+        "gq": "p-type semiconductor માં majority carriers:",
+        "opts": [
+            "Holes",
+            "Neutrons",
+            "Electrons",
+            "Protons"
+        ],
+        "gOpts": [
+            "Holes",
+            "Neutrons",
+            "Electrons",
+            "Protons"
+        ],
+        "ans": 0,
+        "exp": "P-type: trivalent dopant creates holes (missing electrons) as majority carriers."
+    },
+    {
+        "id": 76,
+        "level": "normal",
+        "q": "The unit of magnetic flux density (B) is:",
+        "gq": "Magnetic flux density (B) નો unit:",
+        "opts": [
+            "Henry (H)",
+            "Weber (Wb)",
+            "Tesla (T)",
+            "Ampere/meter (A/m)"
+        ],
+        "gOpts": [
+            "Henry (H)",
+            "Weber (Wb)",
+            "Tesla (T)",
+            "Ampere/meter (A/m)"
+        ],
+        "ans": 2,
+        "exp": "B (flux density) = Tesla = Wb/m². Weber = total flux Φ. H field unit = A/m."
+    },
+    {
+        "id": 77,
+        "level": "normal",
+        "q": "An NPN transistor in active mode: the emitter-base junction is:",
+        "gq": "Active mode NPN transistor: emitter-base junction:",
+        "opts": [
+            "Reverse biased",
+            "Forward biased",
+            "Zero biased",
+            "Breakdown biased"
+        ],
+        "gOpts": [
+            "Reverse biased",
+            "Forward biased",
+            "Zero biased",
+            "Breakdown biased"
+        ],
+        "ans": 1,
+        "exp": "Active mode: E-B forward biased, C-B reverse biased. This allows transistor to amplify."
+    },
+    {
+        "id": 78,
+        "level": "normal",
+        "q": "The main advantage of negative feedback in amplifiers is:",
+        "gq": "Amplifiers માં negative feedback નો main advantage:",
+        "opts": [
+            "Increased gain",
+            "Lower bandwidth",
+            "Reduced distortion and improved stability",
+            "Increased distortion"
+        ],
+        "gOpts": [
+            "Increased gain",
+            "Lower bandwidth",
+            "Reduced distortion અને improved stability",
+            "Increased distortion"
+        ],
+        "ans": 2,
+        "exp": "NFB improves linearity, stability, bandwidth and reduces distortion — though it sacrifices some gain."
+    },
+    {
+        "id": 79,
+        "level": "normal",
+        "q": "A capacitor blocks:",
+        "gq": "Capacitor ક્યો signal block કરે?",
+        "opts": [
+            "High frequency AC",
+            "All electrical signals",
+            "DC signals (low frequency → zero frequency)",
+            "Radio frequency only"
+        ],
+        "gOpts": [
+            "High frequency AC",
+            "બધા electrical signals",
+            "DC signals (low frequency → zero frequency)",
+            "ફક્ت Radio frequency"
+        ],
+        "ans": 2,
+        "exp": "Capacitor reactance XC = 1/(2πfC) → infinite at f=0 (DC), so it blocks DC and passes AC."
+    },
+    {
+        "id": 80,
+        "level": "normal",
+        "q": "In class A amplifier, the transistor conducts for:",
+        "gq": "Class A amplifier માં transistor ક્યારે conduct?",
+        "opts": [
+            "180° (half cycle)",
+            "90° (quarter cycle)",
+            "360° (entire input cycle)",
+            "Less than 180°"
+        ],
+        "gOpts": [
+            "180° (half cycle)",
+            "90° (quarter cycle)",
+            "360° (entire input cycle)",
+            "180° થી ઓછા"
+        ],
+        "ans": 2,
+        "exp": "Class A: transistor remains ON for full 360° of input cycle — linear but inefficient."
+    },
+    {
+        "id": 81,
+        "level": "normal",
+        "q": "Insulating materials have resistivity in the range of:",
+        "gq": "Insulating materials ની resistivity range:",
+        "opts": [
+            "10^8 to 10^18 Ω·m",
+            "10^-3 to 1 Ω·m",
+            "10^-8 to 10^-6 Ω·m",
+            "1 to 10^3 Ω·m"
+        ],
+        "gOpts": [
+            "10^8 to 10^18 Ω·m",
+            "10^-3 to 1 Ω·m",
+            "10^-8 to 10^-6 Ω·m",
+            "1 to 10^3 Ω·m"
+        ],
+        "ans": 0,
+        "exp": "Insulators: ρ = 10^8 to 10^18 Ω·m. Conductors: 10^-8 to 10^-6. Semiconductors: in between."
+    },
+    {
+        "id": 82,
+        "level": "normal",
+        "q": "The output voltage of a non-inverting op-amp is:",
+        "gq": "Non-inverting op-amp ની output voltage:",
+        "opts": [
+            "-Rf/Rin × Vin",
+            "Rf/Rin × Vin",
+            "Vin only",
+            "(1 + Rf/Rin) × Vin"
+        ],
+        "gOpts": [
+            "-Rf/Rin × Vin",
+            "Rf/Rin × Vin",
+            "ફક્ત Vin",
+            "(1 + Rf/Rin) × Vin"
+        ],
+        "ans": 3,
+        "exp": "Non-inverting: Av = 1 + Rf/Rin. Always positive gain, no phase inversion."
+    },
+    {
+        "id": 83,
+        "level": "normal",
+        "q": "Which type of transistor is voltage-controlled?",
+        "gq": "ક્યા type નો transistor voltage-controlled?",
+        "opts": [
+            "SCR",
+            "BJT (Bipolar Junction Transistor)",
+            "UJT",
+            "FET (Field Effect Transistor)"
+        ],
+        "gOpts": [
+            "SCR",
+            "BJT (Bipolar Junction Transistor)",
+            "UJT",
+            "FET (Field Effect Transistor)"
+        ],
+        "ans": 3,
+        "exp": "FET is voltage-controlled (gate voltage controls drain current). BJT is current-controlled."
+    },
+    {
+        "id": 84,
+        "level": "normal",
+        "q": "The function of a capacitor filter in a power supply is to:",
+        "gq": "Power supply માં capacitor filter:",
+        "opts": [
+            "Smooth the pulsating DC output",
+            "Provide regulation",
+            "Block DC component",
+            "Increase the output voltage"
+        ],
+        "gOpts": [
+            "Pulsating DC output smooth",
+            "Regulation provide",
+            "DC component block",
+            "Output voltage increase"
+        ],
+        "ans": 0,
+        "exp": "Capacitor charges to peak voltage, discharges slowly through load — smoothing the DC output."
+    },
+    {
+        "id": 85,
+        "level": "normal",
+        "q": "Which of these is a conducting material?",
+        "gq": "નીચેમાંથી ક્યો conducting material?",
+        "opts": [
+            "Mica",
+            "Glass",
+            "Rubber",
+            "Copper (Cu)"
+        ],
+        "gOpts": [
+            "Mica",
+            "Glass",
+            "Rubber",
+            "Copper (Cu)"
+        ],
+        "ans": 3,
+        "exp": "Copper has very low resistivity (1.7×10^-8 Ω·m) — best common conductor for wiring."
+    },
+    {
+        "id": 86,
+        "level": "normal",
+        "q": "The maximum efficiency of a half-wave rectifier is:",
+        "gq": "Half-wave rectifier ની maximum efficiency:",
+        "opts": [
+            "78.5%",
+            "40.6%",
+            "81.2%",
+            "100%"
+        ],
+        "gOpts": [
+            "78.5%",
+            "40.6%",
+            "81.2%",
+            "100%"
+        ],
+        "ans": 1,
+        "exp": "Half-wave rectifier max efficiency = 40.6%. Full-wave = 81.2%. Class B amplifier = 78.5%."
+    },
+    {
+        "id": 87,
+        "level": "normal",
+        "q": "The forward resistance of an ideal diode is:",
+        "gq": "Ideal diode ની forward resistance:",
+        "opts": [
+            "Depends on current",
+            "Zero",
+            "50 Ω",
+            "Infinite"
+        ],
+        "gOpts": [
+            "Current પર depend",
+            "Zero",
+            "50 Ω",
+            "Infinite"
+        ],
+        "ans": 1,
+        "exp": "Ideal diode: forward resistance = 0 (short circuit), reverse resistance = ∞ (open circuit)."
+    },
+    {
+        "id": 88,
+        "level": "normal",
+        "q": "Which material is used as gate insulator in MOSFET?",
+        "gq": "MOSFET માં gate insulator ક્યો material?",
+        "opts": [
+            "Silicon Dioxide (SiO2)",
+            "Copper",
+            "Germanium",
+            "Mica"
+        ],
+        "gOpts": [
+            "Silicon Dioxide (SiO2)",
+            "Copper",
+            "Germanium",
+            "Mica"
+        ],
+        "ans": 0,
+        "exp": "SiO2 (silicon dioxide / quartz glass) insulates the gate electrode — basis of IGFET/MOSFET structure."
+    },
+    {
+        "id": 89,
+        "level": "normal",
+        "q": "A tunnel diode is used in applications requiring:",
+        "gq": "Tunnel diode ક્યા applications માં?",
+        "opts": [
+            "High voltage regulation",
+            "High power switching",
+            "High-frequency oscillation (negative resistance region)",
+            "Low-frequency filtering"
+        ],
+        "gOpts": [
+            "High voltage regulation",
+            "High power switching",
+            "High-frequency oscillation (negative resistance region)",
+            "Low-frequency filtering"
+        ],
+        "ans": 2,
+        "exp": "Tunnel diode exhibits negative resistance — enables high-frequency oscillators and microwave amplifiers."
+    },
+    {
+        "id": 90,
+        "level": "normal",
+        "q": "Germanium diode forward voltage drop is approximately:",
+        "gq": "Germanium diode ની forward voltage drop:",
+        "opts": [
+            "5 V",
+            "0.6–0.7 V",
+            "1.2 V",
+            "0.2–0.3 V"
+        ],
+        "gOpts": [
+            "5 V",
+            "0.6–0.7 V",
+            "1.2 V",
+            "0.2–0.3 V"
+        ],
+        "ans": 3,
+        "exp": "Ge diode: Vf ≈ 0.2-0.3V. Si diode: Vf ≈ 0.6-0.7V. GaAs LED: Vf ≈ 1.4V."
+    },
+    {
+        "id": 91,
+        "level": "current",
+        "q": "In modern smartphones, which type of transistor is predominantly used?",
+        "gq": "Modern smartphones માં ક્યો transistor predominantly use?",
+        "opts": [
+            "BJT NPN",
+            "FinFET (Fin Field-Effect Transistor)",
+            "JFET",
+            "Planar MOSFET"
+        ],
+        "gOpts": [
+            "BJT NPN",
+            "FinFET (Fin Field-Effect Transistor)",
+            "JFET",
+            "Planar MOSFET"
+        ],
+        "ans": 1,
+        "exp": "FinFETs (3D gate structure) dominate at sub-10nm nodes — better control, lower leakage than planar MOSFET."
+    },
+    {
+        "id": 92,
+        "level": "current",
+        "q": "5G wireless systems use which frequency bands?",
+        "gq": "5G wireless systems ક્યા frequency bands use?",
+        "opts": [
+            "Below 1 MHz only",
+            "Sub-6 GHz and mmWave (24-100 GHz)",
+            "Infrared only",
+            "Only AM radio bands (530-1700 kHz)"
+        ],
+        "gOpts": [
+            "ફક્ત 1 MHz ની નીચે",
+            "Sub-6 GHz અને mmWave (24-100 GHz)",
+            "ફક્ત Infrared",
+            "ફક્ત AM radio bands"
+        ],
+        "ans": 1,
+        "exp": "5G uses sub-6GHz for coverage and mmWave bands (24-100GHz) for extremely high data rates."
+    },
+    {
+        "id": 93,
+        "level": "current",
+        "q": "IoT sensors typically use which low-power wireless protocol?",
+        "gq": "IoT sensors ક્યો low-power wireless protocol use?",
+        "opts": [
+            "Zigbee or BLE (Bluetooth Low Energy)",
+            "Satellite communication",
+            "5G only",
+            "Dial-up modem"
+        ],
+        "gOpts": [
+            "Zigbee અથવા BLE (Bluetooth Low Energy)",
+            "Satellite communication",
+            "ફક્ત 5G",
+            "Dial-up modem"
+        ],
+        "ans": 0,
+        "exp": "IoT devices use BLE (Bluetooth 5.x), Zigbee, Z-Wave, LoRa — all designed for ultra-low-power operation."
+    },
+    {
+        "id": 94,
+        "level": "current",
+        "q": "GaN (Gallium Nitride) transistors in modern power electronics offer:",
+        "gq": "Modern power electronics માં GaN transistors:",
+        "opts": [
+            "Lower frequency operation only",
+            "Only for low voltage under 5V",
+            "Higher switching speed and efficiency vs silicon at high voltages",
+            "Less efficiency than Si"
+        ],
+        "gOpts": [
+            "ફક્ત Lower frequency operation",
+            "ફક્ત 5V ની નીચે low voltage",
+            "High voltage પર silicon ની સરખામણીએ higher switching speed અને efficiency",
+            "Si કરતાં ઓછી efficiency"
+        ],
+        "ans": 2,
+        "exp": "GaN wide bandgap (3.4eV) allows higher voltage, temperature, frequency with far better efficiency."
+    },
+    {
+        "id": 95,
+        "level": "current",
+        "q": "Which integrated circuit architecture powers modern AI chips (like NPUs)?",
+        "gq": "Modern AI chips (NPUs) ક્યો IC architecture use?",
+        "opts": [
+            "Massively parallel VLSI with specialized matrix multiply units",
+            "Basic op-amp arrays",
+            "Simple 555 timer based circuits",
+            "Single BJT transistor arrays"
+        ],
+        "gOpts": [
+            "Specialized matrix multiply units સાથે Massively parallel VLSI",
+            "Basic op-amp arrays",
+            "Simple 555 timer based circuits",
+            "Single BJT transistor arrays"
+        ],
+        "ans": 0,
+        "exp": "AI/ML chips use VLSI with hundreds of parallel MACs (multiply-accumulate units) for tensor operations."
+    },
+    {
+        "id": 96,
+        "level": "current",
+        "q": "In modern wireless chargers, which principle is used?",
+        "gq": "Modern wireless chargers ક્યો principle use?",
+        "opts": [
+            "Radio wave rectification",
+            "Optical power transfer",
+            "Capacitive coupling only",
+            "Resonant inductive coupling (magnetic resonance)"
+        ],
+        "gOpts": [
+            "Radio wave rectification",
+            "Optical power transfer",
+            "ફક્ત Capacitive coupling",
+            "Resonant inductive coupling (magnetic resonance)"
+        ],
+        "ans": 3,
+        "exp": "Qi standard wireless charging uses resonant magnetic induction (loosely coupled LC resonators at ~100-200kHz)."
+    },
+    {
+        "id": 97,
+        "level": "current",
+        "q": "Silicon Carbide (SiC) power devices are used in EVs because:",
+        "gq": "EVs માં Silicon Carbide (SiC) power devices:",
+        "opts": [
+            "Handle higher voltages (800V+) and temperatures with lower switching losses",
+            "Work only at room temperature",
+            "Are cheaper than silicon",
+            "Only handle low voltages below 12V"
+        ],
+        "gOpts": [
+            "Lower switching losses સાથે higher voltages (800V+) અને temperatures handle",
+            "ફક્ત room temperature",
+            "Silicon કરતાં સસ્તા",
+            "ફક્ત 12V ની નીચે low voltages"
+        ],
+        "ans": 0,
+        "exp": "SiC enables 800V EV architectures, faster charging, higher efficiency power inverters with smaller heat sinks."
+    },
+    {
+        "id": 98,
+        "level": "current",
+        "q": "In WiFi 6 (802.11ax), what modulation scheme is used for highest data rates?",
+        "gq": "WiFi 6 (802.11ax) highest data rates માટે ક્યો modulation?",
+        "opts": [
+            "BPSK only",
+            "AM only",
+            "FM only",
+            "1024-QAM (Quadrature Amplitude Modulation)"
+        ],
+        "gOpts": [
+            "ફક્ત BPSK",
+            "ફક્ત AM",
+            "ફક્ત FM",
+            "1024-QAM (Quadrature Amplitude Modulation)"
+        ],
+        "ans": 3,
+        "exp": "WiFi 6 uses 1024-QAM encoding 10 bits per symbol — 25% more data than WiFi 5's 256-QAM."
+    },
+    {
+        "id": 99,
+        "level": "current",
+        "q": "Lithium-ion battery management systems use which type of circuit?",
+        "gq": "Lithium-ion battery management systems ક્યો circuit?",
+        "opts": [
+            "Simple relay switches",
+            "Mixed-signal ICs with ADC, protection FETs, and microcontrollers",
+            "Single diode rectifiers",
+            "Basic transformer circuits"
+        ],
+        "gOpts": [
+            "Simple relay switches",
+            "ADC, protection FETs અને microcontrollers સાથે Mixed-signal ICs",
+            "Single diode rectifiers",
+            "Basic transformer circuits"
+        ],
+        "ans": 1,
+        "exp": "BMS ICs monitor cell voltage/current/temperature via ADC, control charge/discharge via power FETs."
+    },
+    {
+        "id": 100,
+        "level": "current",
+        "q": "RFID technology used in smart cards operates by:",
+        "gq": "Smart cards માં RFID technology:",
+        "opts": [
+            "Electromagnetic induction — reader energizes passive card antenna to power IC",
+            "Battery-powered radio transmission",
+            "Infrared signal exchange",
+            "Optical data reading (like barcode)"
+        ],
+        "gOpts": [
+            "Electromagnetic induction — reader passive card antenna energize",
+            "Battery-powered radio transmission",
+            "Infrared signal exchange",
+            "Optical data reading (barcode like)"
+        ],
+        "ans": 0,
+        "exp": "Passive RFID: reader coil induces voltage in card coil (transformer action), powering the IC to respond."
+    },
+    {
+        "id": 101,
+        "level": "current",
+        "q": "Which type of amplifier is used in hearing aids today for ultra-low power?",
+        "gq": "Hearing aids માં ultra-low power માટે ક્યો amplifier?",
+        "opts": [
+            "Class A linear amplifier",
+            "Vacuum tube amplifier",
+            "Class B push-pull only",
+            "Class D switching amplifier with PWM"
+        ],
+        "gOpts": [
+            "Class A linear amplifier",
+            "Vacuum tube amplifier",
+            "ફક્ત Class B push-pull",
+            "PWM સાથે Class D switching amplifier"
+        ],
+        "ans": 3,
+        "exp": "Class D: efficiency 90-95% using PWM switching — essential for battery-powered hearing aids."
+    },
+    {
+        "id": 102,
+        "level": "current",
+        "q": "In satellite communication downlink receivers, LNA stands for:",
+        "gq": "Satellite communication downlink receivers: LNA =",
+        "opts": [
+            "Large Noise Attenuator",
+            "Low Noise Amplifier",
+            "Load Neutral Amplifier",
+            "Linear Network Amplifier"
+        ],
+        "gOpts": [
+            "Large Noise Attenuator",
+            "Low Noise Amplifier",
+            "Load Neutral Amplifier",
+            "Linear Network Amplifier"
+        ],
+        "ans": 1,
+        "exp": "LNA (Low Noise Amplifier) at the receiver front-end amplifies weak satellite signals with minimal added noise."
+    },
+    {
+        "id": 103,
+        "level": "current",
+        "q": "Phased array antennas in modern radar and 5G use:",
+        "gq": "Modern radar અને 5G phased array antennas:",
+        "opts": [
+            "Electronically steered beams via phase shifters without mechanical movement",
+            "Mechanical rotation only",
+            "Fixed single-beam radiation",
+            "Omnidirectional radiation always"
+        ],
+        "gOpts": [
+            "Mechanical movement વગર phase shifters દ્વારા electronically steered beams",
+            "ફક્ત Mechanical rotation",
+            "Fixed single-beam radiation",
+            "Always Omnidirectional"
+        ],
+        "ans": 0,
+        "exp": "Phased arrays steer beams electronically by controlling phase of each antenna element — key to 5G beamforming."
+    },
+    {
+        "id": 104,
+        "level": "current",
+        "q": "In modern SDR (Software Defined Radio), the key component is:",
+        "gq": "Modern SDR (Software Defined Radio) ની key component:",
+        "opts": [
+            "High-speed ADC converting RF directly to digital for software processing",
+            "Crystal oscillator banks",
+            "Fixed hardware filters only",
+            "Analog mixing circuits only"
+        ],
+        "gOpts": [
+            "Software processing માટે RF ને directly digital convert high-speed ADC",
+            "Crystal oscillator banks",
+            "ફક્ત Fixed hardware filters",
+            "ફક્ત Analog mixing circuits"
+        ],
+        "ans": 0,
+        "exp": "SDR digitizes RF signals with fast ADCs, then demodulation/filtering done in software (DSP/FPGA)."
+    },
+    {
+        "id": 105,
+        "level": "current",
+        "q": "The main semiconductor material being researched to replace silicon for ultra-fast electronics is:",
+        "gq": "Ultra-fast electronics માટે silicon replace research material:",
+        "opts": [
+            "Glass",
+            "Iron oxide",
+            "Pure copper",
+            "Graphene and 2D materials like MoS2"
+        ],
+        "gOpts": [
+            "Glass",
+            "Iron oxide",
+            "Pure copper",
+            "Graphene અને MoS2 જેવા 2D materials"
+        ],
+        "ans": 3,
+        "exp": "Graphene has electron mobility 100× higher than Si; MoS2 enables ultra-thin channels for future transistors."
+    }
+];
+  
+// Keep a reference to original questions so editor can restore
+  const originalQuestions = JSON.parse(JSON.stringify(questions));
+
+  // ===========================
+  // STATE
+  // ===========================
+  let currentIdx = 0;
+  let userAnswers = {};
+  let bookmarks = new Set();
+  let submitted = false;
+  let isDark = false;
+  let focusMode = false;
+  let editorOpen = false;
+
+  // Timer state
+  let timerSeconds = 0;
+  let timerRunning = false;
+  let timerInterval = null;
+
+  const STORAGE_KEY = 'mcq_wireless_psi_v2_ar';
+
+  // ===========================
+  // PERSISTENCE
+  // ===========================
+  function saveState() {
+    const state = { userAnswers, submitted, currentIdx, bookmarks: [...bookmarks], timerSeconds };
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const s = JSON.parse(raw);
+      if (s.userAnswers) userAnswers = s.userAnswers;
+      if (s.submitted !== undefined) submitted = s.submitted;
+      if (s.currentIdx !== undefined) currentIdx = Math.min(s.currentIdx, questions.length - 1);
+      if (s.bookmarks) bookmarks = new Set(s.bookmarks);
+      if (s.timerSeconds) timerSeconds = s.timerSeconds;
+    } catch(e) {}
+  }
+
+  function loadTheme() {
+    try {
+      if (localStorage.getItem('mcq_theme') === 'dark') { isDark = true; applyTheme(false); }
+    } catch(e) {}
+  }
+
+  // ===========================
+  // THEME
+  // ===========================
+  function toggleTheme() {
+    isDark = !isDark;
+    applyTheme(true);
+    try { localStorage.setItem('mcq_theme', isDark ? 'dark' : 'light'); } catch(e) {}
+  }
+
+  function applyTheme(animate) {
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+    const btn = document.getElementById('theme-btn');
+    if (btn) btn.innerHTML = isDark ? '☀️ <span>Light</span>' : '🌙 <span>Dark</span>';
+    if (animate) showToast(isDark ? '🌙 Dark mode on' : '☀️ Light mode on', 1500);
+  }
+
+  // ===========================
+  // FOCUS MODE
+  // ===========================
+  function toggleFocusMode() {
+    focusMode = !focusMode;
+    document.body.classList.toggle('focus-mode', focusMode);
+    const btn = document.getElementById('focus-btn');
+    if (btn) {
+      btn.classList.toggle('focus-active', focusMode);
+      btn.innerHTML = focusMode ? '🎯 <span>Exit Focus</span>' : '🎯 <span>Focus</span>';
+    }
+    showToast(focusMode ? '🎯 Focus Mode ON' : '👁️ Focus Mode OFF', 1800);
+  }
+
+  // ===========================
+  // MCQ EDITOR
+  // ===========================
+  function toggleEditor() {
+    editorOpen = !editorOpen;
+    const panel = document.getElementById('editor-panel');
+    const btn = document.getElementById('edit-btn');
+    panel.classList.toggle('show', editorOpen);
+    btn.classList.toggle('edit-active', editorOpen);
+    if (editorOpen) {
+      // Populate textarea with current questions
+      document.getElementById('mcq-editor').value = JSON.stringify(questions, null, 2)
+        .replace(/"id":/g, 'id:')
+        .replace(/"level":/g, 'level:')
+        .replace(/"q":/g, 'q:')
+        .replace(/"gq":/g, 'gq:')
+        .replace(/"opts":/g, 'opts:')
+        .replace(/"gOpts":/g, 'gOpts:')
+        .replace(/"ans":/g, 'ans:')
+        .replace(/"exp":/g, 'exp:');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function applyEditor() {
+    const raw = document.getElementById('mcq-editor').value.trim();
+    try {
+      // Try to eval as JS object literal (more flexible than JSON)
+      let parsed;
+      try {
+        parsed = (new Function('return ' + raw))();
+      } catch(e) {
+        parsed = JSON.parse(raw);
+      }
+      if (!Array.isArray(parsed) || parsed.length === 0) throw new Error('Must be a non-empty array');
+      // Basic validation
+      parsed.forEach((q, i) => {
+        if (!q.q || !Array.isArray(q.opts) || q.opts.length < 2) throw new Error(`Q${i+1}: missing q or opts`);
+        if (q.ans === undefined) q.ans = 0;
+        if (!q.id) q.id = i + 1;
+        if (!q.level) q.level = 'normal';
+        if (!q.gq) q.gq = '';
+        if (!q.gOpts) q.gOpts = q.opts;
+        if (!q.exp) q.exp = '';
+      });
+      // Apply
+      questions.length = 0;
+      parsed.forEach(q => questions.push(q));
+      // Reset state
+      userAnswers = {}; submitted = false; currentIdx = 0;
+      try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+      document.getElementById('review-panel').classList.remove('show');
+      closeModal();
+      renderSidebar();
+      renderQuestion();
+      updateStats();
+      toggleEditor();
+      showToast(`✅ ${questions.length} questions loaded!`, 2500);
+    } catch(err) {
+      showToast('❌ Parse error: ' + err.message, 3500);
+    }
+  }
+
+  function resetEditorToOriginal() {
+    if (!confirm('Restore to the original 105 questions?')) return;
+    questions.length = 0;
+    originalQuestions.forEach(q => questions.push(q));
+    userAnswers = {}; submitted = false; currentIdx = 0;
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+    document.getElementById('review-panel').classList.remove('show');
+    closeModal();
+    renderSidebar();
+    renderQuestion();
+    updateStats();
+    showToast('↩ Original 105 questions restored!', 2000);
+    // Refresh textarea
+    document.getElementById('mcq-editor').value = JSON.stringify(questions, null, 2);
+  }
+
+  // ===========================
+  // COPY QUESTION
+  // ===========================
+  function copyQuestion() {
+    const q = questions[currentIdx];
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    let text = `Q${currentIdx + 1}. ${q.q}\n`;
+    if (q.gq) text += `(${q.gq})\n`;
+    text += '\n';
+    q.opts.forEach((opt, i) => {
+      text += `${letters[i]}. ${opt}`;
+      if (q.gOpts && q.gOpts[i] && q.gOpts[i] !== opt) text += ` (${q.gOpts[i]})`;
+      text += '\n';
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('q-copy-btn');
+      btn.classList.add('copied');
+      btn.innerHTML = '✅ <span>Copied!</span>';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '📋 <span>Copy Q</span>';
+      }, 2000);
+      showToast('📋 Question + options copied!', 2000);
+    }).catch(() => {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('📋 Copied!', 1800);
+    });
+  }
+
+  // ===========================
+  // TIMER
+  // ===========================
+  function toggleTimer() {
+    if (!timerRunning) {
+      timerRunning = true;
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        updateTimerDisplay();
+        if (timerSeconds % 30 === 0) saveState();
+      }, 1000);
+      document.getElementById('timer-chip').className = 'timer-chip running';
+      showToast('⏱️ Timer started', 1500);
+    } else {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      document.getElementById('timer-chip').className = 'timer-chip paused';
+      showToast('⏸️ Timer paused', 1500);
+    }
+  }
+
+  function updateTimerDisplay() {
+    const h = Math.floor(timerSeconds / 3600);
+    const m = Math.floor((timerSeconds % 3600) / 60);
+    const s = timerSeconds % 60;
+    const display = h > 0
+      ? `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+      : `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    document.getElementById('timer-display').textContent = display;
+  }
+
+  function formatTime(secs) {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    if (h > 0) return `${h}h ${m}m ${s}s`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
+  }
+
+  // ===========================
+  // BOOKMARK
+  // ===========================
+  function toggleBookmark() {
+    const q = questions[currentIdx];
+    if (bookmarks.has(q.id)) {
+      bookmarks.delete(q.id);
+      showToast('🔖 Bookmark removed', 1500);
+    } else {
+      bookmarks.add(q.id);
+      showToast('🔖 Bookmarked! Press B to toggle', 1500);
+    }
+    saveState();
+    updateBookmarkBtn();
+    renderSidebar();
+  }
+
+  function updateBookmarkBtn() {
+    const q = questions[currentIdx];
+    const btn = document.getElementById('q-bookmark-btn');
+    if (!btn) return;
+    if (bookmarks.has(q.id)) {
+      btn.classList.add('bookmarked');
+      btn.title = 'Remove Bookmark (B)';
+    } else {
+      btn.classList.remove('bookmarked');
+      btn.title = 'Bookmark (B)';
+    }
+  }
+
+  // ===========================
+  // SIDEBAR
+  // ===========================
+  function renderSidebar() {
+    const grid = document.getElementById('q-grid');
+    grid.innerHTML = '';
+    let answered = 0;
+
+    questions.forEach((q, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'q-btn';
+      btn.textContent = i + 1;
+      btn.title = `Q${i+1}: ${q.q.substring(0, 50)}...`;
+
+      const ans = userAnswers[q.id];
+      const hasAnswer = ans !== undefined;
+      if (hasAnswer) answered++;
+
+      if (submitted) {
+        if (hasAnswer && ans === q.ans) btn.classList.add('correct');
+        else if (hasAnswer) btn.classList.add('wrong');
+      } else if (hasAnswer) {
+        btn.classList.add('answered');
+      }
+      if (i === currentIdx) btn.classList.add('active');
+      if (bookmarks.has(q.id)) btn.classList.add('bookmarked');
+
+      btn.onclick = () => goQuestion(i);
+      grid.appendChild(btn);
+    });
+
+    const ct = document.getElementById('sidebar-count');
+    if (ct) ct.textContent = answered + '/' + questions.length;
+  }
+
+  // ===========================
+  // RENDER QUESTION
+  // ===========================
+  function renderQuestion() {
+    const q = questions[currentIdx];
+    const ans = userAnswers[q.id];
+    const hasAnswer = ans !== undefined;
+
+    // Counter & progress
+    document.getElementById('q-counter').textContent = `Q ${currentIdx+1} / ${questions.length}`;
+    document.getElementById('q-progress').style.width = ((currentIdx+1)/questions.length*100).toFixed(1)+'%';
+
+    // Level
+    const lvlEl = document.getElementById('q-level');
+    lvlEl.textContent = q.level.charAt(0).toUpperCase() + q.level.slice(1);
+    lvlEl.className = 'level-tag level-' + q.level;
+
+    // Text
+    document.getElementById('q-text').textContent = q.q;
+    document.getElementById('q-guj').textContent = q.gq || '';
+
+    // Bookmark button
+    updateBookmarkBtn();
+
+    // Reset copy button
+    const copyBtn = document.getElementById('q-copy-btn');
+    if (copyBtn) { copyBtn.classList.remove('copied'); copyBtn.innerHTML = '📋 <span>Copy Q</span>'; }
+
+    // Options
+    const optList = document.getElementById('options-list');
+    optList.innerHTML = '';
+    q.opts.forEach((opt, i) => {
+      const div = document.createElement('div');
+      div.className = 'option-item';
+      const isSelected = ans === i;
+      const isCorrect = i === q.ans;
+
+      if (hasAnswer) {
+        div.classList.add('locked');
+        if (isCorrect) div.classList.add('correct');
+        else if (isSelected) div.classList.add('wrong');
+        else div.classList.add('disabled-unselected');
+      } else {
+        div.onclick = () => selectAnswer(i);
+      }
+
+      const badge = document.createElement('div');
+      badge.className = 'opt-badge';
+      badge.textContent = String.fromCharCode(65+i);
+
+      const textDiv = document.createElement('div');
+      textDiv.className = 'opt-text';
+      const gOptText = (q.gOpts && q.gOpts[i]) ? `<div class="opt-guj">${q.gOpts[i]}</div>` : '';
+      textDiv.innerHTML = `<div class="opt-en">${opt}</div>${gOptText}`;
+
+      const iconDiv = document.createElement('div');
+      iconDiv.className = 'opt-icon';
+      if (hasAnswer) {
+        if (isCorrect) iconDiv.textContent = '✅';
+        else if (isSelected) iconDiv.textContent = '❌';
+      }
+
+      div.appendChild(badge);
+      div.appendChild(textDiv);
+      div.appendChild(iconDiv);
+      optList.appendChild(div);
+    });
+
+    // Explanation + short cause
+    const expBox = document.getElementById('explain-box');
+    const shortCause = document.getElementById('short-cause');
+    const shortCauseText = document.getElementById('short-cause-text');
+
+    if (hasAnswer) {
+      const isRight = ans === q.ans;
+      expBox.className = 'explain-box show ' + (isRight ? 'correct-exp' : 'wrong-exp');
+      document.getElementById('exp-verdict').textContent = isRight ? '✅ Correct!' : '❌ Wrong Answer';
+      document.getElementById('exp-verdict').className = 'exp-verdict ' + (isRight ? 'ok' : 'no');
+      document.getElementById('exp-body').innerHTML = '<strong>Explanation:</strong> ' + q.exp;
+      document.getElementById('correct-ans-label').textContent = !isRight ? '✓ Correct: ' + q.opts[q.ans] : '';
+
+      // Short cause: extract first sentence or key phrase
+      if (q.exp) {
+        const firstSentence = q.exp.split(/[.!]/)[0].trim();
+        if (firstSentence.length > 10 && firstSentence.length < 120) {
+          shortCause.style.display = 'inline-flex';
+          shortCauseText.textContent = firstSentence;
+        } else {
+          shortCause.style.display = 'none';
+        }
+      } else {
+        shortCause.style.display = 'none';
+      }
+    } else {
+      expBox.className = 'explain-box';
+      shortCause.style.display = 'none';
+    }
+
+    // Nav buttons
+    const btnNext = document.getElementById('btn-next');
+    const btnSubmit = document.getElementById('btn-submit');
+    if (submitted) {
+      btnNext.style.display = currentIdx < questions.length-1 ? '' : 'none';
+      btnSubmit.style.display = 'none';
+    } else {
+      btnNext.style.display = currentIdx < questions.length-1 ? '' : 'none';
+      btnSubmit.style.display = currentIdx === questions.length-1 ? '' : 'none';
+    }
+
+    // Scroll sidebar
+    const gridBtns = document.querySelectorAll('.q-btn');
+    if (gridBtns[currentIdx]) gridBtns[currentIdx].scrollIntoView({block:'nearest',behavior:'smooth'});
+
+    updateStats();
+  }
+
+  // ===========================
+  // SELECT ANSWER
+  // ===========================
+  function selectAnswer(optionIdx) {
+    if (submitted) return;
+    const q = questions[currentIdx];
+    if (userAnswers[q.id] !== undefined) return;
+    userAnswers[q.id] = optionIdx;
+    saveState();
+    renderQuestion();
+    renderSidebar();
+    updateStats();
+  }
+
+  // ===========================
+  // NAVIGATION
+  // ===========================
+  function goQuestion(idx) {
+    if (idx < 0 || idx >= questions.length) return;
+    currentIdx = idx;
+    saveState();
+    renderQuestion();
+    renderSidebar();
+    if (window.innerWidth < 900) {
+      document.getElementById('quiz-card').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  }
+
+  // ===========================
+  // STATS
+  // ===========================
+  function updateStats() {
+    const answeredIds = Object.keys(userAnswers);
+    const answered = answeredIds.length;
+    let correct = 0;
+    answeredIds.forEach(id => {
+      const q = questions.find(q => q.id == id);
+      if (q && userAnswers[id] === q.ans) correct++;
+    });
+    document.getElementById('stat-ans').textContent = answered;
+    document.getElementById('stat-cor').textContent = correct;
+    document.getElementById('stat-score').textContent = answered > 0 ? Math.round(correct/answered*100)+'%' : '0%';
+    document.getElementById('header-progress').style.width = (answered/questions.length*100).toFixed(1)+'%';
+  }
+
+  // ===========================
+  // SUBMIT
+  // ===========================
+  function submitQuiz() {
+    const unanswered = questions.length - Object.keys(userAnswers).length;
+    if (unanswered > 0) {
+      if (!confirm(`${unanswered} question(s) unanswered. Submit anyway?`)) return;
+    }
+    submitted = true;
+    if (timerRunning) { timerRunning = false; clearInterval(timerInterval); }
+    saveState();
+    renderQuestion();
+    renderSidebar();
+    updateStats();
+    renderReviewPanel();
+    document.getElementById('review-panel').classList.add('show');
+    showScoreModal();
+  }
+
+  function showScoreModal() {
+    const total = questions.length;
+    let correct = 0, wrong = 0;
+    Object.keys(userAnswers).forEach(id => {
+      const q = questions.find(q => q.id == id);
+      if (!q) return;
+      if (userAnswers[id] === q.ans) correct++;
+      else wrong++;
+    });
+    const skip = total - Object.keys(userAnswers).length;
+    const pct = Math.round(correct/total*100);
+
+    let emoji = '😕', msg = 'Keep practicing! Review the wrong answers below.';
+    if (pct >= 90) { emoji = '🏆'; msg = 'Outstanding! Excellent work!'; }
+    else if (pct >= 75) { emoji = '🎉'; msg = 'Great job! Well done!'; }
+    else if (pct >= 60) { emoji = '👍'; msg = 'Good effort! Keep it up!'; }
+    else if (pct >= 40) { emoji = '📚'; msg = 'Review the wrong answers and try again.'; }
+
+    document.getElementById('modal-emoji').textContent = emoji;
+    document.getElementById('modal-score').textContent = correct+'/'+total;
+    document.getElementById('modal-sub').textContent = `Score: ${pct}% — ${msg}`;
+    document.getElementById('ms-correct').textContent = correct;
+    document.getElementById('ms-wrong').textContent = wrong;
+    document.getElementById('ms-skip').textContent = skip;
+    document.getElementById('ms-time').textContent = timerSeconds > 0 ? formatTime(timerSeconds) : '--';
+    document.getElementById('score-modal').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('score-modal').classList.remove('show');
+  }
+
+  // ===========================
+  // REVIEW PANEL
+  // ===========================
+  let activeReviewTab = 'wrong';
+
+  function renderReviewPanel() {
+    const wrongList = [], emptyList = [], bmList = [];
+    questions.forEach((q, i) => {
+      const ans = userAnswers[q.id];
+      if (ans === undefined) emptyList.push({ q, i });
+      else if (ans !== q.ans) wrongList.push({ q, i });
+      if (bookmarks.has(q.id)) bmList.push({ q, i });
+    });
+    document.getElementById('cnt-wrong').textContent = wrongList.length;
+    document.getElementById('cnt-empty').textContent = emptyList.length;
+    document.getElementById('cnt-bm').textContent = bmList.length;
+    renderReviewList(activeReviewTab, wrongList, emptyList, bmList);
+  }
+
+  function renderReviewList(tab, wrongList, emptyList, bmList) {
+    const body = document.getElementById('review-body');
+    body.innerHTML = '';
+    let list, type;
+    if (tab === 'wrong') { list = wrongList; type = 'wrong'; }
+    else if (tab === 'empty') { list = emptyList; type = 'empty'; }
+    else { list = bmList; type = 'bm'; }
+
+    if (list.length === 0) {
+      const emptyLabel = tab === 'wrong'
+        ? { emoji: '🎉', msg: 'No wrong answers! Perfect score on answered questions.' }
+        : tab === 'empty'
+        ? { emoji: '✅', msg: 'All questions answered! Great job.' }
+        : { emoji: '🔖', msg: 'No bookmarks yet. Press B while viewing a question.' };
+      body.innerHTML = `<div class="review-empty-state"><div class="big-emoji">${emptyLabel.emoji}</div><p>${emptyLabel.msg}</p></div>`;
+      return;
+    }
+
+    list.forEach(({ q, i }) => {
+      const item = document.createElement('div');
+      item.className = 'review-item';
+      item.onclick = () => { goQuestion(i); closeModal(); };
+
+      const num = document.createElement('div');
+      num.className = 'review-num ' + type;
+      num.textContent = i + 1;
+
+      const textDiv = document.createElement('div');
+      textDiv.className = 'opt-text';
+
+      const qText = document.createElement('div');
+      qText.className = 'review-q-text';
+      qText.textContent = q.q.length > 80 ? q.q.substring(0, 80) + '…' : q.q;
+
+      const qSub = document.createElement('div');
+      qSub.className = 'review-q-sub';
+      if (type === 'wrong') {
+        const sel = userAnswers[q.id];
+        qSub.textContent = `Your answer: ${sel !== undefined ? q.opts[sel] : '—'} | Correct: ${q.opts[q.ans]}`;
+      } else if (type === 'empty') {
+        qSub.textContent = `Correct answer: ${q.opts[q.ans]}`;
+      } else {
+        const sel = userAnswers[q.id];
+        if (sel !== undefined) qSub.textContent = sel === q.ans ? '✓ Correct' : `✗ Wrong | Correct: ${q.opts[q.ans]}`;
+        else qSub.textContent = 'Not answered';
+      }
+
+      const arrow = document.createElement('div');
+      arrow.className = 'review-arrow';
+      arrow.textContent = '→';
+
+      textDiv.appendChild(qText);
+      textDiv.appendChild(qSub);
+      item.appendChild(num);
+      item.appendChild(textDiv);
+      item.appendChild(arrow);
+      body.appendChild(item);
+    });
+  }
+
+  function switchReviewTab(tab) {
+    activeReviewTab = tab;
+    document.getElementById('tab-wrong').classList.toggle('active', tab === 'wrong');
+    document.getElementById('tab-empty').classList.toggle('active', tab === 'empty');
+    document.getElementById('tab-bm').classList.toggle('active', tab === 'bookmarks');
+    renderReviewPanel();
+  }
+
+  // ===========================
+  // RESET
+  // ===========================
+  function resetAll() {
+    if (!confirm('Reset all answers and start fresh? Bookmarks will be kept.')) return;
+    userAnswers = {};
+    submitted = false;
+    currentIdx = 0;
+    timerSeconds = 0;
+    timerRunning = false;
+    clearInterval(timerInterval);
+    document.getElementById('timer-chip').className = 'timer-chip';
+    updateTimerDisplay();
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+    document.getElementById('review-panel').classList.remove('show');
+    closeModal();
+    renderSidebar();
+    renderQuestion();
+    updateStats();
+    showToast('✅ Reset complete! Bookmarks preserved.', 2500);
+  }
+
+  // ===========================
+  // TOAST
+  // ===========================
+  let _toastTimer = null;
+  function showToast(msg, duration = 2500) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => t.classList.remove('show'), duration);
+  }
+
+  // ===========================
+  // KEYBOARD
+  // ===========================
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const key = e.key.toUpperCase();
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goQuestion(currentIdx + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goQuestion(currentIdx - 1); }
+    else if (e.key === '1') selectAnswer(0);
+    else if (e.key === '2') selectAnswer(1);
+    else if (e.key === '3') selectAnswer(2);
+    else if (e.key === '4') selectAnswer(3);
+    else if (key === 'B') toggleBookmark();
+    else if (key === 'C') copyQuestion();
+    else if (key === 'F') toggleFocusMode();
+    else if (key === 'T') toggleTimer();
+    else if (e.key === 'Escape') { closeModal(); if (focusMode) toggleFocusMode(); }
+  });
+
+  // ===========================
+  // INIT
+  // ===========================
+  window.onload = function() {
+    loadTheme();
+    loadState();
+    updateTimerDisplay();
+    renderSidebar();
+    renderQuestion();
+    updateStats();
+
+    if (submitted) {
+      renderReviewPanel();
+      document.getElementById('review-panel').classList.add('show');
+    }
+
+    const answered = Object.keys(userAnswers).length;
+    if (answered > 0) {
+      showToast(`📖 Resumed — ${answered} answered, ${bookmarks.size} bookmarked`, 3000);
+    }
+  };
+</script>
+</body>
+</html>

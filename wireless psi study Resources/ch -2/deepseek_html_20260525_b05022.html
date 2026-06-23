@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <title>ફ્લિપ-ફ્લોપ ગાઇડ - ગુજરાતી</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Gujarati', 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 1000px;
+            padding: 20px;
+            background: white;
+            color: #1e2a3e;
+        }
+        h1, h2, h3 {
+            color: #0f3b5c;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #f8fafc;
+        }
+        th, td {
+            border: 1px solid #94a3b8;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+        }
+        .note {
+            background: #e6f7ff;
+            border-left: 5px solid #0284c7;
+            padding: 12px;
+            margin: 15px 0;
+        }
+        .highlight {
+            background-color: #fef9c3;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .mcq-ans {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+        hr {
+            margin: 30px 0;
+            border: 1px solid #cbd5e1;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📘 ફ્લિપ-ફ્લોપ (Flip-Flop) – સંપૂર્ણ માર્ગદર્શન (ગુજરાતી)</h1>
+<p><strong>ડિજિટલ ઈલેક્ટ્રોનિક્સ | સીક્વેન્શિયલ સર્કિટ</strong></p>
+
+<h2>1. સીક્વેન્શિયલ સર્કિટ એટલે શું?</h2>
+<ul>
+    <li><strong>કોમ્બિનેશનલ સર્કિટ</strong> – આઉટપુટ ફક્ત હાલના ઈનપુટ પર આધાર રાખે છે (દા.ત. AND, OR, મલ્ટિપ્લેક્સર).</li>
+    <li><strong>સીક્વેન્શિયલ સર્કિટ</strong> – આઉટપુટ હાલના ઈનપુટ <strong>અને પહેલાની સ્થિતિ (past state)</strong> પર આધાર રાખે છે. તેથી તેને <strong>મેમરી</strong>ની જરૂર છે.</li>
+    <li>સીક્વેન્શિયલ સર્કિટનો મૂળભૂત મેમરી એલિમેન્ટ છે – <strong>ફ્લિપ-ફ્લોપ</strong>.</li>
+</ul>
+
+<h2>2. ફ્લિપ-ફ્લોપ શું છે?</h2>
+<ul>
+    <li>ફ્લિપ-ફ્લોપ <strong>1 બાઈનરી બીટ (0 અથવા 1)</strong> સ્ટોર કરી શકે છે.</li>
+    <li>તેને <strong>બિસ્ટેબલ મલ્ટિવાઈબ્રેટર</strong> પણ કહેવાય છે – બે સ્થિર સ્થિતિઓ (0/1) માંથી એક.</li>
+    <li>ઘડિયાળ (Clock) ના સિગ્નલના આધારે સ્થિતિ બદલે છે.</li>
+</ul>
+
+<h2>3. લેચ (Latch) અને ફ્લિપ-ફ્લોપ વચ્ચે તફાવત</h2>
+<table>
+    <tr><th>લેચ (Latch)</th><th>ફ્લિપ-ફ્લોપ (Flip-Flop)</th></tr>
+    <tr><td><strong>લેવલ ટ્રિગર્ડ</strong> – જ્યાં સુધી એનેબલ સિગ્નલ હાઈ/લો હોય ત્યાં સુધી આઉટપુટ બદલાય.</td><td><strong>એજ ટ્રિગર્ડ</strong> – માત્ર ઘડિયાળના ઉંચા (↑) કે નીચા (↓) કિનારે જ આઉટપુટ બદલાય.</td></tr>
+    <tr><td>રેસ કન્ડિશન વધુ સંભાવના</td><td>એજ ટ્રિગરિંગ રેસ કન્ડિશન ટાળે છે.</td></tr>
+</table>
+<div class="note">✅ <strong>MCQ:</strong> “Which triggering avoids race condition?” → <span class="mcq-ans">Edge triggering</span></div>
+
+<h2>4. ઘડિયાળ (Clock) ના પ્રકાર</h2>
+<ul>
+    <li><strong>Rising edge (↑)</strong> : ઘડિયાળ 0→1 થાય ત્યારે.</li>
+    <li><strong>Falling edge (↓)</strong> : ઘડિયાળ 1→0 થાય ત્યારે.</li>
+</ul>
+
+<hr>
+
+<h2>📌 મુખ્ય 4 પ્રકારના ફ્લિપ-ફ્લોપ</h2>
+
+<h3>A. SR ફ્લિપ-ફ્લોપ (Set-Reset)</h3>
+<table>
+    <tr><th>S</th><th>R</th><th>Q⁺ (આગળની સ્થિતિ)</th><th>સમજૂતી</th></tr>
+    <tr><td>0</td><td>0</td><td>Q (કોઈ બદલાવ નહીં)</td><td>મેમરી મોડ</td></tr>
+    <tr><td>1</td><td>0</td><td>1</td><td>Set – આઉટપુટ 1 કરો</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>Reset – આઉટપુટ 0 કરો</td></tr>
+    <tr><td class="highlight">1</td><td class="highlight">1</td><td>❌ <strong>Invalid (અમાન્ય)</strong></td><td>બંને 1 ન આપવા</td></tr>
+</table>
+
+<h3>B. D ફ્લિપ-ફ્લોપ (Data / Delay)</h3>
+<ul>
+    <li>આઉટપુટ = <strong>D ઈનપુટ</strong> (ઘડિયાળના કિનારે)</li>
+    <li><strong>લાક્ષણિક સમીકરણ:</strong> Q⁺ = D</li>
+    <li><strong>ઉપયોગ:</strong> રજિસ્ટર, શિફ્ટ રજિસ્ટર, ડેટા સ્ટોરેજ.</li>
+    <li>📌 <em>MCQ: “D flip-flop is also called:” → <strong>Data flip-flop</strong></em></li>
+</ul>
+
+<h3>C. T ફ્લિપ-ફ્લોપ (Toggle)</h3>
+<ul>
+    <li>T=0 → No change</li>
+    <li>T=1 → દરેક ઘડિયાળના કિનારે <strong>ટોગલ</strong> (0→1, 1→0)</li>
+    <li><strong>લાક્ષણિક સમીકરણ:</strong> Q⁺ = T ⊕ Q</li>
+    <li><strong>ઉપયોગ:</strong> divide-by-2 કાઉન્ટર</li>
+</ul>
+
+<h3>D. JK ફ્લિપ-ફ્લોપ (Universal Flip-Flop)</h3>
+<ul>
+    <li>SR ની invalid state દૂર કરે છે.</li>
+    <li>J=Set, K=Reset</li>
+    <li><strong>J=1, K=1</strong> → ટોગલ (T જેવું)</li>
+    <li><strong>લાક્ષણિક સમીકરણ:</strong> Q⁺ = J Q' + K' Q</li>
+    <li>🏆 <strong>સૌથી વધુ લવચીક → Universal Flip-Flop</strong></li>
+    <li class="highlight">⚠️ <strong>Race around condition</strong> – JK માં J=K=1 અને લાંબો ક્લોક પલ્સ હોય ત્યારે. <br> ➡ <strong>ઉકેલ:</strong> Master-slave JK flip-flop અથવા Edge triggering.</li>
+</ul>
+
+<hr>
+
+<h2>🧾 લાક્ષણિક સમીકરણો (Characteristic Equations)</h2>
+<table>
+    <tr><th>ફ્લિપ-ફ્લોપ</th><th>લાક્ષણિક સમીકરણ</th></tr>
+    <tr><td>D</td><td>Q⁺ = D</td></tr>
+    <tr><td>T</td><td>Q⁺ = T ⊕ Q</td></tr>
+    <tr><td>JK</td><td>Q⁺ = J Q' + K' Q</td></tr>
+    <tr><td>SR</td><td>Q⁺ = S + R' Q  (જ્યાં SR=0)</td></tr>
+</table>
+
+<h2>📊 એક્સાઈટેશન ટેબલ (Excitation Table) – ડિઝાઈન માટે ઉપયોગી</h2>
+<p>જણાવે છે કે <strong>Q થી Q⁺</strong> મેળવવા શું ઈનપુટ આપવું.</p>
+<p><strong>ઉદાહરણ – JK માટે:</strong></p>
+<table>
+    <tr><th>Q → Q⁺</th><th>J</th><th>K</th></tr>
+    <tr><td>0 → 0</td><td>0</td><td>X</td></tr>
+    <tr><td>0 → 1</td><td>1</td><td>X</td></tr>
+    <tr><td>1 → 0</td><td>X</td><td>1</td></tr>
+    <tr><td>1 → 1</td><td>X</td><td>0</td></tr>
+</table>
+
+<h2>🔄 ફ્લિપ-ફ્લોપનું રૂપાંતર (Conversion)</h2>
+<p>એક ફ્લિપ-ફ્લોપને બીજામાં બદલવા માટે <strong>કોમ્બિનેશનલ લોજિક</strong> + <strong>એક્સાઈટેશન ટેબલ</strong> + K-map વપરાય છે. <br>
+દા.ત. JK → D : J = D, K = D'.</p>
+
+<h2>⏱️ પ્રીસેટ અને ક્લિયર (Preset & Clear) – અસિંક્રોનસ ઈનપુટ</h2>
+<ul>
+    <li><strong>Preset</strong> → આઉટપુટ <strong>1</strong> કરે છે (ઘડિયાળને ધ્યાનમાં લીધા વગર).</li>
+    <li><strong>Clear</strong> → આઉટપુટ <strong>0</strong> કરે છે.</li>
+</ul>
+
+<hr>
+
+<h2>📦 શિફ્ટ રજિસ્ટર અને કાઉન્ટર (સંક્ષિપ્ત)</h2>
+<ul>
+    <li><strong>રજિસ્ટર</strong> = ફ્લિપ-ફ્લોપનો સમૂહ → ડેટા સ્ટોર કરવા.</li>
+    <li><strong>શિફ્ટ રજિસ્ટરના પ્રકાર:</strong> SISO, SIPO (serial to parallel), PISO (parallel to serial), PIPO (only storage).</li>
+    <li><strong>Left shift</strong> → ×2 (ગુણાકાર), <strong>Right shift</strong> → ÷2 (ભાગાકાર).</li>
+    <li><strong>રિપલ કાઉન્ટર</strong> – અસિંક્રોનસ, ખામી: પ્રોપગેશન ડિલે.</li>
+    <li><strong>સિંક્રોનસ કાઉન્ટર</strong> – બધા ફ્લિપ-ફ્લોપને સાથે ક્લોક → <strong>ઝડપી</strong>.</li>
+    <li><strong>Mod-10 કાઉન્ટર</strong> = દશાંશ (0 થી 9).</li>
+    <li><strong>રીંગ કાઉન્ટર</strong> – 4-bit માટે 4 states (one-hot).</li>
+    <li><strong>જોહ્નસન કાઉન્ટર</strong> – 4-bit માટે 8 states.</li>
+</ul>
+
+<hr>
+
+<h2>📌 મહત્વના MCQ જવાબો (ગુજરાતી સમજૂતી)</h2>
+<table>
+    <tr><th>પ્રશ્ન</th><th>જવાબ</th></tr>
+    <tr><td>સીક્વેન્શિયલ સર્કિટનું મૂળભૂત મેમરી એલિમેન્ટ</td><td>Flip-flop</td></tr>
+    <tr><td>SR ફ્લિપ-ફ્લોપમાં અમાન્ય સ્થિતિ</td><td>S=1, R=1</td></tr>
+    <tr><td>D ફ્લિપ-ફ્લોપનું બીજું નામ</td><td>Data flip-flop</td></tr>
+    <tr><td>ટોગલ કરવા T ફ્લિપ-ફ્લોપમાં કઈ કિંમત આપવી?</td><td>T=1</td></tr>
+    <tr><td>રેસ કન્ડિશન ક્યાં થાય છે?</td><td>JK flip-flop (J=K=1)</td></tr>
+    <tr><td>રેસ કન્ડિશન ટાળવા માટેનો ઉપાય</td><td>Master-slave અથવા Edge triggering</td></tr>
+    <tr><td>યુનિવર્સલ ફ્લિપ-ફ્લોપ કયો?</td><td>JK</td></tr>
+    <tr><td>Divide-by-2 સર્કિટ માટે કયો ફ્લિપ-ફ્લોપ?</td><td>T flip-flop (T=1)</td></tr>
+</table>
+
+<hr>
+
+<h2>🧭 પગલા-દર-પગલા શીખવાનો ક્રમ</h2>
+<ol>
+    <li>સીક્વેન્શિયલ સર્કિટ અને મેમરીની જરૂરિયાત સમજો.</li>
+    <li>લેચ vs ફ્લિપ-ફ્લોપ (level vs edge trigger).</li>
+    <li>SR ફ્લિપ-ફ્લોપ અને તેની અમાન્ય સ્થિતિ.</li>
+    <li>D ફ્લિપ-ફ્લોપ – ડેટા સ્ટોરેજ.</li>
+    <li>T ફ્લિપ-ફ્લોપ – ટોગલ અને divide-by-2.</li>
+    <li>JK ફ્લિપ-ફ્લોપ – યુનિવર્સલ, race condition, master-slave.</li>
+    <li>બધાનાં characteristic equations અને excitation tables લખતાં શીખો.</li>
+    <li>ફ્લિપ-ફ્લોપનું રૂપાંતર (JK→D વગેરે).</li>
+    <li>રજિસ્ટર અને શિફ્ટ રજિસ્ટર (SISO, SIPO, PISO, PIPO).</li>
+    <li>કાઉન્ટર (રિપલ, સિંક્રોનસ, મોડ, રીંગ, જોહ્નસન).</li>
+</ol>
+
+<div class="note">
+    💡 <strong>યાદ રાખો:</strong> ફ્લિપ-ફ્લોપ એ ડિજિટલ સિસ્ટમનું મગજ છે. બધા સીક્વેન્શિયલ સર્કિટ (રજિસ્ટર, કાઉન્ટર, મેમરી) ફ્લિપ-ફ્લોપ પર જ બનેલા છે.
+</div>
+
+<footer>
+    ડિજિટલ ઈલેક્ટ્રોનિક્સ નોંધ – ગુજરાતી ભાષામાં | સંપૂર્ણપણે મફત શૈક્ષણિક સામગ્રી
+</footer>
+</body>
+</html>

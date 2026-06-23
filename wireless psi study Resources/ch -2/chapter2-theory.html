@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ડિજિટલ ઇલેક્ટ્રોનિક્સ, VLSI & FPGA - સંપૂર્ણ માર્ગદર્શિકા (ગુજરાતી)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Gujarati', 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #1a1a1a;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #16a085;
+            border-left: 5px solid #16a085;
+            padding-left: 15px;
+            margin-top: 30px;
+            background-color: #e8f8f5;
+        }
+        h3 {
+            color: #2980b9;
+            margin-left: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        .note {
+            background-color: #fef9e4;
+            border-left: 6px solid #f1c40f;
+            padding: 12px;
+            margin: 20px 0;
+        }
+        .important {
+            background-color: #fdedec;
+            border-left: 6px solid #e74c3c;
+            padding: 12px;
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        @media print {
+            body {
+                margin: 0;
+                padding: 15px;
+                background-color: white;
+            }
+            h2 {
+                page-break-after: avoid;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>📘 ડિજિટલ ઇલેક્ટ્રોનિક્સ, VLSI & FPGA<br>સંપૂર્ણ વિષયવાર માર્ગદર્શિકા (ગુજરાતી)</h1>
+<p style="text-align:center; font-size:1.1em;">MCQs આધારિત + વધારાની માહિતી | સ્પર્ધાત્મક પરીક્ષા, યુનિવર્સિટી અને ઇન્ટરવ્યુ માટે ઉપયોગી</p>
+
+<!-- ==================== SECTION 1 ==================== -->
+<h2>૧. સંખ્યા પદ્ધતિ (Number System)</h2>
+<table>
+    <tr><th>સંખ્યા પદ્ધતિ</th><th>આધાર (Base)</th><th>વપરાતા અંકો/અક્ષરો</th><th>ઉદાહરણ</th></tr>
+    <tr><td>દ્વિમાન (Binary)</td><td>2</td><td>0, 1</td><td>(1011)₂ = 11₁₀</td></tr>
+    <tr><td>દશમાન (Decimal)</td><td>10</td><td>0-9</td><td>25₁₀</td></tr>
+    <tr><td>અષ્ટમાન (Octal)</td><td>8</td><td>0-7</td><td>(17)₈ = 15₁₀</td></tr>
+    <tr><td>ષોડશમાન (Hexadecimal)</td><td>16</td><td>0-9, A-F</td><td>(1A)₁₆ = 26₁₀</td></tr>
+</table>
+<div class="note">
+    <strong>✍️ વધારાની માહિતી:</strong>
+    <ul>
+        <li><strong>દ્વિમાન → દશમાન:</strong> દરેક બીટને 2^n વડે ગુણો (n = સ્થાન, જમણેથી 0).</li>
+        <li><strong>દશમાન → દ્વિમાન:</strong> 2 વડે વારંવાર ભાગાકાર, બાકીના અંક ઊલટા ક્રમે લખો.</li>
+        <li><strong>ષોડશમાન → દ્વિમાન:</strong> દરેક ષોડશમાન અંકને 4-બીટ દ્વિમાનમાં ફેરવો.</li>
+        <li><strong>દ્વિમાન → અષ્ટમાન:</strong> 3-3 બીટના જૂથ બનાવો (જમણી બાજુથી).</li>
+    </ul>
+</div>
+
+<!-- ==================== SECTION 2 ==================== -->
+<h2>૨. બુલિયન બીજગણિત (Boolean Algebra)</h2>
+<table>
+    <tr><th>નિયમ (Law)</th><th>સૂત્ર</th></tr>
+    <tr><td>સ્વતઃસિદ્ધ (Identity)</td><td>A + 0 = A, &nbsp; A·1 = A</td></tr>
+    <tr><td>પૂરક (Complement)</td><td>A + A' = 1, &nbsp; A·A' = 0</td></tr>
+    <tr><td>સ્વસમ (Idempotent)</td><td>A + A = A, &nbsp; A·A = A</td></tr>
+    <tr><td>સહચારી (Associative)</td><td>(A+B)+C = A+(B+C)</td></tr>
+    <tr><td>વિતરક (Distributive)</td><td>A(B+C) = AB + AC</td></tr>
+    <tr><td>શોષણ (Absorption)</td><td>A + AB = A, &nbsp; A(A+B) = A</td></tr>
+    <tr><td>ડી મોર્ગન (De Morgan)</td><td>(A·B)' = A' + B', &nbsp; (A+B)' = A'·B'</td></tr>
+</table>
+<div class="important">
+    <strong>🔹 મિનટર્મ (Minterm):</strong> ચલોનું AND, દરેક ચલ તેના મૂળ અથવા પૂરક સ્વરૂપમાં.<br>
+    <strong>🔹 મેક્સટર્મ (Maxterm):</strong> ચલોનું OR.<br>
+    <strong>🔹 SOP (Sum of Products):</strong> મિનટર્મોનો OR.<br>
+    <strong>🔹 POS (Product of Sums):</strong> મેક્સટર્મોનો AND.
+</div>
+
+<!-- ==================== SECTION 3 ==================== -->
+<h2>૩. લોજિક ગેટ્સ (Logic Gates)</h2>
+<table>
+    <tr><th>ગેટ</th><th>આઉટપુટ સ્થિતિ (HIGH માટે)</th></tr>
+    <tr><td>AND</td><td>બધા ઇનપુટ = 1</td></tr>
+    <tr><td>OR</td><td>કોઈપણ એક ઇનપુટ = 1</td></tr>
+    <tr><td>NOT (Inverter)</td><td>ઇનપુટની વિરુદ્ધ</td></tr>
+    <tr><td>NAND</td><td>બધા ઇનપુટ 1 હોય તો જ 0, બાકી 1</td></tr>
+    <tr><td>NOR</td><td>બધા ઇનપુટ 0 હોય તો જ 1, બાકી 0</td></tr>
+    <tr><td>XOR</td><td>ઇનપુટ અલગ-અલગ હોય (01 અથવા 10)</td></tr>
+    <tr><td>XNOR</td><td>ઇનપુટ સમાન હોય (00 અથવા 11)</td></tr>
+</table>
+<div class="note">
+    <strong>🌟 Universal Gates:</strong> NAND અને NOR – કોઈપણ લોજિક ગેટ ફક્ત આ બે ગેટ વડે બનાવી શકાય છે.<br>
+    <strong>🌟 Fan-out:</strong> એક ગેટના આઉટપુટ વડે કેટલા બીજા ગેટ ચલાવી શકાય છે.
+</div>
+
+<!-- ==================== SECTION 4 ==================== -->
+<h2>૪. K-Map અને સરળીકરણ (Karnaugh Map & Simplification)</h2>
+<ul>
+    <li><strong>K-Map:</strong> બુલિયન સમીકરણો ગ્રાફિકલ રીતે સરળ બનાવવા માટે.</li>
+    <li><strong>સેલની સંખ્યા = 2ⁿ</strong> (n = ચલોની સંખ્યા).</li>
+    <li><strong>ગ્રુપિંગ નિયમો:</strong>
+        <ul>
+            <li>2 સેલ → 1 ચલ દૂર થાય</li>
+            <li>4 સેલ → 2 ચલ દૂર થાય</li>
+            <li>8 સેલ → 3 ચલ દૂર થાય</li>
+        </ul>
+    </li>
+    <li><strong>Don't Care (X):</strong> મોટા ગ્રુપ બનાવવા માટે ઉપયોગ કરી શકાય.</li>
+    <li><strong>Quine-McCluskey Method:</strong> 5-6 કરતાં વધુ ચલો હોય ત્યારે K-Map ને બદલે આ પદ્ધતિ વપરાય છે.</li>
+</ul>
+
+<!-- ==================== SECTION 5 ==================== -->
+<h2>૫. એડર અને સબ્ટ્રેક્ટર (Adder & Subtractor)</h2>
+<h3>✧ હાફ એડર (Half Adder)</h3>
+<ul><li>2 ઇનપુટ (A, B) → 2 આઉટપુટ: Sum = A⊕B, Carry = A·B</li></ul>
+<h3>✧ ફુલ એડર (Full Adder)</h3>
+<ul><li>3 ઇનપુટ (A, B, Cin) → Sum, Carry-out → બે હાફ એડર વડે બનાવી શકાય.</li></ul>
+<h3>✧ સબ્ટ્રેક્ટર</h3>
+<ul><li>Half Subtractor: Difference = A⊕B, Borrow = A'·B</li>
+<li>Full Subtractor: 3 ઇનપુટ, 2 આઉટપુટ</li></ul>
+<h3>✧ Carry Look-Ahead Adder (CLA)</h3>
+<ul><li>રિપલ કેરી એડરમાં કેરી પ્રસારણમાં વિલંબ થાય છે. CLA એડરમાં કેરી અગાઉથી જનરેટ થાય છે → ઝડપી.</li></ul>
+<h3>✧ 2's Complement વડે બાદબાકી</h3>
+<ul><li>સબ્ટ્રાહેન્ડનો 2’s complement લઈને મિન્યુએન્ડમાં ઉમેરો.</li></ul>
+
+<!-- ==================== SECTION 6 ==================== -->
+<h2>૬. કોડ કન્વર્ઝન (Code Conversion)</h2>
+<table>
+    <tr><th>કોડ</th><th>લાક્ષણિકતા</th></tr>
+    <tr><td>BCD</td><td>દરેક દશમાન અંકને 4-બીટમાં – Weighted code</td></tr>
+    <tr><td>Excess-3</td><td>BCD + 3 – Self‑complementing code</td></tr>
+    <tr><td>Gray Code</td><td>સળંગ સંખ્યાઓ વચ્ચે માત્ર 1 બીટ બદલાય</td></tr>
+    <tr><td>ASCII</td><td>7-બીટ, કેરેક્ટર માટે</td></tr>
+</table>
+<div class="note">
+    <strong>🔁 રૂપાંતર:</strong><br>
+    Binary → Gray: MSB સરખો રાખો, બાકી દરેક બીટ = અગાઉની બીટ XOR હાલની બીટ.<br>
+    Gray → Binary: MSB સરખો, પછી દરેક નવી બીટ = અગાઉની Binary XOR હાલની Gray.
+</div>
+
+<!-- ==================== SECTION 7 ==================== -->
+<h2>૭. કોમ્બિનેશનલ સર્કિટ્સ (MUX, DEMUX, ડીકોડર, એન્કોડર, કંપેરેટર)</h2>
+<ul>
+    <li><strong>Multiplexer (MUX):</strong> Data Selector – n સિલેક્ટ લાઈન → 2ⁿ ઇનપુટ.</li>
+    <li><strong>Demultiplexer (DEMUX):</strong> Data Distributor – એક ઇનપુટને અનેક આઉટપુટમાં મોકલે.</li>
+    <li><strong>Decoder:</strong> n ઇનપુટ → 2ⁿ આઉટપુટ (ફક્ત એક આઉટપુટ HIGH). Enable pin વડે સક્રિય/નિષ્ક્રિય.</li>
+    <li><strong>Encoder:</strong> 2ⁿ ઇનપુટ → n આઉટપુટ. Priority Encoder: એકસાથે બહુવિધ ઇનપુટ હોય તો ઉચ્ચ પ્રાથમિકતાવાળાને પ્રતિસાદ આપે.</li>
+    <li><strong>Magnitude Comparator:</strong> બે દ્વિમાન સંખ્યાઓની તુલના કરે (A>B, A<B, A=B).</li>
+</ul>
+
+<!-- ==================== SECTION 8 ==================== -->
+<h2>૮. PLD, ROM, PLA, PAL (Programmable Logic Devices)</h2>
+<table>
+    <tr><th>ઉપકરણ</th><th>AND એરે</th><th>OR એરે</th><th>લાક્ષણિકતા</th></tr>
+    <tr><td>ROM</td><td>Fixed</td><td>Fixed</td><td>એડ્રેસ ડીકોડર, non‑volatile</td></tr>
+    <tr><td>PLA</td><td>Programmable</td><td>Programmable</td><td>સૌથી લવચીક (flexible)</td></tr>
+    <tr><td>PAL</td><td>Programmable</td><td>Fixed</td><td>ઝડપી, ઓછો ખર્ચ</td></tr>
+</table>
+<div class="important">
+    <strong>📌 CPLD (Complex PLD):</strong> બહુવિધ PALs એક ચિપમાં.<br>
+    <strong>📌 FPGA:</strong> LUT + Flip-Flop + Routing – Field Programmable.
+</div>
+
+<!-- ==================== SECTION 9 ==================== -->
+<h2>૯. સિક્વેન્શિયલ સર્કિટ્સ – ફ્લિપ-ફ્લોપ્સ</h2>
+<table>
+    <tr><th>ફ્લિપ-ફ્લોપ</th><th>ઇનપુટ</th><th>લાક્ષણિકતા સમીકરણ</th><th>વિશેષ</th></tr>
+    <tr><td>SR</td><td>S, R</td><td>Q⁺ = S + R'Q</td><td>S=R=1 અમાન્ય</td></tr>
+    <tr><td>D</td><td>D</td><td>Q⁺ = D</td><td>Data / Delay FF</td></tr>
+    <tr><td>JK</td><td>J, K</td><td>Q⁺ = JQ' + K'Q</td><td>J=K=1 → Toggle (Universal FF)</td></tr>
+    <tr><td>T</td><td>T</td><td>Q⁺ = T ⊕ Q</td><td>T=1 → Toggle (Divide‑by‑2)</td></tr>
+</table>
+<div class="note">
+    <strong>⚠️ Race Around Condition:</strong> JK FF માં J=K=1 અને level‑triggered હોય ત્યારે થાય.<br>
+    <strong>✅ Master‑Slave FF:</strong> બે FFની મદદથી race condition દૂર થાય.<br>
+    <strong>✅ Edge Triggered:</strong> ઘડિયાળના Rising/Falling એજ પર જ સ્થિતિ બદલાય.<br>
+    <strong>✅ Preset (Q=1), Clear (Q=0):</strong> અસિંક્રોનસ ફોર્સિંગ.
+</div>
+
+<!-- ==================== SECTION 10 ==================== -->
+<h2>૧૦. કાઉન્ટર્સ (Counters)</h2>
+<table>
+    <tr><th>કાઉન્ટર પ્રકાર</th><th>લાક્ષણિકતા</th></tr>
+    <tr><td>Ripple (Asynchronous)</td><td>દરેક FFનું ક્લોક પાછલા FFના આઉટપુટ પર – ધીમું (propagation delay)</td></tr>
+    <tr><td>Synchronous</td><td>બધા FFને એક સાથે ક્લોક – ઝડપી</td></tr>
+    <tr><td>Ring Counter</td><td>One‑hot code – 4-bit માં 4 સ્થિતિ</td></tr>
+    <tr><td>Johnson Counter</td><td>Twisted ring – 4-bit માં 8 સ્થિતિ</td></tr>
+    <tr><td>Decade Counter (Mod‑10)</td><td>0 થી 9 સુધી ગણે (BCD)</td></tr>
+    <tr><td>Up‑Down Counter</td><td>ઉપર અને નીચે બંને ગણી શકે</td></tr>
+</table>
+<div class="note">
+    <strong>🔢 Modulus =</strong> કાઉન્ટરની કુલ સ્થિતિઓની સંખ્યા.<br>
+    <strong>🔢 n-bit counter મહત્તમ ગણતરી = 2ⁿ − 1.</strong><br>
+    <strong>🔄 Reset:</strong> કાઉન્ટરને 0 પર લાવે છે.
+</div>
+
+<!-- ==================== SECTION 11 ==================== -->
+<h2>૧૧. રજિસ્ટર (Registers)</h2>
+<table>
+    <tr><th>પ્રકાર</th><th>અર્થ</th><th>ઉપયોગ</th></tr>
+    <tr><td>SISO</td><td>Serial In Serial Out</td><td>સમય વિલંબ (delay)</td></tr>
+    <tr><td>SIPO</td><td>Serial In Parallel Out</td><td>સીરીયલ → પેરેલલ કન્વર્ટર</td></tr>
+    <tr><td>PISO</td><td>Parallel In Serial Out</td><td>પેરેલલ → સીરીયલ કન્વર્ટર</td></tr>
+    <tr><td>PIPO</td><td>Parallel In Parallel Out</td><td>ફક્ત સ્ટોરેજ</td></tr>
+    <tr><td>Universal Shift Register</td><td>ડાબે/જમણે શિફ્ટ, લોડ</td><td>સૌથી લવચીક</td></tr>
+</table>
+<div class="important">
+    <strong>➡️ Right shift = 2 વડે ભાગાકાર</strong> &nbsp;&nbsp;|&nbsp;&nbsp;
+    <strong>⬅️ Left shift = 2 વડે ગુણાકાર</strong>
+</div>
+
+<!-- ==================== SECTION 12 ==================== -->
+<h2>૧૨. લોજિક ફેમિલી (Logic Families)</h2>
+<table>
+    <tr><th>ફેમિલી</th><th>ટેક્નોલોજી</th><th>ઝડપ</th><th>પાવર</th><th>નોઇઝ ઇમ્યુનિટી</th></tr>
+    <tr><td>TTL</td><td>BJT</td><td>મધ્યમ</td><td>વધુ</td><td>મધ્યમ</td></tr>
+    <tr><td>CMOS</td><td>NMOS+PMOS</td><td>મધ્યમ</td><td>ખૂબ ઓછો</td><td>ઊંચી</td></tr>
+    <tr><td>ECL</td><td>Emitter Coupled BJT</td><td>સૌથી ઝડપી</td><td>ખૂબ વધુ</td><td>નીચી</td></tr>
+</table>
+<div class="note">
+    <strong>💡 Fan-out:</strong> TTL ~10, CMOS >50.<br>
+    <strong>💡 Power‑Delay Product:</strong> ઊર્જા કાર્યક્ષમતા માપવા માટે.<br>
+    <strong>💡 CMOS Static Power:</strong> આદર્શ રીતે શૂન્ય (માત્ર leakage).
+</div>
+
+<!-- ==================== SECTION 13 ==================== -->
+<h2>૧૩. ADC અને DAC (Converters)</h2>
+<h3>◆ DAC (Digital to Analog)</h3>
+<ul><li><strong>Weighted Resistor DAC:</strong> ઊંચા બીટ્સ માટે રેઝિસ્ટર વેલ્યુમાં ઘણો તફાવત – જટિલ.</li>
+<li><strong>R-2R Ladder DAC:</strong> માત્ર બે રેઝિસ્ટર વેલ્યુ (R અને 2R) – સરળ અને ચોક્કસ.</li>
+<li><strong>Full Scale Output:</strong> જ્યારે બધા બીટ્સ = 1.</li>
+<li><strong>Resolution = 1/2ⁿ (Vref ની તુલનામાં)</strong></li></ul>
+
+<h3>◆ ADC (Analog to Digital)</h3>
+<ul><li><strong>Flash ADC:</strong> સૌથી ઝડપી, પણ 2ⁿ કંપેરેટર – ખર્ચાળ.</li>
+<li><strong>SAR ADC:</strong> બાઈનરી સર્ચ પદ્ધતિ – મધ્યમ ઝડપ, સારું સંતુલન.</li>
+<li><strong>Dual Slope ADC:</strong> ધીમું પણ નોઇઝ પ્રતિરોધક – માપન માટે સારું.</li>
+<li><strong>Counter Type ADC:</strong> ધીમું, સરળ.</li></ul>
+<div class="important">
+    <strong>📏 Quantization Error:</strong> ±0.5 LSB.<br>
+    <strong>🎯 Sampling Theorem:</strong> f<sub>s</sub> ≥ 2 × f<sub>max</sub> (એલિયાસિંગ ટાળવા).<br>
+    <strong>⚠️ Aliasing:</strong> ઓછું સેમ્પલિંગ થાય ત્યારે ઉચ્ચ આવૃત્તિના સિગ્નલ નીચી આવૃત્તિ તરીકે દેખાય.
+</div>
+
+<!-- ==================== SECTION 14 ==================== -->
+<h2>૧૪. VLSI & MOSFET</h2>
+<h3>✦ CMOS Inverter</h3>
+<ul><li>Pull‑up: PMOS (VDD તરફ), Pull‑down: NMOS (GND તરફ).</li>
+<li>Switching Threshold ≈ VDD/2 (જ્યારે Vin = Vout).</li>
+<li><strong>Dynamic Power = C × V² × f</strong></li>
+<li>Static Power: Leakage current (subthreshold, gate leakage).</li></ul>
+
+<h3>✦ MOSFET Operating Regions</h3>
+<ul><li><strong>Cutoff:</strong> VGS < Vth → સ્વીચ OFF</li>
+<li><strong>Triode (Linear):</strong> VGS > Vth, VDS < VGS-Vth → સ્વીચ ON</li>
+<li><strong>Saturation:</strong> VDS ≥ VGS-Vth → એમ્પ્લીફાયર મોડ, ડિજિટલ લોજિકમાં ચાર્જિંગ.</li></ul>
+
+<h3>✦ Short Channel Effects</h3>
+<ul><li><strong>DIBL (Drain Induced Barrier Lowering):</strong> Vth ઘટે છે.</li>
+<li><strong>Velocity Saturation:</strong> કરંટ પર મર્યાદા.</li>
+<li><strong>Body Effect:</strong> V<sub>SB</sub> વધે તો V<sub>th</sub> વધે.</li></ul>
+
+<div class="note">
+    <strong>📈 Moore's Law:</strong> ટ્રાન્ઝિસ્ટરની સંખ્યા દર 18-24 મહિને બમણી થાય.<br>
+    <strong>🔬 Lithography:</strong> UV પ્રકાશ વડે પેટર્ન ટ્રાન્સફર.<br>
+    <strong>🔌 Copper Interconnect:</strong> એલ્યુમિનિયમ કરતાં ઓછો પ્રતિકાર, વધુ સારી કાર્યક્ષમતા.
+</div>
+
+<!-- ==================== SECTION 15 ==================== -->
+<h2>૧૫. FPGA અને VHDL</h2>
+<h3>🧩 FPGA Architecture</h3>
+<ul><li><strong>CLB (Configurable Logic Block):</strong> LUT + Flip‑Flop.</li>
+<li><strong>LUT (Look‑Up Table):</strong> નાનું ROM – કોઈપણ બુલિયન ફંક્શન.</li>
+<li><strong>BRAM:</strong> Block RAM (ઑન‑ચિપ મેમરી).</li>
+<li><strong>DSP Slice:</strong> Multiply‑Accumulate (MAC) માટે હાર્ડવેર.</li></ul>
+
+<h3>⚖️ FPGA vs ASIC</h3>
+<table>
+    <tr><th>માપદંડ</th><th>FPGA</th><th>ASIC</th></tr>
+    <tr><td>રીપ્રોગ્રામેબલ</td><td>હા</td><td>ના</td></tr>
+    <tr><td>પાવર</td><td>વધુ</td><td>ઓછો</td></tr>
+    <tr><td>ઝડપ</td><td>ઓછી</td><td>વધુ</td></tr>
+    <tr><td>એકમ ખર્ચ (મોટા વોલ્યુમ)</td><td>વધુ</td><td>ઓછો</td></tr>
+    <tr><td>ડિઝાઇન ચક્ર</td><td>ટૂંકું</td><td>લાંબું</td></tr>
+</table>
+
+<h3>📝 VHDL Basics</h3>
+<ul><li><strong>Entity:</strong> બાહ્ય ઇન્ટરફેસ (ports).</li>
+<li><strong>Architecture:</strong> આંતરિક વર્તણૂક.</li>
+<li><strong>Process Block:</strong> અંદર સિક્વેન્શિયલ કોડ.</li>
+<li><strong>Signal Assignment:</strong> `&lt;=`</li>
+<li><strong>Data Types:</strong> bit, std_logic, std_logic_vector, integer.</li>
+<li><strong>Sensitivity List:</strong> પ્રોસેસ ક્યારે ચાલે તે નક્કી કરે.</li>
+<li><strong>rising_edge(clk):</strong> positive edge detection.</li></ul>
+
+<div class="important">
+    <strong>🧪 Testbench:</strong> HDL કોડ ચકાસવા માટે.<br>
+    <strong>⚙️ Synthesis:</strong> VHDL → Gate‑level netlist.<br>
+    <strong>📁 Bitstream:</strong> FPGA પ્રોગ્રામ કરવા માટેની ફાઇલ.
+</div>
+
+<!-- ==================== SECTION 16 ==================== -->
+<h2>૧૬. MCQમાં ન હોય તેવા મહત્વપૂર્ણ વિષયો (વધારાની માહિતી)</h2>
+<ul>
+    <li><strong>Mealy vs Moore Machine:</strong> Mealy – આઉટપુટ = f(ઇનપુટ, પ્રેઝન્ટ સ્ટેટ) ; Moore – આઉટપુટ = f(પ્રેઝન્ટ સ્ટેટ). Mealyમાં ઓછા સ્ટેટ.</li>
+    <li><strong>Metastability:</strong> ફ્લિપ-ફ્લોપ અનિશ્ચિત સ્થિતિ – ઉકેલ: બે FFનું સિંક્રોનાઈઝર.</li>
+    <li><strong>Clock Skew & Jitter:</strong> Skew = સમયનો તફાવત; Jitter = કાંઠાની સ્થિતિમાં ફેરફાર.</li>
+    <li><strong>Power Gating:</strong> સ્લીપ ટ્રાન્ઝિસ્ટર વડે બ્લોકનો પાવર કાપવો.</li>
+    <li><strong>Clock Gating:</strong> જ્યારે જરૂર ન હોય ત્યારે ક્લોક બંધ કરવી.</li>
+    <li><strong>Verilog HDL:</strong> VHDL જેવી બીજી HDL – <code>always @(posedge clk)</code>.</li>
+    <li><strong>FinFET Technology:</strong> ચેનલ પર ત્રણ બાજુથી ગેટ – 22nm અને નાના નોડમાં ઉપયોગ, લીકેજ ઓછું.</li>
+    <li><strong>FIFO (First In First Out):</strong> ડેટા બફરિંગ – Full/Empty flags.</li>
+</ul>
+
+<footer>
+    📌 આ માર્ગદર્શિકા MCQ પ્રશ્નો અને ડિજિટલ ઇલેક્ટ્રોનિક્સ, VLSI, FPGA ના અન્ય મહત્વપૂર્ણ વિષયો પર આધારિત છે.<br>
+    ✍️ તૈયાર કરનાર: AI સહાયક | 🗓️ મે ૨૦૨૬<br>
+    🔖 નોંધ: આ દસ્તાવેજને PDF તરીકે સેવ કરવા માટે Ctrl+P → "Save as PDF" નો ઉપયોગ કરો.
+</footer>
+
+</body>
+</html>

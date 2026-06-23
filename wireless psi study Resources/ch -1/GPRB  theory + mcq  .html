@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en" id="app-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electronics – Chapter 1 Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f9ff;
+    --surface: #e0f2fe;
+    --card: #ffffff;
+    --border: #bae6fd;
+    --accent: #0284c7;
+    --accent2: #0ea5e9;
+    --accent3: #7c3aed;
+    --green: #059669;
+    --red: #dc2626;
+    --yellow: #d97706;
+    --text: #0c4a6e;
+    --muted: #475569;
+    --font: 'Sora', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+  /* NAV */
+  nav {
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 2rem;
+    height: 64px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(2,132,199,0.1);
+  }
+  .logo { font-weight: 800; font-size: 1.1rem; color: var(--accent); letter-spacing: -0.5px; }
+  .logo span { color: var(--accent2); }
+  .nav-tabs { display: flex; gap: 0.25rem; flex: 1; overflow-x: auto; }
+  .nav-tab {
+    padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;
+    font-size: 0.8rem; font-weight: 600; color: var(--muted);
+    white-space: nowrap; border: none; background: none;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover { color: var(--text); background: var(--border); }
+  .nav-tab.active { color: var(--accent); background: rgba(59,130,246,0.15); }
+  .badge {
+    background: var(--accent3); color: white;
+    font-size: 0.65rem; padding: 1px 6px; border-radius: 20px;
+    margin-left: 4px; vertical-align: middle;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #dbeafe 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(2,132,199,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(124,58,237,0.08) 0%, transparent 60%);
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+  .hero h1 .hl { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+  .hero-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* SECTIONS */
+  .section { display: none; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* TOPIC CARDS GRID */
+  .topics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .topic-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .topic-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 0 30px rgba(59,130,246,0.15); }
+  .topic-header {
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .topic-icon { font-size: 2rem; }
+  .topic-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+  .topic-sub { font-size: 0.8rem; color: var(--muted); }
+  .topic-body { padding: 0 1.5rem 1.5rem; }
+  .topic-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; margin: 3px 3px 3px 0;
+  }
+  .t-blue { background: rgba(59,130,246,0.2); color: var(--accent); }
+  .t-cyan { background: rgba(6,182,212,0.2); color: var(--accent2); }
+  .t-purple { background: rgba(139,92,246,0.2); color: var(--accent3); }
+  .t-green { background: rgba(16,185,129,0.2); color: var(--green); }
+  .t-yellow { background: rgba(245,158,11,0.2); color: var(--yellow); }
+
+  /* ACCORDION STUDY CONTENT */
+  .study-section { margin-bottom: 1.5rem; }
+  .acc-header {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.25rem;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    font-weight: 600; transition: all 0.2s;
+  }
+  .acc-header:hover { border-color: var(--accent); }
+  .acc-header.open { border-radius: 12px 12px 0 0; border-color: var(--accent); }
+  .acc-icon { transition: transform 0.3s; color: var(--accent); font-size: 1.2rem; }
+  .acc-header.open .acc-icon { transform: rotate(180deg); }
+  .acc-body {
+    background: var(--surface); border: 1px solid var(--accent);
+    border-top: none; border-radius: 0 0 12px 12px;
+    padding: 1.25rem; display: none;
+  }
+  .acc-body.open { display: block; }
+
+  /* CONTENT STYLES */
+  .key-point {
+    background: rgba(2,132,199,0.07); border-left: 3px solid var(--accent);
+    padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin: 0.75rem 0;
+    font-size: 0.9rem;
+  }
+  .key-point strong { color: #0369a1; }
+  .formula-box {
+    background: #e0f2fe; border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.75rem 1rem; margin: 0.75rem 0;
+    font-family: var(--mono); font-size: 0.85rem; color: #0369a1;
+  }
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th { background: rgba(2,132,199,0.15); color: var(--accent); padding: 0.6rem 1rem; text-align: left; }
+  td { border-top: 1px solid var(--border); padding: 0.6rem 1rem; color: var(--muted); }
+  tr:hover td { background: rgba(2,132,199,0.05); color: var(--text); }
+  .tip-box {
+    background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 8px; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.9rem;
+  }
+  .tip-box .tip-label { color: var(--yellow); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.25rem; }
+  h3 { font-size: 0.95rem; color: var(--accent2); margin: 1rem 0 0.5rem; }
+  p { line-height: 1.7; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.5rem; }
+  ul { padding-left: 1.25rem; }
+  ul li { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.35rem; line-height: 1.6; }
+  ul li strong { color: var(--text); }
+
+  /* MCQ QUIZ */
+  .quiz-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+  .quiz-title { font-size: 1.25rem; font-weight: 700; }
+  .quiz-controls { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.5rem 1.25rem; border-radius: 8px; font-family: var(--font);
+    font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    border: none; transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #2563eb; }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .filter-btn {
+    padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted);
+    transition: all 0.2s;
+  }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 1.5rem; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transition: width 0.3s; }
+  .question-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .q-num { font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+  .q-level { float: right; font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; }
+  .lvl-1 { background: rgba(16,185,129,0.2); color: var(--green); }
+  .lvl-2 { background: rgba(59,130,246,0.2); color: var(--accent); }
+  .lvl-3 { background: rgba(245,158,11,0.2); color: var(--yellow); }
+  .lvl-4 { background: rgba(239,68,68,0.2); color: var(--red); }
+  .q-text { font-size: 0.95rem; font-weight: 600; line-height: 1.6; margin-bottom: 1rem; }
+  .options { display: flex; flex-direction: column; gap: 0.6rem; }
+  .option {
+    padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid var(--border);
+    cursor: pointer; font-size: 0.875rem; transition: all 0.2s; display: flex; align-items: flex-start; gap: 0.75rem;
+  }
+  .option:hover:not(.disabled) { border-color: var(--accent); background: rgba(2,132,199,0.08); }
+  .option.correct { border-color: var(--green); background: rgba(16,185,129,0.12); color: var(--text); }
+  .option.wrong { border-color: var(--red); background: rgba(239,68,68,0.12); }
+  .option.disabled { cursor: not-allowed; }
+  .opt-letter { font-weight: 700; color: var(--accent); min-width: 20px; }
+  .explanation {
+    margin-top: 1rem; padding: 0.75rem 1rem;
+    background: rgba(14,165,233,0.08); border-left: 3px solid var(--accent2);
+    border-radius: 0 8px 8px 0; font-size: 0.85rem; color: var(--muted);
+    display: none;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--accent2); }
+  .quiz-score {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem; text-align: center; margin-top: 1.5rem;
+    display: none;
+  }
+  .score-num { font-size: 3rem; font-weight: 800; }
+  .score-msg { font-size: 1.1rem; color: var(--muted); margin-top: 0.5rem; }
+
+  /* FLASHCARDS */
+  .flashcard-area { max-width: 680px; margin: 0 auto; }
+  .flashcard-nav { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .fc-counter { text-align: center; color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+  .flashcard {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 3rem 2rem; text-align: center;
+    cursor: pointer; min-height: 260px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 1rem;
+    position: relative; transition: transform 0.6s; transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  .flashcard.flipped { border-color: var(--accent); }
+  .fc-hint { font-size: 0.75rem; color: var(--muted); position: absolute; bottom: 1rem; }
+  .fc-q { font-size: 1.05rem; font-weight: 600; line-height: 1.6; }
+  .fc-a { display: none; font-size: 0.95rem; line-height: 1.7; color: var(--muted); }
+  .fc-a strong { color: var(--accent2); display: block; margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .flashcard.flipped .fc-q { display: none; }
+  .flashcard.flipped .fc-a { display: block; }
+  .fc-btns { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+  .fc-result { padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; border: none; transition: all 0.2s; }
+  .fc-know { background: rgba(16,185,129,0.2); color: var(--green); border: 1px solid var(--green); }
+  .fc-know:hover { background: var(--green); color: white; }
+  .fc-again { background: rgba(239,68,68,0.2); color: var(--red); border: 1px solid var(--red); }
+  .fc-again:hover { background: var(--red); color: white; }
+
+  /* SECTION TITLE */
+  .section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .section-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+  /* LANGUAGE TOGGLE */
+  .lang-toggle {
+    display: flex; align-items: center;
+    background: var(--surface); border: 2px solid var(--border);
+    border-radius: 30px; padding: 3px; gap: 2px; flex-shrink: 0;
+  }
+  .lang-btn {
+    padding: 5px 14px; border-radius: 24px; font-size: 0.78rem; font-weight: 700;
+    cursor: pointer; border: none; background: transparent;
+    color: var(--muted); transition: all 0.25s; white-space: nowrap;
+  }
+  .lang-btn.active {
+    background: var(--accent); color: white;
+    box-shadow: 0 2px 8px rgba(2,132,199,0.35);
+  }
+  /* Gujarati font feel */
+  .guj { font-size: 0.92em; }
+  [data-lang="gu"] .en-text { display: none !important; }
+  [data-lang="gu"] .gu-text { display: inline !important; }
+  [data-lang="en"] .gu-text { display: none !important; }
+  [data-lang="en"] .en-text { display: inline !important; }
+  .gu-text { display: none; }
+  .en-text { display: inline; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; gap: 0.75rem; }
+    .section { padding: 1.25rem; }
+    .hero { padding: 2.5rem 1.25rem; }
+    .lang-btn { padding: 4px 10px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body data-lang="en">
+
+<nav>
+  <div class="logo">⚡ Elec<span>Hub</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('home')">🏠 <span class="en-text">Home</span><span class="gu-text">મુખ્ય</span></button>
+    <button class="nav-tab" onclick="showSection('topics')">📚 <span class="en-text">Topics</span><span class="gu-text">વિષયો</span></button>
+    <button class="nav-tab" onclick="showSection('mcq')">🎯 <span class="en-text">MCQ Quiz</span><span class="gu-text">MCQ ક્વિઝ</span> <span class="badge">100+</span></button>
+    <button class="nav-tab" onclick="showSection('flashcards')">🃏 <span class="en-text">Flashcards</span><span class="gu-text">ફ્લેશકાર્ડ</span></button>
+    <button class="nav-tab" onclick="showSection('formulas')">🔢 <span class="en-text">Formulas</span><span class="gu-text">સૂત્રો</span></button>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-gu" onclick="setLang('gu')">ગુજ</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="section active">
+  <div style="max-width:1200px;margin:0 auto;">
+  <div class="hero" style="border-radius:20px;margin-bottom:2rem;">
+    <div class="hero-content">
+      <div style="display:inline-block;background:rgba(2,132,199,0.12);border:1px solid rgba(2,132,199,0.3);border-radius:20px;padding:6px 16px;font-size:0.8rem;color:var(--accent);margin-bottom:1rem;">
+        <span class="en-text">Chapter 1 · Electronics Components, Devices & Circuits</span>
+        <span class="gu-text">પ્રકરણ 1 · ઇલેક્ટ્રોનિક્સ ઘટકો, ઉપકરણો અને પરિપથ</span>
+      </div>
+      <h1>
+        <span class="en-text">Your <span class="hl">Smart Study Hub</span><br>for Electronics</span>
+        <span class="gu-text">ઇલેક્ટ્રોનિક્સ માટે<br>તમારો <span class="hl">સ્માર્ટ અભ્યાસ કેન્દ્ર</span></span>
+      </h1>
+      <p>
+        <span class="en-text">Complete notes, MCQs, flashcards and formulas — all from your PDF. Study smarter, not harder.</span>
+        <span class="gu-text">સંપૂર્ણ નોંધ, MCQ, ફ્લેશકાર્ડ અને સૂત્રો — તમારા PDF માંથી. સ્માર્ટ રીતે ભણો, વધુ મહેનત નહીં.</span>
+      </p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">6</div><div class="stat-label"><span class="en-text">Major Topics</span><span class="gu-text">મુખ્ય વિષયો</span></div></div>
+        <div class="stat"><div class="stat-num">100+</div><div class="stat-label"><span class="en-text">MCQ Questions</span><span class="gu-text">MCQ પ્રશ્નો</span></div></div>
+        <div class="stat"><div class="stat-num">40+</div><div class="stat-label"><span class="en-text">Flashcards</span><span class="gu-text">ફ્લેશકાર્ડ</span></div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label"><span class="en-text">Difficulty Levels</span><span class="gu-text">કઠિનાઈ સ્તર</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-card" onclick="showSection('topics');openTopic('semi')">
+      <div class="topic-header">
+        <div class="topic-icon">🔌</div>
+        <div>
+          <div class="topic-title"><span class="en-text">1.1 Semiconductor Basics</span><span class="gu-text">1.1 સેમિકન્ડક્ટરની મૂળભૂત માહિતી</span></div>
+          <div class="topic-sub"><span class="en-text">Conductors, Resistivity, Band Theory</span><span class="gu-text">વાહક, અવરોધકતા, બેન્ડ થિયરી</span></div>
+        </div>
+      </div>
+      <div class="topic-body">
+        <span class="topic-tag t-blue"><span class="en-text">Conductivity</span><span class="gu-text">વાહકતા</span></span>
+        <span class="topic-tag t-cyan"><span class="en-text">Band Theory</span><span class="gu-text">બેન્ડ થિયરી</span></span>
+        <span class="topic-tag t-purple"><span class="en-text">P-N Junctions</span><span class="gu-text">P-N જંક્શન</span></span>
+        <span class="topic-tag t-green"><span class="en-text">Doping</span><span class="gu-text">ડોપિંગ</span></span>
+      </div>
+    </div>
+    <div class="topic-card" onclick="showSection('topics');openTopic('diode')">
+      <div class="topic-header">
+        <div class="topic-icon">💡</div>
+        <div>
+          <div class="topic-title"><span class="en-text">Diodes & Special Diodes</span><span class="gu-text">ડાયોડ્સ અને ખાસ ડાયોડ્સ</span></div>
+          <div class="topic-sub"><span class="en-text">Zener, Schottky, LED, Varactor</span><span class="gu-text">ઝેનર, શૉટ્કી, LED, વેરેક્ટર</span></div>
+        </div>
+      </div>
+      <div class="topic-body">
+        <span class="topic-tag t-blue"><span class="en-text">Rectification</span><span class="gu-text">રેક્ટિફિકેશન</span></span>
+        <span class="topic-tag t-yellow"><span class="en-text">Zener</span><span class="gu-text">ઝેનર</span></span>
+        <span class="topic-tag t-cyan">LED</span>
+        <span class="topic-tag t-green"><span class="en-text">Photodiode</span><span class="gu-text">ફોટોડાયોડ</span></span>
+      </div>
+    </div>
+    <div class="topic-card" onclick="showSection('topics');openTopic('bjt')">
+      <div class="topic-header">
+        <div class="topic-icon">🔧</div>
+        <div>
+          <div class="topic-title"><span class="en-text">1.2 BJT Transistors</span><span class="gu-text">1.2 BJT ટ્રાન્ઝિસ્ટર</span></div>
+          <div class="topic-sub"><span class="en-text">CB, CE, CC Configurations</span><span class="gu-text">CB, CE, CC ગોઠવણ</span></div>
+        </div>
+      </div>
+      <div class="topic-body">
+        <span class="topic-tag t-blue">NPN / PNP</span>
+        <span class="topic-tag t-purple"><span class="en-text">Alpha & Beta</span><span class="gu-text">અલ્ફા અને બીટા</span></span>
+        <span class="topic-tag t-green"><span class="en-text">Biasing</span><span class="gu-text">બાયસિંગ</span></span>
+        <span class="topic-tag t-yellow">Q-Point</span>
+      </div>
+    </div>
+    <div class="topic-card" onclick="showSection('topics');openTopic('amp')">
+      <div class="topic-header">
+        <div class="topic-icon">📡</div>
+        <div>
+          <div class="topic-title"><span class="en-text">Amplifiers & Op-Amps</span><span class="gu-text">એમ્પ્લિફાયર અને Op-Amp</span></div>
+          <div class="topic-sub"><span class="en-text">741 IC, Inverting, Non-Inverting</span><span class="gu-text">741 IC, ઇન્વર્ટિંગ, નોન-ઇન્વર્ટિંગ</span></div>
+        </div>
+      </div>
+      <div class="topic-body">
+        <span class="topic-tag t-blue"><span class="en-text">Gain</span><span class="gu-text">ગેઇન</span></span>
+        <span class="topic-tag t-cyan">CMRR</span>
+        <span class="topic-tag t-purple"><span class="en-text">Slew Rate</span><span class="gu-text">સ્લ્યૂ રેટ</span></span>
+        <span class="topic-tag t-green"><span class="en-text">Filters</span><span class="gu-text">ફિલ્ટર</span></span>
+      </div>
+    </div>
+    <div class="topic-card" onclick="showSection('topics');openTopic('fet')">
+      <div class="topic-header">
+        <div class="topic-icon">⚡</div>
+        <div>
+          <div class="topic-title"><span class="en-text">1.3.4 Field Effect Transistors</span><span class="gu-text">1.3.4 ફીલ્ડ ઇફેક્ટ ટ્રાન્ઝિસ્ટર</span></div>
+          <div class="topic-sub"><span class="en-text">JFET, MOSFET, D-MOSFET</span><span class="gu-text">JFET, MOSFET, D-MOSFET</span></div>
+        </div>
+      </div>
+      <div class="topic-body">
+        <span class="topic-tag t-blue">JFET</span>
+        <span class="topic-tag t-yellow">MOSFET</span>
+        <span class="topic-tag t-purple"><span class="en-text">Gate Control</span><span class="gu-text">ગેટ નિયંત્રણ</span></span>
+        <span class="topic-tag t-cyan">gm</span>
+      </div>
+    </div>
+    <div class="topic-card" onclick="showSection('topics');openTopic('osc')">
+      <div class="topic-header">
+        <div class="topic-icon">🌀</div>
+        <div>
+          <div class="topic-title"><span class="en-text">Oscillators & Power Amps</span><span class="gu-text">ઑસ્સિલેટર અને પાવર એમ્પ</span></div>
+          <div class="topic-sub"><span class="en-text">RC, LC, Class A/B/C</span><span class="gu-text">RC, LC, Class A/B/C</span></div>
+        </div>
+      </div>
+      <div class="topic-body">
+        <span class="topic-tag t-blue"><span class="en-text">Wien Bridge</span><span class="gu-text">વિન બ્રિજ</span></span>
+        <span class="topic-tag t-purple"><span class="en-text">Class A</span><span class="gu-text">ક્લાસ A</span></span>
+        <span class="topic-tag t-green"><span class="en-text">Feedback</span><span class="gu-text">ફીડબેક</span></span>
+        <span class="topic-tag t-yellow"><span class="en-text">Efficiency</span><span class="gu-text">કાર્યક્ષમતા</span></span>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- TOPICS -->
+<div id="topics" class="section">
+  <div class="section-title">📚 <span class="en-text">Study Topics</span><span class="gu-text">અભ્યાસ વિષયો</span></div>
+  <div class="section-desc"><span class="en-text">Click any section to expand detailed notes</span><span class="gu-text">વિગતવાર નોંધ જોવા કોઈ પણ વિભાગ પર ક્લિક કરો</span></div>
+
+  <!-- 1.1 Semiconductor Basics -->
+  <div id="topic-semi">
+  <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin:1.5rem 0 1rem;">🔌 <span class="en-text">1.1 Semiconductor Basics</span><span class="gu-text">1.1 સેમિકન્ડક્ટરની મૂળભૂત માહિતી</span></div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      ⚡ <span class="en-text">Fundamental Concepts: Conductivity & Resistivity</span><span class="gu-text">મૂળભૂત સંકલ્પ: વાહકતા અને અવરોધકતા</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="key-point"><strong><span class="en-text">Conductivity (σ):</span><span class="gu-text">વાહકતા (σ):</span></strong> <span class="en-text">Ease with which electric current flows through a material. Unit: Siemens/metre (S/m). It is the reciprocal of resistivity.</span><span class="gu-text">વિદ્યુત પ્રવાહ સામગ્રીમાં કેટલી સરળતાથી વહે છે. એકમ: સિમેન્સ/મીટર (S/m). તે અવરોધકતાનો વ્યુત્ક્રમ છે.</span></div>
+      <div class="key-point"><strong><span class="en-text">Resistivity (ρ):</span><span class="gu-text">અવરોધકતા (ρ):</span></strong> <span class="en-text">Property of a material to oppose current flow. Formula: R = ρl/a, where l = length, a = cross-sectional area.</span><span class="gu-text">સામગ્રીની વિદ્યુત પ્રવાહનો વિરોધ કરવાની ક્ષમતા. સૂત્ર: R = ρl/a, જ્યાં l = લંબાઈ, a = આડ-વિભાગ ક્ષેત્ર.</span></div>
+      <div class="key-point"><strong><span class="en-text">Temperature Coefficient:</span><span class="gu-text">તાપમાન ગુણાંક:</span></strong> <span class="en-text">For pure metallic conductors, resistance increases with temperature (positive temperature coefficient).</span><span class="gu-text">શુદ્ધ ધાતુ વાહકો માટે, તાપમાન વધવાથી અવરોધ વધે છે (ધન તાપમાન ગુણાંક).</span></div>
+      <h3><span class="en-text">Classification of Conducting Materials</span><span class="gu-text">વહન સામગ્રીઓનું વર્ગીકરણ</span></h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th><span class="en-text">Material</span><span class="gu-text">સામગ્રી</span></th><th><span class="en-text">Key Property</span><span class="gu-text">મુખ્ય ગુણ</span></th><th><span class="en-text">Application</span><span class="gu-text">ઉપયોગ</span></th></tr>
+          <tr><td>Silver (Ag)</td><td><span class="en-text">Highest conductivity</span><span class="gu-text">સૌથી વધુ વાહકતા</span></td><td><span class="en-text">Special contacts, research</span><span class="gu-text">ખાસ સંપર્ક, સંશોધન</span></td></tr>
+          <tr><td>Copper (Cu)</td><td><span class="en-text">High conductivity, ductile</span><span class="gu-text">ઉચ્ચ વાહકતા, નમ્ય</span></td><td><span class="en-text">House wiring, motor windings</span><span class="gu-text">ઘરની વાયરિંગ, મોટર વિન્ડિંગ</span></td></tr>
+          <tr><td>Aluminium (Al)</td><td><span class="en-text">Lightweight, cost-effective</span><span class="gu-text">હળવો, સસ્તો</span></td><td><span class="en-text">Overhead transmission lines (ACSR)</span><span class="gu-text">ઓવરહેડ ટ્રાન્સ્મિશન લાઇન (ACSR)</span></td></tr>
+          <tr><td>Tungsten (W)</td><td><span class="en-text">High melting point (3410°C)</span><span class="gu-text">ઉચ્ચ ગલનબિંદુ (3410°C)</span></td><td><span class="en-text">Bulb filaments, X-ray electrodes</span><span class="gu-text">બલ્બ ફિલામેન્ટ, X-ray ઇલેક્ટ્રોડ</span></td></tr>
+          <tr><td>Nichrome</td><td><span class="en-text">High resistivity, heat stable</span><span class="gu-text">ઉચ્ચ અવરોધકતા, ઉષ્મા સ્થિર</span></td><td><span class="en-text">Heating elements in irons/heaters</span><span class="gu-text">ઈસ્ત્રી/હીટરમાં ગરમ ઘટક</span></td></tr>
+          <tr><td>Manganin</td><td><span class="en-text">Nearly zero temp coefficient</span><span class="gu-text">લગભગ શૂન્ય તાપ ગુણાંક</span></td><td><span class="en-text">Standard precision resistors</span><span class="gu-text">ચોક્સાઈ પ્રતિરોધક</span></td></tr>
+        </table>
+      </div>
+      <div class="tip-box">
+        <div class="tip-label">💡 <span class="en-text">Exam Tip</span><span class="gu-text">પરીક્ષા ટિપ</span></div>
+        <span class="en-text">Silver = Best conductor but costly. Copper = Most widely used. Manganin = Precision resistors (zero temp coefficient).</span>
+        <span class="gu-text">Silver = શ્રેષ્ઠ વાહક પણ મોંઘો. Copper = સૌથી વધુ ઉપયોગ. Manganin = ચોક્સાઈ પ્રતિરોધક (શૂન્ય તાપ ગુણાંક).</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🏗️ <span class="en-text">Band Theory & Semiconductor Doping</span><span class="gu-text">બેન્ડ થિયરી અને સેમિકન્ડક્ટર ડોપિંગ</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <h3><span class="en-text">Band Theory of Solids</span><span class="gu-text">ઘન પદાર્થની બેન્ડ થિયરી</span></h3>
+      <ul>
+        <li><strong><span class="en-text">Conductor:</span><span class="gu-text">વાહક:</span></strong> <span class="en-text">Valence Band and Conduction Band overlap — electrons flow freely.</span><span class="gu-text">વેલેન્સ બેન્ડ અને કન્ડક્શન બેન્ડ ઓવરલેપ — ઇલેક્ટ્રોન મુક્તપણે વહે છે.</span></li>
+        <li><strong><span class="en-text">Insulator:</span><span class="gu-text">અવાહક:</span></strong> <span class="en-text">Very large energy gap (>5eV) — electrons cannot jump to conduction band.</span><span class="gu-text">ખૂબ મોટો ઊર્જા અંતર (>5eV) — ઇલેક્ટ્રોન કન્ડક્શન બેન્ડમાં જઈ શકતા નથી.</span></li>
+        <li><strong><span class="en-text">Semiconductor:</span><span class="gu-text">સેમિકન્ડક્ટર:</span></strong> <span class="en-text">Small energy gap (~1.1eV for Silicon) — can be overcome by heat or doping.</span><span class="gu-text">નાનો ઊર્જા અંતર (~1.1eV સિલિકોન) — ગરમી અથવા ડોપિંગ વડે દૂર કરી શકાય.</span></li>
+      </ul>
+      <h3><span class="en-text">Intrinsic vs Extrinsic Semiconductors</span><span class="gu-text">આંતરિક vs બાહ્ય સેમિકન્ડક્ટર</span></h3>
+      <div class="key-point"><strong><span class="en-text">Intrinsic:</span><span class="gu-text">આંતરિક:</span></strong> <span class="en-text">Pure semiconductor (Silicon/Germanium). Equal number of electrons and holes. Very low conductivity at room temperature.</span><span class="gu-text">શુદ્ધ સેમિકન્ડક્ટર (Silicon/Germanium). ઇલેક્ટ્રોન અને હોલ સમાન. ઓરડાના તાપમાને ખૂબ ઓછી વાહકતા.</span></div>
+      <div class="key-point"><strong><span class="en-text">N-type (Extrinsic):</span><span class="gu-text">N-type (બાહ્ય):</span></strong> <span class="en-text">Doped with Pentavalent material (Arsenic, Antimony).</span><span class="gu-text">Pentavalent સામગ્રી (Arsenic, Antimony) વડે ડોપ.</span> <strong><span class="en-text">Electrons are majority carriers.</span><span class="gu-text">ઇલેક્ટ્રોન બહુમત વાહક.</span></strong></div>
+      <div class="key-point"><strong><span class="en-text">P-type (Extrinsic):</span><span class="gu-text">P-type (બાહ્ય):</span></strong> <span class="en-text">Doped with Trivalent material (Boron, Indium).</span><span class="gu-text">Trivalent સામગ્રી (Boron, Indium) વડે ડોપ.</span> <strong><span class="en-text">Holes are majority carriers.</span><span class="gu-text">હોલ બહુમત વાહક.</span></strong></div>
+      <div class="tip-box">
+        <div class="tip-label">💡 <span class="en-text">Memory Trick</span><span class="gu-text">યાદ રાખવાની યુક્તિ</span></div>
+        <span class="en-text">P-type = <b>P</b>ositive holes dominant. N-type = <b>N</b>egative electrons dominant. Pentavalent → N-type. Trivalent → P-type.</span>
+        <span class="gu-text">P-type = <b>P</b>ositiveહોલ મુખ્ય. N-type = <b>N</b>egativeઇલેક્ટ્રોન મુખ્ય. Pentavalent → N-type. Trivalent → P-type.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🔬 <span class="en-text">Theories of Conduction (Advanced)</span><span class="gu-text">વહનના સિદ્ધાંત (ઉચ્ચ)</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <ul>
+        <li><strong><span class="en-text">Classical Free Electron Theory (Drude-Lorentz):</span><span class="gu-text">ક્લાસિકલ ફ્રી ઇલેક્ટ્રોન થિયરી (Drude-Lorentz):</span></strong> <span class="en-text">Electrons move randomly like a gas and collide with positive ions. Cannot explain specific heat or photoelectric effect.</span><span class="gu-text">ઇલેક્ટ્રોન ગેસ જેવા અવ્યવસ્થિત ફરે છે. ચોક્કસ ઉષ્મા કે ફોટોઇલેક્ટ્રિક અસર સ્પષ્ટ કરી શકાતી નથી.</span></li>
+        <li><strong><span class="en-text">Quantum Free Electron Theory (Sommerfeld):</span><span class="gu-text">ક્વોન્ટમ ફ્રી ઇલેક્ટ્રોન થિયરી (Sommerfeld):</span></strong> <span class="en-text">Uses Fermi-Dirac statistics to explain electron energy levels at absolute zero.</span><span class="gu-text">Fermi-Dirac આંકડા ઉપયોગ — સંપૂર્ણ શૂન્ય ઊર્જા સ્તર સ્પષ્ટ કરે.</span></li>
+        <li><strong><span class="en-text">Band Theory:</span><span class="gu-text">બેન્ડ થિયરી:</span></strong> <span class="en-text">Explains conductivity based on overlap (or gap) between Valence Band and Conduction Band.</span><span class="gu-text">વેલેન્સ અને કન્ડક્શન બેન્ડ વચ્ચેના અંતર/ઓવરલેપ આધારે વાહકતા સ્પષ્ટ.</span></li>
+      </ul>
+      <div class="key-point"><strong>ACSR:</strong> <span class="en-text">Aluminium Conductor Steel Reinforced. Central steel core for mechanical strength surrounded by aluminium strands for conductivity. Used in long-distance overhead transmission lines.</span><span class="gu-text">Aluminium Conductor Steel Reinforced. ઇસ્પાત ઊભું ટ્રાન્સ્મિશન — aluminum વડે ઢંકાયેલ — લાંબા અંતરની ઓવરહેડ લાઇন.</span></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Diodes -->
+  <div id="topic-diode">
+  <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin:1.5rem 0 1rem;">💡 <span class="en-text">Diodes & Special Diodes</span><span class="gu-text">ડાયોડ્સ અને ખાસ ડાયોડ્સ</span></div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🔴 <span class="en-text">P-N Junction & Basic Diode Operation</span><span class="gu-text">P-N જંક્શન અને ડાયોડ ઓપરેશન</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="key-point"><strong><span class="en-text">Forward Bias:</span><span class="gu-text">ફોરવર્ડ બાયસ:</span></strong> <span class="en-text">Positive terminal to P-side. Depletion region narrows. Current flows. Silicon cut-in voltage ≈ 0.7V, Germanium ≈ 0.3V.</span><span class="gu-text">ધન ટર્મિનલ P-સાઇડ. ડિપ્લીશન ઘટે. પ્રવાહ વહે. Silicon ≈ 0.7V, Germanium ≈ 0.3V.</span></div>
+      <div class="key-point"><strong><span class="en-text">Reverse Bias:</span><span class="gu-text">રિવર્સ બાયસ:</span></strong> <span class="en-text">Depletion region widens. Only tiny leakage current flows. At breakdown voltage — large reverse current flows.</span><span class="gu-text">ડિપ્લીશન વિસ્તૃત. ફક્ત નાનો લીકેજ પ્રવાહ. Breakdown voltage — મોટો reverse પ્રવાહ.</span></div>
+      <h3><span class="en-text">Rectifier Circuits</span><span class="gu-text">રેક્ટિફાયર સર્કિટ</span></h3>
+      <ul>
+        <li><strong><span class="en-text">Half-Wave Rectifier:</span><span class="gu-text">અર્ધ-તરંગ રેક્ટિફાયર:</span></strong> <span class="en-text">Average output = 0.318 × Vm</span><span class="gu-text">સરેરાશ આઉટપુટ = 0.318 × Vm</span></li>
+        <li><strong><span class="en-text">Full-Wave Rectifier:</span><span class="gu-text">સંપૂર્ણ-તરંગ રેક્ટિફાયર:</span></strong> <span class="en-text">Average output = 0.637 × Vm (bridge or centre-tap)</span><span class="gu-text">સરેરાશ = 0.637 × Vm (bridge અથવા centre-tap)</span></li>
+      </ul>
+      <div class="formula-box">Average DC (Full-wave) = 0.637 × Vm = (2/π) × Vm</div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      ⚡ <span class="en-text">Special Diodes Quick Reference</span><span class="gu-text">ખાસ ડાયોડ ઝડપી સંદર્ભ</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th><span class="en-text">Diode</span><span class="gu-text">ડાયોડ</span></th><th><span class="en-text">Working Principle</span><span class="gu-text">કાર્ય સિદ્ધાંત</span></th><th><span class="en-text">Application</span><span class="gu-text">ઉપયોગ</span></th></tr>
+          <tr><td>Zener Diode</td><td><span class="en-text">Operates in reverse breakdown</span><span class="gu-text">Reverse breakdown માં ચાલે</span></td><td><span class="en-text">Voltage regulation</span><span class="gu-text">Voltage નિયમન</span></td></tr>
+          <tr><td>Schottky Diode</td><td><span class="en-text">Metal-semiconductor junction, low forward voltage</span><span class="gu-text">Metal-semiconductor junction, ઓછો voltage</span></td><td><span class="en-text">RF switching, high-speed circuits</span><span class="gu-text">RF switching, ઝડપી સર્કિટ</span></td></tr>
+          <tr><td>LED</td><td><span class="en-text">Recombination emits photons (light)</span><span class="gu-text">Recombination ફોટોન ઉત્સર્ગ</span></td><td><span class="en-text">Indicators, optical communication</span><span class="gu-text">Indicator, ઓપ્ટિકલ</span></td></tr>
+          <tr><td>Photodiode</td><td><span class="en-text">Reverse biased — light generates current</span><span class="gu-text">Reverse bias — પ્રકાશ → પ્રવાહ</span></td><td><span class="en-text">Light detection, solar cells</span><span class="gu-text">પ્રકાશ ગ્રહણ, સૌર સેલ</span></td></tr>
+          <tr><td>Varactor (Varicap)</td><td><span class="en-text">Junction capacitance varies with reverse voltage</span><span class="gu-text">Junction Capacitance reverse voltage સાથે બદલાય</span></td><td><span class="en-text">Frequency tuning, VCOs</span><span class="gu-text">ફ્રિક્વન્સી ટ્યૂનિંગ, VCO</span></td></tr>
+          <tr><td>Tunnel Diode</td><td><span class="en-text">Quantum tunneling — negative resistance</span><span class="gu-text">Quantum tunneling — ઋણ અવરોધ</span></td><td><span class="en-text">Microwave oscillators</span><span class="gu-text">Microwave oscillator</span></td></tr>
+          <tr><td>PIN Diode</td><td><span class="en-text">Intrinsic layer between P and N — variable resistor at RF</span><span class="gu-text">P-N વચ્ચે Intrinsic layer — RF variable resistor</span></td><td><span class="en-text">RF switching, attenuation</span><span class="gu-text">RF switching</span></td></tr>
+        </table>
+      </div>
+      <div class="tip-box">
+        <div class="tip-label">💡 <span class="en-text">Key Fact</span><span class="gu-text">મહત્ત્વની વાત</span></div>
+        <span class="en-text">Photodiode operates in <b>Reverse Bias</b> for light detection. Varactor diode is used in <b>VCOs for frequency tuning</b>. PIN diode acts as variable resistor at high frequencies.</span>
+        <span class="gu-text">Photodiode <b>Reverse Bias</b> માં ચાલે. Varactor <b>VCO ફ્રિક્વન્સી ટ્યૂનિંગ</b> માટે. PIN diode ઉચ્ચ ફ્રિક્વન્સી પર variable resistor.</span>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BJT -->
+  <div id="topic-bjt">
+  <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin:1.5rem 0 1rem;">🔧 <span class="en-text">1.2 BJT Transistors & Configurations</span><span class="gu-text">1.2 BJT ટ્રાન્ઝિસ્ટર અને ગોઠવણ</span></div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🏗️ <span class="en-text">BJT Construction & Terminals</span><span class="gu-text">BJT બાંધણી અને ટર્મિનલ</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="key-point"><strong>BJT</strong> = <span class="en-text">Bipolar Junction Transistor. Current-controlled device. Has 3 terminals and 2 PN junctions.</span><span class="gu-text">Bipolar Junction Transistor. ધારા-નિયંત્રિત ઉપકરણ. 3 ટર્મિનલ અને 2 PN junction.</span></div>
+      <ul>
+        <li><strong>NPN:</strong> <span class="en-text">P-region between two N-regions. Majority carriers: Electrons. Faster & more popular.</span><span class="gu-text">બે N-region વચ્ચે P-region. બહુમત વાહક: ઇલેક્ટ્રોન. ઝડપી અને વધુ ઉપયોગ.</span></li>
+        <li><strong>PNP:</strong> <span class="en-text">N-region between two P-regions. Majority carriers: Holes.</span><span class="gu-text">બે P-region વચ્ચે N-region. બહુમત વાહક: હોલ.</span></li>
+      </ul>
+      <h3><span class="en-text">Terminal Properties</span><span class="gu-text">ટર્મિનલ ગુણો</span></h3>
+      <ul>
+        <li><strong><span class="en-text">Emitter (E):</span><span class="gu-text">ઉત્સર્જક (E):</span></strong> <span class="en-text">Heavily doped. Emits charge carriers. Vbe ≈ 0.7V (Silicon).</span><span class="gu-text">ઉચ્ચ ડોપ. ચાર્જ વાહક ઉત્સર્ગ. Vbe ≈ 0.7V (Silicon).</span></li>
+        <li><strong><span class="en-text">Base (B):</span><span class="gu-text">આધાર (B):</span></strong> <span class="en-text">Very thin, lightly doped. Controls carrier flow (acts as a valve).</span><span class="gu-text">ખૂબ પાતળું, ઓছু ડોપ. Carrier flow નિયંત્રણ.</span></li>
+        <li><strong><span class="en-text">Collector (C):</span><span class="gu-text">સંગ્રાહક (C):</span></strong> <span class="en-text">Moderately doped, largest size. Collects carriers & dissipates heat.</span><span class="gu-text">મધ્યમ ડોપ, સૌથી મોટું. Carrier ભેગા કરે અને ઉષ્મા ઉત્સર્ગ.</span></li>
+      </ul>
+      <div class="key-point"><strong><span class="en-text">Biasing Rule:</span><span class="gu-text">Biasing નિયમ:</span></strong> <span class="en-text">Emitter-Base Junction (EBJ) → Always Forward Biased. Collector-Base Junction (CBJ) → Always Reverse Biased (Active Region).</span><span class="gu-text">EBJ → હંમેશા Forward Bias. CBJ → હંમેશા Reverse Bias (Active Region).</span></div>
+      <div class="formula-box">Ie = Ic + Ib  (Kirchhoff's Current Law)</div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      📊 <span class="en-text">Three Configurations Comparison</span><span class="gu-text">ત્રણ ગોઠવણ સરખામણી</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th><span class="en-text">Parameter</span><span class="gu-text">પ્રમાણ</span></th><th><span class="en-text">Common Base (CB)</span><span class="gu-text">Common Base (CB)</span></th><th><span class="en-text">Common Emitter (CE)</span><span class="gu-text">Common Emitter (CE)</span></th><th><span class="en-text">Common Collector (CC)</span><span class="gu-text">Common Collector (CC)</span></th></tr>
+          <tr><td><span class="en-text">Current Gain</span><span class="gu-text">ધારા ગેઇન</span></td><td>α &lt; 1 (0.95–0.99)</td><td>β = 20 to 500 (<span class="en-text">High</span><span class="gu-text">ઊંચો</span>)</td><td>β+1 (<span class="en-text">Highest</span><span class="gu-text">સૌથી ઊંચો</span>)</td></tr>
+          <tr><td><span class="en-text">Voltage Gain</span><span class="gu-text">Voltage ગેઇન</span></td><td><span class="en-text">High</span><span class="gu-text">ઊંચો</span></td><td><span class="en-text">Medium/High</span><span class="gu-text">મધ્યમ/ઊંચો</span></td><td>&lt;1 (<span class="en-text">Unity</span><span class="gu-text">એકતા</span>)</td></tr>
+          <tr><td><span class="en-text">Phase Shift</span><span class="gu-text">ફેઝ Shift</span></td><td>0° (<span class="en-text">In-phase</span><span class="gu-text">In-phase</span>)</td><td>180° (<span class="en-text">Inverted</span><span class="gu-text">ઊંધો</span>)</td><td>0° (<span class="en-text">In-phase</span><span class="gu-text">In-phase</span>)</td></tr>
+          <tr><td><span class="en-text">Input Impedance</span><span class="gu-text">Input Impedance</span></td><td><span class="en-text">Very Low</span><span class="gu-text">ખૂબ ઓછો</span></td><td><span class="en-text">Medium</span><span class="gu-text">મધ્યમ</span></td><td><span class="en-text">Very High</span><span class="gu-text">ખૂબ ઊંચો</span></td></tr>
+          <tr><td><span class="en-text">Output Impedance</span><span class="gu-text">Output Impedance</span></td><td><span class="en-text">Very High</span><span class="gu-text">ખૂબ ઊંચો</span></td><td><span class="en-text">Medium</span><span class="gu-text">મધ્યમ</span></td><td><span class="en-text">Very Low</span><span class="gu-text">ખૂબ ઓછો</span></td></tr>
+          <tr><td><span class="en-text">Application</span><span class="gu-text">ઉપયોગ</span></td><td><span class="en-text">RF Amplifiers</span><span class="gu-text">RF Amplifier</span></td><td><span class="en-text">Audio Amplifiers</span><span class="gu-text">Audio Amplifier</span></td><td><span class="en-text">Impedance Matching</span><span class="gu-text">Impedance Matching</span></td></tr>
+        </table>
+      </div>
+      <div class="tip-box">
+        <div class="tip-label">💡 <span class="en-text">Memory Tricks</span><span class="gu-text">યાદ રાખવાની ટ્રિક</span></div>
+        <ul style="margin-top:0.5rem;">
+          <li><span class="en-text">Only <b>CE has 180° phase shift</b> — the "exceptional" one.</span><span class="gu-text">ફક્ત <b>CE 180° phase shift</b> — "ખાસ" ગોઠવણ.</span></li>
+          <li><span class="en-text">CB: Low In, High Out. CC: High In, Low Out. CE: Medium, Medium.</span><span class="gu-text">CB: ઓછો In, ઊંચો Out. CC: ઊંચો In, ઓછો Out. CE: મધ્યમ, મધ્યમ.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🌡️ <span class="en-text">Operating Regions & Thermal Runaway</span><span class="gu-text">ઓપરેટિંગ ક્ષેત્ર અને Thermal Runaway</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <ul>
+        <li><strong><span class="en-text">Active Region:</span><span class="gu-text">Active ક્ષેત્ર:</span></strong> <span class="en-text">EBJ forward, CBJ reverse. Used for amplification. Q-point set here.</span><span class="gu-text">EBJ forward, CBJ reverse. Amplification. Q-point અહીં.</span></li>
+        <li><strong><span class="en-text">Saturation Region:</span><span class="gu-text">Saturation ક્ષેત્ર:</span></strong> <span class="en-text">Both junctions forward biased. Acts as <b>closed switch</b>. Vce ≈ 0.</span><span class="gu-text">બન્ને junction forward. <b>બંધ switch</b> જેવું. Vce ≈ 0.</span></li>
+        <li><strong><span class="en-text">Cutoff Region:</span><span class="gu-text">Cutoff ક્ષેત્ર:</span></strong> <span class="en-text">Both junctions reverse biased. Acts as <b>open switch</b>. Vce ≈ Vcc.</span><span class="gu-text">બન્ને junction reverse. <b>ખુલ્લું switch</b>. Vce ≈ Vcc.</span></li>
+      </ul>
+      <div class="key-point"><strong><span class="en-text">Thermal Runaway:</span><span class="gu-text">Thermal Runaway:</span></strong> <span class="en-text">Increase in temperature → more leakage current → more Ic → more heat → destructive cycle. Most dangerous in CE configuration.</span><span class="gu-text">તાપ ↑ → leakage ↑ → Ic ↑ → ગરમી ↑ → નુકસાનકારક ચક્ર. CE ગોઠવણ વધુ ખતરનાક.</span></div>
+      <h3><span class="en-text">Biasing Methods (Stability)</span><span class="gu-text">Biasing પદ્ધતિ (સ્થિરતા)</span></h3>
+      <ul>
+        <li><strong><span class="en-text">Fixed Bias:</span><span class="gu-text">Fixed Bias:</span></strong> <span class="en-text">Simple but unstable. Ic changes with temperature.</span><span class="gu-text">સરળ પણ અસ્થિર. Ic તાપ સાથે બદલાય.</span></li>
+        <li><strong><span class="en-text">Collector-to-Base Bias:</span><span class="gu-text">Collector-to-Base Bias:</span></strong> <span class="en-text">Better stability through negative feedback.</span><span class="gu-text">Negative feedback વડે સારી સ્થિરતા.</span></li>
+        <li><strong><span class="en-text">Voltage Divider Bias (Self Bias):</span><span class="gu-text">Voltage Divider Bias (Self Bias):</span></strong> <span class="en-text">Most stable. Used in all practical circuits. Q-point independent of β.</span><span class="gu-text">સૌથી સ્થિર. વ્યावहारिक circuit. Q-point β સ્વતંત્ર.</span></li>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Op-Amp -->
+  <div id="topic-amp">
+  <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin:1.5rem 0 1rem;">📡 <span class="en-text">Amplifiers & Op-Amps (741 IC)</span><span class="gu-text">Amplifier અને Op-Amp (741 IC)</span></div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🎛️ <span class="en-text">Ideal Op-Amp Parameters</span><span class="gu-text">આદર્શ Op-Amp પ્રમાણ</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th><span class="en-text">Parameter</span><span class="gu-text">પ્રમાણ</span></th><th><span class="en-text">Ideal Value</span><span class="gu-text">આદર્શ મૂલ્ય</span></th><th><span class="en-text">741 IC (Typical)</span><span class="gu-text">741 IC (સામાન્ય)</span></th></tr>
+          <tr><td>Open Loop Gain (Aol)</td><td>∞</td><td>200,000</td></tr>
+          <tr><td>Input Impedance</td><td>∞</td><td>2 MΩ</td></tr>
+          <tr><td>Output Impedance</td><td>0</td><td>75 Ω</td></tr>
+          <tr><td>Bandwidth</td><td>∞</td><td>1 MHz (GBWP)</td></tr>
+          <tr><td>CMRR</td><td>∞ dB</td><td>90 dB</td></tr>
+          <tr><td>Slew Rate</td><td>∞</td><td>0.5 V/μs</td></tr>
+        </table>
+      </div>
+      <div class="key-point"><strong>CMRR:</strong> <span class="en-text">Ability to reject noise present on both input lines. High CMRR = better noise rejection. Formula: CMRR (dB) = 20 log(Ad/Ac)</span><span class="gu-text">બન્ને input line પર અવાજ નકારવાની ક્ષમતા. ઊંચો CMRR = સારો અવાજ અસ્વીકાર.</span></div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🔄 <span class="en-text">Op-Amp Circuit Configurations</span><span class="gu-text">Op-Amp સર્કિટ ગોઠવણ</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <h3><span class="en-text">Inverting Amplifier</span><span class="gu-text">Inverting Amplifier</span></h3>
+      <div class="formula-box">Av = -(Rf / Rin)  [<span class="en-text">Negative = inverted output</span><span class="gu-text">ઋણ = ઊંધો output</span>]</div>
+      <h3><span class="en-text">Non-Inverting Amplifier</span><span class="gu-text">Non-Inverting Amplifier</span></h3>
+      <div class="formula-box">Av = 1 + (Rf / Rin)  [<span class="en-text">Positive = same phase</span><span class="gu-text">ધન = સમ ફેઝ</span>]</div>
+      <h3><span class="en-text">Voltage Follower (Buffer)</span><span class="gu-text">Voltage Follower (Buffer)</span></h3>
+      <div class="formula-box">Av = 1  [<span class="en-text">Unity gain, infinite input impedance</span><span class="gu-text">Unity ગેઇન, અનંત input impedance</span>]</div>
+      <h3><span class="en-text">Summing Amplifier</span><span class="gu-text">Summing Amplifier</span></h3>
+      <div class="formula-box">Vout = -(V1 + V2 + V3)</div>
+      <h3><span class="en-text">Differentiator</span><span class="gu-text">Differentiator</span></h3>
+      <p><span class="en-text">Capacitor at input, Resistor in feedback. Output proportional to rate of change of input. Acts as High Pass Filter.</span><span class="gu-text">Input પર Capacitor, feedback માં Resistor. Output = input બદલાવ દર. High Pass Filter.</span></p>
+      <h3><span class="en-text">Integrator</span><span class="gu-text">Integrator</span></h3>
+      <p><span class="en-text">Resistor at input, Capacitor in feedback. Output is mathematical integral of input. Acts as Low Pass Filter. Square wave input → Triangular wave output.</span><span class="gu-text">Input પર Resistor, feedback માં Capacitor. Output = input નો ઇન્ટિગ્રલ. Low Pass Filter. ચોરસ તરંગ → ત્રિભુજ તરંગ.</span></p>
+      <div class="tip-box">
+        <div class="tip-label">💡 <span class="en-text">Key Fact</span><span class="gu-text">મહત્ત્વની વાત</span></div>
+        <span class="en-text">Gain-Bandwidth Product (GBWP) = Gain × Bandwidth = constant. At higher gain → lower bandwidth. GBWP for 741 = 1 MHz.</span>
+        <span class="gu-text">GBWP = Gain × Bandwidth = constant. ઊંચો gain → ઓછો bandwidth. 741 GBWP = 1 MHz.</span>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FET -->
+  <div id="topic-fet">
+  <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin:1.5rem 0 1rem;">⚡ <span class="en-text">1.3.4 Field Effect Transistors (FET)</span><span class="gu-text">1.3.4 ફીલ્ડ ઇફેક્ટ ટ્રાન્ઝિસ્ટર (FET)</span></div>
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🔬 <span class="en-text">JFET vs MOSFET Overview</span><span class="gu-text">JFET vs MOSFET ઝાંખી</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="key-point"><strong>FET:</strong> <span class="en-text">Voltage-controlled device (unlike BJT which is current-controlled). Controlling terminal = Gate (G). Source (S) and Drain (D) are the other terminals.</span><span class="gu-text">Voltage-નિયંત્રિત ઉપકરણ (BJT = ધારા-નિયંત્રિત). નિયંત્રણ ટર્મિનલ = Gate (G). Source (S) અને Drain (D).</span></div>
+      <ul>
+        <li><strong>JFET:</strong> <span class="en-text">Gate is a reverse-biased P-N junction. Channel is always present. Depletion-mode only.</span><span class="gu-text">Gate = reverse-biased P-N junction. Channel હંમેશા હોય. ફક્ત Depletion-mode.</span></li>
+        <li><strong>D-MOSFET:</strong> <span class="en-text">Gate insulated by SiO₂ layer. Can work in depletion or enhancement mode.</span><span class="gu-text">Gate SiO₂ layer વડે insulated. Depletion અથવા Enhancement mode.</span></li>
+        <li><strong>E-MOSFET:</strong> <span class="en-text">Enhancement-only mode. No channel without gate voltage. Used in digital ICs (CMOS).</span><span class="gu-text">ફક્ત Enhancement mode. Gate voltage વગર channel નહીં. Digital IC (CMOS).</span></li>
+      </ul>
+      <div class="formula-box">Id = Idss × (1 - Vgs/Vp)²  [JFET / D-MOSFET Current Equation]</div>
+      <h3><span class="en-text">Key FET Parameters</span><span class="gu-text">FET ના મહત્ત્વના પ્રમાણ</span></h3>
+      <ul>
+        <li><strong>gm (<span class="en-text">Transconductance</span><span class="gu-text">Transconductance</span>):</strong> <span class="en-text">Ratio of change in drain current to change in gate voltage. Unit: Siemens (S).</span><span class="gu-text">drain current ફેરફાર / gate voltage ફેરફાર. એકમ: Siemens.</span></li>
+        <li><strong>rd:</strong> <span class="en-text">AC Drain Resistance. Change in Vds / Change in Id at constant Vgs.</span><span class="gu-text">AC Drain Resistance. ΔVds/ΔId (Vgs constant).</span></li>
+        <li><strong>μ (<span class="en-text">Amplification Factor</span><span class="gu-text">Amplification Factor</span>):</strong> μ = gm × rd</li>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Oscillators -->
+  <div id="topic-osc">
+  <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin:1.5rem 0 1rem;">🌀 <span class="en-text">Oscillators & Power Amplifiers</span><span class="gu-text">Oscillator અને Power Amplifier</span></div>
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🔁 <span class="en-text">Oscillators — Types & Conditions</span><span class="gu-text">Oscillator — પ્રકાર અને શરતો</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="key-point"><strong><span class="en-text">Barkhausen Criterion:</span><span class="gu-text">Barkhausen માપદંડ:</span></strong> <span class="en-text">For sustained oscillations: (1) Loop gain |Aβ| = 1, (2) Total phase shift = 0° or 360°.</span><span class="gu-text">ટકાઉ oscillation: (1) Loop gain |Aβ| = 1, (2) કુલ phase shift = 0° અથવા 360°.</span></div>
+      <h3><span class="en-text">Types of Oscillators</span><span class="gu-text">Oscillator ના પ્રકાર</span></h3>
+      <ul>
+        <li><strong><span class="en-text">RC Oscillators (Audio Frequency):</span><span class="gu-text">RC Oscillator (Audio ફ્રિક્વન્સી):</span></strong> <span class="en-text">Wien Bridge, Phase Shift oscillators. For 20Hz–20kHz range.</span><span class="gu-text">Wien Bridge, Phase Shift. 20Hz–20kHz.</span></li>
+        <li><strong><span class="en-text">LC Oscillators (RF):</span><span class="gu-text">LC Oscillator (RF):</span></strong> <span class="en-text">Hartley, Colpitts oscillators. For radio frequency signals.</span><span class="gu-text">Hartley, Colpitts. Radio frequency.</span></li>
+        <li><strong><span class="en-text">Crystal Oscillators:</span><span class="gu-text">Crystal Oscillator:</span></strong> <span class="en-text">Most stable frequency. Uses piezoelectric crystal. For precise frequency references.</span><span class="gu-text">સૌથી સ્થિર. Piezoelectric crystal. ચોક્સ frequency.</span></li>
+      </ul>
+      <div class="tip-box">
+        <div class="tip-label">💡 <span class="en-text">Key Fact</span><span class="gu-text">મહત્ત્વની વાત</span></div>
+        <span class="en-text">The <b>feedback network</b> (RC or LC) determines frequency stability, NOT the op-amp gain or supply voltage.</span>
+        <span class="gu-text"><b>Feedback network</b> (RC/LC) frequency stability નક્કી કરે — op-amp gain કે supply voltage નહીં.</span>
+      </div>
+    </div>
+  </div>
+  <div class="study-section">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      🔊 <span class="en-text">Power Amplifier Classes</span><span class="gu-text">Power Amplifier ના Class</span> <span class="acc-icon">▼</span>
+    </div>
+    <div class="acc-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Class</th><th><span class="en-text">Conduction Angle</span><span class="gu-text">Conduction Angle</span></th><th><span class="en-text">Efficiency</span><span class="gu-text">કાર્યક્ષમતા</span></th><th><span class="en-text">Use</span><span class="gu-text">ઉપયોગ</span></th></tr>
+          <tr><td>Class A</td><td>360°</td><td>Max 25–30%</td><td><span class="en-text">Audio — low distortion</span><span class="gu-text">Audio — ઓછો distortion</span></td></tr>
+          <tr><td>Class B</td><td>180°</td><td>Max 78.5%</td><td><span class="en-text">Push-pull audio amplifiers</span><span class="gu-text">Push-pull audio</span></td></tr>
+          <tr><td>Class AB</td><td>180°–360°</td><td><span class="en-text">Between A&B</span><span class="gu-text">A અને B વચ્ચે</span></td><td><span class="en-text">Practical audio</span><span class="gu-text">વ્यावहारिक audio</span></td></tr>
+          <tr><td>Class C</td><td>&lt;180°</td><td>&gt;80%</td><td><span class="en-text">RF transmitters</span><span class="gu-text">RF ટ્રાન્સ્મિટર</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- MCQ QUIZ -->
+<div id="mcq" class="section">
+  <div class="quiz-header">
+    <div class="quiz-title">🎯 <span class="en-text">MCQ Quiz Bank</span><span class="gu-text">MCQ ક્વિઝ બેંક</span></div>
+    <div class="quiz-controls">
+      <button class="btn btn-outline" onclick="resetQuiz()">↺ <span class="en-text">Reset All</span><span class="gu-text">ફરીથી શરૂ</span></button>
+      <button class="btn btn-primary" onclick="shuffleQuestions()">🔀 <span class="en-text">Shuffle</span><span class="gu-text">ફેરફાર</span></button>
+    </div>
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterTopic('all',this)"><span class="en-text">All Topics</span><span class="gu-text">બધા વિષય</span></button>
+    <button class="filter-btn" onclick="filterTopic('semi',this)"><span class="en-text">Semiconductors</span><span class="gu-text">Semiconductor</span></button>
+    <button class="filter-btn" onclick="filterTopic('bjt',this)">BJT</button>
+    <button class="filter-btn" onclick="filterTopic('opamp',this)">Op-Amp</button>
+    <button class="filter-btn" onclick="filterTopic('diode',this)"><span class="en-text">Diodes</span><span class="gu-text">ડાયોડ</span></button>
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterLevel('all',this)" data-type="level"><span class="en-text">All Levels</span><span class="gu-text">બધા સ્તર</span></button>
+    <button class="filter-btn" onclick="filterLevel(1,this)" data-type="level">🟢 <span class="en-text">Level 1 – Basic</span><span class="gu-text">સ્તર 1 – મૂળભૂત</span></button>
+    <button class="filter-btn" onclick="filterLevel(2,this)" data-type="level">🔵 <span class="en-text">Level 2 – Application</span><span class="gu-text">સ્તર 2 – ઉપયોગ</span></button>
+    <button class="filter-btn" onclick="filterLevel(3,this)" data-type="level">🟡 <span class="en-text">Level 3 – Advanced</span><span class="gu-text">સ્તર 3 – ઉચ્ચ</span></button>
+    <button class="filter-btn" onclick="filterLevel(4,this)" data-type="level">🔴 <span class="en-text">Level 4 – Calculation</span><span class="gu-text">સ્તર 4 – ગણતરી</span></button>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+  <div id="quiz-container"></div>
+  <div class="quiz-score" id="quiz-score">
+    <div class="score-num" id="score-num">0/0</div>
+    <div class="score-msg" id="score-msg"><span class="en-text">Complete all questions to see your score!</span><span class="gu-text">સ્કોર જોવા બધા પ્રશ્ન પૂર્ણ કરો!</span></div>
+  </div>
+</div>
+
+<!-- FLASHCARDS -->
+<div id="flashcards" class="section">
+  <div class="section-title">🃏 <span class="en-text">Flashcards</span><span class="gu-text">ફ્લેશકાર્ડ</span></div>
+  <div class="section-desc"><span class="en-text">Click the card to reveal the answer. Use buttons to track your progress.</span><span class="gu-text">જવાબ જોવા card પર ક્લિક કરો. Progress track કરવા buttons વાપરો.</span></div>
+  <div class="flashcard-area">
+    <div class="fc-counter" id="fc-counter">Card 1 of 40</div>
+    <div class="progress-bar"><div class="progress-fill" id="fc-progress" style="width:2.5%"></div></div>
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-q" id="fc-q">Loading...</div>
+      <div class="fc-a" id="fc-a"><strong><span class="en-text">Answer</span><span class="gu-text">જવાબ</span></strong><span id="fc-ans"></span></div>
+      <div class="fc-hint">👆 <span class="en-text">Click to flip</span><span class="gu-text">ફ્લિપ કરવા ક્લિક</span></div>
+    </div>
+    <div class="fc-btns" id="fc-btns" style="display:none;">
+      <button class="fc-result fc-again" onclick="fcAgain()">✗ <span class="en-text">Study Again</span><span class="gu-text">ફરી ભણો</span></button>
+      <button class="fc-result fc-know" onclick="fcKnow()">✓ <span class="en-text">I Know This</span><span class="gu-text">મને ખ્યાલ છે</span></button>
+    </div>
+    <div class="flashcard-nav">
+      <button class="btn btn-outline" onclick="fcPrev()">← <span class="en-text">Previous</span><span class="gu-text">પાછળ</span></button>
+      <button class="btn btn-outline" onclick="fcNext()"><span class="en-text">Next</span><span class="gu-text">આગળ</span> →</button>
+      <button class="btn btn-primary" onclick="shuffleCards()">🔀 <span class="en-text">Shuffle</span><span class="gu-text">ફેરફાર</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- FORMULAS -->
+<div id="formulas" class="section">
+  <div class="section-title">🔢 <span class="en-text">Formula Sheet</span><span class="gu-text">સૂત્ર પત્રક</span></div>
+  <div class="section-desc"><span class="en-text">All key formulas from the chapter for quick revision</span><span class="gu-text">ઝડપી revisionm માટે પ્રકરણના બધા મુખ્ય સૂત્ર</span></div>
+  <div class="topics-grid">
+    <div class="topic-card" style="cursor:default;">
+      <div class="topic-header"><div class="topic-icon">⚡</div><div><div class="topic-title">Conductors & Resistivity</div></div></div>
+      <div class="topic-body">
+        <div class="formula-box">R = ρ × l / a</div>
+        <div class="formula-box">σ = 1/ρ  (Conductivity)</div>
+        <div class="formula-box">J = I/A  (Current Density, A/m²)</div>
+        <div class="formula-box">v_d = μ × E  (Drift Velocity)</div>
+      </div>
+    </div>
+    <div class="topic-card" style="cursor:default;">
+      <div class="topic-header"><div class="topic-icon">🔧</div><div><div class="topic-title">BJT Transistor</div></div></div>
+      <div class="topic-body">
+        <div class="formula-box">Ie = Ic + Ib</div>
+        <div class="formula-box">β = Ic/Ib  (Common Emitter gain)</div>
+        <div class="formula-box">α = Ic/Ie  (Common Base gain, &lt;1)</div>
+        <div class="formula-box">β = α/(1-α)  and  α = β/(β+1)</div>
+        <div class="formula-box">Iceo = (1+β) × Icbo</div>
+        <div class="formula-box">GBW = Gain × Bandwidth</div>
+      </div>
+    </div>
+    <div class="topic-card" style="cursor:default;">
+      <div class="topic-header"><div class="topic-icon">📡</div><div><div class="topic-title">Op-Amp Circuits</div></div></div>
+      <div class="topic-body">
+        <div class="formula-box">Av = -Rf/Rin  (Inverting)</div>
+        <div class="formula-box">Av = 1 + Rf/Rin  (Non-Inverting)</div>
+        <div class="formula-box">CMRR(dB) = 20 log(Ad/Ac)</div>
+        <div class="formula-box">f_max = SR / (2π × Vpeak)</div>
+        <div class="formula-box">BW = GBWP / Gain</div>
+        <div class="formula-box">Vout_sum = -(V1+V2+V3)</div>
+      </div>
+    </div>
+    <div class="topic-card" style="cursor:default;">
+      <div class="topic-header"><div class="topic-icon">💡</div><div><div class="topic-title">Diodes & Rectifiers</div></div></div>
+      <div class="topic-body">
+        <div class="formula-box">HW Rectifier Vavg = 0.318 × Vm</div>
+        <div class="formula-box">FW Rectifier Vavg = 0.637 × Vm</div>
+        <div class="formula-box">Vrms (HW) = Vm/2</div>
+        <div class="formula-box">Vrms (FW) = Vm/√2</div>
+        <div class="formula-box">V_silicon = 0.7V, V_Ge = 0.3V</div>
+      </div>
+    </div>
+    <div class="topic-card" style="cursor:default;">
+      <div class="topic-header"><div class="topic-icon">⚡</div><div><div class="topic-title">FET Parameters</div></div></div>
+      <div class="topic-body">
+        <div class="formula-box">Id = Idss(1 - Vgs/Vp)²</div>
+        <div class="formula-box">gm = ΔId/ΔVgs  (Transconductance)</div>
+        <div class="formula-box">rd = ΔVds/ΔId  (Drain Resistance)</div>
+        <div class="formula-box">μ = gm × rd  (Amplification Factor)</div>
+      </div>
+    </div>
+    <div class="topic-card" style="cursor:default;">
+      <div class="topic-header"><div class="topic-icon">🌀</div><div><div class="topic-title">Biasing & Power</div></div></div>
+      <div class="topic-body">
+        <div class="formula-box">Ib = (Vcc - Vbe) / Rb  (Fixed Bias)</div>
+        <div class="formula-box">P = Vce × Ic  (Power Dissipation)</div>
+        <div class="formula-box">Ic_max = P_rated / Vce</div>
+        <div class="formula-box">η_ClassA ≤ 25%</div>
+        <div class="formula-box">η_ClassB ≤ 78.5%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const questions = [
+  // SEMICONDUCTORS Level 1
+  {topic:'semi',level:1,q:"Which element has the highest electrical conductivity?",opts:["Copper","Gold","Silver","Aluminium"],ans:2,exp:"Silver has the lowest resistivity and most free electrons, though copper is more common due to cost."},
+  {topic:'semi',level:1,q:"In conductors, the energy gap between Valence Band and Conduction Band is:",opts:["Very large","Small","Zero (Overlap)","Infinite"],ans:2,exp:"This overlapping allows electrons to move freely even at room temperature."},
+  {topic:'semi',level:1,q:"What happens to resistance of a pure metallic conductor as temperature increases?",opts:["It decreases","It increases","Remains constant","First increases then decreases"],ans:1,exp:"Pure metals have a positive temperature coefficient of resistance."},
+  {topic:'semi',level:1,q:"ACSR stands for — what does 'S' represent?",opts:["Silver","Standard","Steel","Silicon"],ans:2,exp:"ACSR = Aluminium Conductor Steel Reinforced. Steel core provides mechanical strength."},
+  {topic:'semi',level:1,q:"Which material is used for precision resistors because resistance is nearly independent of temperature?",opts:["Nichrome","Manganin","Tungsten","Carbon"],ans:1,exp:"Manganin has nearly zero temperature coefficient, ideal for measurement instruments."},
+  {topic:'semi',level:1,q:"Which material is most suitable for the filament of an incandescent bulb?",opts:["Platinum","Copper","Tungsten","Aluminium"],ans:2,exp:"Tungsten has very high melting point (3410°C) to prevent overheating."},
+  {topic:'semi',level:1,q:"Superconductors exhibit:",opts:["High resistance at low temperatures","Zero resistance below critical temperature","High conductivity at room temperature","Negative temperature coefficient"],ans:1,exp:"Zero resistance below the critical temperature is the defining property of superconductivity."},
+  {topic:'semi',level:1,q:"Which material is used as heating element in electric irons?",opts:["Tungsten","Nichrome","Manganin","Lead"],ans:1,exp:"Nichrome is a high-resistivity alloy that withstands high temperatures without oxidation."},
+  {topic:'semi',level:2,q:"Current density (J) is defined as:",opts:["V/I","I×A","I/A","V/A"],ans:2,exp:"Current density = current per unit cross-sectional area, measured in A/m²."},
+  {topic:'semi',level:2,q:"The drift velocity of electrons in a conductor is directly proportional to:",opts:["Applied Electric Field","Cross-sectional area","Square of current","Material length"],ans:0,exp:"Formula: v_d = μ × E, where μ is mobility."},
+  {topic:'semi',level:1,q:"N-type semiconductor is doped with:",opts:["Trivalent material (Boron)","Pentavalent material (Arsenic)","Tetravalent material","Any impurity"],ans:1,exp:"Pentavalent dopants (Arsenic, Antimony) add extra electrons, making N-type semiconductors."},
+  {topic:'semi',level:1,q:"In P-type semiconductor, the majority carriers are:",opts:["Electrons","Holes","Protons","Neutrons"],ans:1,exp:"P-type is doped with trivalent material (Boron/Indium). Holes are the majority carriers."},
+  // DIODES Level 1-2
+  {topic:'diode',level:1,q:"In a full-wave rectifier, average DC output voltage is approximately:",opts:["0.318×Vm","0.637×Vm","Vm","2×Vm"],ans:1,exp:"Full-wave rectifier Vavg = (2/π)×Vm ≈ 0.637×Vm."},
+  {topic:'diode',level:1,q:"Which diode is used in voltage-controlled oscillators (VCOs)?",opts:["Zener diode","Varactor diode","Schottky diode","Tunnel diode"],ans:1,exp:"Varactor diode's junction capacitance varies with reverse voltage, used for frequency tuning."},
+  {topic:'diode',level:1,q:"Photodiode operates in which mode for detecting light?",opts:["Forward bias","Reverse bias","Zero bias","Breakdown mode"],ans:1,exp:"Photodiode is reverse biased — incident light generates minority carriers, creating current."},
+  {topic:'diode',level:1,q:"Which diode is commonly used in RF switching and attenuation?",opts:["PIN diode","LED","Tunnel diode","Zener diode"],ans:0,exp:"PIN diode acts as a variable resistor at high frequencies, ideal for RF switching."},
+  {topic:'diode',level:1,q:"Which diode is used in optical communication as a light source?",opts:["Zener diode","LED","Schottky diode","Tunnel diode"],ans:1,exp:"LED (Light Emitting Diode) emits photons when forward biased — used in optical communication."},
+  {topic:'diode',level:2,q:"In a half-wave rectifier, the average DC output voltage is:",opts:["0.637×Vm","Vm","0.318×Vm","Vm/√2"],ans:2,exp:"Half-wave Vavg = Vm/π ≈ 0.318×Vm (only one half cycle is used)."},
+  {topic:'diode',level:1,q:"Zener diode is primarily used for:",opts:["Amplification","Rectification","Voltage regulation","Frequency tuning"],ans:2,exp:"Zener diode operates in controlled reverse breakdown to regulate/clamp voltage."},
+  {topic:'diode',level:2,q:"The PIN diode is widely used in RF circuits because of its ability to:",opts:["Emit light","Act as a variable resistor at high frequencies","Exhibit negative resistance","Have high capacitance"],ans:1,exp:"The intrinsic (I) layer in PIN diode allows it to behave as a variable resistor controlled by DC bias."},
+  // BJT Level 1-4
+  {topic:'bjt',level:1,q:"A Bipolar Junction Transistor (BJT) has how many PN junctions?",opts:["One","Two","Three","Four"],ans:1,exp:"A BJT acts as two back-to-back PN junctions (Emitter-Base and Collector-Base)."},
+  {topic:'bjt',level:1,q:"Which terminal of a BJT is the most heavily doped?",opts:["Base","Collector","Emitter","All equally doped"],ans:2,exp:"The Emitter is heavily doped to inject a large number of charge carriers into the base."},
+  {topic:'bjt',level:1,q:"In a standard NPN transistor, the arrow on the emitter points:",opts:["Inwards","Outwards","Towards the Base","Towards the Collector"],ans:1,exp:"In NPN, current flows out of the Emitter, so arrow points outwards ('Not Pointing In')."},
+  {topic:'bjt',level:1,q:"Typical Base-Emitter voltage (Vbe) for a Silicon transistor in active region:",opts:["0.3 V","0.7 V","1.2 V","5.0 V"],ans:1,exp:"Standard 'cut-in' voltage for Silicon PN junction ≈ 0.7V. For Germanium = 0.3V."},
+  {topic:'bjt',level:1,q:"Which transistor configuration is known as 'Emitter Follower'?",opts:["Common Base","Common Emitter","Common Collector","Common Source"],ans:2,exp:"In CC configuration, output at emitter follows input at base (unity gain), hence 'Emitter Follower'."},
+  {topic:'bjt',level:1,q:"β (Beta) of a transistor is:",opts:["Ic/Ie","Ic/Ib","Ib/Ic","Ie/Ib"],ans:1,exp:"Beta = Ic/Ib = Common Emitter current gain. It is dimensionless (ratio of two currents)."},
+  {topic:'bjt',level:1,q:"Which current equation is true for any BJT?",opts:["Ic=Ie+Ib","Ib=Ic+Ie","Ie=Ic+Ib","Ie=Ic-Ib"],ans:2,exp:"By Kirchhoff's Current Law: Ie = Ic + Ib (total emitter current = collector + base currents)."},
+  {topic:'bjt',level:2,q:"What happens to input signal phase in a Common Emitter (CE) amplifier?",opts:["0° shift","90° shift","180° (Phase Reversal)","270° shift"],ans:2,exp:"CE amplifier produces output 180° out of phase (inverted) relative to input."},
+  {topic:'bjt',level:2,q:"A transistor acts as a 'Closed Switch' when it is in which region?",opts:["Active Region","Cutoff Region","Saturation Region","Breakdown Region"],ans:2,exp:"In Saturation, both junctions are forward biased, Vce ≈ 0, max current flows — like a closed switch."},
+  {topic:'bjt',level:2,q:"CE configuration is most widely used because it provides:",opts:["Highest voltage gain","Highest current gain","Both high current AND voltage gain (highest power gain)","Zero input impedance"],ans:2,exp:"CE is the only configuration that provides both significant voltage and current gain → highest power gain."},
+  {topic:'bjt',level:2,q:"In Cutoff region, Vce equals approximately:",opts:["0V","0.7V","Vcc (supply voltage)","Vbe"],ans:2,exp:"In cutoff, transistor acts as open switch. No current through load, so Vce = Vcc."},
+  {topic:'bjt',level:2,q:"The 'Early Effect' in a BJT refers to modulation of:",opts:["Emitter Width","Base Width","Collector Width","Doping Concentration"],ans:1,exp:"Increasing Vcb widens depletion region → narrows physical width of Base. This is Base Width Modulation."},
+  {topic:'bjt',level:3,q:"Thermal Runaway is most likely to occur in which configuration if not stabilized?",opts:["Common Base","Common Emitter","Common Collector","Never occurs"],ans:1,exp:"In CE, leakage current Iceo = (1+β)×Icbo — temperature rise causes runaway positive feedback loop."},
+  {topic:'bjt',level:3,q:"Iceo > Icbo because:",opts:["Iceo includes extra multiplication","Iceo is smaller","They are equal","Iceo depends only on material"],ans:0,exp:"Iceo = (1+β)×Icbo. Collector-Emitter leakage includes amplification, so it's much larger."},
+  {topic:'bjt',level:4,q:"If β=100 and Ib=20μA, what is Ic?",opts:["2mA","20mA","0.2mA","200mA"],ans:0,exp:"Ic = β × Ib = 100 × 20μA = 2000μA = 2mA."},
+  {topic:'bjt',level:4,q:"If α=0.95, what is β?",opts:["9.5","19","49","99"],ans:1,exp:"β = α/(1-α) = 0.95/0.05 = 19."},
+  {topic:'bjt',level:4,q:"Transistor has Icbo=100nA and β=99. Calculate Iceo.",opts:["100nA","1μA","10μA","100μA"],ans:2,exp:"Iceo = (1+β)×Icbo = (1+99)×100nA = 100×100nA = 10,000nA = 10μA."},
+  {topic:'bjt',level:4,q:"Calculate Ie if Ic=4.9mA and Ib=0.1mA.",opts:["4.8mA","5.0mA","5.1mA","49mA"],ans:1,exp:"Ie = Ic + Ib = 4.9mA + 0.1mA = 5.0mA."},
+  {topic:'bjt',level:4,q:"Power dissipation = 500mW, Vce=10V. Maximum safe Ic?",opts:["5mA","50mA","500mA","1A"],ans:1,exp:"Ic = P/Vce = 0.5W / 10V = 0.05A = 50mA."},
+  // OP-AMP
+  {topic:'opamp',level:1,q:"The ideal input impedance of an Op-Amp is:",opts:["Zero","1kΩ","Infinite","75Ω"],ans:2,exp:"Ideal Op-Amp has infinite input impedance — no current flows into the input terminals."},
+  {topic:'opamp',level:1,q:"CMRR stands for:",opts:["Common Mode Rejection Rate","Common Mode Rejection Ratio","Current Mode Rejection Ratio","Common Mode Response Rate"],ans:1,exp:"CMRR = Common Mode Rejection Ratio = Ad/Ac. High CMRR = better noise rejection."},
+  {topic:'opamp',level:2,q:"An Inverting Amplifier has Rf=10kΩ and Rin=1kΩ. What is Av?",opts:["10","-10","11","-11"],ans:1,exp:"Av = -(Rf/Rin) = -(10k/1k) = -10. Negative sign indicates phase inversion."},
+  {topic:'opamp',level:2,q:"A Non-Inverting Amplifier has Rf=4kΩ and Rin=1kΩ. Vin=1V. What is Vout?",opts:["4V","5V","-4V","8V"],ans:1,exp:"Av = 1 + Rf/Rin = 1 + 4 = 5. Vout = 5 × 1V = 5V."},
+  {topic:'opamp',level:2,q:"In an Op-Amp Integrator circuit, the capacitor is placed in:",opts:["Series with input resistor","The feedback path (Output to Input)","Parallel with the input","Power supply line"],ans:1,exp:"Integrator has Resistor at input and Capacitor in the feedback loop."},
+  {topic:'opamp',level:2,q:"If a sine wave is fed into a Zero Crossing Detector (Comparator), output will be:",opts:["Sine Wave","Triangle Wave","Square Wave","Sawtooth"],ans:2,exp:"Comparator switches to +Vsat when input > 0 and -Vsat when input < 0, creating square wave."},
+  {topic:'opamp',level:2,q:"An Op-Amp Differentiator is effectively a:",opts:["Low Pass Filter","High Pass Filter","Band Pass Filter","Band Stop Filter"],ans:1,exp:"Differentiator gain increases with frequency, blocking DC/low frequencies and passing high frequencies."},
+  {topic:'opamp',level:3,q:"GBWP of an Op-Amp is 1MHz. What is bandwidth at gain of 100?",opts:["1MHz","100kHz","10kHz","1kHz"],ans:2,exp:"BW = GBWP/Gain = 1,000,000/100 = 10,000Hz = 10kHz."},
+  {topic:'opamp',level:3,q:"CMRR = 80dB means (in dB): Ad=10000, what is Ac?",opts:["100","1","0.1","10"],ans:2,exp:"80dB = 20log(Ad/Ac). Ad/Ac = 10^4. Ac = 10000/10000 = 1? Wait: 20log(10000/Ac)=80 → Ac=1. Verify: 20×4=80✓"},
+  {topic:'opamp',level:3,q:"Negative feedback in Op-Amp results in:",opts:["Increased Gain, Reduced Bandwidth","Reduced Gain and Increased Bandwidth","Infinite Gain","Unstable Oscillation"],ans:1,exp:"Negative feedback trades gain for stability and bandwidth — reduces gain but extends frequency range."},
+  {topic:'opamp',level:3,q:"If square wave is applied to an ideal Integrator, output will be:",opts:["Sine Wave","Square Wave","Triangular Wave","Sawtooth"],ans:2,exp:"Integrating constant positive voltage gives linear ramp up, constant negative gives ramp down → triangle wave."},
+  {topic:'opamp',level:3,q:"Hysteresis is added to a Comparator (Schmitt Trigger) to:",opts:["Increase Gain","Reduce Bandwidth","Prevent false triggering due to noise","Increase Slew Rate"],ans:2,exp:"Hysteresis creates a 'dead band' so small noise fluctuations don't cause rapid output switching."},
+  {topic:'opamp',level:4,q:"CMRR in dB if Differential Gain=10000 and Common Mode Gain=0.1:",opts:["80dB","100dB","60dB","40dB"],ans:1,exp:"Ratio = Ad/Ac = 10000/0.1 = 100000. CMRR(dB) = 20×log(100000) = 20×5 = 100dB."},
+  {topic:'opamp',level:4,q:"Op-Amp Slew Rate is 1V/μs. Maximum output frequency for 10V peak without distortion?",opts:["10kHz","15.9kHz","50kHz","100kHz"],ans:1,exp:"fmax = SR/(2π×Vpeak) = 1,000,000/(2×3.14×10) ≈ 15,915Hz ≈ 15.9kHz."},
+];
+
+// Flashcards
+const flashcards = [
+  {q:"What is Conductivity (σ)?",a:"Ease with which electric current flows. Unit: Siemens/metre (S/m). Reciprocal of resistivity."},
+  {q:"What is Resistivity (ρ)?",a:"Property of material to oppose current flow. R = ρl/a where l=length, a=cross-section."},
+  {q:"Why is Silver not used for general wiring despite being the best conductor?",a:"Silver has the highest conductivity but is very expensive, limiting its use to special contacts."},
+  {q:"What is ACSR? Where is it used?",a:"Aluminium Conductor Steel Reinforced. Steel core for strength + Aluminium for conductivity. Used in overhead transmission lines."},
+  {q:"What is Manganin used for and why?",a:"Standard precision resistors. Because it has nearly zero temperature coefficient — resistance stays constant with temperature change."},
+  {q:"What is Band Theory of Solids?",a:"Explains conductivity based on overlap (or gap) between Valence Band and Conduction Band. Conductors overlap; Semiconductors have small gap; Insulators have large gap."},
+  {q:"What is N-type semiconductor?",a:"Semiconductor doped with Pentavalent material (Arsenic, Antimony). Electrons are majority carriers."},
+  {q:"What is P-type semiconductor?",a:"Semiconductor doped with Trivalent material (Boron, Indium). Holes are majority carriers."},
+  {q:"What is the cut-in voltage for Silicon and Germanium diodes?",a:"Silicon: 0.7V. Germanium: 0.3V. These are forward voltage drops before diode conducts."},
+  {q:"What are the three terminals of a BJT transistor?",a:"Emitter (E), Base (B), Collector (C). BJT has 2 PN junctions (EBJ and CBJ)."},
+  {q:"Which terminal of BJT is most heavily doped?",a:"Emitter — heavily doped to inject maximum charge carriers into the base."},
+  {q:"What is the formula: Ie = ?",a:"Ie = Ic + Ib (Emitter current = Collector current + Base current — Kirchhoff's law)"},
+  {q:"What is Common Emitter current gain (β)?",a:"β = Ic/Ib. Ranges from 20 to 500. Most widely used for amplification."},
+  {q:"What is Common Base current gain (α)?",a:"α = Ic/Ie. Always less than 1 (0.95 to 0.99). Relationship: β = α/(1-α)"},
+  {q:"What is the phase shift in Common Emitter configuration?",a:"180° — output is inverted (phase reversed) relative to input. CB and CC have 0° shift."},
+  {q:"What is the operating region for transistor amplification?",a:"Active Region: EBJ forward biased, CBJ reverse biased. Q-point set here."},
+  {q:"What happens in Saturation Region?",a:"Both EBJ and CBJ are forward biased. Transistor acts as CLOSED SWITCH. Vce ≈ 0."},
+  {q:"What happens in Cutoff Region?",a:"Both junctions reverse biased. Transistor acts as OPEN SWITCH. Vce ≈ Vcc."},
+  {q:"What is Thermal Runaway?",a:"Self-destruction: Temperature rises → more leakage → more Ic → more heat → cycle repeats. Most dangerous in CE configuration."},
+  {q:"What is the Early Effect?",a:"Base Width Modulation — increasing Vcb widens depletion region, effectively narrowing the physical base width."},
+  {q:"Which BJT configuration has highest input impedance?",a:"Common Collector (CC) — very high input impedance. Used as impedance matching buffer."},
+  {q:"Which BJT configuration is used for RF amplifiers?",a:"Common Base (CB) — high frequency response, 0° phase shift, low input impedance."},
+  {q:"What is Voltage Divider Bias? Why is it preferred?",a:"Most stable biasing method. Q-point is independent of β — unaffected by transistor variation or temperature."},
+  {q:"What is the Ideal Op-Amp input impedance?",a:"Infinite — no current flows into the input terminals of an ideal op-amp."},
+  {q:"Formula for Inverting Amplifier gain?",a:"Av = -(Rf/Rin). Negative sign indicates 180° phase inversion."},
+  {q:"Formula for Non-Inverting Amplifier gain?",a:"Av = 1 + (Rf/Rin). Output is in-phase with input."},
+  {q:"What is CMRR and why is it important?",a:"Common Mode Rejection Ratio = Ad/Ac. High CMRR means Op-Amp rejects noise on both input lines — critical for radio receivers."},
+  {q:"What is Slew Rate of an Op-Amp?",a:"Maximum rate of change of output voltage. 741 IC = 0.5V/μs. Limits high-frequency performance."},
+  {q:"What does GBWP mean?",a:"Gain-Bandwidth Product = Gain × Bandwidth = constant. For 741 = 1MHz. Higher gain → lower bandwidth."},
+  {q:"What is an Op-Amp Integrator?",a:"Resistor at input + Capacitor in feedback. Performs mathematical integration. Square wave input → Triangular wave output."},
+  {q:"What is an Op-Amp Differentiator?",a:"Capacitor at input + Resistor in feedback. Performs differentiation. Acts as High Pass Filter."},
+  {q:"What is Schmitt Trigger (Hysteresis comparator)?",a:"Comparator with positive feedback creating hysteresis — prevents false triggering from noise. Creates a 'dead band'."},
+  {q:"What is the FET controlling terminal?",a:"Gate (G). FET is voltage-controlled unlike BJT (current-controlled). Source and Drain are the other terminals."},
+  {q:"JFET current equation?",a:"Id = Idss × (1 - Vgs/Vp)². Idss = max drain current (Vgs=0). Vp = pinch-off voltage."},
+  {q:"What is Transconductance (gm)?",a:"gm = ΔId/ΔVgs. Ratio of change in drain current to change in gate voltage. Unit: Siemens (S)."},
+  {q:"What is the Barkhausen Criterion for oscillation?",a:"(1) Loop gain |Aβ| = 1, (2) Total phase shift = 0° or 360°. Both conditions must be met for sustained oscillation."},
+  {q:"Class A vs Class B amplifier efficiency?",a:"Class A: max 25-30% (full 360° conduction). Class B: max 78.5% (180° conduction). Class C: >80% (<180° conduction)."},
+  {q:"What is a Varactor (Varicap) diode used for?",a:"Frequency tuning in oscillators and VCOs. Its junction capacitance varies with reverse bias voltage."},
+  {q:"What is a Precision Rectifier (Super Diode)?",a:"Op-Amp with diode in feedback loop — eliminates 0.7V diode drop, allowing rectification of millivolt-level signals."},
+  {q:"What is Latch-up in Op-Amps?",a:"Failure mode where internal parasitic transistors turn on, creating a short-circuit path that can destroy the IC."},
+];
+
+let currentTopic = 'all', currentLevel = 'all';
+let answered = 0, correct = 0;
+let fcIndex = 0, fcFlipped = false, fcKnown = new Set();
+
+// ===================== NAVIGATION =====================
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes(id)) t.classList.add('active');
+  });
+  if (id === 'mcq') renderQuiz();
+  if (id === 'flashcards') renderFlashcard();
+}
+
+function openTopic(id) {
+  const el = document.getElementById('topic-' + id);
+  if (el) el.scrollIntoView({behavior:'smooth'});
+}
+
+// ===================== ACCORDION =====================
+function toggleAcc(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ===================== QUIZ =====================
+function getFilteredQuestions() {
+  return questions.filter(q => {
+    const topicMatch = currentTopic === 'all' || q.topic === currentTopic;
+    const levelMatch = currentLevel === 'all' || q.level === currentLevel;
+    return topicMatch && levelMatch;
+  });
+}
+
+function renderQuiz() {
+  const qs = getFilteredQuestions();
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  answered = 0; correct = 0;
+  updateProgress(qs.length);
+
+  qs.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = 'qcard-' + i;
+    const levelLabels = ['','🟢 Basic','🔵 Application','🟡 Advanced','🔴 Calculation'];
+    const levelClass = ['','lvl-1','lvl-2','lvl-3','lvl-4'];
+    card.innerHTML = `
+      <div class="q-num">Q${i+1} of ${qs.length} <span class="q-level ${levelClass[q.level]}">${levelLabels[q.level]}</span></div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts-${i}">
+        ${q.opts.map((o,j) => `
+          <div class="option" id="opt-${i}-${j}" onclick="selectAnswer(${i},${j})">
+            <span class="opt-letter">${String.fromCharCode(65+j)}.</span><span>${o}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="explanation" id="exp-${i}">
+        <strong>✅ Explanation:</strong> ${q.exp}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(qi, selected) {
+  const qs = getFilteredQuestions();
+  const q = qs[qi];
+  const opts = document.getElementById('opts-' + qi).querySelectorAll('.option');
+  opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
+  opts[selected].classList.add(selected === q.ans ? 'correct' : 'wrong');
+  if (selected !== q.ans) opts[q.ans].classList.add('correct');
+  document.getElementById('exp-' + qi).classList.add('show');
+  answered++;
+  if (selected === q.ans) correct++;
+  updateProgress(qs.length);
+  if (answered === qs.length) showScore(qs.length);
+}
+
+function updateProgress(total) {
+  const pct = total > 0 ? (answered / total * 100) : 0;
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+function showScore(total) {
+  const el = document.getElementById('quiz-score');
+  el.style.display = 'block';
+  document.getElementById('score-num').textContent = correct + '/' + total;
+  const pct = Math.round(correct/total*100);
+  const lang = document.body.getAttribute('data-lang') || 'en';
+  const msg = pct >= 80 ?
+    (lang === 'gu' ? '🏆 ઉત્તમ! તમે પરીક્ષા માટે તૈયાર છો!' : '🏆 Excellent! You are ready for the exam!') :
+    pct >= 60 ?
+    (lang === 'gu' ? '👍 સારું! ખોટા જવાબ ફરી review કરો.' : '👍 Good job! Review the wrong answers.') :
+    (lang === 'gu' ? '📖 વધુ ભણો! વિષયો ફરી review કરો.' : '📖 Keep studying! Review the topics again.');
+  document.getElementById('score-msg').textContent = msg;
+  el.style.borderColor = pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+  document.getElementById('score-num').style.color = pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+}
+
+function resetQuiz() { answered = 0; correct = 0; document.getElementById('quiz-score').style.display='none'; renderQuiz(); }
+function shuffleQuestions() { questions.sort(() => Math.random()-0.5); resetQuiz(); }
+
+function filterTopic(topic, btn) {
+  currentTopic = topic;
+  document.querySelectorAll('.filter-btn:not([data-type])').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  resetQuiz();
+}
+
+function filterLevel(level, btn) {
+  currentLevel = level;
+  document.querySelectorAll('.filter-btn[data-type="level"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  resetQuiz();
+}
+
+// ===================== FLASHCARDS =====================
+function renderFlashcard() {
+  const fc = flashcards[fcIndex];
+  document.getElementById('fc-q').textContent = fc.q;
+  document.getElementById('fc-ans').textContent = fc.a;
+  document.getElementById('fc-counter').textContent = `Card ${fcIndex+1} of ${flashcards.length} · Known: ${fcKnown.size}`;
+  document.getElementById('fc-progress').style.width = ((fcIndex+1)/flashcards.length*100) + '%';
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('fc-btns').style.display = 'none';
+  fcFlipped = false;
+}
+
+function flipCard() {
+  if (!fcFlipped) {
+    document.getElementById('flashcard').classList.add('flipped');
+    document.getElementById('fc-btns').style.display = 'flex';
+    fcFlipped = true;
+  }
+}
+
+function fcNext() { fcIndex = (fcIndex + 1) % flashcards.length; renderFlashcard(); }
+function fcPrev() { fcIndex = (fcIndex - 1 + flashcards.length) % flashcards.length; renderFlashcard(); }
+function fcKnow() { fcKnown.add(fcIndex); fcNext(); }
+function fcAgain() { fcNext(); }
+function shuffleCards() { flashcards.sort(() => Math.random()-0.5); fcIndex=0; fcKnown.clear(); renderFlashcard(); }
+
+// ===================== LANGUAGE TOGGLE =====================
+function setLang(lang) {
+  document.body.setAttribute('data-lang', lang);
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-gu').classList.toggle('active', lang === 'gu');
+  localStorage.setItem('studyLang', lang);
+}
+// Restore saved language preference
+(function() {
+  const saved = localStorage.getItem('studyLang');
+  if (saved) setLang(saved);
+})();
+
+// Init
+renderQuiz();
+renderFlashcard();
+</script>
+</body>
+</html>

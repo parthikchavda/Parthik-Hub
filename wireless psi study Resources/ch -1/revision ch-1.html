@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ઇલેક્ટ્રોનિક્સ ઘટકો, ઉપકરણો અને પરિપથો | ગુજરાતીમાં સિદ્ધાંત અને ઉદાહરણો</title>
+    <!-- Font Awesome Icons (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font for clean look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.5;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 1.5rem 2rem 3rem 2rem;
+        }
+
+        /* Header */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #1e293b, #2563eb);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .hero p {
+            color: #334155;
+            font-size: 1.1rem;
+        }
+        .badge {
+            background: #e2e8f0;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e40af;
+            margin-top: 0.75rem;
+        }
+
+        /* topic grid */
+        .topic-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* card style */
+        .topic-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+        .topic-card:hover {
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.15);
+            border-color: #b9d0f0;
+        }
+
+        .card-header {
+            background: #f8fafc;
+            padding: 1.2rem 1.8rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .card-header i {
+            font-size: 2rem;
+            color: #2563eb;
+        }
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+        }
+
+        .theory {
+            padding: 1.2rem 1.8rem 0.8rem 1.8rem;
+            background: #ffffff;
+        }
+        .theory p {
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+            text-align: justify;
+        }
+
+        .example-box {
+            margin: 0.5rem 1.8rem 1.5rem 1.8rem;
+            background: #fefce8;
+            border-left: 5px solid #eab308;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            transition: 0.1s;
+        }
+        .example-box strong {
+            color: #b45309;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+        .example-box p, .example-box ul {
+            color: #2d3e50;
+            font-size: 0.95rem;
+            margin-top: 0.4rem;
+        }
+        .example-box ul {
+            margin-left: 1.5rem;
+        }
+        .example-code {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin-top: 0.6rem;
+            overflow-x: auto;
+        }
+
+        hr {
+            margin: 0 1.8rem 0.5rem;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cbd5e1, transparent);
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #475569;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 1.8rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem;
+            }
+            .card-header h2 {
+                font-size: 1.2rem;
+            }
+            .theory p, .example-box p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-microchip"></i> ઇલેક્ટ્રોનિક્સ ઘટકો, ઉપકરણો અને પરિપથો</h1>
+        <p>સંપૂર્ણ સિદ્ધાંત (ગુજરાતીમાં) + વ્યવહારુ ઉદાહરણો</p>
+        <div class="badge"><i class="fas fa-book-open"></i> વાહક, ચુંબકીય, અવાહક, અર્ધવાહક, ડાયોડ, ટ્રાન્ઝિસ્ટર, એમ્પ્લિફાયર, ઓસિલેટર, IC</div>
+    </div>
+
+    <div class="topic-grid">
+        <!-- 1. વાહક પદાર્થો -->
+        <div class="topic-card">
+            <div class="card-header"><i class="fas fa-bolt"></i><h2>૧. વાહક પદાર્થો (Conducting Materials)</h2></div>
+            <div class="theory"><p>વાહક પદાર્થો એવા હોય છે જેમાં મુક્ત ઇલેક્ટ્રોન વધુ હોય છે, જેના કારણે વિદ્યુતપ્રવાહ સરળતાથી વહે છે. ઉદા. તાંબુ (Cu), એલ્યુમિનિયમ (Al), ચાંદી (Ag). ઓછા અવરોધ અને ઉચ્ચ વાહકતા ધરાવે છે.</p></div>
+            <div class="example-box"><strong><i class="fas fa-lightbulb"></i> વધારાનું ઉદાહરણ :</strong><p>ઘરગથ્થુ વાયરિંગમાં તાંબાના વાયરનો ઉપયોગ થાય છે. ઉદા. 1.5 mm² કોપર વાયર 10A પ્રવાહ સહન કરી શકે છે. PCBમાં કોપર ટ્રેક વાહક તરીકે કામ કરે છે.</p><div class="example-code">વાહકતા ક્રમ: Ag > Cu > Au > Al</div></div>
+        </div>
+
+        <!-- 2. ચુંબકીય પદાર્થો -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-magnet"></i><h2>૨. ચુંબકીય પદાર્થો (Magnetic Materials)</h2></div>
+        <div class="theory"><p>જે પદાર્થો ચુંબકીય ક્ષેત્રમાં તીવ્ર અસર અનુભવે છે, જેમ કે લોખંડ (Iron), નિકલ, કોબાલ્ટ. ટ્રાન્સફોર્મર, ઇન્ડક્ટર, મોટર કોરમાં વપરાય છે. ઉચ્ચ પરમીએબિલિટી અને હિસ્ટેરેસિસ ગુણધર્મો.</p></div>
+        <div class="example-box"><strong><i class="fas fa-microphone-alt"></i> વધારાનું ઉદાહરણ :</strong><p>સ્વીચ મોડ પાવર સપ્લાય (SMPS) માં ફેરાઇટ કોર ઇન્ડક્ટર – ઉચ્ચ આવૃત્તિએ ઓછા એડી કરન્ટ નુકસાન. ટ્રાન્સફોર્મરની કાર્યક્ષમતા વધારવા માટે સિલિકોન સ્ટીલનો ઉપયોગ.</p></div></div>
+
+        <!-- 3. અવાહક પદાર્થો -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-shield-alt"></i><h2>૩. અવાહક પદાર્થો (Insulating Materials)</h2></div>
+        <div class="theory"><p>જે પદાર્થો વિદ્યુતપ્રવાહને અવરોધે છે. ઉદા. રબર, પ્લાસ્ટિક, કાચ, માઇકા, પીવીસી. કેબલ ઇન્સ્યુલેશન, PCB સબસ્ટ્રેટ, ટૂલ હેન્ડલ વગેરેમાં ઉપયોગી. ઉચ્ચ ડાઇઇલેક્ટ્રિક સ્ટ્રેન્થ જરૂરી.</p></div>
+        <div class="example-box"><strong><i class="fas fa-plug"></i> વધારાનું ઉદાહરણ :</strong><p>ઇલેક્ટ્રિક હીટરમાં માઇકા શીટ હીટિંગ એલિમેન્ટ અને મેટલ કવર વચ્ચે ઇન્સ્યુલેશન આપે છે. PCB માં FR-4 એપોક્સી ગ્લાસ અવાહક તરીકે કામ કરે છે.</p></div></div>
+
+        <!-- 4. અર્ધવાહક (Semiconductors) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-atom"></i><h2>૪. અર્ધવાહક (Semiconductors)</h2></div>
+        <div class="theory"><p>સિલિકોન (Si) અને જર્મેનિયમ (Ge) જેવા પદાર્થો, જેની વાહકતા વાહક અને અવાહકની મધ્યમાં હોય છે. ડોપિંગ (ફોસ્ફરસ/બોરોન) વડે N-પ્રકાર અને P-પ્રકાર બનાવી શકાય છે.</p></div>
+        <div class="example-box"><strong><i class="fas fa-microchip"></i> વધારાનું ઉદાહરણ :</strong><p>ડાયોડ, ટ્રાન્ઝિસ્ટર, IC નો આધાર અર્ધવાહક છે. દા.ત., 1N4148 ડાયોડ સિલિકોનથી બને છે. તાપમાન વધતાં અર્ધવાહકનો અવરોધ ઘટે છે (નકારાત્મક તાપમાન ગુણાંક).</p></div></div>
+
+        <!-- 5. ઇલેક્ટ્રોનિક ઘટકો -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-cubes"></i><h2>૫. ઇલેક્ટ્રોનિક ઘટકો (Components)</h2></div>
+        <div class="theory"><p>રેઝિસ્ટર, કેપેસિટર, ઇન્ડક્ટર, ડાયોડ, ટ્રાન્ઝિસ્ટર, IC વગેરે. આ ઘટકો મળીને સર્કિટ બનાવે છે. સક્રિય (ડાયોડ, ટ્રાન્ઝિસ્ટર) અને નિષ્ક્રિય (R, L, C) ઘટકો.</p></div>
+        <div class="example-box"><strong><i class="fas fa-battery-full"></i> ઉદાહરણ :</strong><p>LED ચલાવવા માટે શ્રેણીમાં રેઝિસ્ટર (દા.ત. 220Ω, 5V સપ્લાય) જોડવામાં આવે છે. કેપેસિટરનો ઉપયોગ ફિલ્ટરિંગ અને કપલિંગમાં થાય છે.</p><div class="example-code">ઉદાહરણ સર્કિટ: 9V બેટરી → 1kΩ રેઝિસ્ટર → LED → GND</div></div></div>
+
+        <!-- 6. સેમિકન્ડક્ટર ફિઝિક્સ અને ડાયોડ -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-charging-station"></i><h2>૬. અર્ધવાહક ભૌતિકશાસ્ત્ર અને ડાયોડ</h2></div>
+        <div class="theory"><p>P-N જંકશન ડાયોડ એકતરફી વાહકતા આપે છે. ફોરવર્ડ બાયસમાં પ્રવાહ વહે છે, રિવર્સ બાયસમાં અવરોધિત. ડિપ્લેશન લેયર અને બિલ્ટ-ઇન પોટેન્શિયલ (~0.7V Si) મૂળભૂત ખ્યાલો.</p></div>
+        <div class="example-box"><strong><i class="fas fa-waveform"></i> વધારાનું ઉદાહરણ :</strong><p>બ્રિજ રેક્ટિફાયર – 4 ડાયોડ વડે AC ને DC માં રૂપાંતર. ઉદા. 12-0-12V ટ્રાન્સફોર્મર + 4×1N4007 ડાયોડ → સંપૂર્ણ તરંગ રેક્ટિફિકેશન.</p><div class="example-code">ડાયોડ ટેસ્ટિંગ: મલ્ટિમીટરથી ફોરવર્ડ રેઝિસ્ટન્સ ઓછી, રિવર્સમાં અનંત.</div></div></div>
+
+        <!-- 7. ડાયોડ એપ્લિકેશન અને અન્ય ટર્મિનલ ઉપકરણો -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-solar-panel"></i><h2>૭. ડાયોડ ઉપયોગો અને અન્ય ટર્મિનલ ઉપકરણો</h2></div>
+        <div class="theory"><p>ઝેનર ડાયોડ (વોલ્ટેજ રેગ્યુલેશન), LED (લાઇટ ઉત્સર્જન), ફોટોડાયોડ (લાઇટ સેન્સર), શોટકી ડાયોડ (ઝડપી સ્વિચિંગ). વિવિધ એપ્લિકેશન: ક્લિપર, ક્લેમ્પર સર્કિટ.</p></div>
+        <div class="example-box"><strong><i class="fas fa-adjust"></i> ઉદાહરણ :</strong><p>5V રેગ્યુલેટેડ સપ્લાય માટે ઝેનર ડાયોડ (1N4733A - 5.1V) સાથે શ્રેણી રેઝિસ્ટર. LED ડ્રાઇવર સર્કિટમાં વર્તમાન-લિમિટિંગ રેઝિસ્ટર ફરજિયાત.</p><div class="example-code">ઝેનર રેગ્યુલેટર: Vin(12V) → R(470Ω) → 5.1V ઝેનર || લોડ → સ્થિર 5V</div></div></div>
+
+        <!-- 8. ટ્રાન્ઝિસ્ટર (BJT) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-exchange-alt"></i><h2>૮. ટ્રાન્ઝિસ્ટર (Transistor - BJT)</h2></div>
+        <div class="theory"><p>BJT એ ત્રણ સ્તર (એમિટર, બેઝ, કલેક્ટર) ધરાવતું ઉપકરણ. NPN અને PNP પ્રકાર. નાના બેઝ કરંટથી મોટો કલેક્ટર કરંટ નિયંત્રિત થાય છે (β = Ic/Ib). સ્વિચ અને એમ્પ્લિફાયર તરીકે ઉપયોગી.</p></div>
+        <div class="example-box"><strong><i class="fas fa-microphone"></i> પ્રાયોગિક ઉદાહરણ :</strong><p>NPN ટ્રાન્ઝિસ્ટર (BC547) સ્વિચ તરીકે: બેઝને 10kΩ રેઝિસ્ટર દ્વારા 5V આપતાં LED ચાલુ થાય છે.</p><div class="example-code">એમ્પ્લિફાયર: સામાન્ય-એમિટર કન્ફિગરેશન, Rc=2.2kΩ, Re=470Ω, β=100, વોલ્ટેજ ગેઇન ≈ -Rc/Re</div></div></div>
+
+        <!-- 9. ટ્રાન્ઝિસ્ટર એમ્પ્લિફાયર -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-volume-up"></i><h2>૯. ટ્રાન્ઝિસ્ટર એમ્પ્લિફાયર</h2></div>
+        <div class="theory"><p>નબળા ઇનપુટ સિગ્નલને મોટું કરીને મજબૂત આઉટપુટ આપે છે. CE (સામાન્ય એમિટર) એમ્પ્લિફાયર વધુ ગેઇન આપે છે. CC (એમિટર ફોલોવર) ઉચ્ચ ઇનપુટ અવરોધ.</p></div>
+        <div class="example-box"><strong><i class="fas fa-headphones"></i> ઉદાહરણ સર્કિટ :</strong><p>ઓડિયો પ્રી-એમ્પ્લિફાયર: 2N3904, Vcc=9V, R1=100k, R2=22k, Rc=4.7k, Re=1k, Ce=100µF બાયપાસ. સિગ્નલ ઇનપુટ કેપેસિટર 10µF.</p></div></div>
+
+        <!-- 10. બાયસિંગ અને થર્મલ સ્ટેબિલિટી -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-temperature-high"></i><h2>૧૦. ટ્રાન્ઝિસ્ટર બાયસિંગ અને થર્મલ સ્ટેબિલિટી</h2></div>
+        <div class="theory"><p>Q-પોઇન્ટને સ્થિર રાખવા માટે બાયસિંગ સર્કિટ (વોલ્ટેજ ડિવાઇડર બાયસ સૌથી સ્થિર). તાપમાનના ફેરફારથી Ico, β, Vbe બદલાય છે, જેને સ્થિર કરવા માટે Re (એમિટર રેઝિસ્ટર) ઉપયોગી.</p></div>
+        <div class="example-box"><strong><i class="fas fa-chart-line"></i> વધારાનું ઉદાહરણ :</strong><p>વોલ્ટેજ ડિવાઇડર બાયસ: R1=56k, R2=12k, Re=1k, Rc=3.3k. તાપમાન વધતાં Ic થોડો વધે પણ Re નેગેટિવ ફીડબેક વડે સ્થિરતા મળે છે.</p></div></div>
+
+        <!-- 11. આવૃત્તિ પ્રતિભાવ (Frequency Response) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-chart-simple"></i><h2>૧૧. નાના સિગ્નલ એમ્પ્લિફાયરની આવૃત્તિ પ્રતિભાવ</h2></div>
+        <div class="theory"><p>એમ્પ્લિફાયરનો ગેઇન આવૃત્તિ સાથે બદલાય છે. નીચા આવૃત્તિએ કપલિંગ કેપેસિટરની અસર, ઉચ્ચ આવૃત્તિએ ટ્રાન્ઝિસ્ટરની ક્ષમતા (મિલર અસર)ને કારણે ગેઇન ઘટે છે. બેન્ડવિડ્થ મધ્યમ આવૃત્તિ વિસ્તાર.</p></div>
+        <div class="example-box"><strong><i class="fas fa-chart-line"></i> ઉદાહરણ :</strong><p>CE એમ્પ્લિફાયરની નીચલી કટ-ઓફ આવૃત્તિ fL = 1/(2π Rin C) ; ઉપલી કટ-ઓફ fH ટ્રાન્ઝિસ્ટરના fT પર આધારિત. ઓડિયો એમ્પ્લિફાયર 20Hz-20kHz સુધી સપાટ પ્રતિભાવ ઇચ્છનીય.</p></div></div>
+
+        <!-- 12. હાઇબ્રિડ પરિમાણ (h-parameters) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-chart-pie"></i><h2>૧૨. હાઇબ્રિડ પરિમાણ (Hybrid Parameters)</h2></div>
+        <div class="theory"><p>BJT ના લઘુ સિગ્નલ મોડેલિંગ માટે h-પરિમાણો: hie (ઇનપુટ અવરોધ), hre (રિવર્સ વોલ્ટેજ ગેઇન), hfe (ફોરવર્ડ કરંટ ગેઇન), hoe (આઉટપુટ કંડક્ટન્સ). આ દ્વારા એમ્પ્લિફાયર વિશ્લેષણ સરળ બને છે.</p></div>
+        <div class="example-box"><strong><i class="fas fa-calculator"></i> ઉદાહરણ :</strong><p>BC547 માટે hfe ≈ 200, hie ≈ 4kΩ (Ic=1mA પર). ગેઇન Av = -hfe * Rc / hie. જો Rc=4.7kΩ, Av ≈ -200*4.7k/4k = -235.</p></div></div>
+
+        <!-- 13. નિયંત્રિત પાવર સપ્લાય (Regulated Power Supply) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-battery-bolt"></i><h2>૧૩. નિયંત્રિત પાવર સપ્લાય</h2></div>
+        <div class="theory"><p>AC મેઇન્સને સ્થિર DC વોલ્ટેજમાં રૂપાંતરિત કરે છે. બ્લોક: ટ્રાન્સફોર્મર → રેક્ટિફાયર → ફિલ્ટર (કેપેસિટર) → રેગ્યુલેટર (78xx, LM317). લોડ અને ઇનપુટ વેરિએશન છતાં આઉટપુટ સ્થિર.</p></div>
+        <div class="example-box"><strong><i class="fas fa-microchip"></i> સર્કિટ ઉદાહરણ :</strong><p>230V AC → 9-0-9V ટ્રાન્સફોર્મર → બ્રિજ રેક્ટિફાયર → 1000µF ફિલ્ટર → IC 7805 → +5V DC (મહત્તમ 1A).</p><div class="example-code">આઉટપુટ કેપેસિટર 0.1µF + 470µF રિપલ ઘટાડે છે.</div></div></div>
+
+        <!-- 14. પ્રતિપોષણ (Feedback) એમ્પ્લિફાયર અને ઓસિલેટર -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-repeat"></i><h2>૧૪. ટ્રાન્ઝિસ્ટર એમ્પ્લિફાયર અને ઓસિલેટરમાં પ્રતિપોષણ</h2></div>
+        <div class="theory"><p>નેગેટિવ ફીડબેક ગેઇન ઘટાડે છે પણ બેન્ડવિડ્થ અને સ્થિરતા વધારે છે. પોઝિટિવ ફીડબેક ઓસિલેટર બનાવે છે (બાર્ખૌસેન માપદંડ). ઓસિલેટરના પ્રકારો: RC ફેઝ શિફ્ટ, કોલપિટ્સ, હાર્ટલી.</p></div>
+        <div class="example-box"><strong><i class="fas fa-wave-square"></i> વધારાનું ઉદાહરણ :</strong><p>ફેઝ શિફ્ટ ઓસિલેટર (3 સ્ટેજ RC, f=1/(2π√6 RC)) 1kHz સાઈન તરંગ ઉત્પન્ન કરે છે. ટ્રાન્ઝિસ્ટર સાથે પોઝિટિવ ફીડબેક આપી શકાય છે.</p></div></div>
+
+        <!-- 15. ટ્રાન્ઝિસ્ટર પાવર એમ્પ્લિફાયર -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-bullhorn"></i><h2>૧૫. ટ્રાન્ઝિસ્ટર પાવર એમ્પ્લિફાયર</h2></div>
+        <div class="theory"><p>ઉચ્ચ શક્તિ (પાવર) ના સિગ્નલો વધારવા માટે. વર્ગ A (ઓછી વિકૃતિ, ઓછી કાર્યક્ષમતા 25%), વર્ગ B (પુશ-પુલ, 78%), વર્ગ AB (ટ્રેડ-ઓફ). ઉદા. ઓડિયો પાવર એમ્પ્લિફાયર.</p></div>
+        <div class="example-box"><strong><i class="fas fa-music"></i> પ્રેક્ટિકલ ઉદાહરણ :</strong><p>LM386 IC પર આધારિત નથી પણ ડિસ્ક્રીટ: 2N3055 અને MJ2955 સાથે પુશ-પુલ કન્ફિગરેશન, ±30V સપ્લાય, 50W આઉટપુટ.</p><div class="example-code">વર્ગ B એમ્પ્લિફાયરમાં ક્રોસઓવર ડિસ્ટોર્શન ઘટાડવા ડાયોડ બાયસિંગ.</div></div></div>
+
+        <!-- 16. સ્પંદ સર્કિટ (Pulse Circuits) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-charging-station"></i><h2>૧૬. સ્પંદ સર્કિટ (Pulse Circuits)</h2></div>
+        <div class="theory"><p>અચાનક બદલાતા સ્પંદો સાથે કામ કરતા સર્કિટ: મલ્ટિવાઇબ્રેટર (એસ્ટેબલ, મોનોસ્ટેબલ, બાયસ્ટેબલ), શ્મિટ ટ્રિગર, ટાઇમર IC 555. ડિજિટલ લોજિક, ક્લોક જનરેશનમાં ઉપયોગી.</p></div>
+        <div class="example-box"><strong><i class="fas fa-clock"></i> ઉદાહરણ :</strong><p>555 ટાઇમરનો એસ્ટેબલ મોડ: R1=10k, R2=100k, C=10µF → આશરે 1.44/( (R1+2R2)C ) Hz આવૃત્તિ સાથે ચોરસ તરંગ. LED ફ્લેશર બનાવી શકાય.</p></div></div>
+
+        <!-- 17. ક્ષેત્ર-અસર ટ્રાન્ઝિસ્ટર (FET) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-bolt"></i><h2>૧૭. ક્ષેત્ર-અસર ટ્રાન્ઝિસ્ટર (FET / MOSFET)</h2></div>
+        <div class="theory"><p>FET વોલ્ટેજ-નિયંત્રિત ઉપકરણ છે (BJT કરંટ-નિયંત્રિત). JFET અને MOSFET (એન્હાન્સમેન્ટ/ડિપ્લેશન). અત્યંત ઊંચો ઇનપુટ અવરોધ (>10 MΩ). સ્વિચિંગ અને એમ્પ્લિફિકેશનમાં વપરાય છે.</p></div>
+        <div class="example-box"><strong><i class="fas fa-microchip"></i> વધારાનું ઉદાહરણ :</strong><p>IRFZ44N N-ચેનલ MOSFET ઉચ્ચ કરંટ સ્વિચિંગ માટે (55V, 49A). Arduino થી ગેટ પર 5V આપતાં LED સ્ટ્રીપ અથવા મોટર ઓન/ઓફ કરી શકાય છે.</p><div class="example-code">ગેટ રેઝિસ્ટર 100Ω ફરજિયાત, ઝડપી સ્વિચિંગ માટે પુલ-ડાઉન રેઝિસ્ટર 10kΩ.</div></div></div>
+
+        <!-- 18. રેખીય સંકલિત પરિપથ (Linear ICs) -->
+        <div class="topic-card"><div class="card-header"><i class="fas fa-chart-line"></i><h2>૧૮. રેખીય સંકલિત પરિપથ (Linear Integrated Circuits)</h2></div>
+        <div class="theory"><p>એનાલોગ સિગ્નલ પર કામ કરતા IC, જેમકે ઓપ-એમ્પ (741, LM358). આ વિપરીત (inverting), અવિપરીત (non-inverting), સરવાળા, વિભેદક, ફિલ્ટર, ઓસિલેટર વગેરે બનાવી શકાય છે. રેખીય IC ઉચ્ચ લાભ, ઉચ્ચ CMRR.</p></div>
+        <div class="example-box"><strong><i class="fas fa-waveform"></i> સૌથી સામાન્ય ઉદાહરણ :</strong><p>LM741 ઓપ-એમ્પથી વોલ્ટેજ ફોલોવર (Av=1) બફર તરીકે. સરવાળો એમ્પ્લિફાયર: Vout = -(Rf/R1 V1 + Rf/R2 V2) વગેરે.</p><div class="example-code">ઇન્વર્ટિંગ એમ્પ્લિફાયર: Rf=100kΩ, Rin=10kΩ → ગેઇન = -10.</div></div></div>
+    </div>
+
+    <footer>
+        <i class="fas fa-chalkboard-teacher"></i> ઇલેક્ટ્રોનિક્સ સિદ્ધાંત અને ઉદાહરણો - ગુજરાતીમાં સંપૂર્ણ સંદર્ભ | દરેક વિષય સાથે વ્યવહારુ સર્કિટ ઉદાહરણો  
+    </footer>
+</div>
+</body>
+</html>
