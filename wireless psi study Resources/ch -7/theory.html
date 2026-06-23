@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>નેટવર્કિંગ જ્ઞાનકોશ | Networking Encyclopedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1a2235;
+    --card: #141c2e;
+    --border: #1e3a5f;
+    --accent1: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --accent4: #f59e0b;
+    --accent5: #ef4444;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --glow: rgba(0,212,255,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans Gujarati', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0a0e1a 0%, #0d1b3e 50%, #0a0e1a 100%);
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent1);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    background: linear-gradient(90deg, var(--accent1), #a78bfa, var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    animation: fadeDown 0.8s ease;
+  }
+  header p {
+    color: var(--text2);
+    font-size: 1.1rem;
+    margin-top: 12px;
+    position: relative;
+    animation: fadeDown 1s ease 0.2s both;
+  }
+  .badge-row {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin-top: 20px; position: relative;
+    animation: fadeDown 1s ease 0.4s both;
+  }
+  .badge {
+    background: rgba(0,212,255,0.1);
+    border: 1px solid var(--accent1);
+    color: var(--accent1);
+    padding: 4px 14px; border-radius: 20px;
+    font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    position: sticky; top: 0; z-index: 100;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-inner {
+    display: flex; gap: 0; max-width: 1400px; margin: 0 auto;
+    white-space: nowrap;
+  }
+  nav a {
+    color: var(--text2); text-decoration: none;
+    padding: 14px 18px; font-size: 0.85rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s; display: inline-block;
+  }
+  nav a:hover { color: var(--accent1); border-bottom-color: var(--accent1); }
+
+  /* MAIN */
+  main { max-width: 1400px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 60px;
+    animation: fadeIn 0.6s ease both;
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .section-title { font-size: 1.5rem; font-weight: 700; }
+  .section-subtitle { color: var(--text2); font-size: 0.9rem; }
+
+  /* CARDS GRID */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .cards-2 { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
+  .cards-1 { grid-template-columns: 1fr; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent1), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent1); box-shadow: 0 8px 30px var(--glow); }
+  .card:hover::before { opacity: 1; }
+
+  .card-tag {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 0.7rem; font-family: 'JetBrains Mono', monospace;
+    font-weight: 700; letter-spacing: 0.05em; margin-bottom: 10px;
+  }
+  .card h3 { font-size: 1rem; margin-bottom: 6px; color: var(--accent1); }
+  .card .fullform { color: var(--accent4); font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px; }
+  .card p { font-size: 0.88rem; color: var(--text2); line-height: 1.65; }
+  .card .example {
+    margin-top: 10px; padding: 8px 12px;
+    background: rgba(0,212,255,0.05); border-left: 3px solid var(--accent1);
+    border-radius: 0 6px 6px 0; font-size: 0.82rem; color: var(--accent3);
+  }
+  .card .port-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem; font-weight: 700; color: var(--accent1);
+    margin-bottom: 4px;
+  }
+
+  /* COLOR VARIANTS */
+  .c-blue { background: rgba(0,212,255,0.12); color: var(--accent1); border-color: rgba(0,212,255,0.3); }
+  .c-purple { background: rgba(124,58,237,0.12); color: #a78bfa; border-color: rgba(124,58,237,0.3); }
+  .c-green { background: rgba(16,185,129,0.12); color: var(--accent3); border-color: rgba(16,185,129,0.3); }
+  .c-yellow { background: rgba(245,158,11,0.12); color: var(--accent4); border-color: rgba(245,158,11,0.3); }
+  .c-red { background: rgba(239,68,68,0.12); color: var(--accent5); border-color: rgba(239,68,68,0.3); }
+  .c-pink { background: rgba(236,72,153,0.12); color: #f472b6; border-color: rgba(236,72,153,0.3); }
+  .c-orange { background: rgba(249,115,22,0.12); color: #fb923c; border-color: rgba(249,115,22,0.3); }
+
+  /* ICON BACKGROUNDS */
+  .icon-blue { background: rgba(0,212,255,0.15); }
+  .icon-purple { background: rgba(124,58,237,0.15); }
+  .icon-green { background: rgba(16,185,129,0.15); }
+  .icon-yellow { background: rgba(245,158,11,0.15); }
+  .icon-red { background: rgba(239,68,68,0.15); }
+  .icon-pink { background: rgba(236,72,153,0.15); }
+  .icon-orange { background: rgba(249,115,22,0.15); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--bg3); }
+  th { padding: 12px 16px; text-align: left; font-size: 0.82rem; color: var(--accent1);
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; white-space: nowrap; }
+  td { padding: 11px 16px; border-top: 1px solid var(--border); font-size: 0.85rem; }
+  tr:hover td { background: rgba(0,212,255,0.03); }
+  td:first-child { font-family: 'JetBrains Mono', monospace; color: var(--accent1); font-weight: 700; }
+  td.guj { color: var(--text2); }
+
+  /* GENERATION TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 80px 20px 1fr;
+    gap: 0 16px; align-items: start; padding-bottom: 32px;
+  }
+  .timeline-year {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+    color: var(--accent4); font-weight: 700; padding-top: 2px; text-align: right;
+  }
+  .timeline-line { display: flex; flex-direction: column; align-items: center; }
+  .timeline-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid; flex-shrink: 0; margin-top: 4px;
+  }
+  .timeline-connector { flex: 1; width: 2px; background: var(--border); margin-top: 4px; }
+  .timeline-content { padding-bottom: 8px; }
+  .timeline-content h3 { font-size: 1.05rem; margin-bottom: 4px; }
+  .timeline-content p { font-size: 0.85rem; color: var(--text2); }
+  .tl-speed { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+
+  /* IP CLASS TABLE */
+  .ip-table td:nth-child(2) { font-family: 'JetBrains Mono', monospace; color: var(--accent3); }
+  .ip-table td:nth-child(3) { font-family: 'JetBrains Mono', monospace; color: var(--accent4); }
+
+  /* SEARCH BAR */
+  .search-bar {
+    display: flex; gap: 10px; margin-bottom: 30px; align-items: center;
+  }
+  .search-bar input {
+    flex: 1; background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 18px; color: var(--text);
+    font-size: 0.95rem; font-family: 'Noto Sans Gujarati', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .search-bar input:focus { border-color: var(--accent1); box-shadow: 0 0 0 3px var(--glow); }
+  .search-bar input::placeholder { color: var(--text3); }
+  .search-hint { color: var(--text3); font-size: 0.82rem; margin-top: 8px; }
+
+  /* OSI MODEL */
+  .osi-layers { display: flex; flex-direction: column; gap: 6px; }
+  .osi-layer {
+    display: grid; grid-template-columns: 60px 160px 1fr;
+    gap: 12px; align-items: center; padding: 12px 16px;
+    border-radius: 10px; border: 1px solid; transition: transform 0.2s;
+  }
+  .osi-layer:hover { transform: translateX(6px); }
+  .osi-num { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; text-align: center; }
+  .osi-name { font-weight: 700; font-size: 0.95rem; }
+  .osi-desc { font-size: 0.82rem; color: var(--text2); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 40px 20px;
+    border-top: 1px solid var(--border); color: var(--text3); font-size: 0.85rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown { from { opacity:0; transform: translateY(-20px); } to { opacity:1; transform: none; } }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: none; } }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .cards-2 { grid-template-columns: 1fr; }
+    .osi-layer { grid-template-columns: 40px 120px 1fr; font-size: 0.8rem; }
+    .timeline-item { grid-template-columns: 60px 16px 1fr; }
+    nav a { padding: 12px 12px; font-size: 0.78rem; }
+  }
+
+  .highlight { color: var(--accent1); font-weight: 600; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="grid-bg"></div>
+  <h1>🌐 નેટવર્કિંગ જ્ઞાનકોશ</h1>
+  <p>Networking Encyclopedia — સંપૂર્ણ ગુજરાતી માર્ગદર્શિકા</p>
+  <div class="badge-row">
+    <span class="badge">OSI Model</span>
+    <span class="badge">IP Addressing</span>
+    <span class="badge">Protocols</span>
+    <span class="badge">1G→5G</span>
+    <span class="badge">Security</span>
+    <span class="badge">VPN</span>
+    <span class="badge">Cables</span>
+    <span class="badge">Ports</span>
+    <span class="badge">Email</span>
+    <span class="badge">Hardware</span>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#devices">📡 ઉપકરણો</a>
+    <a href="#osi">🔷 OSI Model</a>
+    <a href="#ip">🔢 IP Addressing</a>
+    <a href="#ipclass">📊 IP Class</a>
+    <a href="#protocols">🔗 Protocols</a>
+    <a href="#mobile">📱 1G–5G</a>
+    <a href="#security">🔒 Security</a>
+    <a href="#vpn">🛡️ VPN</a>
+    <a href="#email">📧 Email</a>
+    <a href="#cables">🔌 Cables</a>
+    <a href="#ports">🚪 Ports</a>
+    <a href="#speed">⚡ Speed</a>
+    <a href="#legacy">📟 Legacy</a>
+    <a href="#fullforms">📖 Full Forms</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===== NETWORK DEVICES ===== -->
+<section class="section" id="devices">
+  <div class="section-header">
+    <div class="section-icon icon-blue">📡</div>
+    <div>
+      <div class="section-title">નેટવર્ક ઉપકરણો — Network Devices</div>
+      <div class="section-subtitle">Hardware devices used in computer networks</div>
+    </div>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <span class="card-tag c-blue">LAN</span>
+      <h3>LAN — Local Area Network</h3>
+      <div class="fullform">Local Area Network</div>
+      <p>નાના વિસ્તારમાં (ઘર, ઓફિસ, શાળા) computers ને જોડતું નેટવર્ક. ઝડપ ઊંચી, ખર્ચ ઓછો.</p>
+      <div class="example">ઉદાહરણ: ઘરનું Wi-Fi, ઓફિસ નેટવર્ક | Speed: 100Mbps–10Gbps</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-purple">WAN</span>
+      <h3>WAN — Wide Area Network</h3>
+      <div class="fullform">Wide Area Network</div>
+      <p>મોટા ભૌગોલિક વિસ્તારને આવરી લેતું નેટવર્ક. ઇન્ટરનેટ એ WAN નું સૌથી મોટું ઉદાહરણ છે.</p>
+      <div class="example">ઉદાહરણ: Internet, BSNL/Jio નેટવર્ક | ઘણા શહેરો/દેશો</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-green">MAN</span>
+      <h3>MAN — Metropolitan Area Network</h3>
+      <div class="fullform">Metropolitan Area Network</div>
+      <p>એક શહેર અથવા કેમ્પસ સ્તરે ઉપયોગ. LAN અને WAN ની વચ્ચેનો આ network type છે.</p>
+      <div class="example">ઉદાહરણ: City-wide cable TV network, University campus | ~50km</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-yellow">WLAN</span>
+      <h3>WLAN — Wireless LAN</h3>
+      <div class="fullform">Wireless Local Area Network</div>
+      <p>Wi-Fi technology દ્વારા wire વિના LAN connection. IEEE 802.11 standard ઉપયોગ.</p>
+      <div class="example">ઉદાહરણ: Home Wi-Fi router, cafe Wi-Fi hotspot</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-red">PAN</span>
+      <h3>PAN — Personal Area Network</h3>
+      <div class="fullform">Personal Area Network</div>
+      <p>એક વ્યક્તિ આસપાસ (~10 meter) ના devices ને જોડે. Bluetooth / USB ઉપયોગ.</p>
+      <div class="example">ઉદાહรণ: Phone–Earphone Bluetooth, Smartwatch connection</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-pink">VPN</span>
+      <h3>VPN — Virtual Private Network</h3>
+      <div class="fullform">Virtual Private Network</div>
+      <p>Encrypted tunnel through internet. Private, secure communication over public network.</p>
+      <div class="example">ઉદાહरण: Work-from-home office access, NordVPN, ExpressVPN</div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+  <h3 style="margin-bottom:16px; color:var(--accent3)">📦 Network Hardware Devices</h3>
+  <div class="cards">
+
+    <div class="card">
+      <span class="card-tag c-blue">Router</span>
+      <h3>Router — રાઉટર</h3>
+      <p>Networks ને connect કરે અને packets ને best path via IP address routing table ઉપર મોકલે.</p>
+      <div class="example">ઉદાહርણ: Jio Fiber router ઘરમાં | Layer 3 device</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-green">Switch</span>
+      <h3>Switch — સ્વિચ</h3>
+      <p>LAN ની અંદર MAC address ઉપર based data frames forward કરે. Smart, intelligent hub.</p>
+      <div class="example">ઉદાહरण: 24-port office switch | Layer 2 device</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-yellow">Hub</span>
+      <h3>Hub — હબ</h3>
+      <p>Data બધા ports ને broadcast કરે, destination ને નહીં. Dumb device, ઓછો ઉપયોગ.</p>
+      <div class="example">Layer 1 device | Half-duplex | Legacy technology</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-purple">Bridge</span>
+      <h3>Bridge — બ્રિજ</h3>
+      <p>બે LAN segments ને MAC address ઉપર based join કરે. Collision domains ઘટાડે.</p>
+      <div class="example">Layer 2 device | Wireless bridge | Network segment join</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-red">Gateway</span>
+      <h3>Gateway — ગેટવે</h3>
+      <p>અલગ protocols અથવા networks ને translate/connect કરે. Internet access point.</p>
+      <div class="example">ઉદાહรણ: Home router = default gateway (192.168.1.1)</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-orange">Repeater</span>
+      <h3>Repeater — રીપીટર</h3>
+      <p>Signal weak થાય ત્યારે amplify/regenerate કરે. Long cable distances માટે.</p>
+      <div class="example">Layer 1 device | Wi-Fi range extender | Optical repeater</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-blue">NIC</span>
+      <h3>NIC — Network Interface Card</h3>
+      <div class="fullform">Network Interface Card</div>
+      <p>Computer ને network સાથે physically connect કરે. Unique MAC address ધરાવે.</p>
+      <div class="example">ઉદાહरण: Ethernet port, Wi-Fi card | MAC: 00:1A:2B:3C:4D:5E</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-green">Modem</span>
+      <h3>Modem — મોડેમ</h3>
+      <div class="fullform">Modulator-Demodulator</div>
+      <p>Digital signal ↔ Analog signal conversion. ISP connection માટે ઉપયોગ.</p>
+      <div class="example">ઉદાহरण: DSL modem, Cable modem, 4G USB dongle</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-yellow">AP</span>
+      <h3>Access Point — એક્સેસ પોઈન્ટ</h3>
+      <div class="fullform">Wireless Access Point (WAP)</div>
+      <p>Wired network ને wireless clients સુધી extend કરે. Wi-Fi signal provide.</p>
+      <div class="example">ઉદાહरण: Mall/Airport Wi-Fi APs | Enterprise campus Wi-Fi</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-purple">Firewall</span>
+      <h3>Firewall — ફાયરવૉલ</h3>
+      <p>Network traffic filter કરે, unauthorized access block કરે. Hardware/Software બંને.</p>
+      <div class="example">ઉદाहरण: Cisco ASA, Windows Firewall, pfSense</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-pink">DNS Server</span>
+      <h3>DNS Server</h3>
+      <div class="fullform">Domain Name System</div>
+      <p>Domain name → IP address translate. Internet ની "Phone Book".</p>
+      <div class="example">google.com → 142.250.80.46 | 8.8.8.8 (Google DNS)</div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag c-red">DHCP Server</span>
+      <h3>DHCP Server</h3>
+      <div class="fullform">Dynamic Host Configuration Protocol</div>
+      <p>Automatic IP address, subnet, gateway, DNS assign કરે devices ને.</p>
+      <div class="example">Router automatically 192.168.1.X IP આપે | Lease time</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== OSI MODEL ===== -->
+<section class="section" id="osi">
+  <div class="section-header">
+    <div class="section-icon icon-purple">🔷</div>
+    <div>
+      <div class="section-title">OSI Model — સ્તર આધારિત નેટવર્ક મોડેલ</div>
+      <div class="section-subtitle">Open Systems Interconnection — 7 Layers</div>
+    </div>
+  </div>
+  <div class="osi-layers">
+    <div class="osi-layer" style="background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.3)">
+      <div class="osi-num" style="color:#ef4444">7</div>
+      <div class="osi-name" style="color:#ef4444">Application Layer</div>
+      <div class="osi-desc">User-facing services — HTTP, FTP, SMTP, DNS | ઉદ.: Browser, Email client</div>
+    </div>
+    <div class="osi-layer" style="background:rgba(249,115,22,0.08);border-color:rgba(249,115,22,0.3)">
+      <div class="osi-num" style="color:#fb923c">6</div>
+      <div class="osi-name" style="color:#fb923c">Presentation Layer</div>
+      <div class="osi-desc">Data format, Encryption, Compression — SSL/TLS, JPEG, ASCII | Data translation</div>
+    </div>
+    <div class="osi-layer" style="background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3)">
+      <div class="osi-num" style="color:#f59e0b">5</div>
+      <div class="osi-name" style="color:#f59e0b">Session Layer</div>
+      <div class="osi-desc">Connection establish/maintain/terminate — NetBIOS, RPC | Sessions manage</div>
+    </div>
+    <div class="osi-layer" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3)">
+      <div class="osi-num" style="color:#10b981">4</div>
+      <div class="osi-name" style="color:#10b981">Transport Layer</div>
+      <div class="osi-desc">End-to-end delivery — TCP, UDP | Port numbers, Segmentation, Error recovery</div>
+    </div>
+    <div class="osi-layer" style="background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.3)">
+      <div class="osi-num" style="color:#00d4ff">3</div>
+      <div class="osi-name" style="color:#00d4ff">Network Layer</div>
+      <div class="osi-desc">IP addressing & routing — IP, ICMP, ARP, RIP, OSPF | Packets, Router</div>
+    </div>
+    <div class="osi-layer" style="background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.3)">
+      <div class="osi-num" style="color:#a78bfa">2</div>
+      <div class="osi-name" style="color:#a78bfa">Data Link Layer</div>
+      <div class="osi-desc">MAC addressing, Frames — Ethernet, PPP, Switch | Error detection (CRC)</div>
+    </div>
+    <div class="osi-layer" style="background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.3)">
+      <div class="osi-num" style="color:#f472b6">1</div>
+      <div class="osi-name" style="color:#f472b6">Physical Layer</div>
+      <div class="osi-desc">Bits, cables, signals — Ethernet cable, Fiber, Wi-Fi radio waves | Hub, NIC</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <p>🧠 <strong style="color:var(--accent4)">Trick to remember:</strong> <span class="mono">"All People Seem To Need Data Processing"</span> (Layer 7→1) | ગુ: "બધા લોકો ડેટા જોઈએ" — Application, Presentation, Session, Transport, Network, Data Link, Physical</p>
+  </div>
+</section>
+
+<!-- ===== IP ADDRESSING ===== -->
+<section class="section" id="ip">
+  <div class="section-header">
+    <div class="section-icon icon-green">🔢</div>
+    <div>
+      <div class="section-title">IP Addressing — આઈ.પી. સરનામું</div>
+      <div class="section-subtitle">IPv4 and IPv6 — Internet Protocol Versions</div>
+    </div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <span class="card-tag c-blue">IPv4</span>
+      <h3>IPv4 — Internet Protocol version 4</h3>
+      <div class="fullform">32-bit address | ~4.3 billion addresses</div>
+      <p>4 octets (0–255) ના dotted decimal format. નેટવર્ક ઓળખ માટે.</p>
+      <div class="example">Format: 192.168.1.1 | Network.Host | Subnet mask: 255.255.255.0</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">IPv6</span>
+      <h3>IPv6 — Internet Protocol version 6</h3>
+      <div class="fullform">128-bit address | 340 undecillion addresses</div>
+      <p>IPv4 exhaustion solution. 8 groups of 4 hex digits. IoT, future internet.</p>
+      <div class="example">Format: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</div>
+    </div>
+  </div>
+  <hr class="divider">
+  <h3 style="margin-bottom:16px;color:var(--accent3)">Special IP Addresses</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>IP Address</th><th>Type</th><th>વર્ણન (Gujarati)</th></tr></thead>
+      <tbody>
+        <tr><td>127.0.0.1</td><td>Loopback</td><td class="guj">પોતાનું computer test — "localhost" | Software testing</td></tr>
+        <tr><td>192.168.x.x</td><td>Private (Class C)</td><td class="guj">ઘર/ઓફિસ LAN — Internet ઉપર route નથી</td></tr>
+        <tr><td>10.x.x.x</td><td>Private (Class A)</td><td class="guj">Large enterprise private network</td></tr>
+        <tr><td>172.16–31.x.x</td><td>Private (Class B)</td><td class="guj">Medium network private range</td></tr>
+        <tr><td>0.0.0.0</td><td>Default Route</td><td class="guj">Unknown / Default gateway reference</td></tr>
+        <tr><td>255.255.255.255</td><td>Broadcast</td><td class="guj">Network ના બધા devices ને message</td></tr>
+        <tr><td>169.254.x.x</td><td>APIPA</td><td class="guj">DHCP ન મળ્યો ત્યારે auto-assign — No internet access</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== IP CLASS ===== -->
+<section class="section" id="ipclass">
+  <div class="section-header">
+    <div class="section-icon icon-yellow">📊</div>
+    <div>
+      <div class="section-title">IP Classes — આઈ.પી. વર્ગો</div>
+      <div class="section-subtitle">Classful IP Addressing (IPv4)</div>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="ip-table">
+      <thead><tr><th>Class</th><th>Range</th><th>Default Mask</th><th>Networks</th><th>Hosts/Net</th><th>ઉપયોગ (Use)</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>1.0.0.0 – 126.255.255.255</td><td>255.0.0.0 /8</td><td>126</td><td>16,777,214</td><td class="guj">ઘણા Hosts — Large ISPs, Big corporates</td></tr>
+        <tr><td>B</td><td>128.0.0.0 – 191.255.255.255</td><td>255.255.0.0 /16</td><td>16,384</td><td>65,534</td><td class="guj">Medium networks — Universities</td></tr>
+        <tr><td>C</td><td>192.0.0.0 – 223.255.255.255</td><td>255.255.255.0 /24</td><td>2M+</td><td>254</td><td class="guj">નાના networks — ઘર, ઓફિસ (સૌથી સામાન્ય)</td></tr>
+        <tr><td>D</td><td>224.0.0.0 – 239.255.255.255</td><td>N/A</td><td>Multicast</td><td>N/A</td><td class="guj">Multicast groups — Video streaming, routing protocols</td></tr>
+        <tr><td>E</td><td>240.0.0.0 – 255.255.255.255</td><td>N/A</td><td>Reserved</td><td>N/A</td><td class="guj">Research/Experimental — General ઉપયોગ નહીં</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <p>🧠 <strong style="color:var(--accent4)">CIDR (Classless Inter-Domain Routing):</strong> <span class="mono">/24 = 256 IPs</span>, <span class="mono">/16 = 65536 IPs</span>, <span class="mono">/8 = 16M IPs</span> | Subnetting ના flexible blocks. VLSM (Variable Length Subnet Mask) — IP wastage ઘટાડે.</p>
+  </div>
+</section>
+
+<!-- ===== PROTOCOLS ===== -->
+<section class="section" id="protocols">
+  <div class="section-header">
+    <div class="section-icon icon-blue">🔗</div>
+    <div>
+      <div class="section-title">Network Protocols — નેટવર્ક પ્રોટોકોલ</div>
+      <div class="section-subtitle">Rules for communication between computers</div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:14px;color:var(--accent3)">🔵 Transport Layer Protocols</h3>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-blue">TCP</span>
+      <h3>TCP — Transmission Control Protocol</h3>
+      <p>Connection-oriented. Reliable, ordered delivery. 3-way handshake (SYN→SYN-ACK→ACK). Error checking & retransmission.</p>
+      <div class="example">ઉdaHaraN: Web browsing, Email, File download | Port varies</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">UDP</span>
+      <h3>UDP — User Datagram Protocol</h3>
+      <p>Connectionless. Fast, no reliability guarantee. No handshake, no retransmission. Low latency.</p>
+      <div class="example">ઉdaHaraN: Video call, Gaming, DNS, Streaming | Speed priority</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h3 style="margin-bottom:14px;color:var(--accent3)">🌐 Application Layer Protocols</h3>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-blue">HTTP/HTTPS</span>
+      <h3>HTTP / HTTPS</h3>
+      <div class="fullform">HyperText Transfer Protocol (Secure)</div>
+      <p>Web pages browse. HTTP = plain text (Port 80). HTTPS = SSL/TLS encrypted (Port 443).</p>
+      <div class="example">ઉdaHaraN: google.com browse, online shopping secure payment</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">FTP/SFTP</span>
+      <h3>FTP / SFTP</h3>
+      <div class="fullform">File Transfer Protocol / Secure FTP</div>
+      <p>Files upload/download. FTP = Port 20,21. SFTP = Port 22 (SSH based, encrypted).</p>
+      <div class="example">ઉdaHaraN: Website files upload to server, FileZilla</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">DNS</span>
+      <h3>DNS — Domain Name System</h3>
+      <p>Name → IP resolution. UDP Port 53. Recursive & Authoritative servers. Cache.</p>
+      <div class="example">google.com → 142.250.x.x | 8.8.8.8 (Google), 1.1.1.1 (Cloudflare)</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">DHCP</span>
+      <h3>DHCP</h3>
+      <div class="fullform">Dynamic Host Configuration Protocol</div>
+      <p>Auto IP assign. UDP Port 67 (server), 68 (client). DORA: Discover→Offer→Request→Ack.</p>
+      <div class="example">ઉdaHaraN: Phone Wi-Fi connect → automatic IP મળ્યું</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">SSH</span>
+      <h3>SSH — Secure Shell</h3>
+      <p>Encrypted remote terminal access. Replaces Telnet. Port 22. Key-based authentication.</p>
+      <div class="example">ઉdaHaraN: Linux server remotely access | ssh user@192.168.1.1</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-orange">Telnet</span>
+      <h3>Telnet</h3>
+      <p>Remote terminal access — unencrypted (insecure). Port 23. Legacy, replaced by SSH.</p>
+      <div class="example">Network device configure (old) | Security risk — avoid</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-blue">SNMP</span>
+      <h3>SNMP</h3>
+      <div class="fullform">Simple Network Management Protocol</div>
+      <p>Network devices monitor/manage. UDP Port 161. MIB (Management Info Base).</p>
+      <div class="example">ઉdaHaraN: Router, Switch CPU/bandwidth monitor | Nagios, Zabbix</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">ICMP</span>
+      <h3>ICMP — Internet Control Message Protocol</h3>
+      <p>Error reporting & diagnostics. ping command uses ICMP Echo Request/Reply.</p>
+      <div class="example">ping google.com, traceroute/tracert command | No port (Layer 3)</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">ARP</span>
+      <h3>ARP — Address Resolution Protocol</h3>
+      <p>IP address → MAC address mapping. LAN ની અંદર. ARP table/cache maintain.</p>
+      <div class="example">arp -a command | 192.168.1.1 → 00:1A:2B:3C:4D:5E</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">NTP</span>
+      <h3>NTP — Network Time Protocol</h3>
+      <p>Computers ના clocks synchronize. UDP Port 123. Stratum levels (0=atomic clock).</p>
+      <div class="example">ઉdaHaraN: Server time sync, security certificate validation</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h3 style="margin-bottom:14px;color:var(--accent3)">🔀 Routing Protocols</h3>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-blue">RIP</span>
+      <h3>RIP — Routing Information Protocol</h3>
+      <p>Distance-vector routing. Max 15 hops. UDP Port 520. Simple but slow convergence.</p>
+      <div class="example">RIPv1 (classful), RIPv2 (classless) | Small networks only</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">OSPF</span>
+      <h3>OSPF — Open Shortest Path First</h3>
+      <p>Link-state routing. Dijkstra algorithm. No hop limit. Fast convergence. Areas.</p>
+      <div class="example">Enterprise/ISP networks | Protocol 89 | Widely used</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">BGP</span>
+      <h3>BGP — Border Gateway Protocol</h3>
+      <p>Internet ની "backbone" routing protocol. AS (Autonomous System) between. TCP Port 179.</p>
+      <div class="example">ISPs between routing | Internet ના 80,000+ routes manage</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">EIGRP</span>
+      <h3>EIGRP — Enhanced IGRP</h3>
+      <div class="fullform">Enhanced Interior Gateway Routing Protocol</div>
+      <p>Cisco proprietary. Hybrid (distance-vector + link-state). DUAL algorithm. Fast.</p>
+      <div class="example">Cisco networks | Protocol 88 | Bandwidth+delay metric</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MOBILE GENERATIONS ===== -->
+<section class="section" id="mobile">
+  <div class="section-header">
+    <div class="section-icon icon-pink">📱</div>
+    <div>
+      <div class="section-title">Mobile Network Generations — 1G થી 5G</div>
+      <div class="section-subtitle">Evolution of wireless mobile technology</div>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">1980s</div>
+      <div class="timeline-line"><div class="timeline-dot" style="background:#ef4444;border-color:#ef4444"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <h3 style="color:#ef4444">1G — First Generation</h3>
+        <p class="tl-speed" style="color:var(--accent4)">Speed: 2.4 kbps | Analog technology</p>
+        <p>ફક્ત voice call. Analog signals. AMPS (Advanced Mobile Phone System). No data. Security ઘણી ઓછી. Roaming problems.</p>
+        <div class="example" style="margin-top:8px">1983 Motorola DynaTAC 8000X — first commercial phone</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1991</div>
+      <div class="timeline-line"><div class="timeline-dot" style="background:#fb923c;border-color:#fb923c"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <h3 style="color:#fb923c">2G — Second Generation</h3>
+        <p class="tl-speed" style="color:var(--accent4)">Speed: 9.6 kbps–144 kbps | GSM/CDMA Digital</p>
+        <p>Digital voice + SMS + basic data. GSM standard. GPRS (2.5G): 56kbps. EDGE (2.75G): 384kbps. Encryption added.</p>
+        <div class="example" style="margin-top:8px">ઉdaHaraN: SMS texting, basic internet, caller ID | India: Airtel, Jio</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2000s</div>
+      <div class="timeline-line"><div class="timeline-dot" style="background:#f59e0b;border-color:#f59e0b"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <h3 style="color:#f59e0b">3G — Third Generation</h3>
+        <p class="tl-speed" style="color:var(--accent4)">Speed: 384 kbps – 21 Mbps | UMTS/HSPA</p>
+        <p>Broadband mobile internet. Video calls, apps, mobile browsing. WCDMA technology. HSPA+: up to 42Mbps. Always-on internet.</p>
+        <div class="example" style="margin-top:8px">ઉdaHaraN: YouTube mobile (early), WhatsApp, Google Maps | 2008 era</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2010s</div>
+      <div class="timeline-line"><div class="timeline-dot" style="background:#10b981;border-color:#10b981"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <h3 style="color:#10b981">4G LTE — Fourth Generation</h3>
+        <p class="tl-speed" style="color:var(--accent4)">Speed: 100 Mbps – 1 Gbps | LTE/LTE-A</p>
+        <p>HD video, VoLTE (Voice over LTE), fast app downloads. OFDMA technology. Low latency ~50ms. India: 2012+ launch, Jio 2016 revolution.</p>
+        <div class="example" style="margin-top:8px">ઉdaHaraN: Netflix HD stream, video call, online gaming | 4G LTE-A: 1Gbps</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2020s</div>
+      <div class="timeline-line"><div class="timeline-dot" style="background:#00d4ff;border-color:#00d4ff"></div><div class="timeline-connector" style="background:transparent"></div></div>
+      <div class="timeline-content">
+        <h3 style="color:#00d4ff">5G — Fifth Generation</h3>
+        <p class="tl-speed" style="color:var(--accent4)">Speed: 1 Gbps – 20 Gbps | mmWave/Sub-6GHz</p>
+        <p>Ultra-low latency (1ms), massive IoT, autonomous vehicles, smart cities. Network slicing. Beamforming. NSA/SA architecture. India: 2022 launch.</p>
+        <div class="example" style="margin-top:8px">ઉdaHaraN: AR/VR, self-driving cars, remote surgery, smart factory | Jio 5G, Airtel 5G</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:8px">
+    <p><strong style="color:var(--accent4)">6G:</strong> Expected 2030. Speed: 1 Tbps. AI-native network. Terahertz frequencies. Holographic communication. Sub-1ms latency.</p>
+  </div>
+  <hr class="divider">
+  <h3 style="margin-bottom:14px;color:var(--accent3)">📶 Wi-Fi Standards (IEEE 802.11)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Standard</th><th>Wi-Fi Name</th><th>Frequency</th><th>Max Speed</th><th>Year</th></tr></thead>
+      <tbody>
+        <tr><td>802.11b</td><td>Wi-Fi 1</td><td>2.4 GHz</td><td>11 Mbps</td><td class="guj">1999</td></tr>
+        <tr><td>802.11a</td><td>Wi-Fi 2</td><td>5 GHz</td><td>54 Mbps</td><td class="guj">1999</td></tr>
+        <tr><td>802.11g</td><td>Wi-Fi 3</td><td>2.4 GHz</td><td>54 Mbps</td><td class="guj">2003</td></tr>
+        <tr><td>802.11n</td><td>Wi-Fi 4</td><td>2.4/5 GHz</td><td>600 Mbps</td><td class="guj">2009</td></tr>
+        <tr><td>802.11ac</td><td>Wi-Fi 5</td><td>5 GHz</td><td>3.5 Gbps</td><td class="guj">2013</td></tr>
+        <tr><td>802.11ax</td><td>Wi-Fi 6/6E</td><td>2.4/5/6 GHz</td><td>9.6 Gbps</td><td class="guj">2019</td></tr>
+        <tr><td>802.11be</td><td>Wi-Fi 7</td><td>2.4/5/6 GHz</td><td>46 Gbps</td><td class="guj">2024</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECURITY ===== -->
+<section class="section" id="security">
+  <div class="section-header">
+    <div class="section-icon icon-red">🔒</div>
+    <div>
+      <div class="section-title">Network Security — નેટવર્ક સુરક્ષા</div>
+      <div class="section-subtitle">Attacks, Defenses & Encryption</div>
+    </div>
+  </div>
+  <h3 style="margin-bottom:14px;color:var(--accent5)">⚠️ Common Attacks</h3>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-red">DoS/DDoS</span>
+      <h3>DoS / DDoS Attack</h3>
+      <div class="fullform">Denial of Service / Distributed DoS</div>
+      <p>Server ને fake requests flood કરી overwhelm. DDoS = multiple sources. Service unavailable.</p>
+      <div class="example">ઉdaHaraN: Website crash, gaming server attack | Cloudflare protection</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">MITM</span>
+      <h3>MITM Attack</h3>
+      <div class="fullform">Man-in-the-Middle Attack</div>
+      <p>Attacker secretly intercepts communication. Data sniff/modify. ARP spoofing, SSL stripping.</p>
+      <div class="example">ઉdaHaraN: Public Wi-Fi banking | HTTPS + VPN protection</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-orange">Phishing</span>
+      <h3>Phishing — ફિશિંગ</h3>
+      <p>Fake emails/websites through personal information (passwords, bank details) steal. Social engineering.</p>
+      <div class="example">ઉdaHaraN: Fake SBI email, fake Jio prize SMS | Email filtering</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">SQL Injection</span>
+      <h3>SQL Injection</h3>
+      <p>Malicious SQL code through database access/modify. Web application vulnerability.</p>
+      <div class="example">Login: ' OR 1=1-- | Parameterized queries solution</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">XSS</span>
+      <h3>XSS — Cross-Site Scripting</h3>
+      <p>Malicious scripts inject into web pages. Users ના browsers ઉપર execute. Cookie theft.</p>
+      <div class="example">Input sanitization, CSP headers | OWASP Top 10</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-orange">Ransomware</span>
+      <h3>Ransomware — રેન્સમવેર</h3>
+      <p>Files encrypt करो, payment demand. Hospitals, companies target. Bitcoin ransom.</p>
+      <div class="example">ઉdaHaraN: WannaCry 2017, NotPetya | Backup + patching solution</div>
+    </div>
+  </div>
+  <hr class="divider">
+  <h3 style="margin-bottom:14px;color:var(--accent3)">🛡️ Security Protocols & Tools</h3>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-green">SSL/TLS</span>
+      <h3>SSL / TLS</h3>
+      <div class="fullform">Secure Sockets Layer / Transport Layer Security</div>
+      <p>Encrypted communication. HTTPS undo TLS. Certificate-based authentication. TLS 1.3 latest.</p>
+      <div class="example">Browser 🔒 padlock icon | Port 443 | Let's Encrypt certificates</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-blue">IPSec</span>
+      <h3>IPSec — IP Security</h3>
+      <p>Network layer encryption protocol suite. AH (Authentication) + ESP (Encryption). VPN undo use.</p>
+      <div class="example">Site-to-site VPN, remote access VPN | IKEv2 key exchange</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">PKI</span>
+      <h3>PKI — Public Key Infrastructure</h3>
+      <p>Digital certificates manage. CA (Certificate Authority) trust chain. Public/private key pairs.</p>
+      <div class="example">ઉdaHaraN: DigiCert, VeriSign CA | HTTPS certificates | Code signing</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">WPA3</span>
+      <h3>WPA3 — Wi-Fi Protected Access 3</h3>
+      <p>Wi-Fi encryption latest standard. SAE (Simultaneous Authentication of Equals). KRACK protected.</p>
+      <div class="example">WPA (2003) → WPA2 (AES) → WPA3 (2018) | 192-bit encryption</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">2FA/MFA</span>
+      <h3>2FA / MFA</h3>
+      <div class="fullform">Two/Multi-Factor Authentication</div>
+      <p>Password + OTP/biometric. Something you know + have + are. Security layer add.</p>
+      <div class="example">ઉdaHaraN: Google Authenticator, bank OTP, fingerprint | TOTP, FIDO2</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">IDS/IPS</span>
+      <h3>IDS / IPS</h3>
+      <div class="fullform">Intrusion Detection/Prevention System</div>
+      <p>IDS = alert only, IPS = block automatically. Signature + anomaly based detection.</p>
+      <div class="example">ઉdaHaraN: Snort, Suricata IDS | Network traffic monitor</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VPN ===== -->
+<section class="section" id="vpn">
+  <div class="section-header">
+    <div class="section-icon icon-purple">🛡️</div>
+    <div>
+      <div class="section-title">VPN — Virtual Private Network</div>
+      <div class="section-subtitle">Secure tunnels over public internet</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-purple">Site-to-Site VPN</span>
+      <h3>Site-to-Site VPN</h3>
+      <p>બે offices/data centers ને securely connect. Permanent tunnel. IPSec protocol. Corporate use.</p>
+      <div class="example">ઉdaHaraN: Mumbai HQ ↔ Ahmedabad branch office secure link</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-blue">Remote Access VPN</span>
+      <h3>Remote Access VPN</h3>
+      <p>Individual user ↔ corporate network. Work from home. SSL VPN, IPSec client. Cisco AnyConnect.</p>
+      <div class="example">ઉdaHaraN: WFH employee office server access | OpenVPN client</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">Consumer VPN</span>
+      <h3>Consumer VPN</h3>
+      <p>Privacy + geo-restriction bypass. IP hide. NordVPN, ExpressVPN, ProtonVPN, Windscribe.</p>
+      <div class="example">ઉdaHaraN: Netflix US content India ઉપર | Public Wi-Fi safe</div>
+    </div>
+  </div>
+  <h3 style="margin-top:24px;margin-bottom:14px;color:var(--accent3)">VPN Protocols</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Protocol</th><th>Port</th><th>Security</th><th>Speed</th><th>ઉdaHaraN</th></tr></thead>
+      <tbody>
+        <tr><td>OpenVPN</td><td>1194 UDP/TCP</td><td class="guj">ઊંચી (AES-256)</td><td class="guj">Good</td><td class="guj">Most popular, open source</td></tr>
+        <tr><td>WireGuard</td><td>51820 UDP</td><td class="guj">ઘણી ઊંચી</td><td class="guj">Fastest</td><td class="guj">Modern, simple, 4K lines code</td></tr>
+        <tr><td>IKEv2/IPSec</td><td>500, 4500 UDP</td><td class="guj">ઊંચી</td><td class="guj">Fast</td><td class="guj">Mobile reconnect quick, Cisco</td></tr>
+        <tr><td>L2TP/IPSec</td><td>1701 UDP</td><td class="guj">Medium</td><td class="guj">Medium</td><td class="guj">Built-in OS support</td></tr>
+        <tr><td>PPTP</td><td>1723 TCP</td><td class="guj">ઓછી (insecure)</td><td class="guj">Fast</td><td class="guj">Legacy, avoid</td></tr>
+        <tr><td>SSTP</td><td>443 TCP</td><td class="guj">ઊંચી (SSL)</td><td class="guj">Good</td><td class="guj">Windows, firewall bypass</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== EMAIL PROTOCOLS ===== -->
+<section class="section" id="email">
+  <div class="section-header">
+    <div class="section-icon icon-orange">📧</div>
+    <div>
+      <div class="section-title">Email Protocols — ઇ-મેઇલ પ્રોટોકોલ</div>
+      <div class="section-subtitle">Send, receive and manage emails</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-orange">SMTP</span>
+      <h3>SMTP — Simple Mail Transfer Protocol</h3>
+      <p>Email <strong>મોકલવા</strong> માટે. Port 25 (server-server), 587 (client-server TLS), 465 (SSL).</p>
+      <div class="example">ઉdaHaraN: Gmail, Outlook email send | "Outgoing mail server" settings</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-blue">POP3</span>
+      <h3>POP3 — Post Office Protocol v3</h3>
+      <p>Email <strong>download</strong> (server ઉpare)athi local. Port 110 (plain), 995 (SSL). Delete from server.</p>
+      <div class="example">Offline email access, single device | Thunderbird POP3</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">IMAP</span>
+      <h3>IMAP — Internet Message Access Protocol</h3>
+      <p>Email server ઉpare <strong>sync</strong> maintain. Port 143 (plain), 993 (SSL). Multi-device access.</p>
+      <div class="example">ઉdaHaraN: Gmail multiple devices sync | Server ઉpare store | IMAP4</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">MIME</span>
+      <h3>MIME</h3>
+      <div class="fullform">Multipurpose Internet Mail Extensions</div>
+      <p>Email undo attachments, images, HTML format support. Non-ASCII characters. Base64 encoding.</p>
+      <div class="example">PDF attach send, HTML email format | S/MIME (encrypted)</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">SPF</span>
+      <h3>SPF / DKIM / DMARC</h3>
+      <div class="fullform">Sender Policy Framework / DomainKeys Identified Mail</div>
+      <p>Email authentication. Spam/spoofing prevent. DNS TXT records. Email verify chain.</p>
+      <div class="example">ઉdaHaraN: Fake "bank@sbi.co.in" email block | DNS verify</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">Spam Filters</span>
+      <h3>Anti-Spam Techniques</h3>
+      <p>Bayesian filtering, blacklists (RBL), content scanning, rate limiting. Gmail spam folder.</p>
+      <div class="example">SpamAssassin, Postfix filters | CAPTCHA, honeypot traps</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CABLES ===== -->
+<section class="section" id="cables">
+  <div class="section-header">
+    <div class="section-icon icon-yellow">🔌</div>
+    <div>
+      <div class="section-title">Network Cables — નેટવર્ક કેબલ્સ</div>
+      <div class="section-subtitle">Physical transmission media</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-yellow">Cat5e</span>
+      <h3>Cat5e — Category 5 Enhanced</h3>
+      <p>Twisted pair copper. 100MHz, 1 Gbps up to 100m. Most common office/home cable. RJ45 connector.</p>
+      <div class="example">ઉdaHaraN: Home LAN, office networking | Low cost, easy install</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-blue">Cat6/Cat6a</span>
+      <h3>Cat6 / Cat6a</h3>
+      <p>250MHz/500MHz. 1Gbps (100m) / 10Gbps (55m/100m). Better crosstalk protection. Data centers.</p>
+      <div class="example">ઉdaHaraN: Server rooms, modern offices | 10GBASE-T networks</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">Cat8</span>
+      <h3>Cat8 — Category 8</h3>
+      <p>2000MHz. 25Gbps/40Gbps up to 30m. Shielded. Data center top-of-rack.</p>
+      <div class="example">ઉdaHaraN: Data centers, server-to-switch connections | High-end</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">Fiber Optic</span>
+      <h3>Fiber Optic — ફાઇબર ઓપ્ટિક</h3>
+      <p>Light signals through glass/plastic fiber. Extremely fast, long distance, EMI-immune. Two types: SMF & MMF.</p>
+      <div class="example">ઉdaHaraN: Jio Fiber, internet backbone, 100Gbps+ | FTTH home</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-orange">Coaxial</span>
+      <h3>Coaxial Cable — કો-એક્સિઅલ</h3>
+      <p>Central conductor + shield. Cable TV, old Ethernet (10BASE2/5). Still used for cable internet (DOCSIS).</p>
+      <div class="example">ઉdaHaraN: Cable TV, CATV, early computer LAN (Thin/Thick Ethernet)</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">STP/UTP</span>
+      <h3>STP vs UTP</h3>
+      <div class="fullform">Shielded / Unshielded Twisted Pair</div>
+      <p>UTP = no shielding (common, cheap). STP = metal shield (EMI protection, industrial). Both RJ45.</p>
+      <div class="example">UTP: homes | STP: factories, hospitals near machines | T568A/B wiring</div>
+    </div>
+  </div>
+  <hr class="divider">
+  <h3 style="margin-bottom:14px;color:var(--accent3)">🔌 Connectors & Standards</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Connector</th><th>Use</th><th>Cables</th><th>Speeds</th></tr></thead>
+      <tbody>
+        <tr><td>RJ45</td><td class="guj">Ethernet (LAN)</td><td class="guj">Cat5e, Cat6, Cat7, Cat8</td><td class="guj">Up to 40Gbps</td></tr>
+        <tr><td>RJ11</td><td class="guj">Phone line, DSL modem</td><td class="guj">Telephone cable</td><td class="guj">Voice, DSL</td></tr>
+        <tr><td>SC/LC/ST</td><td class="guj">Fiber optic connections</td><td class="guj">SMF, MMF fiber</td><td class="guj">100Gbps+</td></tr>
+        <tr><td>SFP/SFP+</td><td class="guj">Switch/Router fiber module</td><td class="guj">Fiber, DAC copper</td><td class="guj">1G / 10G</td></tr>
+        <tr><td>QSFP</td><td class="guj">Data center high-speed</td><td class="guj">Fiber, DAC</td><td class="guj">40G / 100G</td></tr>
+        <tr><td>BNC</td><td class="guj">Coaxial, old Ethernet</td><td class="guj">Coaxial cable</td><td class="guj">10 Mbps (legacy)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== PORTS ===== -->
+<section class="section" id="ports">
+  <div class="section-header">
+    <div class="section-icon icon-blue">🚪</div>
+    <div>
+      <div class="section-title">Network Ports — નેટવર્ક પોર્ટ્સ</div>
+      <div class="section-subtitle">Logical communication endpoints (0–65535)</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="port-num">20/21</div><h3>FTP</h3><div class="fullform">File Transfer Protocol</div><p>Data (20) + Control (21). File upload/download.</p></div>
+    <div class="card"><div class="port-num">22</div><h3>SSH / SFTP / SCP</h3><div class="fullform">Secure Shell</div><p>Encrypted remote access, secure file transfer.</p></div>
+    <div class="card"><div class="port-num">23</div><h3>Telnet</h3><p>Remote terminal (unencrypted). Legacy, insecure.</p></div>
+    <div class="card"><div class="port-num">25</div><h3>SMTP</h3><div class="fullform">Simple Mail Transfer Protocol</div><p>Email sending between mail servers.</p></div>
+    <div class="card"><div class="port-num">53</div><h3>DNS</h3><div class="fullform">Domain Name System</div><p>Domain → IP resolution. UDP (queries) + TCP (zone transfer).</p></div>
+    <div class="card"><div class="port-num">67/68</div><h3>DHCP</h3><p>Server (67) + Client (68). IP auto-assign.</p></div>
+    <div class="card"><div class="port-num">80</div><h3>HTTP</h3><div class="fullform">HyperText Transfer Protocol</div><p>Web browsing (unencrypted).</p></div>
+    <div class="card"><div class="port-num">110</div><h3>POP3</h3><p>Email download from server.</p></div>
+    <div class="card"><div class="port-num">123</div><h3>NTP</h3><div class="fullform">Network Time Protocol</div><p>Time synchronization. UDP.</p></div>
+    <div class="card"><div class="port-num">143</div><h3>IMAP</h3><p>Email sync/access. Multi-device.</p></div>
+    <div class="card"><div class="port-num">161/162</div><h3>SNMP</h3><p>Network monitoring. UDP 161 (query), 162 (trap).</p></div>
+    <div class="card"><div class="port-num">443</div><h3>HTTPS</h3><div class="fullform">HTTP Secure (TLS)</div><p>Encrypted web. 🔒 padlock.</p></div>
+    <div class="card"><div class="port-num">465/587</div><h3>SMTP (Secure)</h3><p>465=SSL, 587=STARTTLS. Email send secure.</p></div>
+    <div class="card"><div class="port-num">993</div><h3>IMAPS</h3><p>IMAP over SSL. Secure email sync.</p></div>
+    <div class="card"><div class="port-num">995</div><h3>POP3S</h3><p>POP3 over SSL. Secure email download.</p></div>
+    <div class="card"><div class="port-num">1194</div><h3>OpenVPN</h3><p>VPN tunnel. UDP/TCP.</p></div>
+    <div class="card"><div class="port-num">1433</div><h3>MS SQL Server</h3><p>Microsoft SQL database. TCP.</p></div>
+    <div class="card"><div class="port-num">3306</div><h3>MySQL/MariaDB</h3><p>MySQL database server.</p></div>
+    <div class="card"><div class="port-num">3389</div><h3>RDP</h3><div class="fullform">Remote Desktop Protocol</div><p>Windows remote desktop. TCP/UDP.</p></div>
+    <div class="card"><div class="port-num">5432</div><h3>PostgreSQL</h3><p>PostgreSQL database server.</p></div>
+    <div class="card"><div class="port-num">6379</div><h3>Redis</h3><p>In-memory data store/cache.</p></div>
+    <div class="card"><div class="port-num">8080/8443</div><h3>HTTP Alt / HTTPS Alt</h3><p>Alternative web server ports. Dev use.</p></div>
+    <div class="card"><div class="port-num">27017</div><h3>MongoDB</h3><p>NoSQL document database.</p></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <p>📌 <strong style="color:var(--accent4)">Port Ranges:</strong> <span class="mono">0–1023</span> = Well-known (system) | <span class="mono">1024–49151</span> = Registered | <span class="mono">49152–65535</span> = Dynamic/Ephemeral (client ports)</p>
+  </div>
+</section>
+
+<!-- ===== HIGH SPEED DATA ===== -->
+<section class="section" id="speed">
+  <div class="section-header">
+    <div class="section-icon icon-green">⚡</div>
+    <div>
+      <div class="section-title">High Speed Data Transfer — ઝડપી ડેટા ટ્રાન્સફર</div>
+      <div class="section-subtitle">Technologies enabling fast data transmission</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card"><span class="card-tag c-blue">FTTH</span><h3>FTTH — Fiber to the Home</h3><p>Optical fiber directly to residence. 1 Gbps+ speeds. Jio Fiber India undo popular.</p><div class="example">ઉdaHaraN: Jio Fiber 1Gbps plan, ACT Fibernet</div></div>
+    <div class="card"><span class="card-tag c-green">GPON</span><h3>GPON</h3><div class="fullform">Gigabit Passive Optical Network</div><p>Fiber optic shared network. 2.5Gbps down, 1.25Gbps up. Passive splitters. Jio Fiber technology.</p><div class="example">One fiber → 32-64 homes split</div></div>
+    <div class="card"><span class="card-tag c-purple">DOCSIS</span><h3>DOCSIS 3.1/4.0</h3><div class="fullform">Data Over Cable Service Interface Spec</div><p>Cable TV wire ઉpare internet. 10Gbps down possible. Full Duplex DOCSIS 4.0.</p><div class="example">Cable internet providers | Spectrum, Comcast</div></div>
+    <div class="card"><span class="card-tag c-yellow">DSL</span><h3>DSL — Digital Subscriber Line</h3><p>Phone line ઉpare broadband. ADSL (up to 8Mbps), VDSL (up to 100Mbps), G.fast (1Gbps).</p><div class="example">ઉdaHaraN: BSNL broadband (copper line based)</div></div>
+    <div class="card"><span class="card-tag c-orange">Satellite</span><h3>Satellite Internet</h3><p>GEO (high latency ~600ms), LEO (low latency ~20ms). Starlink = 200Mbps, 20ms latency.</p><div class="example">ઉdaHaraN: Starlink India, rural areas | Remote locations</div></div>
+    <div class="card"><span class="card-tag c-blue">100GbE</span><h3>100 Gigabit Ethernet</h3><p>Data center backbone. 100Gbps per port. QSFP28 transceivers. Hyperscale data centers.</p><div class="example">Google, Amazon, Microsoft data centers</div></div>
+  </div>
+</section>
+
+<!-- ===== LEGACY ===== -->
+<section class="section" id="legacy">
+  <div class="section-header">
+    <div class="section-icon icon-orange">📟</div>
+    <div>
+      <div class="section-title">Legacy Protocols & Technologies</div>
+      <div class="section-subtitle">Historical networking — X.25, IMP, Token Ring, etc.</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag c-orange">X.25</span>
+      <h3>X.25 Protocol</h3>
+      <p>1970s packet-switched WAN standard. ITU-T. Error correction built-in. Slow (64kbps). Banks, ATMs.</p>
+      <div class="example">ઉdaHaraN: Early ATM networks, airline reservations | Replaced by Frame Relay, MPLS</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-orange">IMP</span>
+      <h3>IMP — Interface Message Processor</h3>
+      <div class="fullform">Interface Message Processor</div>
+      <p>ARPANET ના first routers (1969). BBN Technologies. Modern routers ના predecessor. Packet switching pioneer.</p>
+      <div class="example">ARPANET 1969 | UCLA first IMP | Internet ના grandfather</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">Token Ring</span>
+      <h3>Token Ring (IEEE 802.5)</h3>
+      <p>IBM 1985. Ring topology. Token pass scheme. 4/16 Mbps. Collision-free. Replaced by Ethernet.</p>
+      <div class="example">IBM mainframe environments | MAU (hub) | Legacy 1980s-90s offices</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">Frame Relay</span>
+      <h3>Frame Relay</h3>
+      <p>Packet-switched WAN. X.25 replacement. DLCI addressing. PVC/SVC. 1.5Mbps–45Mbps. Banks.</p>
+      <div class="example">1990s corporate WAN | Replaced by MPLS, broadband</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-blue">ATM</span>
+      <h3>ATM — Asynchronous Transfer Mode</h3>
+      <p>Fixed 53-byte cells. QoS built-in. OC-3 to OC-192. Telecom backbone. Complex, expensive.</p>
+      <div class="example">Telecom networks, cable TV backbone | 155Mbps–10Gbps</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-red">ISDN</span>
+      <h3>ISDN — Integrated Services Digital Network</h3>
+      <div class="fullform">Integrated Services Digital Network</div>
+      <p>Digital phone + data. BRI (128kbps), PRI (1.5/2Mbps). Pre-DSL era broadband.</p>
+      <div class="example">1990s video conferencing | Replaced by DSL/broadband</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-orange">Dial-up</span>
+      <h3>Dial-up Modem</h3>
+      <p>V.90/V.92 standard. 56kbps maximum. Phone line. ISP ने call. Famous 🎵 modem sound.</p>
+      <div class="example">ઉdaHaraN: 1990s VSNL internet India | AOL, NetZero | Still rural areas</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-green">MPLS</span>
+      <h3>MPLS — Multiprotocol Label Switching</h3>
+      <p>Labels undo fast packet forward. VPN, QoS. ISP/Enterprise WAN backbone. IP+ATM advantages.</p>
+      <div class="example">Enterprise WAN, ISP backbone | MPLS VPN = secure leased line alternative</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-yellow">BOP</span>
+      <h3>BOP — Bit-Oriented Protocol</h3>
+      <div class="fullform">Bit-Oriented Protocol</div>
+      <p>HDLC, SDLC family. Bit-level framing. Flag (01111110) delimiters. Synchronous transmission.</p>
+      <div class="example">HDLC: WAN, ISDN, PPP base | SDLC: IBM SNA networks</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-purple">PPP</span>
+      <h3>PPP — Point-to-Point Protocol</h3>
+      <p>Direct serial connection protocol. Authentication (PAP/CHAP). DSL base (PPPoE). Multi-protocol.</p>
+      <div class="example">ઉdaHaraN: DSL internet (PPPoE), dial-up, VPN tunnels | Layer 2</div>
+    </div>
+    <div class="card">
+      <span class="card-tag c-blue">CAN Bus</span>
+      <h3>CAN — Controller Area Network</h3>
+      <div class="fullform">Controller Area Network</div>
+      <p>Automotive/industrial device communication bus. No central computer. Differential signaling. 1Mbps.</p>
+      <div class="example">ઉdaHaraN: Car ECU, ABS, airbag, instrument cluster communication | OBD-II</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FULL FORMS ===== -->
+<section class="section" id="fullforms">
+  <div class="section-header">
+    <div class="section-icon icon-pink">📖</div>
+    <div>
+      <div class="section-title">Complete Full Forms — સંપૂર્ણ ટૂંકાક્ષર (A–Z)</div>
+      <div class="section-subtitle">All networking acronyms with Gujarati meaning</div>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Acronym</th><th>Full Form</th><th>ગુjRATI અર્થ</th></tr></thead>
+      <tbody>
+        <tr><td>ACK</td><td>Acknowledgment</td><td class="guj">રસીદ / પ્રાપ્તિ acknowledgment</td></tr>
+        <tr><td>ADSL</td><td>Asymmetric Digital Subscriber Line</td><td class="guj">Asymmetric broadband over phone line</td></tr>
+        <tr><td>AES</td><td>Advanced Encryption Standard</td><td class="guj">ઉchcha સ્તરીય encryption algorithm</td></tr>
+        <tr><td>AP</td><td>Access Point</td><td class="guj">Wireless network access device</td></tr>
+        <tr><td>API</td><td>Application Programming Interface</td><td class="guj">Software ane software ane communicate</td></tr>
+        <tr><td>ARP</td><td>Address Resolution Protocol</td><td class="guj">IP → MAC address ane resolve</td></tr>
+        <tr><td>ASN</td><td>Autonomous System Number</td><td class="guj">BGP routing ane unique identifier</td></tr>
+        <tr><td>ATM</td><td>Asynchronous Transfer Mode</td><td class="guj">Fixed-cell packet network technology</td></tr>
+        <tr><td>BGP</td><td>Border Gateway Protocol</td><td class="guj">Internet routing protocol (between ISPs)</td></tr>
+        <tr><td>BNC</td><td>Bayonet Neill-Concelman</td><td class="guj">Coaxial cable connector type</td></tr>
+        <tr><td>BYOD</td><td>Bring Your Own Device</td><td class="guj">Personal device ane office network ane use</td></tr>
+        <tr><td>CA</td><td>Certificate Authority</td><td class="guj">SSL certificates issue ane authority</td></tr>
+        <tr><td>CDN</td><td>Content Delivery Network</td><td class="guj">Website content globally fast deliver</td></tr>
+        <tr><td>CIDR</td><td>Classless Inter-Domain Routing</td><td class="guj">Flexible IP address blocks ane divide</td></tr>
+        <tr><td>CLI</td><td>Command Line Interface</td><td class="guj">Text-based computer ane control</td></tr>
+        <tr><td>CPU</td><td>Central Processing Unit</td><td class="guj">Computer ane main processor</td></tr>
+        <tr><td>CRC</td><td>Cyclic Redundancy Check</td><td class="guj">Data error detection method</td></tr>
+        <tr><td>CSMA/CD</td><td>Carrier Sense Multiple Access/Collision Detection</td><td class="guj">Ethernet collision detection method</td></tr>
+        <tr><td>DDoS</td><td>Distributed Denial of Service</td><td class="guj">Multiple sources ane server attack</td></tr>
+        <tr><td>DHCP</td><td>Dynamic Host Configuration Protocol</td><td class="guj">Automatic IP address assignment</td></tr>
+        <tr><td>DMZ</td><td>Demilitarized Zone</td><td class="guj">Public servers ane separate network segment</td></tr>
+        <tr><td>DNS</td><td>Domain Name System</td><td class="guj">Domain → IP address ane translator</td></tr>
+        <tr><td>DoS</td><td>Denial of Service</td><td class="guj">Server ane overwhelm ane attack</td></tr>
+        <tr><td>DSL</td><td>Digital Subscriber Line</td><td class="guj">Phone line ane broadband internet</td></tr>
+        <tr><td>EIGRP</td><td>Enhanced Interior Gateway Routing Protocol</td><td class="guj">Cisco advanced routing protocol</td></tr>
+        <tr><td>EMI</td><td>Electromagnetic Interference</td><td class="guj">Electronic signal interference</td></tr>
+        <tr><td>FTP</td><td>File Transfer Protocol</td><td class="guj">Files transfer protocol</td></tr>
+        <tr><td>FTTB</td><td>Fiber to the Building</td><td class="guj">Building ane fiber optic</td></tr>
+        <tr><td>FTTH</td><td>Fiber to the Home</td><td class="guj">Ghar ane fiber optic internet</td></tr>
+        <tr><td>FTTP</td><td>Fiber to the Premises</td><td class="guj">Location ane fiber optic</td></tr>
+        <tr><td>GSM</td><td>Global System for Mobile</td><td class="guj">2G mobile phone standard</td></tr>
+        <tr><td>HDLC</td><td>High-level Data Link Control</td><td class="guj">Bit-oriented WAN protocol</td></tr>
+        <tr><td>HTTP</td><td>HyperText Transfer Protocol</td><td class="guj">Web browsing protocol</td></tr>
+        <tr><td>HTTPS</td><td>HTTP Secure</td><td class="guj">Encrypted web browsing protocol</td></tr>
+        <tr><td>ICMP</td><td>Internet Control Message Protocol</td><td class="guj">Ping/traceroute error protocol</td></tr>
+        <tr><td>IDS</td><td>Intrusion Detection System</td><td class="guj">Network attack detect ane system</td></tr>
+        <tr><td>IEEE</td><td>Institute of Electrical and Electronics Engineers</td><td class="guj">Tech standards organization</td></tr>
+        <tr><td>IKE</td><td>Internet Key Exchange</td><td class="guj">VPN key negotiation protocol</td></tr>
+        <tr><td>IMAP</td><td>Internet Message Access Protocol</td><td class="guj">Email sync protocol (multi-device)</td></tr>
+        <tr><td>IMP</td><td>Interface Message Processor</td><td class="guj">ARPANET ane first router (1969)</td></tr>
+        <tr><td>IP</td><td>Internet Protocol</td><td class="guj">Internet address / routing protocol</td></tr>
+        <tr><td>IPS</td><td>Intrusion Prevention System</td><td class="guj">Network attack block ane system</td></tr>
+        <tr><td>IPSec</td><td>Internet Protocol Security</td><td class="guj">Network layer VPN encryption</td></tr>
+        <tr><td>ISP</td><td>Internet Service Provider</td><td class="guj">Internet connection provide ane company</td></tr>
+        <tr><td>ISDN</td><td>Integrated Services Digital Network</td><td class="guj">Digital phone + data network (legacy)</td></tr>
+        <tr><td>ITU</td><td>International Telecommunication Union</td><td class="guj">Global telecom standards body</td></tr>
+        <tr><td>L2TP</td><td>Layer 2 Tunneling Protocol</td><td class="guj">VPN tunneling protocol</td></tr>
+        <tr><td>LAN</td><td>Local Area Network</td><td class="guj">Nana vistarmaan computer network</td></tr>
+        <tr><td>LDAP</td><td>Lightweight Directory Access Protocol</td><td class="guj">Directory services access protocol</td></tr>
+        <tr><td>LTE</td><td>Long Term Evolution</td><td class="guj">4G mobile standard</td></tr>
+        <tr><td>MAC</td><td>Media Access Control</td><td class="guj">Hardware unique address (NIC)</td></tr>
+        <tr><td>MAN</td><td>Metropolitan Area Network</td><td class="guj">Shahar-level network</td></tr>
+        <tr><td>MIME</td><td>Multipurpose Internet Mail Extensions</td><td class="guj">Email attachments + formats</td></tr>
+        <tr><td>MPLS</td><td>Multiprotocol Label Switching</td><td class="guj">Fast WAN packet forwarding</td></tr>
+        <tr><td>MTU</td><td>Maximum Transmission Unit</td><td class="guj">Largest packet size on network</td></tr>
+        <tr><td>NAT</td><td>Network Address Translation</td><td class="guj">Private IP → Public IP convert</td></tr>
+        <tr><td>NIC</td><td>Network Interface Card</td><td class="guj">Computer network connection hardware</td></tr>
+        <tr><td>NTP</td><td>Network Time Protocol</td><td class="guj">Network time synchronization</td></tr>
+        <tr><td>OSI</td><td>Open Systems Interconnection</td><td class="guj">7-layer network reference model</td></tr>
+        <tr><td>OSPF</td><td>Open Shortest Path First</td><td class="guj">Link-state routing protocol</td></tr>
+        <tr><td>OTP</td><td>One-Time Password</td><td class="guj">Ek vakhta ni pasword (2FA)</td></tr>
+        <tr><td>PAN</td><td>Personal Area Network</td><td class="guj">Ek vyakti aaspaas network (~10m)</td></tr>
+        <tr><td>PKI</td><td>Public Key Infrastructure</td><td class="guj">Digital certificates management system</td></tr>
+        <tr><td>POP3</td><td>Post Office Protocol version 3</td><td class="guj">Email download protocol</td></tr>
+        <tr><td>PPP</td><td>Point-to-Point Protocol</td><td class="guj">Direct connection protocol (DSL/dial-up)</td></tr>
+        <tr><td>PPPoE</td><td>PPP over Ethernet</td><td class="guj">DSL internet authentication</td></tr>
+        <tr><td>QoS</td><td>Quality of Service</td><td class="guj">Network traffic priority management</td></tr>
+        <tr><td>RADIUS</td><td>Remote Authentication Dial-In User Service</td><td class="guj">Network access authentication server</td></tr>
+        <tr><td>RDP</td><td>Remote Desktop Protocol</td><td class="guj">Windows remote control protocol</td></tr>
+        <tr><td>RFC</td><td>Request for Comments</td><td class="guj">Internet standards documents</td></tr>
+        <tr><td>RIP</td><td>Routing Information Protocol</td><td class="guj">Distance-vector routing protocol</td></tr>
+        <tr><td>RSA</td><td>Rivest-Shamir-Adleman</td><td class="guj">Asymmetric encryption algorithm</td></tr>
+        <tr><td>SFTP</td><td>SSH File Transfer Protocol</td><td class="guj">Encrypted file transfer</td></tr>
+        <tr><td>SIP</td><td>Session Initiation Protocol</td><td class="guj">VoIP calls setup protocol</td></tr>
+        <tr><td>SMF</td><td>Single Mode Fiber</td><td class="guj">Long distance fiber (yellow)</td></tr>
+        <tr><td>SMTP</td><td>Simple Mail Transfer Protocol</td><td class="guj">Email mOKalva protocol</td></tr>
+        <tr><td>SNMP</td><td>Simple Network Management Protocol</td><td class="guj">Network device monitoring</td></tr>
+        <tr><td>SPN</td><td>Service Provider Network</td><td class="guj">ISP infrastructure network</td></tr>
+        <tr><td>SSH</td><td>Secure Shell</td><td class="guj">Encrypted remote terminal access</td></tr>
+        <tr><td>SSL</td><td>Secure Sockets Layer</td><td class="guj">Encrypted connection (older TLS)</td></tr>
+        <tr><td>STP</td><td>Shielded Twisted Pair / Spanning Tree</td><td class="guj">Shielded cable / Loop prevention protocol</td></tr>
+        <tr><td>TCP</td><td>Transmission Control Protocol</td><td class="guj">Reliable data delivery protocol</td></tr>
+        <tr><td>TCP/IP</td><td>Transmission Control Protocol/Internet Protocol</td><td class="guj">Internet anu mul protocol suite</td></tr>
+        <tr><td>TLS</td><td>Transport Layer Security</td><td class="guj">Modern SSL - web encryption</td></tr>
+        <tr><td>TTL</td><td>Time to Live</td><td class="guj">Packet lifetime / DNS cache time</td></tr>
+        <tr><td>UDP</td><td>User Datagram Protocol</td><td class="guj">Fast (unreliable) data protocol</td></tr>
+        <tr><td>UMTS</td><td>Universal Mobile Telecommunications System</td><td class="guj">3G mobile network standard</td></tr>
+        <tr><td>URL</td><td>Uniform Resource Locator</td><td class="guj">Website address (https://...)</td></tr>
+        <tr><td>UTP</td><td>Unshielded Twisted Pair</td><td class="guj">Common ethernet cable type</td></tr>
+        <tr><td>VLAN</td><td>Virtual Local Area Network</td><td class="guj">Logical network segmentation</td></tr>
+        <tr><td>VLSM</td><td>Variable Length Subnet Mask</td><td class="guj">Flexible IP subnetting</td></tr>
+        <tr><td>VoIP</td><td>Voice over Internet Protocol</td><td class="guj">Internet par phone call</td></tr>
+        <tr><td>VPN</td><td>Virtual Private Network</td><td class="guj">Secure encrypted internet tunnel</td></tr>
+        <tr><td>WAN</td><td>Wide Area Network</td><td class="guj">Mota vistarmaan network (internet)</td></tr>
+        <tr><td>WAP</td><td>Wireless Access Point</td><td class="guj">Wi-Fi signal provide ane device</td></tr>
+        <tr><td>WCDMA</td><td>Wideband Code Division Multiple Access</td><td class="guj">3G transmission technology</td></tr>
+        <tr><td>WLAN</td><td>Wireless Local Area Network</td><td class="guj">Wi-Fi based LAN</td></tr>
+        <tr><td>WPA</td><td>Wi-Fi Protected Access</td><td class="guj">Wi-Fi security protocol</td></tr>
+        <tr><td>WWW</td><td>World Wide Web</td><td class="guj">Internet par websites anu collection</td></tr>
+        <tr><td>XSS</td><td>Cross-Site Scripting</td><td class="guj">Web attack - malicious script inject</td></tr>
+        <tr><td>ZTP</td><td>Zero Touch Provisioning</td><td class="guj">Auto network device configure</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>🌐 <strong>નેટવર્કિંગ જ્ઞાનકોશ</strong> — Networking Encyclopedia in Gujarati</p>
+  <p style="margin-top:8px">OSI Model • IP Addressing • Protocols • 1G–5G • Security • VPN • Email • Cables • Ports • Full Forms</p>
+  <p style="margin-top:8px;color:var(--text3)">ગુjRATI stu dents & professionals ane sambhit | For learning purposes</p>
+</footer>
+
+</body>
+</html>
