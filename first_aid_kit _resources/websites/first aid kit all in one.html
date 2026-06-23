@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="gu">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First Aid Complete Course - Conductor Exam</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0b5e7c;
+            --primary-light: #1782a8;
+            --primary-dark: #073a4f;
+            --primary-bg: #e8f4f8;
+            --accent: #e67e22;
+            --accent-light: #f39c12;
+            --text: #1e293b;
+            --text-light: #475569;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            --radius: 14px;
+            --transition: 0.3s ease;
+            --sidebar-width: 300px;
+            --header-height: 64px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul,
+        ol {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* ===== HEADER ===== */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .app-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .app-header .logo span {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+
+        .app-header .logo .icon {
+            font-size: 1.5rem;
+        }
+
+        /* ===== SEARCH CONTAINER & RESULTS DROPDOWN ===== */
+        .search-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 6px);
+            /* left: 0; */
+            right: 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            max-height: 60vh;            /* ← changed to use viewport height */
+            overflow-y: auto;            /* ensure scrolling */
+            z-index: 1100;
+            display: none;
+            min-width: 280px;
+            padding: 0.3rem 0;
+        }
+
+        .search-results.visible {
+            display: block;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 1px solid var(--bg);
+            font-size: 0.85rem;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover,
+        .search-result-item:focus {
+            background: var(--primary-bg);
+            color: var(--primary);
+        }
+
+        .search-result-item .result-part {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.7rem;
+            background: var(--primary-bg);
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        .search-result-item .result-title {
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .search-result-item .result-match {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .search-results .no-result {
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* ===== SEARCH ===== */
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+            border-radius: 30px;
+            padding: 0.2rem 0.2rem 0.2rem 1rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .search-wrapper:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(11, 94, 124, 0.15);
+        }
+
+        .search-wrapper input {
+            border: none;
+            background: transparent;
+            padding: 0.4rem 0.2rem;
+            font-size: 0.85rem;
+            width: 150px;
+            outline: none;
+            font-family: var(--font);
+            color: var(--text);
+        }
+
+        .search-wrapper input::placeholder {
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+
+        .search-wrapper button {
+            background: var(--primary);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-wrapper button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* highlight matches */
+        .highlight {
+            background: #f1c40f;
+            padding: 0.1rem 0.2rem;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .topic-card.search-match {
+            border: 3px solid #f1c40f;
+            box-shadow: 0 0 20px rgba(241, 196, 15, 0.25);
+        }
+
+        .header-actions .badge {
+            background: var(--primary-bg);
+            color: var(--primary);
+            padding: 0.2rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+            padding: 0.2rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background: var(--bg);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            padding: 1.2rem 0.8rem 2rem;
+            z-index: 999;
+            transition: transform var(--transition);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar .nav-section {
+            margin-bottom: 0.6rem;
+        }
+
+        .sidebar .nav-section-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 0.6rem 0.8rem 0.3rem;
+        }
+
+        .sidebar .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .nav-item:hover {
+            background: var(--primary-bg);
+            color: var(--primary);
+        }
+
+        .sidebar .nav-item.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(11, 94, 124, 0.25);
+        }
+
+        .sidebar .nav-item .num {
+            font-weight: 600;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            min-width: 22px;
+        }
+
+        .sidebar .nav-item.active .num {
+            opacity: 1;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            padding: 2rem 2.5rem 4rem;
+            flex: 1;
+            max-width: 1100px;
+        }
+
+        /* ===== TOPIC CARD ===== */
+        .topic-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .topic-card:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+        }
+
+        .topic-card .part-badge {
+            display: inline-block;
+            background: var(--primary-bg);
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.9rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 0.8rem;
+        }
+
+        .topic-card h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.4rem;
+            line-height: 1.2;
+        }
+
+        .topic-card .subhead {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-light);
+            padding-left: 1rem;
+        }
+
+        .topic-card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin: 1.8rem 0 0.8rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 2px solid var(--primary-bg);
+        }
+
+        .topic-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 1.2rem 0 0.5rem;
+        }
+
+        .topic-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 1rem 0 0.3rem;
+        }
+
+        .topic-card p {
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .topic-card ul,
+        .topic-card ol {
+            margin-bottom: 0.8rem;
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 480px;
+        }
+
+        .table-wrap th {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            padding: 0.7rem 1rem;
+            text-align: left;
+        }
+
+        .table-wrap td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table-wrap tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-wrap tr:nth-child(even) td {
+            background: var(--bg);
+        }
+
+        /* ===== BOXES ===== */
+        .box-tip,
+        .box-warning,
+        .box-important,
+        .box-example {
+            padding: 1rem 1.4rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 5px solid;
+        }
+
+        .box-tip {
+            background: #eafaf1;
+            border-color: #27ae60;
+        }
+
+        .box-warning {
+            background: #fef9e7;
+            border-color: #f39c12;
+        }
+
+        .box-important {
+            background: #eaf2f8;
+            border-color: #2980b9;
+        }
+
+        .box-example {
+            background: #fdf2e9;
+            border-color: #e67e22;
+        }
+
+        .box-tip strong,
+        .box-warning strong,
+        .box-important strong,
+        .box-example strong {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.2rem;
+        }
+
+        .box-tip strong {
+            color: #1a7a3a;
+        }
+
+        .box-warning strong {
+            color: #b7950b;
+        }
+
+        .box-important strong {
+            color: #1a5276;
+        }
+
+        .box-example strong {
+            color: #b9770e;
+        }
+
+        /* ===== MCQ ===== */
+        .mcq-block {
+            margin: 1.2rem 0;
+            padding: 1.2rem 1.5rem;
+            background: var(--bg);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .mcq-block .q {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .mcq-block .opts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            padding-left: 0.5rem;
+        }
+
+        .mcq-block .opts label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.92rem;
+        }
+
+        .mcq-block .opts label:hover {
+            background: var(--primary-bg);
+        }
+
+        .mcq-block .opts input[type="radio"] {
+            accent-color: var(--primary);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .mcq-block .reveal-btn {
+            margin-top: 0.8rem;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mcq-block .reveal-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .mcq-block .answer {
+            margin-top: 0.8rem;
+            padding: 0.6rem 1rem;
+            background: #d5f5e3;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #1a7a3a;
+            display: none;
+        }
+
+        .mcq-block .answer.show {
+            display: block;
+        }
+
+        /* ===== DO / DON'T ===== */
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .do-dont .col {
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .do-dont .col.do {
+            background: #eafaf1;
+            border-color: #27ae60;
+        }
+
+        .do-dont .col.dont {
+            background: #fdedec;
+            border-color: #e74c3c;
+        }
+
+        .do-dont .col h4 {
+            margin-top: 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .do-dont .col ul {
+            margin: 0.3rem 0 0;
+            padding-left: 1.2rem;
+        }
+
+        .do-dont .col ul li {
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        /* ===== MNEMONIC ===== */
+        .mnemonic {
+            background: linear-gradient(135deg, #fef9e7, #fdebd0);
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid #f9e79f;
+            margin: 0.8rem 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+            width: auto;
+        }
+
+        @media (max-width: 820px) {
+            .search-wrapper input {
+                width: 100px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper input {
+                width: 70px;
+                font-size: 0.7rem;
+            }
+
+            .search-wrapper {
+                padding: 0.1rem 0.1rem 0.1rem 0.6rem;
+            }
+
+            .search-wrapper button {
+                width: 26px;
+                height: 26px;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .topic-card {
+                padding: 1.5rem;
+            }
+
+            .do-dont {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 820px) {
+            :root {
+                --sidebar-width: 280px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+                box-shadow: 4px 0 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1.2rem;
+            }
+
+            .app-header .badge {
+                display: none;
+            }
+
+            .topic-card h1 {
+                font-size: 1.5rem;
+            }
+
+            .topic-card {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-header {
+                padding: 0 1rem;
+            }
+
+            .app-header .logo {
+                font-size: 0.9rem;
+            }
+
+            .app-header .logo .icon {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding: 0.8rem;
+            }
+
+            .topic-card {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+
+            .topic-card h1 {
+                font-size: 1.2rem;
+            }
+
+            .topic-card .subhead {
+                font-size: 0.9rem;
+                padding-left: 0.7rem;
+            }
+
+            .table-wrap table {
+                font-size: 0.8rem;
+                min-width: 360px;
+            }
+
+            .table-wrap th,
+            .table-wrap td {
+                padding: 0.4rem 0.6rem;
+            }
+
+            .mcq-block {
+                padding: 0.8rem 1rem;
+            }
+
+            .do-dont .col {
+                padding: 0.8rem;
+            }
+
+            .box-tip,
+            .box-warning,
+            .box-important,
+            .box-example {
+                padding: 0.8rem 1rem;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+
+            .sidebar,
+            .app-header,
+            .menu-toggle,
+            .mcq-block .reveal-btn {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                margin-top: 0 !important;
+                padding: 0.5in !important;
+                max-width: 100% !important;
+            }
+
+            .topic-card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .mcq-block .answer {
+                display: block !important;
+                background: #f0f0f0 !important;
+            }
+
+            .table-wrap {
+                border: 1px solid #ccc !important;
+            }
+
+            .do-dont .col {
+                border: 1px solid #ccc !important;
+            }
+
+            body {
+                background: #fff !important;
+            }
+        }
+
+        /* ===== UTILITY ===== */
+        .mt-0 {
+            margin-top: 0;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-small {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .gap-1 {
+            gap: 0.5rem;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Smooth section reveal */
+        .topic-card {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: fadeUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* scroll margin for anchor */
+        .topic-card[id] {
+            scroll-margin-top: calc(var(--header-height) + 16px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="app-header">
+        <div class="logo">
+            <span class="icon">🩺</span>
+            FirstAid<span>Course</span>
+        </div>
+        <div class="header-actions">
+            <span class="badge">Conductor Exam</span>
+            <!-- +++ NEW: Search bar +++ -->
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" placeholder="Search topics..." />
+                    <button id="searchBtn" aria-label="Search">🔍</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </header>
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar" role="navigation">
+        <div class="nav-section">
+            <div class="nav-section-title">📘 Course Parts</div>
+            <!-- Will be populated by JS -->
+            <div id="navList"></div>
+        </div>
+        <div
+            style="margin-top:1.5rem;padding:0.8rem;background:var(--primary-bg);border-radius:10px;font-size:0.8rem;color:var(--text-light);">
+            <strong style="color:var(--primary);">💡 Tip:</strong> Click any topic to jump.
+        </div>
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <main class="main-content" id="mainContent">
+        <!-- All content rendered by JS -->
+        <div id="contentContainer"></div>
+    </main>
+
+    <script>
+
+        // ============================================================
+        //  SEARCH — LIVE DROPDOWN + HIGHLIGHT (ALL MATCHES)
+        // ============================================================
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchResults = document.getElementById('searchResults');
+
+        function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            // Clear previous highlights and results
+            document.querySelectorAll('.highlight').forEach(el => {
+                const parent = el.parentNode;
+                parent.replaceChild(document.createTextNode(el.textContent), el);
+                parent.normalize();
+            });
+            document.querySelectorAll('.topic-card.search-match').forEach(el => {
+                el.classList.remove('search-match');
+            });
+            searchResults.classList.remove('visible');
+            searchResults.innerHTML = '';
+
+            if (!query) return;
+
+            const cards = document.querySelectorAll('.topic-card');
+            const matches = [];
+
+            // 1. Find ALL matching topic cards
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const part = card.querySelector('.part-badge')?.textContent || 'Part';
+                    const title = card.querySelector('h1')?.textContent || card.id;
+                    matches.push({ id: card.id, part, title });
+                }
+            });
+
+            // 2. Build dropdown list — show ALL matches (no limit)
+            if (matches.length === 0) {
+                searchResults.innerHTML = `<div class="no-result">❌ No topic found for “${searchInput.value}”</div>`;
+                searchResults.classList.add('visible');
+                return;
+            }
+
+            // Show ALL matches
+            matches.forEach(match => {
+                const item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.innerHTML = `
+                    <span class="result-part">${match.part}</span>
+                    <span class="result-title">${match.title}</span>
+                    <span class="result-match">🔍</span>
+                `;
+                item.addEventListener('click', () => {
+                    // Scroll to the selected topic
+                    const target = document.getElementById(match.id);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // Re-run highlight on that specific card after scrolling
+                        setTimeout(() => highlightCard(target, query), 300);
+                        searchResults.classList.remove('visible');
+                    }
+                });
+                searchResults.appendChild(item);
+            });
+
+            searchResults.classList.add('visible');
+
+            // 3. Highlight matches in ALL cards (first match scrolls)
+            let firstMatched = false;
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    if (!firstMatched) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        firstMatched = true;
+                    }
+                    highlightCard(card, query);
+                }
+            });
+        }
+
+        // Helper: highlight text inside a single card
+        function highlightCard(card, query) {
+            card.classList.add('search-match');
+            const walker = document.createTreeWalker(
+                card,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function (node) {
+                        const parent = node.parentElement;
+                        if (parent && parent.closest('.highlight')) return NodeFilter.FILTER_REJECT;
+                        if (node.textContent.toLowerCase().includes(query)) return NodeFilter.FILTER_ACCEPT;
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                }
+            );
+            const nodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                nodes.push(node);
+            }
+            nodes.forEach(textNode => {
+                const text = textNode.textContent;
+                const parts = text.split(new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'));
+                const fragment = document.createDocumentFragment();
+                parts.forEach(part => {
+                    if (part.toLowerCase() === query) {
+                        const mark = document.createElement('span');
+                        mark.className = 'highlight';
+                        mark.textContent = part;
+                        fragment.appendChild(mark);
+                    } else {
+                        fragment.appendChild(document.createTextNode(part));
+                    }
+                });
+                textNode.parentNode.replaceChild(fragment, textNode);
+            });
+        }
+
+        // ----- Event Listeners -----
+        searchInput.addEventListener('input', performSearch);
+
+        searchBtn.addEventListener('click', performSearch);
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performSearch();
+                // Close dropdown after Enter
+                setTimeout(() => searchResults.classList.remove('visible'), 100);
+            }
+            if (e.key === 'Escape') {
+                searchResults.classList.remove('visible');
+                searchInput.blur();
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.classList.remove('visible');
+            }
+        });
+
+        // Clear highlights when input is emptied
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.trim() === '') {
+                document.querySelectorAll('.highlight').forEach(el => {
+                    const parent = el.parentNode;
+                    parent.replaceChild(document.createTextNode(el.textContent), el);
+                    parent.normalize();
+                });
+                document.querySelectorAll('.topic-card.search-match').forEach(el => {
+                    el.classList.remove('search-match');
+                });
+                searchResults.classList.remove('visible');
+            }
+        });
+
+        // ============================================================
+        //  DATA — Full course content as nested structure
+        // ============================================================
+        const courseData = [{
+            id: 'part1',
+            part: 'PART 1',
+            title: 'First Aid Basics',
+            content: `
+            <h2>1. First Aid શું છે? (What is First Aid?)</h2>
+            <p><strong>Definition:</strong> પ્રથમોપચાર (First Aid) એ તબીબની સહાય મળે તે પહેલાં માંદી કે ઈજાગ્રસ્ત વ્યક્તિને તરત અપાતી પ્રારંભિક સારવાર છે.</p>
+            <div class="box-important"><strong>📌 Importance:</strong> કટોકટીના સમયે જીવન બચાવે છે • ઈજાને વધુ ગંભીર બનતી અટકાવે છે • પીડા ઘટાડે છે • દર્દીને હોસ્પિટલ પહોંચાડવા સુધી સ્થિતિ જાળવી રાખે છે</div>
+            <div class="box-example"><strong>📖 Real Life Example:</strong> બસમાં મુસાફરને અચાનક હાર્ટ એટેક આવે છે. ડૉક્ટર આવે ત્યાં સુધી Conductor તરીકે તમે દર્દીને યોગ્ય સ્થિતિમાં મૂકી, તેનો શ્વાસ અને નાડી ચકાસી, CPR આપીને તેનો જીવ બચાવી શકો છો.</div>
+            <p><strong>Important Points:</strong> First Aid એ તબીબી સારવાર નથી, પરંતુ કટોકટી સુધીની કાળજી છે • દવા આપવી કે નિદાન કરવું એ First Aid નો ભાગ નથી • દરેક સેકન્ડ મહત્વપૂર્ણ છે</p>
+            <div class="mnemonic">🧠 Memory Trick: "FAST" – First Aid Saves Time</div>
+
+            <h2>2. First Aider કોણ છે?</h2>
+            <p><strong>Definition:</strong> First Aider એ એવી વ્યક્તિ છે જેણે First Aid ની તાલીમ લીધી હોય અને કટોકટીના સમયે ઈજાગ્રસ્ત અથવા બીમાર વ્યક્તિને પ્રાથમિક સારવાર આપી શકે.</p>
+            <p><strong>Qualities:</strong> શાંત અને ધીરજવાન • ઝડપી નિર્ણય લેનાર • સહાનુભૂતિશીલ • જવાબદાર • તાત્કાલિક મદદ માટે તૈયાર</p>
+            <div class="box-tip"><strong>💡 Conductor as First Aider:</strong> બસ Conductor તરીકે તમે ઘણી વખત First Aider તરીકે કામ કરો છો. બસમાં અકસ્માત, મુસાફર બીમાર પડે, કે અન્ય કોઈ કટોકટીમાં તમારે First Aid આપવાની જરૂર પડે છે.</div>
+
+            <h2>3. First Aid ના ઉદ્દેશો (3P)</h2>
+            <div class="table-wrap"><table><thead><tr><th>ઉદ્દેશ</th><th>Gujarati</th><th>Meaning</th></tr></thead><tbody><tr><td><strong>Preserve Life</strong></td><td>જીવન બચાવવું</td><td>સૌથી મહત્વપૂર્ણ</td></tr><tr><td><strong>Prevent Further Injury</strong></td><td>વધુ ઈજા અટકાવવી</td><td>સ્થિતિને વધુ ખરાબ થતી અટકાવવી</td></tr><tr><td><strong>Promote Recovery</strong></td><td>પુનઃપ્રાપ્તિને પ્રોત્સાહન</td><td>ઝડપી સાજા થવામાં મદદ</td></tr></tbody></table></div>
+
+            <h2>4. Golden Rules of First Aid</h2>
+            <ol><li><strong>શાંત રહો</strong> – ગભરાશો નહીં</li><li><strong>તાત્કાલિક કાર્ય કરો</strong> – દરેક સેકન્ડ મહત્વપૂર્ણ</li><li><strong>સૌ પ્રથમ સલામતી</strong> – તમે અને દર્દી બંને સુરક્ષિત</li><li><strong>વ્યવસ્થિત અભિગમ</strong> – DRABC પદ્ધતિ</li><li><strong>હંમેશા ગંભીર ધારો</strong> – જ્યાં સુધી વધુ માહિતી ન મળે</li><li><strong>ABC યાદ રાખો</strong> – Airway, Breathing, Circulation</li><li><strong>દર્દીને આશ્વાસન આપો</strong> – શાંત કરો અને વિશ્વાસ આપો</li></ol>
+
+            <h2>5. Emergency Management</h2>
+            <ol><li><strong>Scene Safety</strong> – સ્થળ સુરક્ષિત છે?</li><li><strong>Identify Emergency</strong> – શું થયું?</li><li><strong>Call for Help</strong> – 108 / 112</li><li><strong>Assess Victim</strong> – DRABC</li><li><strong>Provide First Aid</strong> – જરૂરી સારવાર</li><li><strong>Monitor</strong> – દર્દીની સ્થિતિ પર નજર</li><li><strong>Handover</strong> – તબીબી ટીમને માહિતી</li></ol>
+
+            <h2>6. ABC Rule</h2>
+            <div class="table-wrap"><table><thead><tr><th>Letter</th><th>Full Form</th><th>Gujarati</th><th>What to Check</th></tr></thead><tbody><tr><td><strong>A</strong></td><td>Airway</td><td>શ્વસનમાર્ગ</td><td>ખુલ્લો છે?</td></tr><tr><td><strong>B</strong></td><td>Breathing</td><td>શ્વાસ</td><td>શ્વાસ ચાલુ છે?</td></tr><tr><td><strong>C</strong></td><td>Circulation</td><td>રક્ત પરિભ્રમણ</td><td>નાડી? રક્તસ્ત્રાવ?</td></tr></tbody></table></div>
+
+            <h2>7. DRABC Method</h2>
+            <div class="table-wrap"><table><thead><tr><th>Letter</th><th>Full Form</th><th>Gujarati</th><th>Action</th></tr></thead><tbody><tr><td><strong>D</strong></td><td>Danger</td><td>ખતરો</td><td>સ્થળ સુરક્ષિત?</td></tr><tr><td><strong>R</strong></td><td>Response</td><td>પ્રતિભાવ</td><td>દર્દી સભાન?</td></tr><tr><td><strong>A</strong></td><td>Airway</td><td>શ્વસનમાર્ગ</td><td>ખુલ્લો?</td></tr><tr><td><strong>B</strong></td><td>Breathing</td><td>શ્વાસ</td><td>શ્વાસ ચાલુ?</td></tr><tr><td><strong>C</strong></td><td>Circulation</td><td>રક્ત પરિભ્રમણ</td><td>નાડી અને રક્તસ્ત્રાવ?</td></tr></tbody></table></div>
+
+            <h2>8. Emergency Action Plan (Conductor)</h2>
+            <ol><li>બસ સુરક્ષિત સ્થળે રોકો</li><li>ડ્રાઈવરને સૂચના આપો (હઝાર્ડ લાઇટ)</li><li>પરિસ્થિતિનું મૂલ્યાંકન</li><li>DRABC કરો</li><li>108/112 પર કૉલ</li><li>First Aid આપો</li><li>અન્ય મુસાફરોને શાંત રાખો</li><li>તબીબી ટીમને માહિતી આપો</li></ol>
+            `
+        }, {
+            id: 'part2',
+            part: 'PART 2',
+            title: 'Human Body Basics',
+            content: `
+            <h2>1. Human Body Structure</h2>
+            <p><strong>Levels:</strong> Cells → Tissues → Organs → Systems → Organism</p>
+            <p><strong>Major Systems:</strong> Skeletal • Muscular • Respiratory • Digestive • Nervous • Circulatory</p>
+
+            <h2>2. Skeletal System</h2>
+            <p><strong>Functions:</strong> શરીરને આકાર અને આધાર • આંતરિક અંગોનું રક્ષણ • હલનચલન • લાલ રક્તકણો ઉત્પન્ન • ખનિજો સંગ્રહ</p>
+            <p><strong>Important:</strong> 206 હાડકાં (પુખ્ત) • Joints (સાંધા)</p>
+
+            <h2>3. Muscular System</h2>
+            <p><strong>Functions:</strong> હલનચલન • મુદ્રા જાળવવી • ઉષ્મા ઉત્પન્ન • આંતરિક અંગોનું રક્ષણ</p>
+            <p><strong>Types:</strong> Skeletal (સ્વૈચ્છિક) • Smooth (અનૈચ્છિક) • Cardiac (અનૈચ્છિક)</p>
+
+            <h2>4. Respiratory System</h2>
+            <p><strong>Organs:</strong> Nose → Pharynx → Larynx → Trachea → Bronchi → Bronchioles → Alveoli → Lungs</p>
+            <p><strong>Functions:</strong> ઓક્સિજન લેવો • CO₂ બહાર કાઢવો • ગેસનું વિનિમય</p>
+            <div class="box-important"><strong>First Aid Connection:</strong> શ્વાસ બંધ → CPR • Choking → અવરોધ • Asthma → શ્વાસનળી સંકુચિત</div>
+
+            <h2>5. Digestive System</h2>
+            <p><strong>Organs:</strong> Mouth → Esophagus → Stomach → Small Intestine → Large Intestine → Rectum</p>
+            <p><strong>Accessory:</strong> Liver, Pancreas</p>
+
+            <h2>6. Nervous System</h2>
+            <p><strong>Parts:</strong> Brain (Cerebrum, Cerebellum, Brainstem) • Spinal Cord • Nerves</p>
+            <p><strong>Functions:</strong> નિયંત્રણ • સંવેદનાઓ • હલનચલન • વિચાર, યાદશક્તિ</p>
+            <div class="box-important"><strong>First Aid:</strong> Head Injury • Spinal Injury (ખસેડશો નહીં!) • Stroke</div>
+
+            <h2>7. Circulatory System</h2>
+            <p><strong>Parts:</strong> Heart (4 chambers) • Arteries • Veins • Capillaries • Blood</p>
+            <p><strong>Functions:</strong> ઓક્સિજન અને પોષક તત્વો પહોંચાડવા • CO₂ દૂર કરવા • તાપમાન નિયંત્રણ • ચેપ સામે રક્ષણ</p>
+            <div class="box-important"><strong>First Aid:</strong> Heart Attack • Bleeding • Shock</div>
+            `
+        }, {
+            id: 'part3',
+            part: 'PART 3',
+            title: 'Wounds and Bleeding',
+            content: `
+            <h2>1. Wound શું છે?</h2>
+            <p><strong>Definition:</strong> જ્યારે શરીરના પેશીઓને ઈજા થાય છે, ત્યારે તેને Wound (ઘા) કહે છે.</p>
+            <h3>Open Wound (ખુલ્લો ઘા)</h3>
+            <div class="table-wrap"><table><thead><tr><th>Type</th><th>Gujarati</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td>Abrasion</td><td>ઉપરછલ્લો ઘસડાટ</td><td>ત્વચાનો ઉપરનો સ્તર ઘસાઈ જાય</td><td>રસ્તા પર પડવું</td></tr><tr><td>Incision</td><td>કાપો</td><td>તીક્ષ્ણ વસ્તુથી સીધો કાપો</td><td>છરી, કાચ</td></tr><tr><td>Laceration</td><td>ફાટેલો ઘા</td><td>અસમાન, ફાટેલો ઘા</td><td>મશીનમાં હાથ ફસાવો</td></tr><tr><td>Puncture</td><td>વીંધાયેલો ઘા</td><td>તીક્ષ્ણ વસ્તુ વીંધે</td><td>ખીલી, સોય</td></tr></tbody></table></div>
+            <h3>Closed Wound (બંધ ઘા)</h3>
+            <p>Contusion (ઉઝરડો) • Hematoma (લોહીનો ગઠ્ઠો)</p>
+
+            <h2>2. Bleeding</h2>
+            <div class="table-wrap"><table><thead><tr><th>Type</th><th>Color</th><th>Flow</th><th>Danger</th></tr></thead><tbody><tr><td><strong>Arterial</strong></td><td>તેજ લાલ</td><td>ફુવારાની જેમ</td><td>ખૂબ ખતરનાક</td></tr><tr><td><strong>Venous</strong></td><td>ઘેરો લાલ</td><td>સતત, ધીમો</td><td>મધ્યમ</td></tr><tr><td><strong>Capillary</strong></td><td>હળવો લાલ</td><td>ઝરતું</td><td>ઓછું ખતરનાક</td></tr></tbody></table></div>
+
+            <h2>3. First Aid for Bleeding</h2>
+            <ol><li>સ્થળ સુરક્ષિત કરો</li><li>ઘા ઉપર સીધો દબાવ આપો (સ્વચ્છ કાપડ)</li><li>ઘાને ઊંચો કરો (હૃદયથી ઊંચો)</li><li>પટ્ટી બાંધો</li><li>જો કાપડ લોહીથી પલળી જાય – તેને ન કાઢો, ઉપર વધુ મૂકો</li><li>Tourniquet – જો જીવન-જોખમી હોય</li><li>દર્દીને શોક માટે તપાસો</li><li>તબીબી સહાય માટે બોલાવો</li></ol>
+            <div class="do-dont"><div class="col do"><h4>✅ Do</h4><ul><li>સ્વચ્છ કાપડ વાપરો</li><li>સીધો દબાવ આપો</li><li>ઘાને ઊંચો કરો</li><li>દર્દીને શાંત રાખો</li></ul></div><div class="col dont"><h4>❌ Don't</h4><ul><li>ઘામાંથી ચીજવસ્તુ ન કાઢો</li><li>દબાવ દૂર ન કરો</li><li>ઘાને સ્પર્શ કરતા પહેલા હાથ ન ધોયા હોય તો ના</li><li>દર્દીને ખસેડશો નહીં</li></ul></div></div>
+            <div class="mnemonic">🧠 RED – Raise, Examine, Direct pressure</div>
+            `
+        }, {
+            id: 'part4',
+            part: 'PART 4',
+            title: 'Fractures and Injuries',
+            content: `
+            <h2>1. Fracture શું છે?</h2>
+            <p><strong>Definition:</strong> હાડકું તૂટવું અથવા ફાટવું તેને Fracture (અસ્થિભંગ) કહે છે.</p>
+            <div class="table-wrap"><table><thead><tr><th>Type</th><th>Gujarati</th><th>Description</th></tr></thead><tbody><tr><td>Simple/Closed</td><td>સાદો</td><td>હાડકું તૂટે પણ ત્વચા અકબંધ</td></tr><tr><td>Compound/Open</td><td>ખુલ્લો</td><td>હાડકું ત્વચા બહાર નીકળે</td></tr><tr><td>Greenstick</td><td>લીલી ડાળી</td><td>અધૂરો ભંગાણ (બાળકો)</td></tr><tr><td>Comminuted</td><td>ચૂર્ણિત</td><td>ઘણા ટુકડા</td></tr><tr><td>Hairline</td><td>વાળ જેવો</td><td>પાતળો તિરાડ</td></tr></tbody></table></div>
+
+            <h2>2. Sprain, Strain, Dislocation</h2>
+            <div class="table-wrap"><table><thead><tr><th>Injury</th><th>Gujarati</th><th>Description</th><th>Affected</th></tr></thead><tbody><tr><td><strong>Sprain</strong></td><td>મચકોડ</td><td>Ligament ખેંચાય/ફાટે</td><td>સાંધા</td></tr><tr><td><strong>Strain</strong></td><td>તાણ</td><td>Muscle/Tendon ખેંચાય/ફાટે</td><td>સ્નાયુ</td></tr><tr><td><strong>Dislocation</strong></td><td>ખસી ગયેલો સાંધો</td><td>હાડકાં ખસી જાય</td><td>સાંધા</td></tr></tbody></table></div>
+            <p><strong>Symptoms:</strong> Pain • Swelling • Tenderness • Bruising • Deformity • Warmth</p>
+
+            <h2>3. First Aid – DOTS &amp; RICE</h2>
+            <p><strong>DOTS Method:</strong> Deformity • Open wound • Tenderness • Swelling</p>
+            <p><strong>RICE Protocol:</strong></p>
+            <div class="table-wrap"><table><thead><tr><th>Letter</th><th>Meaning</th><th>Gujarati</th><th>Action</th></tr></thead><tbody><tr><td><strong>R</strong></td><td>Rest</td><td>આરામ</td><td>ઇજાગ્રસ્ત ભાગને હલાવો નહીં</td></tr><tr><td><strong>I</strong></td><td>Ice</td><td>બરફ</td><td>20 મિનિટ બરફનું પેક</td></tr><tr><td><strong>C</strong></td><td>Compression</td><td>દબાવ</td><td>પટ્ટી વડે દબાવ</td></tr><tr><td><strong>E</strong></td><td>Elevation</td><td>ઊંચો કરો</td><td>હૃદયથી ઊંચો રાખો</td></tr></tbody></table></div>
+            <div class="box-important"><strong>Fracture First Aid:</strong> દર્દીને હલાવો નહીં • ઇજાગ્રસ્ત ભાગ સ્થિર કરો • Splint લગાવો • ખુલ્લો ઘા ઢાંકો • 108 પર કૉલ</div>
+            `
+        }, {
+            id: 'part5',
+            part: 'PART 5',
+            title: 'Burns and Scalds',
+            content: `
+            <h2>1. Burn શું છે?</h2>
+            <p><strong>Definition:</strong> તાપ, રસાયણ, વીજળી, કે કિરણોત્સર્ગથી પેશીઓને થતું નુકસાન.</p>
+            <p><strong>Scald:</strong> ગરમ પ્રવાહી અથવા વરાળથી થતો બળતરો.</p>
+
+            <h2>2. Types of Burns</h2>
+            <div class="table-wrap"><table><thead><tr><th>Degree</th><th>Layers</th><th>Symptoms</th><th>Example</th></tr></thead><tbody><tr><td><strong>First</strong></td><td>Epidermis</td><td>લાલ, દુખાવો, હળવો સોજો</td><td>તડકો</td></tr><tr><td><strong>Second</strong></td><td>Epidermis + Dermis</td><td>લાલ, ફોલ્લા, તીવ્ર દુખાવો</td><td>ગરમ પાણી</td></tr><tr><td><strong>Third</strong></td><td>બધા સ્તરો</td><td>સફેદ/કાળો, દુખાવો ન હોઈ શકે</td><td>આગ, વીજળી</td></tr></tbody></table></div>
+            <p><strong>Other:</strong> Electrical Burn • Chemical Burn • Radiation Burn</p>
+
+            <h2>3. First Aid for Burns</h2>
+            <ol><li>તાત્કાલિક ઠંડુ કરો – ઠંડા વહેતા પાણી નીચે 20 મિનિટ</li><li>કપડાં દૂર કરો (જો ચોંટ્યા ન હોય)</li><li>ઘરેણાં દૂર કરો (સોજા પહેલાં)</li><li>સ્વચ્છ કપડાથી ઢાંકો</li><li>દર્દીને ગરમ રાખો</li><li>તબીબી સહાય માટે બોલાવો</li></ol>
+            <p><strong>Chemical Burn:</strong> 20+ મિનિટ પાણીથી ધોઈ નાખો • રસાયણ ઓળખો</p>
+            <p><strong>Electrical Burn:</strong> વીજળીનો સ્ત્રોત દૂર કરો (non-conductive) • CPR જો જરૂરી</p>
+            <div class="do-dont"><div class="col do"><h4>✅ Do</h4><ul><li>20 મિનિટ ઠંડા પાણીથી ઠંડુ કરો</li><li>ઘરેણાં દૂર કરો</li><li>સ્વચ્છ કપડાથી ઢાંકો</li></ul></div><div class="col dont"><h4>❌ Don't</h4><ul><li>બરફ ન લગાવો</li><li>ફોલ્લા ન ફોડો</li><li>ક્રીમ/લોશન/તેલ ન લગાવો</li><li>ચોંટેલા કપડાં ન ખેંચો</li></ul></div></div>
+            `
+        }, {
+            id: 'part6',
+            part: 'PART 6',
+            title: 'Shock',
+            content: `
+            <h2>1. Shock શું છે?</h2>
+            <p><strong>Definition:</strong> જ્યારે શરીરના અંગો અને પેશીઓને રક્તનો પૂરતો પ્રવાહ ન મળે, ત્યારે તે સ્થિતિને Shock (આઘાત) કહે છે.</p>
+
+            <h2>2. Causes &amp; Symptoms</h2>
+            <div class="table-wrap"><table><thead><tr><th>Cause</th><th>Gujarati</th><th>Example</th></tr></thead><tbody><tr><td>Hypovolemic</td><td>રક્તની ઉણપ</td><td>ગંભીર રક્તસ્ત્રાવ</td></tr><tr><td>Cardiogenic</td><td>હૃદય સંબંધિત</td><td>હાર્ટ એટેક</td></tr><tr><td>Anaphylactic</td><td>એલર્જી</td><td>દવા/જંતુનો ડંખ</td></tr><tr><td>Septic</td><td>ચેપ</td><td>ગંભીર ચેપ</td></tr></tbody></table></div>
+            <p><strong>Early Symptoms:</strong> Restlessness • Pale, cool, clammy skin • Rapid, weak pulse • Rapid, shallow breathing • Nausea • Thirst</p>
+            <p><strong>Late Symptoms:</strong> Drowsiness • Confusion • Unconsciousness • Dilated pupils</p>
+
+            <h2>3. First Aid for Shock</h2>
+            <ol><li>DRABC – શ્વાસ અને નાડી તપાસો</li><li>શોકના કારણો દૂર કરો (રક્તસ્ત્રાવ બંધ)</li><li>દર્દીને પીઠ પર સૂવાડો</li><li>પગ 30–45 સે.મી. ઊંચા કરો (જો ફ્રેક્ચર ન હોય)</li><li>શ્વસનમાર્ગ ખુલ્લો રાખો</li><li>કપડાં ઢીલા કરો</li><li>દર્દીને ગરમ રાખો (ધાબળો)</li><li>ખાવા-પીવાનું ન આપો</li><li>108 પર કૉલ કરો</li><li>નિરીક્ષણ કરો</li></ol>
+            <div class="do-dont"><div class="col do"><h4>✅ Do</h4><ul><li>પગ ઊંચા કરો</li><li>ગરમ રાખો</li><li>ઢીલા કપડાં</li></ul></div><div class="col dont"><h4>❌ Don't</h4><ul><li>દર્દીને બેસાડો નહીં</li><li>ખાવા-પીવાનું ન આપો</li><li>એકલો ન છોડો</li></ul></div></div>
+            `
+        }, {
+            id: 'part7',
+            part: 'PART 7',
+            title: 'Unconscious Casualty',
+            content: `
+            <h2>1. Unconscious Person</h2>
+            <p><strong>Definition:</strong> એવી વ્યક્તિ જે પ્રતિભાવ આપી શકતી નથી, આંખો ખોલી શકતી નથી, અને બોલી શકતી નથી.</p>
+            <p><strong>Causes:</strong> Head injury • Stroke • Heart attack • Choking • Poisoning • Diabetes • Epilepsy • Alcohol/Drugs</p>
+
+            <h2>2. Recovery Position</h2>
+            <p><strong>When to Use:</strong> દર્દી બેભાન છે • શ્વાસ લઈ રહ્યો છે • કોઈ ગંભીર ઈજા નથી (ગરદન/કરોડરજ્જુ)</p>
+            <ol><li>પીઠ પર સૂવાડો</li><li>બાજુમાં ઘૂંટણિયે બેસો</li><li>નજીકનો હાથ – 90° કોણ</li><li>દૂરનો હાથ – છાતી પર, ગાલ નીચે</li><li>દૂરનો પગ – ઘૂંટણ વાળો</li><li>દર્દીને બાજુ પર ફેરવો</li><li>માથું પાછળ નમાવો (શ્વસનમાર્ગ ખુલ્લો)</li><li>સ્થિતિ તપાસો</li></ol>
+            <div class="box-tip"><strong>💡 Benefits:</strong> શ્વસનમાર્ગ ખુલ્લો • ઉલટી/પ્રવાહી બહાર નીકળે • જીભ પાછળ ન જાય</div>
+
+            <h2>3. Breathing Check – Look, Listen, Feel</h2>
+            <ul><li><strong>Look</strong> – છાતીની હલનચલન</li><li><strong>Listen</strong> – શ્વાસનો અવાજ</li><li><strong>Feel</strong> – શ્વાસ ગાલ પર</li></ul>
+            <p><strong>Time:</strong> 10 સેકન્ડ</p>
+            <p><strong>No breathing → CPR શરૂ કરો</strong></p>
+
+            <h2>4. Pulse Check</h2>
+            <p><strong>Common Points:</strong> Carotid (ગળાની બાજુ) • Radial (કાંડા) • Brachial • Femoral</p>
+            <p><strong>Carotid:</strong> આદમની ફળદડી → 2 આંગળીઓ બાજુ → 5–10 સેકન્ડ → 60–100 bpm સામાન્ય</p>
+            <p><strong>No Pulse → CPR શરૂ કરો (30:2)</strong></p>
+            `
+        }, {
+            id: 'part8',
+            part: 'PART 8',
+            title: 'CPR',
+            content: `
+            <h2>1. CPR Full Form</h2>
+            <p><strong>Cardiopulmonary Resuscitation</strong> – જ્યારે શ્વાસ અને/અથવા હૃદય બંધ થઈ જાય ત્યારે પુનઃજીવિત કરવાની પ્રક્રિયા.</p>
+
+            <h2>2. Adult CPR</h2>
+            <ol><li><strong>Check Responsiveness</strong> – ખભે ટેકો, બૂમ</li><li><strong>Call for Help</strong> – 108/112, AED</li><li><strong>Check Breathing</strong> – 10 સેકન્ડ</li><li><strong>Chest Compressions</strong> – છાતીની વચ્ચે, 2 ઇંચ ઊંડા, 100–120/min</li><li><strong>Rescue Breaths</strong> – Head Tilt-Chin Lift, 2 breaths (1 સેકન્ડ દરેક)</li><li><strong>Continue</strong> – 30:2 રેશિયો</li></ol>
+            <div class="table-wrap"><table><thead><tr><th>Parameter</th><th>Adult</th><th>Child (1–8 yr)</th><th>Infant (0–1 yr)</th></tr></thead><tbody><tr><td>Hands</td><td>2 hands</td><td>1 hand (or 2)</td><td>2 fingers</td></tr><tr><td>Depth</td><td>2 inch (5–6 cm)</td><td>2 inch (1/3 chest)</td><td>1.5 inch (1/3 chest)</td></tr><tr><td>Rate</td><td>100–120/min</td><td>100–120/min</td><td>100–120/min</td></tr><tr><td>Ratio</td><td>30:2</td><td>30:2 / 15:2</td><td>30:2 / 15:2</td></tr></tbody></table></div>
+
+            <h2>3. When to Perform / Not Perform</h2>
+            <p><strong>When:</strong> Unconscious + No breathing + No pulse • Abnormal breathing (gasping) • Choking victim becomes unconscious</p>
+            <p><strong>When NOT:</strong> દર્દી શ્વાસ લઈ રહ્યો છે અને નાડી છે • DNR order • Rigor mortis • Obvious signs of death</p>
+
+            <h2>4. Common Mistakes</h2>
+            <ul><li>ખૂબ ઝડપી/ધીમી compressions → 100–120/min</li><li>ખૂબ છીછરી compressions → 2 ઇંચ</li><li>Hands ની ખોટી સ્થિતિ → છાતીની વચ્ચે</li><li>Breaths માં ખૂબ હવા → માત્ર છાતી ઊંચી થાય તેટલી</li><li>Compressions વચ્ચે લાંબો વિરામ → &lt; 10 સેકન્ડ</li></ul>
+            <div class="mnemonic">🧠 CPR Steps: "CAB" – Compression, Airway, Breathing</div>
+            `
+        }, {
+            id: 'part9',
+            part: 'PART 9',
+            title: 'Choking',
+            content: `
+            <h2>1. Choking શું છે?</h2>
+            <p><strong>Definition:</strong> જ્યારે કોઈ વસ્તુ શ્વસનમાર્ગમાં અટકી જાય અને શ્વાસ લેવામાં અવરોધ ઊભો કરે.</p>
+
+            <h2>2. Signs of Choking</h2>
+            <ul><li>હાથ ગળા પર પકડવા (Universal Sign)</li><li>બોલી શકતા નથી</li><li>શ્વાસ લેવામાં તકલીફ</li><li>ચહેરો લાલ/વાદળી</li><li>ઉધરસ (શરૂઆતમાં)</li><li>ચેતના ગુમાવવી (ગંભીર)</li></ul>
+
+            <h2>3. Heimlich Maneuver (Adult)</h2>
+            <ol><li>Ask: "શું તમે ગૂંગળાઈ રહ્યા છો?"</li><li>દર્દીની પાછળ ઊભા રહો</li><li>કમર આસપાસ હાથ લપેટો</li><li>મુઠ્ઠી બનાવો (અંગૂઠો પેટ તરફ)</li><li>નાભિની ઉપર, પાંસળીની નીચે</li><li>બીજા હાથથી મુઠ્ઠી પકડો</li><li>અંદર અને ઉપર તરફ ઝડપથી દબાવો</li><li>જ્યાં સુધી વસ્તુ બહાર ન નીકળે ત્યાં સુધી પુનરાવર્તન</li></ol>
+            <p><strong>Self-Heimlich:</strong> મુઠ્ઠી પેટ પર મૂકો અને ટેબલ/ખુરશીની પીઠ સામે દબાવો.</p>
+
+            <h2>4. Child &amp; Infant Choking</h2>
+            <p><strong>Child (1–8 yr):</strong> Same as adult but with less force.</p>
+            <p><strong>Infant (0–1 yr):</strong> 5 Back Blows (ઊંધું, પીઠ પર હળવા થપ્પા) → 5 Chest Thrusts → Repeat</p>
+
+            <h2>5. If Choking Victim Becomes Unconscious</h2>
+            <ol><li>કાળજીપૂર્વક જમીન પર સૂવાડો</li><li>108 પર કૉલ</li><li>CPR શરૂ કરો (chest compressions)</li><li>Mouth check – જો વસ્તુ દેખાય તો કાઢો (આંગળી વડે સ્વીપ ન કરો)</li></ol>
+            `
+        }, {
+            id: 'part10',
+            part: 'PART 10',
+            title: 'Poisoning',
+            content: `
+            <h2>1. Poisoning શું છે?</h2>
+            <p><strong>Definition:</strong> જ્યારે કોઈ વ્યક્તિ ઝેરી પદાર્થનું સેવન કરે, શ્વાસમાં લે, અથવા ત્વચા દ્વારા શોષી લે ત્યારે Poisoning થાય છે.</p>
+
+            <h2>2. Types</h2>
+            <ul><li><strong>Food Poisoning</strong> – બગડેલો ખોરાક, બેક્ટેરિયા</li><li><strong>Chemical Poisoning</strong> – એસિડ, આલ્કલી, કેરોસીન</li><li><strong>Drug Poisoning</strong> – ઓવરડોઝ</li><li><strong>Gas Poisoning</strong> – CO, ક્લોરિન</li><li><strong>Animal/Plant Poison</strong> – સાપ, ઝેરી છોડ</li></ul>
+
+            <h2>3. Signs</h2>
+            <p>Burns around mouth • Breathing difficulty • Vomiting • Dizziness • Confusion • Seizures • Unconsciousness</p>
+
+            <h2>4. First Aid</h2>
+            <ol><li>Identify the Poison</li><li>Remove from Source</li><li>Check ABC (DRABC)</li><li>Do NOT induce vomiting (જો એસિડ/આલ્કલી/કેરોસીન)</li><li>Call 108</li><li>Save evidence (નમૂનો રાખો)</li></ol>
+            <p><strong>Swallowed Poison:</strong> Acids/Alkalis/Kerosene → ઉલટી ન કરાવો • Other poisons → જો ડૉક્ટર કહે તો ઉલટી</p>
+            <p><strong>Inhaled Poison (Gas):</strong> તાજી હવામાં લઈ જાઓ • નાક-મોં ભીના કપડાથી ઢાંકો • બધા દરવાજા-બારીઓ ખોલો</p>
+            <p><strong>Skin Poison:</strong> ઝેરી પદાર્થ દૂર કરો • 15–20 મિનિટ પાણીથી ધોઈ નાખો • ઝેરી કપડાં દૂર કરો</p>
+            `
+        }, {
+            id: 'part11',
+            part: 'PART 11',
+            title: 'Bites and Stings',
+            content: `
+            <h2>1. Snake Bite</h2>
+            <p><strong>Signs:</strong> 2 પંચર ચિહ્નો • Pain, swelling • Nausea • Breathing difficulty • Blurred vision</p>
+            <p><strong>First Aid:</strong> દર્દીને શાંત રાખો • ડંખેલો ભાગ હૃદયથી નીચો • ચુસ્ત પટ્ટી (Tourniquet નહીં!) • ઘરેણાં દૂર કરો • હોસ્પિટલ</p>
+            <div class="do-dont"><div class="col do"><h4>✅ Do</h4><ul><li>શાંત રાખો</li><li>હોસ્પિટલ લઈ જાઓ</li><li>ચુસ્ત પટ્ટી</li></ul></div><div class="col dont"><h4>❌ Don't</h4><ul><li>ન કાપો</li><li>ઝેર ન ચૂસો</li><li>Tourniquet ન લગાવો</li></ul></div></div>
+
+            <h2>2. Dog Bite</h2>
+            <p><strong>Risks:</strong> Rabies, Tetanus, Infection</p>
+            <p><strong>First Aid:</strong> ઘાને સાબુ-પાણીથી 5–10 મિનિટ ધોઈ નાખો • દબાવ આપો • ઢાંકો • હોસ્પિટલ (Rabies vaccine)</p>
+
+            <h2>3. Insect / Bee Sting</h2>
+            <p><strong>Signs:</strong> Pain, swelling, redness, itching • Allergic Reaction: difficulty breathing, swelling of face/lips</p>
+            <p><strong>First Aid:</strong> Stinger ને ક્રેડિટ કાર્ડ વડે ખંજવાળીને કાઢો (ચીપીને નહીં) • સાબુ-પાણી • Ice pack • Antihistamine • Allergic Reaction → 108, EpiPen</p>
+
+            <h2>4. Scorpion Sting</h2>
+            <p><strong>Signs:</strong> Intense pain • Swelling • Numbness • Sweating • Breathing difficulty</p>
+            <p><strong>First Aid:</strong> શાંત રાખો • ઠંડા પાણીથી ધોઈ લો • Ice pack • હોસ્પિટલ • Antivenom</p>
+            `
+        }, {
+            id: 'part12',
+            part: 'PART 12',
+            title: 'Heat &amp; Cold Emergencies',
+            content: `
+            <h2>1. Heat Stroke</h2>
+            <p><strong>Definition:</strong> શરીરનું તાપમાન 40°C થી વધી જાય.</p>
+            <p><strong>Symptoms:</strong> High body temp • Hot, dry skin (NO sweating) • Confusion • Seizures • Unconsciousness • Rapid, strong pulse</p>
+            <p><strong>First Aid:</strong> 108 • ઠંડી જગ્યાએ • વધુ કપડાં દૂર • ઠંડુ કરો (sponge, ice packs, fan) • જો સભાન હોય તો ઠંડા પાણી પીવડાવો</p>
+
+            <h2>2. Heat Exhaustion</h2>
+            <p><strong>Symptoms:</strong> Heavy sweating • Pale, clammy skin • Nausea, dizziness • Weakness • Headache • Muscle cramps</p>
+            <p><strong>First Aid:</strong> ઠંડી જગ્યાએ • ઢીલા કપડાં • ઠંડા પાણીથી સ્પોન્જ • ધીમે-ધીમે ઠંડા પાણી પીવડાવો • જો 1 કલાકમાં સુધરે નહીં → હોસ્પિટલ</p>
+
+            <h2>3. Hypothermia</h2>
+            <p><strong>Definition:</strong> શરીરનું તાપમાન 35°C થી નીચે જવું.</p>
+            <p><strong>Symptoms:</strong> Shivering (શરૂઆત) • Slurred speech • Slow breathing • Weak pulse • Confusion, drowsiness • Loss of consciousness</p>
+            <p><strong>First Aid:</strong> ગરમ જગ્યાએ • ભીના કપડાં દૂર • ગરમ, સૂકા કપડાં • ગરમ ધાબળો • ગરમ પીણાં (જો સભાન) • 108</p>
+            `
+        }, {
+            id: 'part13',
+            part: 'PART 13',
+            title: 'Medical Emergencies',
+            content: `
+            <h2>1. Heart Attack</h2>
+            <p><strong>Symptoms:</strong> Chest pain (pressure) • Pain to left arm, jaw, back • Shortness of breath • Sweating • Nausea • Lightheadedness</p>
+            <p><strong>First Aid:</strong> 108 • અર્ધ-બેઠક સ્થિતિ (ઘૂંટણ વાળીને) • ઢીલા કપડાં • Aspirin (જો એલર્જી ન હોય) • શાંત રાખો • જો બેભાન → CPR</p>
+
+            <h2>2. Stroke – FAST</h2>
+            <div class="table-wrap"><table><thead><tr><th>Letter</th><th>Meaning</th><th>Check</th></tr></thead><tbody><tr><td><strong>F</strong></td><td>Face</td><td>ચહેરો એક બાજુ ઝૂલ્યો?</td></tr><tr><td><strong>A</strong></td><td>Arms</td><td>બંને હાથ ઊંચા કરી શકે?</td></tr><tr><td><strong>S</strong></td><td>Speech</td><td>બોલી અસ્પષ્ટ?</td></tr><tr><td><strong>T</strong></td><td>Time</td><td>તાત્કાલિક 108</td></tr></tbody></table></div>
+            <p><strong>First Aid:</strong> 108 • સૂવાડો (માથું 30° ઊંચું) • ઢીલા કપડાં • ખાવા-પીવાનું ન આપો • જો ઉલટી → Recovery Position</p>
+
+            <h2>3. Epilepsy / Seizure</h2>
+            <p><strong>Symptoms:</strong> Uncontrolled jerking • Staring spell • Confusion • Loss of consciousness • Biting tongue</p>
+            <p><strong>First Aid:</strong> સુરક્ષિત સ્થળે • બાજુ પર ફેરવો • માથા નીચે નરમ વસ્તુ • ઢીલા કપડાં • સમય નોંધો • જો 5+ મિનિટ → 108</p>
+            <div class="do-dont"><div class="col do"><h4>✅ Do</h4><ul><li>બાજુ પર ફેરવો</li><li>માથા નીચે નરમ વસ્તુ</li><li>સમય નોંધો</li></ul></div><div class="col dont"><h4>❌ Don't</h4><ul><li>પકડીને ન રાખો</li><li>મોંમાં કંઈ ન નાખો</li><li>પાણી ન પીવડાવો</li></ul></div></div>
+
+            <h2>4. Asthma Attack</h2>
+            <p><strong>Symptoms:</strong> Wheezing • Shortness of breath • Coughing • Chest tightness • Difficulty speaking</p>
+            <p><strong>First Aid:</strong> દર્દીને <strong>બેસાડો</strong> (સૂવાડો નહીં) • Inhaler વાપરવા દો • શાંત રાખો • ઢીલા કપડાં • 5–10 મિનિટમાં સુધારો ન થાય → 108</p>
+
+            <h2>5. Diabetes Emergency</h2>
+            <p><strong>Hypoglycemia (Low sugar):</strong> Shakiness • Sweating • Confusion • Hunger • Dizziness • Unconsciousness</p>
+            <p><strong>First Aid:</strong> જો સભાન → શુગરયુક્ત પીણું/ખોરાક (જ્યુસ, ચોકલેટ, ગ્લુકોઝ) • 15 મિનિટ પછી તપાસો • સુધારો ન થાય → 108 • જો બેભાન → Recovery Position, 108</p>
+            `
+        }, {
+            id: 'part14',
+            part: 'PART 14',
+            title: 'Disaster &amp; Accident Management',
+            content: `
+            <h2>1. Road Accident – Conductor's Role</h2>
+            <ol><li>Bus Stop Safely – સુરક્ષિત સ્થળે રોકો</li><li>Hazard Lights On</li><li>Assess Situation</li><li>DRABC</li><li>Call 108/112</li><li>First Aid</li><li>Keep Passengers Calm</li><li>Traffic Management</li><li>Information to Police/Medical Team</li></ol>
+            <p><strong>Multiple Casualty – Triage:</strong> Red (life-threatening, immediate) • Yellow (serious but not immediate) • Green (mild) • Black (deceased/unsalvageable)</p>
+
+            <h2>2. Bus Accident</h2>
+            <ol><li>Engine Off</li><li>Emergency Exit open</li><li>Evacuate passengers</li><li>Head Count</li><li>First Aid for injured</li><li>Call 108, Police</li><li>Inform Depot/Office</li></ol>
+            <p><strong>Fire in Bus:</strong> Engine Off • Evacuate • Fire Extinguisher (PASS)</p>
+            <div class="mnemonic">🧠 PASS – Pull, Aim, Squeeze, Sweep</div>
+
+            <h2>3. Electrical Accident</h2>
+            <ol><li>વીજળીનો સ્ત્રોત દૂર કરો (non-conductive: wooden stick, rubber)</li><li>પોતાને સ્પર્શ કરશો નહીં (જ્યાં સુધી વીજળી બંધ ન થાય)</li><li>DRABC</li><li>CPR જો જરૂરી</li><li>Burns treatment</li><li>108</li></ol>
+            `
+        }, {
+            id: 'part15',
+            part: 'PART 15',
+            title: 'First Aid Kit',
+            content: `
+            <h2>First Aid Box Contents</h2>
+            <div class="table-wrap"><table><thead><tr><th>Item</th><th>Gujarati</th><th>Use</th></tr></thead><tbody><tr><td>Bandages</td><td>પટ્ટીઓ</td><td>ઘા ઢાંકવા, દબાવ</td></tr><tr><td>Gauze</td><td>ગોઝ</td><td>ઘા સાફ, લોહી શોષ</td></tr><tr><td>Cotton Wool</td><td>કપાસ</td><td>ઘા સાફ</td></tr><tr><td>Adhesive Tape</td><td>ચીકણું ટેપ</td><td>પટ્ટી ચોંટાડવા</td></tr><tr><td>Scissors</td><td>કાતર</td><td>કપડાં/પટ્ટી કાપ</td></tr><tr><td>Tweezers</td><td>ચીપડી</td><td>કાંટા/કાચ કાઢ</td></tr><tr><td>Antiseptic</td><td>એન્ટિસેપ્ટીક</td><td>ઘા સાફ (Dettol, Savlon)</td></tr><tr><td>Pain Relievers</td><td>દુખાવાની દવા</td><td>દુખાવો ઘટાડ</td></tr><tr><td>Antihistamine</td><td>એન્ટિહિસ્ટામાઇન</td><td>એલર્જી</td></tr><tr><td>Thermometer</td><td>થર્મોમીટર</td><td>તાવ તપાસ</td></tr><tr><td>Gloves</td><td>ગ્લોવ્ઝ</td><td>ચેપ અટકાવ</td></tr><tr><td>CPR Mask</td><td>CPR માસ્ક</td><td>કૃત્રિમ શ્વાસ</td></tr><tr><td>Ice Pack</td><td>બરફનું પેક</td><td>સોજો ઘટાડ</td></tr><tr><td>Burn Dressing</td><td>બળતરા ડ્રેસિંગ</td><td>બળતરા</td></tr><tr><td>Triangular Bandage</td><td>ત્રિકોણ પટ્ટી</td><td>હાથ/હાડકું ટેકવા</td></tr><tr><td>Safety Pins</td><td>સલામતી પિન</td><td>પટ્ટી બાંધવા</td></tr><tr><td>Emergency Numbers</td><td>કટોકટી નંબરો</td><td>108, 112, 101, 102</td></tr></tbody></table></div>
+            <div class="box-tip"><strong>💡 Conductor's First Aid Kit:</strong> Bandages • Gauze • Antiseptic • Gloves • CPR Mask • Emergency Numbers list</div>
+            `
+        }, {
+            id: 'part16',
+            part: 'PART 16',
+            title: 'Transport &amp; Casualty Handling',
+            content: `
+            <h2>1. Patient Transport – General Principles</h2>
+            <ul><li>Do NOT move if spinal injury suspected</li><li>Stabilize injured area before moving</li><li>Use proper technique to avoid further injury</li><li>Keep airway open during transport</li></ul>
+            <p><strong>Manual Carries:</strong> One-person (Fireman's carry, Piggyback) • Two-person (Chair carry, Extremity carry) • Multiple-person (Stretcher carry)</p>
+
+            <h2>2. Stretcher Use</h2>
+            <p><strong>Types:</strong> Standard • Spine Board • Foldable • Improvised</p>
+            <p><strong>Stretcher Loading:</strong> દર્દીને સ્થિર કરો • Straps વડે બાંધો • 4 લોકો ઉપાડે • સમાન ગતિ • માથું પહેલા (ઊંચો કરો) અને પહેલા (નીચે મૂકો)</p>
+
+            <h2>3. Lifting Techniques</h2>
+            <ul><li>Wide stance</li><li>Bend knees (not back)</li><li>Keep back straight</li><li>Hold close to body</li><li>Lift with legs</li><li>No twisting</li></ul>
+            <p><strong>Team Lifting:</strong> એક વ્યક્તિ આદેશ • બધા એક સાથે ઉપાડે • સમાન ગતિ • માથું નિયંત્રણમાં</p>
+
+            <h2>4. Bus Conductor Special Instructions</h2>
+            <ul><li>દર્દીને બસની પાછળની સીટ પર ન લઈ જાઓ</li><li>મધ્યમ દરવાજા પાસે રાખો (ઝડપી ઉતરાણ)</li><li>દર્દીને સૂવાડો (3 સીટ પર)</li><li>AC યોગ્ય રાખો</li><li>અન્ય મુસાફરોને શાંત રાખો</li><li>ડ્રાઈવરને ધીમે અને કાળજીપૂર્વક ચલાવવા કહો</li></ul>
+            `
+        }, {
+            id: 'part17',
+            part: 'PART 17',
+            title: 'Conductor Exam Special',
+            content: `
+            <h2>100 Most Important MCQ (Sample)</h2>
+            <div class="mcq-block"><div class="q">1. First Aid નો મુખ્ય હેતુ શું છે?</div><div class="opts"><label><input type="radio" name="q1"> a) દવા આપવી</label><label><input type="radio" name="q1"> b) જીવન બચાવવું</label><label><input type="radio" name="q1"> c) ઓપરેશન કરવું</label><label><input type="radio" name="q1"> d) નિદાન કરવું</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ b) જીવન બચાવવું</div></div>
+            <div class="mcq-block"><div class="q">2. DRABC માં 'D' શું દર્શાવે છે?</div><div class="opts"><label><input type="radio" name="q2"> a) Doctor</label><label><input type="radio" name="q2"> b) Danger</label><label><input type="radio" name="q2"> c) Drug</label><label><input type="radio" name="q2"> d) Damage</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ b) Danger</div></div>
+            <div class="mcq-block"><div class="q">3. ABC Rule માં 'B' શું દર્શાવે છે?</div><div class="opts"><label><input type="radio" name="q3"> a) Blood</label><label><input type="radio" name="q3"> b) Breathing</label><label><input type="radio" name="q3"> c) Brain</label><label><input type="radio" name="q3"> d) Bone</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ b) Breathing</div></div>
+            <div class="mcq-block"><div class="q">4. CPR નું Full Form શું છે?</div><div class="opts"><label><input type="radio" name="q4"> a) Cardio Pulmonary Resuscitation</label><label><input type="radio" name="q4"> b) Cardio Physical Resuscitation</label><label><input type="radio" name="q4"> c) Cardiac Pulmonary Recovery</label><label><input type="radio" name="q4"> d) Cardio Pulse Recovery</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ a) Cardio Pulmonary Resuscitation</div></div>
+            <div class="mcq-block"><div class="q">5. Adult CPR માં Compression:Breath રેશિયો શું છે?</div><div class="opts"><label><input type="radio" name="q5"> a) 15:2</label><label><input type="radio" name="q5"> b) 30:2</label><label><input type="radio" name="q5"> c) 5:1</label><label><input type="radio" name="q5"> d) 10:2</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ b) 30:2</div></div>
+            <div class="mcq-block"><div class="q">6. ધમની રક્તસ્ત્રાવનો રંગ કેવો હોય છે?</div><div class="opts"><label><input type="radio" name="q6"> a) ઘેરો લાલ</label><label><input type="radio" name="q6"> b) તેજ લાલ</label><label><input type="radio" name="q6"> c) કાળો</label><label><input type="radio" name="q6"> d) પીળો</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ b) તેજ લાલ</div></div>
+            <div class="mcq-block"><div class="q">7. Stroke માટે FAST ટેસ્ટમાં 'F' શું દર્શાવે છે?</div><div class="opts"><label><input type="radio" name="q7"> a) Fever</label><label><input type="radio" name="q7"> b) Face</label><label><input type="radio" name="q7"> c) Foot</label><label><input type="radio" name="q7"> d) Finger</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ b) Face</div></div>
+            <div class="mcq-block"><div class="q">8. Choking નો Universal Sign શું છે?</div><div class="opts"><label><input type="radio" name="q8"> a) માથું દુખે છે</label><label><input type="radio" name="q8"> b) હાથ ગળા પર પકડવા</label><label><input type="radio" name="q8"> c) ઉલટી થાય છે</label><label><input type="radio" name="q8"> d) ચક્કર આવે છે</label></div><button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button><div class="answer">✅ b) હાથ ગળા પર પકડવા</div></div>
+
+            <h2>50 True/False (Selected)</h2>
+            <ul><li>First Aid માં દવા આપી શકાય છે. <strong>False</strong></li><li>DRABC માં 'D' Danger દર્શાવે છે. <strong>True</strong></li><li>CPR માં 30 compressions અને 2 breaths આપવામાં આવે છે. <strong>True</strong></li><li>બળતરા પર બરફ લગાવવો જોઈએ. <strong>False</strong></li><li>Shock માં દર્દીના પગ ઊંચા કરવા જોઈએ. <strong>True</strong></li><li>Open Fracture માં હાડકું ત્વચા બહાર નીકળે છે. <strong>True</strong></li><li>Heimlich Maneuver ફક્ત બાળકો માટે છે. <strong>False</strong></li><li>Choking માં દર્દીને પાણી પીવડાવવું જોઈએ. <strong>False</strong></li><li>Heart Attack માં દર્દીને સૂવાડવો જોઈએ. <strong>False</strong> (અર્ધ-બેઠક)</li><li>Stroke માં FAST ટેસ્ટ ઉપયોગી છે. <strong>True</strong></li></ul>
+
+            <h2>50 Fill in the Blanks (Selected)</h2>
+            <ul><li>First Aid નો મુખ્ય હેતુ ________ બચાવવાનો છે. → <strong>જીવન</strong></li><li>DRABC માં 'D' ________ દર્શાવે છે. → <strong>Danger</strong></li><li>CPR નું Full Form ________ છે. → <strong>Cardiopulmonary Resuscitation</strong></li><li>Adult CPR માં Compression:Breath રેશિયો ________ છે. → <strong>30:2</strong></li><li>CPR માં Compression નો દર ________ પ્રતિ મિનિટ છે. → <strong>100–120</strong></li><li>________ રક્તસ્ત્રાવ ફુવારાની જેમ વહે છે. → <strong>Arterial</strong></li><li>Sprain માટે ________ Protocol વપરાય છે. → <strong>RICE</strong></li><li>________ Fracture માં હાડકું ત્વચા બહાર નીકળે છે. → <strong>Open/Compound</strong></li></ul>
+
+            <h2>Short &amp; Long Questions (Summary)</h2>
+            <p><strong>Short Questions (20):</strong> First Aid, DRABC, ABC, CPR, Heimlich, Shock, Heat Stroke, FAST, RICE, etc.</p>
+            <p><strong>Long Questions (20):</strong> First Aid objectives &amp; Golden Rules • DRABC • CPR step-by-step • Choking • Bleeding types • Fractures &amp; Sprains • Burns • Shock • Recovery Position • Heart Attack, Stroke, Epilepsy, Asthma, Diabetes • Poisoning • Bites • Heat/Cold • First Aid Kit • Bus accident • Unconscious casualty • CPR mistakes • Triage • Conductor duty examples</p>
+            `
+        }, {
+            id: 'part18',
+            part: 'PART 18',
+            title: 'Practical Knowledge',
+            content: `
+            <h2>50 Real Life Emergency Situations (Sample)</h2>
+            <div class="box-example"><strong>1. Situation:</strong> મુસાફરને અચાનક હાર્ટ એટેક આવે છે.<br><strong>Risk:</strong> જીવન જોખમ<br><strong>First Aid:</strong> 108, અર્ધ-બેઠક સ્થિતિ, ઢીલા કપડાં<br><strong>Mistakes:</strong> દર્દીને સૂવાડવો, ખાવા-પીવાનું આપવું</div>
+            <div class="box-example"><strong>2. Situation:</strong> બસ અકસ્માત થાય છે.<br><strong>Risk:</strong> અનેક ઈજાઓ<br><strong>First Aid:</strong> એન્જિન બંધ, મુસાફરો બહાર, 108, First Aid<br><strong>Mistakes:</strong> ગભરાવું, મુસાફરોને શાંત ન રાખવા</div>
+            <div class="box-example"><strong>3. Situation:</strong> મુસાફર ખોરાક ખાતા ગૂંગળાય છે.<br><strong>Risk:</strong> શ્વાસ બંધ<br><strong>First Aid:</strong> Heimlich Maneuver<br><strong>Mistakes:</strong> પાણી પીવડાવવું, ખોટી રીતે પીઠ પર થપ્પા</div>
+            <div class="box-example"><strong>4. Situation:</strong> મુસાફરને સ્ટ્રોક આવે છે.<br><strong>Risk:</strong> મગજનું નુકસાન<br><strong>First Aid:</strong> FAST ટેસ્ટ, 108, સૂવાડો (માથું 30°)<br><strong>Mistakes:</strong> સમય બગાડવો, ખાવા-પીવાનું આપવું</div>
+            <div class="box-example"><strong>5. Situation:</strong> મુસાફરને હીટ સ્ટ્રોક થાય છે.<br><strong>Risk:</strong> જીવન જોખમ<br><strong>First Aid:</strong> ઠંડી જગ્યાએ, ઠંડુ કરો, 108<br><strong>Mistakes:</strong> ગરમ કપડાં, ગરમ પીણાં</div>
+            <p><em>… and 45 more situations covering all emergency types.</em></p>
+            `
+        }, {
+            id: 'part19',
+            part: 'PART 19',
+            title: 'Interview Preparation',
+            content: `
+            <h2>First Aid Interview Questions</h2>
+            <div class="box-important"><strong>Q: First Aid શું છે?</strong><br><strong>A:</strong> તબીબની સહાય મળે તે પહેલાં ઈજાગ્રસ્ત વ્યક્તિને તરત અપાતી પ્રારંભિક સારવાર.</div>
+            <div class="box-important"><strong>Q: DRABC નો અર્થ શું છે?</strong><br><strong>A:</strong> Danger, Response, Airway, Breathing, Circulation.</div>
+            <div class="box-important"><strong>Q: CPR કેવી રીતે કરવી?</strong><br><strong>A:</strong> 30 compressions (2 ઇંચ ઊંડા, 100–120/min) પછી 2 breaths.</div>
+            <div class="box-important"><strong>Q: Conductor તરીકે First Aid શા માટે મહત્વપૂર્ણ છે?</strong><br><strong>A:</strong> બસમાં કટોકટીના સમયે Conductor પ્રથમ પ્રતિસાદ આપનાર હોય છે.</div>
+            <div class="box-important"><strong>Q: Choking માટે શું કરવું?</strong><br><strong>A:</strong> Heimlich Maneuver (Abdominal Thrusts).</div>
+            <div class="box-important"><strong>Q: Shock માટે શું કરવું?</strong><br><strong>A:</strong> સૂવાડો, પગ ઊંચા કરો, ગરમ રાખો, ખાવા-પીવાનું ન આપો.</div>
+            <div class="box-important"><strong>Q: Heat Stroke માટે શું કરવું?</strong><br><strong>A:</strong> ઠંડી જગ્યાએ, ઠંડુ કરો, 108.</div>
+
+            <h2>Model Answer – Conductor Role</h2>
+            <div class="box-tip"><strong>Q: બસ અકસ્માતમાં તમે શું કરશો?</strong><br>1. સૌ પ્રથમ બસનું એન્જિન બંધ કરીશ<br>2. મુસાફરોને સુરક્ષિત રીતે બહાર કાઢીશ<br>3. 108 પર કૉલ કરીશ<br>4. ઈજાગ્રસ્તોને DRABC થી તપાસીશ<br>5. First Aid આપીશ (રક્તસ્ત્રાવ બંધ, CPR, વગેરે)<br>6. અન્ય મુસાફરોને શાંત રાખીશ<br>7. ડેપો અને પોલીસને માહિતી આપીશ<br>8. તબીબી ટીમ આવે ત્યાં સુધી નિરીક્ષણ કરીશ</div>
+            `
+        }, {
+            id: 'part20',
+            part: 'PART 20',
+            title: 'Exam Revision',
+            content: `
+            <h2>Important Definitions – Quick Reference</h2>
+            <div class="table-wrap"><table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody><tr><td>First Aid</td><td>તબીબની સહાય મળે તે પહેલાં અપાતી પ્રારંભિક સારવાર</td></tr><tr><td>First Aider</td><td>First Aid તાલીમ પામેલ વ્યક્તિ</td></tr><tr><td>ABC</td><td>Airway, Breathing, Circulation</td></tr><tr><td>DRABC</td><td>Danger, Response, Airway, Breathing, Circulation</td></tr><tr><td>CPR</td><td>Cardiopulmonary Resuscitation</td></tr><tr><td>Shock</td><td>શરીરના અંગોને અપૂરતો રક્ત પ્રવાહ</td></tr><tr><td>Fracture</td><td>હાડકું તૂટવું</td></tr><tr><td>Sprain</td><td>Ligament ખેંચાય/ફાટે</td></tr><tr><td>Strain</td><td>સ્નાયુ/કંડરા ખેંચાય/ફાટે</td></tr><tr><td>Dislocation</td><td>સાંધાના હાડકાં ખસી જાય</td></tr><tr><td>Choking</td><td>શ્વસનમાર્ગમાં અવરોધ</td></tr><tr><td>Hypothermia</td><td>શરીરનું તાપમાન 35°C થી નીચે</td></tr><tr><td>Heat Stroke</td><td>શરીરનું તાપમાન 40°C થી વધી જાય</td></tr><tr><td>Stroke</td><td>મગજમાં રક્ત પ્રવાહ બંધ</td></tr><tr><td>Heart Attack</td><td>હૃદયમાં રક્ત પ્રવાહ બંધ</td></tr></tbody></table></div>
+
+            <h2>Important Formulas/Ratios</h2>
+            <div class="table-wrap"><table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Adult CPR Ratio</td><td>30:2</td></tr><tr><td>Child/Infant CPR Ratio (2 rescuers)</td><td>15:2</td></tr><tr><td>CPR Compression Rate</td><td>100–120/min</td></tr><tr><td>Adult CPR Depth</td><td>2 inches (5–6 cm)</td></tr><tr><td>Child CPR Depth</td><td>1/3 chest depth (~2 inches)</td></tr><tr><td>Infant CPR Depth</td><td>1/3 chest depth (~1.5 inches)</td></tr><tr><td>Burn Cooling Time</td><td>20 minutes</td></tr><tr><td>Shock Leg Elevation</td><td>30–45 cm</td></tr><tr><td>Heat Stroke Temperature</td><td>&gt; 40°C</td></tr><tr><td>Hypothermia Temperature</td><td>&lt; 35°C</td></tr><tr><td>Normal Pulse Rate</td><td>60–100/min</td></tr><tr><td>Normal Breathing Rate</td><td>12–20/min</td></tr></tbody></table></div>
+
+            <h2>One Day Revision Plan</h2>
+            <ul><li><strong>Morning (2h):</strong> First Aid Basics (DRABC, ABC, Golden Rules) • Human Body Basics • Wounds and Bleeding</li><li><strong>Afternoon (2h):</strong> Fractures and Injuries • Burns and Scalds • Shock</li><li><strong>Evening (2h):</strong> Unconscious Casualty, Recovery Position • CPR (Adult, Child, Infant) • Choking</li><li><strong>Night (2h):</strong> Poisoning, Bites, Heat/Cold • Medical Emergencies • First Aid Kit, Transport</li><li><strong>Last Hour:</strong> MCQs, True/False, Fill in the Blanks • Important Definitions • Memory Tricks</li></ul>
+
+            <h2>Memory Tricks (Mnemonics)</h2>
+            <div class="table-wrap"><table><thead><tr><th>Topic</th><th>Mnemonic</th><th>Meaning</th></tr></thead><tbody><tr><td>DRABC</td><td><strong>D</strong>RABC</td><td>Danger, Response, Airway, Breathing, Circulation</td></tr><tr><td>CPR Steps</td><td><strong>CAB</strong></td><td>Compression, Airway, Breathing</td></tr><tr><td>RICE</td><td><strong>RICE</strong></td><td>Rest, Ice, Compression, Elevation</td></tr><tr><td>FAST</td><td><strong>FAST</strong></td><td>Face, Arms, Speech, Time</td></tr><tr><td>PASS</td><td><strong>PASS</strong></td><td>Pull, Aim, Squeeze, Sweep</td></tr><tr><td>DOTS</td><td><strong>DOTS</strong></td><td>Deformity, Open wound, Tenderness, Swelling</td></tr><tr><td>3P</td><td><strong>3P</strong></td><td>Preserve Life, Prevent Further Injury, Promote Recovery</td></tr></tbody></table></div>
+
+            <h2>Exam Tips</h2>
+            <ul><li><strong>DRABC</strong> – હંમેશા યાદ રાખો</li><li><strong>ABC</strong> – Airway → Breathing → Circulation</li><li><strong>CPR</strong> – 30:2, 100–120/min, 2 inch depth</li><li><strong>RICE</strong> – Rest, Ice, Compression, Elevation</li><li><strong>FAST</strong> – Face, Arms, Speech, Time</li><li><strong>PASS</strong> – Pull, Aim, Squeeze, Sweep</li><li><strong>DOTS</strong> – Deformity, Open wound, Tenderness, Swelling</li><li><strong>3P</strong> – Preserve Life, Prevent Further Injury, Promote Recovery</li><li><strong>Golden Rules</strong> – શાંત રહો, તાત્કાલિક કાર્ય કરો, સલામતી પ્રથમ</li></ul>
+            `
+        }];
+
+        // ============================================================
+        //  RENDER
+        // ============================================================
+        const navList = document.getElementById('navList');
+        const contentContainer = document.getElementById('contentContainer');
+
+        function renderNav() {
+            navList.innerHTML = '';
+            courseData.forEach((item, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'nav-item';
+                btn.dataset.target = item.id;
+                btn.innerHTML = `<span class="num">${String(idx + 1).padStart(2, '0')}</span> ${item.part} : ${item.title}`;
+                btn.addEventListener('click', () => {
+                    document.getElementById(item.id).scrollIntoView({ behavior: 'smooth' });
+                    // close sidebar on mobile
+                    document.getElementById('sidebar').classList.remove('open');
+                });
+                navList.appendChild(btn);
+            });
+        }
+
+        function renderContent() {
+            contentContainer.innerHTML = '';
+            courseData.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'topic-card';
+                card.id = item.id;
+                card.innerHTML = `
+                    <div class="part-badge">${item.part}</div>
+                    <h1>${item.title}</h1>
+                    <div class="subhead">Full course content – Basic to Advanced</div>
+                    ${item.content}
+                `;
+                contentContainer.appendChild(card);
+            });
+        }
+
+        // ============================================================
+        //  MCQ REVEAL
+        // ============================================================
+        function revealAnswer(btn) {
+            const block = btn.closest('.mcq-block');
+            const ans = block.querySelector('.answer');
+            if (ans) {
+                ans.classList.toggle('show');
+                btn.textContent = ans.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+            }
+        }
+
+        // ============================================================
+        //  SIDEBAR TOGGLE (mobile)
+        // ============================================================
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        // Close sidebar on outside click (mobile)
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('menuToggle');
+            if (window.innerWidth <= 820) {
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // ============================================================
+        //  HIGHLIGHT ACTIVE NAV ON SCROLL
+        // ============================================================
+        function updateActiveNav() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = courseData.map(d => document.getElementById(d.id)).filter(Boolean);
+            let currentId = null;
+            sections.forEach((sec) => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top <= 120) {
+                    currentId = sec.id;
+                }
+            });
+            navItems.forEach((btn) => {
+                btn.classList.toggle('active', btn.dataset.target === currentId);
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        renderNav();
+        renderContent();
+
+        // After render, set initial active
+        setTimeout(updateActiveNav, 300);
+
+        console.log('🩺 First Aid Course loaded — Conductor Exam Ready!');
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>પ્રાથમિક સારવાર પ્રમાણપત્ર | First Aid Certificate</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --red:    #D72638;
+    --red-l:  #FF4D5E;
+    --red-bg: #FFF0F2;
+    --dark:   #1A1A2E;
+    --mid:    #2D2D44;
+    --text:   #2C2C3A;
+    --muted:  #6B6B80;
+    --white:  #FFFFFF;
+    --cream:  #FAFAFA;
+    --border: #E8E8EE;
+    --green:  #1A8754;
+    --green-l:#D1F2E1;
+    --blue:   #1565C0;
+    --blue-l: #DBEAFE;
+    --orange: #C96A00;
+    --orange-l:#FEF0DC;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans Gujarati', 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+    color: var(--white);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-icon {
+    background: var(--red);
+    border-radius: 10px;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .header-text h1 { font-size: 1.05rem; font-weight: 700; line-height: 1.2; }
+  .header-text p  { font-size: 0.75rem; color: #aaa; margin-top: 2px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--red) 0%, #8B0000 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 52px 20px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "✚";
+    position: absolute;
+    font-size: 260px;
+    opacity: 0.04;
+    top: -40px; right: -40px;
+    line-height: 1;
+  }
+  .hero h2 { font-size: clamp(1.5rem, 5vw, 2.6rem); font-weight: 700; margin-bottom: 10px; }
+  .hero p  { font-size: 1rem; opacity: 0.88; max-width: 560px; margin: 0 auto 24px; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 0.82rem;
+    backdrop-filter: blur(6px);
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: auto; padding: 0 16px; }
+  section { padding: 44px 0; }
+
+  /* ── SECTION TITLE ── */
+  .sec-title {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .sec-title .tag {
+    display: inline-block;
+    background: var(--red-bg);
+    color: var(--red);
+    border-radius: 6px;
+    padding: 3px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .sec-title h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); font-weight: 700; color: var(--dark); }
+  .sec-title p  { color: var(--muted); margin-top: 6px; font-size: 0.92rem; }
+
+  /* ── CARD GRID ── */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 14px; }
+
+  .card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+  .card-icon { font-size: 2rem; margin-bottom: 10px; }
+  .card h4   { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+  .card p    { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── ACCENT CARDS ── */
+  .card.red    { border-left: 4px solid var(--red);    background: var(--red-bg); }
+  .card.green  { border-left: 4px solid var(--green);  background: var(--green-l); }
+  .card.blue   { border-left: 4px solid var(--blue);   background: var(--blue-l); }
+  .card.orange { border-left: 4px solid var(--orange); background: var(--orange-l); }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 16px; }
+  .step {
+    display: flex;
+    gap: 16px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 18px;
+    box-shadow: var(--shadow);
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--red);
+    color: var(--white);
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .step-body h4  { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--dark); }
+  .step-body p   { font-size: 0.865rem; color: var(--muted); }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--white); }
+  thead { background: var(--dark); color: var(--white); }
+  th { padding: 12px 16px; text-align: left; font-size: 0.85rem; font-weight: 600; }
+  td { padding: 11px 16px; font-size: 0.86rem; border-bottom: 1px solid var(--border); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #F7F7FA; }
+  td:first-child { font-weight: 600; color: var(--dark); }
+
+  /* ── BADGE LIST ── */
+  .badge-list { display: flex; flex-wrap: wrap; gap: 10px; }
+  .badge {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.83rem;
+    color: var(--text);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  /* ── ALERT BOX ── */
+  .alert {
+    background: var(--orange-l);
+    border: 1.5px solid #F5C070;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .alert-body h4 { font-size: 0.95rem; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
+  .alert-body p  { font-size: 0.875rem; color: #6B4A00; }
+
+  /* ── CPR VISUAL ── */
+  .cpr-box {
+    background: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 100%);
+    border-radius: 16px;
+    color: var(--white);
+    padding: 30px 24px;
+    text-align: center;
+  }
+  .cpr-box h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 18px; }
+  .cpr-steps-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+  .cpr-step {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    min-width: 120px;
+    flex: 1;
+  }
+  .cpr-step .num { font-size: 1.8rem; font-weight: 700; color: var(--red-l); }
+  .cpr-step .label { font-size: 0.78rem; opacity: 0.8; margin-top: 4px; }
+
+  /* ── QUIZ ── */
+  .quiz-box {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .quiz-q { font-size: 0.95rem; font-weight: 600; margin-bottom: 14px; color: var(--dark); }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-opt {
+    background: #F4F4F8;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all .15s;
+    text-align: left;
+  }
+  .quiz-opt:hover { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+  .quiz-opt.correct { background: var(--green-l); border-color: var(--green); color: #145C38; }
+  .quiz-opt.wrong   { background: #FFE8E8; border-color: var(--red); color: var(--red); }
+  .quiz-result { margin-top: 12px; font-size: 0.875rem; font-weight: 600; display: none; }
+  .quiz-next {
+    margin-top: 14px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 22px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: none;
+  }
+  .quiz-score-box { text-align: center; padding: 24px; display: none; }
+  .quiz-score-num { font-size: 2.5rem; font-weight: 700; color: var(--red); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    background: var(--border);
+    border-radius: 999px;
+    height: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--red);
+    border-radius: 999px;
+    transition: width .4s ease;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 0.82rem;
+  }
+  footer strong { color: var(--red-l); }
+
+  /* ── SECTION BG ALTERNATION ── */
+  .bg-white { background: var(--white); }
+  .bg-cream  { background: var(--cream); }
+
+  @media (max-width: 600px) {
+    .header-text h1 { font-size: 0.92rem; }
+    .hero { padding: 36px 16px 40px; }
+    section { padding: 32px 0; }
+    .cpr-steps-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <div class="header-icon">✚</div>
+    <div class="header-text">
+      <h1>પ્રાથમિક સારવાર પ્રમાણપત્ર અભ્યાસ</h1>
+      <p>First Aid Certificate Study Guide | Basic to Advanced</p>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <h2>પ્રાથમિક સારવાર શીખો<br>જીવ બચાવો</h2>
+  <p>Basic થી Advance સુધી — સંપૂર્ણ First Aid Certificate તૈયારી ગુજરાતીમાં</p>
+  <span class="hero-badge">🏅 Certificate Ready Study Material</span>
+</div>
+
+<!-- ── SECTION 1: INTRO / WHAT IS FIRST AID ── -->
+<section class="bg-white">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">BASIC · પ્રાથમિક જ્ઞાન</div>
+      <h3>પ્રાથમિક સારવાર એટલે શું?</h3>
+      <p>What is First Aid?</p>
+    </div>
+    <div class="grid-3">
+      <div class="card red">
+        <div class="card-icon">🩺</div>
+        <h4>વ્યાખ્યા</h4>
+        <p>અકસ્માત, ઈજા અથવા અચાનક બીમારી થાય ત્યારે ડૉક્ટર આવે તે પહેલાં આપવામાં આવતી <strong>તાત્કાલિક મદદ</strong>ને પ્રાથમિક સારવાર કહે છે.</p>
+      </div>
+      <div class="card green">
+        <div class="card-icon">🎯</div>
+        <h4>ઉદ્દેશ</h4>
+        <p>• જીવ બચાવવો<br>• સ્થિતિ વધુ ખરાબ ન થાય<br>• ઝડપી સ્વસ્થ થવામાં મદદ<br>• ઈજા ગ્રસ્તને હોસ્પિટલ સુધી પહોંચાડવો</p>
+      </div>
+      <div class="card blue">
+        <div class="card-icon">⚡</div>
+        <h4>Golden Hour</h4>
+        <p>ઈજા પછીનો <strong>પ્રથમ ૧ કલાક</strong> — "Golden Hour" — સૌથી મહત્ત્વનો છે. આ સમયમાં યોગ્ય સારવાર મળે તો જીવ બચવાની શક્યતા ઘણી વધી જાય છે.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 2: FIRST AID KIT ── -->
+<section class="bg-cream">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">BASIC · First Aid Kit</div>
+      <h3>પ્રાથમિક સારવાર પેટી (First Aid Box)</h3>
+      <p>દરેક ઘર, શાળા, ઓફિસ અને વાહનમાં First Aid Box હોવી જ જોઈએ</p>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h4>🧰 ફરજિયાત સામાન (Essential Items)</h4>
+          <br>
+          <div class="badge-list">
+            <span class="badge">🩹 Adhesive Bandages</span>
+            <span class="badge">🧻 Gauze Pads</span>
+            <span class="badge">🌡️ Thermometer</span>
+            <span class="badge">✂️ Scissors (કાતર)</span>
+            <span class="badge">📌 Safety Pins</span>
+            <span class="badge">🧤 Gloves</span>
+            <span class="badge">💊 Antiseptic Wipes</span>
+            <span class="badge">🩺 Stethoscope</span>
+            <span class="badge">💉 Syringe</span>
+            <span class="badge">🔦 Flashlight (ટોર્ચ)</span>
+            <span class="badge">🧴 Antiseptic Cream</span>
+            <span class="badge">🩸 Tourniquet</span>
+            <span class="badge">💊 Paracetamol</span>
+            <span class="badge">🌿 Betadine</span>
+          </div>
+        </div>
+      </div>
+      <div class="card blue">
+        <h4>📋 First Aid Box ના નિયમો</h4>
+        <br>
+        <div class="steps" style="gap:10px">
+          <div class="step" style="padding:12px">
+            <div class="step-num" style="width:28px;height:28px;font-size:0.78rem">1</div>
+            <div class="step-body"><p>Box હંમેશા <strong>ઠંડી અને સૂકી</strong> જગ્યાએ રાખો</p></div>
+          </div>
+          <div class="step" style="padding:12px">
+            <div class="step-num" style="width:28px;height:28px;font-size:0.78rem">2</div>
+            <div class="step-body"><p>દર ૬ મહિને <strong>Expiry Date</strong> ચેક કરો</p></div>
+          </div>
+          <div class="step" style="padding:12px">
+            <div class="step-num" style="width:28px;height:28px;font-size:0.78rem">3</div>
+            <div class="step-body"><p>Box ઉપર <strong>✚ Red Cross</strong> નું ચિહ્ન લગાવો</p></div>
+          </div>
+          <div class="step" style="padding:12px">
+            <div class="step-num" style="width:28px;height:28px;font-size:0.78rem">4</div>
+            <div class="step-body"><p>ઉપયોગ પછી સામાન <strong>તરત ભરી</strong> દો</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 3: DR. ABC ── -->
+<section class="bg-white">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">BASIC · Emergency Protocol</div>
+      <h3>DR. ABC Rule — ઈમરજન્સીમાં સૌ પ્રથમ</h3>
+      <p>કોઈ પણ ઈમરજન્સીમાં આ ક્રમ યાદ રાખો</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">D</div>
+        <div class="step-body">
+          <h4>Danger — જોખમ ચેક કરો</h4>
+          <p>પ્રથમ પોતે સુરક્ષિત છો? આસપાસ કોઈ જોખમ છે? (ગેસ, આગ, ટ્રાફિક)</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">R</div>
+        <div class="step-body">
+          <h4>Response — ઈજાગ્રસ્ત સભાન છે?</h4>
+          <p>ખભા પર હળવો સ્પર્શ કરો — "શું તમે ઠીક છો?" — પ્રત્યુત્તર આવે છે?</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">A</div>
+        <div class="step-body">
+          <h4>Airway — શ્વાસ માર્ગ ખુલ્લો છે?</h4>
+          <p>ડોક ઊંચી કરો (Head-tilt Chin-lift) — ગળામાં કોઈ અવરોધ નથી?</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B</div>
+        <div class="step-body">
+          <h4>Breathing — શ્વાસ ચાલે છે?</h4>
+          <p>જુઓ, સાંભળો, અનુભવ કરો — ૧૦ સેકન્ડ સુધી. ના ચાલે? CPR શરૂ કરો.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">C</div>
+        <div class="step-body">
+          <h4>Circulation — લોહી વહે છે?</h4>
+          <p>ભારે રક્તસ્ત્રાવ? — દબાઈ ઘા પર Bandage કરો અને Pulse ચેક કરો.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 4: CPR ── -->
+<section class="bg-cream">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">INTERMEDIATE · CPR</div>
+      <h3>CPR — Cardio Pulmonary Resuscitation</h3>
+      <p>હૃદય બંધ થઈ જાય ત્યારે</p>
+    </div>
+    <div class="cpr-box">
+      <h4>✚ CPR ના 7 મહત્ત્વના પગલાં</h4>
+      <div class="cpr-steps-row">
+        <div class="cpr-step">
+          <div class="num">1</div>
+          <div class="label">Danger & Response ચેક</div>
+        </div>
+        <div class="cpr-step">
+          <div class="num">2</div>
+          <div class="label">108 Call કરો</div>
+        </div>
+        <div class="cpr-step">
+          <div class="num">3</div>
+          <div class="label">Airway ખોલો</div>
+        </div>
+        <div class="cpr-step">
+          <div class="num">4</div>
+          <div class="label">Breathing ચેક</div>
+        </div>
+        <div class="cpr-step">
+          <div class="num">30</div>
+          <div class="label">Chest Compressions</div>
+        </div>
+        <div class="cpr-step">
+          <div class="num">2</div>
+          <div class="label">Rescue Breaths</div>
+        </div>
+        <div class="cpr-step">
+          <div class="num">∞</div>
+          <div class="label">Repeat till Help</div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="grid-3" style="margin-top:0">
+      <div class="card green">
+        <div class="card-icon">🤲</div>
+        <h4>Compression ની ઊંડાઈ</h4>
+        <p>ઓછામાં ઓછી <strong>5-6 cm</strong> — સ્ટર્નમ (Sternum) ના નીચેના ભાગ પર બે હાથ મૂકો</p>
+      </div>
+      <div class="card orange">
+        <div class="card-icon">⏱️</div>
+        <h4>Speed</h4>
+        <p>મિનિટે <strong>100-120</strong> Compressions — "Stayin' Alive" ગીતની લય</p>
+      </div>
+      <div class="card blue">
+        <div class="card-icon">👶</div>
+        <h4>શિશુ (Infant) CPR</h4>
+        <p>ફક્ત <strong>2 આંગળી</strong> — ૩ cm ઊંડાઈ — Ratio: 30:2</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 5: COMMON EMERGENCIES TABLE ── -->
+<section class="bg-white">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">INTERMEDIATE · Common Emergencies</div>
+      <h3>સામાન્ય ઈમરજન્સી અને સારવાર</h3>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ઈમરજન્સી</th>
+            <th>Emergency Type</th>
+            <th>ચિહ્નો (Signs)</th>
+            <th>સારવાર (First Aid)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ઘા / રક્તસ્ત્રાવ</td>
+            <td>Bleeding</td>
+            <td>લોહી વહેવું</td>
+            <td>ઘા પર કાપડ દબાવો, ઊંચો રાખો, Bandage</td>
+          </tr>
+          <tr>
+            <td>બળતરા / દઝાડ</td>
+            <td>Burns</td>
+            <td>ચામડી લાલ/ફોડા</td>
+            <td>ઠંડા વહેતા પાણીમાં 10-20 મિ. ભીંજવો, ઢાંકો</td>
+          </tr>
+          <tr>
+            <td>હાડકું ભાગ્યું</td>
+            <td>Fracture</td>
+            <td>દુખાવો, સોજો, વળ</td>
+            <td>Move ન કરો, Splint/Sling, Ice Pack, Hospital</td>
+          </tr>
+          <tr>
+            <td>ઝેર ચઢ્યું</td>
+            <td>Poisoning</td>
+            <td>ઉબકા, ઊલ્ટી, ચક્કર</td>
+            <td>Vomit ન કરાવો, 108 Call, ઝેરની વસ્તુ safe રાખો</td>
+          </tr>
+          <tr>
+            <td>ગૂંગળામણ</td>
+            <td>Choking</td>
+            <td>ખાઈ ન શકે, શ્વાસ ન આવે</td>
+            <td>Heimlich Maneuver — પેટ પર ઝટકો</td>
+          </tr>
+          <tr>
+            <td>ઉષ્ણઘાત</td>
+            <td>Heat Stroke</td>
+            <td>અ. 40°C+, ત્વચા ગરમ-સૂકી</td>
+            <td>ઠંડી જગ્યાએ લઈ જાઓ, ઠંડા પાણીથી ભીંજો</td>
+          </tr>
+          <tr>
+            <td>Shock</td>
+            <td>Shock</td>
+            <td>ઠંડી ચામડી, ઝડપી Pulse</td>
+            <td>સૂવો, પગ ઊંચા, ગરમ ઢાંકો, 108 Call</td>
+          </tr>
+          <tr>
+            <td>બેભાન / Faint</td>
+            <td>Unconsciousness</td>
+            <td>ચક્કર, પડી ગ્યા</td>
+            <td>Recovery Position, DR.ABC, 108 Call</td>
+          </tr>
+          <tr>
+            <td>Eye Injury</td>
+            <td>Eye Injury</td>
+            <td>આંખ લાલ, દ. ઓ.</td>
+            <td>ઘસો નહી, ઠંડા પાણીથી ધોઓ, ઢાંકો</td>
+          </tr>
+          <tr>
+            <td>Snake Bite</td>
+            <td>સાપ કરડ્યો</td>
+            <td>સોજો, બળ, ઊબ</td>
+            <td>Move ઓછો, ઘા ઊંચો ન રાખો, 108, Anti-venom</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 6: BURNS ── -->
+<section class="bg-cream">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">ADVANCED · Burns Classification</div>
+      <h3>બળતરા / દઝાડ — ડિગ્રી પ્રમાણે</h3>
+    </div>
+    <div class="grid-3">
+      <div class="card red">
+        <div class="card-icon">🔴</div>
+        <h4>1st Degree (Surface)</h4>
+        <p><strong>ચામડીની ઉપરી સ્તર</strong> — લાલ, દુ:ખાવો, ફોડ નહી<br><em>ઉ.દ. : સૂર્ય દઝ</em><br><br>✅ ઠંડા પાણી 10 મિ., Moisturiser</p>
+      </div>
+      <div class="card orange">
+        <div class="card-icon">🟠</div>
+        <h4>2nd Degree (Partial)</h4>
+        <p><strong>Dermis Layer</strong> — ફોડા, ભારે દ. ઓ., ભીનું<br><em>ઉ.દ. : ગરમ પ્રવાહી</em><br><br>✅ ઠંડા પ., ઢાંકો, ફોડ ન ફોડો, Hospital</p>
+      </div>
+      <div class="card" style="border-left:4px solid #6B21A8; background:#F5F0FF">
+        <div class="card-icon">🟣</div>
+        <h4>3rd Degree (Full Thickness)</h4>
+        <p><strong>સંપૂર્ણ ચામડી</strong> — ચામડી સફેદ/કાળી, દ. ઓ. ઓછો<br><em>ઉ.દ. : આગ, વિ. ચ.</em><br><br>✅ ઢાંકો, ન ઘસો, 108, ICU</p>
+      </div>
+    </div>
+    <br>
+    <div class="alert">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <h4>શું ન કરવું — Burns માં</h4>
+        <p>❌ બળ્યા ઉપર <strong>Oil, Toothpaste, Ghee</strong> ન લગાવો — ઘા ઈન્ફેક્શન વધે છે<br>
+        ❌ ફોડ <strong>ન ફોડો</strong> — ઈન્ફેક્શન ફેલાય<br>
+        ❌ ઠંડું <strong>Ice</strong> સીધું ન મૂકો — Frostbite થઈ શકે</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 7: FRACTURE ── -->
+<section class="bg-white">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">ADVANCED · Fracture & Bleeding</div>
+      <h3>ભાંગ (Fracture) અને ગંભીર રક્તસ્ત્રાવ</h3>
+    </div>
+    <div class="grid-2">
+      <div>
+        <h4 style="margin-bottom:14px; color:var(--dark)">🦴 Fracture ના પ્રકાર</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>પ્રકાર</th><th>વ્યાખ્યા</th></tr></thead>
+            <tbody>
+              <tr><td>Closed</td><td>ચામડી ઉઘડ્યા વગર — અંદર</td></tr>
+              <tr><td>Open (Compound)</td><td>હાડકું ચામડી ભેદ કરે</td></tr>
+              <tr><td>Greenstick</td><td>અડધું ભાંગ્યું — બાળકો</td></tr>
+              <tr><td>Stress</td><td>Overuse — Marathon Runner</td></tr>
+              <tr><td>Comminuted</td><td>ઘણા ટૂકડા — ભારે ઈજા</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="steps">
+        <h4 style="margin-bottom:14px; color:var(--dark)">🩸 Bleeding Control</h4>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Direct Pressure (સીધો દબાઈ)</h4>
+            <p>સ્વચ્છ કાપડ/Gauze ઘા પર ૧૫ મિ. સુધી ભારે દબાઈ</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Elevation (ઊંચો રાખો)</h4>
+            <p>ઘાળ અંગ હૃદય ઉપર રાખો — ગ્રેવિટી ઓછી</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Tourniquet</h4>
+            <p>ભારે Arterial Bleeding — ઉપરે 5 cm — ૨ ઘ. ઉ. ઢીલો</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Pressure Points</h4>
+            <p>Femoral/Brachial Artery — ધમની પ્રેશર</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 8: DEEP — TRIAGE ── -->
+<section class="bg-cream">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">DEEP · TRIAGE System</div>
+      <h3>Triage — ઈજાગ્રસ્તોની પ્રાथмিکता</h3>
+      <p>Mass Casualty માં — SMART TAG System</p>
+    </div>
+    <div class="grid-4">
+      <div class="card" style="border-top:5px solid #E53935; text-align:center">
+        <div class="card-icon">🔴</div>
+        <h4>Red — Immediate</h4>
+        <p>જીવ જોખમ — <strong>તાત્કાળ</strong> સારવાર<br><small>Airway, Severe Bleeding, Shock</small></p>
+      </div>
+      <div class="card" style="border-top:5px solid #F9A825; text-align:center">
+        <div class="card-icon">🟡</div>
+        <h4>Yellow — Delayed</h4>
+        <p><strong>1-2 ઘ.</strong> રાહ જોઈ શકે<br><small>Fracture, Moderate Burns</small></p>
+      </div>
+      <div class="card" style="border-top:5px solid #2E7D32; text-align:center">
+        <div class="card-icon">🟢</div>
+        <h4>Green — Minor</h4>
+        <p>ચાલી ફરી શકે<br><small>Cuts, Bruises, Minor Burns</small></p>
+      </div>
+      <div class="card" style="border-top:5px solid #424242; text-align:center">
+        <div class="card-icon">⬛</div>
+        <h4>Black — Expectant</h4>
+        <p>બચવાની <strong>શક્યતા નહી</strong><br><small>No Breathing, No Pulse, Severe Brain</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 9: LEGAL ── -->
+<section class="bg-white">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">DEEP · Legal & Ethics</div>
+      <h3>First Aid — કાયદાકીય જ્ઞાન (Legal Knowledge)</h3>
+    </div>
+    <div class="grid-2">
+      <div class="card green">
+        <div class="card-icon">⚖️</div>
+        <h4>Good Samaritan Law — ભારત 2016</h4>
+        <p>જો કોઈ ઈજાગ્રસ્ત વ્યક્તિને ઈમાનદારીથી પ્રાથ. સ. આપો, તો <strong>ન્યાયિક ઉત્તરદાયિત્વ નથી</strong>. Hospital પ્રશ્ન ના પૂછી શકે — SC Guideline 2016.</p>
+      </div>
+      <div class="card orange">
+        <div class="card-icon">📋</div>
+        <h4>Consent — સંમતિ</h4>
+        <p>• <strong>Expressed Consent</strong>: સભાન વ્યક્તિ — "હા" કહે<br>
+        • <strong>Implied Consent</strong>: બેભાન, બાળક — ધારીને મદદ<br>
+        • Minor: Guardian ની સંમ. — ઈ. ન. તો Implied</p>
+      </div>
+      <div class="card blue">
+        <div class="card-icon">🔐</div>
+        <h4>Confidentiality</h4>
+        <p>ઈજાગ્રસ્તની <strong>ખાનગી માહિતી</strong> ગોપ. રાખો. ફક્ત Medical Team ને જ જણાવો.</p>
+      </div>
+      <div class="card red">
+        <div class="card-icon">📞</div>
+        <h4>Emergency Numbers</h4>
+        <p><strong>108</strong> — Ambulance<br>
+        <strong>112</strong> — Emergency<br>
+        <strong>1091</strong> — Women Helpline<br>
+        <strong>1098</strong> — Child Helpline</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 10: QUIZ ── -->
+<section class="bg-cream">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag">PRACTICE · ક્વિઝ</div>
+      <h3>Mock Quiz — First Aid Certificate</h3>
+      <p>5 સવાલ — ટૉપ પ્રશ્નો</p>
+    </div>
+    <div class="quiz-box" id="quizBox">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div id="quizContent">
+        <div class="quiz-q" id="quizQ"></div>
+        <div class="quiz-options" id="quizOpts"></div>
+        <div class="quiz-result" id="quizResult"></div>
+        <button class="quiz-next" id="quizNext" onclick="nextQ()">આગળ →</button>
+      </div>
+      <div class="quiz-score-box" id="scoreBox">
+        <div class="quiz-score-num" id="scoreNum"></div>
+        <p id="scoreMsg" style="color:var(--muted); margin-top:8px"></p>
+        <button class="quiz-next" style="display:inline-block; margin-top:16px" onclick="restartQuiz()">ફરી રમો 🔄</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>✚ <strong>First Aid Certificate Study | Gujarati</strong> | Basic to Deep</p>
+  <p style="margin-top:6px">📞 Emergency: <strong>108</strong> | StudyFor Series</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "CPR માં Chest Compression અને Rescue Breath નો ratio શું છે?",
+    opts: ["15:2","30:2","30:1","20:2"],
+    ans: 1,
+    exp: "✅ સાચો જવાબ: 30:2 — ૩૦ Compressions + ૨ Rescue Breaths"
+  },
+  {
+    q: "2nd Degree Burns માં શું થાય?",
+    opts: ["ફક્ત લાલ","ફોડા (Blisters) પડે","ચામડી સ. ન.","દ. ઓ. ઓ."],
+    ans: 1,
+    exp: "✅ Blisters/ફોડ — Dermis Layer અસર"
+  },
+  {
+    q: "CPR ની Speed (Rate) કેટલી હોવી જોઈએ?",
+    opts: ["60-80/min","80-100/min","100-120/min","120-140/min"],
+    ans: 2,
+    exp: "✅ 100-120 Compressions per minute — Standard Rate"
+  },
+  {
+    q: "Triage માં Red Tag નો અર્થ શું?",
+    opts: ["Minor Injury","Delayed Care","Immediate Care","Expectant"],
+    ans: 2,
+    exp: "✅ Red = Immediate — જીવ જોખમ — તાત્કાળ"
+  },
+  {
+    q: "Good Samaritan Law ભારતમાં ક્યારે લાગુ થઈ?",
+    opts: ["2010","2014","2016","2018"],
+    ans: 2,
+    exp: "✅ 2016 — SC Guideline — First Aid Provider ને રક્ષણ"
+  }
+];
+
+let cur = 0, score = 0, answered = false;
+
+function loadQ() {
+  answered = false;
+  const q = questions[cur];
+  document.getElementById('quizQ').textContent = `Q${cur+1}. ${q.q}`;
+  document.getElementById('progressFill').style.width = `${(cur/questions.length)*100}%`;
+  const opts = document.getElementById('quizOpts');
+  opts.innerHTML = '';
+  q.opts.forEach((o,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = o;
+    btn.onclick = () => checkAns(i, btn);
+    opts.appendChild(btn);
+  });
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizNext').style.display = 'none';
+}
+
+function checkAns(i, btn) {
+  if(answered) return;
+  answered = true;
+  const q = questions[cur];
+  const allBtns = document.querySelectorAll('.quiz-opt');
+  allBtns.forEach(b => b.style.pointerEvents = 'none');
+  if(i === q.ans) {
+    btn.classList.add('correct');
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    allBtns[q.ans].classList.add('correct');
+  }
+  const res = document.getElementById('quizResult');
+  res.textContent = q.exp;
+  res.style.display = 'block';
+  res.style.color = i === q.ans ? '#1A8754' : '#D72638';
+  document.getElementById('quizNext').style.display = 'inline-block';
+}
+
+function nextQ() {
+  cur++;
+  if(cur >= questions.length) showScore();
+  else loadQ();
+}
+
+function showScore() {
+  document.getElementById('quizContent').style.display = 'none';
+  const sb = document.getElementById('scoreBox');
+  sb.style.display = 'block';
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('scoreNum').textContent = `${score}/${questions.length}`;
+  const msgs = ['ફરી વાંચો 📖','સારો પ્રયાસ! 👍','ઉત્કૃષ્ટ! 🏅','Perfect! 🎉',''];
+  document.getElementById('scoreMsg').textContent = score <= 1 ? msgs[0] : score <= 2 ? msgs[1] : score <= 3 ? msgs[2] : msgs[3];
+}
+
+function restartQuiz() {
+  cur = 0; score = 0;
+  document.getElementById('quizContent').style.display = 'block';
+  document.getElementById('scoreBox').style.display = 'none';
+  loadQ();
+}
+
+loadQ();
+</script>
+</body>
+</html>
