@@ -1,4 +1,4 @@
-# First Aid Kit Hub
+# Parthik Hub
 
 A self-updating content hub: drop HTML pages, PDFs, or images into a folder,
 push to GitHub, and they show up in the sidebar automatically — no token to
