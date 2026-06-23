@@ -20,7 +20,7 @@
    ============================================================ */
 
 const GITHUB_OWNER  = 'parthikchavda';   // e.g. 'parthik'
-const GITHUB_REPO   = 'first-aid-kit-hub';          // your repo name
+const GITHUB_REPO   = 'Parthik-Hub';          // your repo name
 const GITHUB_BRANCH = 'main';                   // 'main' or 'master'
 
 const SITE_TITLE = 'Parthik Hub';
