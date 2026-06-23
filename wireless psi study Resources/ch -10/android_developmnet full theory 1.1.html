@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android OS — Full Glossary | PSI 2026 | Gujarati + English</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #fdf8f0;
+  --bg2: #fff9f0;
+  --card: #ffffff;
+  --border: #e8d9c0;
+  --ink: #1a1208;
+  --muted: #7a6548;
+  --accent: #c8401a;
+  --accent2: #e07b3a;
+  --green: #1a6b3c;
+  --blue: #1a4a8a;
+  --purple: #5a2a8a;
+  --teal: #1a6b6b;
+  --gold: #b8860b;
+  --light-gold: #fff4d0;
+  --light-red: #fff0ec;
+  --light-green: #edfaf3;
+  --light-blue: #eef4ff;
+  --light-purple: #f6f0ff;
+  --light-teal: #edfafa;
+}
+
+* { margin:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Baloo 2', sans-serif;
+  line-height: 1.6;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(200,64,26,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(26,74,138,0.04) 0%, transparent 50%);
+}
+
+/* ── HEADER ── */
+.header {
+  background: linear-gradient(135deg, #1a1208 0%, #2d1e0a 60%, #1a1208 100%);
+  color: white;
+  padding: 48px 24px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 40px,
+    rgba(255,255,255,0.015) 40px,
+    rgba(255,255,255,0.015) 41px
+  );
+}
+.header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffd27a;
+  position: relative;
+  line-height: 1.2;
+}
+.header .sub {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  position: relative;
+}
+.header .tagline {
+  margin-top: 14px;
+  font-size: 1rem;
+  color: rgba(255,210,122,0.85);
+  position: relative;
+}
+
+/* ── SEARCH ── */
+.search-bar {
+  max-width: 700px;
+  margin: -22px auto 0;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+.search-bar input {
+  width: 100%;
+  padding: 16px 52px 16px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: white;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-bar input:focus { border-color: var(--accent2); }
+.search-bar .s-icon {
+  position: absolute;
+  right: 38px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* ── CATEGORY TABS ── */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 36px 20px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: 99px;
+  border: 2px solid var(--border);
+  background: white;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--muted);
+}
+.tab-btn:hover, .tab-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.tab-btn.active { box-shadow: 0 4px 12px rgba(200,64,26,0.25); }
+
+/* ── WRAPPER ── */
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ── SECTION TITLE ── */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 40px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.sec-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.sec-title-en { font-size: 1.4rem; font-weight: 800; color: var(--ink); }
+.sec-title-gu { font-size: 0.9rem; color: var(--muted); margin-top: 1px; }
+
+/* ── GLOSSARY GRID ── */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+/* ── GLOSSARY CARD ── */
+.g-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.g-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-color: var(--accent2);
+}
+.g-card.hidden { display: none; }
+
+.g-card-top {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.g-term {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.g-badge {
+  font-size: 0.65rem;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace;
+}
+.bg-abbr { background: var(--light-red); color: var(--accent); border: 1px solid rgba(200,64,26,0.2); }
+.bg-method { background: var(--light-blue); color: var(--blue); border: 1px solid rgba(26,74,138,0.2); }
+.bg-class { background: var(--light-green); color: var(--green); border: 1px solid rgba(26,107,60,0.2); }
+.bg-concept { background: var(--light-gold); color: var(--gold); border: 1px solid rgba(184,134,11,0.2); }
+.bg-layout { background: var(--light-purple); color: var(--purple); border: 1px solid rgba(90,42,138,0.2); }
+.bg-component { background: var(--light-teal); color: var(--teal); border: 1px solid rgba(26,107,107,0.2); }
+
+.g-card-body { padding: 12px 16px 14px; }
+
+.fullform-row {
+  background: var(--light-gold);
+  border: 1px solid rgba(184,134,11,0.2);
+  border-radius: 8px;
+  padding: 7px 12px;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+.fullform-row .ff-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.meaning-en {
+  font-size: 0.9rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.meaning-gu {
+  font-size: 0.88rem;
+  color: #5a4030;
+  background: #fdf4e8;
+  border-left: 3px solid var(--accent2);
+  padding: 7px 10px;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.example-box {
+  margin-top: 8px;
+  background: #f7f2fb;
+  border: 1px solid rgba(90,42,138,0.1);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--purple);
+  line-height: 1.6;
+}
+.example-box .ex-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* ── COUNT BAR ── */
+.result-count {
+  text-align: center;
+  padding: 10px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── NO RESULT ── */
+#no-result {
+  text-align: center;
+  padding: 60px;
+  color: var(--muted);
+  display: none;
+  font-size: 1.1rem;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 28px;
+  background: #1a1208;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+footer span { color: #ffd27a; }
+
+@media (max-width: 600px) {
+  .glossary-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📖 Android OS — સંપૂર્ણ શબ્દકોશ<br>Complete Glossary</h1>
+  <p class="sub">PSI EXAM 2026 · ALL SHORT FORMS + TECHNICAL WORDS</p>
+  <p class="tagline">દરેક ટેકનિકલ શબ્દ · Full Form · English Meaning · ગુજરાતી અર્થ</p>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="🔍  Search any word... (e.g. ADB, onCreate, SQLite, Intent)" oninput="doSearch()">
+  <span class="s-icon">🔍</span>
+</div>
+
+<div class="tabs" id="tabsRow">
+  <button class="tab-btn active" onclick="filterCat('all',this)">🌐 બધા | All</button>
+  <button class="tab-btn" onclick="filterCat('abbr',this)">🔤 Full Forms (Short → Full)</button>
+  <button class="tab-btn" onclick="filterCat('concept',this)">💡 Concepts</button>
+  <button class="tab-btn" onclick="filterCat('class',this)">🟢 Classes</button>
+  <button class="tab-btn" onclick="filterCat('method',this)">🔵 Methods</button>
+  <button class="tab-btn" onclick="filterCat('layout',this)">🟣 Layouts</button>
+  <button class="tab-btn" onclick="filterCat('component',this)">🔵 Components</button>
+</div>
+
+<div class="wrapper">
+
+<div class="result-count" id="resultCount"></div>
+<div id="no-result">😕 કોઈ પરિણામ મળ્યું નહિ | No results found</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION: ABBREVIATIONS / SHORT FORMS          -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sec-head"><div class="sec-icon" style="background:#fff0ec">🔤</div><div><div class="sec-title-en">Abbreviations — Short Form → Full Form</div><div class="sec-title-gu">ટૂંકા સ્વરૂપ → પૂર્ણ સ્વરૂપ</div></div></div>
+<div class="glossary-grid" id="grid-abbr">
+
+<div class="g-card" data-cat="abbr" data-keywords="apk android package kit">
+  <div class="g-card-top"><span class="g-term">APK</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Android Package Kit</div>
+    <div class="meaning-en">The file format (.apk) used to distribute and install Android apps. Like a ZIP file containing your app's code, resources, and manifest.</div>
+    <div class="meaning-gu">Android એપ ઇન્સ્ટોલ કરવા માટેનું ફાઇલ ફોર્મેટ. (.apk) — આ ફાઇલ play store કે manually install થાય છે.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="adb android debug bridge">
+  <div class="g-card-top"><span class="g-term">ADB</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Android Debug Bridge</div>
+    <div class="meaning-en">A command-line tool that lets you communicate with a connected Android device or emulator. Used to install APKs, view logs, run shell commands.</div>
+    <div class="meaning-gu">Android ડિવાઇસ/ઇમ્યુલેટર સાથે computer ને જોડવાનું ટૂલ. adb install, adb devices, adb uninstall — debug/test વખતે વપરાય.</div>
+    <div class="example-box"><span class="ex-label">Commands</span>adb devices | adb install app.apk | adb uninstall com.pkg</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="sdk software development kit">
+  <div class="g-card-top"><span class="g-term">SDK</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Software Development Kit</div>
+    <div class="meaning-en">A collection of tools, libraries, APIs, and documentation used to develop Android applications. Includes compilers, emulators, and build tools.</div>
+    <div class="meaning-gu">Android app બનાવવા માટેનો ટૂલ-સેટ. Libraries, compilers, emulator — બધું SDK માં. minSdkVersion manifest/gradle માં.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="art android runtime aot">
+  <div class="g-card-top"><span class="g-term">ART</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Android Runtime</div>
+    <div class="meaning-en">The runtime environment that executes Android apps. Replaced Dalvik in Android 5.0 (Lollipop). Uses AOT (Ahead-of-Time) compilation — compiles app code at install time for faster execution.</div>
+    <div class="meaning-gu">Android app ચલાવવાનું runtime environment. Lollipop (5.0) થી Dalvik ને replace કર્યું. AOT compilation = install time પર code compile — faster performance.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="aot ahead of time compilation art">
+  <div class="g-card-top"><span class="g-term">AOT</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Ahead-Of-Time Compilation</div>
+    <div class="meaning-en">Compilation technique where code is compiled BEFORE execution (at install time). ART uses AOT — makes apps run faster because machine code is ready.</div>
+    <div class="meaning-gu">Install time પર code compile થઈ જાય — execution પહેલાં. ART આ technique વાપરે. Faster performance.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="jit just in time compilation dalvik">
+  <div class="g-card-top"><span class="g-term">JIT</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Just-In-Time Compilation</div>
+    <div class="meaning-en">Compilation technique where code is compiled DURING execution (at runtime). Dalvik VM used JIT — slower than AOT because compilation happens while running.</div>
+    <div class="meaning-gu">Running time (execution) દરમ્યાન code compile. Dalvik JIT વાપરતો. AOT કરતાં ધીમો — ART (AOT) એ replace કર્યો.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="jvm java virtual machine">
+  <div class="g-card-top"><span class="g-term">JVM</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Java Virtual Machine</div>
+    <div class="meaning-en">The standard runtime for running Java bytecode on a computer. Android does NOT use JVM — it uses its own ART (previously Dalvik) instead.</div>
+    <div class="meaning-gu">Java code ચલાવવાની standard virtual machine. Android JVM વાપરતું નથી — ART/Dalvik (Android-specific) વાપરે.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="hal hardware abstraction layer">
+  <div class="g-card-top"><span class="g-term">HAL</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Hardware Abstraction Layer</div>
+    <div class="meaning-en">A layer in Android architecture that provides a standard interface between Android framework and hardware-specific drivers (Camera, Bluetooth, Sensors). Allows hardware manufacturers to implement drivers without changing the framework.</div>
+    <div class="meaning-gu">Android framework અને hardware ની વચ્ચેનો layer. Camera, Bluetooth, Sensor ના drivers ને framework થી અલગ રાખે. Hardware maker HAL implement કરે.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="ipc inter process communication binder">
+  <div class="g-card-top"><span class="g-term">IPC</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Inter-Process Communication</div>
+    <div class="meaning-en">Mechanism allowing separate processes (apps) to communicate with each other. Android uses "Binder" IPC (implemented in Linux kernel) for this purpose.</div>
+    <div class="meaning-gu">અલગ-અલગ processes (apps) વચ્ચે communication. Android Binder IPC (Linux Kernel) વાપરે.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="ui user interface">
+  <div class="g-card-top"><span class="g-term">UI</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>User Interface</div>
+    <div class="meaning-en">The visual part of the app that the user sees and interacts with — buttons, text, images, layouts. In Android, built using XML layouts and View classes.</div>
+    <div class="meaning-gu">User ને દેખાતો app નો ભાગ — buttons, text, images. Android માં XML layout files + View classes વડે.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="xml extensible markup language layout">
+  <div class="g-card-top"><span class="g-term">XML</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>eXtensible Markup Language</div>
+    <div class="meaning-en">A markup language used in Android to define UI layouts, string resources, and the AndroidManifest. Human-readable, tag-based format like HTML.</div>
+    <div class="meaning-gu">Android UI layout, strings, manifest — બધા XML format માં. Tags (<View>, <Button>) વડે structure define.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="mvc model view controller pattern">
+  <div class="g-card-top"><span class="g-term">MVC</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Model-View-Controller</div>
+    <div class="meaning-en">A software design pattern separating app logic into 3 parts: Model (data), View (UI), Controller (logic/input handling). Adapter pattern in Android lists follows MVC concept.</div>
+    <div class="meaning-gu">Software design pattern: Model (data) + View (UI) + Controller (logic). Android list adapter pattern MVC concept follow કરે.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="mvvm model view viewmodel architecture">
+  <div class="g-card-top"><span class="g-term">MVVM</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Model-View-ViewModel</div>
+    <div class="meaning-en">Modern Android architecture pattern. ViewModel holds UI data and survives rotation. Room library + LiveData follows MVVM / Repository pattern.</div>
+    <div class="meaning-gu">Modern Android architecture: Model + View + ViewModel. ViewModel rotation survive કરે. Room library MVVM follow કરે.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="api application programming interface">
+  <div class="g-card-top"><span class="g-term">API</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Application Programming Interface</div>
+    <div class="meaning-en">A set of rules/functions that allow apps to interact with the OS, other apps, or web services. Android framework provides APIs to developers. "API level" = Android version number.</div>
+    <div class="meaning-gu">Android framework developer ને APIs provide કરે. API level = Android version (API 21 = Android 5.0). Web services સાથે communicate.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="dp density independent pixels layout dimensions">
+  <div class="g-card-top"><span class="g-term">dp / dip</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Density-Independent Pixels</div>
+    <div class="meaning-en">Unit for layout dimensions in Android. 1dp = 1 pixel on 160dpi screen. Scales automatically on different screen densities — layouts look consistent on all devices.</div>
+    <div class="meaning-gu">Layout dimensions (width, height, margin, padding) માટે unit. Different screen size/density પર consistent look. Layout માં dp વાપરો.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="sp scale independent pixels text size font">
+  <div class="g-card-top"><span class="g-term">sp</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Scale-Independent Pixels</div>
+    <div class="meaning-en">Unit for TEXT SIZE in Android. Like dp but also scales with the user's font size preference (accessibility). Always use sp for android:textSize.</div>
+    <div class="meaning-gu">Text size (android:textSize) માટે unit. User's font size setting સાથે scale. Text size = sp, Layout dimensions = dp.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="sql structured query language database">
+  <div class="g-card-top"><span class="g-term">SQL</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Structured Query Language</div>
+    <div class="meaning-en">Language used to manage and query relational databases. Android uses SQLite which supports SQL. Commands: SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE.</div>
+    <div class="meaning-gu">Database manage/query કરવાની ભાષા. Android SQLite SQL support કરે. SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="dao data access object room">
+  <div class="g-card-top"><span class="g-term">DAO</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Data Access Object</div>
+    <div class="meaning-en">In Android Room library, DAO is an interface annotated with @Dao that defines database operations (INSERT, DELETE, @Query). Separates database logic from app logic.</div>
+    <div class="meaning-gu">Room library માં @Dao interface — database operations define. App logic ને DB logic થી અલગ. @Insert, @Delete, @Query annotations.</div>
+    <div class="example-box"><span class="ex-label">Code</span>@Dao interface UserDao { @Query("SELECT * FROM users") List&lt;User&gt; getAll(); }</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="fab floating action button material">
+  <div class="g-card-top"><span class="g-term">FAB</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Floating Action Button</div>
+    <div class="meaning-en">A circular Material Design button that floats above the UI, used for the primary action of a screen (like compose, add, create). Class: FloatingActionButton.</div>
+    <div class="meaning-gu">Screen ના primary action (add/create) માટે floating circular button. Material Design component. Class: FloatingActionButton.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="abbr" data-keywords="cab contextual action bar action mode">
+  <div class="g-card-top"><span class="g-term">CAB</span><span class="g-badge bg-abbr">ABBREVIATION</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Contextual Action Bar</div>
+    <div class="meaning-en">A temporary toolbar that replaces the Action Bar when items are selected (long-press). Used for bulk operations like delete, share. Managed by ActionMode class.</div>
+    <div class="meaning-gu">Item select (long-press) પર temporary toolbar. Bulk operations (delete, share) માટે. ActionMode class manage કરે.</div>
+  </div>
+</div>
+
+</div><!-- end grid-abbr -->
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION: CORE CONCEPTS                        -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sec-head"><div class="sec-icon" style="background:#fff4d0">💡</div><div><div class="sec-title-en">Core Concepts</div><div class="sec-title-gu">મૂળ ખ્યાલો</div></div></div>
+<div class="glossary-grid" id="grid-concept">
+
+<div class="g-card" data-cat="concept" data-keywords="kernel linux core operating system">
+  <div class="g-card-top"><span class="g-term">Kernel</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Core of an operating system.</strong> The kernel is the lowest-level software that directly manages hardware — CPU, memory, device drivers, file system, security. Android is based on the <strong>Linux kernel</strong>.</div>
+    <div class="meaning-gu">Operating system નો core (heart). Hardware — CPU, memory, drivers — directly manage. Android Linux kernel પર based. Architecture ના bottom layer.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="sandbox security isolation app process">
+  <div class="g-card-top"><span class="g-term">Sandbox</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Isolated execution environment.</strong> Each Android app runs in its own sandbox — a separate process with a unique Linux user ID. Apps CANNOT access each other's data directly. Enforced by the kernel.</div>
+    <div class="meaning-gu">દરેક app ને isolated environment. Unique Linux user ID. Apps directly data share ન કરી શકે. Security kernel level enforce. App delete → data delete.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="lifecycle activity state oncreate onresume">
+  <div class="g-card-top"><span class="g-term">Lifecycle</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>The sequence of states an Activity goes through from creation to destruction.</strong> States: Created → Started → Resumed → Paused → Stopped → Destroyed. Android system calls specific callback methods at each transition.</div>
+    <div class="meaning-gu">Activity ની create થઈ → destroy સુધીની journey. System automatically onCreate, onStart, onResume, onPause, onStop, onDestroy call. Resources manage.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="intent messaging component start activity service">
+  <div class="g-card-top"><span class="g-term">Intent</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>A messaging object used to request an action from another component.</strong> Used to: start an Activity, start a Service, deliver a Broadcast, pass data between components. Explicit (specific class) or Implicit (general action).</div>
+    <div class="meaning-gu">Components (Activity, Service) ને start/communicate message object. putExtra() = data pass. Explicit = specific class. Implicit = general action (share, open URL).</div>
+    <div class="example-box"><span class="ex-label">Example</span>Intent i = new Intent(this, Next.class); i.putExtra("key","val"); startActivity(i);</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="back stack task activity launch mode">
+  <div class="g-card-top"><span class="g-term">Back Stack</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>A stack of activities in the order they were opened.</strong> When you press Back, the top activity is popped. Launch modes (standard, singleTop, singleTask, singleInstance) control how activities are added to this stack.</div>
+    <div class="meaning-gu">Activities LIFO stack. Back button = top activity pop. Launch modes stack behaviour control. finish() = current activity pop.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="bundle savedinstancestate data rotation">
+  <div class="g-card-top"><span class="g-term">Bundle</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>A key-value container for passing data.</strong> Used to: pass data between activities (via Intent), save/restore UI state (onSaveInstanceState → Bundle → onCreate). Stores primitives, strings, arrays.</div>
+    <div class="meaning-gu">Key-value data container. Activities વચ્ચે data pass. onSaveInstanceState — UI state Bundle માં save. onCreate — Bundle restore. Screen rotation survive.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="context global app environment resources service">
+  <div class="g-card-top"><span class="g-term">Context</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Provides access to the global application environment.</strong> Context is needed to access resources, file system, databases, system services (like Toast, getting LayoutInflater). Activity, Service, Application are all types of Context.</div>
+    <div class="meaning-gu">Global app environment access. Resources, file, DB, system services access Context વડે. Toast, LayoutInflater, getSystemService() — Context needed. Activity = Context type.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="permission dangerous normal runtime marshmallow">
+  <div class="g-card-top"><span class="g-term">Permission</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Access control for sensitive device features.</strong> Normal permissions (INTERNET) = auto-granted. Dangerous permissions (CAMERA, LOCATION) = require runtime user approval since Android 6.0 Marshmallow. Declared in AndroidManifest.xml.</div>
+    <div class="meaning-gu">Sensitive features access control. Normal = auto grant. Dangerous (Camera, Location) = Android 6.0+ user approval. AndroidManifest.xml declare.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="thread main ui background async task">
+  <div class="g-card-top"><span class="g-term">Main Thread</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>The primary thread that handles UI rendering and user events.</strong> Never do heavy work (network, DB) on the main thread — it will freeze the UI (ANR error). Use background threads for heavy tasks.</div>
+    <div class="meaning-gu">UI render + user events handle main thread. Network/DB main thread પર ન કરો — UI freeze (ANR). Background thread/coroutine use.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="anr application not responding main thread">
+  <div class="g-card-top"><span class="g-term">ANR</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="fullform-row"><span class="ff-label">Full Form</span>Application Not Responding</div>
+    <div class="meaning-en">Error dialog shown when main thread is blocked for too long (5+ seconds). Caused by doing heavy work on the main/UI thread. Solution: move work to background thread.</div>
+    <div class="meaning-gu">Main thread block (5+ sec) → ANR dialog. Heavy work (network, DB) main thread = ANR. Background thread use.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="adapter bridge data view listview recyclerview">
+  <div class="g-card-top"><span class="g-term">Adapter Pattern</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Design pattern that separates data from UI in lists.</strong> The Adapter takes data (array, database) and creates View objects for each item. Used by ListView, RecyclerView, GridView, Spinner.</div>
+    <div class="meaning-gu">Data (array/DB) ↔ View (ListView/RecyclerView) bridge. Data + UI ને separate. Adapter = getView()/onBindViewHolder() per item.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="material design lollipop android 5 ui guidelines">
+  <div class="g-card-top"><span class="g-term">Material Design</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Google's design language for Android introduced in Android 5.0 Lollipop.</strong> Based on physical metaphors like paper and ink. Includes elevation, shadows, animations, CardView, FAB, Snackbar, AppBarLayout.</div>
+    <div class="meaning-gu">Android 5.0 Lollipop માં introduce. Google's design system. Elevation, shadow, animation, CardView, FAB, Snackbar — Material Design components.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="transaction sqlite database bulk performance">
+  <div class="g-card-top"><span class="g-term">Transaction</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>A group of database operations treated as a single unit.</strong> Either ALL succeed (commit) or ALL fail (rollback). Used for bulk inserts — dramatically improves performance. beginTransaction() → setTransactionSuccessful() → endTransaction().</div>
+    <div class="meaning-gu">DB operations group — all succeed ya all fail. Bulk insert faster. beginTransaction() → setTransactionSuccessful() → endTransaction(). Rollback on failure.</div>
+    <div class="example-box"><span class="ex-label">Flow</span>beginTransaction() → operations → setTransactionSuccessful() → endTransaction()</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="cursor database query result set rows">
+  <div class="g-card-top"><span class="g-term">Cursor</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Holds the results of a database query.</strong> Acts like a pointer that you move through rows. Key methods: moveToFirst(), moveToNext(), getCount(), getString(), getColumnIndex(), close().</div>
+    <div class="meaning-gu">DB query result hold. Row-by-row pointer. moveToFirst() → loop → moveToNext(). getString(getColumnIndex("col")) data read. close() always.</div>
+    <div class="example-box"><span class="ex-label">Pattern</span>if(cursor.moveToFirst()) { do { getString(idx); } while(cursor.moveToNext()); }</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="viewholder recyclerview view caching performance">
+  <div class="g-card-top"><span class="g-term">ViewHolder</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Design pattern that caches View references for RecyclerView rows.</strong> Avoids repeated expensive findViewById() calls during scrolling. RecyclerView makes ViewHolder MANDATORY. Greatly improves list scroll performance.</div>
+    <div class="meaning-gu">RecyclerView row ના views cache. Scrolling time repeated findViewById() avoid. RecyclerView ViewHolder mandatory. Smooth scrolling.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="resource qualifier adaptive screen size orientation">
+  <div class="g-card-top"><span class="g-term">Resource Qualifier</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Folder suffixes that provide different resources for different device configurations.</strong> -land (landscape), -sw600dp (tablet), -night (dark theme), -en (English). Enables adaptive UI without hardcoding.</div>
+    <div class="meaning-gu">Different screen/config માટે different resources. res/layout-land/ = landscape. res/values-night/ = dark theme. Adaptive UI = resource qualifiers.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="open source linux android google free">
+  <div class="g-card-top"><span class="g-term">Open Source</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Software whose source code is publicly available for anyone to view, modify, and distribute.</strong> Android is open source — maintained by Google under AOSP (Android Open Source Project). Anyone can modify it.</div>
+    <div class="meaning-gu">Source code publicly available. Android open source — Google AOSP maintain. Manufacturers customize (Samsung, MIUI). Free to use/modify.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="modal non-modal dialog blocking interaction">
+  <div class="g-card-top"><span class="g-term">Modal vs Non-Modal</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Modal Dialog:</strong> Blocks all background interaction until dismissed. User must respond before continuing. <strong>Non-Modal:</strong> Does NOT block background. User can interact with both. Toast is non-modal.</div>
+    <div class="meaning-gu">Modal = background block — user respond જ કરવો. Non-modal = background interact possible. Toast = non-modal. AlertDialog = modal.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="concept" data-keywords="event driven programming listener callback android">
+  <div class="g-card-top"><span class="g-term">Event-Driven</span><span class="g-badge bg-concept">CONCEPT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>Programming model where execution flows based on events (user actions, system signals).</strong> Android is event-driven — button click, touch, lifecycle callbacks are all events. Listeners/callbacks handle events.</div>
+    <div class="meaning-gu">Program events (click, touch, lifecycle) based ચાલે. Android event-driven model. OnClickListener, OnTouchListener, lifecycle callbacks — events.</div>
+  </div>
+</div>
+
+</div><!-- end grid-concept -->
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION: CLASSES                              -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sec-head"><div class="sec-icon" style="background:#edfaf3">🟢</div><div><div class="sec-title-en">Important Classes</div><div class="sec-title-gu">મહત્વના Classes</div></div></div>
+<div class="glossary-grid" id="grid-class">
+
+<div class="g-card" data-cat="class" data-keywords="activity appcompatactivity screen ui entry point">
+  <div class="g-card-top"><span class="g-term">Activity</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">A single screen with a user interface. The entry point of an app. Base class: AppCompatActivity. One activity = one screen. Has its own lifecycle (onCreate → onDestroy).</div>
+    <div class="meaning-gu">App ની single screen + UI. App ની entry point. AppCompatActivity extend. Lifecycle: onCreate → onDestroy. setContentView() UI load.</div>
+    <div class="example-box"><span class="ex-label">Class</span>public class MainActivity extends AppCompatActivity { }</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="service background no ui music sync task">
+  <div class="g-card-top"><span class="g-term">Service</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">A component that runs in the background WITHOUT a UI. Used for long-running operations: playing music, syncing data, downloading files. Has no visual interface.</div>
+    <div class="meaning-gu">Background task — UI નહિ. Music play, data sync, download. Background process. Service = no UI. Activity = UI.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="fragment reusable ui portion fragmentmanager">
+  <div class="g-card-top"><span class="g-term">Fragment</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">A reusable UI portion that lives inside an Activity. Has its own lifecycle. Managed by FragmentManager. Used for multi-pane layouts, tabs, ViewPager pages.</div>
+    <div class="meaning-gu">Activity ની અંદર reusable UI portion. Own lifecycle. FragmentManager manage. Tabs, multi-pane layout, ViewPager. Reuse possible.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="broadcastreceiver system broadcast sms boot">
+  <div class="g-card-top"><span class="g-term">BroadcastReceiver</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Responds to system-wide broadcast announcements. No UI. Examples: SMS received, device booted, battery low, network changed. Register in Manifest or dynamically.</div>
+    <div class="meaning-gu">System broadcast receive. UI નહિ. SMS, boot, battery low, network change events. Manifest માં register.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="contentprovider data sharing contacts media uri">
+  <div class="g-card-top"><span class="g-term">ContentProvider</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Provides data sharing between apps. Access to contacts, media, files through a standard URI interface. Android's contacts and media use ContentProviders.</div>
+    <div class="meaning-gu">Apps વચ્ચે data share. Contacts, media access. URI (Content URI) identify. Standard interface.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="sqliteopenhelper database oncreate onupgrade helper">
+  <div class="g-card-top"><span class="g-term">SQLiteOpenHelper</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Helper class to manage SQLite database creation and versioning. Override: onCreate() — first-time database creation. onUpgrade() — called when DB version changes.</div>
+    <div class="meaning-gu">SQLite DB manage helper. onCreate() = DB first create. onUpgrade() = version change. getWritableDatabase() / getReadableDatabase().</div>
+    <div class="example-box"><span class="ex-label">Must Override</span>onCreate(db) — first time | onUpgrade(db, old, new) — version change</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="sqlitedatabase execsql insert update delete query rawquery">
+  <div class="g-card-top"><span class="g-term">SQLiteDatabase</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Represents an open database connection. Provides CRUD methods: insert(), update(), delete(), query(), rawQuery(), execSQL(). Get via getWritableDatabase() or getReadableDatabase().</div>
+    <div class="meaning-gu">Open DB connection represent. CRUD: insert(), update(), delete(), query(), rawQuery(), execSQL(). Write: getWritableDatabase(). Read: getReadableDatabase().</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="contentvalues put column value insert update">
+  <div class="g-card-top"><span class="g-term">ContentValues</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">A key-value container for storing column-value pairs for INSERT or UPDATE operations. Use put("column_name", value) to add each column's value.</div>
+    <div class="meaning-gu">Column-value pairs store. INSERT/UPDATE operations. put("name", "Raj") — column value add. insert(table, null, values).</div>
+    <div class="example-box"><span class="ex-label">Usage</span>ContentValues v = new ContentValues(); v.put("name","Raj"); db.insert("users",null,v);</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="layoutinflater inflate xml view runtime">
+  <div class="g-card-top"><span class="g-term">LayoutInflater</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Converts an XML layout file into a View object at runtime. Used in: Adapters (getView), Fragment onCreateView(), Custom Dialogs. inflate() method does the conversion.</div>
+    <div class="meaning-gu">XML layout → View object runtime. Adapter getView(), Fragment onCreateView(), Custom dialog. inflate(R.layout.row, parent, false).</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="canvas draw custom view shapes graphics">
+  <div class="g-card-top"><span class="g-term">Canvas</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">The drawing surface for custom View graphics. In onDraw(Canvas canvas), use Canvas to draw shapes, bitmaps, text. Works together with Paint (style/color).</div>
+    <div class="meaning-gu">Custom View graphics drawing surface. onDraw() override. drawCircle(), drawRect(), drawText(), drawBitmap(). Paint = style/color.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="paint color style stroke custom view draw">
+  <div class="g-card-top"><span class="g-term">Paint</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Holds style and color information for drawing operations on a Canvas. Set color, stroke width, text size, fill vs stroke, anti-alias. Used together with Canvas.</div>
+    <div class="meaning-gu">Canvas drawing style + color. setColor(), setStrokeWidth(), setTextSize(), setStyle(FILL/STROKE). Canvas + Paint = custom graphics.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="gesturedetector swipe fling scroll touch">
+  <div class="g-card-top"><span class="g-term">GestureDetector</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Detects common gestures: single tap, double tap, long press, scroll, fling (swipe). Override onTouchEvent() in your View and pass MotionEvent to GestureDetector.</div>
+    <div class="meaning-gu">Common gestures detect — tap, double tap, long press, scroll, fling/swipe. onTouchEvent() → GestureDetector.onTouchEvent(event).</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="objectanimator property animation alpha rotation translation">
+  <div class="g-card-top"><span class="g-term">ObjectAnimator</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Animates properties of any object (View). Can animate: alpha (transparency), rotation, translationX/Y, scaleX/Y. Part of the property animation system.</div>
+    <div class="meaning-gu">View properties animate — alpha, rotation, translationX/Y, scaleX/Y. ofFloat(view, "alpha", 0f, 1f). setDuration().start().</div>
+    <div class="example-box"><span class="ex-label">Example</span>ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).setDuration(500).start();</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="fragmentmanager add replace transaction dynamic">
+  <div class="g-card-top"><span class="g-term">FragmentManager</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Manages Fragment transactions (add, replace, remove) dynamically at runtime. Use getSupportFragmentManager() in Activity. beginTransaction().replace().commit().</div>
+    <div class="meaning-gu">Runtime fragments dynamically manage. add(), replace(), remove(). getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit().</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="popupwindow popup ui window overlay">
+  <div class="g-card-top"><span class="g-term">PopupWindow</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Manages floating popup UI windows that appear over the current content. Can contain any View layout. Custom dropdowns, tooltips, mini-menus.</div>
+    <div class="meaning-gu">Floating popup window manage. Custom view layout. Content ઉપર overlay. Custom dropdown, tooltip, mini-menu.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="motionlayout animation constraint transition">
+  <div class="g-card-top"><span class="g-term">MotionLayout</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Extends ConstraintLayout to support complex constraint-based animations. Define start/end ConstraintSets in XML with a MotionScene. Google's most powerful UI animation tool.</div>
+    <div class="meaning-gu">ConstraintLayout extend — complex animations. Start/end ConstraintSet XML. MotionScene define. Most powerful Android animation.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="snackbar feedback action toast alternative bottom">
+  <div class="g-card-top"><span class="g-term">Snackbar</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Material Design replacement for Toast. Shows at the bottom of screen with optional action button (like UNDO). Lifecycle-aware, can be dismissed by swipe. Better than Toast for action-based feedback.</div>
+    <div class="meaning-gu">Toast નો Material Design replacement. Bottom of screen. Action button support (UNDO). Swipe dismiss. Lifecycle-aware. Action feedback = Snackbar.</div>
+    <div class="example-box"><span class="ex-label">Code</span>Snackbar.make(view, "Deleted", Snackbar.LENGTH_SHORT).setAction("UNDO", v->{}).show();</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="class" data-keywords="bitmapfactory load image decode resource file">
+  <div class="g-card-top"><span class="g-term">BitmapFactory</span><span class="g-badge bg-class">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Efficiently creates Bitmap objects from various sources: files, resources, byte arrays, streams. decodeResource(), decodeFile(), decodeStream() are key methods.</div>
+    <div class="meaning-gu">Bitmap images load. File, resource, stream থেকে. decodeResource(), decodeFile(). Image efficient load.</div>
+  </div>
+</div>
+
+</div><!-- end grid-class -->
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION: METHODS                              -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sec-head"><div class="sec-icon" style="background:#eef4ff">🔵</div><div><div class="sec-title-en">Important Methods</div><div class="sec-title-gu">મહત્વની Methods</div></div></div>
+<div class="glossary-grid" id="grid-method">
+
+<div class="g-card" data-cat="method" data-keywords="oncreate activity first create initialize ui">
+  <div class="g-card-top"><span class="g-term">onCreate()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called when Activity is created for the FIRST TIME. Called only once per lifecycle. <strong>Do here:</strong> setContentView(), findViewById(), initialize variables, setup UI.</div>
+    <div class="meaning-gu">Activity FIRST CREATE — once call. setContentView(), findViewById(), UI init. Lifecycle start.</div>
+    <div class="example-box"><span class="ex-label">Use</span>setContentView(R.layout.main); btn = findViewById(R.id.button);</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="onstart activity visible start lifecycle">
+  <div class="g-card-top"><span class="g-term">onStart()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called when Activity becomes VISIBLE to the user (after onCreate or onRestart). The Activity is visible but not yet interactive. Register listeners, load fresh data.</div>
+    <div class="meaning-gu">Activity VISIBLE but not interactive. onCreate/onRestart પછી. Listeners register, fresh data load.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="onresume activity foreground interactive resumed highest">
+  <div class="g-card-top"><span class="g-term">onResume()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called when Activity comes to the FOREGROUND and is fully interactive. HIGHEST PRIORITY state. <strong>Do here:</strong> start animations, camera, GPS, resume paused work. Called when returning from onPause.</div>
+    <div class="meaning-gu">Activity FOREGROUND + fully interactive. HIGHEST priority state. Animation start, camera/GPS resume. onPause → activity visible → onResume.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="onpause activity partially hidden dialog pause">
+  <div class="g-card-top"><span class="g-term">onPause()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called when Activity is PARTIALLY HIDDEN (another activity appears on top, dialog shows). Activity is still VISIBLE. <strong>Do here:</strong> pause animations, release camera, save unsaved data quickly.</div>
+    <div class="meaning-gu">Activity PARTIALLY hidden — still visible. Dialog/another activity on top. Camera/GPS release. Unsaved data quick save. Short execution time.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="onstop activity completely hidden invisible background">
+  <div class="g-card-top"><span class="g-term">onStop()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called when Activity is COMPLETELY HIDDEN (user navigated to another app/home). Not visible at all. <strong>Do here:</strong> stop heavy operations, save to DB, unregister listeners.</div>
+    <div class="meaning-gu">Activity COMPLETELY HIDDEN — not visible. User navigated away/home. Heavy operations stop. DB save. Listeners unregister.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="onrestart activity stopped coming back restart">
+  <div class="g-card-top"><span class="g-term">onRestart()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called BEFORE onStart() when an Activity is returning from the STOPPED state (e.g., user presses back from another app). Opportunity to refresh data that may have changed.</div>
+    <div class="meaning-gu">STOPPED state → return — onStart() BEFORE call. Stopped activity back. Data refresh opportunity. onRestart → onStart → onResume sequence.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="ondestroy activity destroy killed finish cleanup">
+  <div class="g-card-top"><span class="g-term">onDestroy()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called right before Activity is DESTROYED. Triggers when: user presses Back, finish() is called, or system kills it. <strong>Do here:</strong> release all resources, close DB, unregister.</div>
+    <div class="meaning-gu">Activity DESTROY — back press / finish() / system kill. All resources release. DB close. Final cleanup.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="onsaveinstancestate save ui state rotation bundle destroy">
+  <div class="g-card-top"><span class="g-term">onSaveInstanceState()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Called BEFORE Activity may be destroyed (screen rotation, system kills it). Save UI state (EditText values, scroll position, etc.) into the Bundle parameter. Restored in onCreate or onRestoreInstanceState.</div>
+    <div class="meaning-gu">Destroy/rotation BEFORE — UI state Bundle save. EditText, scroll position. onCreate(savedInstanceState) restore. Screen rotation survive.</div>
+    <div class="example-box"><span class="ex-label">Code</span>outState.putString("name", editText.getText().toString());</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="setcontentview layout inflate activity ui">
+  <div class="g-card-top"><span class="g-term">setContentView()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Loads a layout XML file into the Activity and sets it as the screen content. Called in onCreate(). Parameter is the layout resource ID.</div>
+    <div class="meaning-gu">Activity ની screen content set. XML layout load. onCreate() માં call. R.layout.activity_main parameter.</div>
+    <div class="example-box"><span class="ex-label">Usage</span>setContentView(R.layout.activity_main);</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="findviewbyid id view button textview reference">
+  <div class="g-card-top"><span class="g-term">findViewById()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Finds a View in the layout by its ID (android:id). Returns the View reference to control it programmatically. Call after setContentView().</div>
+    <div class="meaning-gu">android:id વડે View find. setContentView() પછી. Button, TextView, EditText reference get. Java code connect XML.</div>
+    <div class="example-box"><span class="ex-label">Usage</span>Button btn = findViewById(R.id.myButton);</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="startactivity intent launch open another screen">
+  <div class="g-card-top"><span class="g-term">startActivity()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Launches another Activity. Pass an Intent as parameter. Adds the new Activity to the Back Stack. If you need a result back, use startActivityForResult() (deprecated → use ActivityResultLauncher).</div>
+    <div class="meaning-gu">Another Activity launch. Intent parameter. Back Stack push. Data pass = intent.putExtra().</div>
+    <div class="example-box"><span class="ex-label">Code</span>startActivity(new Intent(this, TargetActivity.class));</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="finish close current activity back stack pop">
+  <div class="g-card-top"><span class="g-term">finish()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Closes the current Activity and removes it from the Back Stack. Triggers onPause() → onStop() → onDestroy() sequence. Similar to user pressing Back button.</div>
+    <div class="meaning-gu">Current Activity close. Back Stack pop. onPause → onStop → onDestroy trigger. Back button press same.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="invalidate redraw view canvas refresh update">
+  <div class="g-card-top"><span class="g-term">invalidate()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Forces a View to be redrawn on the next UI frame. Calls onDraw() again. Use when you've changed data in a custom View and need to update the display.</div>
+    <div class="meaning-gu">View redraw force. onDraw() again call. Custom View data change → invalidate() → UI update.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="inflate layoutinflater xml view adapter fragment">
+  <div class="g-card-top"><span class="g-term">inflate()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Converts an XML layout file into a View object at runtime. Used by LayoutInflater. Essential in Adapters (create row views), Fragments (onCreateView), Custom Dialogs.</div>
+    <div class="meaning-gu">XML layout → View object. LayoutInflater.inflate(). Adapter row, Fragment onCreateView, Custom dialog — essential.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="notifydatasetchanged adapter update list refresh">
+  <div class="g-card-top"><span class="g-term">notifyDataSetChanged()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Tells the Adapter that data has changed — ListView/RecyclerView should refresh all its views. Call after adding, removing, or modifying data in the adapter's dataset.</div>
+    <div class="meaning-gu">Data change → list refresh. Adapter dataset modify → call. ListView/RecyclerView update display.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="execsql rawquery sqlite sql execute query">
+  <div class="g-card-top"><span class="g-term">execSQL() / rawQuery()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>execSQL():</strong> Executes any SQL statement that doesn't return data (CREATE TABLE, DROP TABLE, INSERT without return). <strong>rawQuery():</strong> Executes SELECT queries and returns a Cursor.</div>
+    <div class="meaning-gu">execSQL() = result ન return SQL (CREATE, DROP). rawQuery() = SELECT → Cursor return. SQL execute methods.</div>
+    <div class="example-box"><span class="ex-label">Usage</span>db.execSQL("CREATE TABLE t(id INT)"); | db.rawQuery("SELECT * FROM t", null);</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="movetofirst cursor row iterate database">
+  <div class="g-card-top"><span class="g-term">moveToFirst() / moveToNext()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>moveToFirst():</strong> Positions cursor at the first row. Returns false if empty. <strong>moveToNext():</strong> Advances cursor to next row. Use in a loop to iterate all rows.</div>
+    <div class="meaning-gu">moveToFirst() = first row. Empty = false. moveToNext() = next row loop. Cursor iteration pattern.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="method" data-keywords="begintransaction settransactionsuccessful endtransaction sqlite bulk">
+  <div class="g-card-top"><span class="g-term">beginTransaction() / endTransaction()</span><span class="g-badge bg-method">METHOD</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en"><strong>beginTransaction()</strong> — starts a transaction. <strong>setTransactionSuccessful()</strong> — marks it as commit. <strong>endTransaction()</strong> — commits or rolls back. Essential for bulk inserts (major performance improvement).</div>
+    <div class="meaning-gu">beginTransaction() start → setTransactionSuccessful() commit mark → endTransaction() commit/rollback. Bulk insert performance.</div>
+  </div>
+</div>
+
+</div><!-- end grid-method -->
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION: LAYOUTS                              -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sec-head"><div class="sec-icon" style="background:#f6f0ff">🟣</div><div><div class="sec-title-en">Layouts — Types & Meanings</div><div class="sec-title-gu">Layouts — પ્રકારો</div></div></div>
+<div class="glossary-grid" id="grid-layout">
+
+<div class="g-card" data-cat="layout" data-keywords="linearlayout vertical horizontal linear arrange">
+  <div class="g-card-top"><span class="g-term">LinearLayout</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Arranges children in a single row (horizontal) or column (vertical). orientation="horizontal" / "vertical". Simple and common. Avoid deep nesting — use ConstraintLayout.</div>
+    <div class="meaning-gu">Children vertical/horizontal line. orientation attribute. Simple forms. Deep nesting avoid — ConstraintLayout better.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="relativelayout relative position each other parent">
+  <div class="g-card-top"><span class="g-term">RelativeLayout</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Positions views relative to each other or relative to the parent layout. Attributes: layout_below, layout_toRightOf, layout_centerInParent, layout_alignParentTop.</div>
+    <div class="meaning-gu">Views one another relative position. layout_below, layout_toRightOf, layout_centerInParent attributes. Each other reference.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="constraintlayout constraint flexible responsive best recommended">
+  <div class="g-card-top"><span class="g-term">ConstraintLayout</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">The most powerful and RECOMMENDED layout. Positions views using constraints to parent or sibling views. Flat hierarchy (no nesting needed) = best performance. Best for responsive UI design.</div>
+    <div class="meaning-gu">Most powerful + RECOMMENDED. Constraints vade position. Flat hierarchy = performance best. Responsive UI. Nesting avoid.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="framelayout overlap stack on top fragment container">
+  <div class="g-card-top"><span class="g-term">FrameLayout</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Designed to hold a SINGLE child, but multiple children can be stacked (overlapping). Each child is drawn on top of the previous one. Used as Fragment containers, splash screens, overlay views.</div>
+    <div class="meaning-gu">Children overlap/stack on top. Fragment container, splash screen, overlay. Single child ideal but multiple stack possible.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="tablelayout table rows columns html tr td">
+  <div class="g-card-top"><span class="g-term">TableLayout</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Arranges views in rows and columns like an HTML table. TableRow for each row. Each child in TableRow = one column. Good for structured data entry forms.</div>
+    <div class="meaning-gu">Rows + columns table. TableRow = each row. Forms, structured data entry. HTML table like.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="gridlayout grid flexible arbitrary position row column">
+  <div class="g-card-top"><span class="g-term">GridLayout</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Places views in a flexible grid. Children can span multiple rows/columns. Unlike TableLayout, rows/columns don't need to be uniform. Used for icon grids, image galleries.</div>
+    <div class="meaning-gu">Flexible grid. Span multiple rows/columns. Icon grid, image gallery. GridLayoutManager (RecyclerView) different.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="absolutelayout deprecated avoid xy coordinates fixed">
+  <div class="g-card-top"><span class="g-term">AbsoluteLayout</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">⚠️ DEPRECATED. Positions views using absolute x/y pixel coordinates. Does NOT adapt to different screen sizes. Avoid completely — use ConstraintLayout instead.</div>
+    <div class="meaning-gu">⚠️ DEPRECATED — avoid. Fixed x/y coordinates. Different screens adapt ન thay. ConstraintLayout use.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="scrollview scroll vertical single child content">
+  <div class="g-card-top"><span class="g-term">ScrollView</span><span class="g-badge bg-layout">LAYOUT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">A layout that allows its single child to scroll vertically. Can contain only ONE direct child (usually a LinearLayout). HorizontalScrollView for horizontal scrolling.</div>
+    <div class="meaning-gu">Vertical scroll. Single child (usually LinearLayout). Long content. HorizontalScrollView = horizontal.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="match_parent fill parent width height full">
+  <div class="g-card-top"><span class="g-term">match_parent</span><span class="g-badge bg-layout">ATTRIBUTE</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Layout attribute value that makes a View expand to fill its parent's available size. Previously called fill_parent. Used for android:layout_width and android:layout_height.</div>
+    <div class="meaning-gu">Parent size fill. width/height = match_parent = parent full occupy. Previously fill_parent.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="layout" data-keywords="wrap_content size content shrink text button">
+  <div class="g-card-top"><span class="g-term">wrap_content</span><span class="g-badge bg-layout">ATTRIBUTE</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Layout attribute value that makes a View just large enough to fit its content. A Button with wrap_content is only as wide as its text. No extra space.</div>
+    <div class="meaning-gu">Content size = View size. Button text → just fit. Extra space no. Content-based size.</div>
+  </div>
+</div>
+
+</div><!-- end grid-layout -->
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION: COMPONENTS                           -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sec-head"><div class="sec-icon" style="background:#edfafa">🔵</div><div><div class="sec-title-en">UI Components & Special Terms</div><div class="sec-title-gu">UI Components અને ખ્યાલો</div></div></div>
+<div class="glossary-grid" id="grid-component">
+
+<div class="g-card" data-cat="component" data-keywords="toast popup short message non-modal lifecycle">
+  <div class="g-card-top"><span class="g-term">Toast</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Small popup message shown briefly at the bottom. Non-modal (doesn't block input). Lifecycle-independent. Auto-disappears. No action button. Use Snackbar if you need action.</div>
+    <div class="meaning-gu">Bottom short popup message. Non-modal — input block ન. Auto disappear. No action button. Action needed = Snackbar.</div>
+    <div class="example-box"><span class="ex-label">Code</span>Toast.makeText(ctx,"msg",Toast.LENGTH_SHORT).show();</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="alertdialog confirmation dialog builder title message button">
+  <div class="g-card-top"><span class="g-term">AlertDialog</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Most common dialog type. Modal — blocks background. Built using AlertDialog.Builder. Can have title, message, up to 3 buttons (Positive, Negative, Neutral), list items.</div>
+    <div class="meaning-gu">Most common dialog. Modal — background block. Builder pattern. Title, message, 3 buttons (Positive/Negative/Neutral). setItems(), setSingleChoiceItems().</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="recycler recyclerview list modern viewholder adapter">
+  <div class="g-card-top"><span class="g-term">RecyclerView</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Modern, flexible list/grid component. RECOMMENDED over ListView. Requires LayoutManager + Adapter + ViewHolder. Recycles view objects for smooth performance. Supports Linear, Grid, Staggered layouts.</div>
+    <div class="meaning-gu">Modern list/grid. ListView replace. LayoutManager + Adapter + ViewHolder required. Views recycle = smooth. Linear, Grid, Staggered support.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="spinner dropdown selection adapter onitemselected">
+  <div class="g-card-top"><span class="g-term">Spinner</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">A dropdown selection widget. Uses ArrayAdapter to populate. OnItemSelectedListener handles selection. Commonly used for forms (country, category, etc.).</div>
+    <div class="meaning-gu">Dropdown selection widget. ArrayAdapter populate. OnItemSelectedListener selection handle. Form select — country, category.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="viewpager swipe tabs fragment pages horizontal">
+  <div class="g-card-top"><span class="g-term">ViewPager</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Allows left-right swipe between pages/tabs. Each page is typically a Fragment. Commonly used with TabLayout for swipeable tab navigation. ViewPager2 is the updated version.</div>
+    <div class="meaning-gu">Left-right swipe pages/tabs. Each page = Fragment. TabLayout + ViewPager = swipeable tabs. ViewPager2 updated version.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="options menu app wide action bar hardware button">
+  <div class="g-card-top"><span class="g-term">Options Menu</span><span class="g-badge bg-component">MENU TYPE</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Primary menu for an Activity. Shown when user presses the hardware menu button or action bar overflow (⋮). Used for app-wide actions: Settings, Search, About. onCreateOptionsMenu() + onOptionsItemSelected().</div>
+    <div class="meaning-gu">Activity primary menu. Hardware menu button / overflow (⋮). App-wide actions. onCreateOptionsMenu() inflate. onOptionsItemSelected() handle.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="context menu long press view contextual item">
+  <div class="g-card-top"><span class="g-term">Context Menu</span><span class="g-badge bg-component">MENU TYPE</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Appears when user long-presses a specific View. Provides contextual actions for that item (Edit, Delete, Share). Register with registerForContextMenu(). onCreateContextMenu() + onContextItemSelected().</div>
+    <div class="meaning-gu">View long-press context actions. Edit, Delete, Share. registerForContextMenu(). onCreateContextMenu() + onContextItemSelected(). Item specific.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="popup menu view attached dropdown click button">
+  <div class="g-card-top"><span class="g-term">Popup Menu</span><span class="g-badge bg-component">MENU TYPE</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">A dropdown menu anchored to a specific View. Appears on button click (not long-press). Used for dropdown action buttons. show() to display, dismiss() to hide, setOnMenuItemClickListener().</div>
+    <div class="meaning-gu">Specific view attached dropdown. Button click (not long-press). show() display. dismiss() hide. setOnMenuItemClickListener().</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="arrayAdapter listview spinner simple array list data">
+  <div class="g-card-top"><span class="g-term">ArrayAdapter</span><span class="g-badge bg-component">ADAPTER</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Simplest adapter for arrays/lists. Converts String array or List into ListView/Spinner items. setAdapter() to connect. Use for simple text lists.</div>
+    <div class="meaning-gu">Simple array/List → ListView/Spinner. Simplest adapter. setAdapter(). Simple text list Spinner common use.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="baseadapter custom complex row layout getview">
+  <div class="g-card-top"><span class="g-term">BaseAdapter</span><span class="g-badge bg-component">ADAPTER</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Abstract base class for custom adapters. Override 4 methods: getCount(), getItem(), getItemId(), getView(). Best for complex custom row layouts with images, multiple TextViews.</div>
+    <div class="meaning-gu">Custom adapter base class. 4 methods override: getCount(), getItem(), getItemId(), getView(). Complex row layouts.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="cursoradapter database cursor sqlite listview">
+  <div class="g-card-top"><span class="g-term">CursorAdapter</span><span class="g-badge bg-component">ADAPTER</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Connects a database Cursor directly to a ListView/RecyclerView. Best when data comes from SQLite. Auto-handles cursor position and view binding.</div>
+    <div class="meaning-gu">DB Cursor → ListView direct connect. SQLite data best. Cursor position auto-handle.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="progressdialog loading spinner deprecated progress">
+  <div class="g-card-top"><span class="g-term">ProgressDialog</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Shows a loading spinner or progress bar inside a dialog. Blocks the background (modal). ⚠️ Deprecated in newer Android — use ProgressBar inside a custom AlertDialog instead.</div>
+    <div class="meaning-gu">Loading spinner dialog. Modal — block. ⚠️ Deprecated — custom AlertDialog + ProgressBar use.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="linearlayoutmanager gridlayoutmanager staggered recyclerview layout">
+  <div class="g-card-top"><span class="g-term">LayoutManager</span><span class="g-badge bg-component">RECYCLERVIEW</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Controls how RecyclerView arranges its items. Types: LinearLayoutManager (vertical/horizontal list), GridLayoutManager (grid columns), StaggeredGridLayoutManager (Pinterest-style staggered grid).</div>
+    <div class="meaning-gu">RecyclerView items arrange. Linear = list. Grid = columns. StaggeredGrid = Pinterest style. setLayoutManager() call.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="menuinflater inflate xml menu programmatically">
+  <div class="g-card-top"><span class="g-term">MenuInflater</span><span class="g-badge bg-component">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Inflates menu XML resource files into Menu objects programmatically. Used in onCreateOptionsMenu() to load menu from res/menu/. getMenuInflater().inflate(R.menu.file, menu).</div>
+    <div class="meaning-gu">Menu XML → Menu object inflate. onCreateOptionsMenu() inside. getMenuInflater().inflate(R.menu.my_menu, menu).</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="action mode actionmode contextual cab toolbar">
+  <div class="g-card-top"><span class="g-term">ActionMode</span><span class="g-badge bg-component">CLASS</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Represents a Contextual Action Bar (CAB) — temporary toolbar that replaces the action bar when items are selected. Used for bulk operations. Floating Contextual Menu appears near selected text.</div>
+    <div class="meaning-gu">Contextual Action Bar (CAB) represent. Item select → temporary toolbar. Bulk operations. Floating contextual menu = selected text near.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="vectordrawable vector svg scalable graphic icon">
+  <div class="g-card-top"><span class="g-term">VectorDrawable</span><span class="g-badge bg-component">DRAWABLE</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Scalable vector graphics (SVG-like) for Android. Looks crisp at ANY screen size/density. Defined in XML. Replaces multiple PNG assets for different screen densities. File size is smaller.</div>
+    <div class="meaning-gu">Scalable vector graphics. Any screen size/density — crisp. XML define. Multiple PNG replace. File size smaller.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="swiperefreshlayout pull to refresh gesture reload">
+  <div class="g-card-top"><span class="g-term">SwipeRefreshLayout</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Provides pull-to-refresh gesture support. Wrap your list/content inside SwipeRefreshLayout. setOnRefreshListener() handles the refresh event. setRefreshing(false) hides spinner when done.</div>
+    <div class="meaning-gu">Pull-to-refresh gesture. List/content wrap. setOnRefreshListener() event. setRefreshing(false) done.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="cardview card shadow elevation material design">
+  <div class="g-card-top"><span class="g-term">CardView</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Material Design component that displays content in a card with rounded corners and a drop shadow (elevation). Used in RecyclerView rows, lists, dashboards.</div>
+    <div class="meaning-gu">Rounded corners + shadow (elevation) card. Material Design. RecyclerView row, list, dashboard. Clean card UI.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="bottomnavigationview bottom navigation bar tabs icons">
+  <div class="g-card-top"><span class="g-term">BottomNavigationView</span><span class="g-badge bg-component">UI COMPONENT</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Material Design component for bottom navigation. Shows 3-5 icon+label destinations at the bottom of the screen. Standard pattern for main app sections (like Instagram, WhatsApp).</div>
+    <div class="meaning-gu">Bottom navigation bar. 3-5 icon+label. Main sections navigate. Instagram, WhatsApp bottom bar like. Material Design.</div>
+  </div>
+</div>
+
+<div class="g-card" data-cat="component" data-keywords="room persistence library annotation sqlite boilerplate">
+  <div class="g-card-top"><span class="g-term">Room</span><span class="g-badge bg-component">LIBRARY</span></div>
+  <div class="g-card-body">
+    <div class="meaning-en">Google's database library that provides an abstraction layer over SQLite. Eliminates boilerplate code with annotations (@Entity, @Dao, @Database, @Query). Follows MVVM/Repository pattern. Compile-time SQL verification.</div>
+    <div class="meaning-gu">SQLite abstraction library. Boilerplate eliminate. @Entity, @Dao, @Database, @Query. MVVM follow. Compile-time SQL verify.</div>
+  </div>
+</div>
+
+</div><!-- end grid-component -->
+
+</div><!-- end wrapper -->
+
+<div id="no-result">😕 કોઈ પરિણામ મળ્યું નહિ | No results found. Try another keyword.</div>
+
+<footer>
+  📖 Android OS Glossary — <span>PSI Exam 2026</span> — All Short Forms + Full Forms + Gujarati Meanings<br>
+  <span style="opacity:0.5; font-size:0.75rem; margin-top:6px; display:block">Total Terms: Abbreviations · Concepts · Classes · Methods · Layouts · UI Components</span>
+</footer>
+
+<script>
+  let activeFilter = 'all';
+
+  function filterCat(cat, btn) {
+    activeFilter = cat;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  }
+
+  function doSearch() { applyFilters(); }
+
+  function applyFilters() {
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    const cards = document.querySelectorAll('.g-card');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const cat = card.getAttribute('data-cat');
+      const keywords = card.getAttribute('data-keywords') || '';
+      const text = (card.innerText || '').toLowerCase();
+
+      const catMatch = activeFilter === 'all' || cat === activeFilter;
+      const searchMatch = query === '' || text.includes(query) || keywords.includes(query);
+
+      if (catMatch && searchMatch) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // Show/hide section headers
+    document.querySelectorAll('.sec-head').forEach(h => {
+      const nextGrid = h.nextElementSibling;
+      if (nextGrid) {
+        const anyVisible = nextGrid.querySelector('.g-card:not(.hidden)');
+        h.style.display = anyVisible ? '' : 'none';
+      }
+    });
+
+    document.getElementById('resultCount').textContent = `${visible} terms found | ${visible} શબ્દો`;
+    document.getElementById('no-result').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  // Init count
+  applyFilters();
+</script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Wireless PSI Exam 2026 – Android Master Theory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f7fb;
+            color: #1e2a3e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* header & nav */
+        .header {
+            background: linear-gradient(135deg, #0b2b26, #1e4a3b);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.25rem;
+        }
+
+        .header p {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-tabs button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            opacity: 0.8;
+        }
+
+        .nav-tabs button.active {
+            background: #ffb74d;
+            color: #1e2a3e;
+            opacity: 1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-tabs button:hover {
+            background: #2d6a4f;
+            opacity: 1;
+        }
+
+        /* main container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* theory cards */
+        .theory-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: 0.2s;
+            border: 1px solid #e9ecef;
+        }
+
+        .card-header {
+            background: #eef2f5;
+            padding: 1rem 1.8rem;
+            border-bottom: 3px solid #2c7a4d;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #0b3b2f;
+        }
+
+        .card-body {
+            padding: 1.5rem 1.8rem;
+        }
+
+        .card-body h3 {
+            margin: 1rem 0 0.5rem;
+            color: #1e6f5c;
+        }
+
+        .card-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .card-body th,
+        .card-body td {
+            border: 1px solid #dee2e6;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .card-body th {
+            background: #f1f3f5;
+        }
+
+        code {
+            background: #f0f2f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        pre {
+           background: #f1f1f1;
+            color: #000000;
+            padding: 1rem;
+            border-radius: 16px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .badge {
+            background: #2c7a4d20;
+            color: #1e6f5c;
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* MCQ section */
+        .mcq-stats {
+            background: white;
+            border-radius: 24px;
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .mcq-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .mcq-item {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            transition: 0.1s;
+        }
+
+        .mcq-question {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+            color: #0c4e3c;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: #2d3e50;
+        }
+
+        .mcq-answer {
+            margin-top: 0.6rem;
+            font-size: 0.85rem;
+            background: #eef2fa;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #004d40;
+        }
+
+        hr {
+            margin: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #5a6e7c;
+            border-top: 1px solid #dee2e6;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 680px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+
+            .mcq-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>📱 Wireless PSI Exam 2026</h1>
+        <p>Android Application Development — Complete Theory</p>
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-section="theory">📘 Theory (Full Syllabus)</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- ==================== THEORY SECTION ==================== -->
+        <div id="theory-section" class="section active-section">
+            <div class="theory-grid">
+                <!-- 1. Android OS Concepts -->
+                <div class="card">
+                    <div class="card-header">🧠 1. Android OS – Core Concepts</div>
+                    <div class="card-body">
+                        <p><strong>Android:</strong> Open-source mobile OS based on Linux kernel. Developed by Android
+                            Inc. (acquired by Google 2005). First device: HTC Dream (2008).</p>
+                        <ul>
+                            <li><strong>Open Source (AOSP):</strong> Free to modify, manufacturers customize (Samsung
+                                One UI, etc.)</li>
+                            <li><strong>Sandbox security:</strong> Each app runs isolated with unique UID.</li>
+                            <li><strong>ART runtime</strong> (Android 5.0+) replaces Dalvik – Hybrid AOT+JIT compilation
+                                → faster startup, better battery.</li>
+                            <li><strong>Key versions:</strong> Marshmallow (runtime permissions), Lollipop (Material
+                                Design), Android 10 (dark theme), Android 12 (Material You).</li>
+                        </ul>
+                        <p><span class="badge">📌 Exam tip</span> Dalvik used JIT, ART uses AOT+JIT; APK = Android
+                            Package Kit.</p>
+                    </div>
+                </div>
+
+                <!-- 2. Android Architecture -->
+                <div class="card">
+                    <div class="card-header">🏗️ 2. Android Architecture (5 Layers)</div>
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <th>Layer</th>
+                                <th>Components / Role</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Linux Kernel</strong></td>
+                                <td>Device drivers, memory/power management, Binder IPC, Low Memory Killer, security
+                                    (UID sandbox).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>HAL</strong></td>
+                                <td>Hardware Abstraction Layer – standard interface for camera, sensors; hardware
+                                    independent.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Native Libraries & ART</strong></td>
+                                <td>SQLite, WebKit, OpenGL, Media Framework + Android Runtime (executes DEX bytecode).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Application Framework</strong></td>
+                                <td>Activity Manager, Window Manager, Content Providers, View System, Notification
+                                    Manager – APIs for developers.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Applications</strong></td>
+                                <td>System apps (Phone, Contacts) + 3rd party apps (your app).</td>
+                            </tr>
+                        </table>
+                        <p><strong>Binder Driver</strong> – high-performance IPC. <strong>Activity Manager</strong>
+                            manages lifecycle & back stack.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Activities & UI Design -->
+                <div class="card">
+                    <div class="card-header">🖥️ 3. Activities & UI Design</div>
+                    <div class="card-body">
+                        <p><strong>Activity</strong> = single screen with UI. Lifecycle (must memorize order):
+                            <code>onCreate() → onStart() → onResume() → onPause() → onStop() → onDestroy()</code>.</p>
+                        <ul>
+                            <li><code>onCreate()</code>: setContentView() , initialize UI.</li>
+                            <li><code>onPause()</code>: save transient data.</li>
+                            <li><code>onSaveInstanceState()</code> handles rotation data loss.</li>
+                        </ul>
+                        <p><strong>Intent:</strong> Explicit (target component) & Implicit (action like VIEW, SEND).
+                            <strong>UI building:</strong> XML layouts (LinearLayout, RelativeLayout, ConstraintLayout).
+                            Units: dp (size), sp (text).</p>
+                        <pre><code>&lt;TextView android:layout_width="wrap_content" android:text="Hello"/&gt;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 4. Advanced UI Programming -->
+                <div class="card">
+                    <div class="card-header">✨ 4. Advanced UI: Fragments, RecyclerView, Styles</div>
+                    <div class="card-body">
+                        <p><strong>Fragment</strong> – modular UI block inside Activity; has own lifecycle
+                            (<code>onCreateView</code>, <code>onViewCreated</code>). Reused for tablet/phone adaptive
+                            layouts.</p>
+                        <p><strong>RecyclerView</strong> – high-performance lists with ViewHolder pattern &
+                            LayoutManager (Linear/Grid). View recycling boosts scrolling.</p>
+                        <p><strong>Styles & Themes:</strong> Style = attribute collection for a View; Theme = whole
+                            app/activity (Material Components). Dark mode via DayNight theme.</p>
+                        <p><strong>Animations:</strong> View animations (fade, slide) and Property animations (actual
+                            property change).</p>
+                    </div>
+                </div>
+
+                <!-- 5. Toast, Menu, Dialog -->
+                <div class="card">
+                    <div class="card-header">🍞 5. Toast · Menu · Dialog</div>
+                    <div class="card-body">
+                        <p><strong>Toast:</strong> short popup, auto-disappear.
+                            <code>Toast.makeText(context, msg, LENGTH_SHORT).show()</code>.</p>
+                        <p><strong>Menu types:</strong> Options Menu (action bar), Context Menu (long-press), Popup
+                            Menu. Inflate from XML.</p>
+                        <p><strong>Dialog:</strong> modal window – AlertDialog (confirmation), DatePickerDialog, Custom
+                            Dialog using <code>builder.setView()</code>. User must interact before returning.</p>
+                        <pre><code>new AlertDialog.Builder(this)
+    .setTitle("Confirm")
+    .setMessage("Delete?")
+    .setPositiveButton("Yes", (d,w)->{})
+    .show();</code></pre>
+                    </div>
+                </div>
+
+                <!-- 6. List & Adapters -->
+                <div class="card">
+                    <div class="card-header">📋 6. Lists & Adapters (ListView / RecyclerView)</div>
+                    <div class="card-body">
+                        <p><strong>Adapter</strong> – bridge between data and UI. ArrayAdapter (simple lists),
+                            CursorAdapter (SQLite), BaseAdapter (custom).</p>
+                        <p><strong>ViewHolder pattern</strong> – caches view references inside <code>getView()</code> /
+                            <code>onBindViewHolder()</code> to avoid expensive <code>findViewById</code> calls → smooth
+                            scrolling.</p>
+                        <p>RecyclerView.Adapter mandatory ViewHolder + LayoutManager. Notify dataset changes:
+                            <code>notifyDataSetChanged()</code> or specific <code>notifyItemInserted()</code>.</p>
+                    </div>
+                </div>
+
+                <!-- 7. Database (SQLite) -->
+                <div class="card">
+                    <div class="card-header">🗄️ 7. Working with SQLite Database</div>
+                    <div class="card-body">
+                        <p><strong>SQLite:</strong> embedded, serverless, zero-config. <code>SQLiteOpenHelper</code>
+                            handles DB creation/upgrades.</p>
+                        <p><strong>CRUD operations:</strong> insert(), query() / rawQuery(), update(), delete(). Cursor
+                            to iterate results (always close).</p>
+                        <pre><code>// Insert example
+ContentValues cv = new ContentValues();
+cv.put("name", "Raj");
+db.insert("students", null, cv);
+
+// Query
+Cursor c = db.rawQuery("SELECT * FROM students", null);
+while(c.moveToNext()) { String name = c.getString(0); }
+c.close();</code></pre>
+                        <p>Combine with ListView/RecyclerView using CursorAdapter or convert to list + ArrayAdapter.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">📖 Quick Revision Summary</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Activity lifecycle order → important MCQ.</li>
+                            <li>Toast vs Dialog: Toast non-interactive, Dialog modal.</li>
+                            <li>Android Architecture: Kernel → HAL → Libraries/ART → Framework → Apps.</li>
+                            <li>Intent types: Explicit & Implicit.</li>
+                            <li>RecyclerView = modern, ViewHolder mandatory, LayoutManager controls orientation.</li>
+                            <li>SQLiteOpenHelper: onCreate() for table creation, onUpgrade() for version changes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>© Wireless PSI Exam 2026 – Android Development | Theory </footer>
+    </div>
+
+</body>
+
+</html>

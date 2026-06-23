@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="gu">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Android OS Master Quiz | PSI Exam 2026 | 200+ MCQs</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Noto Sans Gujarati', Arial, sans-serif;
+      background: #eef2f7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0b2b26, #1e4a3b);
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .lang-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px;
+      background: #f9fafb;
+      border-bottom: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      background: #e2e8f0;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #1e293b;
+    }
+
+    .lang-btn.active {
+      background: #1e4a3b;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .quiz-area {
+      padding: 20px 24px 40px;
+    }
+
+    .question-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid #eef2f6;
+      transition: 0.1s;
+    }
+
+    .question-number {
+      font-weight: 800;
+      color: #1e4a3b;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      border-left: 4px solid #2d7a5a;
+      padding-left: 12px;
+    }
+
+    .question-text {
+      font-size: 1.12rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: #0f172a;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option {
+      background: #fefefe;
+      border: 2px solid #dce3ec;
+      border-radius: 18px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.98rem;
+      line-height: 1.4;
+    }
+
+    .option:hover {
+      background: #f1f5f9;
+      border-color: #9aaebf;
+    }
+
+    .option.correct {
+      background: #dff9e6;
+      border-color: #2e7d64;
+      color: #145c46;
+    }
+
+    .option.wrong {
+      background: #ffe9e9;
+      border-color: #e15554;
+      color: #a1221a;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 14px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      display: none;
+      font-size: 0.95rem;
+    }
+
+    .correct-result {
+      background: #e0f2e9;
+      color: #166534;
+      border-left: 5px solid #2e7d64;
+    }
+
+    .wrong-result {
+      background: #fee8e8;
+      color: #b91c1c;
+      border-left: 5px solid #e15554;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f9fafb;
+      border-top: 1px solid #e2e8f0;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 640px) {
+      .question-card {
+        padding: 16px;
+      }
+
+      .option {
+        padding: 12px 14px;
+      }
+
+      .header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>📱 Android OS Ultimate Quiz</h1>
+      <p>Wireless PSI Exam 2026 | 200+ MCQs | Architecture, Activities, UI, Database, Advanced UI, Toast, Menu, Dialog
+      </p>
+      <p style="font-size:0.85rem; margin-top:6px;">એન્ડ્રોઇડ ઓએસ | સંપૂર્ણ તૈયારી | બે PDF મર્જ</p>
+    </div>
+
+    <div class="lang-buttons">
+      <button class="lang-btn active" data-lang="both">🌐 બંને | Both</button>
+      <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+      <button class="lang-btn" data-lang="gu">🇮🇳 ગુજરાતી</button>
+    </div>
+
+    <div class="quiz-area" id="quizRoot"></div>
+    <footer>✅ સાચો વિકલ્પ પસંદ કરો – તરત જ પરિણામ બતાશે. <br>📚 કુલ પ્રશ્નો: 200+ (Android OS, Architecture, Activities,
+      UI, Advanced UI, Toast, Menu, Dialog, Database & more)</footer>
+  </div>
+
+  <script>
+    // --------------------------------------------------------------
+    // COMBINED MCQ LIST from both PDFs (1 to 206, removing exact duplicates)
+    // First file gave Q1 to Q98 (android basics, architecture, etc)
+    // Second file gave Q97 to Q206 (activities, UI, layouts, advanced, toast, menu, dialog)
+    // We merge and deduplicate based on english question text.
+    // Total unique ≈ 200+ 
+    // --------------------------------------------------------------
+
+    const mcqsRaw = [
+      // -------- FROM FIRST PDF (Android basics, architecture, Q1-Q98) -------------
+      { enQ: "Android OS is primarily based on which kernel?", guQ: "Android OS મુખ્યત્વે કયા કર્નલ પર આધારિત છે?", optsEn: ["(A) Windows NT", "(B) Linux", "(C) macOS Kernel", "(D) UNIX System V"], optsGu: ["(A) Windows NT", "(B) Linux", "(C) macOS કર્નલ", "(D) UNIX System V"], ans: 1 },
+      { enQ: "Android was initially developed by which company?", guQ: "Android ની શરૂઆત કઈ કંપની દ્વારા કરવામાં આવી?", optsEn: ["(A) Microsoft", "(B) Apple", "(C) Android Inc.", "(D) IBM"], optsGu: ["(A) માઇક્રોસોફ્ટ", "(B) એપલ", "(C) Android Inc.", "(D) IBM"], ans: 2 },
+      { enQ: "Which company acquired Android Inc. in 2005?", guQ: "2005 માં Android Inc. ને કઈ કંપનીએ ખરીદી?", optsEn: ["(A) Oracle", "(B) Google", "(C) Intel", "(D) Samsung"], optsGu: ["(A) ઓરેકલ", "(B) ગૂગલ", "(C) ઈન્ટેલ", "(D) સેમસંગ"], ans: 1 },
+      { enQ: "Android applications are mainly written in:", guQ: "Android એપ્લિકેશનો મુખ્યત્વે કઈ ભાષામાં લખાય છે?", optsEn: ["(A) Swift", "(B) Kotlin/Java", "(C) C# only", "(D) Ruby"], optsGu: ["(A) સ્વિફ્ટ", "(B) કોટલિન/જાવા", "(C) માત્ર C#", "(D) રૂબી"], ans: 1 },
+      { enQ: "The package file format used to distribute Android apps is:", guQ: "Android એપ્સ વિતરિત કરવા માટે વપરાતું પેકેજ ફાઇલ ફોર્મેટ કયું છે?", optsEn: ["(A) .exe", "(B) .jar", "(C) .apk", "(D) .app"], optsGu: ["(A) .exe", "(B) .jar", "(C) .apk", "(D) .app"], ans: 2 },
+      { enQ: "Which component manages app lifecycle in Android?", guQ: "Android માં એપ લાઇફસાયકલ કયો કોમ્પોનન્ટ મેનેજ કરે છે?", optsEn: ["(A) Activity Manager", "(B) Window Manager", "(C) View Manager", "(D) Layout Manager"], optsGu: ["(A) એક્ટિવિટી મેનેજર", "(B) વિન્ડો મેનેજર", "(C) વ્યૂ મેનેજર", "(D) લેઆઉટ મેનેજર"], ans: 0 },
+      { enQ: "Android is which type of operating system?", guQ: "Android કયા પ્રકારનું ઓપરેટિંગ સિસ્ટમ છે?", optsEn: ["(A) Closed source", "(B) Proprietary", "(C) Open source", "(D) Hybrid only"], optsGu: ["(A) બંધ સ્ત્રોત", "(B) માલિકી", "(C) ઓપન સોર્સ", "(D) માત્ર હાઇબ્રિડ"], ans: 2 },
+      { enQ: "Which virtual machine was used in early Android versions?", guQ: "પ્રારંભિક Android સંસ્કરણોમાં કયું વર્ચ્યુઅલ મશીન વપરાતું હતું?", optsEn: ["(A) JVM", "(B) Dalvik VM", "(C) Hyper-V", "(D) VMware"], optsGu: ["(A) JVM", "(B) Dalvik VM", "(C) Hyper-V", "(D) VMware"], ans: 1 },
+      { enQ: "Dalvik VM was replaced by:", guQ: "Dalvik VM ને બદલે શું આવ્યું?", optsEn: ["(A) ART", "(B) JVM", "(C) CLR", "(D) DVM2"], optsGu: ["(A) ART", "(B) JVM", "(C) CLR", "(D) DVM2"], ans: 0 },
+      { enQ: "Full form of APK is:", guQ: "APK નું પૂર્ણ સ્વરૂપ શું છે?", optsEn: ["(A) Android Program Kit", "(B) Android Package Kit", "(C) Application Package Kernel", "(D) Android Primary Kit"], optsGu: ["(A) Android Program Kit", "(B) Android Package Kit", "(C) Application Package Kernel", "(D) Android Primary Kit"], ans: 1 },
+      { enQ: "Which language is officially recommended by Google for Android development?", guQ: "Android વિકાસ માટે Google દ્વારા સત્તાવાર રીતે ભલામણ કરેલી ભાષા કઈ છે?", optsEn: ["(A) Python", "(B) Kotlin", "(C) PHP", "(D) C"], optsGu: ["(A) પાયથોન", "(B) કોટલિન", "(C) PHP", "(D) C"], ans: 1 },
+      { enQ: "Android OS is mainly designed for:", guQ: "Android OS મુખ્યત્વે કોના માટે ડિઝાઇન થયેલ છે?", optsEn: ["(A) Desktop systems", "(B) Embedded chips only", "(C) Mobile devices", "(D) Servers"], optsGu: ["(A) ડેસ્કટોપ સિસ્ટમ", "(B) માત્ર એમ્બેડેડ ચિપ્સ", "(C) મોબાઇલ ઉપકરણો", "(D) સર્વર્સ"], ans: 2 },
+      { enQ: "Which Android component has no UI?", guQ: "કયા Android કોમ્પોનન્ટમાં UI હોતું નથી?", optsEn: ["(A) Activity", "(B) Fragment", "(C) Service", "(D) View"], optsGu: ["(A) Activity", "(B) Fragment", "(C) Service", "(D) View"], ans: 2 },
+      { enQ: "Android apps run inside:", guQ: "Android એપ્સ ક્યાં ચલાવવામાં આવે છે?", optsEn: ["(A) Common shared process", "(B) Sandbox environment", "(C) BIOS", "(D) Kernel mode only"], optsGu: ["(A) સામાન્ય શેર્ડ પ્રોસેસ", "(B) સેન્ડબોક્સ એન્વાયર્નમેન્ટ", "(C) BIOS", "(D) માત્ર કર્નલ મોડ"], ans: 1 },
+      { enQ: "Which file contains app permissions?", guQ: "એપ પરમિશન કઈ ફાઇલમાં હોય છે?", optsEn: ["(A) config.xml", "(B) manifest.xml", "(C) AndroidManifest.xml", "(D) permission.xml"], optsGu: ["(A) config.xml", "(B) manifest.xml", "(C) AndroidManifest.xml", "(D) permission.xml"], ans: 2 },
+      { enQ: "Which storage is private to app and removed when app uninstalled?", guQ: "કયું સ્ટોરેજ એપ માટે ખાનગી છે અને એપ દૂર થતાં ખતમ થાય છે?", optsEn: ["(A) Shared Storage", "(B) Internal Storage", "(C) External Storage", "(D) Cloud Storage"], optsGu: ["(A) શેર્ડ સ્ટોરેજ", "(B) ઇન્ટરનલ સ્ટોરેજ", "(C) એક્સટર્નલ સ્ટોરેજ", "(D) ક્લાઉડ સ્ટોરેજ"], ans: 1 },
+      { enQ: "Android is based on which programming model?", guQ: "Android કયા પ્રોગ્રામિંગ મોડેલ પર આધારિત છે?", optsEn: ["(A) Event-driven", "(B) Linear execution", "(C) Sequential only", "(D) Procedural only"], optsGu: ["(A) ઈવેન્ટ-ડ્રિવન", "(B) લિનિયર એક્ઝિક્યુશન", "(C) માત્ર સિક્વેન્શિયલ", "(D) માત્ર પ્રોસીજરલ"], ans: 0 },
+      { enQ: "Which tool is used to debug Android apps?", guQ: "Android એપ્સ ડીબગ કરવા કયું ટૂલ વપરાય છે?", optsEn: ["(A) ADB", "(B) GCC", "(C) JVM", "(D) BIOS"], optsGu: ["(A) ADB", "(B) GCC", "(C) JVM", "(D) BIOS"], ans: 0 },
+      { enQ: "ADB stands for:", guQ: "ADB નું પૂર્ણ સ્વરૂપ:", optsEn: ["(A) Android Debug Bridge", "(B) Android Data Bridge", "(C) Application Debug Bus", "(D) Android Development Binary"], optsGu: ["(A) Android Debug Bridge", "(B) Android Data Bridge", "(C) Application Debug Bus", "(D) Android Development Binary"], ans: 0 },
+      { enQ: "Google Play Store apps are mainly signed using:", guQ: "Google Play Store ની એપ્સ મુખ્યત્વે કેવી રીતે સાઇન થાય છે?", optsEn: ["(A) SSL certificate", "(B) Developer key", "(C) BIOS key", "(D) Kernel signature"], optsGu: ["(A) SSL પ્રમાણપત્ર", "(B) વિકાસકર્તા કી", "(C) BIOS કી", "(D) કર્નલ સહી"], ans: 1 },
+      { enQ: "Minimum Android SDK version is specified in:", guQ: "ન્યૂનતમ Android SDK વર્ઝન ક્યાં સ્પષ્ટ થાય છે?", optsEn: ["(A) layout.xml", "(B) strings.xml", "(C) manifest file", "(D) gradle file"], optsGu: ["(A) layout.xml", "(B) strings.xml", "(C) મેનિફેસ્ટ ફાઇલ", "(D) ગ્રેડલ ફાઇલ"], ans: 2 },
+      { enQ: "Which process is killed first when memory is low?", guQ: "મેમરી ઓછી હોય ત્યારે સૌપ્રથમ કઈ પ્રક્રિયા બંધ થાય છે?", optsEn: ["(A) Foreground process", "(B) Visible process", "(C) Background process", "(D) System process"], optsGu: ["(A) ફોરગ્રાઉન્ડ પ્રોસેસ", "(B) વિઝિબલ પ્રોસેસ", "(C) બેકગ્રાઉન્ડ પ્રોસેસ", "(D) સિસ્ટમ પ્રોસેસ"], ans: 2 },
+      { enQ: "Android uses which database by default?", guQ: "Android ડિફોલ્ટ રૂપે કયો ડેટાબેઝ વાપરે છે?", optsEn: ["(A) Oracle", "(B) MySQL", "(C) SQLite", "(D) PostgreSQL"], optsGu: ["(A) ઓરેકલ", "(B) MySQL", "(C) SQLite", "(D) PostgreSQL"], ans: 2 },
+      { enQ: "Which command installs APK via terminal?", guQ: "ટર્મિનલ દ્વારા APK ઇન્સ્ટોલ કરવા માટેનો આદેશ કયો છે?", optsEn: ["(A) adb push", "(B) adb install", "(C) adb run", "(D) adb load"], optsGu: ["(A) adb push", "(B) adb install", "(C) adb run", "(D) adb load"], ans: 1 },
+      { enQ: "Which Android version introduced Material Design?", guQ: "કયા Android વર્ઝનમાં Material Design રજૂ થયું?", optsEn: ["(A) KitKat", "(B) Lollipop", "(C) Jelly Bean", "(D) Oreo"], optsGu: ["(A) KitKat", "(B) Lollipop", "(C) Jelly Bean", "(D) Oreo"], ans: 1 },
+      { enQ: "Android permissions are categorized mainly as:", guQ: "Android પરમિશન મુખ્યત્વે કેવી રીતે વર્ગીકૃત થાય છે?", optsEn: ["(A) Visible and Invisible", "(B) Normal and Dangerous", "(C) Secure and Insecure", "(D) Static and Dynamic"], optsGu: ["(A) દૃશ્યમાન અને અદૃશ્ય", "(B) સામાન્ય અને જોખમી", "(C) સુરક્ષિત અને અસુરક્ષિત", "(D) સ્થિર અને ગતિશીલ"], ans: 1 },
+      { enQ: "Which Android component handles background tasks?", guQ: "બેકગ્રાઉન્ડ કાર્યો માટે કયો Android કોમ્પોનન્ટ જવાબદાર છે?", optsEn: ["(A) Activity", "(B) Service", "(C) BroadcastReceiver", "(D) ContentProvider"], optsGu: ["(A) Activity", "(B) Service", "(C) BroadcastReceiver", "(D) ContentProvider"], ans: 1 },
+      { enQ: "Which file compiles resources into binary?", guQ: "સ્ત્રોતોને બાઈનરીમાં કમ્પાઈલ કરે છે?", optsEn: ["(A) aapt", "(B) adb", "(C) apktool", "(D) gradle"], optsGu: ["(A) aapt", "(B) adb", "(C) apktool", "(D) gradle"], ans: 0 },
+      { enQ: "Which Android component responds to system broadcasts?", guQ: "સિસ્ટમ બ્રોડકાસ્ટ પ્રતિભાવ આપે છે?", optsEn: ["(A) Service", "(B) Fragment", "(C) BroadcastReceiver", "(D) Activity"], optsGu: ["(A) Service", "(B) Fragment", "(C) BroadcastReceiver", "(D) Activity"], ans: 2 },
+      { enQ: "Which Android feature isolates apps from each other?", guQ: "એપ્સને એકબીજાથી અલગ રાખતી વિશેષતા?", optsEn: ["(A) Kernel mode", "(B) Sandbox security", "(C) Cloud firewall", "(D) Runtime stack"], optsGu: ["(A) કર્નલ મોડ", "(B) સેન્ડબોક્સ સુરક્ષા", "(C) ક્લાઉડ ફાયરવોલ", "(D) રનટાઇમ સ્ટેક"], ans: 1 },
+      { enQ: "Which command lists connected devices?", guQ: "કનેક્ટેડ ડિવાઇસ બતાવવા માટેનો આદેશ?", optsEn: ["(A) adb list", "(B) adb devices", "(C) adb show", "(D) adb connect"], optsGu: ["(A) adb list", "(B) adb devices", "(C) adb show", "(D) adb connect"], ans: 1 },
+      { enQ: "Which OS layer interacts directly with hardware?", guQ: "હાર્ડવેર સાથે સીધું સંપર્ક કરતું સ્તર?", optsEn: ["(A) Application layer", "(B) Libraries", "(C) Linux Kernel", "(D) Runtime"], optsGu: ["(A) એપ્લિકેશન સ્તર", "(B) લાઇબ્રેરીઓ", "(C) Linux Kernel", "(D) રનટાઇમ"], ans: 2 },
+      { enQ: "Which format is used for UI layout files?", guQ: "UI લેઆઉટ ફાઇલો માટે કયું ફોર્મેટ વપરાય છે?", optsEn: ["(A) JSON", "(B) XML", "(C) YAML", "(D) TXT"], optsGu: ["(A) JSON", "(B) XML", "(C) YAML", "(D) TXT"], ans: 1 },
+      { enQ: "Which Android version first supported runtime permissions?", guQ: "રનટાઇમ પરમિશન સૌપ્રથમ કયા વર્ઝનમાં સપોર્ટ થયું?", optsEn: ["(A) Marshmallow", "(B) KitKat", "(C) Lollipop", "(D) Nougat"], optsGu: ["(A) Marshmallow", "(B) KitKat", "(C) Lollipop", "(D) Nougat"], ans: 0 },
+      { enQ: "Which company maintains Android source code?", guQ: "Android સોર્સ કોડ જાળવે છે?", optsEn: ["(A) IBM", "(B) Google", "(C) Intel", "(D) Nokia"], optsGu: ["(A) IBM", "(B) Google", "(C) Intel", "(D) Nokia"], ans: 1 },
+      { enQ: "Which Android component provides data sharing between apps?", guQ: "એપ્સ વચ્ચે ડેટા શેરિંગ કરે છે?", optsEn: ["(A) Activity", "(B) Intent", "(C) Content Provider", "(D) Layout"], optsGu: ["(A) Activity", "(B) Intent", "(C) Content Provider", "(D) Layout"], ans: 2 },
+      { enQ: "Intent is used for:", guQ: "Intent નો ઉપયોગ શેના માટે થાય છે?", optsEn: ["(A) Database query", "(B) Messaging between components", "(C) UI rendering", "(D) Storage allocation"], optsGu: ["(A) ડેટાબેઝ પ્રશ્ન", "(B) કોમ્પોનન્ટ્સ વચ્ચે સંદેશ", "(C) UI રેન્ડરિંગ", "(D) સ્ટોરેજ ફાળવણી"], ans: 1 },
+      { enQ: "Which Android version introduced ART runtime default?", guQ: "ART runtime ડિફોલ્ટ કયા વર્ઝનમાં આવ્યું?", optsEn: ["(A) KitKat", "(B) Lollipop", "(C) Nougat", "(D) Oreo"], optsGu: ["(A) KitKat", "(B) Lollipop", "(C) Nougat", "(D) Oreo"], ans: 1 },
+      { enQ: "Which architecture does Android follow?", guQ: "Android કયા આર્કિટેક્ચરને અનુસરે છે?", optsEn: ["(A) Monolithic", "(B) Layered", "(C) Linear", "(D) Pipeline"], optsGu: ["(A) મોનોલિથિક", "(B) સ્તરીય", "(C) રેખીય", "(D) પાઇપલાઇન"], ans: 1 },
+      { enQ: "Android SDK stands for:", guQ: "Android SDK નું પૂર્ણ સ્વરૂપ?", optsEn: ["(A) Software Development Kit", "(B) System Debug Kit", "(C) Software Design Kernel", "(D) System Data Kit"], optsGu: ["(A) સોફ્ટવેર ડેવલપમેન્ટ કિટ", "(B) સિસ્ટમ ડીબગ કિટ", "(C) સોફ્ટવેર ડિઝાઇન કર્નલ", "(D) સિસ્ટમ ડેટા કિટ"], ans: 0 },
+      { enQ: "Which file stores string resources?", guQ: "સ્ટ્રિંગ રિસોર્સિસ કઈ ફાઇલમાં સંગ્રહાય છે?", optsEn: ["(A) main.xml", "(B) strings.xml", "(C) values.xml", "(D) config.xml"], optsGu: ["(A) main.xml", "(B) strings.xml", "(C) values.xml", "(D) config.xml"], ans: 1 },
+      { enQ: "Which Android component is entry point of app?", guQ: "એપનું પ્રવેશબિંદુ કયું છે?", optsEn: ["(A) Service", "(B) Activity", "(C) Intent", "(D) Fragment"], optsGu: ["(A) Service", "(B) Activity", "(C) Intent", "(D) Fragment"], ans: 1 },
+      { enQ: "Which permission allows internet access?", guQ: "ઈન્ટરનેટ ઍક્સેસ આપતું પરમિશન?", optsEn: ["(A) ACCESS_NETWORK", "(B) INTERNET", "(C) NETWORK_ACCESS", "(D) WIFI_USE"], optsGu: ["(A) ACCESS_NETWORK", "(B) INTERNET", "(C) NETWORK_ACCESS", "(D) WIFI_USE"], ans: 1 },
+      { enQ: "Which tool compiles Android code?", guQ: "Android કોડ કમ્પાઇલ કરે છે?", optsEn: ["(A) javac only", "(B) dx/d8 + gradle", "(C) gcc", "(D) kernel compiler"], optsGu: ["(A) માત્ર javac", "(B) dx/d8 + gradle", "(C) gcc", "(D) કર્નલ કમ્પાઇલર"], ans: 1 },
+      { enQ: "Which Android OS feature allows multitasking?", guQ: "મલ્ટિટાસ્કિંગની સુવિધા આપે છે?", optsEn: ["(A) Single thread execution", "(B) Activity stack", "(C) Process scheduling", "(D) Both b and c"], optsGu: ["(A) એકલ થ્રેડ", "(B) Activity સ્ટેક", "(C) પ્રોસેસ શેડ્યુલિંગ", "(D) b અને c બંને"], ans: 3 },
+      { enQ: "Which Android component shows UI dialog?", guQ: "UI ડાયલોગ બતાવે છે?", optsEn: ["(A) Service", "(B) DialogFragment", "(C) Provider", "(D) Receiver"], optsGu: ["(A) Service", "(B) DialogFragment", "(C) Provider", "(D) Receiver"], ans: 1 },
+      { enQ: "Which command uninstalls app via ADB?", guQ: "ADB દ્વારા એપ અનઇન્સ્ટોલ કરવા આદેશ?", optsEn: ["(A) adb remove", "(B) adb uninstall", "(C) adb delete", "(D) adb erase"], optsGu: ["(A) adb remove", "(B) adb uninstall", "(C) adb delete", "(D) adb erase"], ans: 1 },
+      { enQ: "Which Android runtime compiles code ahead-of-time?", guQ: "AOT કમ્પાઇલ કરતું રનટાઇમ?", optsEn: ["(A) Dalvik", "(B) ART", "(C) JVM", "(D) CLR"], optsGu: ["(A) Dalvik", "(B) ART", "(C) JVM", "(D) CLR"], ans: 1 },
+      { enQ: "Which system manages notifications?", guQ: "નોટિફિકેશન મેનેજ કરે છે?", optsEn: ["(A) Activity Manager", "(B) Notification Manager", "(C) UI Manager", "(D) Window Engine"], optsGu: ["(A) Activity Manager", "(B) Notification Manager", "(C) UI Manager", "(D) Window Engine"], ans: 1 },
+      { enQ: "Android OS is mainly written in:", guQ: "Android OS મુખ્યત્વે કઈ ભાષાઓમાં લખાયો છે?", optsEn: ["(A) Python", "(B) C/C++ and Java/Kotlin", "(C) Assembly only", "(D) PHP"], optsGu: ["(A) Python", "(B) C/C++ અને Java/Kotlin", "(C) માત્ર એસેમ્બલી", "(D) PHP"], ans: 1 },
+      { enQ: "Android architecture is based on which model?", guQ: "Android આર્કિટેક્ચર કયા મોડેલ પર આધારિત?", optsEn: ["(A) Monolithic", "(B) Layered stack", "(C) Client-server", "(D) Ring architecture"], optsGu: ["(A) મોનોલિથિક", "(B) સ્તરીય સ્ટેક", "(C) ક્લાયન્ટ-સર્વર", "(D) રિંગ આર્કિટેક્ચર"], ans: 1 },
+      { enQ: "Which layer is at the bottom of Android architecture?", guQ: "Android આર્કિટેક્ચરમાં સૌથી નીચે કયું સ્તર?", optsEn: ["(A) Libraries", "(B) Application Framework", "(C) Linux Kernel", "(D) Runtime"], optsGu: ["(A) લાઇબ્રેરીઓ", "(B) ઍપ્લિકેશન ફ્રેમવર્ક", "(C) Linux Kernel", "(D) રનટાઇમ"], ans: 2 },
+      { enQ: "Which layer contains Activity Manager and Window Manager?", guQ: "Activity Manager અને Window Manager કયા સ્તરમાં?", optsEn: ["(A) Application layer", "(B) Libraries layer", "(C) Application Framework", "(D) Kernel"], optsGu: ["(A) એપ્લિકેશન સ્તર", "(B) લાઇબ્રેરી સ્તર", "(C) એપ્લિકેશન ફ્રેમવર્ક", "(D) કર્નલ"], ans: 2 },
+      { enQ: "Which Android layer provides hardware abstraction?", guQ: "હાર્ડવેર એબ્સ્ટ્રેક્શન કયું સ્તર પૂરું પાડે છે?", optsEn: ["(A) HAL", "(B) Runtime", "(C) Applications", "(D) Intent layer"], optsGu: ["(A) HAL", "(B) Runtime", "(C) એપ્લિકેશન્સ", "(D) Intent સ્તર"], ans: 0 },
+      { enQ: "HAL stands for:", guQ: "HAL નું પૂર્ણ સ્વરૂપ?", optsEn: ["(A) Hardware Access Layer", "(B) Hardware Abstraction Layer", "(C) High Application Layer", "(D) Host Access Library"], optsGu: ["(A) હાર્ડવેર એક્સેસ લેયર", "(B) હાર્ડવેર એબ્સ્ટ્રેક્શન લેયર", "(C) હાઇ એપ્લિકેશન લેયર", "(D) હોસ્ટ એક્સેસ લાઇબ્રેરી"], ans: 1 },
+      { enQ: "Which component manages memory and processes?", guQ: "મેમરી અને પ્રોસેસનું સંચાલન કોણ કરે છે?", optsEn: ["(A) Libraries", "(B) Kernel", "(C) Runtime", "(D) Framework"], optsGu: ["(A) લાઇબ્રેરીઓ", "(B) કર્નલ", "(C) રનટાઇમ", "(D) ફ્રેમવર્ક"], ans: 1 },
+      { enQ: "Which Android layer includes SQLite and WebKit?", guQ: "SQLite અને WebKit કયા સ્તરમાં આવે છે?", optsEn: ["(A) Libraries", "(B) Kernel", "(C) Framework", "(D) Applications"], optsGu: ["(A) લાઇબ્રેરીઓ", "(B) કર્નલ", "(C) ફ્રેમવર્ક", "(D) એપ્લિકેશન્સ"], ans: 0 },
+      { enQ: "Which runtime replaced Dalvik?", guQ: "Dalvik ની જગ્યાએ કયું runtime આવ્યું?", optsEn: ["(A) JVM", "(B) ART", "(C) CLR", "(D) V8"], optsGu: ["(A) JVM", "(B) ART", "(C) CLR", "(D) V8"], ans: 1 },
+      { enQ: "Which layer provides Java API framework?", guQ: "Java API ફ્રેમવર્ક કયું સ્તર પૂરું પાડે છે?", optsEn: ["(A) Kernel", "(B) Runtime", "(C) Framework", "(D) HAL"], optsGu: ["(A) કર્નલ", "(B) રનટાઇમ", "(C) ફ્રેમવર્ક", "(D) HAL"], ans: 2 },
+      { enQ: "Which layer interacts directly with device drivers?", guQ: "ડિવાઇસ ડ્રાઇવરો સાથે સીધું સંપર્ક કરતું સ્તર?", optsEn: ["(A) Runtime", "(B) Framework", "(C) Kernel", "(D) Application"], optsGu: ["(A) રનટાઇમ", "(B) ફ્રેમવર્ક", "(C) કર્નલ", "(D) એપ્લિકેશન"], ans: 2 },
+      { enQ: "Which Android architecture layer contains native C/C++ libraries?", guQ: "મૂળ C/C++ લાઇબ્રેરીઓ ક્યાં હોય છે?", optsEn: ["(A) Applications", "(B) Libraries", "(C) Runtime", "(D) Framework"], optsGu: ["(A) એપ્લિકેશન્સ", "(B) લાઇબ્રેરીઓ", "(C) રનટાઇમ", "(D) ફ્રેમવર્ક"], ans: 1 },
+      { enQ: "Which library is used for database in Android architecture?", guQ: "ડેટાબેઝ માટે કઈ લાઇબ્રેરી વપરાય છે?", optsEn: ["(A) MySQL", "(B) SQLite", "(C) Oracle", "(D) PostgreSQL"], optsGu: ["(A) MySQL", "(B) SQLite", "(C) Oracle", "(D) PostgreSQL"], ans: 1 },
+      { enQ: "Which component manages views and layouts?", guQ: "વ્યૂ અને લેઆઉટનું સંચાલન કોણ કરે છે?", optsEn: ["(A) Activity Manager", "(B) Window Manager", "(C) View Manager", "(D) Layout Controller"], optsGu: ["(A) Activity Manager", "(B) Window Manager", "(C) View Manager", "(D) Layout Controller"], ans: 2 },
+      { enQ: "Which Android layer contains core libraries for Java execution?", guQ: "જાવા એક્ઝિક્યુશન માટે કોર લાઇબ્રેરીઓ કયા સ્તરમાં?", optsEn: ["(A) Runtime", "(B) Kernel", "(C) Libraries", "(D) Applications"], optsGu: ["(A) રનટાઇમ", "(B) કર્નલ", "(C) લાઇબ્રેરીઓ", "(D) એપ્લિકેશન્સ"], ans: 0 },
+      { enQ: "Which layer includes notification manager?", guQ: "Notification Manager કયા સ્તરમાં આવે છે?", optsEn: ["(A) Framework", "(B) Kernel", "(C) Runtime", "(D) HAL"], optsGu: ["(A) ફ્રેમવર્ક", "(B) કર્નલ", "(C) રનટાઇમ", "(D) HAL"], ans: 0 },
+      { enQ: "Which Android layer includes applications like contacts and browser?", guQ: "કોન્ટેક્ટ્સ અને બ્રાઉઝર એપ્સ કયા સ્તરમાં?", optsEn: ["(A) Framework", "(B) Application layer", "(C) Libraries", "(D) Runtime"], optsGu: ["(A) ફ્રેમવર્ક", "(B) એપ્લિકેશન સ્તર", "(C) લાઇબ્રેરીઓ", "(D) રનટાઇમ"], ans: 1 },
+      { enQ: "Which Android architecture component manages application lifecycle?", guQ: "એપ્લિકેશન જીવનચક્રનું સંચાલન કરે છે?", optsEn: ["(A) Window Manager", "(B) Activity Manager", "(C) Resource Manager", "(D) Notification Manager"], optsGu: ["(A) Window Manager", "(B) Activity Manager", "(C) Resource Manager", "(D) Notification Manager"], ans: 1 },
+      { enQ: "Which library handles media playback?", guQ: "મીડિયા પ્લેબેક કઈ લાઇબ્રેરી હેન્ડલ કરે છે?", optsEn: ["(A) Media Framework", "(B) OpenGL", "(C) SQLite", "(D) Surface Manager"], optsGu: ["(A) Media Framework", "(B) OpenGL", "(C) SQLite", "(D) Surface Manager"], ans: 0 },
+      { enQ: "Which layer provides Binder IPC mechanism?", guQ: "Binder IPC મિકેનિઝમ કયું સ્તર પૂરું પાડે છે?", optsEn: ["(A) Kernel", "(B) Framework", "(C) Runtime", "(D) Application"], optsGu: ["(A) કર્નલ", "(B) ફ્રેમવર્ક", "(C) રનટાઇમ", "(D) એપ્લિકેશન"], ans: 0 },
+      { enQ: "Which layer includes OpenGL ES library?", guQ: "OpenGL ES લાઇબ્રેરી કયા સ્તરમાં?", optsEn: ["(A) Kernel", "(B) Libraries", "(C) Runtime", "(D) Framework"], optsGu: ["(A) કર્નલ", "(B) લાઇબ્રેરીઓ", "(C) રનટાઇમ", "(D) ફ્રેમવર્ક"], ans: 1 },
+      { enQ: "Which Android architecture layer handles security and permissions?", guQ: "સુરક્ષા અને પરમિશન કયું સ્તર સંભાળે છે?", optsEn: ["(A) Application", "(B) Framework", "(C) Kernel", "(D) Runtime"], optsGu: ["(A) એપ્લિકેશન", "(B) ફ્રેમવર્ક", "(C) કર્નલ", "(D) રનટાઇમ"], ans: 2 },
+      { enQ: "Which manager controls app resources like strings and layouts?", guQ: "સ્ટ્રિંગ અને લેઆઉટ જેવા રિસોર્સ કોણ નિયંત્રિત કરે છે?", optsEn: ["(A) Resource Manager", "(B) Activity Manager", "(C) Window Manager", "(D) Package Manager"], optsGu: ["(A) Resource Manager", "(B) Activity Manager", "(C) Window Manager", "(D) Package Manager"], ans: 0 },
+      { enQ: "Which layer provides class libraries and runtime environment?", guQ: "ક્લાસ લાઇબ્રેરીઓ અને runtime પૂરું પાડે છે?", optsEn: ["(A) Kernel", "(B) Runtime", "(C) HAL", "(D) Application"], optsGu: ["(A) કર્નલ", "(B) રનટાઇમ", "(C) HAL", "(D) એપ્લિકેશન"], ans: 1 },
+      { enQ: "Which component installs and removes apps?", guQ: "એપ્સ ઇન્સ્ટોલ અને દૂર કરે છે?", optsEn: ["(A) Activity Manager", "(B) Package Manager", "(C) Window Manager", "(D) Resource Manager"], optsGu: ["(A) Activity Manager", "(B) Package Manager", "(C) Window Manager", "(D) Resource Manager"], ans: 1 },
+      { enQ: "Which Android architecture layer contains WebView engine?", guQ: "WebView એન્જિન કયા સ્તરમાં છે?", optsEn: ["(A) Libraries", "(B) Kernel", "(C) Runtime", "(D) Framework"], optsGu: ["(A) લાઇબ્રેરીઓ", "(B) કર્નલ", "(C) રનટાઇમ", "(D) ફ્રેમવર્ક"], ans: 0 },
+      { enQ: "Which layer manages power management?", guQ: "પાવર મેનેજમેન્ટ કયું સ્તર કરે છે?", optsEn: ["(A) Kernel", "(B) Framework", "(C) Runtime", "(D) Applications"], optsGu: ["(A) કર્નલ", "(B) ફ્રેમવર્ક", "(C) રનટાઇમ", "(D) એપ્લિકેશન્સ"], ans: 0 },
+      { enQ: "Which Android architecture layer is responsible for telephony services?", guQ: "ટેલિફોની સેવાઓ માટે કયું સ્તર જવાબદાર?", optsEn: ["(A) Framework", "(B) Libraries", "(C) Runtime", "(D) HAL"], optsGu: ["(A) ફ્રેમવર્ક", "(B) લાઇબ્રેરીઓ", "(C) રનટાઇમ", "(D) HAL"], ans: 0 },
+      { enQ: "Which layer provides APIs to developers?", guQ: "ડેવલપર્સ માટે API કયું સ્તર પૂરું પાડે છે?", optsEn: ["(A) Framework", "(B) Kernel", "(C) HAL", "(D) Libraries"], optsGu: ["(A) ફ્રેમવર્ક", "(B) કર્નલ", "(C) HAL", "(D) લાઇબ્રેરીઓ"], ans: 0 },
+      { enQ: "Which Android component manages screen rendering?", guQ: "સ્ક્રીન રેન્ડરિંગ કોણ કરે છે?", optsEn: ["(A) Window Manager", "(B) Activity Manager", "(C) Package Manager", "(D) Power Manager"], optsGu: ["(A) Window Manager", "(B) Activity Manager", "(C) Package Manager", "(D) Power Manager"], ans: 0 },
+      { enQ: "Which layer contains libc library?", guQ: "libc લાઇબ્રેરી કયા સ્તરમાં છે?", optsEn: ["(A) Kernel", "(B) Libraries", "(C) Runtime", "(D) Application"], optsGu: ["(A) કર્નલ", "(B) લાઇબ્રેરીઓ", "(C) રનટાઇમ", "(D) એપ્લિકેશન"], ans: 1 },
+      { enQ: "Which Android architecture layer is closest to user?", guQ: "વપરાશકર્તાની સૌથી નજીક કયું સ્તર છે?", optsEn: ["(A) Applications", "(B) Runtime", "(C) Kernel", "(D) HAL"], optsGu: ["(A) એપ્લિકેશન્સ", "(B) રનટાઇમ", "(C) કર્નલ", "(D) HAL"], ans: 0 },
+      { enQ: "Which Android runtime feature improves performance by AOT compilation?", guQ: "AOT કમ્પાઇલેશન દ્વારા પર્ફોર્મન્સ સુધારે છે?", optsEn: ["(A) Dalvik", "(B) ART", "(C) JVM", "(D) Interpreter"], optsGu: ["(A) Dalvik", "(B) ART", "(C) JVM", "(D) ઇન્ટરપ્રીટર"], ans: 1 },
+      { enQ: "Which manager tracks installed apps?", guQ: "ઇન્સ્ટોલ થયેલ એપ્સને ટ્રૅક કરે છે?", optsEn: ["(A) Activity Manager", "(B) Package Manager", "(C) Resource Manager", "(D) Window Manager"], optsGu: ["(A) Activity Manager", "(B) Package Manager", "(C) Resource Manager", "(D) Window Manager"], ans: 1 },
+      { enQ: "Which layer provides camera services?", guQ: "કૅમેરા સેવાઓ કયું સ્તર પૂરી પાડે છે?", optsEn: ["(A) Kernel", "(B) Framework", "(C) Runtime", "(D) Libraries"], optsGu: ["(A) કર્નલ", "(B) ફ્રેમવર્ક", "(C) રનટાઇમ", "(D) લાઇબ્રેરીઓ"], ans: 1 },
+      { enQ: "Which layer is responsible for thread management?", guQ: "થ્રેડ મેનેજમેન્ટ કયું સ્તર કરે છે?", optsEn: ["(A) Runtime", "(B) Kernel", "(C) Framework", "(D) Applications"], optsGu: ["(A) રનટાઇમ", "(B) કર્નલ", "(C) ફ્રેમવર્ક", "(D) એપ્લિકેશન્સ"], ans: 1 },
+      { enQ: "Which Android architecture layer handles networking stack?", guQ: "નેટવર્કિંગ સ્ટેક કયું સ્તર હેન્ડલ કરે છે?", optsEn: ["(A) Kernel", "(B) Runtime", "(C) Libraries", "(D) Framework"], optsGu: ["(A) કર્નલ", "(B) રનટાઇમ", "(C) લાઇબ્રેરીઓ", "(D) ફ્રેમવર્ક"], ans: 0 },
+      { enQ: "Which library is used for 2D graphics rendering?", guQ: "2D ગ્રાફિક્સ રેન્ડરિંગ માટે કઈ લાઇબ્રેરી?", optsEn: ["(A) Surface Manager", "(B) Skia", "(C) WebKit", "(D) OpenGL"], optsGu: ["(A) Surface Manager", "(B) Skia", "(C) WebKit", "(D) OpenGL"], ans: 1 },
+      { enQ: "Which layer provides Content Provider service?", guQ: "Content Provider સેવા કયું સ્તર પૂરું પાડે છે?", optsEn: ["(A) Framework", "(B) Kernel", "(C) Runtime", "(D) Libraries"], optsGu: ["(A) ફ્રેમવર્ક", "(B) કર્નલ", "(C) રનટાઇમ", "(D) લાઇબ્રેરીઓ"], ans: 0 },
+      { enQ: "Which Android architecture layer provides Bluetooth drivers?", guQ: "બ્લૂટૂથ ડ્રાઇવરો કયું સ્તર પૂરાં પાડે છે?", optsEn: ["(A) Libraries", "(B) Runtime", "(C) Kernel", "(D) Applications"], optsGu: ["(A) લાઇબ્રેરીઓ", "(B) રનટાઇમ", "(C) કર્નલ", "(D) એપ્લિકેશન્સ"], ans: 2 },
+      { enQ: "Which manager is responsible for launching apps?", guQ: "એપ્સ લોન્ચ કરવા માટે કયો મેનેજર જવાબદાર?", optsEn: ["(A) Package Manager", "(B) Activity Manager", "(C) Window Manager", "(D) Resource Manager"], optsGu: ["(A) Package Manager", "(B) Activity Manager", "(C) Window Manager", "(D) Resource Manager"], ans: 1 },
+      { enQ: "Which Android architecture layer provides Location Manager?", guQ: "Location Manager કયું સ્તર પૂરું પાડે છે?", optsEn: ["(A) Framework", "(B) Kernel", "(C) Runtime", "(D) Libraries"], optsGu: ["(A) ફ્રેમવર્ક", "(B) કર્નલ", "(C) રનટાઇમ", "(D) લાઇબ્રેરીઓ"], ans: 0 },
+      { enQ: "Which Android component handles process scheduling?", guQ: "પ્રોસેસ શેડ્યુલિંગ કયો ઘટક કરે છે?", optsEn: ["(A) Runtime", "(B) Framework", "(C) Kernel", "(D) Application layer"], optsGu: ["(A) રનટાઇમ", "(B) ફ્રેમવર્ક", "(C) કર્નલ", "(D) એપ્લિકેશન સ્તર"], ans: 2 },
+      { enQ: "Which Android layer includes SSL library?", guQ: "SSL લાઇબ્રેરી કયા સ્તરમાં છે?", optsEn: ["(A) Kernel", "(B) Libraries", "(C) Runtime", "(D) Framework"], optsGu: ["(A) કર્નલ", "(B) લાઇબ્રેરીઓ", "(C) રનટાઇમ", "(D) ફ્રેમવર્ક"], ans: 1 },
+      { enQ: "Which Android architecture layer supports sensor drivers?", guQ: "સેન્સર ડ્રાઇવરો કયું સ્તર સપોર્ટ કરે છે?", optsEn: ["(A) Framework", "(B) Kernel", "(C) Runtime", "(D) Applications"], optsGu: ["(A) ફ્રેમવર્ક", "(B) કર્નલ", "(C) રનટાઇમ", "(D) એપ્લિકેશન્સ"], ans: 1 },
+      { enQ: "Which Android layer manages UI widgets?", guQ: "UI વિજેટ્સ કયું સ્તર મેનેજ કરે છે?", optsEn: ["(A) Framework", "(B) Kernel", "(C) Runtime", "(D) HAL"], optsGu: ["(A) ફ્રેમવર્ક", "(B) કર્નલ", "(C) રનટાઇમ", "(D) HAL"], ans: 0 },
+      { enQ: "Which Android architecture layer executes bytecode?", guQ: "બાઇટકોડ એક્ઝિક્યુટ કરે છે?", optsEn: ["(A) Kernel", "(B) Runtime", "(C) Libraries", "(D) Framework"], optsGu: ["(A) કર્નલ", "(B) રનટાઇમ", "(C) લાઇબ્રેરીઓ", "(D) ફ્રેમવર્ક"], ans: 1 },
+      // ----- second PDF (activities, UI, layouts, advanced, toast, menu, dialog) Q97 to Q206  (some overlap but we keep all unique)
+      { enQ: "Which component provides access to contacts database?", guQ: "કોન્ટેક્ટ ડેટાબેઝ માટે કયો કોમ્પોનન્ટ ઍક્સેસ આપે છે?", optsEn: ["(A) Activity Manager", "(B) Content Provider", "(C) Window Manager", "(D) Package Manager"], optsGu: ["(A) Activity Manager", "(B) Content Provider", "(C) Window Manager", "(D) Package Manager"], ans: 1 },
+      { enQ: "Which Android architecture layer contains WebKit engine?", guQ: "WebKit એન્જિન કયા સ્તરમાં છે?", optsEn: ["(A) Runtime", "(B) Libraries", "(C) Kernel", "(D) Application"], optsGu: ["(A) Runtime", "(B) Libraries", "(C) Kernel", "(D) Application"], ans: 1 },
+      { enQ: "Which Android layer provides audio drivers?", guQ: "ઓડિયો ડ્રાઇવરો કયું સ્તર પૂરાં પાડે છે?", optsEn: ["(A) Kernel", "(B) Runtime", "(C) Framework", "(D) Libraries"], optsGu: ["(A) કર્નલ", "(B) રનટાઇમ", "(C) ફ્રેમવર્ક", "(D) લાઇબ્રેરીઓ"], ans: 0 },
+      { enQ: "Correct order of Android architecture layers (top → bottom):", guQ: "Android આર્કિટેક્ચર સ્તરોનો સાચો ક્રમ (ઉપરથી નીચે):", optsEn: ["(A) Kernel → Runtime → Framework → Apps", "(B) Apps → Framework → Runtime/Libraries → Kernel", "(C) Framework → Apps → Kernel → Runtime", "(D) Apps → Kernel → Framework → Runtime"], optsGu: ["(A) Kernel → Runtime → Framework → Apps", "(B) Apps → Framework → Runtime/Libraries → Kernel", "(C) Framework → Apps → Kernel → Runtime", "(D) Apps → Kernel → Framework → Runtime"], ans: 1 },
+      { enQ: "Which component represents a single screen with UI?", guQ: "UI સાથે એક સ્ક્રીન રજૂ કરતો ઘટક?", optsEn: ["(A) Service", "(B) Activity", "(C) Fragment", "(D) Intent"], optsGu: ["(A) Service", "(B) Activity", "(C) Fragment", "(D) Intent"], ans: 1 },
+      { enQ: "Which method is called first when activity is created?", guQ: "Activity બનાવાય ત્યારે સૌપ્રથમ કઈ મેથડ કૉલ થાય છે?", optsEn: ["(A) onStart()", "(B) onResume()", "(C) onCreate()", "(D) onInit()"], optsGu: ["(A) onStart()", "(B) onResume()", "(C) onCreate()", "(D) onInit()"], ans: 2 },
+      { enQ: "Which lifecycle method is called when activity becomes visible?", guQ: "Activity દૃશ્યમાન થાય ત્યારે કઈ lifecycle મેથડ કૉલ થાય?", optsEn: ["(A) onPause()", "(B) onStart()", "(C) onStop()", "(D) onDestroy()"], optsGu: ["(A) onPause()", "(B) onStart()", "(C) onStop()", "(D) onDestroy()"], ans: 1 },
+      { enQ: "Which method is called when activity goes to background but still visible partially?", guQ: "Activity પાર્શ્વભૂમિમાં જાય પણ આંશિક દૃશ્યમાન હોય ત્યારે કઈ મેથડ?", optsEn: ["(A) onStop()", "(B) onPause()", "(C) onDestroy()", "(D) onRestart()"], optsGu: ["(A) onStop()", "(B) onPause()", "(C) onDestroy()", "(D) onRestart()"], ans: 1 },
+      { enQ: "Which method is called when activity is completely hidden?", guQ: "Activity સંપૂર્ણપણે છુપાય ત્યારે?", optsEn: ["(A) onStop()", "(B) onPause()", "(C) onRestart()", "(D) onResume()"], optsGu: ["(A) onStop()", "(B) onPause()", "(C) onRestart()", "(D) onResume()"], ans: 0 },
+      { enQ: "Which layout arranges elements vertically or horizontally?", guQ: "ઘટકોને ઊભા અથવા આડા ગોઠવતો લેઆઉટ?", optsEn: ["(A) RelativeLayout", "(B) LinearLayout", "(C) FrameLayout", "(D) GridLayout"], optsGu: ["(A) RelativeLayout", "(B) LinearLayout", "(C) FrameLayout", "(D) GridLayout"], ans: 1 },
+      { enQ: "Which layout positions elements relative to each other?", guQ: "ઘટકોને એકબીજાના સાપેક્ષ ગોઠવતો લેઆઉટ?", optsEn: ["(A) FrameLayout", "(B) LinearLayout", "(C) RelativeLayout", "(D) ScrollLayout"], optsGu: ["(A) FrameLayout", "(B) LinearLayout", "(C) RelativeLayout", "(D) ScrollLayout"], ans: 2 },
+      { enQ: "Which layout is best for overlapping views?", guQ: "અતિવ્યાપ્ત (overlap) દૃશ્યો માટે શ્રેષ્ઠ લેઆઉટ?", optsEn: ["(A) LinearLayout", "(B) FrameLayout", "(C) TableLayout", "(D) GridLayout"], optsGu: ["(A) LinearLayout", "(B) FrameLayout", "(C) TableLayout", "(D) GridLayout"], ans: 1 },
+      { enQ: "Which file defines UI layout?", guQ: "UI લેઆઉટ કઈ ફાઇલ વ્યાખ્યાયિત કરે છે?", optsEn: ["(A) MainActivity.java", "(B) AndroidManifest.xml", "(C) layout.xml", "(D) strings.xml"], optsGu: ["(A) MainActivity.java", "(B) AndroidManifest.xml", "(C) layout.xml", "(D) strings.xml"], ans: 2 },
+      { enQ: "Which unit is recommended for text size?", guQ: "ટેક્સ્ટ સાઇઝ માટે કયો એકમ ભલામણ કરેલ?", optsEn: ["(A) px", "(B) dp", "(C) sp", "(D) mm"], optsGu: ["(A) px", "(B) dp", "(C) sp", "(D) mm"], ans: 2 },
+      { enQ: "Which unit is recommended for layout dimensions?", guQ: "લેઆઉટ પરિમાણો માટે કયો એકમ?", optsEn: ["(A) sp", "(B) dp", "(C) px", "(D) pt"], optsGu: ["(A) sp", "(B) dp", "(C) px", "(D) pt"], ans: 1 },
+      { enQ: "Which lifecycle method is called when returning to activity from stopped state?", guQ: "stopped સ્થિતિમાંથી પાછા ફરતી વખતે કઈ મેથડ કૉલ થાય?", optsEn: ["(A) onStart()", "(B) onRestart()", "(C) onResume()", "(D) onCreate()"], optsGu: ["(A) onStart()", "(B) onRestart()", "(C) onResume()", "(D) onCreate()"], ans: 1 },
+      { enQ: "Which method is called right before activity is destroyed?", guQ: "Activity નાશ પામે તે પહેલાં કઈ મેથડ કૉલ થાય?", optsEn: ["(A) onPause()", "(B) onStop()", "(C) onDestroy()", "(D) onRestart()"], optsGu: ["(A) onPause()", "(B) onStop()", "(C) onDestroy()", "(D) onRestart()"], ans: 2 },
+      { enQ: "Which class is base class for Activity?", guQ: "Activity માટે આધાર વર્ગ?", optsEn: ["(A) Intent", "(B) Context", "(C) View", "(D) AppCompatActivity"], optsGu: ["(A) Intent", "(B) Context", "(C) View", "(D) AppCompatActivity"], ans: 3 },
+      { enQ: "Which XML attribute sets view ID?", guQ: "View ID સેટ કરતો XML એટ્રિબ્યુટ?", optsEn: ["(A) android:name", "(B) android:id", "(C) android:value", "(D) android:ref"], optsGu: ["(A) android:name", "(B) android:id", "(C) android:value", "(D) android:ref"], ans: 1 },
+      { enQ: "Which method loads layout file into activity?", guQ: "લેઆઉટ ફાઇલ Activityમાં લોડ કરતી મેથડ?", optsEn: ["(A) loadLayout()", "(B) setLayout()", "(C) setContentView()", "(D) setView()"], optsGu: ["(A) loadLayout()", "(B) setLayout()", "(C) setContentView()", "(D) setView()"], ans: 2 },
+      { enQ: "Which layout supports constraint-based positioning?", guQ: "Constraint-આધારિત પોઝિશનિંગ લેઆઉટ?", optsEn: ["(A) LinearLayout", "(B) ConstraintLayout", "(C) TableLayout", "(D) FrameLayout"], optsGu: ["(A) LinearLayout", "(B) ConstraintLayout", "(C) TableLayout", "(D) FrameLayout"], ans: 1 },
+      { enQ: "Which method is used to find view by ID?", guQ: "ID દ્વારા View શોધવા માટેની મેથડ?", optsEn: ["(A) getView()", "(B) findViewById()", "(C) searchView()", "(D) viewById()"], optsGu: ["(A) getView()", "(B) findViewById()", "(C) searchView()", "(D) viewById()"], ans: 1 },
+      { enQ: "Which component handles user interaction events?", guQ: "યુઝર ઇન્ટરેક્શન ઇવેન્ટ્સ કયો કોમ્પોનન્ટ હેન્ડલ કરે છે?", optsEn: ["(A) Listener", "(B) Adapter", "(C) Provider", "(D) Manager"], optsGu: ["(A) Listener", "(B) Adapter", "(C) Provider", "(D) Manager"], ans: 0 },
+      { enQ: "Which listener handles button click?", guQ: "બટન ક્લિક કયો લિસનર હેન્ડલ કરે છે?", optsEn: ["(A) OnSelectListener", "(B) OnClickListener", "(C) OnTouchAdapter", "(D) OnPressHandler"], optsGu: ["(A) OnSelectListener", "(B) OnClickListener", "(C) OnTouchAdapter", "(D) OnPressHandler"], ans: 1 },
+      { enQ: "Which method starts another activity?", guQ: "બીજી Activity શરૂ કરવાની મેથડ?", optsEn: ["(A) launchActivity()", "(B) startActivity()", "(C) openActivity()", "(D) runActivity()"], optsGu: ["(A) launchActivity()", "(B) startActivity()", "(C) openActivity()", "(D) runActivity()"], ans: 1 },
+      { enQ: "Which object is used to start activity?", guQ: "Activity શરૂ કરવા માટેનો ઑબ્જેક્ટ?", optsEn: ["(A) Context", "(B) Intent", "(C) Bundle", "(D) Adapter"], optsGu: ["(A) Context", "(B) Intent", "(C) Bundle", "(D) Adapter"], ans: 1 },
+      { enQ: "Which activity launch mode creates new instance always?", guQ: "હંમેશા નવો ઇન્સ્ટન્સ બનાવતો launch mode?", optsEn: ["(A) singleTop", "(B) singleTask", "(C) standard", "(D) singleInstance"], optsGu: ["(A) singleTop", "(B) singleTask", "(C) standard", "(D) singleInstance"], ans: 2 },
+      { enQ: "Which lifecycle method is best for initializing UI elements?", guQ: "UI તત્વો ઇનિશિયલાઇઝ કરવા શ્રેષ્ઠ મેથડ?", optsEn: ["(A) onStart()", "(B) onCreate()", "(C) onResume()", "(D) onPause()"], optsGu: ["(A) onStart()", "(B) onCreate()", "(C) onResume()", "(D) onPause()"], ans: 1 },
+      { enQ: "Which XML attribute sets width to match parent?", guQ: "width match_parent સેટ કરતો એટ્રિબ્યુટ?", optsEn: ["(A) fill", "(B) wrap_content", "(C) match_parent", "(D) expand"], optsGu: ["(A) fill", "(B) wrap_content", "(C) match_parent", "(D) expand"], ans: 2 },
+      { enQ: "Which XML attribute sizes view to content?", guQ: "view ને content પ્રમાણે સાઇઝ કરતો એટ્રિબ્યુટ?", optsEn: ["(A) match_parent", "(B) auto", "(C) wrap_content", "(D) dynamic"], optsGu: ["(A) match_parent", "(B) auto", "(C) wrap_content", "(D) dynamic"], ans: 2 },
+      { enQ: "Which component represents reusable UI portion?", guQ: "પુનઃઉપયોગી UI ભાગ રજૂ કરતો ઘટક?", optsEn: ["(A) Activity", "(B) Service", "(C) Fragment", "(D) Intent"], optsGu: ["(A) Activity", "(B) Service", "(C) Fragment", "(D) Intent"], ans: 2 },
+      { enQ: "Which layout arranges elements in table form?", guQ: "કોષ્ટક સ્વરૂપે ઘટકો ગોઠવતો લેઆઉટ?", optsEn: ["(A) LinearLayout", "(B) GridLayout", "(C) TableLayout", "(D) FrameLayout"], optsGu: ["(A) LinearLayout", "(B) GridLayout", "(C) TableLayout", "(D) FrameLayout"], ans: 2 },
+      { enQ: "Which attribute sets margin?", guQ: "margin સેટ કરતો એટ્રિબ્યુટ?", optsEn: ["(A) android:padding", "(B) android:margin", "(C) android:layout_margin", "(D) android:space"], optsGu: ["(A) android:padding", "(B) android:margin", "(C) android:layout_margin", "(D) android:space"], ans: 2 },
+      { enQ: "Which attribute sets internal spacing?", guQ: "આંતરિક અંતર સેટ કરતો એટ્રિબ્યુટ?", optsEn: ["(A) margin", "(B) padding", "(C) spacing", "(D) gap"], optsGu: ["(A) margin", "(B) padding", "(C) spacing", "(D) gap"], ans: 1 },
+      { enQ: "Which method is used to pass data between activities?", guQ: "Activity વચ્ચે ડેટા પસાર કરવા માટેની મેથડ?", optsEn: ["(A) Bundle", "(B) Intent extras", "(C) Adapter", "(D) Provider"], optsGu: ["(A) Bundle", "(B) Intent extras", "(C) Adapter", "(D) Provider"], ans: 1 },
+      { enQ: "Which UI component allows scrolling?", guQ: "સ્ક્રોલ કરવા દેતો UI ઘટક?", optsEn: ["(A) ScrollView", "(B) LinearLayout", "(C) FrameLayout", "(D) TableLayout"], optsGu: ["(A) ScrollView", "(B) LinearLayout", "(C) FrameLayout", "(D) TableLayout"], ans: 0 },
+      { enQ: "Which layout should be avoided for complex UI due to nesting?", guQ: "નેસ્ટિંગને કારણે જટિલ UI માટે કયો લેઆઉટ ટાળવો જોઈએ?", optsEn: ["(A) LinearLayout", "(B) ConstraintLayout", "(C) RelativeLayout", "(D) FrameLayout"], optsGu: ["(A) LinearLayout", "(B) ConstraintLayout", "(C) RelativeLayout", "(D) FrameLayout"], ans: 0 },
+      { enQ: "Which callback is triggered when activity returns to foreground?", guQ: "Activity ફોરગ્રાઉન્ડમાં પાછી આવે ત્યારે કયો callback?", optsEn: ["(A) onStart()", "(B) onResume()", "(C) onRestart()", "(D) onCreate()"], optsGu: ["(A) onStart()", "(B) onResume()", "(C) onRestart()", "(D) onCreate()"], ans: 1 },
+      { enQ: "Which activity state is highest priority?", guQ: "સૌથી વધુ પ્રાથમિકતા ધરાવતો Activity સ્ટેટ?", optsEn: ["(A) Paused", "(B) Stopped", "(C) Resumed", "(D) Destroyed"], optsGu: ["(A) Paused", "(B) Stopped", "(C) Resumed", "(D) Destroyed"], ans: 2 },
+      { enQ: "Which method saves UI state before destruction?", guQ: "નાશ પહેલાં UI સ્થિતિ સાચવતી મેથડ?", optsEn: ["(A) onSaveInstanceState()", "(B) onStop()", "(C) onPause()", "(D) onDestroy()"], optsGu: ["(A) onSaveInstanceState()", "(B) onStop()", "(C) onPause()", "(D) onDestroy()"], ans: 0 },
+      { enQ: "Which class provides access to global app environment?", guQ: "વૈશ્વિક એપ એન્વાયર્નમેન્ટ ઍક્સેસ આપતો ક્લાસ?", optsEn: ["(A) Context", "(B) Activity", "(C) Application", "(D) Service"], optsGu: ["(A) Context", "(B) Activity", "(C) Application", "(D) Service"], ans: 0 },
+      { enQ: "Which XML file contains UI strings?", guQ: "UI સ્ટ્રિંગ્સ ધરાવતી XML ફાઇલ?", optsEn: ["(A) layout.xml", "(B) strings.xml", "(C) main.xml", "(D) config.xml"], optsGu: ["(A) layout.xml", "(B) strings.xml", "(C) main.xml", "(D) config.xml"], ans: 1 },
+      { enQ: "Which method restores saved state?", guQ: "સંગ્રહિત સ્થિતિ પુનઃસ્થાપિત કરતી મેથડ?", optsEn: ["(A) onRestoreInstanceState()", "(B) onResume()", "(C) onRestart()", "(D) onStart()"], optsGu: ["(A) onRestoreInstanceState()", "(B) onResume()", "(C) onRestart()", "(D) onStart()"], ans: 0 },
+      { enQ: "Which layout is best for responsive UI?", guQ: "પ્રતિભાવશીલ UI માટે શ્રેષ્ઠ લેઆઉટ?", optsEn: ["(A) FrameLayout", "(B) ConstraintLayout", "(C) TableLayout", "(D) AbsoluteLayout"], optsGu: ["(A) FrameLayout", "(B) ConstraintLayout", "(C) TableLayout", "(D) AbsoluteLayout"], ans: 1 },
+      { enQ: "Which layout type is deprecated?", guQ: "અપ્રચલિત (deprecated) લેઆઉટ પ્રકાર?", optsEn: ["(A) LinearLayout", "(B) AbsoluteLayout", "(C) RelativeLayout", "(D) FrameLayout"], optsGu: ["(A) LinearLayout", "(B) AbsoluteLayout", "(C) RelativeLayout", "(D) FrameLayout"], ans: 1 },
+      { enQ: "Which method closes current activity?", guQ: "વર્તમાન Activity બંધ કરતી મેથડ?", optsEn: ["(A) finish()", "(B) close()", "(C) stop()", "(D) end()"], optsGu: ["(A) finish()", "(B) close()", "(C) stop()", "(D) end()"], ans: 0 },
+      { enQ: "Which callback occurs after onCreate()?", guQ: "onCreate() પછી કયો callback આવે છે?", optsEn: ["(A) onStart()", "(B) onResume()", "(C) onPause()", "(D) onStop()"], optsGu: ["(A) onStart()", "(B) onResume()", "(C) onPause()", "(D) onStop()"], ans: 0 },
+      { enQ: "Which component displays images?", guQ: "ચિત્રો દર્શાવતો ઘટક?", optsEn: ["(A) ImageView", "(B) TextView", "(C) Button", "(D) LayoutView"], optsGu: ["(A) ImageView", "(B) TextView", "(C) Button", "(D) LayoutView"], ans: 0 },
+      { enQ: "Which attribute sets text in TextView?", guQ: "TextView માં ટેક્સ્ટ સેટ કરતો એટ્રિબ્યુટ?", optsEn: ["(A) android:value", "(B) android:label", "(C) android:text", "(D) android:title"], optsGu: ["(A) android:value", "(B) android:label", "(C) android:text", "(D) android:title"], ans: 2 },
+      { enQ: "Which layout attribute aligns view center?", guQ: "view ને મધ્યમાં ગોઠવતો લેઆઉટ એટ્રિબ્યુટ?", optsEn: ["(A) layout_alignCenter", "(B) layout_gravity=\"center\"", "(C) center=true", "(D) gravity=\"true\""], optsGu: ["(A) layout_alignCenter", "(B) layout_gravity=\"center\"", "(C) center=true", "(D) gravity=\"true\""], ans: 1 },
+      { enQ: "Which method pauses activity temporarily?", guQ: "Activity ને અસ્થાયી રૂપે વિરામ આપતી મેથડ?", optsEn: ["(A) onPause()", "(B) onStop()", "(C) onHold()", "(D) onFreeze()"], optsGu: ["(A) onPause()", "(B) onStop()", "(C) onHold()", "(D) onFreeze()"], ans: 0 },
+      { enQ: "Which lifecycle method is called after onPause()?", guQ: "onPause() પછી કઈ lifecycle મેથડ આવે?", optsEn: ["(A) onResume()", "(B) onStop()", "(C) onCreate()", "(D) onRestart()"], optsGu: ["(A) onResume()", "(B) onStop()", "(C) onCreate()", "(D) onRestart()"], ans: 1 },
+      { enQ: "Which component is used for user input text?", guQ: "યુઝર ઇનપુટ ટેક્સ્ટ માટે કયો ઘટક?", optsEn: ["(A) TextView", "(B) EditText", "(C) Label", "(D) InputView"], optsGu: ["(A) TextView", "(B) EditText", "(C) Label", "(D) InputView"], ans: 1 },
+      { enQ: "Correct order of activity lifecycle (basic flow):", guQ: "Activity lifecycle નો સાચો ક્રમ (મૂળભૂત):", optsEn: ["(A) onCreate → onStart → onResume", "(B) onResume → onStart → onCreate", "(C) onStart → onCreate → onResume", "(D) onCreate → onResume → onStart"], optsGu: ["(A) onCreate → onStart → onResume", "(B) onResume → onStart → onCreate", "(C) onStart → onCreate → onResume", "(D) onCreate → onResume → onStart"], ans: 0 },
+      { enQ: "Which Android class is used as base for custom views?", guQ: "કસ્ટમ વ્યૂ માટે આધાર તરીકે વપરાતો Android ક્લાસ?", optsEn: ["(A) View", "(B) Layout", "(C) Activity", "(D) Fragment"], optsGu: ["(A) View", "(B) Layout", "(C) Activity", "(D) Fragment"], ans: 0 },
+      { enQ: "Which Android method is overridden to draw custom graphics?", guQ: "કસ્ટમ ગ્રાફિક્સ દોરવા ઓવરરાઇડ કરેલ મેથડ?", optsEn: ["(A) onCreate()", "(B) onDraw()", "(C) onRender()", "(D) drawLayout()"], optsGu: ["(A) onCreate()", "(B) onDraw()", "(C) onRender()", "(D) drawLayout()"], ans: 1 },
+      { enQ: "Which Android class is used for animations?", guQ: "એનિમેશન માટેનો Android ક્લાસ?", optsEn: ["(A) Animator", "(B) Animation", "(C) ObjectAnimator", "(D) All of the above"], optsGu: ["(A) Animator", "(B) Animation", "(C) ObjectAnimator", "(D) ઉપરના તમામ"], ans: 3 },
+      { enQ: "Which Android layout allows overlapping UI elements?", guQ: "અતિવ્યાપ્ત UI ઘટકો માટે Android લેઆઉટ?", optsEn: ["(A) LinearLayout", "(B) ConstraintLayout", "(C) FrameLayout", "(D) TableLayout"], optsGu: ["(A) LinearLayout", "(B) ConstraintLayout", "(C) FrameLayout", "(D) TableLayout"], ans: 2 },
+      { enQ: "Which Android component is used for swipeable tabs?", guQ: "સ્વાઇપેબલ ટૅબ્સ માટે Android ઘટક?", optsEn: ["(A) RecyclerView", "(B) ViewPager", "(C) GridView", "(D) ScrollView"], optsGu: ["(A) RecyclerView", "(B) ViewPager", "(C) GridView", "(D) ScrollView"], ans: 1 },
+      { enQ: "Which Android class handles gesture detection?", guQ: "જેસ્ચર ડિટેક્શન કરતો Android ક્લાસ?", optsEn: ["(A) GestureDetector", "(B) MotionHandler", "(C) TouchManager", "(D) InputAdapter"], optsGu: ["(A) GestureDetector", "(B) MotionHandler", "(C) TouchManager", "(D) InputAdapter"], ans: 0 },
+      { enQ: "Which Android method handles touch events?", guQ: "ટચ ઇવેન્ટ્સ હેન્ડલ કરતી મેથડ?", optsEn: ["(A) onClick()", "(B) onTouchEvent()", "(C) onPress()", "(D) onHit()"], optsGu: ["(A) onClick()", "(B) onTouchEvent()", "(C) onPress()", "(D) onHit()"], ans: 1 },
+      { enQ: "Which Android layout provides flexible positioning using constraints?", guQ: "કોન્સ્ટ્રેન્ટ દ્વારા લવચીક પોઝિશનિંગ આપતો લેઆઉટ?", optsEn: ["(A) LinearLayout", "(B) FrameLayout", "(C) ConstraintLayout", "(D) TableLayout"], optsGu: ["(A) LinearLayout", "(B) FrameLayout", "(C) ConstraintLayout", "(D) TableLayout"], ans: 2 },
+      { enQ: "Which Android component efficiently displays large lists?", guQ: "મોટી યાદીઓને કાર્યક્ષમ રીતે દર્શાવતો ઘટક?", optsEn: ["(A) ListView", "(B) RecyclerView", "(C) ScrollView", "(D) GridLayout"], optsGu: ["(A) ListView", "(B) RecyclerView", "(C) ScrollView", "(D) GridLayout"], ans: 1 },
+      { enQ: "Which Android feature allows dark/light themes?", guQ: "ડાર્ક/લાઇટ થીમ માટેની સુવિધા?", optsEn: ["(A) Style Resources", "(B) Theme system", "(C) Layout Manager", "(D) Resource Adapter"], optsGu: ["(A) Style Resources", "(B) Theme system", "(C) Layout Manager", "(D) Resource Adapter"], ans: 1 },
+      { enQ: "Which Android class is used for drawing shapes programmatically?", guQ: "પ્રોગ્રામેટિક રીતે આકારો દોરવા માટેનો ક્લાસ?", optsEn: ["(A) Canvas", "(B) Painter", "(C) Brush", "(D) DrawableView"], optsGu: ["(A) Canvas", "(B) Painter", "(C) Brush", "(D) DrawableView"], ans: 0 },
+      { enQ: "Which Android object provides drawing instructions?", guQ: "ડ્રોઇંગ સૂચનાઓ પૂરી પાડતો ઑબ્જેક્ટ?", optsEn: ["(A) Pen", "(B) Paint", "(C) ColorTool", "(D) DrawTool"], optsGu: ["(A) Pen", "(B) Paint", "(C) ColorTool", "(D) DrawTool"], ans: 1 },
+      { enQ: "Which Android class handles property animations?", guQ: "પ્રોપર્ટી એનિમેશન્સ માટેનો ક્લાસ?", optsEn: ["(A) ObjectAnimator", "(B) LayoutAnimator", "(C) UIAnimator", "(D) MotionAnimator"], optsGu: ["(A) ObjectAnimator", "(B) LayoutAnimator", "(C) UIAnimator", "(D) MotionAnimator"], ans: 0 },
+      { enQ: "Which Android component manages fragments dynamically?", guQ: "ડાયનેમિક રીતે ફ્રેગમેન્ટ્સ મેનેજ કરતો ઘટક?", optsEn: ["(A) FragmentHandler", "(B) FragmentManager", "(C) FragmentController", "(D) FragmentHost"], optsGu: ["(A) FragmentHandler", "(B) FragmentManager", "(C) FragmentController", "(D) FragmentHost"], ans: 1 },
+      { enQ: "Which Android method inflates XML layout into view object?", guQ: "XML લેઆઉટને view object માં ફેરવતી મેથડ?", optsEn: ["(A) expandLayout()", "(B) inflate()", "(C) buildLayout()", "(D) loadXML()"], optsGu: ["(A) expandLayout()", "(B) inflate()", "(C) buildLayout()", "(D) loadXML()"], ans: 1 },
+      { enQ: "Which Android class is used for custom drawable graphics?", guQ: "કસ્ટમ ડ્રોએબલ ગ્રાફિક્સ માટે ક્લાસ?", optsEn: ["(A) Drawable", "(B) Bitmap", "(C) Canvas", "(D) GraphicView"], optsGu: ["(A) Drawable", "(B) Bitmap", "(C) Canvas", "(D) GraphicView"], ans: 0 },
+      { enQ: "Which Android layout is best for responsive UI design?", guQ: "પ્રતિભાવશીલ UI ડિઝાઇન માટે શ્રેષ્ઠ લેઆઉટ?", optsEn: ["(A) AbsoluteLayout", "(B) ConstraintLayout", "(C) TableLayout", "(D) FrameLayout"], optsGu: ["(A) AbsoluteLayout", "(B) ConstraintLayout", "(C) TableLayout", "(D) FrameLayout"], ans: 1 },
+      { enQ: "Which Android class handles multi-touch gestures?", guQ: "મલ્ટી-ટચ જેસ્ચર માટેનો ક્લાસ?", optsEn: ["(A) MultiTouchHandler", "(B) ScaleGestureDetector", "(C) MotionManager", "(D) TouchController"], optsGu: ["(A) MultiTouchHandler", "(B) ScaleGestureDetector", "(C) MotionManager", "(D) TouchController"], ans: 1 },
+      { enQ: "Which Android method is used to animate layout changes automatically?", guQ: "લેઆઉટ ફેરફારો આપમેળે એનિમેટ કરતી મેથડ?", optsEn: ["(A) enableAnimation()", "(B) LayoutTransition", "(C) setAnimation(true)", "(D) animateLayout()"], optsGu: ["(A) enableAnimation()", "(B) LayoutTransition", "(C) setAnimation(true)", "(D) animateLayout()"], ans: 1 },
+      { enQ: "Which Android view group is used for flexible grid layout?", guQ: "લવચીક ગ્રીડ લેઆઉટ માટેનો ViewGroup?", optsEn: ["(A) GridLayout", "(B) LinearLayout", "(C) TableLayout", "(D) FrameLayout"], optsGu: ["(A) GridLayout", "(B) LinearLayout", "(C) TableLayout", "(D) FrameLayout"], ans: 0 },
+      { enQ: "Which Android component is used to display card-style layouts?", guQ: "કાર્ડ-સ્ટાઇલ લેઆઉટ દર્શાવતો ઘટક?", optsEn: ["(A) FrameLayout", "(B) CardView", "(C) GridView", "(D) ScrollLayout"], optsGu: ["(A) FrameLayout", "(B) CardView", "(C) GridView", "(D) ScrollLayout"], ans: 1 },
+      { enQ: "Which Android class manages transitions between activities or fragments?", guQ: "Activity કે Fragment વચ્ચે ટ્રાન્ઝિશન મેનેજ કરતો ક્લાસ?", optsEn: ["(A) TransitionManager", "(B) AnimationManager", "(C) MotionManager", "(D) UIManager"], optsGu: ["(A) TransitionManager", "(B) AnimationManager", "(C) MotionManager", "(D) UIManager"], ans: 0 },
+      { enQ: "Which Android feature supports vector graphics?", guQ: "વેક્ટર ગ્રાફિક્સ સપોર્ટ કરતી સુવિધા?", optsEn: ["(A) VectorDrawable", "(B) ShapeDrawable", "(C) BitmapDrawable", "(D) IconDrawable"], optsGu: ["(A) VectorDrawable", "(B) ShapeDrawable", "(C) BitmapDrawable", "(D) IconDrawable"], ans: 0 },
+      { enQ: "Which Android UI element shows progress indicator?", guQ: "પ્રગતિ દર્શાવતો UI ઘટક?", optsEn: ["(A) StatusView", "(B) ProgressBar", "(C) Loader", "(D) WaitView"], optsGu: ["(A) StatusView", "(B) ProgressBar", "(C) Loader", "(D) WaitView"], ans: 1 },
+      { enQ: "Which Android class is used to load images efficiently?", guQ: "ચિત્રો કાર્યક્ષમ રીતે લોડ કરવાનો ક્લાસ?", optsEn: ["(A) BitmapFactory", "(B) ImageLoader", "(C) DrawableFactory", "(D) ResourceLoader"], optsGu: ["(A) BitmapFactory", "(B) ImageLoader", "(C) DrawableFactory", "(D) ResourceLoader"], ans: 0 },
+      { enQ: "Which Android component is recommended instead of ListView?", guQ: "ListView ને બદલે ભલામણ કરેલ ઘટક?", optsEn: ["(A) ScrollView", "(B) RecyclerView", "(C) GridLayout", "(D) FrameLayout"], optsGu: ["(A) ScrollView", "(B) RecyclerView", "(C) GridLayout", "(D) FrameLayout"], ans: 1 },
+      { enQ: "Which Android class controls layout animation timing?", guQ: "લેઆઉટ એનિમેશન સમય નિયંત્રિત કરતો ક્લાસ?", optsEn: ["(A) AnimatorSet", "(B) LayoutTransition", "(C) AnimationSet", "(D) FrameAnimator"], optsGu: ["(A) AnimatorSet", "(B) LayoutTransition", "(C) AnimationSet", "(D) FrameAnimator"], ans: 0 },
+      { enQ: "Which Android view allows horizontal scrolling lists?", guQ: "આડી સ્ક્રોલિંગ યાદી માટેનો વ્યૂ?", optsEn: ["(A) HorizontalScrollView", "(B) RecyclerView horizontal layout", "(C) Both a and b", "(D) None"], optsGu: ["(A) HorizontalScrollView", "(B) RecyclerView horizontal layout", "(C) a અને b બંને", "(D) કોઈ નહીં"], ans: 2 },
+      { enQ: "Which Android class handles drag and drop events?", guQ: "ડ્રેગ અને ડ્રોપ ઇવેન્ટ્સ માટેનો ક્લાસ?", optsEn: ["(A) DragEvent", "(B) DropHandler", "(C) DragManager", "(D) TouchDrag"], optsGu: ["(A) DragEvent", "(B) DropHandler", "(C) DragManager", "(D) TouchDrag"], ans: 0 },
+      { enQ: "Which Android property defines view transparency?", guQ: "વ્યૂની પારદર્શકતા વ્યાખ્યાયિત કરતી પ્રોપર્ટી?", optsEn: ["(A) visibility", "(B) alpha", "(C) opacityValue", "(D) fade"], optsGu: ["(A) visibility", "(B) alpha", "(C) opacityValue", "(D) fade"], ans: 1 },
+      { enQ: "Which Android class manages motion layout animations?", guQ: "મોશન લેઆઉટ એનિમેશન માટેનો ક્લાસ?", optsEn: ["(A) MotionLayout", "(B) AnimationLayout", "(C) MotionView", "(D) DynamicLayout"], optsGu: ["(A) MotionLayout", "(B) AnimationLayout", "(C) MotionView", "(D) DynamicLayout"], ans: 0 },
+      { enQ: "Which Android layout arranges children in staggered grid?", guQ: "સ્ટેગર્ડ ગ્રીડમાં ચિલ્ડ્રન ગોઠવતો લેઆઉટ?", optsEn: ["(A) GridLayout", "(B) StaggeredGridLayoutManager", "(C) TableLayout", "(D) LinearLayout"], optsGu: ["(A) GridLayout", "(B) StaggeredGridLayoutManager", "(C) TableLayout", "(D) LinearLayout"], ans: 1 },
+      { enQ: "Which Android class is used for drawing bitmap images?", guQ: "બિટમેપ ચિત્રો દોરવા માટેનો ક્લાસ?", optsEn: ["(A) Bitmap", "(B) BitmapDrawable", "(C) Canvas.drawBitmap()", "(D) All of the above"], optsGu: ["(A) Bitmap", "(B) BitmapDrawable", "(C) Canvas.drawBitmap()", "(D) ઉપરના તમામ"], ans: 3 },
+      { enQ: "Which Android method handles long press gesture?", guQ: "લાંબા દબાવવાની હાવભાવ માટેની મેથડ?", optsEn: ["(A) onClick()", "(B) onLongClick()", "(C) onPress()", "(D) onHold()"], optsGu: ["(A) onClick()", "(B) onLongClick()", "(C) onPress()", "(D) onHold()"], ans: 1 },
+      { enQ: "Which Android component enables collapsing toolbar effect?", guQ: "કોલેપ્સિંગ ટૂલબાર ઇફેક્ટ આપતો ઘટક?", optsEn: ["(A) AppBarLayout", "(B) ToolbarLayout", "(C) CollapseLayout", "(D) TopBarView"], optsGu: ["(A) AppBarLayout", "(B) ToolbarLayout", "(C) CollapseLayout", "(D) TopBarView"], ans: 0 },
+      { enQ: "Which Android view provides material floating button?", guQ: "મટીરિયલ ફ્લોટિંગ બટન આપતો વ્યૂ?", optsEn: ["(A) FloatingButton", "(B) FAB", "(C) FloatingActionButton", "(D) ActionButton"], optsGu: ["(A) FloatingButton", "(B) FAB", "(C) FloatingActionButton", "(D) ActionButton"], ans: 2 },
+      { enQ: "Which Android class handles nested scrolling?", guQ: "નેસ્ટેડ સ્ક્રોલિંગ હેન્ડલ કરતો ક્લાસ?", optsEn: ["(A) NestedScrollView", "(B) ScrollLayout", "(C) DeepScrollView", "(D) MultiScrollView"], optsGu: ["(A) NestedScrollView", "(B) ScrollLayout", "(C) DeepScrollView", "(D) MultiScrollView"], ans: 0 },
+      { enQ: "Which Android class controls view elevation?", guQ: "વ્યૂની એલિવેશન નિયંત્રિત કરતો ક્લાસ/એટ્રિબ્યુટ?", optsEn: ["(A) Z-axis property", "(B) elevation attribute", "(C) depth property", "(D) layer attribute"], optsGu: ["(A) Z-axis property", "(B) elevation attribute", "(C) depth property", "(D) layer attribute"], ans: 1 },
+      { enQ: "Which Android component is used for bottom navigation UI?", guQ: "બોટમ નેવિગેશન UI માટેનો ઘટક?", optsEn: ["(A) BottomNavigationView", "(B) FooterMenu", "(C) NavigationFooter", "(D) MenuBarBottom"], optsGu: ["(A) BottomNavigationView", "(B) FooterMenu", "(C) NavigationFooter", "(D) MenuBarBottom"], ans: 0 },
+      { enQ: "Which Android attribute rotates view?", guQ: "View ને ફેરવતો એટ્રિબ્યુટ?", optsEn: ["(A) android:rotate", "(B) android:rotation", "(C) android:spin", "(D) android:angle"], optsGu: ["(A) android:rotate", "(B) android:rotation", "(C) android:spin", "(D) android:angle"], ans: 1 },
+      { enQ: "Which Android class handles shared element transitions?", guQ: "શેર્ડ એલિમેન્ટ ટ્રાન્ઝિશન માટેનો ક્લાસ?", optsEn: ["(A) TransitionManager", "(B) SharedTransition", "(C) AnimationBridge", "(D) LayoutAnimator"], optsGu: ["(A) TransitionManager", "(B) SharedTransition", "(C) AnimationBridge", "(D) LayoutAnimator"], ans: 0 },
+      { enQ: "Which Android class manages popup UI windows?", guQ: "પોપઅપ UI વિન્ડો મેનેજ કરતો ક્લાસ?", optsEn: ["(A) PopupWindow", "(B) DialogView", "(C) FloatingLayout", "(D) WindowPopup"], optsGu: ["(A) PopupWindow", "(B) DialogView", "(C) FloatingLayout", "(D) WindowPopup"], ans: 0 },
+      { enQ: "Which Android method invalidates view for redraw?", guQ: "રીડ્રો માટે view ને અમાન્ય બનાવતી મેથડ?", optsEn: ["(A) refresh()", "(B) redraw()", "(C) invalidate()", "(D) updateView()"], optsGu: ["(A) refresh()", "(B) redraw()", "(C) invalidate()", "(D) updateView()"], ans: 2 },
+      { enQ: "Which Android class is used for drawing paths?", guQ: "પાથ દોરવા માટેનો ક્લાસ?", optsEn: ["(A) Path", "(B) Route", "(C) ShapePath", "(D) DrawPath"], optsGu: ["(A) Path", "(B) Route", "(C) ShapePath", "(D) DrawPath"], ans: 0 },
+      { enQ: "Which Android component supports swipe-to-refresh?", guQ: "સ્વાઇપ-ટુ-રિફ્રેશ સપોર્ટ કરતો ઘટક?", optsEn: ["(A) RefreshLayout", "(B) SwipeRefreshLayout", "(C) PullLayout", "(D) ReloadView"], optsGu: ["(A) RefreshLayout", "(B) SwipeRefreshLayout", "(C) PullLayout", "(D) ReloadView"], ans: 1 },
+      { enQ: "Which Android attribute sets view visibility gone?", guQ: "view visibility 'gone' સેટ કરતો એટ્રિબ્યુટ?", optsEn: ["(A) invisible", "(B) hidden", "(C) gone", "(D) null"], optsGu: ["(A) invisible", "(B) hidden", "(C) gone", "(D) null"], ans: 2 },
+      { enQ: "Which Android class supports constraint-based animation?", guQ: "કોન્સ્ટ્રેન્ટ-આધારિત એનિમેશન માટેનો ક્લાસ?", optsEn: ["(A) ConstraintAnimator", "(B) MotionLayout", "(C) FrameAnimator", "(D) LayoutAnimator"], optsGu: ["(A) ConstraintAnimator", "(B) MotionLayout", "(C) FrameAnimator", "(D) LayoutAnimator"], ans: 1 },
+      { enQ: "Which Android class loads layout dynamically at runtime?", guQ: "રનટાઇમ પર લેઆઉટ ડાયનેમિક રીતે લોડ કરતો ક્લાસ?", optsEn: ["(A) LayoutInflater", "(B) ViewLoader", "(C) LayoutBuilder", "(D) UIInflater"], optsGu: ["(A) LayoutInflater", "(B) ViewLoader", "(C) LayoutBuilder", "(D) UIInflater"], ans: 0 },
+      { enQ: "Which Android class is used to display snackbar messages?", guQ: "સ્નેકબાર સંદેશા દર્શાવવા માટેનો ક્લાસ?", optsEn: ["(A) Toast", "(B) Snackbar", "(C) AlertBar", "(D) MessageBar"], optsGu: ["(A) Toast", "(B) Snackbar", "(C) AlertBar", "(D) MessageBar"], ans: 1 },
+      { enQ: "Which Android feature provides adaptive UI for different screen sizes?", guQ: "વિવિધ સ્ક્રીન સાઇઝ માટે અનુકૂલનશીલ UI આપતી સુવિધા?", optsEn: ["(A) Static layouts", "(B) Resource qualifiers", "(C) Hardcoded layouts", "(D) Fixed resolution UI"], optsGu: ["(A) Static layouts", "(B) Resource qualifiers", "(C) Hardcoded layouts", "(D) Fixed resolution UI"], ans: 1 },
+      { enQ: "Which Android class is used to display short popup messages?", guQ: "ટૂંકા પોપઅપ સંદેશા માટેનો ક્લાસ?", optsEn: ["(A) Snackbar", "(B) Toast", "(C) AlertDialog", "(D) PopupWindow"], optsGu: ["(A) Snackbar", "(B) Toast", "(C) AlertDialog", "(D) PopupWindow"], ans: 1 },
+      { enQ: "Which Android method is used to create a Toast message?", guQ: "Toast સંદેશો બનાવવા માટેની મેથડ?", optsEn: ["(A) Toast.show()", "(B) Toast.makeText()", "(C) Toast.display()", "(D) Toast.build()"], optsGu: ["(A) Toast.show()", "(B) Toast.makeText()", "(C) Toast.display()", "(D) Toast.build()"], ans: 1 },
+      { enQ: "Which Android method displays a Toast?", guQ: "Toast દર્શાવતી મેથડ?", optsEn: ["(A) show()", "(B) start()", "(C) display()", "(D) render()"], optsGu: ["(A) show()", "(B) start()", "(C) display()", "(D) render()"], ans: 0 },
+      { enQ: "Which Android constant defines short duration for Toast?", guQ: "Toast માટે ટૂંકા સમયગાળાનો અચળાંક?", optsEn: ["(A) LENGTH_SHORT", "(B) TIME_SHORT", "(C) SHORT_TIME", "(D) DURATION_SHORT"], optsGu: ["(A) LENGTH_SHORT", "(B) TIME_SHORT", "(C) SHORT_TIME", "(D) DURATION_SHORT"], ans: 0 },
+      { enQ: "Which Android constant defines long Toast duration?", guQ: "Toast માટે લાંબા સમયગાળાનો અચળાંક?", optsEn: ["(A) LENGTH_LONG", "(B) TIME_LONG", "(C) LONG_DURATION", "(D) SHOW_LONG"], optsGu: ["(A) LENGTH_LONG", "(B) TIME_LONG", "(C) LONG_DURATION", "(D) SHOW_LONG"], ans: 0 },
+      { enQ: "Which Android UI component is better alternative to Toast for action messages?", guQ: "એક્શન મેસેજ માટે Toast કરતાં વધુ સારો વિકલ્પ?", optsEn: ["(A) Snackbar", "(B) Dialog", "(C) PopupWindow", "(D) Tooltip"], optsGu: ["(A) Snackbar", "(B) Dialog", "(C) PopupWindow", "(D) Tooltip"], ans: 0 }
+      ,
+      { enQ: "Which Android class represents menu item?", guQ: "મેનૂ આઇટમ દર્શાવતો Android ક્લાસ?", optsEn: ["(A) MenuOption", "(B) MenuItem", "(C) MenuElement", "(D) MenuObject"], optsGu: ["(A) MenuOption", "(B) MenuItem", "(C) MenuElement", "(D) MenuObject"], ans: 1 },
+      { enQ: "Which Android menu is shown when user presses hardware menu button?", guQ: "હાર્ડવેર મેનૂ બટન દબાવવા પર કયો મેનૂ દેખાય છે?", optsEn: ["(A) Context Menu", "(B) Options Menu", "(C) Popup Menu", "(D) Floating Menu"], optsGu: ["(A) કોન્ટેક્સ્ટ મેનૂ", "(B) ઑપ્શન્સ મેનૂ", "(C) પોપઅપ મેનૂ", "(D) ફ્લોટિંગ મેનૂ"], ans: 1 },
+      { enQ: "Which Android method removes Toast before time ends?", guQ: "ટાઇમ પૂરો થતાં પહેલાં Toast દૂર કરતી મેથડ?", optsEn: ["(A) cancel()", "(B) remove()", "(C) hide()", "(D) stop()"], optsGu: ["(A) cancel()", "(B) remove()", "(C) hide()", "(D) stop()"], ans: 0 },
+      { enQ: "Which Android class is used for Action Bar menu items?", guQ: "એક્શન બાર મેનૂ આઇટમ માટે વપરાતો ક્લાસ?", optsEn: ["(A) ActionMenu", "(B) MenuItem", "(C) ToolbarMenu", "(D) MenuBarItem"], optsGu: ["(A) ActionMenu", "(B) MenuItem", "(C) ToolbarMenu", "(D) MenuBarItem"], ans: 1 },
+      { enQ: "Which Android XML tag defines menu item?", guQ: "મેનૂ આઇટમ વ્યાખ્યાયિત કરતો XML ટૅગ?", optsEn: ["(A) option tag", "(B) item tag", "(C) menuitem tag", "(D) choice tag"], optsGu: ["(A) option tag", "(B) item tag", "(C) menuitem tag", "(D) choice tag"], ans: 1 },
+      { enQ: "Which Android attribute hides menu item?", guQ: "મેનૂ આઇટમ છુપાવતો Android એટ્રિબ્યુટ?", optsEn: ["(A) visible=false", "(B) android:hidden", "(C) android:visible=\"false\"", "(D) android:show=\"false\""], optsGu: ["(A) visible=false", "(B) android:hidden", "(C) android:visible=\"false\"", "(D) android:show=\"false\""], ans: 2 },
+      { enQ: "Which Android method dynamically adds menu item?", guQ: "ડાયનેમિક રીતે મેનૂ આઇટમ ઉમેરતી મેથડ?", optsEn: ["(A) addItem()", "(B) menu.add()", "(C) insertMenu()", "(D) newItem()"], optsGu: ["(A) addItem()", "(B) menu.add()", "(C) insertMenu()", "(D) newItem()"], ans: 1 },
+      { enQ: "Which Android menu supports submenus?", guQ: "સબમેનૂ સપોર્ટ કરતો Android મેનૂ?", optsEn: ["(A) Options Menu", "(B) Context Menu", "(C) Popup Menu", "(D) All of the above"], optsGu: ["(A) ઑપ્શન્સ મેનૂ", "(B) કોન્ટેક્સ્ટ મેનૂ", "(C) પોપઅપ મેનૂ", "(D) ઉપરના તમામ"], ans: 3 },
+      { enQ: "Which Android UI element replaces ActionBar?", guQ: "ActionBar ને બદલે કયો UI ઘટક આવ્યો?", optsEn: ["(A) MenuBar", "(B) Toolbar", "(C) TopBar", "(D) HeaderBar"], optsGu: ["(A) MenuBar", "(B) Toolbar", "(C) TopBar", "(D) HeaderBar"], ans: 1 },
+      { enQ: "Which Android class handles toolbar menus?", guQ: "ટૂલબાર મેનૂ સંભાળતો Android ક્લાસ?", optsEn: ["(A) Toolbar", "(B) MenuHost", "(C) ActionBar", "(D) MenuManager"], optsGu: ["(A) Toolbar", "(B) MenuHost", "(C) ActionBar", "(D) MenuManager"], ans: 0 },
+      { enQ: "Which Android attribute shows menu item as action button?", guQ: "મેનૂ આઇટમને એક્શન બટન તરીકે બતાવતો એટ્રિબ્યુટ?", optsEn: ["(A) showAsButton", "(B) showAsAction", "(C) actionVisible", "(D) showButton"], optsGu: ["(A) showAsButton", "(B) showAsAction", "(C) actionVisible", "(D) showButton"], ans: 1 },
+      { enQ: "Which Android menu is best for contextual actions?", guQ: "સંદર્ભ ક્રિયાઓ માટે શ્રેષ્ઠ મેનૂ?", optsEn: ["(A) Options Menu", "(B) Context Menu", "(C) Toolbar Menu", "(D) Drawer Menu"], optsGu: ["(A) ઑપ્શન્સ મેનૂ", "(B) કોન્ટેક્સ્ટ મેનૂ", "(C) ટૂલબાર મેનૂ", "(D) ડ્રોઅર મેનૂ"], ans: 1 },
+      { enQ: "Which Android method prepares menu before display?", guQ: "પ્રદર્શન પહેલાં મેનૂ તૈયાર કરતી મેથડ?", optsEn: ["(A) onPrepareOptionsMenu()", "(B) onReadyMenu()", "(C) prepareMenu()", "(D) onMenuPrepare()"], optsGu: ["(A) onPrepareOptionsMenu()", "(B) onReadyMenu()", "(C) prepareMenu()", "(D) onMenuPrepare()"], ans: 0 },
+      { enQ: "Which Android method is used to show PopupMenu?", guQ: "PopupMenu બતાવવા માટેની મેથડ?", optsEn: ["(A) display()", "(B) show()", "(C) start()", "(D) render()"], optsGu: ["(A) display()", "(B) show()", "(C) start()", "(D) render()"], ans: 1 },
+      { enQ: "Which Android method dismisses PopupMenu?", guQ: "PopupMenu બંધ કરતી મેથડ?", optsEn: ["(A) dismiss()", "(B) cancel()", "(C) close()", "(D) hide()"], optsGu: ["(A) dismiss()", "(B) cancel()", "(C) close()", "(D) hide()"], ans: 0 },
+      { enQ: "Which Android component is lifecycle independent popup?", guQ: "જીવનચક્રથી સ્વતંત્ર પોપઅપ?", optsEn: ["(A) Toast", "(B) Snackbar", "(C) Dialog", "(D) AlertDialog"], optsGu: ["(A) Toast", "(B) Snackbar", "(C) Dialog", "(D) AlertDialog"], ans: 0 },
+      { enQ: "Which Android method is used to set Toast margin?", guQ: "Toast માર્જિન સેટ કરવા માટેની મેથડ?", optsEn: ["(A) setMargin()", "(B) setLayoutMargin()", "(C) setSpacing()", "(D) setPadding()"], optsGu: ["(A) setMargin()", "(B) setLayoutMargin()", "(C) setSpacing()", "(D) setPadding()"], ans: 0 },
+      { enQ: "Which Android class is used to inflate menus programmatically?", guQ: "પ્રોગ્રામેટિક રીતે મેનૂ ઇન્ફ્લેટ કરવા માટેનો ક્લાસ?", optsEn: ["(A) MenuInflater", "(B) LayoutInflater", "(C) XMLInflater", "(D) ResourceInflater"], optsGu: ["(A) MenuInflater", "(B) LayoutInflater", "(C) XMLInflater", "(D) ResourceInflater"], ans: 0 },
+      { enQ: "Which Android attribute sets menu shortcut key?", guQ: "મેનૂ શોર્ટકટ કી સેટ કરતો એટ્રિબ્યુટ?", optsEn: ["(A) android:key", "(B) android:shortcut", "(C) android:alphabeticShortcut", "(D) android:menuKey"], optsGu: ["(A) android:key", "(B) android:shortcut", "(C) android:alphabeticShortcut", "(D) android:menuKey"], ans: 2 },
+      { enQ: "Which Android component supports checkable menu items?", guQ: "ચેકેબલ મેનૂ આઇટમ સપોર્ટ કરતો ઘટક?", optsEn: ["(A) MenuItem", "(B) MenuOption", "(C) MenuCheck", "(D) MenuToggle"], optsGu: ["(A) MenuItem", "(B) MenuOption", "(C) MenuCheck", "(D) MenuToggle"], ans: 0 },
+      { enQ: "Which Android method shows context menu manually?", guQ: "કોન્ટેક્સ્ટ મેનૂ જાતે બતાવતી મેથડ?", optsEn: ["(A) openContextMenu()", "(B) showContext()", "(C) displayContextMenu()", "(D) showMenuContext()"], optsGu: ["(A) openContextMenu()", "(B) showContext()", "(C) displayContextMenu()", "(D) showMenuContext()"], ans: 0 },
+      { enQ: "Which Android menu appears near selected text?", guQ: "પસંદ કરેલ ટેક્સ્ટ નજીક દેખાતો મેનૂ?", optsEn: ["(A) Context Menu", "(B) Floating Contextual Menu", "(C) Options Menu", "(D) Popup Menu"], optsGu: ["(A) કોન્ટેક્સ્ટ મેનૂ", "(B) ફ્લોટિંગ કોન્ટેક્સ્ટ મેનૂ", "(C) ઑપ્શન્સ મેનૂ", "(D) પોપઅપ મેનૂ"], ans: 1 },
+      { enQ: "Which Android component is best for temporary feedback with action?", guQ: "એક્શન સાથે અસ્થાયી પ્રતિસાદ માટે શ્રેષ્ઠ ઘટક?", optsEn: ["(A) Toast", "(B) Snackbar", "(C) Dialog", "(D) Notification"], optsGu: ["(A) Toast", "(B) Snackbar", "(C) Dialog", "(D) Notification"], ans: 1 },
+      { enQ: "Which Android method updates existing options menu?", guQ: "હાલના ઑપ્શન્સ મેનૂ અપડેટ કરતી મેથડ?", optsEn: ["(A) refreshMenu()", "(B) invalidateOptionsMenu()", "(C) reloadMenu()", "(D) updateMenu()"], optsGu: ["(A) refreshMenu()", "(B) invalidateOptionsMenu()", "(C) reloadMenu()", "(D) updateMenu()"], ans: 1 },
+      { enQ: "Which Android menu is attached to a specific view?", guQ: "ચોક્કસ વ્યૂ સાથે જોડાયેલો મેનૂ?", optsEn: ["(A) Context Menu", "(B) Options Menu", "(C) Drawer Menu", "(D) Action Menu"], optsGu: ["(A) કોન્ટેક્સ્ટ મેનૂ", "(B) ઑપ્શન્સ મેનૂ", "(C) ડ્રોઅર મેનૂ", "(D) એક્શન મેનૂ"], ans: 0 },
+      { enQ: "Which Android method sets click listener for PopupMenu item?", guQ: "PopupMenu આઇટમ માટે ક્લિક લિસનર સેટ કરતી મેથડ?", optsEn: ["(A) setOnClickListener()", "(B) setOnMenuItemClickListener()", "(C) setItemListener()", "(D) setMenuClickListener()"], optsGu: ["(A) setOnClickListener()", "(B) setOnMenuItemClickListener()", "(C) setItemListener()", "(D) setMenuClickListener()"], ans: 1 },
+      { enQ: "Which Android menu is used for app-wide actions?", guQ: "એપ-વ્યાપી ક્રિયાઓ માટેનો મેનૂ?", optsEn: ["(A) Context Menu", "(B) Options Menu", "(C) Popup Menu", "(D) Floating Menu"], optsGu: ["(A) કોન્ટેક્સ્ટ મેનૂ", "(B) ઑપ્શન્સ મેનૂ", "(C) પોપઅપ મેનૂ", "(D) ફ્લોટિંગ મેનૂ"], ans: 1 },
+      { enQ: "Which Android method hides menu item dynamically?", guQ: "ડાયનેમિક રીતે મેનૂ આઇટમ છુપાવતી મેથડ?", optsEn: ["(A) setHidden(true)", "(B) setVisible(false)", "(C) hideItem()", "(D) removeVisible()"], optsGu: ["(A) setHidden(true)", "(B) setVisible(false)", "(C) hideItem()", "(D) removeVisible()"], ans: 1 },
+      { enQ: "Which Android class represents contextual action mode toolbar?", guQ: "કોન્ટેક્સ્ચ્યુઅલ એક્શન મોડ ટૂલબાર દર્શાવતો ક્લાસ?", optsEn: ["(A) ActionMode", "(B) ContextToolbar", "(C) ContextActionBar", "(D) MenuMode"], optsGu: ["(A) ActionMode", "(B) ContextToolbar", "(C) ContextActionBar", "(D) MenuMode"], ans: 0 },
+      { enQ: "Which Android class is used to create dialog boxes?", guQ: "ડાયલોગ બોક્સ બનાવવા માટેનો ક્લાસ?", optsEn: ["(A) DialogBox", "(B) Dialog", "(C) AlertDialog", "(D) Both b and c"], optsGu: ["(A) DialogBox", "(B) Dialog", "(C) AlertDialog", "(D) b અને c બંને"], ans: 3 },
+      { enQ: "Which Android dialog is commonly used for confirmation messages?", guQ: "પુષ્ટિ સંદેશા માટે સામાન્ય રીતે વપરાતો ડાયલોગ?", optsEn: ["(A) ProgressDialog", "(B) AlertDialog", "(C) Toast", "(D) PopupWindow"], optsGu: ["(A) ProgressDialog", "(B) AlertDialog", "(C) Toast", "(D) PopupWindow"], ans: 1 },
+      { enQ: "Which Android class is used to build AlertDialog?", guQ: "AlertDialog બનાવવા માટેનો ક્લાસ?", optsEn: ["(A) AlertDialog.Builder", "(B) DialogBuilder", "(C) AlertCreator", "(D) DialogFactory"], optsGu: ["(A) AlertDialog.Builder", "(B) DialogBuilder", "(C) AlertCreator", "(D) DialogFactory"], ans: 0 },
+      { enQ: "Which Android method displays dialog?", guQ: "ડાયલોગ દર્શાવતી મેથડ?", optsEn: ["(A) show()", "(B) start()", "(C) display()", "(D) open()"], optsGu: ["(A) show()", "(B) start()", "(C) display()", "(D) open()"], ans: 0 },
+      { enQ: "Which Android method closes dialog?", guQ: "ડાયલોગ બંધ કરતી મેથડ?", optsEn: ["(A) close()", "(B) cancel()", "(C) dismiss()", "(D) Both b and c"], optsGu: ["(A) close()", "(B) cancel()", "(C) dismiss()", "(D) b અને c બંને"], ans: 3 },
+      { enQ: "Which Android dialog shows loading spinner?", guQ: "લોડિંગ સ્પિનર બતાવતો ડાયલોગ?", optsEn: ["(A) AlertDialog", "(B) ProgressDialog", "(C) InputDialog", "(D) ToastDialog"], optsGu: ["(A) AlertDialog", "(B) ProgressDialog", "(C) InputDialog", "(D) ToastDialog"], ans: 1 },
+      { enQ: "Which Android component displays scrollable list of items?", guQ: "સ્ક્રોલેબલ યાદી દર્શાવતો ઘટક?", optsEn: ["(A) ListView", "(B) TextView", "(C) ButtonView", "(D) LayoutView"], optsGu: ["(A) ListView", "(B) TextView", "(C) ButtonView", "(D) LayoutView"], ans: 0 },
+      { enQ: "Which Android component is modern replacement for ListView?", guQ: "ListView નો આધુનિક વિકલ્પ?", optsEn: ["(A) GridView", "(B) RecyclerView", "(C) ScrollView", "(D) TableLayout"], optsGu: ["(A) GridView", "(B) RecyclerView", "(C) ScrollView", "(D) TableLayout"], ans: 1 },
+      { enQ: "Which Android interface handles list item click?", guQ: "યાદી આઇટમ ક્લિક સંભાળતો ઇન્ટરફેસ?", optsEn: ["(A) OnItemClickListener", "(B) OnListClickListener", "(C) OnViewClickListener", "(D) OnItemTouchHandler"], optsGu: ["(A) OnItemClickListener", "(B) OnListClickListener", "(C) OnViewClickListener", "(D) OnItemTouchHandler"], ans: 0 },
+      { enQ: "Which Android class connects data to ListView?", guQ: "ListView સાથે ડેટા જોડતો ક્લાસ?", optsEn: ["(A) Connector", "(B) Adapter", "(C) Provider", "(D) Manager"], optsGu: ["(A) Connector", "(B) Adapter", "(C) Provider", "(D) Manager"], ans: 1 },
+      { enQ: "Which Android adapter is used for array data?", guQ: "એરે ડેટા માટે વપરાતો Adapter?", optsEn: ["(A) CursorAdapter", "(B) BaseAdapter", "(C) ArrayAdapter", "(D) SimpleAdapter"], optsGu: ["(A) CursorAdapter", "(B) BaseAdapter", "(C) ArrayAdapter", "(D) SimpleAdapter"], ans: 2 },
+      { enQ: "Which Android adapter is used for database cursor?", guQ: "ડેટાબેઝ કર્સર માટે વપરાતો Adapter?", optsEn: ["(A) CursorAdapter", "(B) DBAdapter", "(C) SQLAdapter", "(D) DataAdapter"], optsGu: ["(A) CursorAdapter", "(B) DBAdapter", "(C) SQLAdapter", "(D) DataAdapter"], ans: 0 },
+      { enQ: "Which Android adapter is base class for custom adapter?", guQ: "કસ્ટમ Adapter માટે આધાર વર્ગ?", optsEn: ["(A) AbstractAdapter", "(B) RootAdapter", "(C) BaseAdapter", "(D) CoreAdapter"], optsGu: ["(A) AbstractAdapter", "(B) RootAdapter", "(C) BaseAdapter", "(D) CoreAdapter"], ans: 2 },
+      { enQ: "Which Android method sets adapter to ListView?", guQ: "ListView પર Adapter સેટ કરતી મેથડ?", optsEn: ["(A) attachAdapter()", "(B) setAdapter()", "(C) bindAdapter()", "(D) assignAdapter()"], optsGu: ["(A) attachAdapter()", "(B) setAdapter()", "(C) bindAdapter()", "(D) assignAdapter()"], ans: 1 },
+      { enQ: "Which Android dialog allows user input text?", guQ: "યુઝર ટેક્સ્ટ ઇનપુટ આપી શકે તેવો ડાયલોગ?", optsEn: ["(A) AlertDialog with EditText", "(B) Toast", "(C) PopupWindow", "(D) Snackbar"], optsGu: ["(A) EditText સાથે AlertDialog", "(B) Toast", "(C) PopupWindow", "(D) Snackbar"], ans: 0 },
+      { enQ: "Which Android class shows list inside dialog?", guQ: "ડાયલોગની અંદર યાદી બતાવતો ક્લાસ?", optsEn: ["(A) ListDialog", "(B) AlertDialog.Builder.setItems()", "(C) DialogList", "(D) PopupList"], optsGu: ["(A) ListDialog", "(B) AlertDialog.Builder.setItems()", "(C) DialogList", "(D) PopupList"], ans: 1 },
+      { enQ: "Which Android method handles dialog button click?", guQ: "ડાયલોગ બટન ક્લિક સંભાળતી મેથડ?", optsEn: ["(A) onClickListener", "(B) setButtonListener", "(C) setOnClickListener", "(D) setPositiveButton() listener"], optsGu: ["(A) onClickListener", "(B) setButtonListener", "(C) setOnClickListener", "(D) setPositiveButton() listener"], ans: 3 },
+      { enQ: "Which Android component shows grid of items?", guQ: "ગ્રીડ યાદી દર્શાવતો ઘટક?", optsEn: ["(A) GridView", "(B) TableView", "(C) MatrixView", "(D) ListGrid"], optsGu: ["(A) GridView", "(B) TableView", "(C) MatrixView", "(D) ListGrid"], ans: 0 },
+      { enQ: "Which Android adapter is flexible for mapping data?", guQ: "ડેટા મેપિંગ માટે લવચીક Adapter?", optsEn: ["(A) SimpleAdapter", "(B) StaticAdapter", "(C) FixedAdapter", "(D) ViewAdapter"], optsGu: ["(A) SimpleAdapter", "(B) StaticAdapter", "(C) FixedAdapter", "(D) ViewAdapter"], ans: 0 },
+      { enQ: "Which Android method creates custom adapter view?", guQ: "કસ્ટમ Adapter વ્યૂ બનાવતી મેથડ?", optsEn: ["(A) getView()", "(B) createView()", "(C) buildItem()", "(D) setItem()"], optsGu: ["(A) getView()", "(B) createView()", "(C) buildItem()", "(D) setItem()"], ans: 0 },
+      { enQ: "Which Android dialog blocks user interaction with background?", guQ: "પૃષ્ઠભૂમિ સાથે યુઝર ઇન્ટરેક્શન અવરોધતો ડાયલોગ?", optsEn: ["(A) Modal dialog", "(B) Non-modal dialog", "(C) AlertDialog", "(D) ConfirmDialog"], optsGu: ["(A) મોડલ ડાયલોગ", "(B) નોન-મોડલ ડાયલોગ", "(C) AlertDialog", "(D) ConfirmDialog"], ans: 0 },
+      { enQ: "Which Android dialog does not block interaction?", guQ: "ઇન્ટરેક્શન અવરોધતો નથી તેવો ડાયલોગ?", optsEn: ["(A) Modal dialog", "(B) Non-modal dialog", "(C) AlertDialog", "(D) ConfirmDialog"], optsGu: ["(A) મોડલ ડાયલોગ", "(B) નોન-મોડલ ડાયલોગ", "(C) AlertDialog", "(D) ConfirmDialog"], ans: 1 },
+      { enQ: "Which Android method updates list data dynamically?", guQ: "ડાયનેમિક રીતે યાદી ડેટા અપડેટ કરતી મેથડ?", optsEn: ["(A) notifyDataSetChanged()", "(B) refreshList()", "(C) reloadData()", "(D) updateList()"], optsGu: ["(A) notifyDataSetChanged()", "(B) refreshList()", "(C) reloadData()", "(D) updateList()"], ans: 0 },
+      { enQ: "Which Android adapter is used for RecyclerView?", guQ: "RecyclerView માટે વપરાતો Adapter?", optsEn: ["(A) RecyclerViewAdapter", "(B) RecyclerView.Adapter", "(C) ViewAdapter", "(D) ListAdapter"], optsGu: ["(A) RecyclerViewAdapter", "(B) RecyclerView.Adapter", "(C) ViewAdapter", "(D) ListAdapter"], ans: 1 },
+      { enQ: "Which Android class manages layout for RecyclerView?", guQ: "RecyclerView માટે લેઆઉટ મેનેજ કરતો ક્લાસ?", optsEn: ["(A) LayoutManager", "(B) RecyclerManager", "(C) ViewManager", "(D) ListManager"], optsGu: ["(A) LayoutManager", "(B) RecyclerManager", "(C) ViewManager", "(D) ListManager"], ans: 0 },
+      { enQ: "Which Android LayoutManager arranges items vertically?", guQ: "ઊભી રીતે આઇટમ ગોઠવતો LayoutManager?", optsEn: ["(A) GridLayoutManager", "(B) LinearLayoutManager", "(C) FrameLayoutManager", "(D) TableLayoutManager"], optsGu: ["(A) GridLayoutManager", "(B) LinearLayoutManager", "(C) FrameLayoutManager", "(D) TableLayoutManager"], ans: 1 },
+      { enQ: "Which Android LayoutManager displays grid items?", guQ: "ગ્રીડ આઇટમ દર્શાવતો LayoutManager?", optsEn: ["(A) LinearLayoutManager", "(B) GridLayoutManager", "(C) TableLayoutManager", "(D) FrameLayoutManager"], optsGu: ["(A) LinearLayoutManager", "(B) GridLayoutManager", "(C) TableLayoutManager", "(D) FrameLayoutManager"], ans: 1 },
+      { enQ: "Which Android class handles view recycling?", guQ: "વ્યૂ રિસાયક્લિંગ કરતો ક્લાસ?", optsEn: ["(A) ViewHolder", "(B) ViewCache", "(C) ViewPool", "(D) ViewManager"], optsGu: ["(A) ViewHolder", "(B) ViewCache", "(C) ViewPool", "(D) ViewManager"], ans: 0 },
+      { enQ: "Which Android dialog method sets message text?", guQ: "ડાયલોગમાં સંદેશ ટેક્સ્ટ સેટ કરતી મેથડ?", optsEn: ["(A) setMessage()", "(B) setText()", "(C) setDialogText()", "(D) setContent()"], optsGu: ["(A) setMessage()", "(B) setText()", "(C) setDialogText()", "(D) setContent()"], ans: 0 },
+      { enQ: "Which Android method sets dialog title?", guQ: "ડાયલોગ ટાઇટલ સેટ કરતી મેથડ?", optsEn: ["(A) setTitle()", "(B) setHeader()", "(C) setName()", "(D) setDialogTitle()"], optsGu: ["(A) setTitle()", "(B) setHeader()", "(C) setName()", "(D) setDialogTitle()"], ans: 0 },
+      { enQ: "Which Android adapter method returns item count?", guQ: "આઇટમ ગણતરી પરત કરતી Adapter મેથડ?", optsEn: ["(A) getSize()", "(B) count()", "(C) getCount()", "(D) sizeOf()"], optsGu: ["(A) getSize()", "(B) count()", "(C) getCount()", "(D) sizeOf()"], ans: 2 },
+      { enQ: "Which Android adapter method returns item at position?", guQ: "સ્થાન પર આઇટમ પરત કરતી Adapter મેથડ?", optsEn: ["(A) getItem()", "(B) itemAt()", "(C) fetchItem()", "(D) retrieveItem()"], optsGu: ["(A) getItem()", "(B) itemAt()", "(C) fetchItem()", "(D) retrieveItem()"], ans: 0 },
+      { enQ: "Which Android dialog method sets positive button?", guQ: "પોઝિટિવ બટન સેટ કરતી મેથડ?", optsEn: ["(A) addPositive()", "(B) setPositiveButton()", "(C) setYesButton()", "(D) setConfirmButton()"], optsGu: ["(A) addPositive()", "(B) setPositiveButton()", "(C) setYesButton()", "(D) setConfirmButton()"], ans: 1 },
+      { enQ: "Which Android dialog method sets negative button?", guQ: "નેગેટિવ બટન સેટ કરતી મેથડ?", optsEn: ["(A) setNegativeButton()", "(B) setCancelButton()", "(C) setNoButton()", "(D) setDismissButton()"], optsGu: ["(A) setNegativeButton()", "(B) setCancelButton()", "(C) setNoButton()", "(D) setDismissButton()"], ans: 0 },
+      { enQ: "Which Android component shows selectable list in dialog?", guQ: "ડાયલોગમાં પસંદ કરી શકાય તેવી યાદી બતાવતો ઘટક?", optsEn: ["(A) setItems()", "(B) setList()", "(C) setChoices()", "(D) setOptions()"], optsGu: ["(A) setItems()", "(B) setList()", "(C) setChoices()", "(D) setOptions()"], ans: 0 },
+      { enQ: "Which Android class handles single-choice dialog list?", guQ: "સિંગલ-ચોઇસ ડાયલોગ યાદી માટેનો ક્લાસ?", optsEn: ["(A) setSingleChoiceItems()", "(B) setChoiceList()", "(C) setRadioItems()", "(D) setSingleList()"], optsGu: ["(A) setSingleChoiceItems()", "(B) setChoiceList()", "(C) setRadioItems()", "(D) setSingleList()"], ans: 0 },
+      { enQ: "Which Android class handles multi-choice dialog list?", guQ: "મલ્ટી-ચોઇસ ડાયલોગ યાદી માટેનો ક્લાસ?", optsEn: ["(A) setMultiChoiceItems()", "(B) setMultiList()", "(C) setCheckItems()", "(D) setChoices()"], optsGu: ["(A) setMultiChoiceItems()", "(B) setMultiList()", "(C) setCheckItems()", "(D) setChoices()"], ans: 0 },
+      { enQ: "Which Android class is used to display dropdown list?", guQ: "ડ્રોપડાઉન યાદી દર્શાવવા માટેનો ક્લાસ?", optsEn: ["(A) Spinner", "(B) DropdownView", "(C) ComboBox", "(D) ListSelect"], optsGu: ["(A) Spinner", "(B) DropdownView", "(C) ComboBox", "(D) ListSelect"], ans: 0 },
+      { enQ: "Which Android adapter is commonly used with Spinner?", guQ: "Spinner સાથે સામાન્ય રીતે વપરાતો Adapter?", optsEn: ["(A) ArrayAdapter", "(B) CursorAdapter", "(C) BaseAdapter", "(D) SimpleAdapter"], optsGu: ["(A) ArrayAdapter", "(B) CursorAdapter", "(C) BaseAdapter", "(D) SimpleAdapter"], ans: 0 },
+      { enQ: "Which Android listener handles Spinner selection?", guQ: "Spinner પસંદગી સંભાળતો લિસનર?", optsEn: ["(A) OnSelectListener", "(B) OnItemSelectedListener", "(C) OnChoiceListener", "(D) OnSpinnerListener"], optsGu: ["(A) OnSelectListener", "(B) OnItemSelectedListener", "(C) OnChoiceListener", "(D) OnSpinnerListener"], ans: 1 },
+      { enQ: "Which Android dialog type is used for date selection?", guQ: "તારીખ પસંદગી માટેનો ડાયલોગ?", optsEn: ["(A) CalendarDialog", "(B) DatePickerDialog", "(C) TimeDialog", "(D) PickerDialog"], optsGu: ["(A) CalendarDialog", "(B) DatePickerDialog", "(C) TimeDialog", "(D) PickerDialog"], ans: 1 },
+      { enQ: "Which Android dialog type is used for time selection?", guQ: "સમય પસંદગી માટેનો ડાયલોગ?", optsEn: ["(A) ClockDialog", "(B) TimePickerDialog", "(C) TimerDialog", "(D) TimeSelectDialog"], optsGu: ["(A) ClockDialog", "(B) TimePickerDialog", "(C) TimerDialog", "(D) TimeSelectDialog"], ans: 1 },
+      { enQ: "Which Android method inflates custom dialog layout?", guQ: "કસ્ટમ ડાયલોગ લેઆઉટ ઇન્ફ્લેટ કરતી મેથડ?", optsEn: ["(A) LayoutInflater.inflate()", "(B) Dialog.inflate()", "(C) loadLayout()", "(D) buildLayout()"], optsGu: ["(A) LayoutInflater.inflate()", "(B) Dialog.inflate()", "(C) loadLayout()", "(D) buildLayout()"], ans: 0 },
+      { enQ: "Which Android adapter is best for complex custom row layout?", guQ: "જટિલ કસ્ટમ પંક્તિ લેઆઉટ માટે શ્રેષ્ઠ Adapter?", optsEn: ["(A) ArrayAdapter", "(B) BaseAdapter", "(C) CursorAdapter", "(D) SimpleAdapter"], optsGu: ["(A) ArrayAdapter", "(B) BaseAdapter", "(C) CursorAdapter", "(D) SimpleAdapter"], ans: 1 },
+      { enQ: "Which Android component displays list horizontally?", guQ: "આડી યાદી દર્શાવતો ઘટક?", optsEn: ["(A) HorizontalListView", "(B) RecyclerView with horizontal LayoutManager", "(C) ListView horizontal", "(D) ScrollList"], optsGu: ["(A) HorizontalListView", "(B) RecyclerView horizontal LayoutManager સાથે", "(C) ListView horizontal", "(D) ScrollList"], ans: 1 },
+      { enQ: "Which Android method removes item from adapter?", guQ: "Adapter માંથી આઇટમ દૂર કરતી મેથડ?", optsEn: ["(A) remove()", "(B) delete()", "(C) erase()", "(D) clearItem()"], optsGu: ["(A) remove()", "(B) delete()", "(C) erase()", "(D) clearItem()"], ans: 0 },
+      { enQ: "Which Android adapter method returns item ID?", guQ: "આઇટમ ID પરત કરતી Adapter મેથડ?", optsEn: ["(A) getId()", "(B) getItemId()", "(C) itemId()", "(D) fetchId()"], optsGu: ["(A) getId()", "(B) getItemId()", "(C) itemId()", "(D) fetchId()"], ans: 1 },
+      { enQ: "Which Android dialog method prevents closing on outside touch?", guQ: "બહાર સ્પર્શ કરતાં બંધ થતું અટકાવતી મેથડ?", optsEn: ["(A) setCancelable(false)", "(B) setLock(true)", "(C) setFixed(true)", "(D) setModal(true)"], optsGu: ["(A) setCancelable(false)", "(B) setLock(true)", "(C) setFixed(true)", "(D) setModal(true)"], ans: 0 },
+      { enQ: "Which Android component shows expandable list?", guQ: "વિસ્તરી શકાય તેવી યાદી દર્શાવતો ઘટક?", optsEn: ["(A) ExpandableListView", "(B) TreeListView", "(C) ExpandList", "(D) NestedListView"], optsGu: ["(A) ExpandableListView", "(B) TreeListView", "(C) ExpandList", "(D) NestedListView"], ans: 0 },
+      { enQ: "Which Android architecture concept separates data and UI in lists?", guQ: "યાદીમાં ડેટા અને UI અલગ કરતો આર્કિટેક્ચર સંકલ્પ?", optsEn: ["(A) MVC pattern", "(B) Adapter pattern", "(C) Singleton pattern", "(D) Builder pattern"], optsGu: ["(A) MVC પેટર્ન", "(B) Adapter પેટર્ન", "(C) Singleton પેટર્ન", "(D) Builder પેટર્ન"], ans: 1 },
+      { enQ: "Which database is built into Android OS?", guQ: "Android OS માં બિલ્ટ-ઇન ડેટાબેઝ?", optsEn: ["(A) MySQL", "(B) Oracle", "(C) SQLite", "(D) PostgreSQL"], optsGu: ["(A) MySQL", "(B) Oracle", "(C) SQLite", "(D) PostgreSQL"], ans: 2 },
+      { enQ: "Which Android class is used to manage SQLite database?", guQ: "SQLite ડેટાબેઝ મેનેજ કરવા માટેનો ક્લાસ?", optsEn: ["(A) SQLiteHelper", "(B) SQLiteOpenHelper", "(C) DBHelper", "(D) SQLManager"], optsGu: ["(A) SQLiteHelper", "(B) SQLiteOpenHelper", "(C) DBHelper", "(D) SQLManager"], ans: 1 },
+      { enQ: "Which Android method is called when database is created first time?", guQ: "પ્રથમ વખત ડેટાબેઝ બને ત્યારે કઈ મેથડ કૉલ થાય?", optsEn: ["(A) onStart()", "(B) onCreate()", "(C) onInit()", "(D) onOpen()"], optsGu: ["(A) onStart()", "(B) onCreate()", "(C) onInit()", "(D) onOpen()"], ans: 1 },
+      { enQ: "Which Android method is called when database version changes?", guQ: "ડેટાબેઝ વર્ઝન બદલાય ત્યારે કઈ મેથડ કૉલ થાય?", optsEn: ["(A) onChange()", "(B) onUpgrade()", "(C) onUpdate()", "(D) onModify()"], optsGu: ["(A) onChange()", "(B) onUpgrade()", "(C) onUpdate()", "(D) onModify()"], ans: 1 },
+      { enQ: "Which Android class represents database connection?", guQ: "ડેટાબેઝ કનેક્શન દર્શાવતો ક્લાસ?", optsEn: ["(A) SQLiteDatabase", "(B) SQLConnection", "(C) DBConnection", "(D) DatabaseConnector"], optsGu: ["(A) SQLiteDatabase", "(B) SQLConnection", "(C) DBConnection", "(D) DatabaseConnector"], ans: 0 },
+      { enQ: "Which Android method executes SQL query?", guQ: "SQL ક્વેરી એક્ઝિક્યુટ કરતી મેથડ?", optsEn: ["(A) executeQuery()", "(B) execSQL()", "(C) runSQL()", "(D) queryRun()"], optsGu: ["(A) executeQuery()", "(B) execSQL()", "(C) runSQL()", "(D) queryRun()"], ans: 1 },
+      { enQ: "Which Android class stores query result?", guQ: "ક્વેરી પરિણામ સંગ્રહતો ક્લાસ?", optsEn: ["(A) ResultSet", "(B) Cursor", "(C) DataSet", "(D) QueryResult"], optsGu: ["(A) ResultSet", "(B) Cursor", "(C) DataSet", "(D) QueryResult"], ans: 1 },
+      { enQ: "Which Android method inserts data using ContentValues?", guQ: "ContentValues વડે ડેટા ઇન્સર્ટ કરતી મેથડ?", optsEn: ["(A) add()", "(B) insert()", "(C) put()", "(D) append()"], optsGu: ["(A) add()", "(B) insert()", "(C) put()", "(D) append()"], ans: 1 },
+      { enQ: "Which Android class is used to store column values?", guQ: "કૉલમ વેલ્યુ સંગ્રહવા માટેનો ક્લાસ?", optsEn: ["(A) DataValues", "(B) ContentValues", "(C) ColumnValues", "(D) TableValues"], optsGu: ["(A) DataValues", "(B) ContentValues", "(C) ColumnValues", "(D) TableValues"], ans: 1 },
+      { enQ: "Which Android method retrieves readable database?", guQ: "રીડેબલ ડેટાબેઝ મેળવતી મેથડ?", optsEn: ["(A) getReadableDatabase()", "(B) openReadDB()", "(C) readDatabase()", "(D) fetchDB()"], optsGu: ["(A) getReadableDatabase()", "(B) openReadDB()", "(C) readDatabase()", "(D) fetchDB()"], ans: 0 },
+      { enQ: "Which Android method retrieves writable database?", guQ: "રાઇટેબલ ડેટાબેઝ મેળવતી મેથડ?", optsEn: ["(A) openWriteDB()", "(B) getWritableDatabase()", "(C) writeDatabase()", "(D) fetchWriteDB()"], optsGu: ["(A) openWriteDB()", "(B) getWritableDatabase()", "(C) writeDatabase()", "(D) fetchWriteDB()"], ans: 1 },
+      { enQ: "Which Android method deletes records?", guQ: "રેકોર્ડ્સ ડિલીટ કરતી મેથડ?", optsEn: ["(A) remove()", "(B) delete()", "(C) erase()", "(D) drop()"], optsGu: ["(A) remove()", "(B) delete()", "(C) erase()", "(D) drop()"], ans: 1 },
+      { enQ: "Which Android method updates records?", guQ: "રેકોર્ડ્સ અપડેટ કરતી મેથડ?", optsEn: ["(A) modify()", "(B) change()", "(C) update()", "(D) set()"], optsGu: ["(A) modify()", "(B) change()", "(C) update()", "(D) set()"], ans: 2 },
+      { enQ: "Which Android class manages database transactions?", guQ: "ડેટાબેઝ ટ્રાન્ઝેક્શન્સ મેનેજ કરતો ક્લાસ?", optsEn: ["(A) SQLiteDatabase", "(B) DBTransaction", "(C) SQLManager", "(D) DBEngine"], optsGu: ["(A) SQLiteDatabase", "(B) DBTransaction", "(C) SQLManager", "(D) DBEngine"], ans: 0 },
+      { enQ: "Which Android method begins transaction?", guQ: "ટ્રાન્ઝેક્શન શરૂ કરતી મેથડ?", optsEn: ["(A) beginTransaction()", "(B) startTransaction()", "(C) initTransaction()", "(D) openTransaction()"], optsGu: ["(A) beginTransaction()", "(B) startTransaction()", "(C) initTransaction()", "(D) openTransaction()"], ans: 0 },
+      { enQ: "Which Android method commits transaction?", guQ: "ટ્રાન્ઝેક્શન કમિટ કરતી મેથડ?", optsEn: ["(A) commit()", "(B) setTransactionSuccessful()", "(C) saveTransaction()", "(D) applyTransaction()"], optsGu: ["(A) commit()", "(B) setTransactionSuccessful()", "(C) saveTransaction()", "(D) applyTransaction()"], ans: 1 },
+      { enQ: "Which Android method ends transaction?", guQ: "ટ્રાન્ઝેક્શન સમાપ્ત કરતી મેથડ?", optsEn: ["(A) stopTransaction()", "(B) endTransaction()", "(C) closeTransaction()", "(D) finishTransaction()"], optsGu: ["(A) stopTransaction()", "(B) endTransaction()", "(C) closeTransaction()", "(D) finishTransaction()"], ans: 1 },
+      { enQ: "Which Android method closes database?", guQ: "ડેટાબેઝ બંધ કરતી મેથડ?", optsEn: ["(A) close()", "(B) stop()", "(C) release()", "(D) finish()"], optsGu: ["(A) close()", "(B) stop()", "(C) release()", "(D) finish()"], ans: 0 },
+      { enQ: "Which Android query method returns Cursor?", guQ: "Cursor પરત કરતી ક્વેરી મેથડ?", optsEn: ["(A) query()", "(B) select()", "(C) fetch()", "(D) retrieve()"], optsGu: ["(A) query()", "(B) select()", "(C) fetch()", "(D) retrieve()"], ans: 0 },
+      { enQ: "Which Android SQL statement creates table?", guQ: "ટેબલ બનાવતો SQL સ્ટેટમેન્ટ?", optsEn: ["(A) BUILD TABLE", "(B) MAKE TABLE", "(C) CREATE TABLE", "(D) FORM TABLE"], optsGu: ["(A) BUILD TABLE", "(B) MAKE TABLE", "(C) CREATE TABLE", "(D) FORM TABLE"], ans: 2 },
+      { enQ: "Which Android SQL statement removes table?", guQ: "ટેબલ દૂર કરતો SQL સ્ટેટમેન્ટ?", optsEn: ["(A) REMOVE TABLE", "(B) DROP TABLE", "(C) DELETE TABLE", "(D) ERASE TABLE"], optsGu: ["(A) REMOVE TABLE", "(B) DROP TABLE", "(C) DELETE TABLE", "(D) ERASE TABLE"], ans: 1 },
+      { enQ: "Which Android class provides abstraction for data sharing?", guQ: "ડેટા શેરિંગ માટે એબ્સ્ટ્રેક્શન પૂરું પાડતો ક્લાસ?", optsEn: ["(A) ContentProvider", "(B) DataProvider", "(C) StorageProvider", "(D) SQLProvider"], optsGu: ["(A) ContentProvider", "(B) DataProvider", "(C) StorageProvider", "(D) SQLProvider"], ans: 0 },
+      { enQ: "Which Android URI identifies ContentProvider data?", guQ: "ContentProvider ડેટા ઓળખાવતો URI?", optsEn: ["(A) Content URI", "(B) Data URI", "(C) Provider URI", "(D) SQL URI"], optsGu: ["(A) Content URI", "(B) Data URI", "(C) Provider URI", "(D) SQL URI"], ans: 0 },
+      { enQ: "Which Android method moves cursor to first row?", guQ: "કર્સરને પ્રથમ પંક્તિ પર ખસેડતી મેથડ?", optsEn: ["(A) first()", "(B) moveFirst()", "(C) moveToFirst()", "(D) goFirst()"], optsGu: ["(A) first()", "(B) moveFirst()", "(C) moveToFirst()", "(D) goFirst()"], ans: 2 },
+      { enQ: "Which Android method checks if cursor has data?", guQ: "કર્સરમાં ડેટા છે કે કેમ તપાસતી મેથડ?", optsEn: ["(A) hasData()", "(B) getCount()", "(C) checkRows()", "(D) hasRows()"], optsGu: ["(A) hasData()", "(B) getCount()", "(C) checkRows()", "(D) hasRows()"], ans: 1 },
+      { enQ: "Which Android method retrieves column index?", guQ: "કૉલમ ઇન્ડેક્સ મેળવતી મેથડ?", optsEn: ["(A) getColumnIndex()", "(B) columnIndex()", "(C) findColumn()", "(D) indexColumn()"], optsGu: ["(A) getColumnIndex()", "(B) columnIndex()", "(C) findColumn()", "(D) indexColumn()"], ans: 0 },
+      { enQ: "Which Android method retrieves string from cursor?", guQ: "કર્સરમાંથી સ્ટ્રિંગ મેળવતી મેથડ?", optsEn: ["(A) getString()", "(B) readString()", "(C) fetchString()", "(D) selectString()"], optsGu: ["(A) getString()", "(B) readString()", "(C) fetchString()", "(D) selectString()"], ans: 0 },
+      { enQ: "Which Android method moves cursor to next row?", guQ: "કર્સરને આગલી પંક્તિ પર ખસેડતી મેથડ?", optsEn: ["(A) next()", "(B) moveNext()", "(C) moveToNext()", "(D) gotoNext()"], optsGu: ["(A) next()", "(B) moveNext()", "(C) moveToNext()", "(D) gotoNext()"], ans: 2 },
+      { enQ: "Which Android database is serverless?", guQ: "સર્વરલેસ ડેટાબેઝ?", optsEn: ["(A) MySQL", "(B) Oracle", "(C) SQLite", "(D) MongoDB"], optsGu: ["(A) MySQL", "(B) Oracle", "(C) SQLite", "(D) MongoDB"], ans: 2 },
+      { enQ: "Which Android storage is best for structured relational data?", guQ: "સંરચિત રિલેશનલ ડેટા માટે શ્રેષ્ઠ સ્ટોરેજ?", optsEn: ["(A) SharedPreferences", "(B) SQLite", "(C) File Storage", "(D) Cache"], optsGu: ["(A) SharedPreferences", "(B) SQLite", "(C) ફાઇલ સ્ટોરેજ", "(D) કૅશ"], ans: 1 },
+      { enQ: "Which Android class handles database version management?", guQ: "ડેટાબેઝ વર્ઝન મેનેજમેન્ટ કરતો ક્લાસ?", optsEn: ["(A) SQLiteDatabase", "(B) SQLiteOpenHelper", "(C) DBManager", "(D) SQLController"], optsGu: ["(A) SQLiteDatabase", "(B) SQLiteOpenHelper", "(C) DBManager", "(D) SQLController"], ans: 1 },
+      { enQ: "Which Android method inserts column value in ContentValues?", guQ: "ContentValues માં કૉલમ વેલ્યુ ઇન્સર્ટ કરતી મેથડ?", optsEn: ["(A) add()", "(B) insert()", "(C) put()", "(D) append()"], optsGu: ["(A) add()", "(B) insert()", "(C) put()", "(D) append()"], ans: 2 },
+      { enQ: "Which Android method executes SELECT query?", guQ: "SELECT ક્વેરી એક્ઝિક્યુટ કરતી મેથડ?", optsEn: ["(A) rawQuery()", "(B) selectQuery()", "(C) getQuery()", "(D) readQuery()"], optsGu: ["(A) rawQuery()", "(B) selectQuery()", "(C) getQuery()", "(D) readQuery()"], ans: 0 },
+      { enQ: "Which Android annotation library simplifies SQLite operations?", guQ: "SQLite કામગીરી સરળ બનાવતી Android એનોટેશન લાઇબ્રેરી?", optsEn: ["(A) Retrofit", "(B) Room", "(C) Glide", "(D) Dagger"], optsGu: ["(A) Retrofit", "(B) Room", "(C) Glide", "(D) Dagger"], ans: 1 },
+      { enQ: "Which Android architecture component replaces SQLite boilerplate?", guQ: "SQLite બોઈલરપ્લેટ બદલતો Android આર્કિટેક્ચર કોમ્પોનન્ટ?", optsEn: ["(A) Room Persistence Library", "(B) SQLite Manager", "(C) DB Toolkit", "(D) SQL Framework"], optsGu: ["(A) Room Persistence Library", "(B) SQLite Manager", "(C) DB Toolkit", "(D) SQL Framework"], ans: 0 },
+      { enQ: "Which Android class defines database schema in Room?", guQ: "Room માં ડેટાબેઝ સ્કીમા વ્યાખ્યાયિત કરતો ક્લાસ?", optsEn: ["(A) Entity", "(B) Schema", "(C) TableClass", "(D) ModelTable"], optsGu: ["(A) Entity", "(B) Schema", "(C) TableClass", "(D) ModelTable"], ans: 0 },
+      { enQ: "Which Android annotation defines DAO interface?", guQ: "DAO ઇન્ટરફેસ વ્યાખ્યાયિત કરતી એનોટેશન?", optsEn: ["(A) @Database", "(B) @Dao", "(C) @Query", "(D) @Entity"], optsGu: ["(A) @Database", "(B) @Dao", "(C) @Query", "(D) @Entity"], ans: 1 },
+      { enQ: "Which Android annotation marks SQL query method?", guQ: "SQL ક્વેરી મેથડ ચિહ્નિત કરતી એનોટેશન?", optsEn: ["(A) @SQL", "(B) @Execute", "(C) @Query", "(D) @Select"], optsGu: ["(A) @SQL", "(B) @Execute", "(C) @Query", "(D) @Select"], ans: 2 },
+      { enQ: "Which Android annotation defines database class?", guQ: "ડેટાબેઝ ક્લાસ વ્યાખ્યાયિત કરતી એનોટેશન?", optsEn: ["(A) @Database", "(B) @DBClass", "(C) @SQLite", "(D) @Storage"], optsGu: ["(A) @Database", "(B) @DBClass", "(C) @SQLite", "(D) @Storage"], ans: 0 },
+      { enQ: "Which Android storage type is best for key-value pairs?", guQ: "કી-વેલ્યુ જોડી માટે શ્રેષ્ઠ સ્ટોરેજ?", optsEn: ["(A) SQLite", "(B) SharedPreferences", "(C) FileStorage", "(D) ContentProvider"], optsGu: ["(A) SQLite", "(B) SharedPreferences", "(C) FileStorage", "(D) ContentProvider"], ans: 1 },
+      { enQ: "Which Android method clears all table data?", guQ: "બધા ટેબલ ડેટા સાફ કરતી મેથડ?", optsEn: ["(A) deleteAll()", "(B) clear()", "(C) DELETE FROM table", "(D) removeAll()"], optsGu: ["(A) deleteAll()", "(B) clear()", "(C) DELETE FROM table", "(D) removeAll()"], ans: 2 },
+      { enQ: "Which Android database operation improves performance for bulk inserts?", guQ: "બલ્ક ઇન્સર્ટ માટે પર્ફોર્મન્સ સુધારતી કામગીરી?", optsEn: ["(A) Transactions", "(B) Indexing", "(C) Cursors", "(D) Views"], optsGu: ["(A) ટ્રાન્ઝેક્શન્સ", "(B) ઇન્ડેક્સિંગ", "(C) કર્સર્સ", "(D) વ્યૂઝ"], ans: 0 },
+      { enQ: "Which Android method sets database version?", guQ: "ડેટાબેઝ વર્ઝન સેટ કરતી મેથડ?", optsEn: ["(A) constructor of SQLiteOpenHelper", "(B) setVersion()", "(C) defineVersion()", "(D) initVersion()"], optsGu: ["(A) SQLiteOpenHelper નો કન્સ્ટ્રક્ટર", "(B) setVersion()", "(C) defineVersion()", "(D) initVersion()"], ans: 0 },
+      { enQ: "Which Android component is used for remote data storage?", guQ: "રિમોટ ડેટા સ્ટોરેજ માટેનો ઘટક?", optsEn: ["(A) SQLite", "(B) Firebase", "(C) SharedPreferences", "(D) File storage"], optsGu: ["(A) SQLite", "(B) Firebase", "(C) SharedPreferences", "(D) File storage"], ans: 1 },
+      { enQ: "Which Android class closes cursor?", guQ: "કર્સર બંધ કરતો ક્લાસ?", optsEn: ["(A) finish()", "(B) stop()", "(C) close()", "(D) end()"], optsGu: ["(A) finish()", "(B) stop()", "(C) close()", "(D) end()"], ans: 2 },
+      { enQ: "Which Android database method returns number of affected rows?", guQ: "અસરગ્રસ્ત પંક્તિઓની સંખ્યા પરત કરતી મેથડ?", optsEn: ["(A) getRows()", "(B) getCount()", "(C) update() return value", "(D) rowsChanged()"], optsGu: ["(A) getRows()", "(B) getCount()", "(C) update()નું રિટર્ન વેલ્યુ", "(D) rowsChanged()"], ans: 2 },
+      { enQ: "Which Android SQL clause filters records?", guQ: "રેકોર્ડ્સ ફિલ્ટર કરતો SQL કલોઝ?", optsEn: ["(A) WHERE", "(B) FILTER", "(C) LIMIT", "(D) SELECT"], optsGu: ["(A) WHERE", "(B) FILTER", "(C) LIMIT", "(D) SELECT"], ans: 0 },
+      { enQ: "Which Android SQL clause sorts records?", guQ: "રેકોર્ડ્સ સૉર્ટ કરતો SQL કલોઝ?", optsEn: ["(A) SORT BY", "(B) ORDER BY", "(C) ARRANGE BY", "(D) GROUP BY"], optsGu: ["(A) SORT BY", "(B) ORDER BY", "(C) ARRANGE BY", "(D) GROUP BY"], ans: 1 },
+      { enQ: "Which Android SQL clause groups records?", guQ: "રેકોર્ડ્સ ગ્રૂપ કરતો SQL કલોઝ?", optsEn: ["(A) GROUP BY", "(B) COLLECT BY", "(C) MERGE BY", "(D) BUNDLE BY"], optsGu: ["(A) GROUP BY", "(B) COLLECT BY", "(C) MERGE BY", "(D) BUNDLE BY"], ans: 0 },
+      { enQ: "Which Android architecture principle is followed by Room library?", guQ: "Room લાઇબ્રેરી કયા આર્કિટેક્ચર સિદ્ધાંતને અનુસરે છે?", optsEn: ["(A) MVC", "(B) MVVM / Repository pattern", "(C) Singleton only", "(D) Procedural design"], optsGu: ["(A) MVC", "(B) MVVM / Repository પેટર્ન", "(C) માત્ર Singleton", "(D) પ્રોસિજરલ ડિઝાઇન"], ans: 1 }
+    ];
+
+    // remove potential duplicate entries based on english question text (simple dedup)
+    const uniqueMap = new Map();
+    for (const mcq of mcqsRaw) {
+      if (!uniqueMap.has(mcq.enQ)) {
+        uniqueMap.set(mcq.enQ, mcq);
+      }
+    }
+    const allMcqs = Array.from(uniqueMap.values());
+    console.log("Total unique MCQs loaded:", allMcqs.length);
+
+    let currentLang = "both";
+
+    function renderQuiz() {
+      const container = document.getElementById("quizRoot");
+      if (!container) return;
+      container.innerHTML = "";
+      allMcqs.forEach((mcq, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        const numSpan = document.createElement("div");
+        numSpan.className = "question-number";
+        numSpan.innerText = `પ્રશ્ન ${idx + 1} | Question ${idx + 1}`;
+        card.appendChild(numSpan);
+        const qDiv = document.createElement("div");
+        qDiv.className = "question-text";
+        if (currentLang === "en") qDiv.innerText = mcq.enQ;
+        else if (currentLang === "gu") qDiv.innerText = mcq.guQ;
+        else qDiv.innerHTML = `${mcq.enQ}<br><strong style="color:#2c5f4a;">${mcq.guQ}</strong>`;
+        card.appendChild(qDiv);
+        const optsDiv = document.createElement("div");
+        optsDiv.className = "options";
+        optsDiv.setAttribute("data-qid", idx);
+        for (let i = 0; i < mcq.optsEn.length; i++) {
+          const opt = document.createElement("div");
+          opt.className = "option";
+          opt.setAttribute("data-opt-index", i);
+          let optDisplay = "";
+          if (currentLang === "en") optDisplay = mcq.optsEn[i];
+          else if (currentLang === "gu") optDisplay = mcq.optsGu[i];
+          else optDisplay = `${mcq.optsEn[i]}<br><span style="color:#475569; font-size:0.9rem;">${mcq.optsGu[i]}</span>`;
+          opt.innerHTML = optDisplay;
+          opt.addEventListener("click", (e) => {
+            e.stopPropagation();
+            handleAnswer(idx, i, optsDiv);
+          });
+          optsDiv.appendChild(opt);
+        }
+        card.appendChild(optsDiv);
+        const resultDiv = document.createElement("div");
+        resultDiv.className = "result";
+        resultDiv.id = `result-${idx}`;
+        card.appendChild(resultDiv);
+        container.appendChild(card);
+      });
+    }
+
+    function handleAnswer(qIdx, selected, containerDiv) {
+      const mcq = allMcqs[qIdx];
+      const allOpts = containerDiv.querySelectorAll(".option");
+      const resultDiv = document.getElementById(`result-${qIdx}`);
+      if (!resultDiv) return;
+      allOpts.forEach(opt => opt.style.pointerEvents = "none");
+      const isCorrect = (selected === mcq.ans);
+      allOpts.forEach((opt, idx) => {
+        if (idx === mcq.ans) opt.classList.add("correct");
+        if (idx === selected && !isCorrect) opt.classList.add("wrong");
+      });
+      resultDiv.style.display = "block";
+      const correctText = (currentLang === "gu" || currentLang === "both") ? mcq.optsGu[mcq.ans] : mcq.optsEn[mcq.ans];
+      if (isCorrect) {
+        resultDiv.className = "result correct-result";
+        resultDiv.innerHTML = "✅ સાચો જવાબ! | Correct!";
+      } else {
+        resultDiv.className = "result wrong-result";
+        resultDiv.innerHTML = `❌ ખોટો જવાબ. સાચો: ${correctText}<br>❌ Wrong answer. Correct: ${correctText}`;
+      }
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        if (btn.getAttribute("data-lang") === lang) btn.classList.add("active");
+        else btn.classList.remove("active");
+      });
+      renderQuiz();
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const lang = btn.getAttribute("data-lang");
+        if (lang) setLanguage(lang);
+      });
+    });
+
+    renderQuiz();
+  </script>
+</body>
+
+</html>

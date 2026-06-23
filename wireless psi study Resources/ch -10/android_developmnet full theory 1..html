@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android OS Complete Study Guide | PSI Exam 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0a0f0d;
+    --bg2: #0f1a16;
+    --bg3: #142018;
+    --card: #111c18;
+    --border: #1e3a2e;
+    --accent: #2dff7e;
+    --accent2: #00c9a7;
+    --accent3: #7effa0;
+    --text: #e8f5ee;
+    --muted: #6b9980;
+    --orange: #ff9f43;
+    --blue: #54d2ff;
+    --purple: #c77dff;
+    --red: #ff6b6b;
+    --yellow: #ffd166;
+  }
+
+  * { margin:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: linear-gradient(135deg, #0a1a12 0%, #0d2418 50%, #0a1a12 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(45,255,126,0.08) 0%, transparent 70%);
+  }
+  .site-header h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+  }
+  .site-header .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-top: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+  .badge-row {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px;
+  }
+  .badge {
+    background: rgba(45,255,126,0.1);
+    border: 1px solid var(--border);
+    color: var(--accent3);
+    padding: 4px 14px;
+    border-radius: 99px;
+    font-size: 0.78rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* LAYOUT */
+  .wrapper { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* NAV */
+  .topic-nav {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .topic-nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-family: 'Space Mono', monospace;
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .topic-nav a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(45,255,126,0.06);
+  }
+
+  /* SECTIONS */
+  .topic-section {
+    margin-bottom: 60px;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  .section-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 48px; height: 48px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 1.6rem; font-weight: 700; }
+  .section-gu { color: var(--muted); font-size: 0.9rem; margin-top: 2px; font-family: 'Space Mono', monospace; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent2); }
+
+  .card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card h3 .tag {
+    font-size: 0.68rem;
+    background: rgba(45,255,126,0.12);
+    border: 1px solid rgba(45,255,126,0.25);
+    color: var(--accent3);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+  }
+  .card p { color: #c0d9cc; font-size: 0.95rem; margin-bottom: 10px; }
+  .card p strong { color: var(--accent3); }
+
+  /* CODE BLOCKS */
+  .code-box {
+    background: #060e0a;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: #9effc4;
+    overflow-x: auto;
+    margin: 12px 0;
+    white-space: pre;
+  }
+
+  /* LIFECYCLE DIAGRAM */
+  .lifecycle-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin: 16px 0;
+  }
+  .lf-node {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 28px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    min-width: 200px;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .lf-node:hover { border-color: var(--accent); color: var(--accent); }
+  .lf-node.green { border-color: #2dff7e; color: #2dff7e; }
+  .lf-node.blue { border-color: var(--blue); color: var(--blue); }
+  .lf-node.orange { border-color: var(--orange); color: var(--orange); }
+  .lf-node.red { border-color: var(--red); color: var(--red); }
+  .lf-arrow {
+    width: 2px; height: 22px;
+    background: var(--border);
+    position: relative;
+  }
+  .lf-arrow::after {
+    content: '▼';
+    position: absolute;
+    bottom: -4px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted);
+    font-size: 0.65rem;
+  }
+
+  /* GRID */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 14px 0; }
+  .info-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .info-item .label { font-size: 0.72rem; font-family: 'Space Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .info-item .value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88rem; }
+  th {
+    background: var(--bg3);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #1a2e24;
+    color: #c0d9cc;
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(45,255,126,0.02); }
+
+  /* PILL LISTS */
+  .pill-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .pill {
+    padding: 5px 14px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+    border: 1px solid;
+  }
+  .pill.g { background: rgba(45,255,126,0.08); border-color: rgba(45,255,126,0.3); color: var(--accent3); }
+  .pill.b { background: rgba(84,210,255,0.08); border-color: rgba(84,210,255,0.3); color: var(--blue); }
+  .pill.o { background: rgba(255,159,67,0.08); border-color: rgba(255,159,67,0.3); color: var(--orange); }
+  .pill.p { background: rgba(199,125,255,0.08); border-color: rgba(199,125,255,0.3); color: var(--purple); }
+  .pill.r { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.3); color: var(--red); }
+
+  /* ALERT BOXES */
+  .alert {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+    border-left: 3px solid;
+  }
+  .alert.tip { background: rgba(45,255,126,0.07); border-color: var(--accent); color: var(--accent3); }
+  .alert.warn { background: rgba(255,159,67,0.07); border-color: var(--orange); color: var(--orange); }
+  .alert.info { background: rgba(84,210,255,0.07); border-color: var(--blue); color: var(--blue); }
+
+  /* ARCH LAYERS */
+  .arch-layers { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+  .arch-layer {
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid;
+    transition: transform 0.2s;
+  }
+  .arch-layer:hover { transform: translateX(6px); }
+  .arch-layer .layer-sub { font-size: 0.78rem; font-weight: 400; color: inherit; opacity: 0.7; margin-top: 3px; font-family: 'Space Mono', monospace; }
+  .al-apps { background: rgba(45,255,126,0.08); border-color: rgba(45,255,126,0.3); color: var(--accent3); }
+  .al-fw { background: rgba(84,210,255,0.08); border-color: rgba(84,210,255,0.3); color: var(--blue); }
+  .al-rt { background: rgba(199,125,255,0.08); border-color: rgba(199,125,255,0.3); color: var(--purple); }
+  .al-lib { background: rgba(255,159,67,0.08); border-color: rgba(255,159,67,0.3); color: var(--orange); }
+  .al-hal { background: rgba(255,209,102,0.08); border-color: rgba(255,209,102,0.3); color: var(--yellow); }
+  .al-kern { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.3); color: var(--red); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+  }
+  footer span { color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .topic-nav { position: static; }
+    .section-title { font-size: 1.3rem; }
+    .card { padding: 16px; }
+  }
+
+  /* SCROLL PROGRESS */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.1s;
+    z-index: 9999;
+    width: 0%;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<header class="site-header">
+  <h1>📱 Android OS Complete Study Guide</h1>
+  <p class="subtitle">PSI EXAM 2026 · ALL TOPICS · GUJARATI + ENGLISH</p>
+  <div class="badge-row">
+    <span class="badge">Architecture</span>
+    <span class="badge">Activity Lifecycle</span>
+    <span class="badge">Layouts & UI</span>
+    <span class="badge">Toast & Menu</span>
+    <span class="badge">Dialog & ListView</span>
+    <span class="badge">SQLite Database</span>
+    <span class="badge">Advanced UI</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+  <!-- STICKY NAV -->
+  <nav class="topic-nav">
+    <a href="#basics">Basics</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#lifecycle">Activity Lifecycle</a>
+    <a href="#layouts">Layouts</a>
+    <a href="#views">Views & Widgets</a>
+    <a href="#intents">Intents</a>
+    <a href="#toast">Toast</a>
+    <a href="#menu">Menu</a>
+    <a href="#dialog">Dialog</a>
+    <a href="#listview">ListView & Adapter</a>
+    <a href="#recyclerview">RecyclerView</a>
+    <a href="#advanced">Advanced UI</a>
+    <a href="#database">SQLite Database</a>
+    <a href="#room">Room Library</a>
+    <a href="#security">Security & Permissions</a>
+  </nav>
+
+  <!-- ========== 1. BASICS ========== -->
+  <section class="topic-section" id="basics">
+    <div class="section-header">
+      <div class="section-icon">🤖</div>
+      <div>
+        <div class="section-title">Android OS — Basics</div>
+        <div class="section-gu">Android OS — મૂળભૂત માહિતી</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>What is Android? <span class="tag">FOUNDATION</span></h3>
+      <p>Android is an <strong>open-source</strong> mobile operating system based on the <strong>Linux kernel</strong>. It was initially developed by <strong>Android Inc.</strong>, acquired by <strong>Google in 2005</strong>, and first released commercially in 2008.</p>
+      <p>Android ek <strong>open-source</strong> mobile operating system chhe je <strong>Linux kernel</strong> par aadharit chhe.</p>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Kernel</div><div class="value">Linux</div></div>
+        <div class="info-item"><div class="label">Original Developer</div><div class="value">Android Inc.</div></div>
+        <div class="info-item"><div class="label">Acquired By</div><div class="value">Google (2005)</div></div>
+        <div class="info-item"><div class="label">App Language</div><div class="value">Kotlin / Java</div></div>
+        <div class="info-item"><div class="label">App Format</div><div class="value">.apk (Android Package Kit)</div></div>
+        <div class="info-item"><div class="label">Source Type</div><div class="value">Open Source</div></div>
+        <div class="info-item"><div class="label">Programming Model</div><div class="value">Event-Driven</div></div>
+        <div class="info-item"><div class="label">Default Database</div><div class="value">SQLite</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>4 Core Components <span class="tag">MUST KNOW</span></h3>
+      <table>
+        <tr><th>Component</th><th>Purpose</th><th>Has UI?</th></tr>
+        <tr><td><strong style="color:var(--accent)">Activity</strong></td><td>Single screen with UI — app entry point</td><td>✅ Yes</td></tr>
+        <tr><td><strong style="color:var(--blue)">Service</strong></td><td>Background tasks (music, sync, etc.)</td><td>❌ No</td></tr>
+        <tr><td><strong style="color:var(--orange)">BroadcastReceiver</strong></td><td>Responds to system-wide broadcasts (SMS, boot, etc.)</td><td>❌ No</td></tr>
+        <tr><td><strong style="color:var(--purple)">ContentProvider</strong></td><td>Shares data between apps (contacts, media)</td><td>❌ No</td></tr>
+      </table>
+      <div class="alert tip">💡 Intent is NOT a component — it is a messaging object used to start activities/services and pass data between components.</div>
+    </div>
+
+    <div class="card">
+      <h3>Key Files & Tools</h3>
+      <table>
+        <tr><th>Name</th><th>Use</th></tr>
+        <tr><td><code>AndroidManifest.xml</code></td><td>Declares components, permissions, SDK versions</td></tr>
+        <tr><td><code>strings.xml</code></td><td>Stores all text/string resources</td></tr>
+        <tr><td><code>layout.xml</code></td><td>Defines UI layout using XML</td></tr>
+        <tr><td><code>ADB</code> (Android Debug Bridge)</td><td>Debug tool: <code>adb install</code>, <code>adb devices</code>, <code>adb uninstall</code></td></tr>
+        <tr><td><code>aapt</code></td><td>Compiles resources to binary</td></tr>
+        <tr><td><code>dx/d8 + Gradle</code></td><td>Compiles Android code to .apk</td></tr>
+        <tr><td><code>APK</code></td><td>Android Package Kit — distribution format</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Runtime: Dalvik vs ART <span class="tag">EXAM FAVE</span></h3>
+      <p><strong>Dalvik VM</strong> was the original Android runtime (JIT — Just In Time compilation).</p>
+      <p><strong>ART (Android Runtime)</strong> replaced Dalvik starting with Lollipop (API 21) and uses <strong>AOT (Ahead Of Time)</strong> compilation — faster execution, better performance.</p>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Dalvik</div><div class="value">JIT compilation — older Android</div></div>
+        <div class="info-item"><div class="label">ART</div><div class="value">AOT compilation — Android 5.0+ default</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Process Priority (Low memory kill order)</h3>
+      <p>Android kills processes to free RAM. Kill order (first to last):</p>
+      <div class="pill-list">
+        <span class="pill r">1. Background Process</span>
+        <span class="pill o">2. Empty Process</span>
+        <span class="pill p">3. Service Process</span>
+        <span class="pill b">4. Visible Process</span>
+        <span class="pill g">5. Foreground Process (last)</span>
+      </div>
+      <div class="alert warn">⚠️ Background process is killed FIRST when RAM is low. Foreground process (user-active app) is killed LAST.</div>
+    </div>
+  </section>
+
+  <!-- ========== 2. ARCHITECTURE ========== -->
+  <section class="topic-section" id="architecture">
+    <div class="section-header">
+      <div class="section-icon">🏗️</div>
+      <div>
+        <div class="section-title">Android Architecture (Layered Stack)</div>
+        <div class="section-gu">Android આર્કિટેક્ચર — સ્તરીય સ્ટૅક</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>6 Layers — Top to Bottom <span class="tag">EXAM CRITICAL</span></h3>
+      <p>Android follows a <strong>layered architecture</strong>. Remember: <strong>Apps → Framework → Runtime+Libraries → HAL → Kernel</strong></p>
+      <div class="arch-layers">
+        <div class="arch-layer al-apps">
+          ① Applications Layer (Top — closest to user)
+          <div class="layer-sub">Browser, Contacts, Camera, Phone, Email, Custom Apps</div>
+        </div>
+        <div class="arch-layer al-fw">
+          ② Application Framework Layer
+          <div class="layer-sub">Activity Manager · Window Manager · Content Providers · View System · Package Manager · Notification Manager · Resource Manager · Location Manager · Telephony Manager · Camera Services</div>
+        </div>
+        <div class="arch-layer al-rt">
+          ③ Android Runtime (ART / Dalvik)
+          <div class="layer-sub">Core Libraries + ART Runtime (AOT compilation)</div>
+        </div>
+        <div class="arch-layer al-lib">
+          ④ Native C/C++ Libraries
+          <div class="layer-sub">SQLite · WebKit · OpenGL ES · Media Framework · Surface Manager · SSL · Skia (2D graphics) · libc</div>
+        </div>
+        <div class="arch-layer al-hal">
+          ⑤ Hardware Abstraction Layer (HAL)
+          <div class="layer-sub">Camera HAL · Bluetooth HAL · Audio HAL · Sensor HAL — bridges hardware to framework</div>
+        </div>
+        <div class="arch-layer al-kern">
+          ⑥ Linux Kernel (Bottom — closest to hardware)
+          <div class="layer-sub">Device Drivers · Memory Mgmt · Process Scheduling · Networking Stack · Binder IPC · Power Management · Security · Thread Management · Bluetooth/Audio/Sensor drivers</div>
+        </div>
+      </div>
+      <div class="alert tip">💡 Exam: "Which layer is at BOTTOM?" → Linux Kernel. "Which is at TOP?" → Applications. "Which contains SQLite/WebKit?" → Libraries (C/C++).</div>
+    </div>
+
+    <div class="card">
+      <h3>Framework Layer — Managers Quick Reference</h3>
+      <table>
+        <tr><th>Manager</th><th>Responsibility</th></tr>
+        <tr><td>Activity Manager</td><td>App lifecycle, launches activities</td></tr>
+        <tr><td>Window Manager</td><td>Screen rendering, manages windows</td></tr>
+        <tr><td>Package Manager</td><td>Install/remove apps, tracks installed apps</td></tr>
+        <tr><td>Resource Manager</td><td>Strings, layouts, drawables</td></tr>
+        <tr><td>Notification Manager</td><td>System notifications</td></tr>
+        <tr><td>Location Manager</td><td>GPS/Network location services</td></tr>
+        <tr><td>Telephony Manager</td><td>Phone/call services</td></tr>
+        <tr><td>View Manager</td><td>Views and layouts</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Libraries Layer — What's inside?</h3>
+      <div class="pill-list">
+        <span class="pill g">SQLite</span>
+        <span class="pill g">WebKit</span>
+        <span class="pill b">OpenGL ES</span>
+        <span class="pill b">Media Framework</span>
+        <span class="pill o">Surface Manager</span>
+        <span class="pill o">SSL</span>
+        <span class="pill p">Skia (2D graphics)</span>
+        <span class="pill p">libc</span>
+        <span class="pill r">FreeType</span>
+      </div>
+      <div class="alert info">ℹ️ These are written in C/C++ and provide core functionality. WebKit = web browser engine. Skia = 2D graphics rendering. SQLite = embedded database.</div>
+    </div>
+
+    <div class="card">
+      <h3>HAL — Hardware Abstraction Layer</h3>
+      <p><strong>HAL</strong> stands for <strong>Hardware Abstraction Layer</strong>. It provides a standard interface that lets the Android framework interact with hardware-specific drivers without knowing hardware details.</p>
+      <div class="alert info">ℹ️ HAL bridges the gap between hardware (Camera, Bluetooth, Sensors) and the Android Framework. Manufacturers implement HAL for their specific hardware.</div>
+    </div>
+
+    <div class="card">
+      <h3>Linux Kernel — What it handles</h3>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Memory Management</div><div class="value">RAM allocation & deallocation</div></div>
+        <div class="info-item"><div class="label">Process Scheduling</div><div class="value">CPU time management</div></div>
+        <div class="info-item"><div class="label">Binder IPC</div><div class="value">Inter-process communication</div></div>
+        <div class="info-item"><div class="label">Networking</div><div class="value">TCP/IP networking stack</div></div>
+        <div class="info-item"><div class="label">Security</div><div class="value">Permissions & sandboxing</div></div>
+        <div class="info-item"><div class="label">Power Mgmt</div><div class="value">Battery & wake locks</div></div>
+        <div class="info-item"><div class="label">Device Drivers</div><div class="value">Camera, Audio, Bluetooth, Sensor</div></div>
+        <div class="info-item"><div class="label">Thread Mgmt</div><div class="value">Thread scheduling & synchronization</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Sandbox Security</h3>
+      <p>Each Android app runs in its own <strong>sandbox</strong> — an isolated process with a unique Linux user ID. Apps <strong>cannot access each other's data</strong> directly. This is enforced at the kernel level.</p>
+      <p>The <code>AndroidManifest.xml</code> declares permissions. Since <strong>Android 6.0 Marshmallow</strong>, dangerous permissions require <strong>runtime user approval</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ========== 3. ACTIVITY LIFECYCLE ========== -->
+  <section class="topic-section" id="lifecycle">
+    <div class="section-header">
+      <div class="section-icon">🔄</div>
+      <div>
+        <div class="section-title">Activity Lifecycle</div>
+        <div class="section-gu">Activity જીવનચક્ર — સૌથી મહત્વપૂર્ણ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Complete Lifecycle Flow <span class="tag">MUST MEMORIZE</span></h3>
+      <div class="lifecycle-flow">
+        <div class="lf-node green">onCreate()</div>
+        <div class="lf-arrow"></div>
+        <div class="lf-node blue">onStart()</div>
+        <div class="lf-arrow"></div>
+        <div class="lf-node green">onResume() ← App is ACTIVE here</div>
+        <div class="lf-arrow"></div>
+        <div class="lf-node orange">onPause() ← partially hidden / dialog covers</div>
+        <div class="lf-arrow"></div>
+        <div class="lf-node orange">onStop() ← fully hidden / navigated away</div>
+        <div class="lf-arrow"></div>
+        <div class="lf-node blue">onRestart() ← when coming back from stopped</div>
+        <div class="lf-arrow"></div>
+        <div class="lf-node red">onDestroy() ← activity being destroyed</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Each Method — Detailed Explanation</h3>
+      <table>
+        <tr><th>Method</th><th>When Called</th><th>What to Do Here</th></tr>
+        <tr>
+          <td><strong style="color:var(--accent)">onCreate()</strong></td>
+          <td>FIRST time activity is created. Called only once per lifecycle.</td>
+          <td>Initialize UI (<code>setContentView()</code>), <code>findViewById()</code>, setup variables, initialize data</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--blue)">onStart()</strong></td>
+          <td>Activity becomes VISIBLE to user (after onCreate or onRestart)</td>
+          <td>Register broadcast receivers, load fresh data for display</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--accent)">onResume()</strong></td>
+          <td>Activity is in FOREGROUND and INTERACTIVE (highest priority state)</td>
+          <td>Start animations, camera, GPS, resume paused operations</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--orange)">onPause()</strong></td>
+          <td>Activity partially hidden (another activity on top, dialog shown). Activity is still VISIBLE.</td>
+          <td>Pause animations, save unsaved data, release camera/GPS</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--orange)">onStop()</strong></td>
+          <td>Activity is COMPLETELY HIDDEN (user navigated to another app)</td>
+          <td>Stop resource-heavy operations, save state to database</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--blue)">onRestart()</strong></td>
+          <td>Called BEFORE onStart() when activity returns from STOPPED state</td>
+          <td>Refresh data that may have changed while stopped</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--red)">onDestroy()</strong></td>
+          <td>Activity is being DESTROYED (user pressed back, or system killed it)</td>
+          <td>Release all resources, close DB connections</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--purple)">onSaveInstanceState()</strong></td>
+          <td>Called before activity may be destroyed (rotation, system kill)</td>
+          <td>Save UI state (EditText values, scroll position) into Bundle</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--purple)">onRestoreInstanceState()</strong></td>
+          <td>After onCreate/onStart when saved state exists</td>
+          <td>Restore previously saved UI state from Bundle</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>State Priorities</h3>
+      <div class="pill-list">
+        <span class="pill g">Resumed (Active) — HIGHEST PRIORITY</span>
+        <span class="pill b">Paused (Partially visible)</span>
+        <span class="pill o">Stopped (Invisible)</span>
+        <span class="pill r">Destroyed — LOWEST PRIORITY</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Activity Launch Modes <span class="tag">EXAM</span></h3>
+      <table>
+        <tr><th>Mode</th><th>Behavior</th></tr>
+        <tr><td><strong>standard</strong></td><td>Default. Creates new instance EVERY time (multiple instances allowed)</td></tr>
+        <tr><td><strong>singleTop</strong></td><td>If activity is at TOP of stack, reuses it; otherwise new instance</td></tr>
+        <tr><td><strong>singleTask</strong></td><td>Only ONE instance in entire back stack; clears activities above it</td></tr>
+        <tr><td><strong>singleInstance</strong></td><td>Only ONE instance, in its own isolated task</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Important Methods for Activity Management</h3>
+      <div class="code-box">// Start a new Activity
+Intent intent = new Intent(this, TargetActivity.class);
+intent.putExtra("key", "value");  // pass data
+startActivity(intent);
+
+// Close current Activity
+finish();
+
+// Load layout into activity
+setContentView(R.layout.activity_main);
+
+// Find view by ID
+Button btn = findViewById(R.id.myButton);
+
+// Base class
+public class MainActivity extends AppCompatActivity { }</div>
+      <p><strong>Context</strong> — provides access to global app environment (file system, resources, system services)</p>
+    </div>
+  </section>
+
+  <!-- ========== 4. LAYOUTS ========== -->
+  <section class="topic-section" id="layouts">
+    <div class="section-header">
+      <div class="section-icon">📐</div>
+      <div>
+        <div class="section-title">Layouts — UI Structure</div>
+        <div class="section-gu">Layouts — UI બંધારણ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>All Layout Types <span class="tag">FREQUENTLY ASKED</span></h3>
+      <table>
+        <tr><th>Layout</th><th>Description</th><th>Best Use</th></tr>
+        <tr><td><strong style="color:var(--accent)">LinearLayout</strong></td><td>Arranges children in a single row/column (horizontal or vertical)</td><td>Simple forms, stacked buttons</td></tr>
+        <tr><td><strong style="color:var(--blue)">RelativeLayout</strong></td><td>Positions elements relative to each other or parent</td><td>Complex relative positioning</td></tr>
+        <tr><td><strong style="color:var(--orange)">ConstraintLayout</strong></td><td>Flexible positioning using constraints; best for responsive UI; flat hierarchy</td><td>Complex responsive layouts — RECOMMENDED</td></tr>
+        <tr><td><strong style="color:var(--purple)">FrameLayout</strong></td><td>Overlapping views; stacks children on top of each other</td><td>Splash screens, overlapping elements, Fragment containers</td></tr>
+        <tr><td><strong style="color:var(--yellow)">TableLayout</strong></td><td>Arranges children in rows and columns (like an HTML table)</td><td>Data tables, forms</td></tr>
+        <tr><td><strong style="color:var(--accent2)">GridLayout</strong></td><td>Flexible grid; children placed in arbitrary grid positions</td><td>Flexible grid of icons/thumbnails</td></tr>
+        <tr><td><strong style="color:var(--red)">AbsoluteLayout</strong></td><td>Positions using absolute x/y coordinates</td><td>⚠️ DEPRECATED — avoid!</td></tr>
+        <tr><td><strong style="color:var(--muted)">ScrollView</strong></td><td>Single child that can scroll vertically</td><td>Long forms, scrollable content</td></tr>
+      </table>
+      <div class="alert warn">⚠️ AbsoluteLayout is DEPRECATED. LinearLayout nesting should be avoided for complex UI — use ConstraintLayout instead.</div>
+    </div>
+
+    <div class="card">
+      <h3>XML Attributes — Quick Reference</h3>
+      <table>
+        <tr><th>Attribute</th><th>Value / Usage</th></tr>
+        <tr><td><code>android:id</code></td><td>Sets view ID: <code>@+id/myView</code></td></tr>
+        <tr><td><code>android:layout_width</code></td><td><code>match_parent</code> / <code>wrap_content</code> / fixed dp</td></tr>
+        <tr><td><code>android:layout_height</code></td><td>Same as width</td></tr>
+        <tr><td><code>android:layout_margin</code></td><td>External spacing around view</td></tr>
+        <tr><td><code>android:padding</code></td><td>Internal spacing inside view</td></tr>
+        <tr><td><code>android:text</code></td><td>Sets text in TextView/Button</td></tr>
+        <tr><td><code>android:visibility</code></td><td><code>visible</code> / <code>invisible</code> / <code>gone</code></td></tr>
+        <tr><td><code>android:rotation</code></td><td>Rotates view (degrees)</td></tr>
+        <tr><td><code>android:alpha</code></td><td>Transparency (0.0 to 1.0)</td></tr>
+        <tr><td><code>android:elevation</code></td><td>Shadow depth (material design Z-axis)</td></tr>
+        <tr><td><code>layout_gravity="center"</code></td><td>Aligns view in center within parent</td></tr>
+      </table>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Text Size Unit</div><div class="value">sp (scales with user font settings)</div></div>
+        <div class="info-item"><div class="label">Layout Dimension Unit</div><div class="value">dp (density-independent pixels)</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>visibility: gone vs invisible</h3>
+      <table>
+        <tr><th>Value</th><th>Visible?</th><th>Takes Space?</th></tr>
+        <tr><td><code>visible</code></td><td>✅ Yes</td><td>✅ Yes</td></tr>
+        <tr><td><code>invisible</code></td><td>❌ No</td><td>✅ Yes (layout space reserved)</td></tr>
+        <tr><td><code>gone</code></td><td>❌ No</td><td>❌ No (removed from layout)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 5. VIEWS & WIDGETS ========== -->
+  <section class="topic-section" id="views">
+    <div class="section-header">
+      <div class="section-icon">🧩</div>
+      <div>
+        <div class="section-title">Views & Widgets</div>
+        <div class="section-gu">Views અને Widgets</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Common UI Widgets</h3>
+      <table>
+        <tr><th>Widget</th><th>Purpose</th></tr>
+        <tr><td><strong>TextView</strong></td><td>Display text (read-only)</td></tr>
+        <tr><td><strong>EditText</strong></td><td>User input text field</td></tr>
+        <tr><td><strong>Button</strong></td><td>Clickable button</td></tr>
+        <tr><td><strong>ImageView</strong></td><td>Display images</td></tr>
+        <tr><td><strong>ProgressBar</strong></td><td>Shows progress indicator (loading spinner)</td></tr>
+        <tr><td><strong>Spinner</strong></td><td>Dropdown selection list</td></tr>
+        <tr><td><strong>CheckBox</strong></td><td>Multi-select toggle</td></tr>
+        <tr><td><strong>RadioButton</strong></td><td>Single-select from group</td></tr>
+        <tr><td><strong>Switch</strong></td><td>Toggle ON/OFF</td></tr>
+        <tr><td><strong>SeekBar</strong></td><td>Slider for value selection</td></tr>
+        <tr><td><strong>FloatingActionButton</strong></td><td>Material design floating action button (FAB)</td></tr>
+        <tr><td><strong>CardView</strong></td><td>Card-style container with elevation/shadow</td></tr>
+        <tr><td><strong>BottomNavigationView</strong></td><td>Bottom navigation bar UI</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>View Base Class & Custom Views</h3>
+      <p>All UI widgets extend from the <strong>View</strong> class. To create custom views, extend View and override:</p>
+      <div class="code-box">public class MyView extends View {
+    @Override
+    protected void onDraw(Canvas canvas) {
+        // Draw custom shapes using Canvas + Paint
+        Paint paint = new Paint();
+        canvas.drawCircle(100, 100, 50, paint);
+    }
+}
+
+// Invalidate = force redraw
+myView.invalidate();</div>
+      <p><strong>Canvas</strong> = drawing surface. <strong>Paint</strong> = color/style instructions. <strong>Path</strong> = for drawing lines/shapes. <strong>Bitmap</strong> = pixel image.</p>
+    </div>
+
+    <div class="card">
+      <h3>Event Listeners</h3>
+      <div class="code-box">// Click listener
+button.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) { /* handle click */ }
+});
+
+// Long click listener
+view.setOnLongClickListener(v -> { /* handle */ return true; });
+
+// Touch listener
+view.setOnTouchListener((v, event) -> {
+    // event.getAction() == MotionEvent.ACTION_DOWN etc.
+    return true;
+});</div>
+      <p><strong>GestureDetector</strong> handles swipe, fling, scroll gestures.</p>
+      <p><strong>ScaleGestureDetector</strong> handles multi-touch pinch-to-zoom.</p>
+    </div>
+  </section>
+
+  <!-- ========== 6. INTENTS ========== -->
+  <section class="topic-section" id="intents">
+    <div class="section-header">
+      <div class="section-icon">📨</div>
+      <div>
+        <div class="section-title">Intents & Navigation</div>
+        <div class="section-gu">Intents અને Navigation</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Intent — What is it?</h3>
+      <p>An <strong>Intent</strong> is a messaging object used to request an action from another component. It is used to start activities, start services, or deliver broadcasts.</p>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Explicit Intent</div><div class="value">Targets a specific component by class name</div></div>
+        <div class="info-item"><div class="label">Implicit Intent</div><div class="value">Declares general action; system finds best match</div></div>
+      </div>
+      <div class="code-box">// Explicit — start specific activity + pass data
+Intent intent = new Intent(this, SecondActivity.class);
+intent.putExtra("username", "Raj");
+startActivity(intent);
+
+// Get data in target activity
+String name = getIntent().getStringExtra("username");
+
+// Implicit — share/open URL
+Intent intent = new Intent(Intent.ACTION_VIEW);
+intent.setData(Uri.parse("https://google.com"));
+startActivity(intent);</div>
+    </div>
+  </section>
+
+  <!-- ========== 7. TOAST ========== -->
+  <section class="topic-section" id="toast">
+    <div class="section-header">
+      <div class="section-icon">🍞</div>
+      <div>
+        <div class="section-title">Toast Messages</div>
+        <div class="section-gu">Toast — ટૂંકા પ્રદર્શન સંદેશ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>What is Toast? <span class="tag">EXAM TOPIC</span></h3>
+      <p>A <strong>Toast</strong> is a small popup message shown briefly at the bottom of the screen. It is <strong>lifecycle-independent</strong> — it does not block user interaction with the background.</p>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Blocks interaction?</div><div class="value">❌ No (non-modal)</div></div>
+        <div class="info-item"><div class="label">Disappears automatically?</div><div class="value">✅ Yes</div></div>
+        <div class="info-item"><div class="label">Can have action button?</div><div class="value">❌ No (use Snackbar for that)</div></div>
+        <div class="info-item"><div class="label">Better alternative</div><div class="value">Snackbar (supports action)</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Toast — All Methods</h3>
+      <div class="code-box">// Create and show Toast
+Toast.makeText(context, "Hello World!", Toast.LENGTH_SHORT).show();
+Toast.makeText(context, "Longer message", Toast.LENGTH_LONG).show();
+
+// Constants
+Toast.LENGTH_SHORT   // ~2 seconds
+Toast.LENGTH_LONG    // ~3.5 seconds
+
+// Cancel toast early
+Toast t = Toast.makeText(context, "msg", Toast.LENGTH_LONG);
+t.show();
+t.cancel();  // removes toast before time ends
+
+// Set toast margin
+t.setMargin(0.1f, 0.1f);  // setMargin(horizontalMargin, verticalMargin)</div>
+      <table>
+        <tr><th>Method</th><th>What it does</th></tr>
+        <tr><td><code>Toast.makeText()</code></td><td>Creates Toast object</td></tr>
+        <tr><td><code>.show()</code></td><td>Displays the Toast</td></tr>
+        <tr><td><code>.cancel()</code></td><td>Hides Toast before time ends</td></tr>
+        <tr><td><code>.setMargin()</code></td><td>Sets horizontal/vertical margin</td></tr>
+        <tr><td><code>LENGTH_SHORT</code></td><td>Short duration constant</td></tr>
+        <tr><td><code>LENGTH_LONG</code></td><td>Long duration constant</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Toast vs Snackbar</h3>
+      <table>
+        <tr><th>Feature</th><th>Toast</th><th>Snackbar</th></tr>
+        <tr><td>Action button</td><td>❌ No</td><td>✅ Yes (e.g., UNDO)</td></tr>
+        <tr><td>Lifecycle aware</td><td>❌ No</td><td>✅ Yes</td></tr>
+        <tr><td>Blocks interaction</td><td>❌ No</td><td>❌ No</td></tr>
+        <tr><td>Position</td><td>Configurable</td><td>Bottom of screen</td></tr>
+        <tr><td>Best for</td><td>Simple info message</td><td>Action-based feedback (delete, undo)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 8. MENU ========== -->
+  <section class="topic-section" id="menu">
+    <div class="section-header">
+      <div class="section-icon">☰</div>
+      <div>
+        <div class="section-title">Menus</div>
+        <div class="section-gu">Android Menus — ત્રણ પ્રકાર</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>3 Types of Menus <span class="tag">EXAM CRITICAL</span></h3>
+      <table>
+        <tr><th>Menu Type</th><th>When/How Shown</th><th>Best For</th></tr>
+        <tr><td><strong style="color:var(--accent)">Options Menu</strong></td><td>Shown when user presses hardware menu button / action bar overflow icon</td><td>App-wide actions (Settings, Search, About)</td></tr>
+        <tr><td><strong style="color:var(--blue)">Context Menu</strong></td><td>Shown on long-press of a specific view</td><td>Contextual actions on selected item (Edit, Delete, Share)</td></tr>
+        <tr><td><strong style="color:var(--orange)">Popup Menu</strong></td><td>Attached to a specific view, shown on click</td><td>Dropdown-style actions from a button</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Options Menu — Full Code</h3>
+      <div class="code-box">// res/menu/main_menu.xml
+&lt;menu xmlns:android="..."&gt;
+    &lt;item
+        android:id="@+id/action_settings"
+        android:title="Settings"
+        android:alphabeticShortcut="s"
+        android:visible="true"
+        app:showAsAction="never" /&gt;
+&lt;/menu&gt;
+
+// In Activity — inflate menu
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.main_menu, menu);
+    return true;
+}
+
+// Handle item click
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_settings) {
+        // do something
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+}
+
+// Update/refresh menu
+invalidateOptionsMenu();
+
+// Prepare before display
+@Override
+public boolean onPrepareOptionsMenu(Menu menu) { return true; }
+
+// Hide item dynamically
+item.setVisible(false);
+
+// Add item dynamically
+menu.add(0, MENU_ID, 0, "New Item");</div>
+    </div>
+
+    <div class="card">
+      <h3>Context Menu — Long Press</h3>
+      <div class="code-box">// Register view for context menu
+registerForContextMenu(myListView);
+
+// Create context menu
+@Override
+public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo info) {
+    super.onCreateContextMenu(menu, v, info);
+    menu.setHeaderTitle("Options");
+    menu.add(0, EDIT_ID, 0, "Edit");
+    menu.add(0, DELETE_ID, 0, "Delete");
+}
+
+// Handle selection
+@Override
+public boolean onContextItemSelected(MenuItem item) { ... }
+
+// Show manually
+openContextMenu(myView);</div>
+      <div class="alert info">ℹ️ Floating Contextual Menu (CAB — Contextual Action Bar) appears near selected text. Managed by ActionMode class.</div>
+    </div>
+
+    <div class="card">
+      <h3>Popup Menu</h3>
+      <div class="code-box">// Create popup menu attached to a view
+PopupMenu popup = new PopupMenu(context, anchorView);
+popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+// Handle click
+popup.setOnMenuItemClickListener(item -> {
+    switch (item.getItemId()) {
+        case R.id.option1: /* ... */ return true;
+    }
+    return false;
+});
+
+popup.show();     // Show popup menu
+popup.dismiss();  // Dismiss popup menu</div>
+    </div>
+
+    <div class="card">
+      <h3>Menu — Key Facts Summary</h3>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Menu XML Inflate Class</div><div class="value">MenuInflater</div></div>
+        <div class="info-item"><div class="label">Menu item XML tag</div><div class="value">&lt;item&gt;</div></div>
+        <div class="info-item"><div class="label">Show as action button</div><div class="value">app:showAsAction</div></div>
+        <div class="info-item"><div class="label">Keyboard shortcut</div><div class="value">android:alphabeticShortcut</div></div>
+        <div class="info-item"><div class="label">ActionBar replacement</div><div class="value">Toolbar</div></div>
+        <div class="info-item"><div class="label">Contextual action mode</div><div class="value">ActionMode class</div></div>
+        <div class="info-item"><div class="label">Checkable menu items</div><div class="value">MenuItem (android:checkable)</div></div>
+        <div class="info-item"><div class="label">Submenus support</div><div class="value">Options, Context, Popup — all support</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 9. DIALOG ========== -->
+  <section class="topic-section" id="dialog">
+    <div class="section-header">
+      <div class="section-icon">💬</div>
+      <div>
+        <div class="section-title">Dialog Boxes</div>
+        <div class="section-gu">Dialog — પ્રકારો અને ઉપયોગ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Dialog Types <span class="tag">EXAM</span></h3>
+      <table>
+        <tr><th>Dialog Type</th><th>Purpose</th></tr>
+        <tr><td><strong style="color:var(--accent)">AlertDialog</strong></td><td>General confirmation/information with buttons. Most common.</td></tr>
+        <tr><td><strong style="color:var(--blue)">ProgressDialog</strong></td><td>Shows loading spinner while operation runs</td></tr>
+        <tr><td><strong style="color:var(--orange)">DatePickerDialog</strong></td><td>Date selection calendar picker</td></tr>
+        <tr><td><strong style="color:var(--purple)">TimePickerDialog</strong></td><td>Time selection clock picker</td></tr>
+        <tr><td><strong style="color:var(--yellow)">Custom Dialog</strong></td><td>Any custom XML layout inflated as dialog</td></tr>
+      </table>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Modal Dialog</div><div class="value">BLOCKS background interaction</div></div>
+        <div class="info-item"><div class="label">Non-Modal Dialog</div><div class="value">Does NOT block background interaction</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>AlertDialog — Complete Example</h3>
+      <div class="code-box">AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+builder.setTitle("Confirm Delete");
+builder.setMessage("Are you sure you want to delete this?");
+
+// Positive button (OK/Yes)
+builder.setPositiveButton("Delete", (dialog, which) -> {
+    // delete logic
+});
+
+// Negative button (Cancel/No)
+builder.setNegativeButton("Cancel", (dialog, which) -> {
+    dialog.dismiss();
+});
+
+// Neutral button
+builder.setNeutralButton("Later", null);
+
+// Selectable list
+builder.setItems(new String[]{"Option A", "Option B"}, (d, i) -> { });
+
+// Single choice list
+builder.setSingleChoiceItems(items, checkedIndex, listener);
+
+// Multi choice list
+builder.setMultiChoiceItems(items, checkedItems, listener);
+
+// Prevent closing on outside touch
+builder.setCancelable(false);
+
+AlertDialog dialog = builder.create();
+dialog.show();    // Show dialog
+dialog.dismiss(); // Close dialog
+dialog.cancel();  // Cancel dialog</div>
+    </div>
+
+    <div class="card">
+      <h3>Custom Dialog</h3>
+      <div class="code-box">Dialog dialog = new Dialog(context);
+
+// Inflate custom layout
+View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null);
+dialog.setContentView(view);
+
+// Access views inside custom layout
+EditText input = view.findViewById(R.id.editInput);
+
+dialog.show();</div>
+    </div>
+
+    <div class="card">
+      <h3>Dialog Key Methods Summary</h3>
+      <table>
+        <tr><th>Method</th><th>Purpose</th></tr>
+        <tr><td><code>show()</code></td><td>Display dialog</td></tr>
+        <tr><td><code>dismiss()</code> / <code>cancel()</code></td><td>Close dialog</td></tr>
+        <tr><td><code>setTitle()</code></td><td>Set dialog title</td></tr>
+        <tr><td><code>setMessage()</code></td><td>Set message text</td></tr>
+        <tr><td><code>setPositiveButton()</code></td><td>OK / Yes button</td></tr>
+        <tr><td><code>setNegativeButton()</code></td><td>Cancel / No button</td></tr>
+        <tr><td><code>setCancelable(false)</code></td><td>Prevent close on outside touch</td></tr>
+        <tr><td><code>setItems()</code></td><td>Selectable list inside dialog</td></tr>
+        <tr><td><code>setSingleChoiceItems()</code></td><td>Radio button list</td></tr>
+        <tr><td><code>setMultiChoiceItems()</code></td><td>Checkbox list</td></tr>
+        <tr><td><code>AlertDialog.Builder</code></td><td>Builder class for AlertDialog</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 10. LISTVIEW & ADAPTER ========== -->
+  <section class="topic-section" id="listview">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div>
+        <div class="section-title">ListView, GridView & Adapters</div>
+        <div class="section-gu">ListView, GridView અને Adapters</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>ListView & GridView</h3>
+      <table>
+        <tr><th>Widget</th><th>Layout</th><th>Use</th></tr>
+        <tr><td><strong>ListView</strong></td><td>Vertical scrollable list</td><td>Simple lists (older approach)</td></tr>
+        <tr><td><strong>GridView</strong></td><td>2D scrollable grid</td><td>Photo galleries, icon grids</td></tr>
+        <tr><td><strong>ExpandableListView</strong></td><td>Collapsible/expandable groups</td><td>Category + item hierarchies</td></tr>
+        <tr><td><strong>Spinner</strong></td><td>Dropdown list</td><td>Form selection dropdowns</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Adapters — The Bridge between Data and View</h3>
+      <p>An <strong>Adapter</strong> acts as a bridge between data (array, database) and a view (ListView, Spinner, etc.). The Adapter pattern separates data from UI.</p>
+      <table>
+        <tr><th>Adapter</th><th>Data Source</th><th>Best For</th></tr>
+        <tr><td><strong style="color:var(--accent)">ArrayAdapter</strong></td><td>Array / List</td><td>Simple text lists, Spinner</td></tr>
+        <tr><td><strong style="color:var(--blue)">CursorAdapter</strong></td><td>Database Cursor</td><td>SQLite query results</td></tr>
+        <tr><td><strong style="color:var(--orange)">BaseAdapter</strong></td><td>Any custom source</td><td>Complex custom row layouts</td></tr>
+        <tr><td><strong style="color:var(--purple)">SimpleAdapter</strong></td><td>List of Maps</td><td>Flexible data mapping</td></tr>
+        <tr><td><strong style="color:var(--accent2)">RecyclerView.Adapter</strong></td><td>Any</td><td>RecyclerView (modern approach)</td></tr>
+      </table>
+      <div class="code-box">// ArrayAdapter example
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(
+    context, android.R.layout.simple_list_item_1, dataList);
+listView.setAdapter(adapter);
+
+// Handle item click
+listView.setOnItemClickListener((parent, view, position, id) -> {
+    String item = adapter.getItem(position);
+});
+
+// Update list data
+adapter.notifyDataSetChanged();</div>
+    </div>
+
+    <div class="card">
+      <h3>BaseAdapter — Required Methods</h3>
+      <div class="code-box">public class MyAdapter extends BaseAdapter {
+    @Override
+    public int getCount() { return data.size(); }  // item count
+
+    @Override
+    public Object getItem(int position) { return data.get(position); }
+
+    @Override
+    public long getItemId(int position) { return position; }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // create/inflate custom row view
+        return rowView;
+    }
+}</div>
+    </div>
+
+    <div class="card">
+      <h3>Spinner (Dropdown)</h3>
+      <div class="code-box">Spinner spinner = findViewById(R.id.spinner);
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(
+    this, android.R.layout.simple_spinner_item, items);
+adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+spinner.setAdapter(adapter);
+
+// Selection listener
+spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView&lt;?&gt; parent, View v, int pos, long id) {
+        String selected = parent.getItemAtPosition(pos).toString();
+    }
+    @Override
+    public void onNothingSelected(AdapterView&lt;?&gt; parent) {}
+});</div>
+    </div>
+  </section>
+
+  <!-- ========== 11. RECYCLERVIEW ========== -->
+  <section class="topic-section" id="recyclerview">
+    <div class="section-header">
+      <div class="section-icon">♻️</div>
+      <div>
+        <div class="section-title">RecyclerView — Modern List</div>
+        <div class="section-gu">RecyclerView — ListView નો આધુનિક વિકલ્પ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>RecyclerView vs ListView</h3>
+      <table>
+        <tr><th>Feature</th><th>ListView</th><th>RecyclerView</th></tr>
+        <tr><td>ViewHolder pattern</td><td>Optional</td><td>✅ Mandatory (efficient)</td></tr>
+        <tr><td>LayoutManager</td><td>Fixed vertical</td><td>✅ Flexible (Linear, Grid, Staggered)</td></tr>
+        <tr><td>Item animations</td><td>Limited</td><td>✅ Built-in</td></tr>
+        <tr><td>Drag & Drop</td><td>Limited</td><td>✅ ItemTouchHelper</td></tr>
+        <tr><td>Recommendation</td><td>Old approach</td><td>✅ RECOMMENDED</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>LayoutManagers</h3>
+      <table>
+        <tr><th>LayoutManager</th><th>Arrangement</th></tr>
+        <tr><td><strong>LinearLayoutManager</strong></td><td>Vertical or Horizontal list</td></tr>
+        <tr><td><strong>GridLayoutManager</strong></td><td>Grid (n columns)</td></tr>
+        <tr><td><strong>StaggeredGridLayoutManager</strong></td><td>Staggered (Pinterest-style) grid</td></tr>
+      </table>
+      <div class="code-box">RecyclerView rv = findViewById(R.id.recyclerView);
+
+// Linear (default vertical)
+rv.setLayoutManager(new LinearLayoutManager(context));
+
+// Horizontal
+rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
+// Grid
+rv.setLayoutManager(new GridLayoutManager(context, 3)); // 3 columns
+
+// Staggered
+rv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));</div>
+    </div>
+
+    <div class="card">
+      <h3>RecyclerView.Adapter with ViewHolder</h3>
+      <div class="code-box">public class MyAdapter extends RecyclerView.Adapter&lt;MyAdapter.ViewHolder&gt; {
+
+    // ViewHolder caches views for recycling
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView title;
+        ViewHolder(View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.textTitle);
+        }
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.item_row, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.title.setText(data.get(position));
+    }
+
+    @Override
+    public int getItemCount() { return data.size(); }
+}</div>
+      <p><strong>ViewHolder</strong> pattern caches views to avoid repeated <code>findViewById()</code> calls — makes scrolling smooth.</p>
+    </div>
+  </section>
+
+  <!-- ========== 12. ADVANCED UI ========== -->
+  <section class="topic-section" id="advanced">
+    <div class="section-header">
+      <div class="section-icon">✨</div>
+      <div>
+        <div class="section-title">Advanced UI Components</div>
+        <div class="section-gu">Advanced UI — ઉચ્ચ UI ઘટકો</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Advanced Components Quick Reference</h3>
+      <table>
+        <tr><th>Component</th><th>Purpose</th></tr>
+        <tr><td><strong>ViewPager</strong></td><td>Swipeable tabs/pages (left-right navigation)</td></tr>
+        <tr><td><strong>Fragment</strong></td><td>Reusable UI portion managed by FragmentManager</td></tr>
+        <tr><td><strong>AppBarLayout</strong></td><td>Collapsing toolbar effect</td></tr>
+        <tr><td><strong>NestedScrollView</strong></td><td>Handles nested scrolling between parent/child</td></tr>
+        <tr><td><strong>SwipeRefreshLayout</strong></td><td>Pull-to-refresh gesture support</td></tr>
+        <tr><td><strong>PopupWindow</strong></td><td>Manages popup UI windows</td></tr>
+        <tr><td><strong>HorizontalScrollView</strong></td><td>Horizontal scrolling container</td></tr>
+        <tr><td><strong>BottomNavigationView</strong></td><td>Bottom navigation bar</td></tr>
+        <tr><td><strong>CardView</strong></td><td>Card-style layout with shadow/elevation</td></tr>
+        <tr><td><strong>MotionLayout</strong></td><td>Constraint-based animations (extends ConstraintLayout)</td></tr>
+        <tr><td><strong>TransitionManager</strong></td><td>Manages transitions between activities/fragments; shared element transitions</td></tr>
+        <tr><td><strong>VectorDrawable</strong></td><td>Scalable vector graphics — crisp at any size</td></tr>
+        <tr><td><strong>BitmapFactory</strong></td><td>Loads images from files/resources efficiently</td></tr>
+        <tr><td><strong>ObjectAnimator</strong></td><td>Property animations (alpha, rotation, translation)</td></tr>
+        <tr><td><strong>AnimatorSet</strong></td><td>Controls layout animation timing</td></tr>
+        <tr><td><strong>DragEvent</strong></td><td>Handles drag and drop events</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Animations</h3>
+      <div class="code-box">// Property animation — fade out
+ObjectAnimator anim = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
+anim.setDuration(500);
+anim.start();
+
+// Layout transition — auto animate layout changes
+ViewGroup layout = findViewById(R.id.myLayout);
+LayoutTransition transition = new LayoutTransition();
+layout.setLayoutTransition(transition);
+
+// MotionLayout — define in XML with ConstraintSet start/end
+// Used for complex constraint-based animations</div>
+    </div>
+
+    <div class="card">
+      <h3>Resource Qualifiers — Adaptive UI</h3>
+      <p><strong>Resource qualifiers</strong> provide different resources for different screen sizes, orientations, languages:</p>
+      <div class="code-box">res/layout/         → default layout
+res/layout-land/    → landscape orientation
+res/layout-sw600dp/ → tablets (600dp min width)
+res/values-night/   → dark theme resources
+res/values-en/      → English locale
+res/drawable-hdpi/  → high DPI screen</div>
+      <p>This enables <strong>adaptive UI</strong> across phones, tablets, and foldables without hardcoded dimensions.</p>
+    </div>
+
+    <div class="card">
+      <h3>LayoutInflater — Dynamic Layout Loading</h3>
+      <div class="code-box">// Inflate XML layout at runtime
+LayoutInflater inflater = LayoutInflater.from(context);
+View rowView = inflater.inflate(R.layout.custom_row, parent, false);
+
+// Used in:
+// - Adapters (getView / onCreateViewHolder)
+// - Custom Dialogs
+// - Fragment onCreateView()</div>
+    </div>
+  </section>
+
+  <!-- ========== 13. SQLITE DATABASE ========== -->
+  <section class="topic-section" id="database">
+    <div class="section-header">
+      <div class="section-icon">🗄️</div>
+      <div>
+        <div class="section-title">SQLite Database</div>
+        <div class="section-gu">SQLite ડેટાબેઝ — Android Data Storage</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>SQLite Basics <span class="tag">EXAM CRITICAL</span></h3>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Type</div><div class="value">Serverless, embedded, relational DB</div></div>
+        <div class="info-item"><div class="label">Built into Android?</div><div class="value">✅ Yes — no setup needed</div></div>
+        <div class="info-item"><div class="label">Best for</div><div class="value">Structured relational data</div></div>
+        <div class="info-item"><div class="label">Key-value?</div><div class="value">No — use SharedPreferences</div></div>
+        <div class="info-item"><div class="label">Remote storage?</div><div class="value">No — use Firebase</div></div>
+        <div class="info-item"><div class="label">Main class</div><div class="value">SQLiteOpenHelper + SQLiteDatabase</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>SQLiteOpenHelper — Database Setup</h3>
+      <div class="code-box">public class MyDBHelper extends SQLiteOpenHelper {
+
+    private static final String DB_NAME = "mydb.db";
+    private static final int DB_VERSION = 1;  // version set in constructor
+
+    public MyDBHelper(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // Called FIRST TIME database is created
+        db.execSQL("CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Called when DB_VERSION changes
+        db.execSQL("DROP TABLE IF EXISTS users");
+        onCreate(db);
+    }
+}</div>
+    </div>
+
+    <div class="card">
+      <h3>CRUD Operations</h3>
+      <div class="code-box">SQLiteDatabase db;
+
+// ─── GET DATABASE ───────────────────────
+db = helper.getWritableDatabase();   // for INSERT/UPDATE/DELETE
+db = helper.getReadableDatabase();   // for SELECT queries only
+
+// ─── INSERT ─────────────────────────────
+ContentValues values = new ContentValues();
+values.put("name", "Raj");           // put() adds column→value
+values.put("age", 25);
+long rowId = db.insert("users", null, values);
+
+// ─── QUERY (SELECT) ─────────────────────
+Cursor cursor = db.query("users", null, "age>?", new String[]{"18"}, null, null, "name ASC");
+// OR:
+Cursor cursor = db.rawQuery("SELECT * FROM users WHERE age > 18 ORDER BY name", null);
+
+// Iterate cursor
+if (cursor.moveToFirst()) {
+    do {
+        int idx = cursor.getColumnIndex("name");
+        String name = cursor.getString(idx);
+    } while (cursor.moveToNext());
+}
+int count = cursor.getCount();  // number of rows
+cursor.close();                 // ALWAYS close cursor!
+
+// ─── UPDATE ─────────────────────────────
+ContentValues update = new ContentValues();
+update.put("age", 26);
+int rows = db.update("users", update, "name=?", new String[]{"Raj"});
+
+// ─── DELETE ─────────────────────────────
+int deleted = db.delete("users", "age<?", new String[]{"18"});
+
+// ─── CLEAR TABLE ────────────────────────
+db.execSQL("DELETE FROM users");
+
+// ─── DROP TABLE ─────────────────────────
+db.execSQL("DROP TABLE IF EXISTS users");
+
+// ─── CLOSE DATABASE ─────────────────────
+db.close();</div>
+    </div>
+
+    <div class="card">
+      <h3>Transactions — Bulk Performance</h3>
+      <div class="code-box">db.beginTransaction();         // start transaction
+try {
+    for (int i = 0; i < 1000; i++) {
+        db.insert("users", null, values);
+    }
+    db.setTransactionSuccessful(); // commit if all ok
+} finally {
+    db.endTransaction();           // end transaction (rollback if not successful)
+}</div>
+      <div class="alert tip">💡 Using transactions for bulk inserts is MUCH faster than individual inserts. All or nothing — if one fails, all rollback.</div>
+    </div>
+
+    <div class="card">
+      <h3>SQL Clauses Quick Reference</h3>
+      <table>
+        <tr><th>SQL Clause</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td><code>WHERE</code></td><td>Filter records</td><td><code>WHERE age > 18</code></td></tr>
+        <tr><td><code>ORDER BY</code></td><td>Sort records</td><td><code>ORDER BY name ASC</code></td></tr>
+        <tr><td><code>GROUP BY</code></td><td>Group records</td><td><code>GROUP BY city</code></td></tr>
+        <tr><td><code>CREATE TABLE</code></td><td>Create new table</td><td><code>CREATE TABLE users (...)</code></td></tr>
+        <tr><td><code>DROP TABLE</code></td><td>Delete table</td><td><code>DROP TABLE IF EXISTS users</code></td></tr>
+        <tr><td><code>INSERT INTO</code></td><td>Add record</td><td><code>INSERT INTO users VALUES (...)</code></td></tr>
+        <tr><td><code>SELECT</code></td><td>Query records</td><td><code>SELECT * FROM users</code></td></tr>
+        <tr><td><code>DELETE FROM</code></td><td>Remove records</td><td><code>DELETE FROM users WHERE id=1</code></td></tr>
+        <tr><td><code>UPDATE</code></td><td>Modify records</td><td><code>UPDATE users SET age=30 WHERE id=1</code></td></tr>
+        <tr><td><code>LIMIT</code></td><td>Limit results</td><td><code>LIMIT 10</code></td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Storage Types Comparison</h3>
+      <table>
+        <tr><th>Storage Type</th><th>Best For</th><th>Example Use</th></tr>
+        <tr><td><strong>SQLite</strong></td><td>Structured relational data</td><td>User accounts, orders, inventory</td></tr>
+        <tr><td><strong>SharedPreferences</strong></td><td>Simple key-value pairs</td><td>Settings, login state, theme preference</td></tr>
+        <tr><td><strong>Internal Storage</strong></td><td>Private files (deleted with app)</td><td>App cache, private documents</td></tr>
+        <tr><td><strong>External Storage</strong></td><td>Shared public files</td><td>Photos, downloads</td></tr>
+        <tr><td><strong>Firebase</strong></td><td>Remote/cloud data</td><td>Real-time sync, multi-device data</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 14. ROOM ========== -->
+  <section class="topic-section" id="room">
+    <div class="section-header">
+      <div class="section-icon">🏠</div>
+      <div>
+        <div class="section-title">Room Persistence Library</div>
+        <div class="section-gu">Room — SQLite ઉપર Abstract Layer</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Room — Modern SQLite Abstraction</h3>
+      <p>Room is part of Android Architecture Components. It provides an abstraction layer over SQLite, eliminating boilerplate code. Follows the <strong>MVVM / Repository pattern</strong>.</p>
+      <div class="code-box">// ① Entity (defines a table)
+@Entity(tableName = "users")
+public class User {
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+    public String name;
+    public int age;
+}
+
+// ② DAO (Data Access Object)
+@Dao
+public interface UserDao {
+    @Insert
+    void insert(User user);
+
+    @Query("SELECT * FROM users")
+    List&lt;User&gt; getAll();
+
+    @Delete
+    void delete(User user);
+}
+
+// ③ Database class
+@Database(entities = {User.class}, version = 1)
+public abstract class AppDatabase extends RoomDatabase {
+    public abstract UserDao userDao();
+}
+
+// Usage
+AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "mydb").build();
+db.userDao().insert(new User("Raj", 25));</div>
+      <table>
+        <tr><th>Annotation</th><th>Purpose</th></tr>
+        <tr><td><code>@Entity</code></td><td>Marks class as database table / defines schema</td></tr>
+        <tr><td><code>@Dao</code></td><td>Marks interface as DAO (data access object)</td></tr>
+        <tr><td><code>@Database</code></td><td>Marks class as the database definition</td></tr>
+        <tr><td><code>@Query</code></td><td>Marks a SELECT/other SQL query method</td></tr>
+        <tr><td><code>@Insert</code></td><td>Insert operation</td></tr>
+        <tr><td><code>@Delete</code></td><td>Delete operation</td></tr>
+        <tr><td><code>@Update</code></td><td>Update operation</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 15. SECURITY ========== -->
+  <section class="topic-section" id="security">
+    <div class="section-header">
+      <div class="section-icon">🔒</div>
+      <div>
+        <div class="section-title">Security & Permissions</div>
+        <div class="section-gu">Security — સુરક્ષા અને Permissions</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Permissions</h3>
+      <table>
+        <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+        <tr><td><strong>Normal</strong></td><td>Auto-granted at install</td><td>INTERNET, SET_ALARM</td></tr>
+        <tr><td><strong>Dangerous</strong></td><td>Requires runtime user approval (Android 6.0+)</td><td>CAMERA, READ_CONTACTS, LOCATION</td></tr>
+        <tr><td><strong>Signature</strong></td><td>Granted only to apps with same certificate</td><td>System apps</td></tr>
+      </table>
+      <div class="alert info">ℹ️ Android 6.0 Marshmallow introduced runtime permissions. Before that, all permissions were granted at install time.</div>
+      <div class="code-box">// In AndroidManifest.xml
+&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-permission android:name="android.permission.CAMERA" /&gt;
+
+// Runtime permission request (Android 6.0+)
+if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+    != PackageManager.PERMISSION_GRANTED) {
+    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
+}</div>
+    </div>
+
+    <div class="card">
+      <h3>Android Security Summary</h3>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">App Isolation</div><div class="value">Sandbox (unique Linux UID per app)</div></div>
+        <div class="info-item"><div class="label">Permission File</div><div class="value">AndroidManifest.xml</div></div>
+        <div class="info-item"><div class="label">Runtime Perms</div><div class="value">Android 6.0 Marshmallow+</div></div>
+        <div class="info-item"><div class="label">App Signing</div><div class="value">Developer key (keystore)</div></div>
+        <div class="info-item"><div class="label">Material Design</div><div class="value">Introduced in Android 5.0 Lollipop</div></div>
+        <div class="info-item"><div class="label">IPC Mechanism</div><div class="value">Binder (in Linux Kernel)</div></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end wrapper -->
+
+<footer>
+  <p>📱 Android OS Complete Study Guide for <span>PSI Exam 2026</span></p>
+  <p style="margin-top:6px;">All Topics: Architecture · Activity Lifecycle · Layouts · Toast · Menu · Dialog · ListView · RecyclerView · SQLite · Room · Security</p>
+</footer>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
