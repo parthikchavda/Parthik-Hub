@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Engineering Study Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .topic-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid #2a5298;
+        }
+        h2 {
+            color: #1e3c72;
+            margin-top: 0;
+            border-bottom: 2px solid #eceff1;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #f12711;
+            margin-top: 20px;
+        }
+        .badge {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .badge-imp {
+            background-color: #fce8e6;
+            color: #d93025;
+        }
+        .badge-formula {
+            background-color: #e6f4ea;
+            color: #137333;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .formula-box {
+            background-color: #f9f9f9;
+            border: 1px dashed #137333;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .dict-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .dict-table th, .dict-table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+        .dict-table th {
+            background-color: #f8f9fa;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e3c72;
+            color: white;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>કોમ્યુનિકેશન એન્જિનિયરિંગ (Communication Engineering)</h1>
+    <p>સંપૂર્ણ સિલેબસ: સરળ ગુજરાતી સમજૂતી, IMP પોઈન્ટ્સ અને સૂત્રો સાથે</p>
+</header>
+
+<div class="container">
+
+    <div class="topic-card">
+        <h2>1. Introduction to Communication Systems (કોમ્યુનિકેશન સિસ્ટમનો પરિચય)</h2>
+        <p><strong>સમજૂતી:</strong> માહિતીને (Information) એક જગ્યાએથી બીજી જગ્યાએ સફળતાપૂર્વક મોકલવાની પ્રક્રિયાને કોમ્યુનિકેશન સિસ્ટમ કહે છે. તેના મુખ્ય ત્રણ ભાગ છે: Transmitter (મોકલનાર), Channel (માધ્યમ) અને Receiver (મેળવનાર).</p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li><strong>Block Diagram:</strong> Input Source &rarr; Transmitter &rarr; Channel (સાથે Noise ઉમેરાય) &rarr; Receiver &rarr; Output.</li>
+            <li><strong>Noise:</strong> ચેનલમાં ઉત્પન્ન થતો અનિચ્છનીય સિગ્નલ જે ઓરિજિનલ સિગ્નલને બગાડે છે.</li>
+        </ul>
+
+        <h3><span class="badge badge-formula">મહત્વના સૂત્રો</span></h3>
+        <div class="formula-box">
+            Signal-to-Noise Ratio (SNR) = P_signal / P_noise <br>
+            Channel Capacity (Shannon Theorem): C = B * log2(1 + SNR) bps
+        </div>
+
+        <h3>અઘરા શબ્દોની સમજૂતી</h3>
+        <table class="dict-table">
+            <tr><th>શબ્દ</th><th>ગુજરાતી અર્થ</th><th>સરળ સમજૂતી</th></tr>
+            <tr><td>Transmitter</td><td>ટ્રાન્સમીટર</td><td>સિગ્નલને મોકલવા યોગ્ય બનાવતું સાધન.</td></tr>
+            <tr><td>Attenuation</td><td>સિગ્નલ નબળો પડવો</td><td>અંતર વધવાની સાથે સિગ્નલની તાકાત ઘટવી.</td></tr>
+        </ul>
+    </div>
+
+    <div class="topic-card">
+        <h2>2. AM (Amplitude Modulation)</h2>
+        <p><strong>સમજૂતી:</strong> જ્યારે કેરિયર સિગ્નલ (Carrier Signal) ના કંપનવિસ્તાર (Amplitude) ને મેસેજ સિગ્નલ પ્રમાણે બદલવામાં આવે, ત્યારે તેને AM કહે છે. આમાં ફ્રીક્વન્સી અચળ રહે છે.</p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li>AM નો ઉપયોગ શોર્ટવેવ અને મીડિયમવેવ બ્રોડકાસ્ટિંગ (AM Radio) માં થાય છે.</li>
+            <li>તેમાં મોડ્યુલેશન ઈન્ડેક્સ ($m$) ની કિંમત 0 થી 1 ની વચ્ચે હોવી જોઈએ. જો $m > 1$ થાય તો ઓવર-મોડ્યુલેશન (ડિસ્ટોર્શન) થાય છે.</li>
+        </ul>
+
+        <h3><span class="badge badge-formula">મહત્વના સૂત્રો</span></h3>
+        <div class="formula-box">
+            Modulation Index: m = Am / Ac <br>
+            Total Power: Pt = Pc * (1 + (m² / 2)) <br>
+            Bandwidth: BW = 2 * fm
+        </div>
+    </div>
+
+    <div class="topic-card">
+        <h2>3. FM & PM (Frequency & Phase Modulation)</h2>
+        <p><strong>સમજૂતી:</strong> 
+            <br><strong>FM:</strong> મેસેજ સિગ્નલ પ્રમાણે કેરિયરની ફ્રીક્વન્સી બદલાય છે.
+            <br><strong>PM:</strong> મેસેજ સિગ્નલ પ્રમાણે કેરિયરનો ફેઝ (Phase) બદલાય છે.
+        </p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li>FM માં અવાજની ગુણવત્તા (Quality) AM કરતા બહુ જ સારી હોય છે કારણ કે તેમાં નોઈઝની અસર ઓછી થાય છે.</li>
+            <li>FM ની બેન્ડવિડ્થ (Bandwidth) AM કરતા વધારે હોય છે.</li>
+        </ul>
+
+        <h3><span class="badge badge-formula">મહત્વના સૂત્રો</span></h3>
+        <div class="formula-box">
+            FM Modulation Index: β = Δf / fm  (જ્યાં Δf = Frequency Deviation)<br>
+            Carson's Rule for FM BW: BW = 2 * (Δf + fm)
+        </div>
+    </div>
+
+    <div class="topic-card">
+        <h2>4. AM & FM Radio Receivers (રેડિયો રિસીવર)</h2>
+        <p><strong>સમજૂતી:</strong> હવામાં રહેલા રેડિયો સિગ્નલને પકડીને તેમાંથી ઓરિજિનલ અવાજ છૂટો પાડતા સાધનને રિસીવર કહે છે. આજના સમયમાં <strong>Superheterodyne Receiver</strong> સૌથી વધુ વપરાય છે.</p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li><strong>Superheterodyne Principle:</strong> આવતા હાઈ-ફ્રીક્વન્સી સિગ્નલને એક ફિક્સ ઓછી ફ્રીક્વન્સીમાં બદલવામાં આવે છે જેને Intermediate Frequency (IF) કહે છે.</li>
+            <li>AM માટે IF = 455 kHz અને FM માટે IF = 10.7 MHz હોય છે.</li>
+            <li><strong>Selectivity:</strong> ઘણા બધા સ્ટેશનમાંથી કોઈ એક જ સ્ટેશન પસંદ કરવાની ક્ષમતા.</li>
+            <li><strong>Sensitivity:</strong> નબળામાં નબળા સિગ્નલને પણ પકડવાની ક્ષમતા.</li>
+        </ul>
+    </div>
+
+    <div class="topic-card">
+        <h2>5. Antenna & Wave Propagation (એન્ટેના અને તરંગ પ્રસરણ)</h2>
+        <p><strong>સમજૂતી:</strong> એન્ટેના એવું સાધન છે જે ઈલેક્ટ્રિકલ સિગ્નલને ઈલેક્ટ્રોમેગ્નેટિક (EM) વેવ્સમાં અને EM વેવ્સને ઈલેક્ટ્રિકલ સિગ્નલમાં રૂપાંતરિત કરે છે. તરંગો હવામાં કેવી રીતે પ્રસરણ પામે છે તેને Wave Propagation કહે છે.</p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li><strong>Ground Wave:</strong> પૃથ્વીની સપાટી પરથી પ્રસરણ પામે (Low Frequency).</li>
+            <li><strong>Sky Wave:</strong> આયોનોસ્ફિયર (Ionosphere) માંથી પરાવર્તન પામીને પાછા આવે (Short wave).</li>
+            <li><strong>Space Wave:</strong> લાઈન ઓફ સાઈટ (LOS) - સીધી રેખામાં પ્રસરણ પામે (FM, TV, Satellite).</li>
+        </ul>
+
+        <h3><span class="badge badge-formula">મહત્વના સૂત્રો</span></h3>
+        <div class="formula-box">
+            Antenna Length (Half-wave Dipole): L = λ / 2  (જ્યાં λ = c / f)
+        </div>
+    </div>
+
+    <div class="topic-card">
+        <h2>6. SSB Techniques & Receivers (Single Sideband)</h2>
+        <p><strong>સમજૂતી:</strong> સામાન્ય AM માં કેરિયર અને બે સાઈડબેન્ડ (USB અને LSB) હોય છે, જેમાં પાવરનો બગાડ થાય છે. પાવર અને બેન્ડવિડ્થ બચાવવા માટે માત્ર એક જ સાઈડબેન્ડ મોકલવાની પદ્ધતિને SSB કહે છે.</p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li>SSB માં 83.3% પાવરની બચત થાય છે અને બેન્ડવિડ્થ અડધી (ફક્ત $f_m$) થઈ જાય છે.</li>
+            <li>SSB જનરેટ કરવાની પદ્ધતિઓ: Filter Method, Phase Shift Method.</li>
+        </ul>
+    </div>
+
+    <div class="topic-card">
+        <h2>7. Pulse & Digital Modulation (પલ્સ અને ડિજિટલ મોડ્યુલેશન)</h2>
+        <p><strong>સમજૂતી:</strong> એનાલોગ સિગ્નલને ડિજિટલ ફોર્મમાં ફેરવવા માટેની આ પદ્ધતિઓ છે. આજના આધુનિક કોમ્યુનિકેશનનો પાયો આ ટોપિક છે.</p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li><strong>PAM, PWM, PPM:</strong> પલ્સ એનાલોગ મોડ્યુલેશનના પ્રકારો છે.</li>
+            <li><strong>PCM (Pulse Code Modulation):</strong> આ શુદ્ધ ડિજિટલ મોડ્યુલેશન છે. તેના ત્રણ સ્ટેપ છે: Sampling &rarr; Quantization &rarr; Encoding.</li>
+            <li><strong>Digital Modulation:</strong> ASK (Amplitude Shift Keying), FSK (Frequency Shift Keying), PSK (Phase Shift Keying).</li>
+        </ul>
+
+        <h3><span class="badge badge-formula">મહત્વના સૂત્રો</span></h3>
+        <div class="formula-box">
+            Sampling Theorem (Nyquist Rate): fs ≥ 2 * fm
+        </div>
+    </div>
+
+    <div class="topic-card">
+        <h2>8. Source Coding, Multiplexing & Data Communication</h2>
+        <p><strong>સમજૂતી:</strong> 
+            <br><strong>Source Coding:</strong> ડેટાનું કમ્પ્રેસન કરવું જેથી ઓછા બિટ્સ વાપરવા પડે (દા.ત. Huffman Coding).
+            <br><strong>Multiplexing:</strong> એક જ ચેનલ કે વાયરમાંથી એકસાથે એકથી વધુ સિગ્નલ મોકલવાની ટેકનિક.
+        </p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li><strong>FDM (Frequency Division Multiplexing):</strong> અલગ-અલગ ફ્રીક્વન્સી આપીને સિગ્નલ મોકલાય (એનાલોગ).</li>
+            <li><strong>TDM (Time Division Multiplexing):</strong> અલગ-અલગ ટાઈમ સ્લોટ આપીને સિગ્નલ મોકલાય (ડિજિટલ).</li>
+            <li><strong>Data Communication:</strong> કમ્પ્યુટર્સ વચ્ચે થતી ડેટાની આપ-લે. સિમ્પલેક્સ (એકતરફી), હાફ-ડુપ્લેક્સ (વારાફરતી બંને તરફ), ફુલ-ડુપ્લેક્સ (એકસાથે બંને તરફ).</li>
+        </ul>
+    </div>
+
+    <div class="topic-card">
+        <h2>9. Telephone Networks & Switching (ટેલિફોન નેટવર્ક અને સ્વિચિંગ)</h2>
+        <p><strong>સમજૂતી:</strong> લાખો યુઝર્સને એકબીજા સાથે ટેલિફોન લાઈન દ્વારા જોડવાની આખી સિસ્ટમ અને વિજ્ઞાન.</p>
+        
+        <h3><span class="badge badge-imp">IMP પોઈન્ટ્સ</span></h3>
+        <ul>
+            <li><strong>Speech Digitization:</strong> આપણો અવાજ એનાલોગ છે, તેને ટેલિફોન લાઈનમાં મોકલવા માટે PCM દ્વારા 64 kbps ના ડિજિટલ સિગ્નલમાં ફેરવવામાં આવે છે.</li>
+            <li><strong>Space Division Switching:</strong> કનેક્શન બનાવવા માટે અલગ ભૌતિક રસ્તો (Physical Path) આપવામાં આવે છે (દા.ત. Crossbar Switch).</li>
+            <li><strong>Time Division Switching:</strong> TDM નો ઉપયોગ કરીને અલગ-અલગ ટાઈમ સ્લોટ બદલીને કનેક્શન કરાય છે.</li>
+            <li><strong>Traffic Engineering:</strong> નેટવર્ક પર કેટલો લોડ (કોલ) છે અને કેટલી લાઈનો જોઈશે તેનું મેનેજમેન્ટ.</li>
+        </ul>
+
+        <h3><span class="badge badge-formula">મહત્વના સૂત્રો</span></h3>
+        <div class="formula-box">
+            Traffic Intensity (Erlang): A = C * H / T <br>
+            (જ્યાં C = કોલની સંખ્યા, H = સરેરાશ કોલનો સમય, T = કુલ સમય)
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Communication Engineering Study Portal | એન્જિનિયરિંગ અભ્યાસ સરળ ભાષામાં</p>
+</footer>
+
+</body>
+</html>
