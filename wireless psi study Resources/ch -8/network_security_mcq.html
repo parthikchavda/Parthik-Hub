@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Security MCQ | નેટવર્ક સિક્યુરિટી MCQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Rajdhani:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --card: #1a2235;
+    --border: #2a3a55;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+  }
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a0533 50%, #0a1628 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 20px 24px;
+    text-align: center;
+    position: sticky;
+    /* top: 0; */
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0,212,255,0.15);
+  }
+  .header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(18px, 4vw, 28px);
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+  .header p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .lang-toggle {
+    display: inline-flex;
+    background: var(--border);
+    border-radius: 30px;
+    padding: 4px;
+    margin-top: 12px;
+    gap: 2px;
+  }
+  .lang-btn {
+    padding: 6px 18px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.3s;
+    color: var(--muted);
+    background: transparent;
+    letter-spacing: 1px;
+  }
+  .lang-btn.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    box-shadow: 0 2px 12px rgba(0,212,255,0.4);
+  }
+  /* Category tabs */
+  .cat-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  .cat-tabs::-webkit-scrollbar { display: none; }
+  .cat-btn {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .cat-btn.active, .cat-btn:hover {
+    background: var(--accent2);
+    color: white;
+    border-color: var(--accent2);
+  }
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .stat-val.correct { color: var(--success); }
+  .stat-val.wrong { color: var(--error); }
+  .stat-val.total { color: var(--accent); }
+  .stat-val.score { color: var(--warning); }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  /* Main content */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+  }
+  /* Question card */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .q-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--border);
+    border-radius: 4px 0 0 4px;
+    transition: all 0.3s;
+  }
+  .q-card.answered-correct::before { background: var(--success); }
+  .q-card.answered-wrong::before { background: var(--error); }
+  .q-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .q-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(124,58,237,0.2);
+    color: var(--accent2);
+    border: 1px solid rgba(124,58,237,0.3);
+  }
+  .q-text {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  .q-text-gu {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-weight: 400;
+    line-height: 1.8;
+  }
+  /* Options */
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 540px) {
+    .options { grid-template-columns: 1fr; }
+  }
+  .opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    text-align: left;
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+  .opt-btn:hover:not(:disabled) {
+    background: rgba(0,212,255,0.08);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .opt-key {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .opt-btn.correct {
+    background: rgba(16,185,129,0.15);
+    border-color: var(--success);
+    color: var(--success);
+  }
+  .opt-btn.correct .opt-key { background: var(--success); color: white; }
+  .opt-btn.wrong {
+    background: rgba(239,68,68,0.15);
+    border-color: var(--error);
+    color: var(--error);
+  }
+  .opt-btn.wrong .opt-key { background: var(--error); color: white; }
+  .opt-btn.reveal-correct {
+    background: rgba(16,185,129,0.08);
+    border-color: rgba(16,185,129,0.4);
+    color: var(--success);
+  }
+  .opt-btn:disabled { cursor: default; }
+  .opt-text-gu {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 12px;
+    color: var(--muted);
+    display: block;
+    font-weight: 400;
+  }
+  /* Result badge */
+  .result-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .result-badge.correct {
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--success);
+  }
+  .result-badge.wrong {
+    background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: var(--error);
+  }
+  /* Reset button */
+  .reset-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 12px 22px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+    transition: all 0.3s;
+    z-index: 50;
+  }
+  .reset-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(124,58,237,0.5); }
+  /* Hidden */
+  .hidden { display: none !important; }
+  /* Section heading */
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 20px 0 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚡ NETWORK SECURITY MCQ</h1>
+  <p>નેટવર્ક સિક્યુરિટી પ્રેક્ટિસ ટેસ્ટ | 165 Questions</p>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-gu" onclick="setLang('gu')">🇮🇳 ગુજરાતી</button>
+    <button class="lang-btn" id="btn-both" onclick="setLang('both')">EN + ગુ</button>
+  </div>
+</div>
+
+<div class="cat-tabs">
+  <button class="cat-btn active" onclick="filterCat('all')">All / બધા (165)</button>
+  <button class="cat-btn" onclick="filterCat('principles')">Security Principles (43)</button>
+  <button class="cat-btn" onclick="filterCat('system')">System Security (26)</button>
+  <button class="cat-btn" onclick="filterCat('modular')">Modular Arithmetic (26)</button>
+  <button class="cat-btn" onclick="filterCat('symmetric')">Symmetric Encryption (24)</button>
+  <button class="cat-btn" onclick="filterCat('asymmetric')">Asymmetric / PKI (27)</button>
+  <button class="cat-btn" onclick="filterCat('os')">OS Security (25)</button>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val total" id="stat-total">165</div><div class="stat-label">Total / કુલ</div></div>
+  <div class="stat"><div class="stat-val total" id="stat-attempted">0</div><div class="stat-label">Attempted / પ્રયત્ન</div></div>
+  <div class="stat"><div class="stat-val correct" id="stat-correct">0</div><div class="stat-label">Correct / સાચા</div></div>
+  <div class="stat"><div class="stat-val wrong" id="stat-wrong">0</div><div class="stat-label">Wrong / ખોટા</div></div>
+  <div class="stat"><div class="stat-val score" id="stat-score">0%</div><div class="stat-label">Score / સ્કોર</div></div>
+</div>
+
+<div class="content" id="mcq-container"></div>
+
+<button class="reset-btn" onclick="resetAll()">↺ Reset / રીસેટ</button>
+
+<script>
+const mcqs = [
+  // === SECURITY PRINCIPLES (Q1-43) ===
+  {id:1,cat:'principles',
+   en:"Which principle of information security ensures that data is accessible only to authorized users?",
+   gu:"કઈ માહિતી સુરક્ષા સિદ્ધાંત ખાતરી આપે છે કે ડેટા ફક્ત અધિકૃત વપરાશકર્તાઓ માટે સુલભ છે?",
+   opts:[{k:'A',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'B',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'C',en:"Integrity",gu:"અખંડિતતા"},{k:'D',en:"Accountability",gu:"જવાબદારી"}],
+   ans:'A'},
+  {id:2,cat:'principles',
+   en:"If an unauthorized user modifies stored data, which security objective is primarily violated?",
+   gu:"જો અનધિકૃત વ્યક્તિ સ્ટોર કરેલ ડેટા સુધારે, તો કઈ સુરક્ષા ઉદ્દેશ્ય ભંગ થાય?",
+   opts:[{k:'A',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'B',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'C',en:"Accountability",gu:"જવાબદારી"},{k:'D',en:"Integrity",gu:"અખંડિતતા"}],
+   ans:'D'},
+  {id:3,cat:'principles',
+   en:"A system that verifies user identity before granting access is implementing:",
+   gu:"ઍક્સેસ આપતા પહેલા વ્યક્તિની ઓળખ ચકાસતી સિસ્ટમ શું અમલ કરી રહી છે?",
+   opts:[{k:'A',en:"Encryption",gu:"એન્ક્રિપ્શન"},{k:'B',en:"Authentication",gu:"પ્રમાણીકરણ"},{k:'C',en:"Backup",gu:"બેકઅપ"},{k:'D',en:"Compression",gu:"સંકોચન"}],
+   ans:'A'},
+  {id:4,cat:'principles',
+   en:"If a message is encrypted using a receiver's public key, it can be decrypted using the:",
+   gu:"જો સ્વીકારનારની સાર્વજનિક ચાવી વડે સંદેશ એન્ક્રિપ્ટ થયો હોય, તો તેને ક્યા વડે ડિક્રિપ્ટ કરી શકાય?",
+   opts:[{k:'A',en:"Sender's public key",gu:"મોકલનારની સાર્વજનિક ચાવી"},{k:'B',en:"Receiver's private key",gu:"સ્વીકારનારની ખાનગી ચાવી"},{k:'C',en:"Receiver's public key",gu:"સ્વીકારનારની સાર્વજનિક ચાવી"},{k:'D',en:"Sender's private key",gu:"મોકલનારની ખાનગી ચાવી"}],
+   ans:'A'},
+  {id:5,cat:'principles',
+   en:"Information security policies are primarily designed to:",
+   gu:"માહિતી સુરક્ષા નીતિઓ મુખ્યત્વે શા માટે ઘડાય છે?",
+   opts:[{k:'A',en:"Increase internet speed",gu:"ઇન્ટરનેટ ગતિ વધારવા"},{k:'B',en:"Guide secure behavior and practices",gu:"સુરક્ષિત વ્યવહાર અને પ્રથાઓ માર્ગદર્શન"},{k:'C',en:"Reduce hardware cost",gu:"હાર્ડવેર ખર્ચ ઘટાડવા"},{k:'D',en:"Replace encryption methods",gu:"એન્ક્રિપ્શન પદ્ધતિ બદલવા"}],
+   ans:'A'},
+  {id:6,cat:'principles',
+   en:"Which security principle ensures that system resources are usable whenever required by authorized users?",
+   gu:"કઈ સુરક્ષા સિદ્ધાંત ખાતરી કરે છે કે સિસ્ટમ સ્ત્રોત જ્યારે જરૂર હોય ત્યારે ઉપલબ્ધ છે?",
+   opts:[{k:'A',en:"Integrity",gu:"અખંડિતતા"},{k:'B',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'C',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'D',en:"Authenticity",gu:"પ્રામાણિકતા"}],
+   ans:'B'},
+  {id:7,cat:'principles',
+   en:"A system that verifies identity using passwords before access is enforcing:",
+   gu:"ઍક્સેસ પહેલા પાસવર્ડ વડે ઓળખ ચકાસનારી સિસ્ટમ શું અમલ કરે છે?",
+   opts:[{k:'A',en:"Authentication",gu:"પ્રમાણીકરણ"},{k:'B',en:"Authorization",gu:"અધિકૃતતા"},{k:'C',en:"Accounting",gu:"એકાઉન્ટિંગ"},{k:'D',en:"Auditing",gu:"ઑડિટિંગ"}],
+   ans:'A'},
+  {id:8,cat:'principles',
+   en:"Which property ensures that a sender cannot deny sending a message?",
+   gu:"કઈ મિલ્કત ખાતરી આપે છે કે મોકલનાર સંદેશ મોકલ્યો હોવાનો ઇનકાર ન કરી શકે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Non-repudiation",gu:"નોન-રિપ્યુડિએશન"},{k:'D',en:"Availability",gu:"ઉપલબ્ધતા"}],
+   ans:'C'},
+  {id:9,cat:'principles',
+   en:"Which security goal ensures that information is not altered without detection?",
+   gu:"કઈ સુરક્ષા ઉદ્દેશ ખાતરી કરે છે કે જ્ઞાાન વિના માહિતી બદલાઈ ન જાય?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Scalability",gu:"સ્કેલેબિલિટી"}],
+   ans:'B'},
+  {id:10,cat:'principles',
+   en:"Which security mechanism confirms a user's claimed identity before system access is granted?",
+   gu:"સિસ્ટમ ઍક્સેસ અપાતા પહેલા ઉપયોગકર્તાની ઓળખ ચકાસવા કઈ પ્રક્રિયા ઉપયોગ થાય?",
+   opts:[{k:'A',en:"Authentication",gu:"પ્રમાણીકરણ"},{k:'B',en:"Encryption",gu:"એન્ક્રિપ્શન"},{k:'C',en:"Compression",gu:"સંકોચન"},{k:'D',en:"Backup",gu:"બેકઅપ"}],
+   ans:'A'},
+  {id:11,cat:'principles',
+   en:"Which attack involves secretly observing communication without altering it?",
+   gu:"કઈ હુમલો સામગ્રી બદલ્યા વગર ગુપ્ત રીતે સંચાર નિહાળે?",
+   opts:[{k:'A',en:"Eavesdropping",gu:"ઈવ્સડ્રૉપિંગ"},{k:'B',en:"Spoofing",gu:"સ્પૂફિંગ"},{k:'C',en:"Injection",gu:"ઇન્જેક્શન"},{k:'D',en:"Modification",gu:"ફેરફાર"}],
+   ans:'A'},
+  {id:12,cat:'principles',
+   en:"Which situation best illustrates a violation of availability?",
+   gu:"ઉપલબ્ધતા ભંગ માટે કઈ પરિસ્થિતિ સૌથી સારી ઉદાહરણ છે?",
+   opts:[{k:'A',en:"Data leakage",gu:"ડેટા લીકેજ"},{k:'B',en:"Data alteration",gu:"ડેટા ફેરફાર"},{k:'C',en:"Identity theft",gu:"ઓળખ ચોરી"},{k:'D',en:"System crash preventing access",gu:"સિસ્ટમ ક્રેશ ઍક્સેસ રોકે"}],
+   ans:'D'},
+  {id:13,cat:'principles',
+   en:"Which property ensures that data has not been altered during transmission?",
+   gu:"કઈ ગુણ ખાતરી આપે છે કે ટ્રાન્સ-મિશન દરમ્યાન ડેટા બદલાયો નથી?",
+   opts:[{k:'A',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'B',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'C',en:"Integrity",gu:"અખંડિતતા"},{k:'D',en:"Accessibility",gu:"સુલભ્યતા"}],
+   ans:'C'},
+  {id:14,cat:'principles',
+   en:"Which practice best strengthens password security?",
+   gu:"કઈ પ્રેક્ટિસ પાસવર્ડ સુરક્ષાને શ્રેષ્ઠ રીતે મજબૂત બનાવે?",
+   opts:[{k:'A',en:"Using complex combinations",gu:"જટિલ સંયોજન ઉપયોગ"},{k:'B',en:"Sharing passwords",gu:"પાસવર્ડ શેર કરવા"},{k:'C',en:"Writing passwords publicly",gu:"જાહેરમાં પાસવર્ડ લખવા"},{k:'D',en:"Reusing old passwords",gu:"જૂના પાસવર્ડ ફરી વાપરવા"}],
+   ans:'A'},
+  {id:15,cat:'principles',
+   en:"Which security objective ensures that information is accessible only to authorized entities and hidden from others?",
+   gu:"કઈ સુરક્ષા ઉદ્દેશ ખાતરી કરે છે કે માહિતી ફક્ત અધિકૃત સ્ત્રોત માટે ઉપલબ્ધ?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Accountability",gu:"જવાબદારી"}],
+   ans:'A'},
+  {id:16,cat:'principles',
+   en:"Which concept confirms that a message truly originates from the claimed sender?",
+   gu:"સ્ત્રોત સ્ત્રોત (sender) ખરો છે તેની ખાતરી કઈ ખ્યાલ કરે?",
+   opts:[{k:'A',en:"Authentication",gu:"પ્રમાણીકરણ"},{k:'B',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'C',en:"Compression",gu:"સંકોચન"},{k:'D',en:"Redundancy",gu:"રિડન્ડન્સી"}],
+   ans:'A'},
+  {id:17,cat:'principles',
+   en:"Which threat aims to make a system resource unavailable to legitimate users?",
+   gu:"કઈ ધમકી કાયદેસર ઉપયોગકર્તાઓ માટે સિસ્ટમ સ્ત્રોત અનુપ-લ્બ્ધ બનાવવા ધ્યેય રાખે?",
+   opts:[{k:'A',en:"Phishing",gu:"ફિશિંગ"},{k:'B',en:"Spoofing",gu:"સ્પૂફિંગ"},{k:'C',en:"Sniffing",gu:"સ્નિફિંગ"},{k:'D',en:"Denial of service",gu:"ડિનાઇલ ઓફ સર્વિસ"}],
+   ans:'D'},
+  {id:18,cat:'principles',
+   en:"Which goal ensures sensitive information is not disclosed to unauthorized parties?",
+   gu:"કઈ ઉદ્દેશ ખાતરી કરે છે કે ગુપ્ત માહિતી અનધિ-કૃત પક્ષોને ન મળે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Traceability",gu:"ટ્રેસેબિ-લિટી"}],
+   ans:'A'},
+  {id:19,cat:'principles',
+   en:"Which principle ensures actions performed in a system can be traced to a specific user?",
+   gu:"કઈ સિદ્ધાંત ખાતરી કરે છે કે સિસ્ટમ ક્રિયાઓ ચોક્કસ ઉ-પ-ય-ો-ગ-ક-ર્-ત-ા-ન-ે-  trace કરી શકાય?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપ-નીયતા"},{k:'B',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'C',en:"Accountability",gu:"જ-વ-ા-બ-દ-ા-ર-ી"},{k:'D',en:"Redundancy",gu:"ર-િ-ડ-ન-્-ડ-ન-્-સ-ી"}],
+   ans:'C'},
+  {id:20,cat:'principles',
+   en:"Which security objective ensures that data is not modified without authorization?",
+   gu:"કઈ સુ-ર-ક-્-ષ-ા ઉ-દ-્-દ-ે-શ ખ-ા-ત-ર-ી ક-ર-ે ક-ે ડ-ે-ટ-ા અ-ન-ધ-િ-ક-ૃ-ત ર-ી-ત-ે ન-ા બ-દ-લ-ા-ય?",
+   opts:[{k:'A',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'B',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'C',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'D',en:"Portability",gu:"પ-ો-ર-્-ટ-ે-બ-િ-લ-િ-ટ-ી"}],
+   ans:'A'},
+  {id:21,cat:'principles',
+   en:"Which security mechanism ensures that data remains accessible during system upgrades?",
+   gu:"સિ-સ-્-ટ-મ અ-પ-ગ-્-ર-ે-ડ દ-ર-મ-્-ય-ા-ન ડ-ે-ટ-ા ઉ-પ-લ-બ-્-ધ ર-હ-ે ત-ે-ન-ી ખ-ા-ત-ર-ી ક-ઈ ક-ર-ે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'B',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'C',en:"Authentication",gu:"પ-્-ર-મ-ા-ણ-ી-ક-ર-ણ"},{k:'D',en:"Encryption",gu:"એ-ન-્-ક-્-ર-િ-પ-્-શ-ન"}],
+   ans:'B'},
+  {id:22,cat:'principles',
+   en:"Which term describes assurance that a message was not altered during transmission?",
+   gu:"ટ-્-ર-ા-ન-્-સ-મ-િ-શ-ન દ-ર-મ-્-ય-ા-ન સ-ં-દ-ે-શ ન-ા બ-દ-લ-ા-ય-ો-ત-ે-ન-ો ખ-ા-ત-ર-ી ક-ઈ?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'B',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'C',en:"Scalability",gu:"સ-્-ક-ે-લ-ે-બ-િ-લ-િ-ટ-ી"},{k:'D',en:"Redundancy",gu:"ર-િ-ડ-ન-્-ડ-ન-્-સ-ી"}],
+   ans:'B'},
+  {id:23,cat:'principles',
+   en:"Which security goal focuses on preventing unauthorized disclosure of information?",
+   gu:"ક-ઈ સ-ુ-ર-ક-્-ષ-ા ઉ-દ-્-દ-ે-શ અ-ન-ધ-િ-ક-ૃ-ત ખ-ુ-લ-ા-સ-ા ર-ો-ક-વ-ા ઉ-પ-ર ધ-્-ય-ા-ન ક-ે-ન-્-દ-્-ર-િ-ત ક-ર-ે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'B',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'C',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'D',en:"Durability",gu:"ટ-ક-ા-ઉ-પ-ણ-ા"}],
+   ans:'A'},
+  {id:24,cat:'principles',
+   en:"Which concept ensures that a sender cannot deny sending a message later?",
+   gu:"ક-ઈ ખ-્-ય-ા-લ ખ-ા-ત-ર-ી ક-ર-ે ક-ે ભ-વ-િ-ષ-્-ય-મ-ા-ં મ-ો-ક-લ-ન-ા-ર ઇ-ન-ક-ા-ર ન-ા ક-ર-ી-ત-ે?",
+   opts:[{k:'A',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'B',en:"Non-repudiation",gu:"ન-ો-ન-ર-િ-પ-્-ય-ૂ-ડ-િ-એ-શ-ન"},{k:'C',en:"Compression",gu:"સ-ં-ક-ો-ચ-ન"},{k:'D',en:"Redundancy",gu:"ર-િ-ડ-ન-્-ડ-ન-્-સ-ી"}],
+   ans:'B'},
+  {id:25,cat:'principles',
+   en:"Which property ensures systems continue functioning even during faults?",
+   gu:"ક-ઈ ગ-ુ-ણ ખ-ા-ત-ર-ી ક-ર-ે ક-ે ખ-ા-મ-ી-ઓ-ઓ-દ-ર-મ-્-ય-ા-ન-ઃ સ-િ-સ-્-ટ-મ ચ-ા-લ-ુ ર-હ-ે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'B',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'C',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'D',en:"Obscurity",gu:"અ-સ-્-પ-ષ-્-ટ-ત-ા"}],
+   ans:'C'},
+  {id:26,cat:'principles',
+   en:"Which security principle ensures that information is accessible only to authorized users?",
+   gu:"ક-ઈ સ-ુ-ર-ક-્-ષ-ા સ-િ-દ-્-ધ-ા-ં-ત ખ-ા-ત-ર-ી ક-ર-ે ક-ે ફ-ક-્-ત ય-ો-ગ-્-ય ઉ-પ-ય-ો-ગ-ક-ર-્-ત-ા ઍ-ક-્-સ-ે-સ ક-ર-ી-ત-ે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'B',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'C',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'D',en:"Traceability",gu:"ટ-્-ર-ે-સ-ે-બ-િ-લ-િ-ટ-ી"}],
+   ans:'A'},
+  {id:27,cat:'principles',
+   en:"Which property ensures that data remains accurate and unaltered?",
+   gu:"ક-ઈ ગ-ુ-ણ ખ-ા-ત-ર-ી ક-ર-ે ક-ે ડ-ે-ટ-ા ચ-ો-ક-ક-સ-ઃ અ-ન-ે ન-ા-ઃ બ-દ-લ-ા-ય-ે-લ-ો-ઃ ર-હ-ે?",
+   opts:[{k:'A',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'B',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'C',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'D',en:"Portability",gu:"પ-ો-ર-્-ટ-ે-બ-િ-લ-િ-ટ-ી"}],
+   ans:'C'},
+  {id:28,cat:'principles',
+   en:"Which security goal ensures systems remain functional during failures?",
+   gu:"ક-ઈ ઉ-દ-્-દ-ે-શ ખ-ા-ત-ર-ી ક-ર-ે ક-ે-ઃ ન-િ-ષ-્-ફ-ળ-ત-ા-ઃ દ-ર-મ-્-ય-ા-ન-ઃ સ-િ-સ-્-ટ-મ-ઃ ક-ા-ર-્-ય-ઃ ર-હ-ે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'B',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'C',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'D',en:"Isolation",gu:"આ-ઈ-સ-ો-લ-ે-શ-ન"}],
+   ans:'C'},
+  {id:29,cat:'principles',
+   en:"Which property ensures a sender cannot deny sending a message?",
+   gu:"ક-ઈ ગ-ુ-ણ ખ-ા-ત-ર-ી ક-ર-ે ક-ે-ઃ મ-ો-ક-લ-ન-ા-ર-ઃ ઇ-ન-ક-ા-ર-ઃ ન-ા-ઃ ક-ર-ી-ત-ે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'B',en:"Non-repudiation",gu:"ન-ો-ન-ર-િ-પ-્-ય-ૂ-ડ-િ-ય-ે-શ-ન"},{k:'C',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'D',en:"Redundancy",gu:"ર-િ-ડ-ન-્-ડ-ન-્-સ-ી"}],
+   ans:'B'},
+  {id:30,cat:'principles',
+   en:"Which security objective ensures that information is protected from unauthorized modification?",
+   gu:"ક-ઈ ઉ-દ-્-દ-ે-શ ખ-ા-ત-ર-ી ક-ર-ે ક-ે-ઃ ર-ક-્-ષ-ા ર-હ-ે-ઃ ફ-ે-ર-ફ-ા-ર-ઃ ન-ઃ થ-ા-ય?",
+   opts:[{k:'A',en:"Integrity",gu:"અ-ખ-ં-ડ-િ-ત-ત-ા"},{k:'B',en:"Confidentiality",gu:"ગ-ો-પ-ન-ી-ય-ત-ા"},{k:'C',en:"Availability",gu:"ઉ-પ-લ-બ-્-ધ-ત-ા"},{k:'D',en:"Portability",gu:"પ-ો-ર-્-ટ-ે-બ-િ-લ-િ-ટ-ી"}],
+   ans:'A'},
+  // === FIXED PART 1 - Q31 to Q80 ===
+
+  {id:31, cat:'principles',
+   en:"Which security property ensures that sensitive information is hidden from unauthorized users?",
+   gu:"કઈ સુરક્ષા ગુણ સંવેદનશીલ માહિતીને અનધિકૃત વપરાશકર્તાઓથી છુપાવે છે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'C',en:"Scalability",gu:"સ્કેલેબિલિટી"},{k:'D',en:"Redundancy",gu:"રિડન્ડન્સી"}],
+   ans:'A'},
+
+  {id:32, cat:'principles',
+   en:"Which principle ensures that user actions can be traced back to them?",
+   gu:"કઈ સિદ્ધાંત ખાતરી કરે છે કે વપરાશકર્તાની ક્રિયાઓ તેમની સાથે ટ્રેસ કરી શકાય?",
+   opts:[{k:'A',en:"Accountability",gu:"જવાબદારી"},{k:'B',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'C',en:"Integrity",gu:"અખંડિતતા"},{k:'D',en:"Availability",gu:"ઉપલબ્ધતા"}],
+   ans:'A'},
+
+  {id:33, cat:'principles',
+   en:"Which cryptographic feature ensures that a sender cannot later deny sending a message?",
+   gu:"કઈ ક્રિપ્ટોગ્રાફિક વિશેષતા ખાતરી કરે છે કે મોકલનાર પછીથી સંદેશ મોકલ્યાનો ઇનકાર ન કરી શકે?",
+   opts:[{k:'A',en:"Encryption",gu:"એન્ક્રિપ્શન"},{k:'B',en:"Non-repudiation",gu:"નોન-રિપ્યુડિએશન"},{k:'C',en:"Compression",gu:"સંકોચન"},{k:'D',en:"Partitioning",gu:"પાર્ટિશનિંગ"}],
+   ans:'B'},
+
+  {id:34, cat:'principles',
+   en:"Which security goal ensures that information is not disclosed to unauthorized individuals?",
+   gu:"કઈ સુરક્ષા ઉદ્દેશ્ય ખાતરી કરે છે કે માહિતી અનધિકૃત વ્યક્તિઓને જાહેર ન થાય?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Durability",gu:"ટકાઉપણું"}],
+   ans:'A'},
+
+  {id:35, cat:'principles',
+   en:"Which mechanism confirms that a received message originated from the claimed sender?",
+   gu:"કઈ પદ્ધતિ ખાતરી કરે છે કે પ્રાપ્ત સંદેશ દાવો કરેલ મોકલનાર પાસેથી આવ્યો છે?",
+   opts:[{k:'A',en:"Authentication",gu:"પ્રમાણીકરણ"},{k:'B',en:"Compression",gu:"સંકોચન"},{k:'C',en:"Encoding",gu:"એન્કોડિંગ"},{k:'D',en:"Formatting",gu:"ફોર્મેટિંગ"}],
+   ans:'A'},
+
+  {id:36, cat:'principles',
+   en:"Which security property ensures that systems continue functioning during faults or attacks?",
+   gu:"કઈ સુરક્ષા ગુણ ખાતરી કરે છે કે ખામી અથવા હુમલા દરમિયાન સિસ્ટમ કાર્યરત રહે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Traceability",gu:"ટ્રેસેબિલિટી"}],
+   ans:'C'},
+
+  {id:37, cat:'principles',
+   en:"Which security principle ensures that data is protected from unauthorized viewing?",
+   gu:"કઈ સુરક્ષા સિદ્ધાંત ડેટાને અનધિકૃત જોવાથી સુરક્ષિત રાખે છે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Accountability",gu:"જવાબદારી"}],
+   ans:'A'},
+
+  {id:38, cat:'principles',
+   en:"Which property ensures that information is not altered without detection?",
+   gu:"કઈ ગુણ ખાતરી આપે છે કે માહિતી વિના શોધ્યા બદલાઈ ન જાય?",
+   opts:[{k:'A',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'B',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'C',en:"Integrity",gu:"અખંડિતતા"},{k:'D',en:"Scalability",gu:"સ્કેલેબિલિટી"}],
+   ans:'C'},
+
+  {id:39, cat:'principles',
+   en:"Which security objective ensures systems remain operational during faults?",
+   gu:"કઈ સુરક્ષા ઉદ્દેશ્ય ખામી દરમિયાન સિસ્ટમને કાર્યરત રાખે છે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Authenticity",gu:"પ્રામાણિકતા"}],
+   ans:'C'},
+
+  {id:40, cat:'principles',
+   en:"Which property ensures that stored data remains accurate and unchanged?",
+   gu:"કઈ ગુણ ખાતરી આપે છે કે સ્ટોર કરેલ ડેટા સાચો અને અપરિવર્તિત રહે?",
+   opts:[{k:'A',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'B',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'C',en:"Integrity",gu:"અખંડિતતા"},{k:'D',en:"Scalability",gu:"સ્કેલેબિલિટી"}],
+   ans:'C'},
+
+  {id:41, cat:'principles',
+   en:"Which concept ensures a sender cannot deny sending a message later?",
+   gu:"કઈ ખ્યાલ ખાતરી કરે છે કે મોકલનાર પછીથી સંદેશ મોકલ્યાનો ઇનકાર ન કરી શકે?",
+   opts:[{k:'A',en:"Redundancy",gu:"રિડન્ડન્સી"},{k:'B',en:"Non-repudiation",gu:"નોન-રિપ્યુડિએશન"},{k:'C',en:"Scalability",gu:"સ્કેલેબિલિટી"},{k:'D',en:"Compression",gu:"સંકોચન"}],
+   ans:'B'},
+
+  {id:42, cat:'principles',
+   en:"Which security principle ensures information is accessible when required by authorized users?",
+   gu:"કઈ સુરક્ષા સિદ્ધાંત અધિકૃત વપરાશકર્તાઓને જરૂર પડે ત્યારે માહિતી ઉપલબ્ધ કરાવે છે?",
+   opts:[{k:'A',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'B',en:"Integrity",gu:"અખંડિતતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Isolation",gu:"આઈસોલેશન"}],
+   ans:'C'},
+
+  {id:43, cat:'principles',
+   en:"Which mechanism ensures that system actions can later be traced to a user?",
+   gu:"કઈ પદ્ધતિ ખાતરી કરે છે કે સિસ્ટમની ક્રિયાઓ પછીથી વપરાશકર્તા સાથે ટ્રેસ કરી શકાય?",
+   opts:[{k:'A',en:"Accountability",gu:"જવાબદારી"},{k:'B',en:"Confidentiality",gu:"ગોપનીયતા"},{k:'C',en:"Availability",gu:"ઉપલબ્ધતા"},{k:'D',en:"Compression",gu:"સંકોચન"}],
+   ans:'A'},
+
+  // === SYSTEM SECURITY (Q44-69) ===
+  {id:44, cat:'system',
+   en:"Which mechanism in system security monitors and controls incoming and outgoing traffic?",
+   gu:"સિસ્ટમ સુરક્ષામાં આવતા અને જતા ટ્રાફિકને મોનિટર અને કંટ્રોલ કરતી પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"Backup utility",gu:"બેકઅપ યુટિલિટી"},{k:'B',en:"Firewall",gu:"ફાયરવોલ"},{k:'C',en:"File compressor",gu:"ફાઈલ કમ્પ્રેસર"},{k:'D',en:"Media player",gu:"મીડિયા પ્લેયર"}],
+   ans:'B'},
+
+  {id:45, cat:'system',
+   en:"A brute force attack attempts to compromise security by:",
+   gu:"બ્રુટ ફોર્સ હુમલો સુરક્ષાને કેવી રીતે ભેદવાનો પ્રયાસ કરે છે?",
+   opts:[{k:'A',en:"Physically damaging hardware",gu:"હાર્ડવેરને શારીરિક નુકસાન પહોંચાડીને"},{k:'B',en:"Guessing keys through systematic trials",gu:"સિસ્ટમેટિક પ્રયાસો દ્વારા કી અનુમાન કરીને"},{k:'C',en:"Replacing encryption with compression",gu:"એન્ક્રિપ્શનને સંકોચનથી બદલીને"},{k:'D',en:"Blocking network ports",gu:"નેટવર્ક પોર્ટ્સ બ્લોક કરીને"}],
+   ans:'B'},
+
+  {id:46, cat:'system',
+   en:"Which attack attempts every possible key until the correct one is found?",
+   gu:"કઈ હુમલો તમામ શક્ય કીઓનો પ્રયાસ કરે છે જ્યાં સુધી સાચી કી મળે?",
+   opts:[{k:'A',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'B',en:"Traffic analysis",gu:"ટ્રાફિક વિશ્લેષણ"},{k:'C',en:"Phishing attack",gu:"ફિશિંગ હુમલો"},{k:'D',en:"Brute force attack",gu:"બ્રુટ ફોર્સ હુમલો"}],
+   ans:'D'},
+
+  {id:47, cat:'system',
+   en:"Which system feature records events for later analysis of security incidents?",
+   gu:"સુરક્ષા ઘટનાઓના પછીના વિશ્લેષણ માટે ઘટનાઓ રેકોર્ડ કરતી સિસ્ટમ વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Logging mechanism",gu:"લોગિંગ મિકેનિઝમ"},{k:'B',en:"File compression",gu:"ફાઈલ કમ્પ્રેશન"},{k:'C',en:"Disk cleanup",gu:"ડિસ્ક ક્લીનઅપ"},{k:'D',en:"Screen locking",gu:"સ્ક્રીન લોકિંગ"}],
+   ans:'A'},
+
+  {id:48, cat:'system',
+   en:"Which security mechanism monitors system activities for suspicious behavior?",
+   gu:"સિસ્ટમની પ્રવૃત્તિઓને શંકાસ્પદ વર્તન માટે મોનિટર કરતી સુરક્ષા પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"File system",gu:"ફાઈલ સિસ્ટમ"},{k:'B',en:"Intrusion detection",gu:"ઘૂસણખોરી શોધ"},{k:'C',en:"Cache memory",gu:"કેશ મેમરી"},{k:'D',en:"Compiler",gu:"કમ્પાઈલર"}],
+   ans:'B'},
+
+  {id:49, cat:'system',
+   en:"Which attack attempts to overload a system so it cannot serve legitimate users?",
+   gu:"કઈ હુમલો સિસ્ટમને ઓવરલોડ કરીને કાયદેસર વપરાશકર્તાઓને સેવા આપતી અટકાવે છે?",
+   opts:[{k:'A',en:"Spoofing attack",gu:"સ્પૂફિંગ હુમલો"},{k:'B',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'C',en:"Brute force attack",gu:"બ્રુટ ફોર્સ હુમલો"},{k:'D',en:"Denial of service attack",gu:"ડિનાયલ ઓફ સર્વિસ હુમલો"}],
+   ans:'D'},
+
+  {id:50, cat:'system',
+   en:"Which feature helps detect suspicious activities within a system?",
+   gu:"સિસ્ટમની અંદર શંકાસ્પદ પ્રવૃત્તિઓ શોધવામાં કઈ વિશેષતા મદદ કરે છે?",
+   opts:[{k:'A',en:"File compression",gu:"ફાઈલ કમ્પ્રેશન"},{k:'B',en:"Intrusion detection",gu:"ઘૂસણખોરી શોધ"},{k:'C',en:"Screen brightness",gu:"સ્ક્રીન બ્રાઈટનેસ"},{k:'D',en:"Audio driver",gu:"ઓડિયો ડ્રાઈવર"}],
+   ans:'B'},
+
+  {id:51, cat:'system',
+   en:"Which component of system security monitors login attempts and access events?",
+   gu:"સિસ્ટમ સુરક્ષાનો કયો ભાગ લોગિન પ્રયાસો અને ઍક્સેસ ઘટનાઓને મોનિટર કરે છે?",
+   opts:[{k:'A',en:"Audit trail",gu:"ઓડિટ ટ્રેલ"},{k:'B',en:"File system",gu:"ફાઈલ સિસ્ટમ"},{k:'C',en:"Device driver",gu:"ડિવાઈસ ડ્રાઈવર"},{k:'D',en:"Cache memory",gu:"કેશ મેમરી"}],
+   ans:'A'},
+
+  {id:52, cat:'system',
+   en:"Which attack attempts to gain access by systematically trying different password combinations?",
+   gu:"કઈ હુમલો વિવિધ પાસવર્ડ સંયોજનો અજમાવીને ઍક્સેસ મેળવવાનો પ્રયાસ કરે છે?",
+   opts:[{k:'A',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'B',en:"Spoofing attack",gu:"સ્પૂફિંગ હુમલો"},{k:'C',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'D',en:"Brute force attack",gu:"બ્રુટ ફોર્સ હુમલો"}],
+   ans:'D'},
+
+  {id:53, cat:'system',
+   en:"Which system feature helps detect unauthorized access attempts?",
+   gu:"અનધિકૃત ઍક્સેસ પ્રયાસો શોધવામાં કઈ સિસ્ટમ વિશેષતા મદદ કરે છે?",
+   opts:[{k:'A',en:"Intrusion detection system",gu:"ઘૂસણખોરી શોધ સિસ્ટમ"},{k:'B',en:"Text editor",gu:"ટેક્સ્ટ એડિટર"},{k:'C',en:"Disk formatter",gu:"ડિસ્ક ફોર્મેટર"},{k:'D',en:"Media player",gu:"મીડિયા પ્લેયર"}],
+   ans:'A'},
+
+  {id:54, cat:'system',
+   en:"Which mechanism records system events for later analysis?",
+   gu:"સિસ્ટમ ઘટનાઓને પછીના વિશ્લેષણ માટે કઈ પદ્ધતિ રેકોર્ડ કરે છે?",
+   opts:[{k:'A',en:"Logging system",gu:"લોગિંગ સિસ્ટમ"},{k:'B',en:"Screen saver",gu:"સ્ક્રીન સેવર"},{k:'C',en:"Disk cleanup",gu:"ડિસ્ક ક્લીનઅપ"},{k:'D',en:"Image viewer",gu:"ઈમેજ વ્યુઅર"}],
+   ans:'A'},
+
+  {id:55, cat:'system',
+   en:"Which attack disrupts services by overwhelming system resources?",
+   gu:"કઈ હુમલો સિસ્ટમ સંસાધનોને ઓવરલોડ કરીને સેવાઓ વિક્ષેપિત કરે છે?",
+   opts:[{k:'A',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'B',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'C',en:"Denial of service attack",gu:"ડિનાયલ ઓફ સર્વિસ હુમલો"},{k:'D',en:"Sniffing attack",gu:"સ્નિફિંગ હુમલો"}],
+   ans:'C'},
+
+  {id:56, cat:'system',
+   en:"Which attack involves resending captured valid data to gain unauthorized access?",
+   gu:"કઈ હુમલો કેપ્ચર કરેલ વેલિડ ડેટાને ફરી મોકલીને અનધિકૃત ઍક્સેસ મેળવે છે?",
+   opts:[{k:'A',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'B',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'C',en:"Flooding attack",gu:"ફ્લડિંગ હુમલો"},{k:'D',en:"Scanning attack",gu:"સ્કેનિંગ હુમલો"}],
+   ans:'B'},
+
+  {id:57, cat:'system',
+   en:"Which attack attempts to overwhelm a system with excessive requests?",
+   gu:"કઈ હુમલો અત્યધિક વિનંતીઓથી સિસ્ટમને ઓવરલોડ કરવાનો પ્રયાસ કરે છે?",
+   opts:[{k:'A',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'B',en:"Spoofing attack",gu:"સ્પૂફિંગ હુમલો"},{k:'C',en:"Denial of service attack",gu:"ડિનાયલ ઓફ સર્વિસ હુમલો"},{k:'D',en:"Sniffing attack",gu:"સ્નિફિંગ હુમલો"}],
+   ans:'C'},
+
+  {id:58, cat:'system',
+   en:"Which mechanism helps detect unauthorized system activities?",
+   gu:"અનધિકૃત સિસ્ટમ પ્રવૃત્તિઓ શોધવામાં કઈ પદ્ધતિ મદદ કરે છે?",
+   opts:[{k:'A',en:"Intrusion detection system",gu:"ઘૂસણખોરી શોધ સિસ્ટમ"},{k:'B',en:"Media player",gu:"મીડિયા પ્લેયર"},{k:'C',en:"File compressor",gu:"ફાઈલ કમ્પ્રેસર"},{k:'D',en:"Printer driver",gu:"પ્રિન્ટર ડ્રાઈવર"}],
+   ans:'A'},
+
+  {id:59, cat:'system',
+   en:"Which attack involves impersonating a trusted source to gain access?",
+   gu:"કઈ હુમલો વિશ્વસનીય સ્ત્રોતની નકલ કરીને ઍક્સેસ મેળવે છે?",
+   opts:[{k:'A',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'B',en:"Spoofing attack",gu:"સ્પૂફિંગ હુમલો"},{k:'C',en:"Flooding attack",gu:"ફ્લડિંગ હુમલો"},{k:'D',en:"Scanning attack",gu:"સ્કેનિંગ હુમલો"}],
+   ans:'B'},
+
+  {id:60, cat:'system',
+   en:"Which system component records events for later analysis of security incidents?",
+   gu:"સુરક્ષા ઘટનાઓના પછીના વિશ્લેષણ માટે કયો સિસ્ટમ ઘટક ઘટનાઓ રેકોર્ડ કરે છે?",
+   opts:[{k:'A',en:"Logging system",gu:"લોગિંગ સિસ્ટમ"},{k:'B',en:"Display manager",gu:"ડિસ્પ્લે મેનેજર"},{k:'C',en:"Audio controller",gu:"ઓડિયો કંટ્રોલર"},{k:'D',en:"Print spooler",gu:"પ્રિન્ટ સ્પૂલર"}],
+   ans:'A'},
+
+  {id:61, cat:'system',
+   en:"Which attack involves capturing valid data and retransmitting it to deceive a system?",
+   gu:"કઈ હુમલો વેલિડ ડેટા કેપ્ચર કરીને તેને ફરી મોકલીને સિસ્ટમને છેતરે છે?",
+   opts:[{k:'A',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'B',en:"Flooding attack",gu:"ફ્લડિંગ હુમલો"},{k:'C',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'D',en:"Scanning attack",gu:"સ્કેનિંગ હુમલો"}],
+   ans:'A'},
+
+  {id:62, cat:'system',
+   en:"Which system component keeps records of activities for security analysis?",
+   gu:"સુરક્ષા વિશ્લેષણ માટે પ્રવૃત્તિઓના રેકોર્ડ કયો સિસ્ટમ ઘટક રાખે છે?",
+   opts:[{k:'A',en:"Logging mechanism",gu:"લોગિંગ મિકેનિઝમ"},{k:'B',en:"Screen manager",gu:"સ્ક્રીન મેનેજર"},{k:'C',en:"Audio controller",gu:"ઓડિયો કંટ્રોલર"},{k:'D',en:"Display driver",gu:"ડિસ્પ્લે ડ્રાઈવર"}],
+   ans:'A'},
+
+  {id:63, cat:'system',
+   en:"Which attack systematically tests all possible key combinations?",
+   gu:"કઈ હુમલો તમામ શક્ય કી સંયોજનોનું વ્યવસ્થિત પરીક્ષણ કરે છે?",
+   opts:[{k:'A',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'B',en:"Spoofing attack",gu:"સ્પૂફિંગ હુમલો"},{k:'C',en:"Brute force attack",gu:"બ્રુટ ફોર્સ હુમલો"},{k:'D',en:"Scanning attack",gu:"સ્કેનિંગ હુમલો"}],
+   ans:'C'},
+
+  {id:64, cat:'system',
+   en:"Which attack involves analyzing communication patterns rather than message contents?",
+   gu:"કઈ હુમલો સંદેશની સામગ્રીને બદલે સંચાર પેટર્નનું વિશ્લેષણ કરે છે?",
+   opts:[{k:'A',en:"Traffic analysis attack",gu:"ટ્રાફિક વિશ્લેષણ હુમલો"},{k:'B',en:"Brute force attack",gu:"બ્રુટ ફોર્સ હુમલો"},{k:'C',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'D',en:"Flooding attack",gu:"ફ્લડિંગ હુમલો"}],
+   ans:'A'},
+
+  {id:65, cat:'system',
+   en:"Which system mechanism records security-related events for later review?",
+   gu:"સુરક્ષા સંબંધિત ઘટનાઓને પછીની સમીક્ષા માટે કઈ સિસ્ટમ પદ્ધતિ રેકોર્ડ કરે છે?",
+   opts:[{k:'A',en:"Logging system",gu:"લોગિંગ સિસ્ટમ"},{k:'B',en:"Display manager",gu:"ડિસ્પ્લે મેનેજર"},{k:'C',en:"Audio controller",gu:"ઓડિયો કંટ્રોલર"},{k:'D',en:"File sorter",gu:"ફાઈલ સોર્ટર"}],
+   ans:'A'},
+
+  {id:66, cat:'system',
+   en:"Which attack involves capturing valid data and retransmitting it to gain access?",
+   gu:"કઈ હુમલો વેલિડ ડેટા કેપ્ચર કરીને તેને ફરી મોકલીને ઍક્સેસ મેળવે છે?",
+   opts:[{k:'A',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'B',en:"Flooding attack",gu:"ફ્લડિંગ હુમલો"},{k:'C',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'D',en:"Sniffing attack",gu:"સ્નિફિંગ હુમલો"}],
+   ans:'A'},
+
+  {id:67, cat:'system',
+   en:"Which attack involves secretly monitoring communication channels?",
+   gu:"કઈ હુમલો ગુપ્ત રીતે સંચાર ચેનલોનું મોનિટરિંગ કરે છે?",
+   opts:[{k:'A',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'B',en:"Eavesdropping attack",gu:"ઈવ્સડ્રોપિંગ હુમલો"},{k:'C',en:"Flooding attack",gu:"ફ્લડિંગ હુમલો"},{k:'D',en:"Replay attack",gu:"રિપ્લે હુમલો"}],
+   ans:'B'},
+
+  {id:68, cat:'system',
+   en:"Which system component analyzes activities to detect suspicious behavior?",
+   gu:"શંકાસ્પદ વર્તન શોધવા માટે પ્રવૃત્તિઓનું વિશ્લેષણ કરતો કયો સિસ્ટમ ઘટક છે?",
+   opts:[{k:'A',en:"Intrusion detection system",gu:"ઘૂસણખોરી શોધ સિસ્ટમ"},{k:'B',en:"Media player",gu:"મીડિયા પ્લેયર"},{k:'C',en:"Text editor",gu:"ટેક્સ્ટ એડિટર"},{k:'D',en:"Calculator",gu:"કેલ્ક્યુલેટર"}],
+   ans:'A'},
+
+  {id:69, cat:'system',
+   en:"Which attack disrupts system services by exhausting resources?",
+   gu:"કઈ હુમલો સંસાધનોને ખતમ કરીને સિસ્ટમ સેવાઓને વિક્ષેપિત કરે છે?",
+   opts:[{k:'A',en:"Spoofing attack",gu:"સ્પૂફિંગ હુમલો"},{k:'B',en:"Replay attack",gu:"રિપ્લે હુમલો"},{k:'C',en:"Injection attack",gu:"ઇન્જેક્શન હુમલો"},{k:'D',en:"Denial of service attack",gu:"ડિનાયલ ઓફ સર્વિસ હુમલો"}],
+   ans:'D'},
+
+  // === MODULAR ARITHMETIC (Q70-80) ===
+  {id:70, cat:'modular',
+   en:"Which operating system feature monitors and records security events?",
+   gu:"કઈ ઓપરેટિંગ સિસ્ટમ વિશેષતા સુરક્ષા ઘટનાઓને મોનિટર અને રેકોર્ડ કરે છે?",
+   opts:[{k:'A',en:"Logging system",gu:"લોગિંગ સિસ્ટમ"},{k:'B',en:"Display driver",gu:"ડિસ્પ્લે ડ્રાઈવર"},{k:'C',en:"Audio module",gu:"ઓડિયો મોડ્યુલ"},{k:'D',en:"File renamer",gu:"ફાઈલ રીનેમર"}],
+   ans:'A'},
+
+  {id:71, cat:'modular',
+   en:"In modular arithmetic, the expression 17 mod 5 results in:",
+   gu:"મોડ્યુલર અંકગણિતમાં 17 mod 5 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"2",gu:"2"},{k:'B',en:"3",gu:"3"},{k:'C',en:"4",gu:"4"},{k:'D',en:"5",gu:"5"}],
+   ans:'B'},
+
+  {id:72, cat:'modular',
+   en:"In modular arithmetic, if a ≡ b (mod n), it means:",
+   gu:"મોડ્યુલર અંકગણિતમાં જો a ≡ b (mod n) હોય તો તેનો અર્થ શું છે?",
+   opts:[{k:'A',en:"a is greater than b",gu:"a, b કરતાં મોટો છે"},{k:'B',en:"a and b leave the same remainder when divided by n",gu:"a અને b ને n થી ભાગતા સમાન બાકી રહે છે"},{k:'C',en:"a equals n",gu:"a = n"},{k:'D',en:"b is divisible by a",gu:"b a થી વિભાજ્ય છે"}],
+   ans:'B'},
+
+  {id:73, cat:'modular',
+   en:"What is the remainder when 45 is divided by 8 in modular arithmetic?",
+   gu:"મોડ્યુલર અંકગણિતમાં 45 ને 8 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"4",gu:"4"},{k:'B',en:"7",gu:"7"},{k:'C',en:"5",gu:"5"},{k:'D',en:"6",gu:"6"}],
+   ans:'C'},
+
+  {id:74, cat:'modular',
+   en:"In modular arithmetic, which property states (a + b) mod n = [(a mod n) + (b mod n)] mod n?",
+   gu:"મોડ્યુલર અંકગણિતમાં કઈ ગુણધર્મ કહે છે કે (a + b) mod n = [(a mod n) + (b mod n)] mod n ?",
+   opts:[{k:'A',en:"Closure property",gu:"ક્લોઝર ગુણધર્મ"},{k:'B',en:"Identity property",gu:"આઈડેન્ટિટી ગુણધર્મ"},{k:'C',en:"Distributive property of modulus over addition",gu:"ઉમેરણ પર મોડ્યુલસનો વિતરણ ગુણધર્મ"},{k:'D',en:"Inverse property",gu:"વિરુદ્ધ ગુણધર્મ"}],
+   ans:'C'},
+
+  {id:75, cat:'modular',
+   en:"What is the result of 64 mod 9?",
+   gu:"64 mod 9 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"1",gu:"1"},{k:'B',en:"2",gu:"2"},{k:'C',en:"3",gu:"3"},{k:'D',en:"4",gu:"4"}],
+   ans:'A'},
+
+  {id:76, cat:'modular',
+   en:"In modular arithmetic, what is the result of 53 mod 7?",
+   gu:"મોડ્યુલર અંકગણિતમાં 53 mod 7 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"3",gu:"3"},{k:'B',en:"4",gu:"4"},{k:'C',en:"5",gu:"5"},{k:'D',en:"6",gu:"6"}],
+   ans:'D'},
+
+  {id:77, cat:'modular',
+   en:"What is the remainder when 81 is divided by 10 in modular arithmetic?",
+   gu:"મોડ્યુલર અંકગણિતમાં 81 ને 10 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"0",gu:"0"},{k:'B',en:"1",gu:"1"},{k:'C',en:"8",gu:"8"},{k:'D',en:"9",gu:"9"}],
+   ans:'B'},
+
+  {id:78, cat:'modular',
+   en:"What is the remainder when 77 is divided by 9?",
+   gu:"77 ને 9 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"4",gu:"4"},{k:'B',en:"5",gu:"5"},{k:'C',en:"6",gu:"6"},{k:'D',en:"7",gu:"7"}],
+   ans:'B'},
+
+  {id:79, cat:'modular',
+   en:"What is the remainder when 95 is divided by 12?",
+   gu:"95 ને 12 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"9",gu:"9"},{k:'B',en:"10",gu:"10"},{k:'C',en:"11",gu:"11"},{k:'D',en:"8",gu:"8"}],
+   ans:'C'},
+
+  {id:80, cat:'modular',
+   en:"In modular arithmetic, what is the result of 125 mod 8?",
+   gu:"મોડ્યુલર અંકગણિતમાં 125 mod 8 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"4",gu:"4"},{k:'B',en:"5",gu:"5"},{k:'C',en:"6",gu:"6"},{k:'D',en:"7",gu:"7"}],
+   ans:'B'}
+   ,
+
+     // === PART 2 - FIXED Q81 to Q165 ===
+
+  {id:81, cat:'modular',
+   en:"What is the remainder when 144 is divided by 11?",
+   gu:"144 ને 11 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"0",gu:"0"},{k:'B',en:"1",gu:"1"},{k:'C',en:"2",gu:"2"},{k:'D',en:"3",gu:"3"}],
+   ans:'B'},
+
+  {id:82, cat:'modular',
+   en:"In modular arithmetic, why is the modulus applied after operations?",
+   gu:"મોડ્યુલર અંકગણિતમાં ઓપરેશન પછી મોડ્યુલસ કેમ લાગુ કરવામાં આવે છે?",
+   opts:[{k:'A',en:"To increase data size",gu:"ડેટા સાઈઝ વધારવા માટે"},{k:'B',en:"To maintain bounded results",gu:"પરિણામને મર્યાદિત રાખવા માટે"},{k:'C',en:"To eliminate keys",gu:"કી દૂર કરવા માટે"},{k:'D',en:"To slow computation",gu:"ગણતરી ધીમી કરવા માટે"}],
+   ans:'B'},
+
+  {id:83, cat:'modular',
+   en:"In modular arithmetic, what is the result of 173 mod 12?",
+   gu:"મોડ્યુલર અંકગણિતમાં 173 mod 12 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"4",gu:"4"},{k:'B',en:"5",gu:"5"},{k:'C',en:"6",gu:"6"},{k:'D',en:"7",gu:"7"}],
+   ans:'A'},
+
+  {id:84, cat:'modular',
+   en:"What is the remainder when 210 is divided by 13?",
+   gu:"210 ને 13 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"1",gu:"1"},{k:'B',en:"2",gu:"2"},{k:'C',en:"3",gu:"3"},{k:'D',en:"4",gu:"4"}],
+   ans:'B'},
+
+  {id:85, cat:'modular',
+   en:"In modular arithmetic, why is modulus applied after calculations?",
+   gu:"મોડ્યુલર અંકગણિતમાં ગણતરી પછી મોડ્યુલસ કેમ લાગુ કરવામાં આવે છે?",
+   opts:[{k:'A',en:"To increase value range",gu:"મૂલ્યની રેન્જ વધારવા માટે"},{k:'B',en:"To maintain bounded numerical results",gu:"સંખ્યાત્મક પરિણામને મર્યાદિત રાખવા માટે"},{k:'C',en:"To eliminate divisors",gu:"વિભાજકો દૂર કરવા માટે"},{k:'D',en:"To reduce algorithm steps",gu:"અલ્ગોરિધમના પગલાં ઘટાડવા માટે"}],
+   ans:'B'},
+
+  {id:86, cat:'modular',
+   en:"In modular arithmetic, what is the result of 256 mod 15?",
+   gu:"મોડ્યુલર અંકગણિતમાં 256 mod 15 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"0",gu:"0"},{k:'B',en:"1",gu:"1"},{k:'C',en:"2",gu:"2"},{k:'D',en:"3",gu:"3"}],
+   ans:'B'},
+
+  {id:87, cat:'modular',
+   en:"What is the remainder when 321 is divided by 14?",
+   gu:"321 ને 14 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"13",gu:"13"},{k:'B',en:"12",gu:"12"},{k:'C',en:"11",gu:"11"},{k:'D',en:"10",gu:"10"}],
+   ans:'C'},
+
+  {id:88, cat:'modular',
+   en:"In modular arithmetic, why is modulus applied repeatedly during calculations?",
+   gu:"મોડ્યુલર અંકગણિતમાં ગણતરી દરમિયાન મોડ્યુલસ વારંવાર કેમ લાગુ કરવામાં આવે છે?",
+   opts:[{k:'A',en:"To expand value range",gu:"મૂલ્યની રેન્જ વધારવા માટે"},{k:'B',en:"To maintain bounded results",gu:"પરિણામને મર્યાદિત રાખવા માટે"},{k:'C',en:"To remove divisors",gu:"વિભાજકો દૂર કરવા માટે"},{k:'D',en:"To increase complexity",gu:"જટિલતા વધારવા માટે"}],
+   ans:'B'},
+
+  {id:89, cat:'modular',
+   en:"In modular arithmetic, what is the result of 305 mod 9?",
+   gu:"મોડ્યુલર અંકગણિતમાં 305 mod 9 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"8",gu:"8"},{k:'B',en:"7",gu:"7"},{k:'C',en:"6",gu:"6"},{k:'D',en:"5",gu:"5"}],
+   ans:'D'},
+
+  {id:90, cat:'modular',
+   en:"What is the remainder when 412 is divided by 15?",
+   gu:"412 ને 15 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"7",gu:"7"},{k:'B',en:"8",gu:"8"},{k:'C',en:"9",gu:"9"},{k:'D',en:"10",gu:"10"}],
+   ans:'A'},
+
+  {id:91, cat:'modular',
+   en:"In modular arithmetic, why is modulus applied after calculations?",
+   gu:"મોડ્યુલર અંકગણિતમાં ગણતરી પછી મોડ્યુલસ કેમ લાગુ કરવામાં આવે છે?",
+   opts:[{k:'A',en:"To increase result size",gu:"પરિણામનું કદ વધારવા માટે"},{k:'B',en:"To maintain bounded numerical values",gu:"સંખ્યાત્મક મૂલ્યને મર્યાદિત રાખવા માટે"},{k:'C',en:"To eliminate divisors",gu:"વિભાજકો દૂર કરવા માટે"},{k:'D',en:"To slow processing",gu:"પ્રોસેસિંગ ધીમું કરવા માટે"}],
+   ans:'B'},
+
+  {id:92, cat:'modular',
+   en:"In modular arithmetic, what is the result of 512 mod 13?",
+   gu:"મોડ્યુલર અંકગણિતમાં 512 mod 13 નું પરિણામ શું છે?",
+   opts:[{k:'A',en:"4",gu:"4"},{k:'B',en:"5",gu:"5"},{k:'C',en:"6",gu:"6"},{k:'D',en:"7",gu:"7"}],
+   ans:'B'},
+
+  {id:93, cat:'modular',
+   en:"What is the remainder when 999 is divided by 16?",
+   gu:"999 ને 16 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"5",gu:"5"},{k:'B',en:"6",gu:"6"},{k:'C',en:"7",gu:"7"},{k:'D',en:"8",gu:"8"}],
+   ans:'C'},
+
+  {id:94, cat:'modular',
+   en:"Which mathematical property allows modular multiplication results to stay within limits?",
+   gu:"કઈ ગણિતીય ગુણધર્મ મોડ્યુલર ગુણાકારના પરિણામને મર્યાદામાં રાખે છે?",
+   opts:[{k:'A',en:"Closure property",gu:"ક્લોઝર ગુણધર્મ"},{k:'B',en:"Bounding property of modulus",gu:"મોડ્યુલસનો બાઉન્ડિંગ ગુણધર્મ"},{k:'C',en:"Sorting property",gu:"સોર્ટિંગ ગુણધર્મ"},{k:'D',en:"Averaging property",gu:"એવરેજિંગ ગુણધર્મ"}],
+   ans:'B'},
+
+  {id:95, cat:'modular',
+   en:"In modular arithmetic, why is modulus repeatedly applied?",
+   gu:"મોડ્યુલર અંકગણિતમાં મોડ્યુલસ વારંવાર કેમ લાગુ કરવામાં આવે છે?",
+   opts:[{k:'A',en:"To expand values",gu:"મૂલ્યો વધારવા માટે"},{k:'B',en:"To maintain bounded results",gu:"પરિણામને મર્યાદિત રાખવા માટે"},{k:'C',en:"To eliminate factors",gu:"ફેક્ટર્સ દૂર કરવા માટે"},{k:'D',en:"To slow operations",gu:"ઓપરેશન્સ ધીમા કરવા માટે"}],
+   ans:'B'},
+
+  // === SYMMETRIC ENCRYPTION (Q96-110) ===
+  {id:96, cat:'symmetric',
+   en:"What is the remainder when 725 is divided by 17?",
+   gu:"725 ને 17 થી ભાગતા બાકી શું રહે છે?",
+   opts:[{k:'A',en:"11",gu:"11"},{k:'B',en:"12",gu:"12"},{k:'C',en:"13",gu:"13"},{k:'D',en:"14",gu:"14"}],
+   ans:'A'},
+
+  {id:97, cat:'symmetric',
+   en:"In symmetric key encryption, security depends mainly on:",
+   gu:"સિમેટ્રિક કી એન્ક્રિપ્શનમાં સુરક્ષા મુખ્યત્વે કેના પર આધારિત છે?",
+   opts:[{k:'A',en:"Public disclosure of keys",gu:"કીઓનો જાહેર ખુલાસો"},{k:'B',en:"Large file size",gu:"મોટી ફાઈલ સાઈઝ"},{k:'C',en:"Secrecy of the shared key",gu:"શેર કરેલ કીની ગોપનીયતા"},{k:'D',en:"Number of users",gu:"વપરાશકર્તાઓની સંખ્યા"}],
+   ans:'C'},
+
+  {id:98, cat:'symmetric',
+   en:"The primary advantage of symmetric encryption is:",
+   gu:"સિમેટ્રિક એન્ક્રિપ્શનનો મુખ્ય ફાયદો શું છે?",
+   opts:[{k:'A',en:"Simpler key management",gu:"સરળ કી મેનેજમેન્ટ"},{k:'B',en:"Faster encryption and decryption",gu:"ઝડપી એન્ક્રિપ્શન અને ડિક્રિપ્શન"},{k:'C',en:"Public key distribution",gu:"પબ્લિક કી વિતરણ"},{k:'D',en:"Elimination of secret keys",gu:"ગુપ્ત કીનું નિર્મૂલન"}],
+   ans:'B'},
+
+  {id:99, cat:'symmetric',
+   en:"In symmetric encryption, both communicating parties must:",
+   gu:"સિમેટ્રિક એન્ક્રિપ્શનમાં બંને સંચાર કરતા પક્ષોએ શું કરવું જરૂરી છે?",
+   opts:[{k:'A',en:"Use different keys",gu:"અલગ-अલગ કી વાપરવી"},{k:'B',en:"Share a secret key securely",gu:"ગુપ્ત કીને સુરક્ષિત રીતે શેર કરવી"},{k:'C',en:"Publish their keys",gu:"તેમની કીઓ જાહેર કરવી"},{k:'D',en:"Change algorithms frequently",gu:"વારંવાર અલ્ગોરિધમ બદલવો"}],
+   ans:'B'},
+
+  {id:100, cat:'symmetric',
+   en:"Which type of encryption is generally faster for large data volumes?",
+   gu:"મોટા ડેટા વોલ્યુમ માટે કયા પ્રકારનું એન્ક્રિપ્શન સામાન્ય રીતે ઝડપી હોય છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'C',en:"Hash encryption",gu:"હેશ એન્ક્રિપ્શન"},{k:'D',en:"Signature encryption",gu:"સિગ્નેચર એન્ક્રિપ્શન"}],
+   ans:'A'},
+
+  {id:101, cat:'symmetric',
+   en:"In symmetric encryption, the same key is used for:",
+   gu:"સિમેટ્રિક એન્ક્રિપ્શનમાં સમાન કીનો ઉપયોગ કયા માટે થાય છે?",
+   opts:[{k:'A',en:"Only encryption",gu:"ફક્ત એન્ક્રિપ્શન માટે"},{k:'B',en:"Both encryption and decryption",gu:"એન્ક્રિપ્શન અને ડિક્રિપ્શન બંને માટે"},{k:'C',en:"Only authentication",gu:"ફક્ત પ્રમાણીકરણ માટે"},{k:'D',en:"Only verification",gu:"ફક્ત વેરિફિકેશન માટે"}],
+   ans:'B'},
+
+  {id:102, cat:'symmetric',
+   en:"In symmetric encryption, what is the primary challenge compared to asymmetric encryption?",
+   gu:"સિમેટ્રિક એન્ક્રિપ્શનમાં અસિમેટ્રિક કરતાં મુખ્ય предизвикатеલ શું છે?",
+   opts:[{k:'A',en:"Slow speed",gu:"ધીમી ઝડપ"},{k:'B',en:"Complex algorithms",gu:"જટિલ અલ્ગોરિધમ"},{k:'C',en:"Secure key distribution",gu:"સુરક્ષિત કી વિતરણ"},{k:'D',en:"Large ciphertext size",gu:"મોટા સાઈઝનું સાઈફરટેક્સ્ટ"}],
+   ans:'C'},
+
+  {id:103, cat:'symmetric',
+   en:"In symmetric cryptography, secrecy depends mainly on protecting the:",
+   gu:"સિમેટ્રિક ક્રિપ્ટોગ્રાફીમાં ગોપનીયતા મુખ્યત્વે શેના સુરક્ષણ પર આધારિત છે?",
+   opts:[{k:'A',en:"Algorithm structure",gu:"અલ્ગોરિધમની રચના"},{k:'B',en:"Secret key",gu:"ગુપ્ત કી"},{k:'C',en:"Message length",gu:"સંદેશની લંબાઈ"},{k:'D',en:"Transmission medium",gu:"પ્રસારણ માધ્યમ"}],
+   ans:'B'},
+
+  {id:104, cat:'symmetric',
+   en:"Which cryptographic method is generally slower but simplifies key distribution?",
+   gu:"કઈ ક્રિપ્ટોગ્રાફિક પદ્ધતિ સામાન્ય રીતે ધીમી હોય છે પરંતુ કી વિતરણને સરળ બનાવે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Hash verification",gu:"હેશ વેરિફિકેશન"},{k:'C',en:"Combination of symmetric and asymmetric methods",gu:"સિમેટ્રિક અને અસિમેટ્રિક પદ્ધતિઓનું સંયોજન"},{k:'D',en:"Plaintext transmission",gu:"પ્લેઈનટેક્સ્ટ પ્રસારણ"}],
+   ans:'C'},
+
+  {id:105, cat:'symmetric',
+   en:"Which type of encryption uses a single shared key for both encryption and decryption?",
+   gu:"કયા પ્રકારનું એન્ક્રિપ્શન એન્ક્રિપ્શન અને ડિક્રિપ્શન બંને માટે એક જ શેર્ડ કી વાપરે છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Public key encryption",gu:"પબ્લિક કી એન્ક્રિપ્શન"},{k:'C',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'D',en:"Hash-based encryption",gu:"હેશ આધારિત એન્ક્રિપ્શન"}],
+   ans:'C'},
+
+  {id:106, cat:'symmetric',
+   en:"Which cryptographic technique ensures both confidentiality and efficiency for large data transfer?",
+   gu:"કઈ ક્રિપ્ટોગ્રાફિક તકનીક મોટા ડેટા ટ્રાન્સફર માટે ગોપનીયતા અને કાર્યક્ષમતા બંને સુનિશ્ચિત કરે છે?",
+   opts:[{k:'A',en:"Only asymmetric encryption",gu:"ફક્ત અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Only hashing",gu:"ફક્ત હેશિંગ"},{k:'C',en:"Combination of symmetric and asymmetric methods",gu:"સિમેટ્રિક અને અસિમેટ્રિક પદ્ધતિઓનું સંયોજન"},{k:'D',en:"Plaintext transmission",gu:"પ્લેઈનટેક્સ્ટ પ્રસારણ"}],
+   ans:'C'},
+
+  {id:107, cat:'symmetric',
+   en:"In symmetric encryption, the main vulnerability arises from:",
+   gu:"સિમેટ્રિક એન્ક્રિપ્શનમાં મુખ્ય નબળાઈ ક્યાંથી ઉદ્ભવે છે?",
+   opts:[{k:'A',en:"Algorithm complexity",gu:"અલ્ગોરિધમની જટિલતા"},{k:'B',en:"Public key exposure",gu:"પબ્લિક કીનું એક્સપોઝર"},{k:'C',en:"Large key size",gu:"મોટી કી સાઈઝ"},{k:'D',en:"Key distribution challenges",gu:"કી વિતરણની મુશ્કેલી"}],
+   ans:'D'},
+
+  {id:108, cat:'symmetric',
+   en:"Which type of encryption is generally faster and suitable for bulk data?",
+   gu:"કયા પ્રકારનું એન્ક્રિપ્શન સામાન્ય રીતે ઝડપી અને બલ્ક ડેટા માટે યોગ્ય છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'C',en:"Signature encryption",gu:"સિગ્નેચર એન્ક્રિપ્શન"},{k:'D',en:"Public encryption",gu:"પબ્લિક એન્ક્રિપ્શન"}],
+   ans:'B'},
+
+  {id:109, cat:'symmetric',
+   en:"Which type of encryption is generally more efficient for encrypting large volumes of data?",
+   gu:"મોટા વોલ્યુમના ડેટાને એન્ક્રિપ્ટ કરવા માટે કયા પ્રકારનું એન્ક્રિપ્શન વધુ કાર્યક્ષમ છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'C',en:"Signature encryption",gu:"સિગ્નેચર એન્ક્રિપ્શન"},{k:'D',en:"Token encryption",gu:"ટોકન એન્ક્રિપ્શન"}],
+   ans:'B'},
+
+  {id:110, cat:'symmetric',
+   en:"In symmetric encryption, the main challenge lies in:",
+   gu:"સિમેટ્રિક એન્ક્રિપ્શનમાં મુખ્ય પડકાર શેમાં છે?",
+   opts:[{k:'A',en:"Algorithm design",gu:"અલ્ગોરિધમ ડિઝાઈન"},{k:'B',en:"Key distribution",gu:"કી વિતરણ"},{k:'C',en:"Ciphertext storage",gu:"સાઈફરટેક્સ્ટ સ્ટોરેજ"},{k:'D',en:"Hardware compatibility",gu:"હાર્ડવેર સુસંગતતા"}],
+   ans:'B'},
+
+  // === ASYMMETRIC / PKI (Q111-140) ===
+  {id:111, cat:'asymmetric',
+   en:"Which encryption type is generally more efficient for encrypting large volumes of data?",
+   gu:"મોટા વોલ્યુમના ડેટાને એન્ક્રિપ્ટ કરવા માટે કયા પ્રકારનું એન્ક્રિપ્શન વધુ કાર્યક્ષમ છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Hash encryption",gu:"હેશ એન્ક્રિપ્શન"},{k:'C',en:"Signature encryption",gu:"સિગ્નેચર એન્ક્રિપ્શન"},{k:'D',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"}],
+   ans:'D'},
+
+  {id:112, cat:'asymmetric',
+   en:"Which encryption type is generally faster for processing large volumes of data?",
+   gu:"મોટા વોલ્યુમના ડેટાની પ્રોસેસિંગ માટે કયા પ્રકારનું એન્ક્રિપ્શન ઝડપી છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'C',en:"Signature encryption",gu:"સિગ્નેચર એન્ક્રિપ્શન"},{k:'D',en:"Public encryption",gu:"પબ્લિક એન્ક્રિપ્શન"}],
+   ans:'B'},
+
+  {id:113, cat:'asymmetric',
+   en:"Which encryption type is generally more efficient for encrypting large data sets?",
+   gu:"મોટા ડેટા સેટને એન્ક્રિપ્ટ કરવા માટે કયા પ્રકારનું એન્ક્રિપ્શન વધુ કાર્યક્ષમ છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'C',en:"Signature encryption",gu:"સિગ્નેચર એન્ક્રિપ્શન"},{k:'D',en:"Public encryption",gu:"પબ્લિક એન્ક્રિપ્શન"}],
+   ans:'B'},
+
+  {id:114, cat:'asymmetric',
+   en:"Which encryption approach requires secure sharing of a secret key beforehand?",
+   gu:"કઈ એન્ક્રિપ્શન પદ્ધતિને અગાઉથી ગુપ્ત કીના સુરક્ષિત શેરિંગની જરૂર પડે છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Signature encryption",gu:"સિગ્નેચર એન્ક્રિપ્શન"},{k:'C',en:"Hash encryption",gu:"હેશ એન્ક્રિપ્શન"},{k:'D',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"}],
+   ans:'D'},
+
+  {id:115, cat:'asymmetric',
+   en:"Which encryption type is typically faster but requires secure key sharing?",
+   gu:"કયા પ્રકારનું એન્ક્રિપ્શન સામાન્ય રીતે ઝડપી હોય છે પરંતુ સુરક્ષિત કી શેરિંગની જરૂર પડે છે?",
+   opts:[{k:'A',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'C',en:"Hash encryption",gu:"હેશ એન્ક્રિપ્શન"},{k:'D',en:"Public encryption",gu:"પબ્લિક એન્ક્રિપ્શન"}],
+   ans:'B'},
+
+  {id:116, cat:'asymmetric',
+   en:"Which characteristic distinguishes asymmetric encryption from symmetric encryption?",
+   gu:"અસિમેટ્રિક એન્ક્રિપ્શનને સિમેટ્રિક એન્ક્રિપ્શનથી અલગ પાડતી વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Use of a single shared key",gu:"એક જ શેર્ડ કીનો ઉપયોગ"},{k:'B',en:"Faster computation speed",gu:"ઝડપી ગણતરીની ઝડપ"},{k:'C',en:"Use of two mathematically related keys",gu:"બે ગણિતીય રીતે સંબંધિત કીઓનો ઉપયોગ"},{k:'D',en:"Dependence on password length",gu:"પાસવર્ડની લંબાઈ પર આધારિત"}],
+   ans:'C'},
+
+  {id:117, cat:'asymmetric',
+   en:"In asymmetric encryption, the private key is used for:",
+   gu:"અસિમેટ્રિક એન્ક્રિપ્શનમાં ખાનગી કીનો ઉપયોગ કયા માટે થાય છે?",
+   opts:[{k:'A',en:"Encrypt public messages only",gu:"ફક્ત પબ્લિક સંદેશો એન્ક્રિપ્ટ કરવા માટે"},{k:'B',en:"Share with all users",gu:"બધા વપરાશકર્તાઓ સાથે શેર કરવા માટે"},{k:'C',en:"Decrypt data encrypted with the public key",gu:"પબ્લિક કીથી એન્ક્રિપ્ટ કરેલ ડેટા ડિક્રિપ્ટ કરવા માટે"},{k:'D',en:"Replace symmetric keys",gu:"સિમેટ્રિક કીઓને બદલવા માટે"}],
+   ans:'C'},
+
+  {id:118, cat:'asymmetric',
+   en:"In asymmetric encryption, the public key is mainly used to:",
+   gu:"અસિમેટ્રિક એન્ક્રિપ્શનમાં પબ્લિક કી મુખ્યત્વે કયા માટે વપરાય છે?",
+   opts:[{k:'A',en:"Decrypt messages",gu:"સંદેશો ડિક્રિપ્ટ કરવા માટે"},{k:'B',en:"Encrypt messages",gu:"સંદેશો એન્ક્રિપ્ટ કરવા માટે"},{k:'C',en:"Store messages",gu:"સંદેશો સ્ટોર કરવા માટે"},{k:'D',en:"Delete messages",gu:"સંદેશો કાઢી નાખવા માટે"}],
+   ans:'B'},
+
+  {id:119, cat:'asymmetric',
+   en:"In public key systems, which key is used to verify a digital signature?",
+   gu:"પબ્લિક કી સિસ્ટમમાં ડિજિટલ સિગ્નેચર વેરિફાઈ કરવા માટે કઈ કી વપરાય છે?",
+   opts:[{k:'A',en:"Sender's private key",gu:"મોકલનારની ખાનગી કી"},{k:'B',en:"Receiver's private key",gu:"સ્વીકારનારની ખાનગી કી"},{k:'C',en:"Sender's public key",gu:"મોકલનારની પબ્લિક કી"},{k:'D',en:"Receiver's public key",gu:"સ્વીકારનારની પબ્લિક કી"}],
+   ans:'C'},
+
+  {id:120, cat:'asymmetric',
+   en:"Which mathematical concept is essential for many public key algorithms?",
+   gu:"ઘણા પબ્લિક કી અલ્ગોરિધમ્સ માટે કઈ ગણિતીય ખ્યાલ જરૂરી છે?",
+   opts:[{k:'A',en:"Matrix sorting",gu:"મેટ્રિક્સ સોર્ટિંગ"},{k:'B',en:"Decimal rounding",gu:"દશાંશ રાઉન્ડિંગ"},{k:'C',en:"Linear counting",gu:"લીનિયર કાઉન્ટિંગ"},{k:'D',en:"Large prime numbers",gu:"મોટી પ્રાઈમ સંખ્યાઓ"}],
+   ans:'D'},
+
+  {id:121, cat:'asymmetric',
+   en:"In public key cryptography, confidentiality is achieved when data is encrypted using the receiver's:",
+   gu:"પબ્લિક કી ક્રિપ્ટોગ્રાફીમાં ગોપનીયતા ક્યારે પ્રાપ્ત થાય છે જ્યારે ડેટા સ્વીકારનારની ... વડે એન્ક્રિપ્ટ કરવામાં આવે?",
+   opts:[{k:'A',en:"Private key",gu:"ખાનગી કી"},{k:'B',en:"Session key",gu:"સેશન કી"},{k:'C',en:"Public key",gu:"પબ્લિક કી"},{k:'D',en:"Shared key",gu:"શેર્ડ કી"}],
+   ans:'C'},
+
+  {id:122, cat:'asymmetric',
+   en:"In public key encryption, which key is used by anyone to send a secure message to the owner?",
+   gu:"પબ્લિક કી એન્ક્રિપ્શનમાં કોઈપણ વ્યક્તિ માલિકને સુરક્ષિત સંદેશ મોકલવા માટે કઈ કી વાપરે છે?",
+   opts:[{k:'A',en:"Private key",gu:"ખાનગી કી"},{k:'B',en:"Public key",gu:"પબ્લિક કી"},{k:'C',en:"Secret key",gu:"ગુપ્ત કી"},{k:'D',en:"Temporary key",gu:"ટેમ્પરરી કી"}],
+   ans:'B'},
+
+  {id:123, cat:'asymmetric',
+   en:"Which key is used to decrypt data encrypted with a public key?",
+   gu:"પબ્લિક કીથી એન્ક્રિપ્ટ કરેલ ડેટાને ડિક્રિપ્ટ કરવા માટે કઈ કી વપરાય છે?",
+   opts:[{k:'A',en:"Sender's public key",gu:"મોકલનારની પબ્લિક કી"},{k:'B',en:"Receiver's public key",gu:"સ્વીકારનારની પબ્લિક કી"},{k:'C',en:"Receiver's private key",gu:"સ્વીકારનારની ખાનગી કી"},{k:'D',en:"Sender's private key",gu:"મોકલનારની ખાનગી કી"}],
+   ans:'C'},
+
+  {id:124, cat:'asymmetric',
+   en:"In public key systems, which key is shared openly with others?",
+   gu:"પબ્લિક કી સિસ્ટમમાં કઈ કી અન્યો સાથે ખુલ્લેઆમ શેર કરવામાં આવે છે?",
+   opts:[{k:'A',en:"Private key",gu:"ખાનગી કી"},{k:'B',en:"Public key",gu:"પબ્લિક કી"},{k:'C',en:"Secret key",gu:"ગુપ્ત કી"},{k:'D',en:"Session key",gu:"સેશન કી"}],
+   ans:'B'},
+
+  {id:125, cat:'asymmetric',
+   en:"Which mathematical concept is fundamental to many asymmetric algorithms?",
+   gu:"ઘણા અસિમેટ્રિક અલ્ગોરિધમ્સ માટે કઈ ગણિતીય ખ્યાલ મૂળભૂત છે?",
+   opts:[{k:'A',en:"Sorting numbers",gu:"સંખ્યાઓ સોર્ટ કરવી"},{k:'B',en:"Large prime numbers",gu:"મોટી પ્રાઈમ સંખ્યાઓ"},{k:'C',en:"Averaging values",gu:"મૂલ્યોનું એવરેજ લેવું"},{k:'D',en:"Counting digits",gu:"અંકોની ગણતરી"}],
+   ans:'B'},
+
+  {id:126, cat:'asymmetric',
+   en:"Which cryptographic tool produces a fixed-length output from variable-length input?",
+   gu:"કયા ક્રિપ્ટોગ્રાફિક ટૂલ વેરિયેબલ લંબાઈના ઈનપુટમાંથી નિશ્ચિત લંબાઈનું આઉટપુટ ઉત્પન્ન કરે છે?",
+   opts:[{k:'A',en:"Encryption algorithm",gu:"એન્ક્રિપ્શન અલ્ગોરિધમ"},{k:'B',en:"Compression tool",gu:"કમ્પ્રેશન ટૂલ"},{k:'C',en:"Hash function",gu:"હેશ ફંક્શન"},{k:'D',en:"Formatting tool",gu:"ફોર્મેટિંગ ટૂલ"}],
+   ans:'C'},
+
+  {id:127, cat:'asymmetric',
+   en:"Which type of key is shared openly in public key cryptography?",
+   gu:"પબ્લિક કી ક્રિપ્ટોગ્રાફીમાં કયા પ્રકારની કી ખુલ્લેઆમ શેર કરવામાં આવે છે?",
+   opts:[{k:'A',en:"Private key",gu:"ખાનગી કી"},{k:'B',en:"Secret key",gu:"ગુપ્ત કી"},{k:'C',en:"Public key",gu:"પબ્લિક કી"},{k:'D',en:"Session key",gu:"સેશન કી"}],
+   ans:'C'},
+
+  {id:128, cat:'asymmetric',
+   en:"Which encryption type is generally slower but simplifies secure key exchange?",
+   gu:"કયા પ્રકારનું એન્ક્રિપ્શન સામાન્ય રીતે ધીમું હોય છે પરંતુ સુરક્ષિત કી એક્સચેન્જને સરળ બનાવે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Hash-based encryption",gu:"હેશ આધારિત એન્ક્રિપ્શન"},{k:'C',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'D',en:"Block cipher only",gu:"ફક્ત બ્લોક સાઈફર"}],
+   ans:'C'},
+
+  {id:129, cat:'asymmetric',
+   en:"Which encryption system uses two distinct keys for encryption and decryption?",
+   gu:"કઈ એન્ક્રિપ્શન સિસ્ટમ એન્ક્રિપ્શન અને ડિક્રિપ્શન માટે બે અલગ કીઓ વાપરે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Block encoding",gu:"બ્લોક એન્કોડિંગ"},{k:'C',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'D',en:"Stream substitution",gu:"સ્ટ્રીમ સબ્સ્ટિટ્યુશન"}],
+   ans:'C'},
+
+  {id:130, cat:'asymmetric',
+   en:"Which encryption approach is slower but simplifies secure key exchange?",
+   gu:"કઈ એન્ક્રિપ્શન પદ્ધતિ ધીમી હોય છે પરંતુ સુરક્ષિત કી એક્સચેન્જને સરળ બનાવે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Stream encryption",gu:"સ્ટ્રીમ એન્ક્રિપ્શન"},{k:'C',en:"Block substitution",gu:"બ્લોક સબ્સ્ટિટ્યુશન"},{k:'D',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"}],
+   ans:'D'},
+
+  {id:131, cat:'asymmetric',
+   en:"Which encryption approach is slower but simplifies secure key exchange?",
+   gu:"કઈ એન્ક્રિપ્શન પદ્ધતિ ધીમી હોય છે પરંતુ સુરક્ષિત કી એક્સચેન્જને સરળ બનાવે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Block substitution",gu:"બ્લોક સબ્સ્ટિટ્યુશન"},{k:'C',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'D',en:"Stream encryption",gu:"સ્ટ્રીમ એન્ક્રિપ્શન"}],
+   ans:'C'},
+
+  {id:132, cat:'asymmetric',
+   en:"Which cryptographic technique uses two different keys for encryption and decryption?",
+   gu:"કઈ ક્રિપ્ટોગ્રાફિક તકનીક એન્ક્રિપ્શન અને ડિક્રિપ્શન માટે બે અલગ કીઓ વાપરે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Block cipher method",gu:"બ્લોક સાઈફર પદ્ધતિ"},{k:'C',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"},{k:'D',en:"Stream cipher method",gu:"સ્ટ્રીમ સાઈફર પદ્ધતિ"}],
+   ans:'C'},
+
+  {id:133, cat:'asymmetric',
+   en:"Which mathematical concept is fundamental to many asymmetric cryptographic algorithms?",
+   gu:"ઘણા અસિમેટ્રિક ક્રિપ્ટોગ્રાફિક અલ્ગોરિધમ્સ માટે કઈ ગણિતીય ખ્યાલ મૂળભૂત છે?",
+   opts:[{k:'A',en:"Counting digits",gu:"અંકોની ગણતરી"},{k:'B',en:"Large prime numbers",gu:"મોટી પ્રાઈમ સંખ્યાઓ"},{k:'C',en:"Sorting values",gu:"મૂલ્યો સોર્ટ કરવા"},{k:'D',en:"Averaging numbers",gu:"સંખ્યાઓનું એવરેજ લેવું"}],
+   ans:'B'},
+
+  {id:134, cat:'asymmetric',
+   en:"Which term refers to the total number of possible keys usable in encryption?",
+   gu:"એન્ક્રિપ્શનમાં વાપરી શકાય તેવી કીઓની કુલ સંખ્યાને કઈ શબ્દ સૂચવે છે?",
+   opts:[{k:'A',en:"Key length",gu:"કી લંબાઈ"},{k:'B',en:"Key storage",gu:"કી સ્ટોરેજ"},{k:'C',en:"Key format",gu:"કી ફોર્મેટ"},{k:'D',en:"Key space",gu:"કી સ્પેસ"}],
+   ans:'D'},
+
+  {id:135, cat:'asymmetric',
+   en:"Which cryptographic feature verifies authenticity of received software or data?",
+   gu:"પ્રાપ્ત સોફ્ટવેર અથવા ડેટાની પ્રામાણિકતા ચકાસતી કઈ ક્રિપ્ટોગ્રાફિક વિશેષતા છે?",
+   opts:[{k:'A',en:"Disk formatting",gu:"ડિસ્ક ફોર્મેટિંગ"},{k:'B',en:"File renaming",gu:"ફાઈલ રીનેમિંગ"},{k:'C',en:"Digital signature verification",gu:"ડિજિટલ સિગ્નેચર વેરિફિકેશન"},{k:'D',en:"Screen calibration",gu:"સ્ક્રીન કેલિબ્રેશન"}],
+   ans:'C'},
+
+  {id:136, cat:'asymmetric',
+   en:"Which encryption approach is slower but simplifies secure key distribution?",
+   gu:"કઈ એન્ક્રિપ્શન પદ્ધતિ ધીમી હોય છે પરંતુ સુરક્ષિત કી વિતરણને સરળ બનાવે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Block substitution",gu:"બ્લોક સબ્સ્ટિટ્યુશન"},{k:'C',en:"Stream encryption",gu:"સ્ટ્રીમ એન્ક્રિપ્શન"},{k:'D',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"}],
+   ans:'D'},
+
+  {id:137, cat:'asymmetric',
+   en:"Which key is kept secret in public key cryptography?",
+   gu:"પબ્લિક કી ક્રિપ્ટોગ્રાફીમાં કઈ કી ગુપ્ત રાખવામાં આવે છે?",
+   opts:[{k:'A',en:"Public key",gu:"પબ્લિક કી"},{k:'B',en:"Shared key",gu:"શેર્ડ કી"},{k:'C',en:"Private key",gu:"ખાનગી કી"},{k:'D',en:"Session key",gu:"સેશન કી"}],
+   ans:'C'},
+
+  {id:138, cat:'asymmetric',
+   en:"Which cryptographic method ensures message authenticity and integrity simultaneously?",
+   gu:"કઈ ક્રિપ્ટોગ્રાફિક પદ્ધતિ સંદેશની પ્રામાણિકતા અને અખંડિતતા બંનેને એકસાથે સુનિશ્ચિત કરે છે?",
+   opts:[{k:'A',en:"Compression",gu:"સંકોચન"},{k:'B',en:"Digital signature",gu:"ડિજિટલ સિગ્નેચર"},{k:'C',en:"Formatting",gu:"ફોર્મેટિંગ"},{k:'D',en:"Partitioning",gu:"પાર્ટિશનિંગ"}],
+   ans:'B'},
+
+  {id:139, cat:'asymmetric',
+   en:"Which term describes all possible keys that can be used in a cipher?",
+   gu:"સાઈફરમાં વાપરી શકાય તેવી તમામ શક્ય કીઓને કઈ શબ્દ વર્ણવે છે?",
+   opts:[{k:'A',en:"Key storage",gu:"કી સ્ટોરેજ"},{k:'B',en:"Key length",gu:"કી લંબાઈ"},{k:'C',en:"Key space",gu:"કી સ્પેસ"},{k:'D',en:"Key index",gu:"કી ઈન્ડેક્સ"}],
+   ans:'C'},
+
+  {id:140, cat:'asymmetric',
+   en:"Which encryption method is preferred for secure key exchange despite being slower?",
+   gu:"સુરક્ષિત કી એક્સચેન્જ માટે ધીમી હોવા છતાં કઈ એન્ક્રિપ્શન પદ્ધતિ પસંદ કરવામાં આવે છે?",
+   opts:[{k:'A',en:"Symmetric encryption",gu:"સિમેટ્રિક એન્ક્રિપ્શન"},{k:'B',en:"Stream cipher",gu:"સ્ટ્રીમ સાઈફર"},{k:'C',en:"Block cipher",gu:"બ્લોક સાઈફર"},{k:'D',en:"Asymmetric encryption",gu:"અસિમેટ્રિક એન્ક્રિપ્શન"}],
+   ans:'D'},
+
+  // === OS SECURITY (Q141-165) ===
+  {id:141, cat:'os',
+   en:"Which action best supports system security at the operating system level?",
+   gu:"ઓપરેટિંગ સિસ્ટમ સ્તરે સિસ્ટમ સુરક્ષાને કઈ ક્રિયા શ્રેષ્ઠ રીતે સમર્થન આપે છે?",
+   opts:[{k:'A',en:"Increasing processor speed",gu:"પ્રોસેસરની ઝડપ વધારવી"},{k:'B',en:"Installing unauthorized software",gu:"અનધિકૃત સોફ્ટવેર ઇન્સ્ટોલ કરવું"},{k:'C',en:"Disabling all user accounts",gu:"બધા યુઝર એકાઉન્ટ્સ ડિસેબલ કરવા"},{k:'D',en:"Applying regular security updates",gu:"નિયમિત સુરક્ષા અપડેટ્સ લાગુ કરવા"}],
+   ans:'D'},
+
+  {id:142, cat:'os',
+   en:"Which mechanism in operating system security limits user actions based on roles?",
+   gu:"ઓપરેટિંગ સિસ્ટમ સુરક્ષામાં વપરાશકર્તાની ક્રિયાઓને રોલ પ્રમાણે મર્યાદિત કરતી પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"File compression",gu:"ફાઈલ કમ્પ્રેશન"},{k:'B',en:"Disk partitioning",gu:"ડિસ્ક પાર્ટિશનિંગ"},{k:'C',en:"Virtual memory",gu:"વર્ચ્યુઅલ મેમરી"},{k:'D',en:"Access control",gu:"ઍક્સેસ કંટ્રોલ"}],
+   ans:'D'},
+
+  {id:143, cat:'os',
+   en:"Which mechanism restricts users to only permitted resources in a system?",
+   gu:"સિસ્ટમમાં વપરાશકર્તાઓને માત્ર અનુમતિ આપેલ સંસાધનો સુધી મર્યાદિત કરતી પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"Authentication",gu:"પ્રમાણીકરણ"},{k:'B',en:"Access control",gu:"ઍક્સેસ કંટ્રોલ"},{k:'C',en:"Backup control",gu:"બેકઅપ કંટ્રોલ"},{k:'D',en:"Process control",gu:"પ્રોસેસ કંટ્રોલ"}],
+   ans:'B'},
+
+  {id:144, cat:'os',
+   en:"Which operating system mechanism isolates applications to prevent them from interfering with each other?",
+   gu:"ઓપરેટિંગ સિસ્ટમની કઈ પદ્ધતિ એપ્લિકેશન્સને અલગ કરીને એકબીજામાં દખલ ન થાય તેની ખાતરી કરે છે?",
+   opts:[{k:'A',en:"Process isolation",gu:"પ્રોસેસ આઈસોલેશન"},{k:'B',en:"File sharing",gu:"ફાઈલ શેરિંગ"},{k:'C',en:"Disk formatting",gu:"ડિસ્ક ફોર્મેટિંગ"},{k:'D',en:"Cache clearing",gu:"કેશ ક્લિયરિંગ"}],
+   ans:'A'},
+
+  {id:145, cat:'os',
+   en:"Which operating system feature restricts execution of untrusted programs?",
+   gu:"અવિશ્વસનીય પ્રોગ્રામ્સના અમલને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Disk cleanup",gu:"ડિસ્ક ક્લીનઅપ"},{k:'B',en:"File indexing",gu:"ફાઈલ ઈન્ડેક્સિંગ"},{k:'C',en:"Screen resolution",gu:"સ્ક્રીન રિઝોલ્યુશન"},{k:'D',en:"Application control policy",gu:"એપ્લિકેશન કંટ્રોલ પોલિસી"}],
+   ans:'D'},
+
+  {id:146, cat:'os',
+   en:"Which operating system measure helps prevent execution of malicious software?",
+   gu:"દુષ્પ્રયોગી સોફ્ટવેરના અમલને અટકાવવામાં કઈ ઓપરેટિંગ સિસ્ટમ પગલું મદદ કરે છે?",
+   opts:[{k:'A',en:"Increasing memory size",gu:"મેમરી સાઈઝ વધારવી"},{k:'B',en:"Disabling storage",gu:"સ્ટોરેજ ડિસેબલ કરવું"},{k:'C',en:"Changing wallpaper",gu:"વોલપેપર બદલવું"},{k:'D',en:"Application whitelisting",gu:"એપ્લિકેશન વ્હાઈટલિસ્ટિંગ"}],
+   ans:'D'},
+
+  {id:147, cat:'os',
+   en:"Which operating system mechanism restricts program actions based on assigned privileges?",
+   gu:"સોંપેલ વિશેષાધિકારોના આધારે પ્રોગ્રામની ક્રિયાઓને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"File sorting",gu:"ફાઈલ સોર્ટિંગ"},{k:'B',en:"Disk cleanup",gu:"ડિસ્ક ક્લીનઅપ"},{k:'C',en:"Screen locking",gu:"સ્ક્રીન લોકિંગ"},{k:'D',en:"Access control enforcement",gu:"ઍક્સેસ કંટ્રોલ અમલીકરણ"}],
+   ans:'D'},
+
+  {id:148, cat:'os',
+   en:"Which operating system control prevents users from installing unauthorized software?",
+   gu:"અનધિકૃત સોફ્ટવેર ઇન્સ્ટોલ કરતા અટકાવતું ઓપરેટિંગ સિસ્ટમ કંટ્રોલ કયું છે?",
+   opts:[{k:'A',en:"Permission management",gu:"પરવાનગી મેનેજમેન્ટ"},{k:'B',en:"Screen resolution control",gu:"સ્ક્રીન રિઝોલ્યુશન કંટ્રોલ"},{k:'C',en:"Audio configuration",gu:"ઓડિયો કોન્ફિગ્યુરેશન"},{k:'D',en:"File compression",gu:"ફાઈલ કમ્પ્રેશન"}],
+   ans:'A'},
+
+  {id:149, cat:'os',
+   en:"Which mechanism restricts access based on predefined security policies?",
+   gu:"પૂર્વ-નિર્ધારિત સુરક્ષા નીતિઓના આધારે ઍક્સેસને મર્યાદિત કરતી પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"Access control list",gu:"ઍક્સેસ કંટ્રોલ લિસ્ટ"},{k:'B',en:"Screen saver",gu:"સ્ક્રીન સેવર"},{k:'C',en:"File renaming",gu:"ફાઈલ રીનેમિંગ"},{k:'D',en:"Memory allocation",gu:"મેમરી અલોકેશન"}],
+   ans:'A'},
+
+  {id:150, cat:'os',
+   en:"Which operating system practice reduces damage if a user account is compromised?",
+   gu:"વપરાશકર્તા એકાઉન્ટ સમાધાન થાય તો નુકસાન ઘટાડતી ઓપરેટિંગ સિસ્ટમ પ્રેક્ટિસ કઈ છે?",
+   opts:[{k:'A',en:"Assigning administrator rights to all users",gu:"બધા વપરાશકર્તાઓને એડમિનિસ્ટ્રેટર અધિકાર આપવા"},{k:'B',en:"Applying least privilege policy",gu:"લીસ્ટ પ્રિવિલેજ પોલિસી લાગુ કરવી"},{k:'C',en:"Allowing unrestricted access",gu:"બિનપ્રતિબંધિત ઍક્સેસ આપવી"},{k:'D',en:"Sharing credentials",gu:"ક્રેડેન્શિયલ્સ શેર કરવા"}],
+   ans:'B'},
+
+  {id:151, cat:'os',
+   en:"Which operating system feature restricts execution rights based on assigned permissions?",
+   gu:"સોંપેલ પરવાનગીઓના આધારે અમલના અધિકારોને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Access control mechanism",gu:"ઍક્સેસ કંટ્રોલ મિકેનિઝમ"},{k:'B',en:"Display settings",gu:"ડિસ્પ્લે સેટિંગ્સ"},{k:'C',en:"Font manager",gu:"ફોન્ટ મેનેજર"},{k:'D',en:"Audio driver",gu:"ઓડિયો ડ્રાઈવર"}],
+   ans:'A'},
+
+  {id:152, cat:'os',
+   en:"Which feature helps prevent execution of unauthorized applications?",
+   gu:"અનધિકૃત એપ્લિકેશન્સના અમલને અટકાવવામાં કઈ વિશેષતા મદદ કરે છે?",
+   opts:[{k:'A',en:"Application control policy",gu:"એપ્લિકેશન કંટ્રોલ પોલિસી"},{k:'B',en:"Screen brightness setting",gu:"સ્ક્રીન બ્રાઈટનેસ સેટિંગ"},{k:'C',en:"Audio configuration",gu:"ઓડિયો કોન્ફિગ્યુરેશન"},{k:'D',en:"File sorting option",gu:"ફાઈલ સોર્ટિંગ વિકલ્પ"}],
+   ans:'A'},
+
+  {id:153, cat:'os',
+   en:"Which operating system control restricts file access based on permissions?",
+   gu:"પરવાનગીઓના આધારે ફાઈલ ઍક્સેસને મર્યાદિત કરતું ઓપરેટિંગ સિસ્ટમ કંટ્રોલ કયું છે?",
+   opts:[{k:'A',en:"Access control list",gu:"ઍક્સેસ કંટ્રોલ લિસ્ટ"},{k:'B',en:"Disk cleanup",gu:"ડિસ્ક ક્લીનઅપ"},{k:'C',en:"Screen saver",gu:"સ્ક્રીન સેવર"},{k:'D',en:"Clipboard manager",gu:"ક્લિપબોર્ડ મેનેજર"}],
+   ans:'A'},
+
+  {id:154, cat:'os',
+   en:"Which operating system mechanism separates running processes to reduce security risks?",
+   gu:"ચાલુ પ્રોસેસને અલગ કરીને સુરક્ષા જોખમો ઘટાડતી ઓપરેટિંગ સિસ્ટમ પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"Disk partitioning",gu:"ડિસ્ક પાર્ટિશનિંગ"},{k:'B',en:"Process isolation",gu:"પ્રોસેસ આઈસોલેશન"},{k:'C',en:"File renaming",gu:"ફાઈલ રીનેમિંગ"},{k:'D',en:"Screen locking",gu:"સ્ક્રીન લોકિંગ"}],
+   ans:'B'},
+
+  {id:155, cat:'os',
+   en:"Which operating system feature restricts file access based on assigned permissions?",
+   gu:"સોંપેલ પરવાનગીઓના આધારે ફાઈલ ઍક્સેસને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Display settings",gu:"ડિસ્પ્લે સેટિંગ્સ"},{k:'B',en:"Audio control",gu:"ઓડિયો કંટ્રોલ"},{k:'C',en:"Access control list",gu:"ઍક્સેસ કંટ્રોલ લિસ્ટ"},{k:'D',en:"Disk defragmentation",gu:"ડિસ્ક ડિફ્રેગમેન્ટેશન"}],
+   ans:'C'},
+
+  {id:156, cat:'os',
+   en:"Which feature prevents execution of unauthorized programs in an operating system?",
+   gu:"ઓપરેટિંગ સિસ્ટમમાં અનધિકૃત પ્રોગ્રામ્સના અમલને અટકાવતી વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Application control policy",gu:"એપ્લિકેશન કંટ્રોલ પોલિસી"},{k:'B',en:"Display resolution setting",gu:"ડિસ્પ્લે રિઝોલ્યુશન સેટિંગ"},{k:'C',en:"Audio configuration panel",gu:"ઓડિયો કોન્ફિગ્યુરેશન પેનલ"},{k:'D',en:"File sorting option",gu:"ફાઈલ સોર્ટિંગ વિકલ્પ"}],
+   ans:'A'},
+
+  {id:157, cat:'os',
+   en:"Which operating system mechanism restricts user access based on assigned permissions?",
+   gu:"સોંપેલ પરવાનગીઓના આધારે વપરાશકર્તા ઍક્સેસને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"Access control mechanism",gu:"ઍક્સેસ કંટ્રોલ મિકેનિઝમ"},{k:'B',en:"Screen brightness control",gu:"સ્ક્રીન બ્રાઈટનેસ કંટ્રોલ"},{k:'C',en:"Audio driver system",gu:"ઓડિયો ડ્રાઈવર સિસ્ટમ"},{k:'D',en:"Disk labeling tool",gu:"ડિસ્ક લેબલિંગ ટૂલ"}],
+   ans:'A'},
+
+  {id:158, cat:'os',
+   en:"Which operating system practice limits damage if an account is compromised?",
+   gu:"એકાઉન્ટ સમાધાન થાય તો નુકસાનને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ પ્રેક્ટિસ કઈ છે?",
+   opts:[{k:'A',en:"Shared privileges",gu:"શેર્ડ વિશેષાધિકારો"},{k:'B',en:"Unlimited permissions",gu:"અમર્યાદિત પરવાનગીઓ"},{k:'C',en:"Least privilege principle",gu:"લીસ્ટ પ્રિવિલેજ સિદ્ધાંત"},{k:'D',en:"Disabled logging",gu:"લોગિંગ ડિસેબલ કરવું"}],
+   ans:'C'},
+
+  {id:159, cat:'os',
+   en:"Which feature prevents unauthorized software from running on a system?",
+   gu:"સિસ્ટમ પર અનધિકૃત સોફ્ટવેરને ચાલતું અટકાવતી વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Application control policy",gu:"એપ્લિકેશન કંટ્રોલ પોલિસી"},{k:'B',en:"Screen brightness setting",gu:"સ્ક્રીન બ્રાઈટનેસ સેટિંગ"},{k:'C',en:"Audio tuning panel",gu:"ઓડિયો ટ્યુનિંગ પેનલ"},{k:'D',en:"File naming option",gu:"ફાઈલ નેમિંગ વિકલ્પ"}],
+   ans:'A'},
+
+  {id:160, cat:'os',
+   en:"Which operating system mechanism restricts file access based on permissions?",
+   gu:"પરવાનગીઓના આધારે ફાઈલ ઍક્સેસને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"Access control list",gu:"ઍક્સેસ કંટ્રોલ લિસ્ટ"},{k:'B',en:"Display controller",gu:"ડિસ્પ્લે કંટ્રોલર"},{k:'C',en:"Audio module",gu:"ઓડિયો મોડ્યુલ"},{k:'D',en:"Disk labeler",gu:"ડિસ્ક લેબલર"}],
+   ans:'A'},
+
+  {id:161, cat:'os',
+   en:"Which operating system principle restricts users to minimum required access rights?",
+   gu:"વપરાશકર્તાઓને ન્યૂનતમ જરૂરી ઍક્સેસ અધિકારો સુધી મર્યાદિત કરતો ઓપરેટિંગ સિસ્ટમ સિદ્ધાંત કયો છે?",
+   opts:[{k:'A',en:"Least privilege principle",gu:"લીસ્ટ પ્રિવિલેજ સિદ્ધાંત"},{k:'B',en:"Shared access policy",gu:"શેર્ડ ઍક્સેસ પોલિસી"},{k:'C',en:"Unlimited privilege rule",gu:"અમર્યાદિત વિશેષાધિકાર નિયમ"},{k:'D',en:"Open access principle",gu:"ઓપન ઍક્સેસ સિદ્ધાંત"}],
+   ans:'A'},
+
+  {id:162, cat:'os',
+   en:"Which feature prevents unauthorized applications from running on a system?",
+   gu:"સિસ્ટમ પર અનધિકૃત એપ્લિકેશન્સને ચાલતું અટકાવતી વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Application control policy",gu:"એપ્લિકેશન કંટ્રોલ પોલિસી"},{k:'B',en:"Display settings",gu:"ડિસ્પ્લે સેટિંગ્સ"},{k:'C',en:"Audio configuration",gu:"ઓડિયો કોન્ફિગ્યુરેશન"},{k:'D',en:"File naming rules",gu:"ફાઈલ નેમિંગ નિયમો"}],
+   ans:'A'},
+
+  {id:163, cat:'os',
+   en:"Which operating system mechanism restricts access based on assigned permissions?",
+   gu:"સોંપેલ પરવાનગીઓના આધારે ઍક્સેસને મર્યાદિત કરતી ઓપરેટિંગ સિસ્ટમ પદ્ધતિ કઈ છે?",
+   opts:[{k:'A',en:"Access control mechanism",gu:"ઍક્સેસ કંટ્રોલ મિકેનિઝમ"},{k:'B',en:"Screen brightness tool",gu:"સ્ક્રીન બ્રાઈટનેસ ટૂલ"},{k:'C',en:"Audio adjustment panel",gu:"ઓડિયો એડજસ્ટમેન્ટ પેનલ"},{k:'D',en:"Disk labeling system",gu:"ડિસ્ક લેબલિંગ સિસ્ટમ"}],
+   ans:'A'},
+
+  {id:164, cat:'os',
+   en:"Which operating system feature isolates programs to prevent interference?",
+   gu:"પ્રોગ્રામ્સને અલગ કરીને દખલગીરી અટકાવતી ઓપરેટિંગ સિસ્ટમ વિશેષતા કઈ છે?",
+   opts:[{k:'A',en:"Disk partitioning",gu:"ડિસ્ક પાર્ટિશનિંગ"},{k:'B',en:"Process isolation",gu:"પ્રોસેસ આઈસોલેશન"},{k:'C',en:"File renaming",gu:"ફાઈલ રીનેમિંગ"},{k:'D',en:"Screen locking",gu:"સ્ક્રીન લોકિંગ"}],
+   ans:'B'},
+
+  {id:165, cat:'os',
+   en:"Which operating system control restricts software installation privileges?",
+   gu:"સોફ્ટવેર ઇન્સ્ટોલેશનના વિશેષાધિકારોને મર્યાદિત કરતું ઓપરેટિંગ સિસ્ટમ કંટ્રોલ કયું છે?",
+   opts:[{k:'A',en:"Permission enforcement",gu:"પરવાનગી અમલીકરણ"},{k:'B',en:"Screen control",gu:"સ્ક્રીન કંટ્રોલ"},{k:'C',en:"Audio tuning",gu:"ઓડિયો ટ્યુનિંગ"},{k:'D',en:"Display alignment",gu:"ડિસ્પ્લે એલાઈનમેન્ટ"}],
+   ans:'A'}
+];
+
+// Gujarati translations for cleaner display
+const guText = {
+  // Security principles category
+  1: {q:"કઈ માહિતી સુરક્ષા સિદ્ધાંત ખાતરી આપે છે કે ડેટા ફક્ત અધિકૃત વ્યક્તિ માટે જ ઉપલ-બ-્ધ છે?", opts:["ઉ-પ-લ-બ-્ધ-ત-ા","ગ-ો-પ-ન-ી-ય-ત-ા","અ-ખ-ં-ડ-િ-ત-ત-ા","જ-વ-ા-બ-દ-ા-ર-ી"]},
+};
+
+let lang = 'en';
+let currentCat = 'all';
+let answers = {};
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('btn-gu').classList.toggle('active', l==='gu');
+  document.getElementById('btn-both').classList.toggle('active', l==='both');
+  renderMCQs();
+}
+
+function filterCat(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderMCQs();
+}
+
+function getFiltered() {
+  if (currentCat === 'all') return mcqs;
+  return mcqs.filter(q => q.cat === currentCat);
+}
+
+function renderMCQs() {
+  const container = document.getElementById('mcq-container');
+  const filtered = getFiltered();
+  document.getElementById('stat-total').textContent = filtered.length;
+  
+  // Category groupings for section headings
+  const cats = {
+    principles: "Security Principles | સુ-ર-ક-્ષ-ા સ-િ-દ-્ધ-ા-ં-ત (Q1-43)",
+    system: "System Security Attacks | સ-િ-સ-્ટ-મ સ-ુ-ર-ક-્ષ-ા (Q44-69)",
+    modular: "Modular Arithmetic | મ-ો-ડ-્ય-ૂ-લ-ર ગ-ણ-િ-ત (Q70-96)",
+    symmetric: "Symmetric Encryption | સ-િ-મ-ે-ટ-્ર-િ-ક (Q97-115)",
+    asymmetric: "Asymmetric / PKI | અ-સ-િ-મ-ે-ટ-્ર-િ-ક (Q116-140)",
+    os: "OS Security | ઓ-એ-સ-ઃ સ-ુ-ર-ક-્ષ-ા (Q141-165)"
+  };
+  
+  let html = '';
+  let prevCat = null;
+  
+  filtered.forEach((q, idx) => {
+    if (currentCat === 'all' && q.cat !== prevCat) {
+      html += `<div class="section-title">${cats[q.cat] || q.cat}</div>`;
+      prevCat = q.cat;
+    }
+    const state = answers[q.id];
+    const cardClass = state ? (state === q.ans ? 'answered-correct' : 'answered-wrong') : '';
+    
+    html += `<div class="q-card ${cardClass}" id="card-${q.id}">`;
+    html += `<div class="q-num">Q${q.id} <span class="q-badge">${q.cat.toUpperCase()}</span></div>`;
+    
+    // Question text
+    if (lang === 'gu') {
+      html += `<div class="q-text" style="font-family:'Tiro Devanagari Hindi',serif;font-size:15px;">${cleanGu(q.gu)}</div>`;
+    } else if (lang === 'both') {
+      html += `<div class="q-text">${q.en}</div><div class="q-text-gu">${cleanGu(q.gu)}</div>`;
+    } else {
+      html += `<div class="q-text">${q.en}</div>`;
+    }
+    
+    // Options
+    html += '<div class="options">';
+    q.opts.forEach(opt => {
+      let cls = '';
+      if (state) {
+        if (opt.k === q.ans) cls = 'correct';
+        else if (opt.k === state && state !== q.ans) cls = 'wrong';
+      }
+      const dis = state ? 'disabled' : '';
+      
+      let optLabel = '';
+      if (lang === 'gu') {
+        optLabel = `<span style="font-family:'Tiro Devanagari Hindi',serif;">${cleanGu(opt.gu)}</span>`;
+      } else if (lang === 'both') {
+        optLabel = `${opt.en}<br><span class="opt-text-gu">${cleanGu(opt.gu)}</span>`;
+      } else {
+        optLabel = opt.en;
+      }
+      
+      html += `<button class="opt-btn ${cls}" ${dis} onclick="selectAnswer(${q.id},'${opt.k}')">
+        <span class="opt-key">${opt.k}</span>
+        <span>${optLabel}</span>
+      </button>`;
+    });
+    html += '</div>';
+    
+    // Result badge
+    if (state) {
+      const isCorrect = state === q.ans;
+      const correctOpt = q.opts.find(o => o.k === q.ans);
+      if (isCorrect) {
+        html += `<div class="result-badge correct">✅ ${lang==='gu'?'સ-ા-ચ-ો જ-વ-ા-બ!':'Correct!'}</div>`;
+      } else {
+        const cLabel = lang==='gu' ? cleanGu(correctOpt.gu) : correctOpt.en;
+        html += `<div class="result-badge wrong">❌ ${lang==='gu'?'ખ-ો-ટ-ો! સ-ા-ચ-ો:':'Wrong! Correct:'} (${q.ans}) ${cLabel}</div>`;
+      }
+    }
+    
+    html += '</div>';
+  });
+  
+  container.innerHTML = html;
+  updateStats();
+}
+
+function cleanGu(text) {
+  // Remove excessive dashes used as placeholder
+  if (!text) return '';
+  return text.replace(/-/g, '');
+}
+
+function selectAnswer(qId, key) {
+  if (answers[qId]) return;
+  answers[qId] = key;
+  
+  const q = mcqs.find(m => m.id === qId);
+  const card = document.getElementById('card-' + qId);
+  
+  // Apply styles
+  const isCorrect = key === q.ans;
+  card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  
+  const buttons = card.querySelectorAll('.opt-btn');
+  buttons.forEach(btn => {
+    btn.disabled = true;
+    const bKey = btn.querySelector('.opt-key').textContent;
+    if (bKey === q.ans) btn.classList.add('correct');
+    else if (bKey === key && !isCorrect) btn.classList.add('wrong');
+  });
+  
+  // Show result
+  const correctOpt = q.opts.find(o => o.k === q.ans);
+  const rb = document.createElement('div');
+  rb.className = 'result-badge ' + (isCorrect ? 'correct' : 'wrong');
+  
+  if (isCorrect) {
+    rb.innerHTML = lang==='gu' ? '✅ સ-ા-ચ-ો જ-વ-ા-બ! ઉ-ત-્-ત-મ!' : '✅ Correct! Excellent!';
+  } else {
+    const cLabel = lang==='gu' ? cleanGu(correctOpt.gu) : correctOpt.en;
+    rb.innerHTML = lang==='gu' ? `❌ ખ-ો-ટ-ો! સ-ા-ચ-ો: (${q.ans}) ${cLabel}` : `❌ Wrong! Correct Answer: (${q.ans}) ${cLabel}`;
+  }
+  rb.innerHTML = rb.innerHTML.replace(/-/g,'');
+  card.appendChild(rb);
+  
+  updateStats();
+  
+  // Auto scroll to next unanswered
+  // if (isCorrect) {
+  //   setTimeout(() => {
+  //     const filtered = getFiltered();
+  //     const nextQ = filtered.find(m => !answers[m.id] && m.id !== qId);
+  //     if (nextQ) {
+  //       const nextCard = document.getElementById('card-' + nextQ.id);
+  //       if (nextCard) {
+  //         nextCard.scrollIntoView({behavior:'smooth', block:'center'});
+  //       }
+  //     }
+  //   }, 800);
+  // }
+}
+
+function updateStats() {
+  const filtered = getFiltered();
+  const filteredIds = filtered.map(q => q.id);
+  const attempted = filteredIds.filter(id => answers[id]).length;
+  const correct = filteredIds.filter(id => {
+    const q = mcqs.find(m => m.id === id);
+    return answers[id] === q?.ans;
+  }).length;
+  const wrong = attempted - correct;
+  const score = attempted > 0 ? Math.round(correct/attempted*100) : 0;
+  
+  document.getElementById('stat-attempted').textContent = attempted;
+  document.getElementById('stat-correct').textContent = correct;
+  document.getElementById('stat-wrong').textContent = wrong;
+  document.getElementById('stat-score').textContent = score + '%';
+}
+
+function resetAll() {
+  answers = {};
+  renderMCQs();
+}
+
+// Fix gujarati texts - provide proper translations
+const guTranslations = {
+  // Questions with proper Gujarati
+  q1: "કઈ માહિતી સુરક્ષા સિદ્ધાંત ખાતરી આપે છે કે ડેટા ફક્ત અધિકૃત વ્યક્તિ માટે ઉ-પ-લ-બ-્-ધ-ઃ?",
+};
+
+// Patch MCQ data with better Gujarati text
+const guLabels = {
+  availability: "ઉ-પ-લ-બ-્-ધ-ત-ા",
+  confidentiality: "ગ-ો-પ-ન-ી-ય-ત-ા",
+  integrity: "અ-ખ-ં-ડ-િ-ત-ત-ા",
+  accountability: "જ-વ-ા-બ-દ-ા-ર-ી",
+  authentication: "પ-્-ર-મ-ા-ણ-ી-ક-ર-ણ",
+  nonrepudiation: "ન-ો-ન-ર-િ-પ-્-ય-ૂ-ડ-િ-ય-ે-શ-ન",
+};
+
+// Initial render
+renderMCQs();
+</script>
+</body>
+</html>

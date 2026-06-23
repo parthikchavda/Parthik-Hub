@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="gu">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Technology MCQ Quiz | વેબ ટેક્નોલોજી MCQ ક્વિઝ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 15px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .lang-buttons {
+      text-align: center;
+      padding: 12px;
+      background: #f8fafc;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .lang-btn {
+      padding: 10px 24px;
+      margin: 0 6px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .lang-btn.active {
+      background: #1e40af;
+      color: white;
+    }
+
+    .question-card {
+      padding: 25px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .question-number {
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 12px;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .option {
+      padding: 16px 20px;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.02rem;
+    }
+
+    .option:hover {
+      background: #f8fafc;
+    }
+
+    .option.correct {
+      background: #d1fae5 !important;
+      border-color: #10b981 !important;
+      color: #166534;
+    }
+
+    .option.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c;
+    }
+
+    .result {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .correct-result {
+      background: #ecfdf5;
+      color: #166534;
+    }
+
+    .wrong-result {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Web Technology MCQ Quiz</h1>
+      <p>વેબ ટેક્નોલોજી MCQ ક્વિઝ - ગુજરાત પોલીસ તૈયારી</p>
+    </div>
+
+    <div class="lang-buttons">
+      <button class="lang-btn active" onclick="setLanguage('both')">બંને | Both</button>
+      <button class="lang-btn" onclick="setLanguage('en')">English</button>
+      <button class="lang-btn" onclick="setLanguage('gu')">ગુજરાતી</button>
+    </div>
+
+    <div id="quiz"></div>
+  </div>
+
+  <script>
+    // All 98 MCQs from the PDF (Question 1 to 98)
+    const mcqs = [
+      { q: "ASP.NET is a successor to which technology?", guj: "ASP.NET કઈ ટેક્નોલોજીનો અનુગામી છે?", optionsEn: ["(A) PHP", "(B) Classic ASP", "(C) JSP", "(D) ColdFusion"], optionsGuj: ["(A) PHP", "(B) ક્લાસિક ASP", "(C) JSP", "(D) ColdFusion"], answer: 1 },
+      { q: "Which of the following is NOT a feature of ASP.NET?", guj: "નીચેનામાંથી કઈ ASP.NETની વિશેષતા નથી?", optionsEn: ["(A) Multi-language support", "(B) Event-driven programming", "(C) Purely interpreted script-based", "(D) Compiled code"], optionsGuj: ["(A) મલ્ટી-લેંગ્વેજ સપોર્ટ", "(B) ઈવેન્ટ-ડ્રિવન પ્રોગ્રામિંગ", "(C) પ્યોરલી interpreted સ્ક્રિપ્ટ આધારિત", "(D) Compiled કોડ"], answer: 2 },
+      { q: "What is the main advantage of ASP.NET being 'Compiled' instead of 'Interpreted'?", guj: "ASP.NET 'Compiled' હોવાનો મુખ્ય ફાયદો શું છે?", optionsEn: ["(A) It improves execution speed", "(B) It allows the use of HTML", "(C) It makes the code easier to read", "(D) It reduces the file size"], optionsGuj: ["(A) એક્ઝિક્યુશન સ્પીડ સુધારે છે", "(B) HTML વાપરવાની મંજૂરી આપે છે", "(C) કોડ વાંચવામાં સરળ બને છે", "(D) ફાઈલ સાઈઝ ઘટાડે છે"], answer: 0 },
+      { q: "ASP.NET belongs to which framework?", guj: "ASP.NET કયા ફ્રેમવર્કનો ભાગ છે?", optionsEn: ["(A) Cocoa Framework", "(B) Django Framework", "(C) .NET Framework", "(D) Java Framework"], optionsGuj: ["(A) Cocoa Framework", "(B) Django Framework", "(C) .NET Framework", "(D) Java Framework"], answer: 2 },
+      { q: "Which component of the .NET Framework provides the execution environment for ASP.NET applications?", guj: "ASP.NET એપ્લિકેશન માટે એક્ઝિક્યુશન વાતાવરણ કયો ઘટક પૂરો પાડે છે?", optionsEn: ["(A) CTS", "(B) CLR", "(C) MSIL", "(D) BCL"], optionsGuj: ["(A) CTS", "(B) CLR", "(C) MSIL", "(D) BCL"], answer: 1 },
+      { q: "Which feature allows ASP.NET to separate the HTML design from the programming logic?", guj: "HTML ડિઝાઈનને પ્રોગ્રામિંગ લોજિકથી અલગ રાખવાની સુવિધા કઈ છે?", optionsEn: ["(A) State Management", "(B) Caching", "(C) Configuration", "(D) Code-Behind"], optionsGuj: ["(A) સ્ટેટ મેનેજમેન્ટ", "(B) કેશિંગ", "(C) કોન્ફિગ્યુરેશન", "(D) કોડ-બિહાઈન્ડ"], answer: 3 },
+      { q: "In ASP.NET, which file extension is typically used for the 'Code-Behind' file in C#?", guj: "ASP.NETમાં C# માટે 'Code-Behind' ફાઈલનું extension સામાન્ય રીતે શું હોય છે?", optionsEn: ["(A) .config", "(B) .aspx", "(C) .html", "(D) .aspx.cs"], optionsGuj: ["(A) .config", "(B) .aspx", "(C) .html", "(D) .aspx.cs"], answer: 3 },
+      { q: "Which feature in ASP.NET is used to store data across multiple requests from the same user?", guj: "એક જ યુઝરના અનેક રિક્વેસ્ટમાં ડેટા સ્ટોર કરવા માટે કઈ વિશેષતા વપરાય છે?", optionsEn: ["(A) Tracing", "(B) Authentication", "(C) State Management", "(D) Caching"], optionsGuj: ["(A) Tracing", "(B) Authentication", "(C) સ્ટેટ મેનેજમેન્ટ", "(D) Caching"], answer: 2 },
+      { q: "What is the purpose of the 'Output Caching' feature in ASP.NET?", guj: "ASP.NETમાં 'Output Caching' વિશેષતાનો હેતુ શું છે?", optionsEn: ["(A) To store rendered HTML for faster requests", "(B) To clear browser history", "(C) To store source code", "(D) To block hackers"], optionsGuj: ["(A) ઝડપી રિક્વેસ્ટ માટે રેન્ડર થયેલ HTML સ્ટોર કરવા", "(B) બ્રાઉઝર હિસ્ટ્રી સાફ કરવા", "(C) સોર્સ કોડ સ્ટોર કરવા", "(D) હેકર્સને બ્લોક કરવા"], answer: 0 },
+      { q: "Which ASP.NET feature allows developers to easily create a consistent layout across all pages of a website?", guj: "વેબસાઈટના તમામ પેજ પર સમાન લેઆઉટ બનાવવા માટે કઈ વિશેષતા વપરાય છે?", optionsEn: ["(A) ViewState", "(B) Theme", "(C) User Controls", "(D) Master Pages"], optionsGuj: ["(A) ViewState", "(B) Theme", "(C) User Controls", "(D) Master Pages"], answer: 3 },
+      { q: "Which of the following languages can be used to write ASP.NET applications?", guj: "ASP.NET એપ્લિકેશન લખવા માટે કઈ ભાષાઓ વાપરી શકાય છે?", optionsEn: ["(A) Only JavaScript", "(B) Only C#", "(C) C#, VB.NET, J#", "(D) Only VB.NET"], optionsGuj: ["(A) માત્ર JavaScript", "(B) માત્ર C#", "(C) C#, VB.NET, J#", "(D) માત્ર VB.NET"], answer: 2 },
+      { q: "'Validation Controls' in ASP.NET are used for:", guj: "'Validation Controls' ASP.NETમાં કયા માટે વપરાય છે?", optionsEn: ["(A) Validating user input", "(B) Speeding server", "(C) Checking database", "(D) Formatting CSS"], optionsGuj: ["(A) યુઝર ઇનપુટ વેલિડેટ કરવા", "(B) સર્વરને ઝડપી બનાવવા", "(C) ડેટાબેઝ તપાસવા", "(D) CSS ફોર્મેટિંગ"], answer: 0 },
+      { q: "Which feature provides a way to monitor the execution of an ASP.NET application and find errors?", guj: "ASP.NET એપ્લિકેશનના એક્ઝિક્યુશનને મોનિટર કરવા અને એરર શોધવા માટે કઈ વિશેષતા છે?", optionsEn: ["(A) Deployment", "(B) Tracing", "(C) Globalization", "(D) Caching"], optionsGuj: ["(A) Deployment", "(B) Tracing", "(C) Globalization", "(D) Caching"], answer: 1 },
+      { q: "ASP.NET is 'Language Independent.' This means:", guj: "ASP.NET 'Language Independent' છે. આનો અર્થ શું છે?", optionsEn: ["(A) It works only on Windows", "(B) No language required", "(C) Auto translates sites", "(D) Supports multiple .NET languages"], optionsGuj: ["(A) તે માત્ર Windows પર કામ કરે છે", "(B) કોઈ ભાષાની જરૂર નથી", "(C) સાઈટ આપોઆપ અનુવાદ કરે છે", "(D) અનેક .NET ભાષાઓને સપોર્ટ કરે છે"], answer: 3 },
+      { q: "Which configuration file is used to manage application-level settings in ASP.NET?", guj: "ASP.NETમાં એપ્લિકેશન લેવલના સેટિંગ્સ મેનેજ કરવા માટે કઈ કોન્ફિગ્યુરેશન ફાઈલ વપરાય છે?", optionsEn: ["(A) Machine.config", "(B) Global.asax", "(C) Web.config", "(D) App.exe"], optionsGuj: ["(A) Machine.config", "(B) Global.asax", "(C) Web.config", "(D) App.exe"], answer: 2 },
+      { q: "The 'Event-Driven' nature of ASP.NET means:", guj: "ASP.NETની 'Event-Driven' પ્રકૃતિનો અર્થ શું છે?", optionsEn: ["(A) Server runs once", "(B) Calendar feature", "(C) Responds to user actions", "(D) Works on holidays"], optionsGuj: ["(A) સર્વર એક વખત ચાલે છે", "(B) કેલેન્ડર વિશેષતા", "(C) યુઝરની ક્રિયાઓ પર પ્રતિસાદ આપે છે", "(D) રજાઓ પર કામ કરે છે"], answer: 2 },
+      { q: "What does 'Side-by-Side Execution' mean in the context of ASP.NET?", guj: "ASP.NETમાં 'Side-by-Side Execution'નો અર્થ શું છે?", optionsEn: ["(A) Multiple runtime versions coexist", "(B) Two browsers open", "(C) Two users", "(D) Split windows"], optionsGuj: ["(A) અનેક રનટાઈમ વર્ઝન સાથે ચાલે છે", "(B) બે બ્રાઉઝર ખુલ્લા છે", "(C) બે યુઝર", "(D) વિન્ડો વિભાજિત"], answer: 0 },
+      { q: "Which ASP.NET feature helps in making the application available in multiple languages and cultures?", guj: "એપ્લિકેશનને અનેક ભાષાઓ અને સંસ્કૃતિઓમાં ઉપલબ્ધ કરાવવા માટે કઈ વિશેષતા છે?", optionsEn: ["(A) Localization & Globalization", "(B) Authentication", "(C) Directives", "(D) Master Pages"], optionsGuj: ["(A) Localization & Globalization", "(B) Authentication", "(C) Directives", "(D) Master Pages"], answer: 0 },
+      { q: "Which tool is primarily used to develop, debug, and deploy ASP.NET applications?", guj: "ASP.NET એપ્લિકેશન વિકસાવવા, ડીબગ કરવા અને ડિપ્લોય કરવા માટે મુખ્યત્વે કયું ટૂલ વપરાય છે?", optionsEn: ["(A) Eclipse", "(B) Dreamweaver", "(C) Visual Studio", "(D) Notepad++"], optionsGuj: ["(A) Eclipse", "(B) Dreamweaver", "(C) Visual Studio", "(D) Notepad++"], answer: 2 },
+      { q: "What is 'ViewState' used for in ASP.NET?", guj: "ASP.NETમાં 'ViewState' કયા માટે વપરાય છે?", optionsEn: ["(A) Store passwords", "(B) Preserve control values", "(C) Connect SQL", "(D) View source"], optionsGuj: ["(A) પાસવર્ડ સ્ટોર કરવા", "(B) કંટ્રોલના મૂલ્યો જાળવવા", "(C) SQL કનેક્ટ કરવા", "(D) સોર્સ જોવા"], answer: 1 },
+      { q: "'XCOPY Deployment' in ASP.NET refers to:", guj: "ASP.NETમાં 'XCOPY Deployment'નો અર્થ શું છે?", optionsEn: ["(A) Copy files deployment", "(B) Delete site", "(C) Encrypt files", "(D) Registry install"], optionsGuj: ["(A) ફાઈલ્સ કોપી કરીને ડિપ્લોય કરવું", "(B) સાઈટ ડિલીટ કરવી", "(C) ફાઈલ્સ એન્ક્રિપ્ટ કરવી", "(D) Registry install"], answer: 0 },
+
+      // Questions 22 to 98
+      { q: "Which security feature is built into ASP.NET to handle user logins?", guj: "ASP.NETમાં યુઝર લોગિન હેન્ડલ કરવા માટે કઈ સિક્યોરિટી વિશેષતા બિલ્ટ-ઇન છે?", optionsEn: ["(A) Tracing", "(B) Authorization", "(C) Authentication", "(D) Both B and C"], optionsGuj: ["(A) Tracing", "(B) Authorization", "(C) Authentication", "(D) B અને C બંને"], answer: 3 },
+      { q: "What is the role of 'Server Controls' in ASP.NET?", guj: "ASP.NETમાં 'Server Controls'ની ભૂમિકા શું છે?", optionsEn: ["(A) Hardware devices", "(B) Browser only", "(C) Cooling servers", "(D) Processed by server"], optionsGuj: ["(A) હાર્ડવેર ડિવાઈસ", "(B) માત્ર બ્રાઉઝર", "(C) સર્વરને ઠંડું કરવા", "(D) સર્વર દ્વારા પ્રોસેસ થાય છે"], answer: 3 },
+      { q: "'AdRotator' is an example of what in ASP.NET?", guj: "'AdRotator' ASP.NETમાં શું છે?", optionsEn: ["(A) Config file", "(B) Server Control", "(C) Database type", "(D) Security setting"], optionsGuj: ["(A) Config file", "(B) Server Control", "(C) Database type", "(D) Security setting"], answer: 1 },
+      { q: "Which feature of Visual Studio helps developers by suggesting code completions (autofill)?", guj: "Visual Studioની કઈ વિશેષતા કોડ સજેશન (autofill) આપે છે?", optionsEn: ["(A) Debugging", "(B) Deployment", "(C) IntelliSense", "(D) Tracing"], optionsGuj: ["(A) Debugging", "(B) Deployment", "(C) IntelliSense", "(D) Tracing"], answer: 2 },
+      { q: "ASP.NET applications run inside which process on the server?", guj: "ASP.NET એપ્લિકેશન સર્વર પર કયા પ્રોસેસમાં ચાલે છે?", optionsEn: ["(A) w3wp.exe", "(B) chrome.exe", "(C) notepad.exe", "(D) explorer.exe"], optionsGuj: ["(A) w3wp.exe", "(B) chrome.exe", "(C) notepad.exe", "(D) explorer.exe"], answer: 0 },
+      { q: "Which feature allows ASP.NET to automatically detect changes in configuration files without restarting the server?", guj: "ASP.NET કોન્ફિગ્યુરેશન ફાઈલમાં ફેરફાર આપોઆપ શોધી લે છે વગર સર્વર રીસ્ટાર્ટ કર્યા?", optionsEn: ["(A) Hard coding", "(B) Static linking", "(C) Auto recompilation", "(D) Manual reboot"], optionsGuj: ["(A) Hard coding", "(B) Static linking", "(C) Auto recompilation", "(D) Manual reboot"], answer: 2 },
+      { q: "What is the 'Global.asax' file used for?", guj: "'Global.asax' ફાઈલ કયા માટે વપરાય છે?", optionsEn: ["(A) CSS styles", "(B) Application events", "(C) Images", "(D) HTML code"], optionsGuj: ["(A) CSS styles", "(B) એપ્લિકેશન ઈવેન્ટ્સ", "(C) Images", "(D) HTML code"], answer: 1 },
+      { q: "Which of the following is a benefit of the 'Strongly Typed' nature of ASP.NET languages?", guj: "ASP.NET ભાષાઓની 'Strongly Typed' પ્રકૃતિનો ફાયદો કયો છે?", optionsEn: ["(A) Compile-time error detection", "(B) Slower code", "(C) More errors", "(D) Integers only"], optionsGuj: ["(A) કમ્પાઈલ સમયે એરર શોધ", "(B) ધીમો કોડ", "(C) વધુ એરર", "(D) માત્ર Integers"], answer: 0 },
+      { q: "What is the fundamental execution difference between Classic ASP and ASP.NET?", guj: "Classic ASP અને ASP.NET વચ્ચે મૂળ એક્ઝિક્યુશન તફાવત શું છે?", optionsEn: ["(A) Both are compiled.", "(B) Both are interpreted.", "(C) Classic ASP is interpreted, ASP.NET is compiled.", "(D) Classic ASP is compiled, ASP.NET is interpreted."], optionsGuj: ["(A) બંને compiled છે.", "(B) બંને interpreted છે.", "(C) Classic ASP interpreted છે, ASP.NET compiled છે.", "(D) Classic ASP compiled છે, ASP.NET interpreted છે."], answer: 2 },
+      { q: "Which language is primarily used in Classic ASP?", guj: "Classic ASPમાં મુખ્યત્વે કઈ ભાષા વપરાય છે?", optionsEn: ["(A) Java", "(B) VBScript", "(C) C#", "(D) VB.NET"], optionsGuj: ["(A) Java", "(B) VBScript", "(C) C#", "(D) VB.NET"], answer: 1 },
+      { q: "How is the 'Code-Behind' model different in ASP.NET compared to Classic ASP?", guj: "ASP.NETમાં 'Code-Behind' મોડલ Classic ASP કરતાં કેવી રીતે અલગ છે?", optionsEn: ["(A) ASP.NET mixes both", "(B) Neither supports separation", "(C) Both same", "(D) Classic mixes, ASP.NET separates"], optionsGuj: ["(A) ASP.NET બંને મિક્સ કરે છે", "(B) કોઈને અલગ કરવાનું સપોર્ટ નથી", "(C) બંને સમાન", "(D) Classic મિક્સ કરે છે, ASP.NET અલગ કરે છે"], answer: 3 },
+      { q: "ASP.NET uses which technology to improve performance over Classic ASP?", guj: "Classic ASP કરતાં પર્ફોર્મન્સ સુધારવા માટે ASP.NET કઈ ટેક્નોલોજી વાપરે છે?", optionsEn: ["(A) Scripting Engine", "(B) COM only", "(C) CLR", "(D) DLL Hell"], optionsGuj: ["(A) Scripting Engine", "(B) COM only", "(C) CLR", "(D) DLL Hell"], answer: 2 },
+      { q: "Which of these is a significant disadvantage of Classic ASP?", guj: "Classic ASPનો મોટો ગેરલાભ કયો છે?", optionsEn: ["(A) Supports C#", "(B) Uses .NET", "(C) Too fast", "(D) Spaghetti code"], optionsGuj: ["(A) C# સપોર્ટ કરે છે", "(B) .NET વાપરે છે", "(C) ખૂબ ઝડપી છે", "(D) Spaghetti code"], answer: 3 },
+      { q: "In ASP.NET, which feature allows the state of controls to be maintained across postbacks?", guj: "ASP.NETમાં કઈ વિશેષતા postback પછી પણ કંટ્રોલ્સની સ્થિતિ જાળવી રાખે છે?", optionsEn: ["(A) ViewState", "(B) Cookie", "(C) Session only", "(D) QueryString"], optionsGuj: ["(A) ViewState", "(B) Cookie", "(C) Session only", "(D) QueryString"], answer: 0 },
+      { q: "Classic ASP relies heavily on which components for extended functionality?", guj: "Classic ASP વધારાની કાર્યક્ષમતા માટે કયા ઘટકો પર આધાર રાખે છે?", optionsEn: ["(A) Managed code", "(B) COM components", "(C) .NET Assemblies", "(D) NuGet packages"], optionsGuj: ["(A) Managed code", "(B) COM components", "(C) .NET Assemblies", "(D) NuGet packages"], answer: 1 },
+      { q: "Which of the following is TRUE regarding language support?", guj: "ભાષા સપોર્ટ વિશે નીચેનામાંથી કયું સાચું છે?", optionsEn: ["(A) ASP.NET supports multiple languages", "(B) Classic ASP supports C#", "(C) ASP.NET limited to VBScript", "(D) Classic ASP supports .NET languages"], optionsGuj: ["(A) ASP.NET અનેક ભાષાઓ સપોર્ટ કરે છે", "(B) Classic ASP C# સપોર્ટ કરે છે", "(C) ASP.NET માત્ર VBScript સુધી મર્યાદિત છે", "(D) Classic ASP .NET ભાષાઓ સપોર્ટ કરે છે"], answer: 0 },
+      { q: "What happens to a Classic ASP page when it is requested?", guj: "Classic ASP પેજને રિક્વેસ્ટ કરતાં શું થાય છે?", optionsEn: ["(A) Sent as-is", "(B) Compiled DLL", "(C) Executable file", "(D) Executed line-by-line"], optionsGuj: ["(A) જેમ છે તેમ મોકલાય છે", "(B) Compiled DLL", "(C) Executable file", "(D) લાઈન-બાય-લાઈન એક્ઝિક્યુટ થાય છે"], answer: 3 },
+      { q: "What happens to an ASP.NET page when it is requested for the first time?", guj: "ASP.NET પેજ પહેલી વખત રિક્વેસ્ટ કરતાં શું થાય છે?", optionsEn: ["(A) Ignored", "(B) Interpreted", "(C) Compiled to MSIL then native", "(D) Converted VBScript"], optionsGuj: ["(A) અવગણવામાં આવે છે", "(B) Interpreted", "(C) MSILમાં કમ્પાઈલ થઈને native બને છે", "(D) VBScriptમાં કન્વર્ટ થાય છે"], answer: 2 },
+      { q: "Which version of ASP introduced the 'Web Forms' concept?", guj: "'Web Forms' કન્સેપ્ટ કઈ ASP વર્ઝનમાં આવ્યું?", optionsEn: ["(A) ASP.NET", "(B) ASP Classic", "(C) ASP 3.0", "(D) ASP 2.0"], optionsGuj: ["(A) ASP.NET", "(B) ASP Classic", "(C) ASP 3.0", "(D) ASP 2.0"], answer: 0 },
+      { q: "Deployment in Classic ASP often required registering components in the:", guj: "Classic ASPમાં ડિપ્લોયમેન્ટ માટે ઘણી વખત કમ્પોનન્ટ્સને ક્યાં રજિસ્ટર કરવા પડતા?", optionsEn: ["(A) Bin folder", "(B) Windows Registry", "(C) Web.config", "(D) Solution Explorer"], optionsGuj: ["(A) Bin folder", "(B) Windows Registry", "(C) Web.config", "(D) Solution Explorer"], answer: 1 },
+      { q: "'Zero-touch deployment' or 'XCOPY deployment' is a feature of:", guj: "'Zero-touch deployment' અથવા 'XCOPY deployment' કઈની વિશેષતા છે?", optionsEn: ["(A) PHP", "(B) HTML", "(C) ASP.NET", "(D) Classic ASP"], optionsGuj: ["(A) PHP", "(B) HTML", "(C) ASP.NET", "(D) Classic ASP"], answer: 2 },
+      { q: "Which file handles application-level configuration in ASP.NET?", guj: "ASP.NETમાં એપ્લિકેશન લેવલની કોન્ફિગ્યુરેશન કઈ ફાઈલ હેન્ડલ કરે છે?", optionsEn: ["(A) Global.asa", "(B) Settings.txt", "(C) Metadata.xml", "(D) Web.config"], optionsGuj: ["(A) Global.asa", "(B) Settings.txt", "(C) Metadata.xml", "(D) Web.config"], answer: 3 },
+      { q: "Which file was used for application/session events in Classic ASP?", guj: "Classic ASPમાં એપ્લિકેશન/સેશન ઈવેન્ટ્સ માટે કઈ ફાઈલ વપરાતી?", optionsEn: ["(A) Global.asa", "(B) App.config", "(C) Root.asp", "(D) Global.asax"], optionsGuj: ["(A) Global.asa", "(B) App.config", "(C) Root.asp", "(D) Global.asax"], answer: 0 },
+      { q: "ASP.NET provides built-in validation controls. How was validation typically done in Classic ASP?", guj: "ASP.NETમાં બિલ્ટ-ઇન વેલિડેશન કંટ્રોલ્સ છે. Classic ASPમાં વેલિડેશન સામાન્ય રીતે કેવી રીતે કરવામાં આવતું?", optionsEn: ["(A) Not possible", "(B) Browser auto", "(C) Manual scripts", "(D) Same controls"], optionsGuj: ["(A) શક્ય ન હતું", "(B) બ્રાઉઝર આપોઆપ", "(C) મેન્યુઅલ સ્ક્રિપ્ટ્સ", "(D) સમાન કંટ્રોલ્સ"], answer: 2 },
+      { q: "Debugging in ASP.NET is easier because:", guj: "ASP.NETમાં ડીબગિંગ સરળ છે કારણ કે:", optionsEn: ["(A) Full debugger support", "(B) No bugs", "(C) Response.Write only", "(D) Interpreted language"], optionsGuj: ["(A) પૂર્ણ ડીબગર સપોર્ટ", "(B) કોઈ બગ નથી", "(C) Response.Write only", "(D) Interpreted language"], answer: 0 },
+      { q: "Which architecture does ASP.NET follow for UI development?", guj: "ASP.NET UI વિકાસ માટે કઈ આર્કિટેક્ચર અનુસરે છે?", optionsEn: ["(A) Static", "(B) Command-line", "(C) Event-driven", "(D) Linear"], optionsGuj: ["(A) Static", "(B) Command-line", "(C) Event-driven", "(D) Linear"], answer: 2 },
+      { q: "In terms of Object Orientation (OO), which statement is correct?", guj: "ઓબ્જેક્ટ ઓરિએન્ટેશન (OO)ની દ્રષ્ટિએ કયું વાક્ય સાચું છે?", optionsEn: ["(A) Neither OO", "(B) Classic ASP fully OO", "(C) ASP.NET fully OO", "(D) Only Classic supports inheritance"], optionsGuj: ["(A) કોઈ પણ OO નથી", "(B) Classic ASP પૂર્ણ OO છે", "(C) ASP.NET પૂર્ણ OO છે", "(D) માત્ર Classic inheritance સપોર્ટ કરે છે"], answer: 2 },
+      { q: "Which of the following is NOT a benefit of ASP.NET over Classic ASP?", guj: "ASP.NETનો Classic ASP કરતાં કયો ફાયદો નથી?", optionsEn: ["(A) Better performance", "(B) Script engine required", "(C) Stronger security", "(D) Easy deployment"], optionsGuj: ["(A) વધુ સારું પર્ફોર્મન્સ", "(B) સ્ક્રિપ્ટ એન્જિન જરૂરી છે", "(C) વધુ મજબૂત સિક્યોરિટી", "(D) સરળ ડિપ્લોયમેન્ટ"], answer: 1 },
+      { q: "Classic ASP code is usually found within which delimiters?", guj: "Classic ASP કોડ સામાન્ય રીતે કયા delimitersમાં હોય છે?", optionsEn: ["(A) {{}}", "(B) <?php ?>", "(C) <% %>", "(D) <script>"], optionsGuj: ["(A) {{}}", "(B) <?php ?>", "(C) <% %>", "(D) <script>"], answer: 2 },
+      { q: "Which version of IIS first supported ASP.NET?", guj: "IISનું કયું વર્ઝન પહેલી વખત ASP.NETને સપોર્ટ કરતું હતું?", optionsEn: ["(A) IIS 1.0", "(B) IIS 4.0", "(C) IIS 3.0", "(D) IIS 5.0"], optionsGuj: ["(A) IIS 1.0", "(B) IIS 4.0", "(C) IIS 3.0", "(D) IIS 5.0"], answer: 3 },
+      { q: "ASP.NET separates UI from code using which file extensions?", guj: "ASP.NET UIને કોડથી અલગ કરવા માટે કયા ફાઈલ extensions વાપરે છે?", optionsEn: ["(A) .html/.js", "(B) .txt/.exe", "(C) .asp/.inc", "(D) .aspx/.aspx.cs"], optionsGuj: ["(A) .html/.js", "(B) .txt/.exe", "(C) .asp/.inc", "(D) .aspx/.aspx.cs"], answer: 3 },
+      { q: "Which engine is responsible for executing Classic ASP?", guj: "Classic ASPને એક્ઝિક્યુટ કરવા માટે કયું એન્જિન જવાબદાર છે?", optionsEn: ["(A) clr.dll", "(B) system.web.dll", "(C) asp.dll", "(D) mscoree.dll"], optionsGuj: ["(A) clr.dll", "(B) system.web.dll", "(C) asp.dll", "(D) mscoree.dll"], answer: 2 },
+      { q: "What is 'DLL Hell' usually associated with?", guj: "'DLL Hell' સામાન્ય રીતે કયા સાથે સંકળાયેલું છે?", optionsEn: ["(A) HTML5", "(B) Java", "(C) Classic ASP", "(D) ASP.NET"], optionsGuj: ["(A) HTML5", "(B) Java", "(C) Classic ASP", "(D) ASP.NET"], answer: 2 },
+      { q: "Can Classic ASP and ASP.NET run on the same server?", guj: "Classic ASP અને ASP.NET એક જ સર્વર પર ચાલી શકે છે?", optionsEn: ["(A) Only Linux", "(B) Only same DB", "(C) No", "(D) Yes side-by-side"], optionsGuj: ["(A) માત્ર Linux", "(B) માત્ર સમાન DB", "(C) ના", "(D) હા side-by-side"], answer: 3 },
+      { q: "In ASP.NET, 'IntelliSense' in Visual Studio provides:", guj: "ASP.NETમાં Visual Studioનું 'IntelliSense' શું પૂરું પાડે છે?", optionsEn: ["(A) Virus protection", "(B) Code suggestions", "(C) Auto internet", "(D) DB backup"], optionsGuj: ["(A) વાયરસ સુરક્ષા", "(B) કોડ સજેશન", "(C) આપોઆપ ઇન્ટરનેટ", "(D) DB બેકઅપ"], answer: 1 },
+      { q: "Which framework provides the class libraries used by ASP.NET?", guj: "ASP.NET દ્વારા વપરાતા ક્લાસ લાઇબ્રેરી કયા ફ્રેમવર્ક પૂરી પાડે છે?", optionsEn: ["(A) Win32 API", "(B) Java Runtime", "(C) COM+", "(D) .NET Framework"], optionsGuj: ["(A) Win32 API", "(B) Java Runtime", "(C) COM+", "(D) .NET Framework"], answer: 3 },
+      { q: "Error handling in Classic ASP was primarily done using:", guj: "Classic ASPમાં એરર હેન્ડલિંગ મુખ્યત્વે કયા દ્વારા કરવામાં આવતું?", optionsEn: ["(A) Global handlers", "(B) Error directives", "(C) On Error Resume Next", "(D) Try Catch"], optionsGuj: ["(A) Global handlers", "(B) Error directives", "(C) On Error Resume Next", "(D) Try Catch"], answer: 2 },
+      { q: "Error handling in ASP.NET is primarily done using:", guj: "ASP.NETમાં એરર હેન્ડલિંગ મુખ્યત્વે કયા દ્વારા કરવામાં આવે છે?", optionsEn: ["(A) Response.Write", "(B) If statements", "(C) On Error Resume Next", "(D) Try-Catch-Finally"], optionsGuj: ["(A) Response.Write", "(B) If statements", "(C) On Error Resume Next", "(D) Try-Catch-Finally"], answer: 3 },
+      { q: "What is the primary characteristic of a Static Webpage?", guj: "સ્ટેટિક વેબપેજની મુખ્ય વિશેષતા શું છે?", optionsEn: ["(A) Same for every visitor", "(B) Written in C#", "(C) Needs database", "(D) Changes with user"], optionsGuj: ["(A) દરેક વિઝિટર માટે સમાન", "(B) C#માં લખાયેલું", "(C) ડેટાબેઝ જરૂરી છે", "(D) યુઝર સાથે બદલાય છે"], answer: 0 },
+      { q: "A Web Application is different from a Webpage because it focus on:", guj: "વેબ એપ્લિકેશન વેબપેજથી અલગ છે કારણ કે તેનું ફોકસ શું છે?", optionsEn: ["(A) Mobile only", "(B) Interaction tasks", "(C) Images only", "(D) No backend"], optionsGuj: ["(A) માત્ર મોબાઈલ", "(B) ઇન્ટરેક્શન કાર્યો", "(C) માત્ર ઈમેજીસ", "(D) કોઈ બેકએન્ડ નથી"], answer: 1 },
+      { q: "Which of the following is the best example of a Web Application?", guj: "વેબ એપ્લિકેશનનું શ્રેષ્ઠ ઉદાહરણ કયું છે?", optionsEn: ["(A) Static document", "(B) Flyer", "(C) Banking portal", "(D) About page"], optionsGuj: ["(A) સ્ટેટિક ડોક્યુમેન્ટ", "(B) Flyer", "(C) બેંકિંગ પોર્ટલ", "(D) About page"], answer: 2 },
+      { q: "In a Web Application, where does the 'Business Logic' usually reside?", guj: "વેબ એપ્લિકેશનમાં 'Business Logic' સામાન્ય રીતે ક્યાં રહે છે?", optionsEn: ["(A) CSS file", "(B) Monitor", "(C) Browser", "(D) Server-side"], optionsGuj: ["(A) CSS file", "(B) Monitor", "(C) Browser", "(D) Server-side"], answer: 3 },
+      { q: "Which language is the standard for defining the structure of a Webpage?", guj: "વેબપેજની સ્ટ્રક્ચર વ્યાખ્યાયિત કરવા માટે કઈ ભાષા સ્ટાન્ડર્ડ છે?", optionsEn: ["(A) SQL", "(B) HTML", "(C) Python", "(D) C++"], optionsGuj: ["(A) SQL", "(B) HTML", "(C) Python", "(D) C++"], answer: 1 },
+      { q: "What role does CSS play in a Webpage or Web Application?", guj: "વેબપેજ અથવા વેબ એપ્લિકેશનમાં CSSની ભૂમિકા શું છે?", optionsEn: ["(A) Style/layout", "(B) Store passwords", "(C) DB queries", "(D) Server math"], optionsGuj: ["(A) સ્ટાઈલ/લેઆઉટ", "(B) પાસવર્ડ સ્ટોર કરવા", "(C) DB queries", "(D) સર્વર મેથ"], answer: 0 },
+      { q: "Dynamic Webpages are generated:", guj: "ડાયનેમિક વેબપેજ કેવી રીતે જનરેટ થાય છે?", optionsEn: ["(A) Printer", "(B) Server real-time", "(C) Once only", "(D) No language"], optionsGuj: ["(A) પ્રિન્ટર", "(B) સર્વર રીયલ-ટાઈમ", "(C) એક વખત જ", "(D) કોઈ ભાષા નથી"], answer: 1 },
+      { q: "Which of the following allows a Web Application to store user data permanently?", guj: "વેબ એપ્લિકેશનને યુઝર ડેટા કાયમી રીતે સ્ટોર કરવા માટે કયું વપરાય છે?", optionsEn: ["(A) Database", "(B) RAM", "(C) Cache", "(D) History"], optionsGuj: ["(A) Database", "(B) RAM", "(C) Cache", "(D) History"], answer: 0 },
+      { q: "What is a 'Single Page Application' (SPA)?", guj: "'Single Page Application' (SPA) શું છે?", optionsEn: ["(A) One user only", "(B) One line code", "(C) Single page dynamic", "(D) No scroll"], optionsGuj: ["(A) માત્ર એક યુઝર", "(B) એક લાઈન કોડ", "(C) સિંગલ પેજ ડાયનેમિક", "(D) કોઈ સ્ક્રોલ નથી"], answer: 2 },
+      { q: "Which of these is a 'Client-side' technology?", guj: "નીચેનામાંથી કઈ 'Client-side' ટેક્નોલોજી છે?", optionsEn: ["(A) PHP", "(B) SQL Server", "(C) ASP.NET", "(D) JavaScript"], optionsGuj: ["(A) PHP", "(B) SQL Server", "(C) ASP.NET", "(D) JavaScript"], answer: 3 },
+      { q: "The 'Frontend' of a Web Application refers to:", guj: "વેબ એપ્લિકેશનનું 'Frontend' શું છે?", optionsEn: ["(A) Server hardware", "(B) User interface", "(C) Hidden code", "(D) Database"], optionsGuj: ["(A) સર્વર હાર્ડવેર", "(B) યુઝર ઈન્ટરફેસ", "(C) છુપાયેલ કોડ", "(D) Database"], answer: 1 },
+      { q: "The 'Backend' of a Web Application refers to:", guj: "વેબ એપ્લિકેશનનું 'Backend' શું છે?", optionsEn: ["(A) Server logic + DB", "(B) Address bar", "(C) Mouse", "(D) Colors"], optionsGuj: ["(A) સર્વર લોજિક + DB", "(B) Address bar", "(C) Mouse", "(D) Colors"], answer: 0 },
+      { q: "Which protocol is used to transfer data between a Web Application and a browser?", guj: "વેબ એપ્લિકેશન અને બ્રાઉઝર વચ્ચે ડેટા ટ્રાન્સફર માટે કયો પ્રોટોકોલ વપરાય છે?", optionsEn: ["(A) SMTP", "(B) SNMP", "(C) HTTP/HTTPS", "(D) FTP"], optionsGuj: ["(A) SMTP", "(B) SNMP", "(C) HTTP/HTTPS", "(D) FTP"], answer: 2 },
+      { q: "What does 'Stateless' mean in the context of the HTTP protocol?", guj: "HTTP પ્રોટોકોલમાં 'Stateless'નો અર્થ શું છે?", optionsEn: ["(A) No memory of requests", "(B) No location", "(C) Free website", "(D) No states"], optionsGuj: ["(A) રિક્વેસ્ટની કોઈ મેમરી નથી", "(B) કોઈ લોકેશન નથી", "(C) ફ્રી વેબસાઈટ", "(D) કોઈ સ્ટેટ નથી"], answer: 0 },
+      { q: "Which component is responsible for interpreting HTML and rendering a Webpage?", guj: "HTMLને interpret કરીને વેબપેજ રેન્ડર કરવા માટે કયો ઘટક જવાબદાર છે?", optionsEn: ["(A) Browser", "(B) Server", "(C) OS"], optionsGuj: ["(A) Browser", "(B) Server", "(C) OS"], answer: 0 },
+      { q: "In ASP.NET, a 'Web Form' is an example of:", guj: "ASP.NETમાં 'Web Form' શું છે?", optionsEn: ["(A) Hardware", "(B) Design tool", "(C) Static page", "(D) Dynamic component"], optionsGuj: ["(A) Hardware", "(B) Design tool", "(C) Static page", "(D) Dynamic component"], answer: 3 },
+      { q: "What is the purpose of a URL (Uniform Resource Locator)?", guj: "URL (Uniform Resource Locator)નો હેતુ શું છે?", optionsEn: ["(A) Encrypt data", "(B) Style site", "(C) Identify address", "(D) Compile code"], optionsGuj: ["(A) ડેટા એન્ક્રિપ્ટ કરવા", "(B) સાઈટ સ્ટાઈલ કરવા", "(C) સરનામું ઓળખવા", "(D) કોડ કમ્પાઈલ કરવા"], answer: 2 },
+      { q: "Which of the following requires 'Server-side Processing'?", guj: "નીચેનામાંથી કયા માટે 'Server-side Processing' જરૂરી છે?", optionsEn: ["(A) Offline HTML", "(B) Tooltip hover", "(C) Login check DB", "(D) CSS color"], optionsGuj: ["(A) Offline HTML", "(B) Tooltip hover", "(C) Login check DB", "(D) CSS color"], answer: 2 },
+      { q: "Client-side validation is primarily used for:", guj: "Client-side validation મુખ્યત્વે કયા માટે વપરાય છે?", optionsEn: ["(A) Reduce server load", "(B) DB connection", "(C) Store session", "(D) Security only"], optionsGuj: ["(A) સર્વર લોડ ઘટાડવા", "(B) DB કનેક્શન", "(C) સેશન સ્ટોર કરવા", "(D) માત્ર સિક્યોરિટી"], answer: 0 },
+      { q: "Which of these is NOT a component of a typical Web Application architecture?", guj: "સામાન્ય વેબ એપ્લિકેશન આર્કિટેક્ચરનો કયો ઘટક નથી?", optionsEn: ["(A) UI layer", "(B) Data layer", "(C) GPU layer", "(D) Logic layer"], optionsGuj: ["(A) UI layer", "(B) Data layer", "(C) GPU layer", "(D) Logic layer"], answer: 2 },
+      { q: "A 'Hyperlink' is used to:", guj: "'Hyperlink' કયા માટે વપરાય છે?", optionsEn: ["(A) Install framework", "(B) Connect pages", "(C) Speed internet", "(D) Delete files"], optionsGuj: ["(A) ફ્રેમવર્ક ઇન્સ્ટોલ કરવા", "(B) પેજ કનેક્ટ કરવા", "(C) ઇન્ટરનેટ સ્પીડ વધારવા", "(D) ફાઈલ્સ ડિલીટ કરવા"], answer: 1 },
+      { q: "Which file type is used to provide interactivity on the client-side of a webpage?", guj: "વેબપેજના ક્લાઈન્ટ સાઈડ પર ઇન્ટરેક્ટિવિટી આપવા માટે કયા ફાઈલ પ્રકાર વપરાય છે?", optionsEn: ["(A) .css", "(B) .jpg", "(C) .txt", "(D) .js"], optionsGuj: ["(A) .css", "(B) .jpg", "(C) .txt", "(D) .js"], answer: 3 },
+      { q: "What is the 'DOM' in web development?", guj: "વેબ ડેવલપમેન્ટમાં 'DOM' શું છે?", optionsEn: ["(A) Desktop mode", "(B) Output manager", "(C) Document Object Model", "(D) Data model"], optionsGuj: ["(A) Desktop mode", "(B) Output manager", "(C) Document Object Model", "(D) Data model"], answer: 2 },
+      { q: "Which of the following describes a 'Responsive Web Design'?", guj: "'Responsive Web Design' શું છે?", optionsEn: ["(A) Voice control", "(B) Fast load", "(C) Auto email reply", "(D) Adapts to screen"], optionsGuj: ["(A) વોઈસ કંટ્રોલ", "(B) ઝડપી લોડ", "(C) આપોઆપ ઈમેઈલ જવાબ", "(D) સ્ક્રીન અનુસાર અનુકૂલિત થાય છે"], answer: 3 },
+      { q: "In a Web Application, what is a 'Postback'?", guj: "વેબ એપ્લિકેશનમાં 'Postback' શું છે?", optionsEn: ["(A) Page back", "(B) CSS fail", "(C) Server crash", "(D) Send data server"], optionsGuj: ["(A) પેજ બેક", "(B) CSS fail", "(C) સર્વર ક્રેશ", "(D) ડેટા સર્વરને મોકલવું"], answer: 3 },
+      { q: "Which of the following is a 'Server-side' language used in Web Apps?", guj: "વેબ એપ્સમાં વપરાતી 'Server-side' ભાષા કઈ છે?", optionsEn: ["(A) HTML", "(B) CSS", "(C) XML", "(D) C#"], optionsGuj: ["(A) HTML", "(B) CSS", "(C) XML", "(D) C#"], answer: 3 },
+      { q: "What is an 'API' in the context of Web Applications?", guj: "વેબ એપ્લિકેશનમાં 'API' શું છે?", optionsEn: ["(A) Monitor type", "(B) Interface software comm", "(C) Header style", "(D) Image format"], optionsGuj: ["(A) Monitor type", "(B) ઇન્ટરફેસ સોફ્ટવેર કોમ્યુનિકેશન", "(C) Header style", "(D) Image format"], answer: 1 },
+      { q: "Which of the following is usually stored on the Client's machine?", guj: "નીચેનામાંથી કયું સામાન્ય રીતે ક્લાઈન્ટની મશીન પર સ્ટોર થાય છે?", optionsEn: ["(A) SQL DB", "(B) Source code", "(C) Cookies", "(D) Server logs"], optionsGuj: ["(A) SQL DB", "(B) Source code", "(C) Cookies", "(D) Server logs"], answer: 2 },
+      { q: "The main goal of 'Web Technology' is to:", guj: "'Web Technology'નો મુખ્ય હેતુ શું છે?", optionsEn: ["(A) Replace hardware", "(B) Design logos", "(C) Internet communication", "(D) Offline tools"], optionsGuj: ["(A) હાર્ડવેર બદલવું", "(B) લોગો ડિઝાઈન કરવા", "(C) ઇન્ટરનેટ કોમ્યુનિકેશન", "(D) ઓફલાઈન ટૂલ્સ"], answer: 2 },
+      { q: "Which tag is the root element of an HTML webpage?", guj: "HTML વેબપેજનું રૂટ એલિમેન્ટ કયું ટેગ છે?", optionsEn: ["(A) head tag", "(B) body tag", "(C) html tag", "(D) title tag"], optionsGuj: ["(A) head tag", "(B) body tag", "(C) html tag", "(D) title tag"], answer: 2 },
+      { q: "A standard Web Application is typically built using which architecture?", guj: "સ્ટાન્ડર્ડ વેબ એપ્લિકેશન સામાન્ય રીતે કઈ આર્કિટેક્ચર વાપરીને બને છે?", optionsEn: ["(A) Mainframe", "(B) Peer-to-Peer only", "(C) Two-tier or Three-tier", "(D) Single-tier"], optionsGuj: ["(A) Mainframe", "(B) Peer-to-Peer only", "(C) Two-tier or Three-tier", "(D) Single-tier"], answer: 2 },
+      { q: "Which component is responsible for displaying the User Interface (UI) to the end-user?", guj: "યુઝર ઈન્ટરફેસ (UI) યુઝરને બતાવવા માટે કયો ઘટક જવાબદાર છે?", optionsEn: ["(A) Application Server", "(B) Web Browser", "(C) Database Server", "(D) Web Server"], optionsGuj: ["(A) Application Server", "(B) Web Browser", "(C) Database Server", "(D) Web Server"], answer: 1 },
+      { q: "In a 3-tier architecture, what are the three layers?", guj: "3-ટાયર આર્કિટેક્ચરમાં ત્રણ લેયર કયા છે?", optionsEn: ["(A) Presentation, Logic, Data", "(B) HTML, CSS, JS", "(C) Keyboard, Mouse, Monitor"], optionsGuj: ["(A) Presentation, Logic, Data", "(B) HTML, CSS, JS", "(C) Keyboard, Mouse, Monitor"], answer: 0 },
+      { q: "Which of the following is considered a 'Client-side' component?", guj: "નીચેનામાંથી કયું 'Client-side' ઘટક છે?", optionsEn: ["(A) Oracle DB", "(B) IIS", "(C) Browser", "(D) SQL Server"], optionsGuj: ["(A) Oracle DB", "(B) IIS", "(C) Browser", "(D) SQL Server"], answer: 2 },
+      { q: "What is the role of the 'Web Server' in a web application?", guj: "વેબ એપ્લિકેશનમાં 'Web Server'ની ભૂમિકા શું છે?", optionsEn: ["(A) Manage cables", "(B) Serve HTTP pages", "(C) Store files", "(D) Design logos"], optionsGuj: ["(A) કેબલ મેનેજ કરવા", "(B) HTTP પેજ સર્વ કરવા", "(C) ફાઈલ્સ સ્ટોર કરવા", "(D) લોગો ડિઝાઈન કરવા"], answer: 1 },
+      { q: "Which component acts as the 'brain' where the calculations and logical decisions happen?", guj: "કયો ઘટક 'brain' તરીકે કામ કરે છે જ્યાં ગણતરી અને લોજિકલ નિર્ણય થાય છે?", optionsEn: ["(A) Client Layer", "(B) Presentation Layer", "(C) Database Layer", "(D) Application Server"], optionsGuj: ["(A) Client Layer", "(B) Presentation Layer", "(C) Database Layer", "(D) Application Server"], answer: 3 },
+      { q: "Where is the data like user profiles and product catalogs permanently stored?", guj: "યુઝર પ્રોફાઈલ અને પ્રોડક્ટ કેટલોગ જેવા ડેટા ક્યાં કાયમી રીતે સ્ટોર થાય છે?", optionsEn: ["(A) Browser Cache", "(B) Database Server", "(C) JS files", "(D) RAM"], optionsGuj: ["(A) Browser Cache", "(B) Database Server", "(C) JS files", "(D) RAM"], answer: 1 },
+      { q: "Which of the following is an example of a Database Management System (DBMS) component?", guj: "Database Management System (DBMS)નું ઉદાહરણ કયું છે?", optionsEn: ["(A) Safari", "(B) Apache", "(C) MySQL", "(D) Visual Studio"], optionsGuj: ["(A) Safari", "(B) Apache", "(C) MySQL", "(D) Visual Studio"], answer: 2 },
+      { q: "Which component is used to ensure that only authorized users can access the application?", guj: "માત્ર અધિકૃત યુઝર્સને એપ્લિકેશન એક્સેસ કરવા દેવા માટે કયો ઘટક વપરાય છે?", optionsEn: ["(A) HTML Header", "(B) Auth module", "(C) CSS file", "(D) GPU"], optionsGuj: ["(A) HTML Header", "(B) Auth module", "(C) CSS file", "(D) GPU"], answer: 1 }
+      , {
+        q: "What is the “Middleware” in a web application?", guj: "વેબ એપ્લિકેશનમાં “Middleware” શું છે?",
+        optionsEn: ["(A) ISP", "(B) Wire", "(C) OS", "(D) Software bridge"],
+        optionsGuj: ["(A) ISP", "(B) Wire", "(C) OS", "(D) સોફ્ટવેર બ્રિજ"], answer: 3
+      },
+
+      {
+        q: "In ASP.NET, which component handles the execution of the server-side code?", guj: "ASP.NETમાં સર્વર-સાઈડ કોડનું એક્ઝિક્યુશન કયો ઘટક હેન્ડલ કરે છે?",
+        optionsEn: ["(A) Windows Explorer", "(B) CLR", "(C) Browser Engine", "(D) JS Interpreter"],
+        optionsGuj: ["(A) Windows Explorer", "(B) CLR", "(C) Browser Engine", "(D) JS Interpreter"], answer: 1
+      },
+
+      {
+        q: "What is the purpose of “Business Logic” in a web application?", guj: "વેબ એપ્લિકેશનમાં “Business Logic”નો હેતુ શું છે?",
+        optionsEn: ["(A) Store URL", "(B) Choose colors", "(C) Define rules", "(D) Speed cursor"],
+        optionsGuj: ["(A) URL સ્ટોર કરવું", "(B) રંગ પસંદ કરવા", "(C) નિયમો વ્યાખ્યાયિત કરવા", "(D) કર્સર સ્પીડ"], answer: 2
+      },
+
+      {
+        q: "Which component helps in reducing server load by storing frequently accessed data temporarily?", guj: "સર્વર લોડ ઘટાડવા માટે વારંવાર વપરાતા ડેટાને અસ્થાયી રીતે સ્ટોર કરવા કયો ઘટક મદદ કરે છે?",
+        optionsEn: ["(A) Monitor", "(B) Hard Drive", "(C) Keyboard", "(D) Cache"],
+        optionsGuj: ["(A) Monitor", "(B) Hard Drive", "(C) Keyboard", "(D) Cache"], answer: 3
+      },
+
+      {
+        q: "Which of the following is a “Server-side” component?", guj: "નીચેનામાંથી કયું “Server-side” ઘટક છે?",
+        optionsEn: ["(A) CSS", "(B) PHP/C# Script", "(C) HTML", "(D) JavaScript"],
+        optionsGuj: ["(A) CSS", "(B) PHP/C# Script", "(C) HTML", "(D) JavaScript"], answer: 1
+      },
+
+      {
+        q: "What does the “Data Access Layer” (DAL) do?", guj: "“Data Access Layer” (DAL) શું કરે છે?",
+        optionsEn: ["(A) Interface DB", "(B) Print data", "(C) Style data", "(D) User typing"],
+        optionsGuj: ["(A) DB સાથે ઇન્ટરફેસ", "(B) ડેટા પ્રિન્ટ કરવું", "(C) ડેટા સ્ટાઈલ કરવું", "(D) યુઝર ટાઈપિંગ"], answer: 0
+      },
+
+      {
+        q: "Which component is responsible for translating a URL into an IP address?", guj: "URLને IP એડ્રેસમાં અનુવાદિત કરવા માટે કયો ઘટક જવાબદાર છે?",
+        optionsEn: ["(A) SQL Server", "(B) DNS", "(C) Browser", "(D) Visual Studio"],
+        optionsGuj: ["(A) SQL Server", "(B) DNS", "(C) Browser", "(D) Visual Studio"], answer: 1
+      },
+
+      {
+        q: "What is a “Web Service” component?", guj: "“Web Service” ઘટક શું છે?",
+        optionsEn: ["(A) Machine communication software", "(B) Power supply", "(C) Browser", "(D) Technician"],
+        optionsGuj: ["(A) મશીન કોમ્યુનિકેશન સોફ્ટવેર", "(B) પાવર સપ્લાય", "(C) Browser", "(D) Technician"], answer: 0
+      },
+
+      {
+        q: "Which component is used to manage “state” (user sessions) in a stateless HTTP environment?", guj: "Stateless HTTP વાતાવરણમાં “state” (user sessions) મેનેજ કરવા માટે કયો ઘટક વપરાય છે?",
+        optionsEn: ["(A) Static Images", "(B) URL", "(C) Session Mgmt", "(D) HTML tags"],
+        optionsGuj: ["(A) Static Images", "(B) URL", "(C) Session Mgmt", "(D) HTML tags"], answer: 2
+      },
+
+      {
+        q: "What is the function of a “Load Balancer” in a large-scale web application?", guj: "મોટા પાયાની વેબ એપ્લિકેશનમાં “Load Balancer”નું કાર્ય શું છે?",
+        optionsEn: ["(A) Increase weight", "(B) Distribute traffic", "(C) Delete files", "(D) Adjust brightness"],
+        optionsGuj: ["(A) વજન વધારવું", "(B) ટ્રાફિક વહેંચવું", "(C) ફાઈલ્સ ડિલીટ કરવી", "(D) બ્રાઈટનેસ એડજસ્ટ કરવી"], answer: 1
+      },
+
+      {
+        q: "Which component interprets the scripts like JavaScript at the client-side?", guj: "ક્લાઈન્ટ સાઈડ પર JavaScript જેવા સ્ક્રિપ્ટ્સને interpret કરવા કયો ઘટક જવાબદાર છે?",
+        optionsEn: ["(A) SQL Engine", "(B) Browser Engine", "(C) OS", "(D) .NET Framework"],
+        optionsGuj: ["(A) SQL Engine", "(B) Browser Engine", "(C) OS", "(D) .NET Framework"], answer: 1
+      },
+
+      {
+        q: "A “Firewall” in a web application architecture is used for:", guj: "વેબ એપ્લિકેશન આર્કિટેક્ચરમાં “Firewall” કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Network security", "(B) Cooling server", "(C) Speed internet", "(D) Graphics"],
+        optionsGuj: ["(A) નેટવર્ક સિક્યોરિટી", "(B) સર્વરને ઠંડું કરવા", "(C) ઇન્ટરનેટ સ્પીડ", "(D) ગ્રાફિક્સ"], answer: 0
+      },
+
+      {
+        q: "Which part of the web application interacts directly with the end-user?", guj: "વેબ એપ્લિકેશનનો કયો ભાગ યુઝર સાથે સીધો સંપર્ક કરે છે?",
+        optionsEn: ["(A) Backend", "(B) Database", "(C) Registry", "(D) Frontend"],
+        optionsGuj: ["(A) Backend", "(B) Database", "(C) Registry", "(D) Frontend"], answer: 3
+      },
+
+      {
+        q: "Which of the following is a protocol component used by web applications?", guj: "વેબ એપ્લિકેશન દ્વારા વપરાતો પ્રોટોકોલ ઘટક કયો છે?",
+        optionsEn: ["(A) SSD", "(B) RAM", "(C) HTTP", "(D) USB"],
+        optionsGuj: ["(A) SSD", "(B) RAM", "(C) HTTP", "(D) USB"], answer: 2
+      },
+
+      {
+        q: "What is a “Configuration File” (like Web.config) used for?", guj: "“Configuration File” (જેમ કે Web.config) કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Store photos", "(B) Store settings", "(C) Logic code", "(D) Mouse input"],
+        optionsGuj: ["(A) ફોટા સ્ટોર કરવા", "(B) સેટિંગ્સ સ્ટોર કરવા", "(C) લોજિક કોડ", "(D) માઉસ ઇનપુટ"], answer: 1
+      },
+
+      {
+        q: "In the context of components, what is “AJAX” used for?", guj: "કોમ્પોનન્ટ્સના સંદર્ભમાં “AJAX” કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Update page parts", "(B) Store videos", "(C) Clean server", "(D) Replace HTML"],
+        optionsGuj: ["(A) પેજના ભાગો અપડેટ કરવા", "(B) વીડિયો સ્ટોર કરવા", "(C) સર્વર સાફ કરવા", "(D) HTML બદલવા"], answer: 0
+      },
+
+      {
+        q: "Which component manages the communication between the Web Server and the Database?", guj: "વેબ સર્વર અને ડેટાબેઝ વચ્ચે કોમ્યુનિકેશન મેનેજ કરવા કયો ઘટક જવાબદાર છે?",
+        optionsEn: ["(A) CSS", "(B) HTML Form", "(C) DB Driver", "(D) Browser"],
+        optionsGuj: ["(A) CSS", "(B) HTML Form", "(C) DB Driver", "(D) Browser"], answer: 2
+      },
+
+      {
+        q: "What is “Client-side Scripting” primarily used for?", guj: "“Client-side Scripting” મુખ્યત્વે કયા માટે વપરાય છે?",
+        optionsEn: ["(A) UI interaction", "(B) Hosting site", "(C) DB connection", "(D) File mgmt"],
+        optionsGuj: ["(A) UI interaction", "(B) Hosting site", "(C) DB connection", "(D) File mgmt"], answer: 0
+      },
+
+      {
+        q: "Which of the following is NOT a core component of a Web Application?", guj: "વેબ એપ્લિકેશનનો કયો ઘટક મુખ્ય નથી?",
+        optionsEn: ["(A) Database", "(B) OS Kernel", "(C) Browser", "(D) Web Server"],
+        optionsGuj: ["(A) Database", "(B) OS Kernel", "(C) Browser", "(D) Web Server"], answer: 1
+      },
+
+      {
+        q: "The “Application Programming Interface” (API) acts as a component that:", guj: "“Application Programming Interface” (API) એક ઘટક તરીકે કામ કરે છે જે:",
+        optionsEn: ["(A) Styles text", "(B) Displays images", "(C) Software communication", "(D) Browser"],
+        optionsGuj: ["(A) ટેક્સ્ટ સ્ટાઈલ કરે છે", "(B) ઈમેજીસ બતાવે છે", "(C) સોફ્ટવેર કોમ્યુનિકેશન", "(D) Browser"], answer: 2
+      },
+
+      {
+        q: "Which component handles the visual “look and feel” of the application components?", guj: "એપ્લિકેશનના વિઝ્યુઅલ “look and feel” કયો ઘટક હેન્ડલ કરે છે?",
+        optionsEn: ["(A) CSS", "(B) XML", "(C) SQL", "(D) C#"],
+        optionsGuj: ["(A) CSS", "(B) XML", "(C) SQL", "(D) C#"], answer: 0
+      },
+
+      {
+        q: "What is the basic concept of Client-Server Architecture?", guj: "Client-Server આર્કિટેક્ચરનો મૂળ કન્સેપ્ટ શું છે?",
+        optionsEn: ["(A) Networking cable", "(B) Decentralized PCs", "(C) Single computer only", "(D) Client requests, server responds"],
+        optionsGuj: ["(A) નેટવર્કિંગ કેબલ", "(B) વિકેન્દ્રિત PCs", "(C) માત્ર એક કોમ્પ્યુટર", "(D) ક્લાઈન્ટ રિક્વેસ્ટ, સર્વર જવાબ આપે છે"], answer: 3
+      },
+
+      {
+        q: "In this architecture, the “Client” is typically:", guj: "આ આર્કિટેક્ચરમાં “Client” સામાન્ય રીતે શું છે?",
+        optionsEn: ["(A) Database manager", "(B) User device", "(C) Router", "(D) Data server"],
+        optionsGuj: ["(A) Database manager", "(B) User device", "(C) Router", "(D) Data server"], answer: 1
+      },
+
+      {
+        q: "Which of the following is the primary role of the “Server”?", guj: "“Server”ની મુખ્ય ભૂમિકા કઈ છે?",
+        optionsEn: ["(A) Respond to clients", "(B) Show HTML", "(C) Send keyboard", "(D) Request data"],
+        optionsGuj: ["(A) ક્લાઈન્ટને જવાબ આપવો", "(B) HTML બતાવવું", "(C) કીબોર્ડ મોકલવું", "(D) ડેટા માંગવું"], answer: 0
+      },
+
+      {
+        q: "What is the standard protocol used for communication between a Web Client and a Web Server?", guj: "વેબ ક્લાઈન્ટ અને વેબ સર્વર વચ્ચે કોમ્યુનિકેશન માટે સ્ટાન્ડર્ડ પ્રોટોકોલ કયો છે?",
+        optionsEn: ["(A) SMTP", "(B) FTP", "(C) HTTP/HTTPS", "(D) SNMP"],
+        optionsGuj: ["(A) SMTP", "(B) FTP", "(C) HTTP/HTTPS", "(D) SNMP"], answer: 2
+      },
+
+      {
+        q: "A “2-Tier Architecture” consists of which two main components?", guj: "“2-Tier Architecture”માં કયા બે મુખ્ય ઘટકો હોય છે?",
+        optionsEn: ["(A) Browser + CSS", "(B) Client + Server", "(C) Client + DB only", "(D) Web + App server"],
+        optionsGuj: ["(A) Browser + CSS", "(B) Client + Server", "(C) Client + DB only", "(D) Web + App server"], answer: 1
+      },
+
+      {
+        q: "Which tier is added in a “3-Tier Architecture” to separate business logic from data?", guj: "“3-Tier Architecture”માં બિઝનેસ લોજિકને ડેટાથી અલગ કરવા માટે કયો ટાયર ઉમેરવામાં આવે છે?",
+        optionsEn: ["(A) Data tier", "(B) Presentation tier", "(C) Application tier", "(D) Client tier"],
+        optionsGuj: ["(A) Data tier", "(B) Presentation tier", "(C) Application tier", "(D) Client tier"], answer: 2
+      },
+
+      {
+        q: "Which of the following is an advantage of 3-Tier Architecture over 2-Tier?", guj: "2-Tier કરતાં 3-Tier Architectureનો કયો ફાયદો છે?",
+        optionsEn: ["(A) No internet needed", "(B) Simpler design", "(C) Fewer computers", "(D) Scalable design"],
+        optionsGuj: ["(A) ઇન્ટરનેટની જરૂર નથી", "(B) સરળ ડિઝાઈન", "(C) ઓછા કોમ્પ્યુટર્સ", "(D) સ્કેલેબલ ડિઝાઈન"], answer: 3
+      },
+
+      {
+        q: "What does “Statelessness” mean in Client-Server communication (specifically HTTP)?", guj: "Client-Server કોમ્યુનિકેશનમાં “Statelessness”નો અર્થ શું છે (ખાસ કરીને HTTP)?",
+        optionsEn: ["(A) Server location unknown", "(B) Independent requests", "(C) Server always on", "(D) Client silent"],
+        optionsGuj: ["(A) સર્વરનું સ્થાન અજાણ્યું", "(B) સ્વતંત્ર રિક્વેસ્ટ્સ", "(C) સર્વર હંમેશા ચાલુ", "(D) ક્લાઈન્ટ શાંત"], answer: 1
+      },
+
+      {
+        q: "A \"Thick Client\" (Rich Client) is one that:", guj: "\"Thick Client\" (Rich Client) એક એવું છે જે:",
+        optionsEn: ["(A) Local processing", "(B) Heavy device", "(C) No disk", "(D) Display only"],
+        optionsGuj: ["(A) લોકલ પ્રોસેસિંગ", "(B) હેવી ડિવાઈસ", "(C) કોઈ ડિસ્ક નથી", "(D) માત્ર ડિસ્પ્લે"], answer: 0
+      },
+
+      {
+        q: "A \"Thin Client\" is one that:", guj: "\"Thin Client\" એક એવું છે જે:",
+        optionsEn: ["(A) Small phone", "(B) Server dependent", "(C) Game device", "(D) Printer device"],
+        optionsGuj: ["(A) નાનું ફોન", "(B) સર્વર પર આધારિત", "(C) ગેમ ડિવાઈસ", "(D) પ્રિન્ટર ડિવાઈસ"], answer: 1
+      },
+
+      {
+        q: "What is a \"Request-Response Cycle\"?", guj: "\"Request-Response Cycle\" શું છે?",
+        optionsEn: ["(A) Typing method", "(B) Virus type", "(C) Client request + server reply", "(D) Server reboot"],
+        optionsGuj: ["(A) ટાઈપિંગ પદ્ધતિ", "(B) વાયરસ પ્રકાર", "(C) ક્લાઈન્ટ રિક્વેસ્ટ + સર્વર જવાબ", "(D) સર્વર રીબૂટ"], answer: 2
+      },
+
+      {
+        q: "Which of these is a typical \"Client-side\" error code?", guj: "નીચેનામાંથી કયું સામાન્ય \"Client-side\" એરર કોડ છે?",
+        optionsEn: ["(A) 200", "(B) 404", "(C) 503", "(D) 500"],
+        optionsGuj: ["(A) 200", "(B) 404", "(C) 503", "(D) 500"], answer: 1
+      },
+
+      {
+        q: "Which of these is a typical \"Server-side\" error code?", guj: "નીચેનામાંથી કયું સામાન્ય \"Server-side\" એરર કોડ છે?",
+        optionsEn: ["(A) 403", "(B) 401", "(C) 400", "(D) 500"],
+        optionsGuj: ["(A) 403", "(B) 401", "(C) 400", "(D) 500"], answer: 3
+      },
+
+      {
+        q: "In Client-Server architecture, what is \"Scalability\"?", guj: "Client-Server આર્કિટેક્ચરમાં \"Scalability\" શું છે?",
+        optionsEn: ["(A) More users supported", "(B) Screen resolution", "(C) Rack height", "(D) Typing speed"],
+        optionsGuj: ["(A) વધુ યુઝર્સ સપોર્ટ", "(B) સ્ક્રીન રિઝોલ્યુશન", "(C) રેક હાઈટ", "(D) ટાઈપિંગ સ્પીડ"], answer: 0
+      },
+
+      {
+        q: "Which component usually handles the \"Presentation Tier\" in a web app?", guj: "વેબ એપ્લિકેશનમાં \"Presentation Tier\" સામાન્ય રીતે કયો ઘટક હેન્ડલ કરે છે?",
+        optionsEn: ["(A) Hard drive", "(B) Browser", "(C) SQL Server", "(D) Source code"],
+        optionsGuj: ["(A) Hard drive", "(B) Browser", "(C) SQL Server", "(D) Source code"], answer: 1
+      },
+
+      {
+        q: "What is the \"Data Tier\" responsible for?", guj: "\"Data Tier\" કયા માટે જવાબદાર છે?",
+        optionsEn: ["(A) Mouse encryption", "(B) Display images", "(C) Data storage", "(D) Email validation"],
+        optionsGuj: ["(A) માઉસ એન્ક્રિપ્શન", "(B) ઈમેજીસ બતાવવી", "(C) ડેટા સ્ટોરેજ", "(D) ઈમેઈલ વેલિડેશન"], answer: 2
+      },
+
+      {
+        q: "\"Centralized Control\" in this architecture means:", guj: "આ આર્કિટેક્ચરમાં \"Centralized Control\"નો અર્થ શું છે?",
+        optionsEn: ["(A) No controller", "(B) Users control server", "(C) All clients servers", "(D) Server manages data"],
+        optionsGuj: ["(A) કોઈ કંટ્રોલર નથી", "(B) યુઝર્સ સર્વરને કંટ્રોલ કરે છે", "(C) બધા ક્લાઈન્ટ સર્વર છે", "(D) સર્વર ડેટા મેનેજ કરે છે"], answer: 3
+      },
+
+      {
+        q: "Which of the following is a disadvantage of Client-Server architecture?", guj: "Client-Server આર્કિટેક્ચરનો ગેરલાભ કયો છે?",
+        optionsEn: ["(A) Central storage", "(B) Strong security", "(C) Server overload", "(D) Easy backup"],
+        optionsGuj: ["(A) સેન્ટ્રલ સ્ટોરેજ", "(B) મજબૂત સિક્યોરિટી", "(C) સર્વર ઓવરલોડ", "(D) સરળ બેકઅપ"], answer: 2
+      },
+
+      {
+        q: "What is a \"Fat Server\"?", guj: "\"Fat Server\" શું છે?",
+        optionsEn: ["(A) Image server", "(B) High RAM", "(C) Heavy logic server", "(D) Slow server"],
+        optionsGuj: ["(A) Image server", "(B) High RAM", "(C) Heavy logic server", "(D) Slow server"], answer: 2
+      },
+
+      {
+        q: "Which of the following software is a \"Client\"?", guj: "નીચેનામાંથી કયું સોફ્ટવેર \"Client\" છે?",
+        optionsEn: ["(A) Chrome", "(B) SQL Server", "(C) IIS", "(D) Tomcat"],
+        optionsGuj: ["(A) Chrome", "(B) SQL Server", "(C) IIS", "(D) Tomcat"], answer: 0
+      },
+
+      {
+        q: "In a web-based client-server model, \"Socket\" refers to:", guj: "વેબ-આધારિત ક્લાઈન્ટ-સર્વર મોડલમાં \"Socket\" શું છે?",
+        optionsEn: ["(A) Desktop folder", "(B) Power outlet", "(C) Communication endpoint", "(D) Mouse type"],
+        optionsGuj: ["(A) Desktop folder", "(B) Power outlet", "(C) Communication endpoint", "(D) Mouse type"], answer: 2
+      },
+
+      {
+        q: "\"Distributed Computing\" is often associated with client-server because:", guj: "\"Distributed Computing\" client-server સાથે કેમ સંકળાયેલું છે?",
+        optionsEn: ["(A) One cable", "(B) Same room", "(C) No software", "(D) Multi-machine processing"],
+        optionsGuj: ["(A) એક કેબલ", "(B) એક જ રૂમ", "(C) કોઈ સોફ્ટવેર નથી", "(D) મલ્ટી-મશીન પ્રોસેસિંગ"], answer: 3
+      },
+
+      {
+        q: "What happens if the Server goes down in a centralized Client-Server network?", guj: "કેન્દ્રીય Client-Server નેટવર્કમાં સર્વર ડાઉન થાય તો શું થાય છે?",
+        optionsEn: ["(A) Hardware fails", "(B) Internet speeds up", "(C) Clients lose access", "(D) Clients unaffected"],
+        optionsGuj: ["(A) હાર્ડવેર ખરાબ થાય છે", "(B) ઇન્ટરનેટ સ્પીડ વધે છે", "(C) ક્લાઈન્ટ્સને એક્સેસ ખોવાઈ જાય છે", "(D) ક્લાઈન્ટ્સ અસરગ્રસ્ત નથી"], answer: 2
+      },
+
+      {
+        q: "Which layer of the OSI model is HTTP located in?", guj: "OSI મોડલના કયા લેયરમાં HTTP આવેલું છે?",
+        optionsEn: ["(A) Network", "(B) Physical", "(C) Application", "(D) Data link"],
+        optionsGuj: ["(A) Network", "(B) Physical", "(C) Application", "(D) Data link"], answer: 2
+      },
+
+      {
+        q: "A \"Database Server\" specifically manages:", guj: "\"Database Server\" ખાસ કરીને શું મેનેજ કરે છે?",
+        optionsEn: ["(A) Email sending", "(B) Printing", "(C) Page layout", "(D) Data queries"],
+        optionsGuj: ["(A) ઈમેઈલ મોકલવું", "(B) પ્રિન્ટિંગ", "(C) પેજ લેઆઉટ", "(D) ડેટા ક્વેરી"], answer: 3
+      },
+
+      {
+        q: "What is \"Interoperability\"?", guj: "\"Interoperability\" શું છે?",
+        optionsEn: ["(A) Different devices connect", "(B) DB size", "(C) CPU speed", "(D) Language type"],
+        optionsGuj: ["(A) અલગ અલગ ડિવાઈસ કનેક્ટ થાય", "(B) DB સાઈઝ", "(C) CPU સ્પીડ", "(D) ભાષા પ્રકાર"], answer: 0
+      },
+
+      {
+        q: "In the context of Client-Server, what is a \"port\"?", guj: "Client-Serverના સંદર્ભમાં \"port\" શું છે?",
+        optionsEn: ["(A) Browser type", "(B) Ship dock", "(C) Logical endpoint", "(D) Monitor button"],
+        optionsGuj: ["(A) Browser type", "(B) Ship dock", "(C) Logical endpoint", "(D) Monitor button"], answer: 2
+      },
+
+      {
+        q: "Which architecture is often used for simple, small-scale applications where the client talks directly to the database?", guj: "સરળ, નાના પાયાની એપ્લિકેશન માટે કઈ આર્કિટેક્ચર વપરાય છે જ્યાં ક્લાઈન્ટ સીધું ડેટાબેઝ સાથે વાત કરે?",
+        optionsEn: ["(A) 3-Tier", "(B) N-Tier", "(C) 1-Tier", "(D) 2-Tier"],
+        optionsGuj: ["(A) 3-Tier", "(B) N-Tier", "(C) 1-Tier", "(D) 2-Tier"], answer: 3
+      },
+
+      {
+        q: "What does the \"N\" in \"N-Tier Architecture\" stand for?", guj: "\"N-Tier Architecture\"માં \"N\" શું છે?",
+        optionsEn: ["(A) New", "(B) Null", "(C) Number", "(D) Network"],
+        optionsGuj: ["(A) New", "(B) Null", "(C) Number", "(D) Network"], answer: 2
+      },
+
+      {
+        q: "Which role does the \"Middleware\" play in this architecture?", guj: "આ આર્કિટેક્ચરમાં \"Middleware\"ની ભૂમિકા શું છે?",
+        optionsEn: ["(A) Styles site", "(B) User monitor", "(C) Keyboard device", "(D) Communication bridge"],
+        optionsGuj: ["(A) સાઈટ સ્ટાઈલ કરે છે", "(B) યુઝર મોનિટર", "(C) કીબોર્ડ ડિવાઈસ", "(D) કોમ્યુનિકેશન બ્રિજ"], answer: 3
+      },
+
+      {
+        q: "Which window in the Visual Studio IDE is primarily used to manage and view the files, folders, and projects in a solution?", guj: "Visual Studio IDEમાં કઈ વિન્ડો ફાઈલ્સ, ફોલ્ડર્સ અને પ્રોજેક્ટ્સ મેનેજ કરવા માટે વપરાય છે?",
+        optionsEn: ["(A) Server Explorer", "(B) Toolbox", "(C) Solution Explorer", "(D) Properties"],
+        optionsGuj: ["(A) Server Explorer", "(B) Toolbox", "(C) Solution Explorer", "(D) Properties"], answer: 2
+      },
+
+      {
+        q: "Where would you go to change the ID, Color, or Text of a Button control you placed on a Web Form?", guj: "વેબ ફોર્મ પર મૂકેલા બટનનું ID, Color અથવા Text બદલવા માટે ક્યાં જવું?",
+        optionsEn: ["(A) Output", "(B) Error List", "(C) Toolbox", "(D) Properties"],
+        optionsGuj: ["(A) Output", "(B) Error List", "(C) Toolbox", "(D) Properties"], answer: 3
+      },
+
+      {
+        q: "Which IDE component contains the list of server-side controls (like Label, TextBox, Button) that can be dragged onto a web page?", guj: "IDEનો કયો ઘટક સર્વર-સાઈડ કંટ્રોલ્સ (Label, TextBox, Button વગેરે)ની યાદી ધરાવે છે જે વેબ પેજ પર ડ્રેગ કરી શકાય?",
+        optionsEn: ["(A) Toolbox", "(B) Class View", "(C) Solution Explorer", "(D) Task List"],
+        optionsGuj: ["(A) Toolbox", "(B) Class View", "(C) Solution Explorer", "(D) Task List"], answer: 0
+      },
+
+      {
+        q: "The 'Code Editor' window is used to:", guj: "'Code Editor' વિન્ડો કયા માટે વપરાય છે?",
+        optionsEn: ["(A) View DLLs", "(B) Write logic", "(C) Design layout", "(D) Manage DB"],
+        optionsGuj: ["(A) DLLs જોવા", "(B) લોજિક લખવા", "(C) લેઆઉટ ડિઝાઈન કરવા", "(D) DB મેનેજ કરવા"], answer: 1
+      },
+
+      {
+        q: "Which tab at the bottom of the Document Window allows you to see the graphical representation of your ASP.NET page?", guj: "Document Windowના તળિયે કયું ટેબ ASP.NET પેજનું ગ્રાફિકલ રિપ્રેઝેન્ટેશન બતાવે છે?",
+        optionsEn: ["(A) Source", "(B) Split", "(C) Preview", "(D) Design"],
+        optionsGuj: ["(A) Source", "(B) Split", "(C) Preview", "(D) Design"], answer: 3
+      },
+
+      {
+        q: "If you want to see both the HTML code and the Design view at the same time, which view should you use?", guj: "HTML કોડ અને Design view બંને એકસાથે જોવા માટે કયું વ્યૂ વાપરવું?",
+        optionsEn: ["(A) Split", "(B) Design", "(C) Source", "(D) Full screen"],
+        optionsGuj: ["(A) Split", "(B) Design", "(C) Source", "(D) Full screen"], answer: 0
+      },
+
+      {
+        q: "The 'Server Explorer' (or Database Explorer) is specifically used to:", guj: "'Server Explorer' (અથવા Database Explorer) ખાસ કરીને કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Edit CSS", "(B) Browse web", "(C) Manage DB", "(D) Check tempo"],
+        optionsGuj: ["(A) CSS એડિટ કરવા", "(B) વેબ બ્રાઉઝ કરવા", "(C) DB મેનેજ કરવા", "(D) ટેમ્પો તપાસવા"], answer: 2
+      },
+
+      {
+        q: "Which window displays compilation errors, warnings, and messages after you build your project?", guj: "પ્રોજેક્ટ બિલ્ડ કર્યા પછી કમ્પાઈલેશન એરર, વોર્નિંગ અને મેસેજ કઈ વિન્ડો બતાવે છે?",
+        optionsEn: ["(A) Toolbox", "(B) Solution Explorer", "(C) Error List", "(D) Output"],
+        optionsGuj: ["(A) Toolbox", "(B) Solution Explorer", "(C) Error List", "(D) Output"], answer: 2
+      },
+
+      {
+        q: "Which part of the IDE allows you to search for and install external libraries (packages) like NewtonSoft.Json or Entity Framework?", guj: "IDEનો કયો ભાગ external libraries (NewtonSoft.Json અથવા Entity Framework) શોધવા અને ઇન્સ્ટોલ કરવા માટે વપરાય છે?",
+        optionsEn: ["(A) Object Browser", "(B) NuGet Manager", "(C) Output", "(D) Properties"],
+        optionsGuj: ["(A) Object Browser", "(B) NuGet Manager", "(C) Output", "(D) Properties"], answer: 1
+      },
+
+      {
+        q: "What is the purpose of the 'Output Window' during the build process?", guj: "'Output Window' બિલ્ડ પ્રોસેસ દરમિયાન કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Show URL", "(B) Compiler log", "(C) Show design", "(D) Show names"],
+        optionsGuj: ["(A) URL બતાવવું", "(B) Compiler log", "(C) ડિઝાઈન બતાવવું", "(D) નામો બતાવવા"], answer: 1
+      },
+
+      {
+        q: "Which IDE feature provides code suggestions and auto-completion as you type?", guj: "IDEની કઈ વિશેષતા કોડ સજેશન અને ઓટો-કમ્પ્લીશન આપે છે?",
+        optionsEn: ["(A) Compiler", "(B) Linker", "(C) IntelliSense", "(D) Debugger"],
+        optionsGuj: ["(A) Compiler", "(B) Linker", "(C) IntelliSense", "(D) Debugger"], answer: 2
+      },
+
+      {
+        q: "In the Properties Window, what does the \"Lightning Bolt\" icon represent?", guj: "Properties Windowમાં \"Lightning Bolt\" આઈકોન શું દર્શાવે છે?",
+        optionsEn: ["(A) Events", "(B) Speed", "(C) Alerts", "(D) Deleted"],
+        optionsGuj: ["(A) Events", "(B) Speed", "(C) Alerts", "(D) Deleted"], answer: 0
+      },
+
+      {
+        q: "Which window shows the hierarchy of objects and classes within your project?", guj: "પ્રોજેક્ટમાં ઑબ્જેક્ટ અને ક્લાસની હાયરાર્કી કઈ વિન્ડો બતાવે છે?",
+        optionsEn: ["(A) Toolbox", "(B) Class View", "(C) Properties", "(D) Explorer"],
+        optionsGuj: ["(A) Toolbox", "(B) Class View", "(C) Properties", "(D) Explorer"], answer: 1
+      },
+
+      {
+        q: "The 'Main Menu Bar' is utilized to:", guj: "'Main Menu Bar' કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Exit only", "(B) Write code", "(C) Drag controls", "(D) Access commands"],
+        optionsGuj: ["(A) માત્ર Exit", "(B) કોડ લખવા", "(C) કંટ્રોલ્સ ડ્રેગ કરવા", "(D) કમાન્ડ્સ એક્સેસ કરવા"], answer: 3
+      },
+
+      {
+        q: "What is the 'Standard Toolbar' used for?", guj: "'Standard Toolbar' કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Quick commands", "(B) Fonts", "(C) Logos", "(D) SQL"],
+        optionsGuj: ["(A) ઝડપી કમાન્ડ્સ", "(B) Fonts", "(C) Logos", "(D) SQL"], answer: 0
+      },
+
+      {
+        q: "Which part of the IDE is used to set \"breakpoints\" for debugging?", guj: "ડીબગિંગ માટે \"breakpoints\" સેટ કરવા IDEનો કયો ભાગ વપરાય છે?",
+        optionsEn: ["(A) Margin gutter", "(B) Menu", "(C) Toolbox", "(D) Properties"],
+        optionsGuj: ["(A) Margin gutter", "(B) Menu", "(C) Toolbox", "(D) Properties"], answer: 0
+      },
+
+      {
+        q: "The 'Immediate Window' is utilized during debugging to:", guj: "ડીબગિંગ દરમિયાન 'Immediate Window' કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Close IDE", "(B) Run commands", "(C) Edit HTML", "(D) Change theme"],
+        optionsGuj: ["(A) IDE બંધ કરવા", "(B) કમાન્ડ્સ ચલાવવા", "(C) HTML એડિટ કરવા", "(D) થીમ બદલવા"], answer: 1
+      },
+
+      {
+        q: "Which window would you use to see the call stack and local variables while the application is in 'Break' mode?", guj: "'Break' મોડમાં કોલ સ્ટેક અને લોકલ વેરિયેબલ્સ જોવા માટે કઈ વિન્ડો વપરાય છે?",
+        optionsEn: ["(A) Autos/Locals", "(B) Toolbox", "(C) Server Explorer", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Autos/Locals", "(B) Toolbox", "(C) Server Explorer", "(D) Solution Explorer"], answer: 0
+      },
+
+      {
+        q: "What is the 'Document Well' (or Tabbed Document Interface)?", guj: "'Document Well' (Tabbed Document Interface) શું છે?",
+        optionsEn: ["(A) Bin folder", "(B) Help docs", "(C) Tabbed editor", "(D) Storage space"],
+        optionsGuj: ["(A) Bin folder", "(B) Help docs", "(C) Tabbed editor", "(D) Storage space"], answer: 2
+      },
+
+      {
+        q: "If you accidentally close the Toolbox or Solution Explorer, which Menu item helps you bring them back?", guj: "જો તમે Toolbox અથવા Solution Explorer આકસ્મિક બંધ કરી દો તો કયા મેનુ આઈટમથી તેને પાછું લાવી શકાય?",
+        optionsEn: ["(A) File", "(B) View", "(C) Tools", "(D) Edit"],
+        optionsGuj: ["(A) File", "(B) View", "(C) Tools", "(D) Edit"], answer: 1
+      },
+
+      {
+        q: "The 'Properties Window' categorizes properties. Which icon allows you to view them alphabetically?", guj: "'Properties Window' પ્રોપર્ટીઝને કેટેગરાઈઝ કરે છે. અક્ષર ક્રમમાં જોવા માટે કયો આઈકોન વપરાય છે?",
+        optionsEn: ["(A) Folder", "(B) Lightning", "(C) A-Z", "(D) Help"],
+        optionsGuj: ["(A) Folder", "(B) Lightning", "(C) A-Z", "(D) Help"], answer: 2
+      },
+
+      {
+        q: "Which feature allows you to \"pin\" or \"unpin\" windows like the Toolbox so they slide away when not in use?", guj: "કઈ વિશેષતા Toolbox જેવી વિન્ડોને \"pin\" અથવા \"unpin\" કરવા દે છે જેથી તે વપરાતી ન હોય ત્યારે સ્લાઈડ થઈ જાય?",
+        optionsEn: ["(A) Docking", "(B) Minimize", "(C) Format", "(D) Auto-Hide"],
+        optionsGuj: ["(A) Docking", "(B) Minimize", "(C) Format", "(D) Auto-Hide"], answer: 3
+      },
+
+      {
+        q: "The 'Object Browser' is used to:", guj: "'Object Browser' કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Delete DB objects", "(B) Inspect libraries", "(C) Rename project", "(D) Browse images"],
+        optionsGuj: ["(A) DB objects ડિલીટ કરવા", "(B) લાઇબ્રેરી તપાસવા", "(C) પ્રોજેક્ટ નામ બદલવા", "(D) ઈમેજીસ બ્રાઉઝ કરવા"], answer: 1
+      },
+
+      {
+        q: "Which IDE part allows you to quickly switch between different configuration modes like 'Debug' and 'Release'?", guj: "IDEનો કયો ભાગ 'Debug' અને 'Release' જેવા અલગ કોન્ફિગ્યુરેશન મોડ વચ્ચે ઝડપથી સ્વિચ કરવા દે છે?",
+        optionsEn: ["(A) Status bar", "(B) Config manager", "(C) Properties", "(D) Explorer"],
+        optionsGuj: ["(A) Status bar", "(B) Config manager", "(C) Properties", "(D) Explorer"], answer: 1
+      },
+
+      {
+        q: "The 'Task List' window is utilized to:", guj: "'Task List' વિન્ડો કયા માટે વપરાય છે?",
+        optionsEn: ["(A) User list", "(B) History", "(C) TODO notes", "(D) Task manager"],
+        optionsGuj: ["(A) User list", "(B) History", "(C) TODO notes", "(D) Task manager"], answer: 2
+      },
+
+      {
+        q: "What does the 'Start' button (Green arrow) on the toolbar do?", guj: "ટૂલબાર પર 'Start' બટન (લીલો તીર) શું કરે છે?",
+        optionsEn: ["(A) Delete project", "(B) Run + debug", "(C) Open browser", "(D) Replace code"],
+        optionsGuj: ["(A) પ્રોજેક્ટ ડિલીટ કરવું", "(B) Run + debug", "(C) બ્રાઉઝર ખોલવું", "(D) કોડ બદલવો"], answer: 1
+      },
+
+      {
+        q: "The 'Status Bar' at the bottom of the IDE displays:", guj: "IDEના તળિયે 'Status Bar' શું બતાવે છે?",
+        optionsEn: ["(A) Weather", "(B) Source code", "(C) Price", "(D) Line/status"],
+        optionsGuj: ["(A) Weather", "(B) Source code", "(C) Price", "(D) Line/status"], answer: 3
+      },
+
+      {
+        q: "Which component is used to manage references to other projects or DLL files?", guj: "અન્ય પ્રોજેક્ટ્સ અથવા DLL ફાઈલ્સના રેફરન્સ મેનેજ કરવા કયો ઘટક વપરાય છે?",
+        optionsEn: ["(A) Toolbox", "(B) References node", "(C) Output", "(D) Toolbar"],
+        optionsGuj: ["(A) Toolbox", "(B) References node", "(C) Output", "(D) Toolbar"], answer: 1
+      },
+
+      {
+        q: "The 'Command Window' is utilized to:", guj: "'Command Window' કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Turn off PC", "(B) Execute commands", "(C) Chat dev's", "(D) Type HTML"],
+        optionsGuj: ["(A) PC બંધ કરવું", "(B) કમાન્ડ્સ એક્ઝિક્યુટ કરવા", "(C) ડેવ્સ સાથે ચેટ", "(D) HTML ટાઈપ કરવું"], answer: 1
+      },
+
+      {
+        q: "Which window allows you to see the CSS styles applied to a specific element in Design view?", guj: "Design viewમાં કોઈ એલિમેન્ટ પર લાગુ પડેલ CSS સ્ટાઈલ જોવા માટે કઈ વિન્ડો વપરાય છે?",
+        optionsEn: ["(A) Error list", "(B) Output", "(C) CSS window", "(D) Explorer"],
+        optionsGuj: ["(A) Error list", "(B) Output", "(C) CSS window", "(D) Explorer"], answer: 2
+      },
+
+      {
+        q: "To create a new project in Visual Studio, which menu path is typically used?", guj: "Visual Studioમાં નવું પ્રોજેક્ટ બનાવવા માટે સામાન્ય મેનુ પાથ કયો છે?",
+        optionsEn: ["(A) Project > New > File", "(B) Edit > New > Project", "(C) File > New > Project", "(D) View > New > Project"],
+        optionsGuj: ["(A) Project > New > File", "(B) Edit > New > Project", "(C) File > New > Project", "(D) View > New > Project"], answer: 2
+      },
+
+      {
+        q: "Which project template should a beginner choose to create a standard ASP.NET Web Form application?", guj: "શરૂઆતી વ્યક્તિએ સ્ટાન્ડર્ડ ASP.NET Web Form એપ્લિકેશન બનાવવા માટે કયું પ્રોજેક્ટ ટેમ્પ્લેટ પસંદ કરવું જોઈએ?",
+        optionsEn: ["(A) ASP.NET Web Application (.NET Framework)", "(B) Console Application", "(C) Windows Forms App", "(D) Class Library"],
+        optionsGuj: ["(A) ASP.NET Web Application (.NET Framework)", "(B) Console Application", "(C) Windows Forms App", "(D) Class Library"], answer: 0
+      },
+
+      {
+        q: "What is the purpose of the \"New Project\" dialog box?", guj: "\"New Project\" ડાયલોગ બોક્સનો હેતુ શું છે?",
+        optionsEn: ["(A) To configure the SQL Server password", "(B) To write the first line of C# code", "(C) To select the template, name the project, and choose the storage location", "(D) To delete old projects"],
+        optionsGuj: ["(A) SQL Server પાસવર્ડ કોન્ફિગર કરવા", "(B) C# કોડની પહેલી લાઈન લખવા", "(C) ટેમ્પ્લેટ પસંદ કરવા, પ્રોજેક્ટનું નામ આપવા અને સ્ટોરેજ લોકેશન પસંદ કરવા", "(D) જૂના પ્રોજેક્ટ ડિલીટ કરવા"], answer: 2
+      },
+
+      {
+        q: "When \"Creating a New Web Project,\" the \"Empty\" template provides:", guj: "\"New Web Project\" બનાવતી વખતે \"Empty\" ટેમ્પ્લેટ શું આપે છે?",
+        optionsEn: ["(A) A project filled with sample data", "(B) A fully functional website with login features", "(C) Only the basic file structure with no default pages or forms", "(D) A link to download more software"],
+        optionsGuj: ["(A) સેમ્પલ ડેટા સાથે પ્રોજેક્ટ", "(B) લોગિન સાથે પૂર્ણ વેબસાઈટ", "(C) માત્ર મૂળ ફાઈલ સ્ટ્રક્ચર (કોઈ ડિફોલ્ટ પેજ નહીં)", "(D) વધુ સોફ્ટવેર ડાઉનલોડ કરવાની લિંક"], answer: 2
+      },
+
+      {
+        q: "Which key is a shortcut to \"Build\" the solution without running it?", guj: "\"Build\" કરવા માટે કયી કી શોર્ટકટ છે?",
+        optionsEn: ["(A) F12", "(B) Ctrl + Shift + B", "(C) Alt + F4", "(D) F1"],
+        optionsGuj: ["(A) F12", "(B) Ctrl + Shift + B", "(C) Alt + F4", "(D) F1"], answer: 1
+      },
+
+      {
+        q: "What is the Content folder (in newer templates) usually used for?", guj: "Content folder (નવા ટેમ્પ્લેટમાં) સામાન્ય રીતે કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Storing static files like CSS and images", "(B) Storing Database scripts", "(C) Storing C# logic", "(D) Storing the project’s license"],
+        optionsGuj: ["(A) CSS અને ઈમેજીસ જેવી સ્ટેટિક ફાઈલ્સ સ્ટોર કરવા", "(B) Database scripts સ્ટોર કરવા", "(C) C# લોજિક સ્ટોર કરવા", "(D) પ્રોજેક્ટનું લાઇસન્સ સ્ટોર કરવા"], answer: 0
+      },
+
+      {
+        q: "The \"Properties\" folder in Solution Explorer contains:", guj: "Solution Explorerમાં \"Properties\" ફોલ્ડરમાં શું હોય છે?",
+        optionsEn: ["(A) The color settings of the IDE", "(B) Images of the property", "(C) AssemblyInfo.cs which contains metadata about the project", "(D) The CSS properties"],
+        optionsGuj: ["(A) IDEની કલર સેટિંગ્સ", "(B) પ્રોપર્ટીની ઈમેજીસ", "(C) AssemblyInfo.cs જે પ્રોજેક્ટ વિશે મેટાડેટા ધરાવે છે", "(D) CSS પ્રોપર્ટીઝ"], answer: 2
+      },
+
+      {
+        q: "Which window allows you to view the properties of a project (like the target .NET Framework version)?", guj: "પ્રોજેક્ટની પ્રોપર્ટીઝ (જેમ કે target .NET Framework version) જોવા માટે કઈ વિન્ડો વપરાય છે?",
+        optionsEn: ["(A) Solution Explorer > Right Click Project > Properties", "(B) Server Explorer", "(C) Toolbox", "(D) Output Window"],
+        optionsGuj: ["(A) Solution Explorer > Right Click Project > Properties", "(B) Server Explorer", "(C) Toolbox", "(D) Output Window"], answer: 0
+      },
+
+      {
+        q: "In a simple ASP.NET app, how is a \"Server-side control\" identified in HTML?", guj: "સરળ ASP.NET એપ્લિકેશનમાં \"Server-side control\" HTMLમાં કેવી રીતે ઓળખાય છે?",
+        optionsEn: ["(A) By the class attribute", "(B) By the script  tag", "(C) By the href attribute", "(D) By the runat=\"server\" attribute"],
+        optionsGuj: ["(A) class attribute દ્વારા", "(B) script tag દ્વારા", "(C) href attribute દ્વારા", "(D) runat=\"server\" attribute દ્વારા"], answer: 3
+      },
+
+      {
+        q: "If your application fails to start and shows a \"Build Error,\" where should you look for details?", guj: "જો તમારી એપ્લિકેશન શરૂ ન થાય અને \"Build Error\" બતાવે તો વિગતો ક્યાં જોવી?",
+        optionsEn: ["(A) The Error List window", "(B) The Toolbox", "(C) The Start Page", "(D) The Trash can"],
+        optionsGuj: ["(A) Error List window", "(B) Toolbox", "(C) Start Page", "(D) Trash can"], answer: 0
+      }
+      ,
+      {
+        q: "To rename a webpage file, you should do it in the:", guj: "વેબપેજ ફાઈલનું નામ બદલવા માટે ક્યાં કરવું જોઈએ?",
+        optionsEn: ["(A) Toolbox", "(B) Browser address bar", "(C) Solution Explorer", "(D) Properties Window"],
+        optionsGuj: ["(A) Toolbox", "(B) Browser address bar", "(C) Solution Explorer", "(D) Properties Window"], answer: 2
+      },
+
+      {
+        q: "What happens when you “Clean” a solution?", guj: "સોલ્યુશનને “Clean” કરતાં શું થાય છે?",
+        optionsEn: ["(A) It deletes the project from the hard drive", "(B) It formats the code to look pretty", "(C) It removes all intermediate and output files (like DLLs) from previous builds", "(D) It deletes all the source code"],
+        optionsGuj: ["(A) પ્રોજેક્ટ હાર્ડ ડ્રાઈવમાંથી ડિલીટ થાય છે", "(B) કોડને સુંદર બનાવે છે", "(C) અગાઉના બિલ્ડની તમામ intermediate અને output ફાઈલ્સ (DLLs) દૂર કરે છે", "(D) તમામ સોર્સ કોડ ડિલીટ કરે છે"], answer: 2
+      },
+
+      {
+        q: "The “Solution Explorer” allows you to “Set as Start Page.” What does this do?", guj: "“Solution Explorer”માં “Set as Start Page” કરવાથી શું થાય છે?",
+        optionsEn: ["(A) It turns the page into a template", "(B) It ensures that specific page opens first when the application runs", "(C) It makes that page the background of your computer", "(D) It deletes all other pages"],
+        optionsGuj: ["(A) પેજને ટેમ્પ્લેટમાં બદલે છે", "(B) એપ્લિકેશન ચાલુ થતાં તે પેજ પહેલા ખુલે છે", "(C) તે પેજને કોમ્પ્યુટરના બેકગ્રાઉન્ડમાં બનાવે છે", "(D) બધા અન્ય પેજ ડિલીટ કરે છે"], answer: 1
+      },
+
+      {
+        q: "What is Microsoft Visual Studio?", guj: "Microsoft Visual Studio શું છે?",
+        optionsEn: ["(A) A Web Browser", "(B) An Operating System", "(C) An Integrated Development Environment (IDE)", "(D) A Database Server"],
+        optionsGuj: ["(A) વેબ બ્રાઉઝર", "(B) ઓપરેટિંગ સિસ્ટમ", "(C) Integrated Development Environment (IDE)", "(D) ડેટાબેઝ સર્વર"], answer: 2
+      },
+
+      {
+        q: "Which company developed Visual Studio?", guj: "Visual Studio કયા કંપનીએ વિકસાવ્યું છે?",
+        optionsEn: ["(A) Apple", "(B) Microsoft", "(C) Oracle", "(D) Google"],
+        optionsGuj: ["(A) Apple", "(B) Microsoft", "(C) Oracle", "(D) Google"], answer: 1
+      },
+
+      {
+        q: "Visual Studio can be used to develop:", guj: "Visual Studioનો ઉપયોગ કઈ એપ્લિકેશન્સ બનાવવા માટે થાય છે?",
+        optionsEn: ["(A) Only Console applications", "(B) Only Desktop Applications", "(C) Web, Mobile, Desktop, and Cloud applications", "(D) Only Web Applications"],
+        optionsGuj: ["(A) માત્ર Console applications", "(B) માત્ર Desktop Applications", "(C) Web, Mobile, Desktop અને Cloud applications", "(D) માત્ર Web Applications"], answer: 2
+      },
+
+      {
+        q: "Which of the following is a free, entry-level version of Visual Studio for students and individual developers?", guj: "વિદ્યાર્થીઓ અને વ્યક્તિગત ડેવલપર્સ માટે Visual Studioનું મફત વર્ઝન કયું છે?",
+        optionsEn: ["(A) Visual Studio Enterprise", "(B) Visual Studio Ultimate", "(C) Visual Studio Community", "(D) Visual Studio Professional"],
+        optionsGuj: ["(A) Visual Studio Enterprise", "(B) Visual Studio Ultimate", "(C) Visual Studio Community", "(D) Visual Studio Professional"], answer: 2
+      },
+
+      {
+        q: "What is an “IDE” (Integrated Development Environment)?", guj: "“IDE” (Integrated Development Environment) શું છે?",
+        optionsEn: ["(A) A type of internet connection", "(B) A programming language", "(C) A place to store computer hardware", "(D) A software suite that provides comprehensive facilities to computer programmers for software development"],
+        optionsGuj: ["(A) ઇન્ટરનેટ કનેક્શનનો પ્રકાર", "(B) પ્રોગ્રામિંગ ભાષા", "(C) કોમ્પ્યુટર હાર્ડવેર સ્ટોર કરવાની જગ્યા", "(D) સોફ્ટવેર સ્યુટ જે પ્રોગ્રામર્સને સોફ્ટવેર વિકાસ માટે સંપૂર્ણ સુવિધાઓ આપે છે"], answer: 3
+      },
+
+      {
+        q: "Which version of the .NET Framework was introduced alongside the first version of Visual Studio.NET?", guj: "Visual Studio.NETના પ્રથમ વર્ઝન સાથે કયું .NET Framework વર્ઝન રજૂ કરવામાં આવ્યું?",
+        optionsEn: ["(A) .NET Core", "(B) .NET 4.5", "(C) .NET 1.0", "(D) .NET 5.0"],
+        optionsGuj: ["(A) .NET Core", "(B) .NET 4.5", "(C) .NET 1.0", "(D) .NET 5.0"], answer: 2
+      },
+
+      {
+        q: "In Visual Studio, a “Solution” can contain:", guj: "Visual Studioમાં “Solution”માં શું હોઈ શકે છે?",
+        optionsEn: ["(A) Only one file", "(B) Multiple projects that work together", "(C) Only one project", "(D) No projects at all"],
+        optionsGuj: ["(A) માત્ર એક ફાઈલ", "(B) અનેક પ્રોજેક્ટ્સ જે સાથે કામ કરે છે", "(C) માત્ર એક પ્રોજેક્ટ", "(D) કોઈ પ્રોજેક્ટ નહીં"], answer: 1
+      },
+
+      {
+        q: "What is the file extension for a Visual Studio Solution file?", guj: "Visual Studio Solution ફાઈલનું extension શું છે?",
+        optionsEn: ["(A) .vbp", "(B) .exe", "(C) .proj", "(D) .sln"],
+        optionsGuj: ["(A) .vbp", "(B) .exe", "(C) .proj", "(D) .sln"], answer: 3
+      },
+
+      {
+        q: "Which programming languages are supported by Visual Studio out-of-the-box?", guj: "Visual Studio આઉટ-ઓફ-ધ-બોક્સ કઈ પ્રોગ્રામિંગ ભાષાઓને સપોર્ટ કરે છે?",
+        optionsEn: ["(A) Only HTML", "(B) C#, VB.NET, C++, and F#", "(C) Only C#", "(D) Only Java"],
+        optionsGuj: ["(A) માત્ર HTML", "(B) C#, VB.NET, C++, and F#", "(C) માત્ર C#", "(D) માત્ર Java"], answer: 1
+      },
+
+      {
+        q: "What is the \"Team Explorer\" window used for?", guj: "\"Team Explorer\" વિન્ડો કયા માટે વપરાય છે?",
+        optionsEn: ["(A) To chat with friends", "(B) To check the computer's RAM", "(C) To manage version control (like Git or Azure DevOps)", "(D) To design the UI"],
+        optionsGuj: ["(A) મિત્રો સાથે ચેટ કરવા", "(B) કોમ્પ્યુટરની RAM તપાસવા", "(C) વર્ઝન કંટ્રોલ મેનેજ કરવા (Git અથવા Azure DevOps)", "(D) UI ડિઝાઈન કરવા"], answer: 2
+      },
+
+      {
+        q: "Which feature in Visual Studio allows you to write code in one language and use it in another project written in a different language?", guj: "Visual Studioની કઈ વિશેષતા તમને એક ભાષામાં કોડ લખીને અન્ય પ્રોજેક્ટમાં અલગ ભાષામાં વાપરવા દે છે?",
+        optionsEn: ["(A) Code Copying", "(B) Binary Conversion", "(C) Language Interoperability", "(D) Translation Mode"],
+        optionsGuj: ["(A) Code Copying", "(B) Binary Conversion", "(C) Language Interoperability", "(D) Translation Mode"], answer: 2
+      },
+
+      {
+        q: "The \"Cloud Explorer\" in Visual Studio is primarily used for managing resources on:", guj: "Visual Studioમાં \"Cloud Explorer\" મુખ્યત્વે કયા પર રિસોર્સ મેનેજ કરવા માટે વપરાય છે?",
+        optionsEn: ["(A) Dropbox", "(B) Microsoft Azure", "(C) Google Drive", "(D) Local hard drive"],
+        optionsGuj: ["(A) Dropbox", "(B) Microsoft Azure", "(C) Google Drive", "(D) Local hard drive"], answer: 1
+      },
+
+      {
+        q: "What is \"IntelliCode\" in newer versions of Visual Studio?", guj: "Visual Studioના નવા વર્ઝનમાં \"IntelliCode\" શું છે?",
+        optionsEn: ["(A) AI-assisted code completion that learns from your patterns", "(B) A built-in calculator", "(C) A search engine for the web", "(D) A way to lock the code with a password"],
+        optionsGuj: ["(A) AI-assisted કોડ કમ્પ્લીશન જે તમારા પેટર્નથી શીખે છે", "(B) બિલ્ટ-ઇન કેલ્ક્યુલેટર", "(C) વેબ માટે સર્ચ એન્જિન", "(D) કોડને પાસવર્ડથી લોક કરવાની રીત"], answer: 0
+      },
+
+      {
+        q: "Which menu option allows you to change the theme (Light/Dark) of Visual Studio?", guj: "Visual Studioની થીમ (Light/Dark) બદલવા માટે કયો મેનુ વિકલ્પ વપરાય છે?",
+        optionsEn: ["(A) View > Toolbars", "(B) Project > Add Item", "(C) File > Save", "(D) Tools > Options"],
+        optionsGuj: ["(A) View > Toolbars", "(B) Project > Add Item", "(C) File > Save", "(D) Tools > Options"], answer: 3
+      },
+
+      {
+        q: "The \"Quick Launch\" (Ctrl+Q) search box is used to:", guj: "\"Quick Launch\" (Ctrl+Q) સર્ચ બોક્સ કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Launch a rocket", "(B) Open the browser", "(C) Search the internet", "(D) Find and execute IDE commands, settings, and files quickly"],
+        optionsGuj: ["(A) રોકેટ લોન્ચ કરવા", "(B) બ્રાઉઝર ખોલવા", "(C) ઇન્ટરનેટ સર્ચ કરવા", "(D) IDE કમાન્ડ્સ, સેટિંગ્સ અને ફાઈલ્સ ઝડપથી શોધવા અને એક્ઝિક્યુટ કરવા"], answer: 3
+      },
+
+      {
+        q: "What does \"Multi-targeting\" mean in Visual Studio?", guj: "Visual Studioમાં \"Multi-targeting\"નો અર્થ શું છે?",
+        optionsEn: ["(A) Attacking multiple viruses at once", "(B) Using two monitors at once", "(C) Running the IDE on multiple computers", "(D) The ability to target different versions of the .NET Framework within one IDE"],
+        optionsGuj: ["(A) એકસાથે અનેક વાયરસ પર હુમલો", "(B) એકસાથે બે મોનિટર વાપરવા", "(C) IDEને અનેક કોમ્પ્યુટર પર ચલાવવું", "(D) એક જ IDEમાં .NET Frameworkના અલગ અલગ વર્ઝનને ટાર્ગેટ કરવાની ક્ષમતા"], answer: 3
+      },
+
+      {
+        q: "Which window is known as the \"central hub\" for managing a project's life cycle?", guj: "પ્રોજેક્ટના જીવનચક્રને મેનેજ કરવા માટે \"central hub\" તરીકે કઈ વિન્ડો ઓળખાય છે?",
+        optionsEn: ["(A) Toolbox", "(B) Control Panel", "(C) Solution Explorer", "(D) Command Prompt"],
+        optionsGuj: ["(A) Toolbox", "(B) Control Panel", "(C) Solution Explorer", "(D) Command Prompt"], answer: 2
+      },
+
+      {
+        q: "What is \"Live Share\" in Visual Studio?", guj: "Visual Studioમાં \"Live Share\" શું છે?",
+        optionsEn: ["(A) A live news feed", "(B) A way to broadcast your screen on TV", "(C) A way to share your password", "(D) A collaborative feature that allows developers to edit and debug together in real-time"],
+        optionsGuj: ["(A) લાઈવ ન્યૂઝ ફીડ", "(B) સ્ક્રીનને ટીવી પર બ્રોડકાસ્ટ કરવાની રીત", "(C) પાસવર્ડ શેર કરવાની રીત", "(D) કોલેબોરેટિવ વિશેષતા જે ડેવલપર્સને રીયલ-ટાઈમમાં સાથે એડિટ અને ડીબગ કરવા દે છે"], answer: 3
+      },
+
+      {
+        q: "Visual Studio is primarily a \"64-bit\" application starting from which version?", guj: "Visual Studio મુખ્યત્વે \"64-bit\" એપ્લિકેશન કયા વર્ઝનથી છે?",
+        optionsEn: ["(A) Visual Studio 2015", "(B) Visual Studio 2022", "(C) Visual Studio 2010", "(D) Visual Studio 2005"],
+        optionsGuj: ["(A) Visual Studio 2015", "(B) Visual Studio 2022", "(C) Visual Studio 2010", "(D) Visual Studio 2005"], answer: 1
+      },
+
+      {
+        q: "What is the function of \"Snippets\" in Visual Studio?", guj: "Visual Studioમાં \"Snippets\"નું કાર્ય શું છે?",
+        optionsEn: ["(A) Small blocks of reusable code that can be inserted quickly", "(B) To delete old code", "(C) To cut parts of the screen", "(D) To take screenshots of the code"],
+        optionsGuj: ["(A) ઝડપથી ઇન્સર્ટ કરી શકાય તેવા નાના રીયુઝેબલ કોડ બ્લોક્સ", "(B) જૂનો કોડ ડિલીટ કરવા", "(C) સ્ક્રીનના ભાગો કાપવા", "(D) કોડના સ્ક્રીનશોટ લેવા"], answer: 0
+      },
+
+      {
+        q: "Which window provides a way to view and manage active \"Breakpoints\"?", guj: "સક્રિય \"Breakpoints\" જોવા અને મેનેજ કરવા માટે કઈ વિન્ડો વપરાય છે?",
+        optionsEn: ["(A) Toolbox", "(B) Properties Window", "(C) Breakpoints Window", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Toolbox", "(B) Properties Window", "(C) Breakpoints Window", "(D) Solution Explorer"], answer: 2
+      },
+
+      {
+        q: "Which tool is used to manage the installation, modification, and updating of Visual Studio itself?", guj: "Visual Studioના ઇન્સ્ટોલેશન, મોડિફિકેશન અને અપડેટ મેનેજ કરવા માટે કયું ટૂલ વપરાય છે?",
+        optionsEn: ["(A) Windows Update", "(B) Task Manager", "(C) Add/Remove Programs", "(D) Visual Studio Installer"],
+        optionsGuj: ["(A) Windows Update", "(B) Task Manager", "(C) Add/Remove Programs", "(D) Visual Studio Installer"], answer: 3
+      },
+
+      {
+        q: "What is the \"Diagnostic Tools\" window used for?", guj: "\"Diagnostic Tools\" વિન્ડો કયા માટે વપરાય છે?",
+        optionsEn: ["(A) To fix the internet connection", "(B) To monitor CPU and Memory usage while the app is running", "(C) To scan for viruses", "(D) To check for hardware errors in the PC"],
+        optionsGuj: ["(A) ઇન્ટરનેટ કનેક્શન સુધારવા", "(B) એપ્લિકેશન ચાલુ હોય ત્યારે CPU અને મેમરી વપરાશ મોનિટર કરવા", "(C) વાયરસ સ્કેન કરવા", "(D) PCમાં હાર્ડવેર એરર તપાસવા"], answer: 1
+      },
+
+      {
+        q: "The \"Object Browser\" allows you to explore:", guj: "\"Object Browser\" તમને શું તપાસવા દે છે?",
+        optionsEn: ["(A) Physical objects in the room", "(B) Images on the web", "(C) Namespaces, classes, and members of various libraries", "(D) The file system"],
+        optionsGuj: ["(A) રૂમમાં ભૌતિક વસ્તુઓ", "(B) વેબ પરની ઈમેજીસ", "(C) Namespaces, classes અને વિવિધ લાઇબ્રેરીઓના મેમ્બર્સ", "(D) ફાઈલ સિસ્ટમ"], answer: 2
+      },
+
+      {
+        q: "Which of the following is NOT a part of the Visual Studio IDE?", guj: "નીચેનામાંથી કયું Visual Studio IDEનો ભાગ નથી?",
+        optionsEn: ["(A) Compiler", "(B) Text Editor", "(C) Web Browser (for previewing)", "(D) Physical Printer"],
+        optionsGuj: ["(A) Compiler", "(B) Text Editor", "(C) Web Browser (preview માટે)", "(D) Physical Printer"], answer: 3
+      },
+
+      {
+        q: "What does \"Refactoring\" mean in Visual Studio?", guj: "Visual Studioમાં \"Refactoring\"નો અર્થ શું છે?",
+        optionsEn: ["(A) Formatting the hard drive", "(B) Changing the color of the IDE", "(C) Improving the internal structure of code without changing its external behavior", "(D) Deleting the whole project"],
+        optionsGuj: ["(A) હાર્ડ ડ્રાઈવ ફોર્મેટ કરવું", "(B) IDEનો રંગ બદલવો", "(C) કોડની આંતરિક સ્ટ્રક્ચર સુધારવી વગર બાહ્ય વર્તન બદલ્યા", "(D) આખું પ્રોજેક્ટ ડિલીટ કરવું"], answer: 2
+      },
+
+      {
+        q: "The \"Call Hierarchy\" window helps you to:", guj: "\"Call Hierarchy\" વિન્ડો તમને કયા માટે મદદ કરે છે?",
+        optionsEn: ["(A) See who is calling you on the phone", "(B) Arrange the files in alphabetical order", "(C) Call Microsoft support", "(D) See where a specific method is called from and what other methods it calls"],
+        optionsGuj: ["(A) ફોન પર કોણ કોલ કરે છે તે જોવા", "(B) ફાઈલ્સને અક્ષર ક્રમમાં ગોઠવવા", "(C) Microsoft સપોર્ટને કોલ કરવા", "(D) કોઈ ચોક્કસ મેથડ ક્યાંથી કોલ થાય છે અને તે અન્ય કયા મેથડને કોલ કરે છે તે જોવા"], answer: 3
+      },
+
+      {
+        q: "What is \"WYSIWYG\" in the context of the Visual Studio Web Designer?", guj: "Visual Studio Web Designerમાં \"WYSIWYG\" શું છે?",
+        optionsEn: ["(A) Windows Yearly System Integrated Web Guide", "(B) What You See Is What You Get", "(C) A type of coding language", "(D) Why You Should Install Web Games"],
+        optionsGuj: ["(A) Windows Yearly System Integrated Web Guide", "(B) What You See Is What You Get", "(C) કોડિંગ ભાષાનો પ્રકાર", "(D) Why You Should Install Web Games"], answer: 1
+      },
+
+      {
+        q: "Which shortcut key is used to \"Comment\" a selected block of code?", guj: "સિલેક્ટેડ કોડ બ્લોકને \"Comment\" કરવા માટે કઈ શોર્ટકટ કી વપરાય છે?",
+        optionsEn: ["(A) Ctrl + K, Ctrl + C", "(B) Ctrl + P", "(C) Alt + F4", "(D) Ctrl + S"],
+        optionsGuj: ["(A) Ctrl + K, Ctrl + C", "(B) Ctrl + P", "(C) Alt + F4", "(D) Ctrl + S"], answer: 0
+      },
+
+      {
+        q: "The \".NET CLI\" (Command Line Interface) is often used as an alternative to the IDE for:", guj: "\".NET CLI\" (Command Line Interface) IDEના વિકલ્પ તરીકે કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Playing music", "(B) Browsing the web", "(C) Drawing graphics", "(D) Creating, building, and running .NET projects via text commands"],
+        optionsGuj: ["(A) મ્યુઝિક વગાડવા", "(B) વેબ બ્રાઉઝ કરવા", "(C) ગ્રાફિક્સ ડ્રો કરવા", "(D) ટેક્સ્ટ કમાન્ડ્સ દ્વારા .NET પ્રોજેક્ટ્સ બનાવવા, બિલ્ડ અને રન કરવા"], answer: 3
+      },
+
+      {
+        q: "When you first open Visual Studio, the initial screen that provides access to recent projects is called the:", guj: "Visual Studio પહેલી વખત ખોલતાં જે પ્રારંભિક સ્ક્રીન આવે છે જે તાજેતરના પ્રોજેક્ટ્સની ઍક્સેસ આપે છે તેને શું કહેવાય છે?",
+        optionsEn: ["(A) Dashboard", "(B) Start Page", "(C) Welcome Screen", "(D) Project Hub"],
+        optionsGuj: ["(A) Dashboard", "(B) Start Page", "(C) Welcome Screen", "(D) Project Hub"], answer: 1
+      },
+
+      {
+        q: "Which section on the Start Page allows you to clone a repository from GitHub or Azure DevOps?", guj: "Start Page પર કયા સેક્શનમાં GitHub અથવા Azure DevOpsમાંથી રિપોઝિટરી ક્લોન કરી શકાય છે?",
+        optionsEn: ["(A) Get Started", "(B) Open Recent", "(C) Project Details", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Get Started", "(B) Open Recent", "(C) Project Details", "(D) Solution Explorer"], answer: 0
+      },
+
+      {
+        q: "The shortcut key to open the \"New Project\" dialog box is:", guj: "\"New Project\" ડાયલોગ બોક્સ ખોલવા માટે શોર્ટકટ કી કઈ છે?",
+        optionsEn: ["(A) Ctrl + N", "(B) Alt + N", "(C) Ctrl + Shift + N", "(D) Shift + N"],
+        optionsGuj: ["(A) Ctrl + N", "(B) Alt + N", "(C) Ctrl + Shift + N", "(D) Shift + N"], answer: 2
+      },
+
+      {
+        q: "In the New Project dialog, which \"Language\" filter should you select for an ASP.NET Web Forms project?", guj: "New Project ડાયલોગમાં ASP.NET Web Forms પ્રોજેક્ટ માટે કયો \"Language\" ફિલ્ટર પસંદ કરવો?",
+        optionsEn: ["(A) C++", "(B) Java", "(C) Python", "(D) C# or Visual Basic"],
+        optionsGuj: ["(A) C++", "(B) Java", "(C) Python", "(D) C# or Visual Basic"], answer: 3
+      },
+
+      {
+        q: "Which \"Platform\" filter is most appropriate for a standard ASP.NET project?", guj: "સ્ટાન્ડર્ડ ASP.NET પ્રોજેક્ટ માટે કયો \"Platform\" ફિલ્ટર સૌથી યોગ્ય છે?",
+        optionsEn: ["(A) Android", "(B) Windows", "(C) Xbox", "(D) iOS"],
+        optionsGuj: ["(A) Android", "(B) Windows", "(C) Xbox", "(D) iOS"], answer: 1
+      },
+
+      {
+        q: "What does the \"Project Type\" filter \"Web\" display in the dialog box?", guj: "ડાયલોગ બોક્સમાં \"Project Type\" ફિલ્ટર \"Web\" શું બતાવે છે?",
+        optionsEn: ["(A) ASP.NET Core, Web API, and Web Forms templates", "(B) Mobile game templates", "(C) Database scripts", "(D) Desktop apps only"],
+        optionsGuj: ["(A) ASP.NET Core, Web API, and Web Forms templates", "(B) Mobile game templates", "(C) Database scripts", "(D) Desktop apps only"], answer: 0
+      },
+
+      {
+        q: "In the \"Configure your new project\" screen, what is the default location for projects?", guj: "\"Configure your new project\" સ્ક્રીનમાં પ્રોજેક્ટ્સ માટે ડિફોલ્ટ લોકેશન શું છે?",
+        optionsEn: ["(A) C:\\Windows\\System32", "(B) D:\\Backup", "(C) C:\\Users\\[User]\\source\\repos", "(D) C:\\Program Files"],
+        optionsGuj: ["(A) C:\\Windows\\System32", "(B) D:\\Backup", "(C) C:\\Users\\[User]\\source\\repos", "(D) C:\\Program Files"], answer: 2
+      },
+
+      {
+        q: "What is the difference between \"Project Name\" and \"Solution Name\" in the dialog box?", guj: "ડાયલોગ બોક્સમાં \"Project Name\" અને \"Solution Name\" વચ્ચે તફાવત શું છે?",
+        optionsEn: ["(A) A Project is a single application; a Solution is a container for one or more projects.", "(B) A Solution is a single file; a Project is a folder.", "(C) They must always be the same.", "(D) There is no difference."],
+        optionsGuj: ["(A) પ્રોજેક્ટ એક સિંગલ એપ્લિકેશન છે; સોલ્યુશન એક અથવા અનેક પ્રોજેક્ટ્સનું કન્ટેનર છે.", "(B) સોલ્યુશન એક સિંગલ ફાઈલ છે; પ્રોજેક્ટ એક ફોલ્ડર છે.", "(C) તેઓ હંમેશા સમાન હોવા જોઈએ.", "(D) કોઈ તફાવત નથી."], answer: 0
+      },
+
+      {
+        q: "The checkbox \"Place solution and project in the same directory\" is used to:", guj: "ચેકબોક્સ \"Place solution and project in the same directory\" કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Delete the project", "(B) Encrypt the files", "(C) Hide the code from other users", "(D) Simplify the folder structure for small, single-project solutions"],
+        optionsGuj: ["(A) પ્રોજેક્ટ ડિલીટ કરવા", "(B) ફાઈલ્સ એન્ક્રિપ્ટ કરવા", "(C) અન્ય યુઝર્સથી કોડ છુપાવવા", "(D) નાના, સિંગલ-પ્રોજેક્ટ સોલ્યુશન માટે ફોલ્ડર સ્ટ્રક્ચર સરળ બનાવવા"], answer: 3
+      },
+
+      {
+        q: "Which version of the .NET Framework can be selected during the creation of an ASP.NET Web Application?", guj: "ASP.NET Web Application બનાવતી વખતે .NET Frameworkનું કયું વર્ઝન પસંદ કરી શકાય છે?",
+        optionsEn: ["(A) Various versions (e.g., 4.5, 4.7.2, 4.8) via a dropdown", "(B) Only the latest version", "(C) Only .NET Core", "(D) None of the above"],
+        optionsGuj: ["(A) વિવિધ વર્ઝન (જેમ કે 4.5, 4.7.2, 4.8) ડ્રોપડાઉન દ્વારા", "(B) માત્ર નવું વર્ઝન", "(C) માત્ર .NET Core", "(D) ઉપરનામાંથી કોઈ નહીં"], answer: 0
+      },
+
+      {
+        q: "The \"Empty\" template in the ASP.NET project dialog provides:", guj: "ASP.NET પ્રોજેક્ટ ડાયલોગમાં \"Empty\" ટેમ્પ્લેટ શું આપે છે?",
+        optionsEn: ["(A) A project filled with sample data", "(B) A fully functional website with login features", "(C) Only the basic file structure with no default pages or forms", "(D) A pre-built login system"],
+        optionsGuj: ["(A) સેમ્પલ ડેટા સાથે પ્રોજેક્ટ", "(B) લોગિન સાથે પૂર્ણ વેબસાઈટ", "(C) માત્ર મૂળ ફાઈલ સ્ટ્રક્ચર (કોઈ ડિફોલ્ટ પેજ નહીં)", "(D) પહેલેથી બનેલું લોગિન સિસ્ટમ"], answer: 2
+      },
+
+      {
+        q: "To include folders and core references for \"Web Forms\" in an empty project, you must:", guj: "ખાલી પ્રોજેક્ટમાં \"Web Forms\" માટે ફોલ્ડર અને કોર રેફરન્સ ઉમેરવા માટે તમારે શું કરવું જોઈએ?",
+        optionsEn: ["(A) Copy them from a USB drive", "(B) Download them from Google", "(C) Manually create every folder", "(D) Use the \"Web Forms\" checkbox in the \"Create a new ASP.NET Web Application\" dialog"],
+        optionsGuj: ["(A) USB ડ્રાઈવમાંથી કોપી કરવા", "(B) Googleમાંથી ડાઉનલોડ કરવા", "(C) દરેક ફોલ્ડર મેન્યુઅલી બનાવવા", "(D) \"Create a new ASP.NET Web Application\" ડાયલોગમાં \"Web Forms\" ચેકબોક્સ વાપરવું"], answer: 3
+      },
+
+      {
+        q: "What is the purpose of the \"Authentication\" button in the project dialog?", guj: "પ્રોજેક્ટ ડાયલોગમાં \"Authentication\" બટનનો હેતુ શું છે?",
+        optionsEn: ["(A) To set the Windows login password", "(B) To configure how users sign in (No Auth, Individual User Accounts, etc.)", "(C) To verify the Visual Studio license", "(D) To check for viruses"],
+        optionsGuj: ["(A) Windows લોગિન પાસવર્ડ સેટ કરવા", "(B) યુઝર્સ કેવી રીતે સાઈન ઇન કરે છે તે કોન્ફિગર કરવા (No Auth, Individual User Accounts વગેરે)", "(C) Visual Studio લાઇસન્સ વેરિફાય કરવા", "(D) વાયરસ તપાસવા"], answer: 1
+      },
+
+      {
+        q: "If you want to create a web app that works specifically on the cross-platform .NET runtime, you choose:", guj: "ક્રોસ-પ્લેટફોર્મ .NET રનટાઈમ પર કામ કરતી વેબ એપ્લિકેશન બનાવવા માટે તમે કયું પસંદ કરો?",
+        optionsEn: ["(A) Console App", "(B) Static HTML Website", "(C) ASP.NET Core Web App", "(D) ASP.NET Web Application (.NET Framework)"],
+        optionsGuj: ["(A) Console App", "(B) Static HTML Website", "(C) ASP.NET Core Web App", "(D) ASP.NET Web Application (.NET Framework)"], answer: 2
+      },
+
+      {
+        q: "The \"Recent project templates\" list on the Start Page helps to:", guj: "Start Page પર \"Recent project templates\" લિસ્ટ કયા માટે મદદ કરે છે?",
+        optionsEn: ["(A) Clear the cache", "(B) Delete old code", "(C) Update Visual Studio", "(D) Speed up the process by selecting previously used templates"],
+        optionsGuj: ["(A) કેશ સાફ કરવા", "(B) જૂનો કોડ ડિલીટ કરવા", "(C) Visual Studio અપડેટ કરવા", "(D) અગાઉ વપરાયેલ ટેમ્પ્લેટ પસંદ કરીને પ્રક્રિયા ઝડપી કરવા"], answer: 3
+      },
+
+      {
+        q: "Can you search for specific templates (like \"MVC\" or \"Web API\") in the New Project dialog?", guj: "New Project ડાયલોગમાં \"MVC\" અથવા \"Web API\" જેવા ચોક્કસ ટેમ્પ્લેટ શોધી શકાય છે?",
+        optionsEn: ["(A) Only if you have an internet connection", "(B) Yes, using the search box at the top", "(C) Only in the Professional version", "(D) No, you must scroll through the list"],
+        optionsGuj: ["(A) માત્ર ઇન્ટરનેટ કનેક્શન હોય તો", "(B) હા, ઉપરના સર્ચ બોક્સ વાપરીને", "(C) માત્ર Professional વર્ઝનમાં", "(D) ના, લિસ્ટમાં સ્ક્રોલ કરવું પડે"], answer: 1
+      },
+
+      {
+        q: "What happens if you try to create a project with a name that already exists in the same folder?", guj: "જો તમે એવા નામ સાથે પ્રોજેક્ટ બનાવવાનો પ્રયાસ કરો જે એ જ ફોલ્ડરમાં પહેલેથી અસ્તિત્વમાં હોય તો શું થાય છે?",
+        optionsEn: ["(A) It overwrites the old project without asking", "(B) It crashes Visual Studio", "(C) It displays an error message", "(D) It renames the old project automatically"],
+        optionsGuj: ["(A) જૂના પ્રોજેક્ટને પૂછ્યા વગર ઓવરરાઈટ કરે છે", "(B) Visual Studio ક્રેશ થાય છે", "(C) એરર મેસેજ બતાવે છે", "(D) જૂના પ્રોજેક્ટનું નામ આપોઆપ બદલે છે"], answer: 2
+      },
+
+      {
+        q: "The \"Framework\" selection is important because:", guj: "\"Framework\" પસંદગી મહત્વપૂર્ણ છે કારણ કે:",
+        optionsEn: ["(A) It determines which libraries and APIs are available to your code", "(B) It sets the language of the menus", "(C) It changes the color of the IDE", "(D) It increases the internet speed"],
+        optionsGuj: ["(A) તે નક્કી કરે છે કે તમારા કોડ માટે કઈ લાઇબ્રેરી અને API ઉપલબ્ધ છે", "(B) તે મેનુની ભાષા સેટ કરે છે", "(C) તે IDEનો રંગ બદલે છે", "(D) તે ઇન્ટરનેટ સ્પીડ વધારે છે"], answer: 0
+      },
+
+      {
+        q: "Which button confirms the settings and generates the project files?", guj: "કયું બટન સેટિંગ્સ કન્ફર્મ કરે છે અને પ્રોજેક્ટ ફાઈલ્સ જનરેટ કરે છે?",
+        optionsEn: ["(A) Cancel", "(B) Finish", "(C) Back", "(D) Create"],
+        optionsGuj: ["(A) Cancel", "(B) Finish", "(C) Back", "(D) Create"], answer: 3
+      },
+
+      {
+        q: "Which project template provides a \"Responsive\" layout by default using Bootstrap?", guj: "કયું પ્રોજેક્ટ ટેમ્પ્લેટ ડિફોલ્ટ રીતે Bootstrap વાપરીને \"Responsive\" લેઆઉટ આપે છે?",
+        optionsEn: ["(A) Console App", "(B) Web Application (Web Forms)", "(C) Class Library", "(D) Empty"],
+        optionsGuj: ["(A) Console App", "(B) Web Application (Web Forms)", "(C) Class Library", "(D) Empty"], answer: 1
+      },
+
+      {
+        q: "Where is the \"Start Page\" located if it is closed?", guj: "જો \"Start Page\" બંધ હોય તો તે ક્યાં છે?",
+        optionsEn: ["(A) File > New", "(B) In the Control Panel", "(C) It cannot be reopened", "(D) File > Start Page (In older versions) or via the \"Welcome\" tab"],
+        optionsGuj: ["(A) File > New", "(B) Control Panelમાં", "(C) તેને ફરીથી ખોલી શકાતું નથી", "(D) File > Start Page (જૂના વર્ઝનમાં) અથવા \"Welcome\" ટેબ દ્વારા"], answer: 3
+      },
+
+      {
+        q: "Which option allows you to open a project from your local computer via the Start Page?", guj: "Start Page દ્વારા તમારા લોકલ કોમ્પ્યુટરમાંથી પ્રોજેક્ટ ખોલવા માટે કયો વિકલ્પ વપરાય છે?",
+        optionsEn: ["(A) Clone a repository", "(B) Open a project or solution", "(C) Create a new project", "(D) Open a local folder"],
+        optionsGuj: ["(A) Clone a repository", "(B) Open a project or solution", "(C) Create a new project", "(D) Open a local folder"], answer: 1
+      },
+
+      {
+        q: "The \"Solution Name\" field is usually:", guj: "\"Solution Name\" ફિલ્ડ સામાન્ય રીતે:",
+        optionsEn: ["(A) Hidden by default", "(B) Locked and cannot be changed", "(C) Visible and can be edited independently of the Project Name", "(D) Only used for databases"],
+        optionsGuj: ["(A) ડિફોલ્ટ રીતે છુપાયેલું", "(B) લોક્ડ અને બદલી શકાતું નથી", "(C) દૃશ્યમાન અને Project Nameથી સ્વતંત્ર રીતે એડિટ કરી શકાય છે", "(D) માત્ર ડેટાબેઝ માટે વપરાય છે"], answer: 2
+      },
+
+      {
+        q: "What is the maximum length for a project name?", guj: "પ્રોજેક્ટ નામ માટે મહત્તમ લંબાઈ કેટલી છે?",
+        optionsEn: ["(A) Unlimited", "(B) 10 characters", "(C) 50 characters", "(D) 260 characters (limited by Windows file path limits)"],
+        optionsGuj: ["(A) અમર્યાદિત", "(B) 10 અક્ષર", "(C) 50 અક્ષર", "(D) 260 અક્ષર (Windows ફાઈલ પાથ લિમિટને કારણે)"], answer: 3
+      },
+
+      {
+        q: "Which template is used for building RESTful services?", guj: "RESTful સર્વિસીસ બનાવવા માટે કયું ટેમ્પ્લેટ વપરાય છે?",
+        optionsEn: ["(A) Web Forms", "(B) Unit Test", "(C) Web API", "(D) WPF App"],
+        optionsGuj: ["(A) Web Forms", "(B) Unit Test", "(C) Web API", "(D) WPF App"], answer: 2
+      },
+
+      {
+        q: "In the dialog, \"HTTPS\" configuration is usually:", guj: "ડાયલોગમાં \"HTTPS\" કોન્ફિગ્યુરેશન સામાન્ય રીતે:",
+        optionsEn: ["(A) Mandatory", "(B) Optional (can be checked/unchecked)", "(C) Only for Google projects", "(D) Not available"],
+        optionsGuj: ["(A) ફરજિયાત", "(B) વૈકલ્પિક (ચેક/અનચેક કરી શકાય)", "(C) માત્ર Google પ્રોજેક્ટ માટે", "(D) ઉપલબ્ધ નથી"], answer: 1
+      },
+
+      {
+        q: "What is \"Docker Support\" in the new project dialog?", guj: "નવા પ્રોજેક્ટ ડાયલોગમાં \"Docker Support\" શું છે?",
+        optionsEn: ["(A) A tool for drawing icons", "(B) A help menu", "(C) A type of database", "(D) A feature to containerize the application for deployment"],
+        optionsGuj: ["(A) આઈકોન ડ્રો કરવાનું ટૂલ", "(B) હેલ્પ મેનુ", "(C) ડેટાબેઝનો પ્રકાર", "(D) એપ્લિકેશનને કન્ટેનરાઈઝ કરવાની વિશેષતા"], answer: 3
+      },
+
+      {
+        q: "After clicking \"Create,\" where do you see the generated files?", guj: "\"Create\" ક્લિક કર્યા પછી જનરેટ થયેલ ફાઈલ્સ ક્યાં જુઓ છો?",
+        optionsEn: ["(A) Toolbox", "(B) Properties Window", "(C) Output Window", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Toolbox", "(B) Properties Window", "(C) Output Window", "(D) Solution Explorer"], answer: 3
+      },
+
+      {
+        q: "Can you create a project without a Solution?", guj: "સોલ્યુશન વગર પ્રોજેક્ટ બનાવી શકાય છે?",
+        optionsEn: ["(A) Only for Python", "(B) Yes, but it is not recommended for ASP.NET", "(C) Only in the Enterprise edition", "(D) No, Visual Studio always creates a solution wrapper"],
+        optionsGuj: ["(A) માત્ર Python માટે", "(B) હા, પરંતુ ASP.NET માટે ભલામણ કરવામાં આવતી નથી", "(C) માત્ર Enterprise વર્ઝનમાં", "(D) ના, Visual Studio હંમેશા સોલ્યુશન વ્રેપર બનાવે છે"], answer: 3
+      },
+
+      {
+        q: "The \"Start Page\" can show \"Developer News\" which is:", guj: "\"Start Page\" \"Developer News\" બતાવી શકે છે જે છે:",
+        optionsEn: ["(A) RSS feeds about updates and blog posts from Microsoft", "(B) Stock market news", "(C) Personal emails", "(D) Local weather"],
+        optionsGuj: ["(A) Microsoft તરફથી અપડેટ અને બ્લોગ પોસ્ટ વિશે RSS feeds", "(B) સ્ટોક માર્કેટ ન્યૂઝ", "(C) વ્યક્તિગત ઈમેઈલ", "(D) સ્થાનિક હવામાન"], answer: 0
+      },
+
+      {
+        q: "Which menu is used to save all files in a solution at once?", guj: "સોલ્યુશનમાં બધી ફાઈલ્સ એકસાથે સેવ કરવા માટે કયો મેનુ વપરાય છે?",
+        optionsEn: ["(A) Build", "(B) File (File > Save All)", "(C) Edit", "(D) Tools"],
+        optionsGuj: ["(A) Build", "(B) File (File > Save All)", "(C) Edit", "(D) Tools"], answer: 1
+      },
+
+      {
+        q: "The \"View\" menu is primarily used for:", guj: "\"View\" મેનુ મુખ્યત્વે કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Compiling the code", "(B) Creating new projects", "(C) Opening hidden or closed windows like the Toolbox or Solution Explorer", "(D) Formatting the text"],
+        optionsGuj: ["(A) કોડ કમ્પાઈલ કરવા", "(B) નવા પ્રોજેક્ટ બનાવવા", "(C) છુપાયેલી અથવા બંધ વિન્ડો ખોલવા જેમ કે Toolbox અથવા Solution Explorer", "(D) ટેક્સ્ટ ફોર્મેટ કરવા"], answer: 2
+      },
+
+      {
+        q: "Which menu contains the \"Build Solution\" and \"Rebuild Solution\" commands?", guj: "કયા મેનુમાં \"Build Solution\" અને \"Rebuild Solution\" કમાન્ડ હોય છે?",
+        optionsEn: ["(A) Debug", "(B) Tools", "(C) Build", "(D) Project"],
+        optionsGuj: ["(A) Debug", "(B) Tools", "(C) Build", "(D) Project"], answer: 2
+      },
+
+      {
+        q: "To start the application without debugging (faster launch), which menu path is used?", guj: "ડીબગિંગ વગર એપ્લિકેશન શરૂ કરવા (ઝડપી લોન્ચ) માટે કયો મેનુ પાથ વપરાય છે?",
+        optionsEn: ["(A) Debug > Start Without Debugging (Ctrl + F5)", "(B) File > Exit", "(C) Build > Clean", "(D) Debug > Start Debugging"],
+        optionsGuj: ["(A) Debug > Start Without Debugging (Ctrl + F5)", "(B) File > Exit", "(C) Build > Clean", "(D) Debug > Start Debugging"], answer: 0
+      },
+
+      {
+        q: "Which menu contains the \"Options\" command to change the IDE settings?", guj: "IDE સેટિંગ્સ બદલવા માટે \"Options\" કમાન્ડ કયા મેનુમાં છે?",
+        optionsEn: ["(A) Help", "(B) Window", "(C) Extensions", "(D) Tools"],
+        optionsGuj: ["(A) Help", "(B) Window", "(C) Extensions", "(D) Tools"], answer: 3
+      },
+
+      {
+        q: "The \"Project\" menu is used to:", guj: "\"Project\" મેનુ કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Add new items (like Web Forms or Classes) to the current project", "(B) Print the code", "(C) Search the web", "(D) Exit Visual Studio"],
+        optionsGuj: ["(A) વર્તમાન પ્રોજેક્ટમાં નવી આઈટમ્સ (Web Forms અથવા Classes) ઉમેરવા", "(B) કોડ પ્રિન્ટ કરવા", "(C) વેબ સર્ચ કરવા", "(D) Visual Studio બંધ કરવા"], answer: 0
+      },
+
+      {
+        q: "Which menu allows you to manage different windows (like Split, Cascade, or Close All Tabs)?", guj: "અલગ અલગ વિન્ડો મેનેજ કરવા માટે (Split, Cascade, અથવા Close All Tabs) કયો મેનુ વપરાય છે?",
+        optionsEn: ["(A) Edit", "(B) Tools", "(C) Window", "(D) View"],
+        optionsGuj: ["(A) Edit", "(B) Tools", "(C) Window", "(D) View"], answer: 2
+      },
+
+      {
+        q: "The \"Edit\" menu includes standard commands like:", guj: "\"Edit\" મેનુમાં સ્ટાન્ડર્ડ કમાન્ડ્સ જેમ કે:",
+        optionsEn: ["(A) Cut, Copy, Paste, Find, and Replace", "(B) Start, Stop, Pause", "(C) Build, Rebuild, Clean", "(D) New, Open, Save"],
+        optionsGuj: ["(A) Cut, Copy, Paste, Find, and Replace", "(B) Start, Stop, Pause", "(C) Build, Rebuild, Clean", "(D) New, Open, Save"], answer: 0
+      },
+
+      {
+        q: "\"IntelliSense\" settings can be found under which menu?", guj: "\"IntelliSense\" સેટિંગ્સ કયા મેનુ હેઠળ મળે છે?",
+        optionsEn: ["(A) Debug", "(B) Edit (Edit > IntelliSense)", "(C) File", "(D) Build"],
+        optionsGuj: ["(A) Debug", "(B) Edit (Edit > IntelliSense)", "(C) File", "(D) Build"], answer: 1
+      },
+
+      {
+        q: "What is a \"Toolbar\" in Visual Studio?", guj: "Visual Studioમાં \"Toolbar\" શું છે?",
+        optionsEn: ["(A) The vertical scroll bar", "(B) The status bar at the bottom", "(C) A place to store tools like hammers", "(D) A row of clickable icons that provide quick access to frequently used menu commands"],
+        optionsGuj: ["(A) વર્ટિકલ સ્ક્રોલ બાર", "(B) તળિયે સ્ટેટસ બાર", "(C) હેમર જેવા ટૂલ્સ સ્ટોર કરવાની જગ્યા", "(D) ક્લિક કરી શકાય તેવા આઈકોન્સની રો જે વારંવાર વપરાતા મેનુ કમાન્ડ્સની ઝડપી ઍક્સેસ આપે છે"], answer: 3
+      },
+
+      {
+        q: "The \"Standard Toolbar\" usually contains which icon?", guj: "\"Standard Toolbar\"માં સામાન્ય રીતે કયો આઈકોન હોય છે?",
+        optionsEn: ["(A) Cut, Copy, and Paste icons", "(B) The Save icon (Floppy disk)", "(C) All of the above", "(D) The Start button (Green arrow)"],
+        optionsGuj: ["(A) Cut, Copy, and Paste આઈકોન", "(B) Save આઈકોન (Floppy disk)", "(C) ઉપરના બધા", "(D) Start બટન (લીલો તીર)"], answer: 2
+      },
+
+      {
+        q: "Which toolbar is specifically used to control the execution of the program during debugging?", guj: "ડીબગિંગ દરમિયાન પ્રોગ્રામના એક્ઝિક્યુશનને કંટ્રોલ કરવા માટે કયો ટૂલબાર વપરાય છે?",
+        optionsEn: ["(A) Formatting Toolbar", "(B) Browser Toolbar", "(C) Debug Toolbar", "(D) Solution Explorer Toolbar"],
+        optionsGuj: ["(A) Formatting Toolbar", "(B) Browser Toolbar", "(C) Debug Toolbar", "(D) Solution Explorer Toolbar"], answer: 2
+      },
+
+      {
+        q: "To show or hide a specific toolbar, you should:", guj: "ચોક્કસ ટૂલબાર બતાવવા અથવા છુપાવવા માટે તમારે શું કરવું જોઈએ?",
+        optionsEn: ["(A) Restart the PC", "(B) Go to the \"Build\" menu", "(C) Press Alt + F4", "(D) Right-click on the empty space in the toolbar area and select the toolbar name"],
+        optionsGuj: ["(A) PC રીસ્ટાર્ટ કરવું", "(B) \"Build\" મેનુમાં જવું", "(C) Alt + F4 દબાવવું", "(D) ટૂલબાર વિસ્તારમાં ખાલી જગ્યા પર રાઈટ-ક્લિક કરીને ટૂલબારનું નામ પસંદ કરવું"], answer: 3
+      },
+
+      {
+        q: "How can you add or remove buttons from a toolbar?", guj: "ટૂલબારમાંથી બટન ઉમેરવા અથવા દૂર કરવા માટે તમે કેવી રીતે કરી શકો છો?",
+        optionsEn: ["(A) You cannot change them", "(B) By deleting the IDE", "(C) Using the small dropdown arrow at the end of the toolbar", "(D) By typing a command in the code"],
+        optionsGuj: ["(A) તમે તેને બદલી શકતા નથી", "(B) IDE ડિલીટ કરીને", "(C) ટૂલબારના અંતે નાના ડ્રોપડાઉન તીર વાપરીને", "(D) કોડમાં કમાન્ડ ટાઈપ કરીને"], answer: 2
+      },
+
+      {
+        q: "What does the \"Comment Out\" button on the toolbar look like?", guj: "ટૂલબાર પર \"Comment Out\" બટન કેવું દેખાય છે?",
+        optionsEn: ["(A) A green arrow", "(B) A red X", "(C) A magnifying glass", "(D) A piece of paper with lines and a small blue arrow or a green box"],
+        optionsGuj: ["(A) લીલો તીર", "(B) લાલ X", "(C) મેગ્નિફાઈંગ ગ્લાસ", "(D) કાગળનો ટુકડો જેના પર લાઈન્સ અને નાનો વાદળી તીર અથવા લીલો બોક્સ"], answer: 3
+      },
+
+      {
+        q: "The \"Debug Target\" dropdown on the toolbar allows you to:", guj: "ટૂલબાર પર \"Debug Target\" ડ્રોપડાઉન તમને કયા માટે પરવાનગી આપે છે?",
+        optionsEn: ["(A) Delete the project", "(B) Choose the language of the code", "(C) Select which browser (Chrome, Edge, etc.) will launch the app", "(D) Choose the color of the text"],
+        optionsGuj: ["(A) પ્રોજેક્ટ ડિલીટ કરવા", "(B) કોડની ભાષા પસંદ કરવા", "(C) કયો બ્રાઉઝર (Chrome, Edge વગેરે) એપ્લિકેશન લોન્ચ કરશે તે પસંદ કરવા", "(D) ટેક્સ્ટનો રંગ પસંદ કરવા"], answer: 2
+      },
+
+      {
+        q: "Which menu provides access to \"NuGet Package Manager\"?", guj: "કયા મેનુ \"NuGet Package Manager\"ની ઍક્સેસ આપે છે?",
+        optionsEn: ["(A) Debug", "(B) Help", "(C) File", "(D) Tools (Tools > NuGet Package Manager)"],
+        optionsGuj: ["(A) Debug", "(B) Help", "(C) File", "(D) Tools (Tools > NuGet Package Manager)"], answer: 3
+      },
+
+      {
+        q: "The \"Git\" menu (in newer versions) is used for:", guj: "\"Git\" મેનુ (નવા વર્ઝનમાં) કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Managing source control and repositories", "(B) Designing graphics", "(C) Checking for updates", "(D) Compiling Java code"],
+        optionsGuj: ["(A) સોર્સ કંટ્રોલ અને રિપોઝિટરી મેનેજ કરવા", "(B) ગ્રાફિક્સ ડિઝાઈન કરવા", "(C) અપડેટ તપાસવા", "(D) Java કોડ કમ્પાઈલ કરવા"], answer: 0
+      },
+
+      {
+        q: "\"Check for Updates\" is found in which menu?", guj: "\"Check for Updates\" કયા મેનુમાં મળે છે?",
+        optionsEn: ["(A) File", "(B) View", "(C) Project", "(D) Help"],
+        optionsGuj: ["(A) File", "(B) View", "(C) Project", "(D) Help"], answer: 3
+      },
+
+      {
+        q: "The \"Solution Configurations\" dropdown on the toolbar typically shows:", guj: "ટૂલબાર પર \"Solution Configurations\" ડ્રોપડાઉન સામાન્ય રીતે શું બતાવે છે?",
+        optionsEn: ["(A) Only \"Debug\"", "(B) \"Start\" and \"Stop\"", "(C) \"Debug\" and \"Release\"", "(D) \"Save\" and \"Load\""],
+        optionsGuj: ["(A) માત્ર \"Debug\"", "(B) \"Start\" and \"Stop\"", "(C) \"Debug\" and \"Release\"", "(D) \"Save\" and \"Load\""], answer: 2
+      },
+
+      {
+        q: "Which toolbar button is used to \"Stop Debugging\"?", guj: "\"Stop Debugging\" માટે કયો ટૂલબાર બટન વપરાય છે?",
+        optionsEn: ["(A) Yellow Triangle", "(B) Green Arrow", "(C) Blue Circle", "(D) Red Square"],
+        optionsGuj: ["(A) Yellow Triangle", "(B) Green Arrow", "(C) Blue Circle", "(D) Red Square"], answer: 3
+      },
+
+      {
+        q: "The \"Formatting\" toolbar is most useful when working in:", guj: "\"Formatting\" ટૂલબાર સૌથી વધુ ઉપયોગી છે ક્યારે?",
+        optionsEn: ["(A) Design View (for styling text/controls)", "(B) Solution Explorer", "(C) Code View", "(D) Output Window"],
+        optionsGuj: ["(A) Design View (ટેક્સ્ટ/કંટ્રોલ્સ સ્ટાઈલ કરવા માટે)", "(B) Solution Explorer", "(C) Code View", "(D) Output Window"], answer: 0
+      },
+
+      {
+        q: "Which menu is used to open \"SQL Server Object Explorer\"?", guj: "\"SQL Server Object Explorer\" ખોલવા માટે કયો મેનુ વપરાય છે?",
+        optionsEn: ["(A) Build", "(B) File", "(C) Help", "(D) View"],
+        optionsGuj: ["(A) Build", "(B) File", "(C) Help", "(D) View"], answer: 3
+      },
+
+      {
+        q: "What is the \"Quick Launch\" search bar located at the top of the menu system used for?", guj: "મેનુ સિસ્ટમના ઉપરના \"Quick Launch\" સર્ચ બાર કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Ordering food", "(B) Browsing YouTube", "(C) Checking email", "(D) Quickly finding commands, settings, or windows within Visual Studio"],
+        optionsGuj: ["(A) ખોરાક ઓર્ડર કરવા", "(B) YouTube બ્રાઉઝ કરવા", "(C) ઈમેઈલ તપાસવા", "(D) Visual Studioમાં કમાન્ડ્સ, સેટિંગ્સ અથવા વિન્ડો ઝડપથી શોધવા"], answer: 3
+      },
+
+      {
+        q: "The \"Extensions\" menu is used to:", guj: "\"Extensions\" મેનુ કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Increase the font size", "(B) Connect to the database", "(C) Manage and install add-ons and plugins for the IDE", "(D) Make the window bigger"],
+        optionsGuj: ["(A) ફોન્ટ સાઈઝ વધારવા", "(B) ડેટાબેઝ સાથે કનેક્ટ કરવા", "(C) IDE માટે એડ-ઓન અને પ્લગઈન મેનેજ અને ઇન્સ્ટોલ કરવા", "(D) વિન્ડો મોટી કરવા"], answer: 2
+      },
+
+      {
+        q: "Which menu option allows you to \"Close Solution\"?", guj: "\"Close Solution\" કરવા માટે કયો મેનુ વિકલ્પ વપરાય છે?",
+        optionsEn: ["(A) Window", "(B) File", "(C) Tools", "(D) Project"],
+        optionsGuj: ["(A) Window", "(B) File", "(C) Tools", "(D) Project"], answer: 1
+      },
+
+      {
+        q: "\"Step Into\" (F11) and \"Step Over\" (F10) are commands found in which menu?", guj: "\"Step Into\" (F11) અને \"Step Over\" (F10) કમાન્ડ કયા મેનુમાં છે?",
+        optionsEn: ["(A) View", "(B) Debug", "(C) Edit", "(D) Build"],
+        optionsGuj: ["(A) View", "(B) Debug", "(C) Edit", "(D) Build"], answer: 1
+      },
+
+      {
+        q: "Which toolbar helps in navigating through the code (Backward/Forward)?", guj: "કોડમાં નેવિગેટ કરવા માટે (Backward/Forward) કયો ટૂલબાર મદદ કરે છે?",
+        optionsEn: ["(A) Debug Toolbar", "(B) Data Toolbar", "(C) Standard Toolbar (Navigation buttons)", "(D) Build Toolbar"],
+        optionsGuj: ["(A) Debug Toolbar", "(B) Data Toolbar", "(C) Standard Toolbar (Navigation buttons)", "(D) Build Toolbar"], answer: 2
+      },
+
+      {
+        q: "The \"Test\" menu is used for:", guj: "\"Test\" મેનુ કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Testing the monitor color", "(B) Testing the internet speed", "(C) Testing the keyboard", "(D) Running Unit Tests to check code logic"],
+        optionsGuj: ["(A) મોનિટરનો રંગ તપાસવા", "(B) ઇન્ટરનેટ સ્પીડ તપાસવા", "(C) કીબોર્ડ તપાસવા", "(D) કોડ લોજિક તપાસવા માટે Unit Tests ચલાવવા"], answer: 3
+      },
+
+      {
+        q: "Which menu contains the command \"Find in Files\"?", guj: "\"Find in Files\" કમાન્ડ કયા મેનુમાં છે?",
+        optionsEn: ["(A) Project", "(B) File", "(C) Edit (Edit > Find and Replace > Find in Files)", "(D) View"],
+        optionsGuj: ["(A) Project", "(B) File", "(C) Edit (Edit > Find and Replace > Find in Files)", "(D) View"], answer: 2
+      },
+
+      {
+        q: "What is \"Split View\" in the Designer?", guj: "Designerમાં \"Split View\" શું છે?",
+        optionsEn: ["(A) It shows the Design View and Source View (HTML) simultaneously.", "(B) It deletes half of the code.", "(C) It divides the screen between two developers.", "(D) It splits the project into two solutions."],
+        optionsGuj: ["(A) Design View અને Source View (HTML) એકસાથે બતાવે છે.", "(B) કોડનો અડધો ભાગ ડિલીટ કરે છે.", "(C) સ્ક્રીનને બે ડેવલપર વચ્ચે વહેંચે છે.", "(D) પ્રોજેક્ટને બે સોલ્યુશનમાં વહેંચે છે."], answer: 0
+      }
+      ,
+      {
+        q: "The \"Code Designer\" (or Code Editor) is used to write:", guj: "\"Code Designer\" (Code Editor) કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Binary code", "(B) HTML only", "(C) C# or VB.NET logic (Code-behind)", "(D) CSS styles only"],
+        optionsGuj: ["(A) Binary code", "(B) HTML only", "(C) C# અથવા VB.NET લોજિક (Code-behind)", "(D) CSS styles only"], answer: 2
+      },
+
+      {
+        q: "In ASP.NET Web Forms, the \"Graphical Designer\" is also known as:", guj: "ASP.NET Web Formsમાં \"Graphical Designer\"ને બીજું નામ શું છે?",
+        optionsEn: ["(A) Design View", "(B) Project View", "(C) Logic View", "(D) Source View"],
+        optionsGuj: ["(A) Design View", "(B) Project View", "(C) Logic View", "(D) Source View"], answer: 0
+      },
+
+      {
+        q: "Which view allows you to drag a \"Button\" from the Toolbox and place it visually on a page?", guj: "કયા વ્યૂમાં તમે Toolboxમાંથી \"Button\" ડ્રેગ કરીને પેજ પર વિઝ્યુઅલી મૂકી શકો છો?",
+        optionsEn: ["(A) Code View", "(B) Split View", "(C) Source View", "(D) Design View"],
+        optionsGuj: ["(A) Code View", "(B) Split View", "(C) Source View", "(D) Design View"], answer: 3
+      },
+
+      {
+        q: "In \"Design View,\" how do you modify the text written on a Label control?", guj: "\"Design View\"માં Label કંટ્રોલ પર લખેલ ટેક્સ્ટ કેવી રીતે બદલવો?",
+        optionsEn: ["(A) Use the Output Window", "(B) Use the Toolbox", "(C) Use the Error List", "(D) Use the Properties Window"],
+        optionsGuj: ["(A) Output Window વાપરીને", "(B) Toolbox વાપરીને", "(C) Error List વાપરીને", "(D) Properties Window વાપરીને"], answer: 3
+      },
+
+      {
+        q: "What is the primary advantage of the \"Code Designer\"?", guj: "\"Code Designer\"નો મુખ્ય ફાયદો શું છે?",
+        optionsEn: ["(A) It allows for precise control over the application's logic and behavior.", "(B) It does not require a keyboard.", "(C) It only works in English.", "(D) It is easier to draw pictures."],
+        optionsGuj: ["(A) એપ્લિકેશનના લોજિક અને વર્તન પર ચોક્કસ કંટ્રોલ આપે છે.", "(B) તેને કીબોર્ડની જરૂર નથી.", "(C) તે માત્ર અંગ્રેજીમાં કામ કરે છે.", "(D) તેમાં ચિત્રો દોરવા સરળ છે."], answer: 0
+      },
+
+      {
+        q: "In the Graphical Designer, what do the \"sizing handles\" around a control allow you to do?", guj: "Graphical Designerમાં કંટ્રોલની આસપાસના \"sizing handles\" તમને શું કરવા દે છે?",
+        optionsEn: ["(A) Change the control's color", "(B) Rename the control", "(C) Resize the control (width/height)", "(D) Delete the control"],
+        optionsGuj: ["(A) કંટ્રોલનો રંગ બદલવો", "(B) કંટ્રોલનું નામ બદલવું", "(C) કંટ્રોલનું કદ બદલવું (પહોળાઈ/ઊંચાઈ)", "(D) કંટ્રોલ ડિલીટ કરવું"], answer: 2
+      },
+
+      {
+        q: "Which view is preferred for editing the raw HTML/ASPX tags of a page?", guj: "પેજના raw HTML/ASPX ટેગ્સ એડિટ કરવા માટે કયું વ્યૂ વધુ પસંદ કરવામાં આવે છે?",
+        optionsEn: ["(A) Preview View", "(B) Solution View", "(C) Source View", "(D) Design View"],
+        optionsGuj: ["(A) Preview View", "(B) Solution View", "(C) Source View", "(D) Design View"], answer: 2
+      },
+
+      {
+        q: "What happens when you double-click a \"Button\" in Design View?", guj: "Design Viewમાં \"Button\" પર ડબલ-ક્લિક કરતાં શું થાય છે?",
+        optionsEn: ["(A) The IDE switches to Code View and creates a Click event handler.", "(B) The browser opens the website.", "(C) The computer reboots.", "(D) The button is deleted."],
+        optionsGuj: ["(A) IDE Code Viewમાં જાય છે અને Click event handler બનાવે છે.", "(B) બ્રાઉઝર વેબસાઈટ ખોલે છે.", "(C) કોમ્પ્યુટર રીબૂટ થાય છે.", "(D) બટન ડિલીટ થાય છે."], answer: 0
+      },
+
+      {
+        q: "Which of the following is NOT a feature of the Code Designer?", guj: "નીચેનામાંથી કઈ Code Designerની વિશેષતા નથી?",
+        optionsEn: ["(A) Line numbering", "(B) Syntax highlighting (colored text)", "(C) IntelliSense (code completion)", "(D) Drag-and-drop image editing"],
+        optionsGuj: ["(A) લાઈન નંબરિંગ", "(B) Syntax highlighting (રંગીન ટેક્સ્ટ)", "(C) IntelliSense (કોડ કમ્પ્લીશન)", "(D) Drag-and-drop image editing"], answer: 3
+      },
+
+      {
+        q: "\"WYSIWYG\" stands for:", guj: "\"WYSIWYG\"નો અર્થ શું છે?",
+        optionsEn: ["(A) Web Yields System Internal Web Graphics", "(B) What You See Is What You Get", "(C) Windows Yield System Interaction Web Guide", "(D) Why Your System Is Working Great"],
+        optionsGuj: ["(A) Web Yields System Internal Web Graphics", "(B) What You See Is What You Get", "(C) Windows Yield System Interaction Web Guide", "(D) Why Your System Is Working Great"], answer: 1
+      },
+
+      {
+        q: "The \"Source View\" displays code using which delimiters for server-side tags?", guj: "\"Source View\"માં સર્વર-સાઈડ ટેગ્સ માટે કયા delimiters વપરાય છે?",
+        optionsEn: ["(A) { ... }", "(B) ( ... )", "(C) <% ... %>", "(D) [[ ... ]]"],
+        optionsGuj: ["(A) { ... }", "(B) ( ... )", "(C) <% ... %>", "(D) [[ ... ]]"], answer: 2
+      },
+
+      {
+        q: "In Design View, \"Smart Tags\" (the small black arrow on a control) are used to:", guj: "Design Viewમાં \"Smart Tags\" (કંટ્રોલ પરનો નાનો કાળો તીર) કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Change the IDE theme", "(B) Access common tasks and configurations for that specific control", "(C) Delete the control", "(D) Search the internet"],
+        optionsGuj: ["(A) IDE થીમ બદલવા", "(B) તે ચોક્કસ કંટ્રોલ માટે સામાન્ય કાર્યો અને કોન્ફિગ્યુરેશન એક્સેસ કરવા", "(C) કંટ્રોલ ડિલીટ કરવા", "(D) ઇન્ટરનેટ સર્ચ કરવા"], answer: 1
+      },
+
+      {
+        q: "Which view is generally faster for experienced developers to build complex layouts?", guj: "અનુભવી ડેવલપર્સ માટે જટિલ લેઆઉટ બનાવવા માટે કયું વ્યૂ વધુ ઝડપી છે?",
+        optionsEn: ["(A) Source View", "(B) Preview View", "(C) Split View", "(D) Design View"],
+        optionsGuj: ["(A) Source View", "(B) Preview View", "(C) Split View", "(D) Design View"], answer: 0
+      },
+
+      {
+        q: "Can you use CSS in the Graphical Designer?", guj: "Graphical Designerમાં CSS વાપરી શકાય છે?",
+        optionsEn: ["(A) Only in the Code Designer", "(B) Only for images", "(C) Yes, changes in CSS are often reflected in the Design View visually", "(D) No"],
+        optionsGuj: ["(A) માત્ર Code Designerમાં", "(B) માત્ર ઈમેજીસ માટે", "(C) હા, CSSમાં ફેરફાર Design Viewમાં વિઝ્યુઅલી દેખાય છે", "(D) ના"], answer: 2
+      },
+
+      {
+        q: "What is the shortcut key to switch between Code View and Design View?", guj: "Code View અને Design View વચ્ચે સ્વિચ કરવા માટે શોર્ટકટ કી કઈ છે?",
+        optionsEn: ["(A) Ctrl + C", "(B) F7 (to Code) / Shift + F7 (to Designer)", "(C) Ctrl + S", "(D) Alt + F4"],
+        optionsGuj: ["(A) Ctrl + C", "(B) F7 (Code માટે) / Shift + F7 (Designer માટે)", "(C) Ctrl + S", "(D) Alt + F4"], answer: 1
+      },
+
+      {
+        q: "The \"Code Designer\" underlines errors in which color by default?", guj: "\"Code Designer\" એરરને ડિફોલ્ટ રીતે કયા રંગમાં અન્ડરલાઈન કરે છે?",
+        optionsEn: ["(A) Blue (for information)", "(B) Green (for warnings)", "(C) All of the above", "(D) Red (for errors)"],
+        optionsGuj: ["(A) Blue (માહિતી માટે)", "(B) Green (વોર્નિંગ માટે)", "(C) ઉપરના બધા", "(D) Red (એરર માટે)"], answer: 3
+      },
+
+      {
+        q: "In Design View, how do you move a control to a different position?", guj: "Design Viewમાં કંટ્રોલને અલગ જગ્યાએ કેવી રીતે ખસેડવો?",
+        optionsEn: ["(A) By typing coordinates in the code", "(B) By clicking and dragging the control to the new location", "(C) By using the arrow keys only", "(D) It cannot be moved"],
+        optionsGuj: ["(A) કોડમાં કોર્ડિનેટ્સ ટાઈપ કરીને", "(B) કંટ્રોલને ક્લિક કરીને નવી જગ્યાએ ડ્રેગ કરીને", "(C) માત્ર એરો કી વાપરીને", "(D) તેને ખસેડી શકાતું નથી"], answer: 1
+      },
+
+      {
+        q: "The \"Document Outline\" window is helpful when using the Designer because:", guj: "\"Document Outline\" વિન્ડો Designer વાપરતી વખતે કેમ મદદરૂપ છે?",
+        optionsEn: ["(A) It checks for spelling mistakes", "(B) It shows the nested hierarchy of all controls on the page", "(C) It prints the code", "(D) It saves the file"],
+        optionsGuj: ["(A) સ્પેલિંગ ભૂલો તપાસે છે", "(B) પેજ પરના તમામ કંટ્રોલ્સની nested hierarchy બતાવે છે", "(C) કોડ પ્રિન્ટ કરે છે", "(D) ફાઈલ સેવ કરે છે"], answer: 1
+      },
+
+      {
+        q: "What is \"Absolute Positioning\" in the Graphical Designer?", guj: "Graphical Designerમાં \"Absolute Positioning\" શું છે?",
+        optionsEn: ["(A) The control stays in one place regardless of screen size (using X and Y coordinates)", "(B) The control moves automatically", "(C) The control is deleted", "(D) The control is only visible on mobile"],
+        optionsGuj: ["(A) કંટ્રોલ એક જ જગ્યાએ રહે છે (X અને Y કોર્ડિનેટ વાપરીને)", "(B) કંટ્રોલ આપોઆપ ખસે છે", "(C) કંટ્રોલ ડિલીટ થાય છે", "(D) કંટ્રોલ માત્ર મોબાઈલ પર દેખાય છે"], answer: 0
+      },
+
+      {
+        q: "Which part of the IDE shows the list of available properties for a control selected in the Designer?", guj: "IDEનો કયો ભાગ Designerમાં સિલેક્ટ કરેલ કંટ્રોલની ઉપલબ્ધ પ્રોપર્ટીઝની યાદી બતાવે છે?",
+        optionsEn: ["(A) Toolbox", "(B) Output Window", "(C) Properties Window", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Toolbox", "(B) Output Window", "(C) Properties Window", "(D) Solution Explorer"], answer: 2
+      },
+
+      {
+        q: "In the Code Designer, \"Outlining\" (the minus/plus signs next to code blocks) allows you to:", guj: "Code Designerમાં \"Outlining\" (કોડ બ્લોક પાસે માઈનસ/પ્લસ સાઈન) તમને શું કરવા દે છે?",
+        optionsEn: ["(A) Collapse or expand code blocks for better readability", "(B) Delete code", "(C) Send code via email", "(D) Encrypt code"],
+        optionsGuj: ["(A) કોડ બ્લોકને કોલેપ્સ અથવા એક્સપેન્ડ કરવા વધુ સારી વાંચનીયતા માટે", "(B) કોડ ડિલીટ કરવા", "(C) કોડ ઈમેઈલ દ્વારા મોકલવા", "(D) કોડ એન્ક્રિપ્ટ કરવા"], answer: 0
+      },
+
+      {
+        q: "Does the Graphical Designer work for \"Code-behind\" files (.cs or .vb)?", guj: "Graphical Designer \"Code-behind\" ફાઈલ્સ (.cs અથવા .vb) માટે કામ કરે છે?",
+        optionsEn: ["(A) Yes", "(B) Only in the Professional version", "(C) Only for HTML files", "(D) No, it only works for .aspx, .ascx, and .master files"],
+        optionsGuj: ["(A) હા", "(B) માત્ર Professional વર્ઝનમાં", "(C) માત્ર HTML ફાઈલ્સ માટે", "(D) ના, તે માત્ર .aspx, .ascx અને .master ફાઈલ્સ માટે કામ કરે છે"], answer: 3
+      },
+
+      {
+        q: "\"Find and Replace\" is a feature utilized in which designer?", guj: "\"Find and Replace\" કયા ડિઝાઈનરમાં વપરાય છે?",
+        optionsEn: ["(A) Graphical Designer", "(B) Both, but primarily Code Designer", "(C) Neither", "(D) Source preview only"],
+        optionsGuj: ["(A) Graphical Designer", "(B) બંને, પરંતુ મુખ્યત્વે Code Designer", "(C) કોઈ પણ નહીં", "(D) Source preview only"], answer: 1
+      },
+
+      {
+        q: "What is the \"Toolbox\" used for in conjunction with the Graphical Designer?", guj: "Graphical Designer સાથે \"Toolbox\" કયા માટે વપરાય છે?",
+        optionsEn: ["(A) To fix the computer", "(B) To manage database tables", "(C) To drag and drop server controls onto the Design surface", "(D) To view error messages"],
+        optionsGuj: ["(A) કોમ્પ્યુટર સુધારવા", "(B) ડેટાબેઝ ટેબલ મેનેજ કરવા", "(C) Design surface પર સર્વર કંટ્રોલ્સ ડ્રેગ અને ડ્રોપ કરવા", "(D) એરર મેસેજ જોવા"], answer: 2
+      },
+
+      {
+        q: "Which feature in the Code Designer allows you to see the definition of a function by hovering over it?", guj: "Code Designerમાં કઈ વિશેષતા તમને કોઈ ફંક્શન પર હોવર કરીને તેની વ્યાખ્યા જોવા દે છે?",
+        optionsEn: ["(A) Error List", "(B) Properties", "(C) Help Menu", "(D) Quick Info"],
+        optionsGuj: ["(A) Error List", "(B) Properties", "(C) Help Menu", "(D) Quick Info"], answer: 3
+      },
+
+      {
+        q: "In Design View, a \"Non-visual component\" (like a SQL Data Source) appears as:", guj: "Design Viewમાં \"Non-visual component\" (જેમ કે SQL Data Source) કેવી રીતે દેખાય છે?",
+        optionsEn: ["(A) It does not appear at all", "(B) A blinking light", "(C) A small gray box that is not visible to the end-user in the browser", "(D) A large image"],
+        optionsGuj: ["(A) તે બિલકુલ દેખાતું નથી", "(B) ઝબકતો લાઈટ", "(C) નાનો ગ્રે બોક્સ જે બ્રાઉઝરમાં યુઝરને દેખાતો નથી", "(D) મોટી ઈમેજ"], answer: 2
+      },
+
+      {
+        q: "\"Go To Definition\" (F12) is a feature of the:", guj: "\"Go To Definition\" (F12) કયાની વિશેષતા છે?",
+        optionsEn: ["(A) Menu System", "(B) Code Designer", "(C) Start Page", "(D) Graphical Designer"],
+        optionsGuj: ["(A) Menu System", "(B) Code Designer", "(C) Start Page", "(D) Graphical Designer"], answer: 1
+      },
+
+      {
+        q: "To see a preview of how the page looks in a specific browser without running the full app, you use:", guj: "પૂર્ણ એપ્લિકેશન ચલાવ્યા વગર કોઈ ચોક્કસ બ્રાઉઝરમાં પેજ કેવું દેખાશે તેનું પ્રિવ્યુ જોવા માટે તમે શું વાપરો છો?",
+        optionsEn: ["(A) Toolbox", "(B) Design View", "(C) View in Browser (from the context menu)", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Toolbox", "(B) Design View", "(C) View in Browser (context menuમાંથી)", "(D) Solution Explorer"], answer: 2
+      },
+
+      {
+        q: "Which file extension represents a \"Web User Control\" that can be designed graphically?", guj: "કયું ફાઈલ extension \"Web User Control\"ને રજૂ કરે છે જે ગ્રાફિકલી ડિઝાઈન કરી શકાય?",
+        optionsEn: ["(A) .aspx", "(B) .config", "(C) .master", "(D) .ascx"],
+        optionsGuj: ["(A) .aspx", "(B) .config", "(C) .master", "(D) .ascx"], answer: 3
+      },
+
+      {
+        q: "The \"Visual Studio Text Editor\" (Code Designer) supports \"Zooming\" via:", guj: "\"Visual Studio Text Editor\" (Code Designer) \"Zooming\" કેવી રીતે સપોર્ટ કરે છે?",
+        optionsEn: ["(A) Ctrl + Mouse Wheel", "(B) Tools > Zoom", "(C) It does not support zooming", "(D) Deleting text"],
+        optionsGuj: ["(A) Ctrl + Mouse Wheel", "(B) Tools > Zoom", "(C) તે zooming સપોર્ટ કરતું નથી", "(D) ટેક્સ્ટ ડિલીટ કરીને"], answer: 0
+      },
+
+      {
+        q: "In Design View, if a control is \"Read-Only,\" it means:", guj: "Design Viewમાં જો કંટ્રોલ \"Read-Only\" હોય તો તેનો અર્થ શું છે?",
+        optionsEn: ["(A) It is a virus.", "(B) You can see it but cannot modify its properties or position graphically.", "(C) You cannot see it.", "(D) It is written in a foreign language."],
+        optionsGuj: ["(A) તે વાયરસ છે.", "(B) તમે તેને જોઈ શકો છો પરંતુ તેની પ્રોપર્ટી અથવા પોઝિશન ગ્રાફિકલી બદલી શકતા નથી.", "(C) તમે તેને જોઈ શકતા નથી.", "(D) તે વિદેશી ભાષામાં લખાયેલું છે."], answer: 1
+      },
+
+      {
+        q: "The \"Properties Window\" can sort properties by:", guj: "\"Properties Window\" પ્રોપર્ટીઝને કેવી રીતે સોર્ટ કરી શકે છે?",
+        optionsEn: ["(A) Price", "(B) Category", "(C) Both A and B", "(D) Alphabetical order"],
+        optionsGuj: ["(A) Price", "(B) Category", "(C) A અને B બંને", "(D) Alphabetical order"], answer: 1
+      },
+
+      {
+        q: "What is the \"Source\" tab used for at the bottom of the designer window?", guj: "ડિઝાઈનર વિન્ડોના તળિયે \"Source\" ટેબ કયા માટે વપરાય છે?",
+        optionsEn: ["(A) To open the database", "(B) To close the project", "(C) To switch to the HTML/Markup view of the page", "(D) To see the website’s source of funding"],
+        optionsGuj: ["(A) ડેટાબેઝ ખોલવા", "(B) પ્રોજેક્ટ બંધ કરવા", "(C) પેજના HTML/Markup વ્યૂમાં સ્વિચ કરવા", "(D) વેબસાઈટના ફંડિંગ સોર્સ જોવા"], answer: 2
+      },
+
+      {
+        q: "\"Refactoring\" (renaming a variable everywhere) is best done in the:", guj: "\"Refactoring\" (વેરિયેબલને બધે રીનેમ કરવું) કયામાં શ્રેષ્ઠ રીતે કરવામાં આવે છે?",
+        optionsEn: ["(A) Code Designer", "(B) Properties Window", "(C) Graphical Designer", "(D) Start Page"],
+        optionsGuj: ["(A) Code Designer", "(B) Properties Window", "(C) Graphical Designer", "(D) Start Page"], answer: 0
+      },
+
+      {
+        q: "In the Code Designer, a \"Breakpoint\" is represented by:", guj: "Code Designerમાં \"Breakpoint\" કેવી રીતે દર્શાવવામાં આવે છે?",
+        optionsEn: ["(A) A green arrow", "(B) A yellow square", "(C) A red circle in the left margin", "(D) A blue star"],
+        optionsGuj: ["(A) લીલો તીર", "(B) પીળો ચોરસ", "(C) ડાબી બાજુના માર્જિનમાં લાલ વર્તુળ", "(D) વાદળી તારો"], answer: 2
+      },
+
+      {
+        q: "Which designer view is most likely to \"lag\" or be slow on a low-end PC?", guj: "કયું ડિઝાઈનર વ્યૂ લો-એન્ડ PC પર \"lag\" અથવા ધીમું થવાની સંભાવના વધુ છે?",
+        optionsEn: ["(A) Start Page", "(B) Code Designer", "(C) Source View", "(D) Graphical Designer (Design View)"],
+        optionsGuj: ["(A) Start Page", "(B) Code Designer", "(C) Source View", "(D) Graphical Designer (Design View)"], answer: 3
+      },
+
+      {
+        q: "The \"Inherits\" attribute in the Page directive connects the .aspx file to:", guj: "Page directiveમાં \"Inherits\" એટ્રિબ્યુટ .aspx ફાઈલને કયા સાથે જોડે છે?",
+        optionsEn: ["(A) The Database", "(B) The JavaScript file", "(C) The Code-behind class in the Code Designer", "(D) The CSS file"],
+        optionsGuj: ["(A) ડેટાબેઝ", "(B) JavaScript ફાઈલ", "(C) Code Designerમાં Code-behind ક્લાસ", "(D) CSS ફાઈલ"], answer: 2
+      },
+
+      {
+        q: "If you change a control's ID in the Code Designer (Source View), what happens in the Graphical Designer?", guj: "જો તમે Code Designer (Source View)માં કંટ્રોલનું ID બદલો તો Graphical Designerમાં શું થાય છે?",
+        optionsEn: ["(A) The control is deleted.", "(B) The control is updated with the new ID.", "(C) The ID remains the old one.", "(D) Nothing happens until the PC is restarted."],
+        optionsGuj: ["(A) કંટ્રોલ ડિલીટ થાય છે.", "(B) કંટ્રોલ નવા ID સાથે અપડેટ થાય છે.", "(C) ID જૂનું જ રહે છે.", "(D) PC રીસ્ટાર્ટ ન થાય ત્યાં સુધી કંઈ થતું નથી."], answer: 1
+      },
+
+      {
+        q: "The ultimate goal of using both Designers together is to:", guj: "બંને ડિઝાઈનરને સાથે વાપરવાનો અંતિમ હેતુ શું છે?",
+        optionsEn: ["(A) Rapidly develop a user interface while maintaining robust server-side logic.", "(B) Avoid using the internet.", "(C) Learn how to type faster.", "(D) Make the project more expensive."],
+        optionsGuj: ["(A) યુઝર ઈન્ટરફેસ ઝડપથી વિકસાવવા સાથે મજબૂત સર્વર-સાઈડ લોજિક જાળવવું.", "(B) ઇન્ટરનેટ વાપરવાનું ટાળવું.", "(C) ટાઈપિંગ વધુ ઝડપી શીખવું.", "(D) પ્રોજેક્ટને વધુ મોંઘું બનાવવું."], answer: 0
+      },
+
+      {
+        q: "Which of the following is the correct order of the ASP.NET Page Life Cycle?", guj: "ASP.NET Page Life Cycleનો સાચો ક્રમ કયો છે?",
+        optionsEn: ["(A) Load, Init, PreRender, Unload", "(B) Init, Load, PreRender, Unload", "(C) Load, PreRender, Init, Unload", "(D) Init, PreRender, Load, Unload"],
+        optionsGuj: ["(A) Load, Init, PreRender, Unload", "(B) Init, Load, PreRender, Unload", "(C) Load, PreRender, Init, Unload", "(D) Init, PreRender, Load, Unload"], answer: 1
+      },
+
+      {
+        q: "Which of the following is a \"postback\" event?", guj: "નીચેનામાંથી કયું \"postback\" ઈવેન્ટ છે?",
+        optionsEn: ["(A) Page_Unload", "(B) Button Click", "(C) Page_Load", "(D) Page_Init"],
+        optionsGuj: ["(A) Page_Unload", "(B) Button Click", "(C) Page_Load", "(D) Page_Init"], answer: 1
+      },
+
+      {
+        q: "Which property of the @ Page directive is used to link a Web Form to its C# class file?", guj: "@ Page directiveની કઈ પ્રોપર્ટી Web Formને તેના C# ક્લાસ ફાઈલ સાથે જોડે છે?",
+        optionsEn: ["(A) Language", "(B) CodeFile (or CodeBehind)", "(C) Inherits", "(D) ClassName"],
+        optionsGuj: ["(A) Language", "(B) CodeFile (or CodeBehind)", "(C) Inherits", "(D) ClassName"], answer: 2
+      },
+
+      {
+        q: "In a 3-tier architecture, which layer is responsible for handling database transactions?", guj: "3-ટાયર આર્કિટેક્ચરમાં કયો લેયર ડેટાબેઝ ટ્રાન્ઝેક્શન હેન્ડલ કરે છે?",
+        optionsEn: ["(A) Client Layer", "(B) Business Logic Layer", "(C) Data Access Layer", "(D) Presentation Layer"],
+        optionsGuj: ["(A) Client Layer", "(B) Business Logic Layer", "(C) Data Access Layer", "(D) Presentation Layer"], answer: 2
+      },
+
+      {
+        q: "Which protocol is used by the browser to communicate with a web server over a secure connection?", guj: "બ્રાઉઝર સુરક્ષિત કનેક્શન દ્વારા વેબ સર્વર સાથે કોમ્યુનિકેટ કરવા માટે કયો પ્રોટોકોલ વપરે છે?",
+        optionsEn: ["(A) SNMP", "(B) SMTP", "(C) HTTPS", "(D) HTTP"],
+        optionsGuj: ["(A) SNMP", "(B) SMTP", "(C) HTTPS", "(D) HTTP"], answer: 2
+      },
+
+      {
+        q: "What is the maximum number of Web.config files an ASP.NET application can have?", guj: "ASP.NET એપ્લિકેશનમાં Web.config ફાઈલ્સની મહત્તમ સંખ્યા કેટલી હોઈ શકે?",
+        optionsEn: ["(A) One per folder", "(B) Unlimited", "(C) Only one", "(D) One per page"],
+        optionsGuj: ["(A) દરેક ફોલ્ડરમાં એક", "(B) અમર્યાદિત", "(C) માત્ર એક", "(D) દરેક પેજમાં એક"], answer: 0
+      },
+
+      {
+        q: "In Classic ASP, the default scripting language is VBScript. What is the default in ASP.NET?", guj: "Classic ASPમાં ડિફોલ્ટ સ્ક્રિપ્ટિંગ ભાષા VBScript છે. ASP.NETમાં ડિફોલ્ટ શું છે?",
+        optionsEn: ["(A) JavaScript", "(B) No default, but C# is most common", "(C) VBScript", "(D) JScript"],
+        optionsGuj: ["(A) JavaScript", "(B) કોઈ ડિફોલ્ટ નથી, પરંતુ C# સૌથી વધુ સામાન્ય છે", "(C) VBScript", "(D) JScript"], answer: 1
+      },
+
+      {
+        q: "Which Visual Studio window allows you to view the properties of a project, such as the assembly name and target framework?", guj: "Visual Studioની કઈ વિન્ડો પ્રોજેક્ટની પ્રોપર્ટીઝ (એસેમ્બલી નામ અને ટાર્ગેટ ફ્રેમવર્ક) જોવા દે છે?",
+        optionsEn: ["(A) Project Property Pages", "(B) Object Browser", "(C) Solution Explorer", "(D) Properties Window"],
+        optionsGuj: ["(A) Project Property Pages", "(B) Object Browser", "(C) Solution Explorer", "(D) Properties Window"], answer: 0
+      },
+
+      {
+        q: "Which component of the .NET Framework is responsible for \"Garbage Collection\"?", guj: ".NET Frameworkનો કયો ઘટક \"Garbage Collection\" માટે જવાબદાર છે?",
+        optionsEn: ["(A) CLR", "(B) CTS", "(C) MSIL", "(D) BCL"],
+        optionsGuj: ["(A) CLR", "(B) CTS", "(C) MSIL", "(D) BCL"], answer: 0
+      },
+
+      {
+        q: "What is the role of IIS Express in the development phase?", guj: "વિકાસ તબક્કામાં IIS Expressની ભૂમિકા શું છે?",
+        optionsEn: ["(A) It compiles C# code into DLLs", "(B) It manages the Windows Registry", "(C) It acts as a lightweight, local web server for testing", "(D) It acts as a database manager"],
+        optionsGuj: ["(A) તે C# કોડને DLLમાં કમ્પાઈલ કરે છે", "(B) તે Windows Registry મેનેજ કરે છે", "(C) તે ટેસ્ટિંગ માટે હલકા, લોકલ વેબ સર્વર તરીકે કામ કરે છે", "(D) તે ડેટાબેઝ મેનેજર તરીકે કામ કરે છે"], answer: 2
+      },
+
+      {
+        q: "Which validator is used to ensure that a user enters a value in a TextBox?", guj: "યુઝરે TextBoxમાં મૂલ્ય દાખલ કર્યું છે તેની ખાતરી કરવા માટે કયો વેલિડેટર વપરાય છે?",
+        optionsEn: ["(A) RequiredFieldValidator", "(B) CompareValidator", "(C) RangeValidator", "(D) RegularExpressionValidator"],
+        optionsGuj: ["(A) RequiredFieldValidator", "(B) CompareValidator", "(C) RangeValidator", "(D) RegularExpressionValidator"], answer: 0
+      },
+
+      {
+        q: "When a project is built, the code is first converted into which format?", guj: "પ્રોજેક્ટ બિલ્ડ થતાં કોડ પહેલા કયા ફોર્મેટમાં કન્વર્ટ થાય છે?",
+        optionsEn: ["(A) Machine Code", "(B) Assembly Code", "(C) Native Code", "(D) MSIL (Microsoft Intermediate Language)"],
+        optionsGuj: ["(A) Machine Code", "(B) Assembly Code", "(C) Native Code", "(D) MSIL (Microsoft Intermediate Language)"], answer: 3
+      },
+
+      {
+        q: "Which shortcut key is used to \"Step Over\" a line of code during debugging?", guj: "ડીબગિંગ દરમિયાન કોડની એક લાઈનને \"Step Over\" કરવા માટે કઈ શોર્ટકટ કી વપરાય છે?",
+        optionsEn: ["(A) F9", "(B) F11", "(C) F10", "(D) F5"],
+        optionsGuj: ["(A) F9", "(B) F11", "(C) F10", "(D) F5"], answer: 2
+      },
+
+      {
+        q: "The \"Global.asax\" file is used to handle:", guj: "\"Global.asax\" ફાઈલ કયા માટે વપરાય છે?",
+        optionsEn: ["(A) CSS styling", "(B) Application-level and Session-level events", "(C) Page-level events", "(D) Database connection strings"],
+        optionsGuj: ["(A) CSS સ્ટાઈલિંગ", "(B) એપ્લિકેશન-લેવલ અને સેશન-લેવલ ઈવેન્ટ્સ", "(C) પેજ-લેવલ ઈવેન્ટ્સ", "(D) ડેટાબેઝ કનેક્શન સ્ટ્રિંગ્સ"], answer: 1
+      },
+
+      {
+        q: "Which feature of ASP.NET allows you to store data for a specific user across multiple pages?", guj: "ASP.NETની કઈ વિશેષતા એક ચોક્કસ યુઝર માટે અનેક પેજ પર ડેટા સ્ટોર કરવા દે છે?",
+        optionsEn: ["(A) Session State", "(B) ViewState", "(C) Application State", "(D) QueryString"],
+        optionsGuj: ["(A) Session State", "(B) ViewState", "(C) Application State", "(D) QueryString"], answer: 0
+      },
+
+      {
+        q: "What does \"JIT\" stand for in the context of the .NET execution model?", guj: ".NET એક્ઝિક્યુશન મોડલમાં \"JIT\"નો અર્થ શું છે?",
+        optionsEn: ["(A) Joint Integration Tool", "(B) Junior Interface Task", "(C) Just In Time", "(D) Java Integrated Technology"],
+        optionsGuj: ["(A) Joint Integration Tool", "(B) Junior Interface Task", "(C) Just In Time", "(D) Java Integrated Technology"], answer: 2
+      },
+
+      {
+        q: "Which of the following is NOT a part of a standard URL?", guj: "સ્ટાન્ડર્ડ URLનો કયો ભાગ નથી?",
+        optionsEn: ["(A) Path", "(B) Domain Name", "(C) Protocol", "(D) MAC Address"],
+        optionsGuj: ["(A) Path", "(B) Domain Name", "(C) Protocol", "(D) MAC Address"], answer: 3
+      },
+
+      {
+        q: "In the Visual Studio Toolbox, \"Standard Controls\" refer to:", guj: "Visual Studio Toolboxમાં \"Standard Controls\" શું છે?",
+        optionsEn: ["(A) JavaScript libraries", "(B) ASP.NET Server Controls", "(C) HTML tags", "(D) Windows Registry keys"],
+        optionsGuj: ["(A) JavaScript libraries", "(B) ASP.NET Server Controls", "(C) HTML tags", "(D) Windows Registry keys"], answer: 1
+      },
+
+      {
+        q: "Which command is used to remove all compiled files from the bin folder before a fresh build?", guj: "નવા બિલ્ડ પહેલા bin ફોલ્ડરમાંથી તમામ કમ્પાઈલ્ડ ફાઈલ્સ દૂર કરવા માટે કયો કમાન્ડ વપરાય છે?",
+        optionsEn: ["(A) Rebuild", "(B) Publish", "(C) Clean", "(D) Build"],
+        optionsGuj: ["(A) Rebuild", "(B) Publish", "(C) Clean", "(D) Build"], answer: 2
+      },
+
+      {
+        q: "What is the purpose of the ViewState property?", guj: "ViewState પ્રોપર્ટીનો હેતુ શું છે?",
+        optionsEn: ["(A) To keep track of user logins", "(B) To style the page", "(C) To connect to the SQL server", "(D) To preserve the page’s values during a postback"],
+        optionsGuj: ["(A) યુઝર લોગિન ટ્રેક કરવા", "(B) પેજ સ્ટાઈલ કરવા", "(C) SQL સર્વર સાથે કનેક્ટ કરવા", "(D) postback દરમિયાન પેજના મૂલ્યો જાળવવા"], answer: 3
+      },
+
+      {
+        q: "Which IDE window shows the structure of the classes, methods, and variables in a project?", guj: "IDEની કઈ વિન્ડો પ્રોજેક્ટમાં ક્લાસ, મેથડ અને વેરિયેબલ્સની સ્ટ્રક્ચર બતાવે છે?",
+        optionsEn: ["(A) Class View", "(B) Toolbox", "(C) Server Explorer", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Class View", "(B) Toolbox", "(C) Server Explorer", "(D) Solution Explorer"], answer: 0
+      },
+
+      {
+        q: "A \"Web Application\" usually requires which of the following to be installed on the hosting server?", guj: "\"Web Application\" સામાન્ય રીતે હોસ્ટિંગ સર્વર પર કયું ઇન્સ્ટોલ હોવું જરૂરી છે?",
+        optionsEn: ["(A) Photoshop", "(B) .NET Runtime and IIS", "(C) Visual Studio", "(D) MS Office"],
+        optionsGuj: ["(A) Photoshop", "(B) .NET Runtime and IIS", "(C) Visual Studio", "(D) MS Office"], answer: 1
+      },
+
+      {
+        q: "Which attribute of the form tag is required for ASP.NET Server Controls to function?", guj: "ASP.NET Server Controls કાર્ય કરવા માટે form ટેગનું કયું એટ્રિબ્યુટ જરૂરી છે?",
+        optionsEn: ["(A) id=\"main\"", "(B) name=\"form1\"", "(C) runat=\"server\"", "(D) method=\"post\""],
+        optionsGuj: ["(A) id=\"main\"", "(B) name=\"form1\"", "(C) runat=\"server\"", "(D) method=\"post\""], answer: 2
+      },
+
+      {
+        q: "The App_Code folder is primarily used for:", guj: "App_Code ફોલ્ડર મુખ્યત્વે કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Storing CSS files", "(B) Storing images", "(C) Storing DLLs", "(D) Storing source code files (.cs) that should be automatically compiled"],
+        optionsGuj: ["(A) CSS ફાઈલ્સ સ્ટોર કરવા", "(B) ઈમેજીસ સ્ટોર કરવા", "(C) DLLs સ્ટોર કરવા", "(D) સોર્સ કોડ ફાઈલ્સ (.cs) સ્ટોર કરવા જે આપોઆપ કમ્પાઈલ થાય"], answer: 3
+      },
+
+      {
+        q: "Which status code indicates that a request was successful?", guj: "કયો સ્ટેટસ કોડ સૂચવે છે કે રિક્વેસ્ટ સફળ થઈ?",
+        optionsEn: ["(A) 404", "(B) 302", "(C) 500", "(D) 200"],
+        optionsGuj: ["(A) 404", "(B) 302", "(C) 500", "(D) 200"], answer: 3
+      },
+
+      {
+        q: "What is \"Managed Code\" in the .NET environment?", guj: ".NET વાતાવરણમાં \"Managed Code\" શું છે?",
+        optionsEn: ["(A) Code that is written by a manager", "(B) Code written in C++ only", "(C) Code that is executed by the CLR (Common Language Runtime)", "(D) Code that has no errors"],
+        optionsGuj: ["(A) મેનેજર દ્વારા લખાયેલ કોડ", "(B) માત્ર C++માં લખાયેલ કોડ", "(C) CLR (Common Language Runtime) દ્વારા એક્ઝિક્યુટ થતો કોડ", "(D) કોડ જેમાં કોઈ એરર નથી"], answer: 2
+      },
+
+      {
+        q: "Which window is used to view the list of servers and databases on your network?", guj: "તમારા નેટવર્ક પર સર્વર અને ડેટાબેઝની યાદી જોવા માટે કઈ વિન્ડો વપરાય છે?",
+        optionsEn: ["(A) Properties Window", "(B) Server Explorer", "(C) Toolbox", "(D) Solution Explorer"],
+        optionsGuj: ["(A) Properties Window", "(B) Server Explorer", "(C) Toolbox", "(D) Solution Explorer"], answer: 1
+      },
+
+      {
+        q: "Which file extension is used for an ASP.NET Master Page?", guj: "ASP.NET Master Page માટે કયું ફાઈલ extension વપરાય છે?",
+        optionsEn: ["(A) .aspx", "(B) .master", "(C) .asax", "(D) .config"],
+        optionsGuj: ["(A) .aspx", "(B) .master", "(C) .asax", "(D) .config"], answer: 1
+      },
+
+      {
+        q: "The IsPostBack property of the Page class returns:", guj: "Page ક્લાસની IsPostBack પ્રોપર્ટી શું પાછી આપે છે?",
+        optionsEn: ["(A) A character", "(B) A boolean (True/False)", "(C) A string", "(D) An integer"],
+        optionsGuj: ["(A) અક્ષર", "(B) બુલિયન (True/False)", "(C) સ્ટ્રિંગ", "(D) ઇન્ટીજર"], answer: 1
+      },
+
+      {
+        q: "Which control is used to display a calendar on a web page?", guj: "વેબ પેજ પર કેલેન્ડર બતાવવા માટે કયો કંટ્રોલ વપરાય છે?",
+        optionsEn: ["(A) Timer", "(B) AdRotator", "(C) Calendar", "(D) DatePicker"],
+        optionsGuj: ["(A) Timer", "(B) AdRotator", "(C) Calendar", "(D) DatePicker"], answer: 2
+      },
+
+      {
+        q: "What is the default port number for HTTP?", guj: "HTTP માટે ડિફોલ્ટ પોર્ટ નંબર કેટલો છે?",
+        optionsEn: ["(A) 25", "(B) 443", "(C) 80", "(D) 21"],
+        optionsGuj: ["(A) 25", "(B) 443", "(C) 80", "(D) 21"], answer: 2
+      },
+
+      {
+        q: "The Server.MapPath() method is used to:", guj: "Server.MapPath() મેથડ કયા માટે વપરાય છે?",
+        optionsEn: ["(A) Map a physical path to a virtual path", "(B) Redirect the user to a new site", "(C) Map a virtual path to a physical path on the server", "(D) Find the location of the client"],
+        optionsGuj: ["(A) ફિઝિકલ પાથને વર્ચ્યુઅલ પાથમાં મેપ કરવા", "(B) યુઝરને નવી સાઈટ પર રીડાયરેક્ટ કરવા", "(C) વર્ચ્યુઅલ પાથને સર્વર પરના ફિઝિકલ પાથમાં મેપ કરવા", "(D) ક્લાઈન્ટનું સ્થાન શોધવા"], answer: 2
+      },
+
+      {
+        q: "Which control is specifically designed for repeating data in a customizable layout?", guj: "કસ્ટમાઈઝેબલ લેઆઉટમાં ડેટા રિપીટ કરવા માટે કયો કંટ્રોલ ખાસ બનાવવામાં આવ્યો છે?",
+        optionsEn: ["(A) Label", "(B) Repeater", "(C) Button", "(D) TextBox"],
+        optionsGuj: ["(A) Label", "(B) Repeater", "(C) Button", "(D) TextBox"], answer: 1
+      },
+
+      {
+        q: "In Visual Studio, \"IntelliSense\" provides:", guj: "Visual Studioમાં \"IntelliSense\" શું પૂરું પાડે છે?",
+        optionsEn: ["(A) Tooltips, member lists, and parameter info while coding", "(B) Security against hackers", "(C) Automatic internet connectivity", "(D) Database backups"],
+        optionsGuj: ["(A) કોડિંગ દરમિયાન ટૂલટિપ્સ, મેમ્બર લિસ્ટ અને પેરામીટર માહિતી", "(B) હેકર્સ સામે સિક્યોરિટી", "(C) આપોઆપ ઇન્ટરનેટ કનેક્ટિવિટી", "(D) ડેટાબેઝ બેકઅપ"], answer: 0
+      },
+
+      {
+        q: "Which of the following is a \"Client-side\" script?", guj: "નીચેનામાંથી કયું \"Client-side\" સ્ક્રિપ્ટ છે?",
+        optionsEn: ["(A) JavaScript", "(B) C#", "(C) VB.NET", "(D) PHP"],
+        optionsGuj: ["(A) JavaScript", "(B) C#", "(C) VB.NET", "(D) PHP"], answer: 0
+      },
+
+      {
+        q: "Which configuration setting in Web.config is used to store connection strings?", guj: "Web.configમાં કનેક્શન સ્ટ્રિંગ્સ સ્ટોર કરવા માટે કઈ કોન્ફિગ્યુરેશન સેટિંગ વપરાય છે?",
+        optionsEn: ["(A) authentication tag", "(B) system.web tag", "(C) connectionStrings tag", "(D) appSettings tag"],
+        optionsGuj: ["(A) authentication tag", "(B) system.web tag", "(C) connectionStrings tag", "(D) appSettings tag"], answer: 2
+      },
+
+      {
+        q: "What is the main difference between \"Static\" and \"Dynamic\" webpages?", guj: "\"Static\" અને \"Dynamic\" વેબપેજ વચ્ચે મુખ્ય તફાવત શું છે?",
+        optionsEn: ["(A) Static pages use images; dynamic pages don’t.", "(B) Static pages only work on desktops.", "(C) Static pages don’t change content; dynamic pages are generated on the fly.", "(D) Static pages are free; dynamic pages are paid."],
+        optionsGuj: ["(A) Static પેજમાં ઈમેજીસ હોય છે; Dynamicમાં નથી.", "(B) Static પેજ માત્ર ડેસ્કટોપ પર કામ કરે છે.", "(C) Static પેજ કન્ટેન્ટ બદલતા નથી; Dynamic પેજ રીયલ-ટાઈમ જનરેટ થાય છે.", "(D) Static પેજ મફત છે; Dynamic પેજ પેઈડ છે."], answer: 2
+      },
+
+      {
+        q: "Which \"Tier\" usually houses the \"Stored Procedures\" in a 3-tier app?", guj: "3-ટાયર એપ્લિકેશનમાં \"Stored Procedures\" સામાન્ય રીતે કયા ટાયરમાં હોય છે?",
+        optionsEn: ["(A) Client Tier", "(B) Presentation Tier", "(C) Data Tier", "(D) Logic Tier"],
+        optionsGuj: ["(A) Client Tier", "(B) Presentation Tier", "(C) Data Tier", "(D) Logic Tier"], answer: 2
+      },
+
+      {
+        q: "Which feature allows you to \"Dock\" windows in Visual Studio?", guj: "Visual Studioમાં વિન્ડોને \"Dock\" કરવાની વિશેષતા કઈ છે?",
+        optionsEn: ["(A) Locking the window to a specific side of the IDE", "(B) Printing the window", "(C) Changing the window’s font", "(D) Deleting the window"],
+        optionsGuj: ["(A) વિન્ડોને IDEની ચોક્કસ બાજુએ લોક કરવી", "(B) વિન્ડો પ્રિન્ટ કરવી", "(C) વિન્ડોનું ફોન્ટ બદલવું", "(D) વિન્ડો ડિલીટ કરવી"], answer: 0
+      },
+
+      {
+        q: "What is the file extension for a C# code-behind file?", guj: "C# code-behind ફાઈલનું extension શું છે?",
+        optionsEn: ["(A) .js", "(B) .aspx", "(C) .cs", "(D) .vb"],
+        optionsGuj: ["(A) .js", "(B) .aspx", "(C) .cs", "(D) .vb"], answer: 2
+      },
+
+      {
+        q: "Which event is fired first when a page is requested?", guj: "પેજ રિક્વેસ્ટ કરતાં પહેલા કયો ઈવેન્ટ ફાયર થાય છે?",
+        optionsEn: ["(A) Page_Init", "(B) Page_Load", "(C) Page_Unload", "(D) Page_PreInit"],
+        optionsGuj: ["(A) Page_Init", "(B) Page_Load", "(C) Page_Unload", "(D) Page_PreInit"], answer: 3
+      },
+
+      {
+        q: "Which \"Designer\" tool is best for writing complex SQL queries?", guj: "જટિલ SQL ક્વેરી લખવા માટે કયું \"Designer\" ટૂલ શ્રેષ્ઠ છે?",
+        optionsEn: ["(A) Graphical Designer", "(B) Solution Explorer", "(C) Query Builder (within Server Explorer)", "(D) Toolbox"],
+        optionsGuj: ["(A) Graphical Designer", "(B) Solution Explorer", "(C) Query Builder (Server Explorerમાં)", "(D) Toolbox"], answer: 2
+      },
+
+      {
+        q: "What does \"State Management\" address?", guj: "\"State Management\" કયા મુદ્દાને સંબોધે છે?",
+        optionsEn: ["(A) Maintaining data between requests in a stateless protocol", "(B) The physical location of the server", "(C) The RAM usage of the computer", "(D) The government regulations of the internet"],
+        optionsGuj: ["(A) Stateless પ્રોટોકોલમાં રિક્વેસ્ટ વચ્ચે ડેટા જાળવવું", "(B) સર્વરનું ફિઝિકલ લોકેશન", "(C) કોમ્પ્યુટરની RAM વપરાશ", "(D) ઇન્ટરનેટના સરકારી નિયમો"], answer: 0
+      },
+
+      {
+        q: "In a \"Client-Server\" model, who initiates the communication?", guj: "\"Client-Server\" મોડલમાં કોમ્યુનિકેશન કોણ શરૂ કરે છે?",
+        optionsEn: ["(A) Both simultaneously", "(B) Neither", "(C) The Client", "(D) The Server"],
+        optionsGuj: ["(A) બંને એકસાથે", "(B) કોઈ પણ નહીં", "(C) ક્લાઈન્ટ", "(D) સર્વર"], answer: 2
+      },
+
+      {
+        q: "Which tool is used to manage the \"Build\" process?", guj: "\"Build\" પ્રોસેસ મેનેજ કરવા માટે કયું ટૂલ વપરાય છે?",
+        optionsEn: ["(A) MSBuild", "(B) Paint", "(C) Notepad", "(D) MSWord"],
+        optionsGuj: ["(A) MSBuild", "(B) Paint", "(C) Notepad", "(D) MSWord"], answer: 0
+      },
+
+      {
+        q: "\"Custom Controls\" are:", guj: "\"Custom Controls\" શું છે?",
+        optionsEn: ["(A) Controls that cannot be changed", "(B) Hardware switches", "(C) User-defined controls built by inheriting from existing classes", "(D) Built-in HTML tags"],
+        optionsGuj: ["(A) બદલી ન શકાય તેવા કંટ્રોલ્સ", "(B) હાર્ડવેર સ્વિચ", "(C) યુઝર-ડિફાઈન્ડ કંટ્રોલ્સ જે અસ્તિત્વમાં હોય તેવા ક્લાસમાંથી વારસાગત બને છે", "(D) બિલ્ટ-ઇન HTML ટેગ્સ"], answer: 2
+      },
+
+      {
+        q: "Which menu in Visual Studio contains \"Check for Updates\"?", guj: "Visual Studioમાં \"Check for Updates\" કયા મેનુમાં છે?",
+        optionsEn: ["(A) Tools", "(B) Help", "(C) Edit", "(D) File"],
+        optionsGuj: ["(A) Tools", "(B) Help", "(C) Edit", "(D) File"], answer: 1
+      },
+
+      {
+        q: "What is the shortcut for \"Find\" (within the current file)?", guj: "વર્તમાન ફાઈલમાં \"Find\" માટે શોર્ટકટ કી કઈ છે?",
+        optionsEn: ["(A) Ctrl + P", "(B) Ctrl + S", "(C) Ctrl + Shift + F", "(D) Ctrl + F"],
+        optionsGuj: ["(A) Ctrl + P", "(B) Ctrl + S", "(C) Ctrl + Shift + F", "(D) Ctrl + F"], answer: 3
+      },
+
+      {
+        q: "Which of the following is an example of an \"Application Server\"?", guj: "નીચેનામાંથી કયું \"Application Server\"નું ઉદાહરણ છે?",
+        optionsEn: ["(A) Windows 10", "(B) MySQL", "(C) Chrome", "(D) IIS"],
+        optionsGuj: ["(A) Windows 10", "(B) MySQL", "(C) Chrome", "(D) IIS"], answer: 3
+      },
+
+      {
+        q: "What is the primary purpose of a \"Solution\" file (.sln)?", guj: "\"Solution\" ફાઈલ (.sln)નો મુખ્ય હેતુ શું છે?",
+        optionsEn: ["(A) To store user passwords", "(B) To manage a group of one or more projects", "(C) To store the logic of the code", "(D) To connect to the internet"],
+        optionsGuj: ["(A) યુઝર પાસવર્ડ સ્ટોર કરવા", "(B) એક અથવા અનેક પ્રોજેક્ટ્સના જૂથને મેનેજ કરવા", "(C) કોડનું લોજિક સ્ટોર કરવા", "(D) ઇન્ટરનેટ સાથે કનેક્ટ કરવા"], answer: 1
+      }
+    ];
+
+    let currentLang = 'both';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz');
+      container.innerHTML = '';
+
+      mcqs.forEach((mcq, qIndex) => {
+        let qHTML = `<div class="question-card">
+      <div class="question-number">પ્રશ્ન ${qIndex + 1} | Question ${qIndex + 1}</div>
+      <div class="question-text">`;
+
+        if (currentLang === 'both' || currentLang === 'en') qHTML += `${mcq.q}<br>`;
+        if (currentLang === 'both' || currentLang === 'gu') qHTML += `<strong>${mcq.guj}</strong>`;
+
+        qHTML += `</div><div class="options" id="options-${qIndex}">`;
+
+        for (let i = 0; i < mcq.optionsEn.length; i++) {
+          let displayText = '';
+          if (currentLang === 'both') {
+            displayText = `${mcq.optionsEn[i]}<br><span style="color:#475569; font-size:0.98rem;">${mcq.optionsGuj[i]}</span>`;
+          } else if (currentLang === 'en') {
+            displayText = mcq.optionsEn[i];
+          } else {
+            displayText = mcq.optionsGuj[i];
+          }
+
+          qHTML += `
+        <div class="option" data-q="${qIndex}" data-opt="${i}" 
+             onclick="selectAnswer(${qIndex}, ${i}, this)">
+          ${displayText}
+        </div>`;
+        }
+
+        qHTML += `</div>
+      <div class="result" id="result-${qIndex}"></div>
+    </div>`;
+
+        container.innerHTML += qHTML;
+      });
+    }
+
+    function selectAnswer(qIndex, selectedIndex, element) {
+      const mcq = mcqs[qIndex];
+      const allOptions = document.querySelectorAll(`#options-${qIndex} .option`);
+      const resultDiv = document.getElementById(`result-${qIndex}`);
+
+      allOptions.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        const idx = parseInt(opt.getAttribute('data-opt'));
+
+        if (idx === mcq.answer) opt.classList.add('correct');
+        if (idx === selectedIndex && selectedIndex !== mcq.answer) opt.classList.add('wrong');
+      });
+
+      resultDiv.style.display = 'block';
+      if (selectedIndex === mcq.answer) {
+        resultDiv.className = 'result correct-result';
+        resultDiv.innerHTML = '✅ સાચો જવાબ!';
+      } else {
+        resultDiv.className = 'result wrong-result';
+        resultDiv.innerHTML = `❌ ખોટો જવાબ!<br>સાચો જવાબ: ${mcq.optionsGuj[mcq.answer]}`;
+      }
+    }
+
+    // Initialize Quiz
+    renderQuiz();
+  </script>
+
+</body>
+
+</html>

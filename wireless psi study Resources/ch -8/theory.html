@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Security — Complete Theory Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050a12;
+  --surface: #0d1521;
+  --card: #111d2e;
+  --card2: #0e1a2a;
+  --border: #1e3050;
+  --border2: #243a58;
+  --accent: #00e5ff;
+  --accent2: #7c3aed;
+  --accent3: #f59e0b;
+  --accent4: #10b981;
+  --accent5: #ef4444;
+  --text: #d4e2f0;
+  --muted: #6b8aad;
+  --white: #ffffff;
+  --glow: rgba(0,229,255,0.15);
+  --glow2: rgba(124,58,237,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:15px;
+  line-height:1.7;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--surface);}
+::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:3px;}
+
+/* ===== HEADER ===== */
+.site-header{
+  background:linear-gradient(135deg,#050f1e 0%,#0a0622 50%,#040e1c 100%);
+  border-bottom:1px solid var(--border);
+  padding:40px 24px 30px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.site-header::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%,rgba(0,229,255,0.08),transparent),
+    radial-gradient(ellipse 40% 40% at 10% 100%,rgba(124,58,237,0.06),transparent);
+  pointer-events:none;
+}
+.header-badge{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:3px;
+  color:var(--accent);
+  border:1px solid rgba(0,229,255,0.3);
+  padding:4px 14px;
+  border-radius:20px;
+  margin-bottom:18px;
+  background:rgba(0,229,255,0.05);
+}
+.site-header h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,6vw,52px);
+  font-weight:800;
+  color:var(--white);
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.site-header h1 span{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.header-sub{
+  font-family:'Tiro Devanagari Hindi',serif;
+  font-size:15px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+.header-desc{
+  font-size:13px;
+  color:var(--muted);
+  max-width:600px;
+  margin:0 auto 24px;
+}
+.header-stats{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  flex-wrap:wrap;
+}
+.hstat{
+  text-align:center;
+}
+.hstat-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:26px;
+  font-weight:700;
+  color:var(--accent);
+}
+.hstat-label{font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+
+/* ===== NAV ===== */
+.top-nav{
+  position:sticky;
+  top:0;
+  z-index:200;
+  background:rgba(5,10,18,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 16px;
+}
+.nav-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-btn{
+  flex-shrink:0;
+  padding:14px 18px;
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font-family:'Syne',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all 0.2s;
+  white-space:nowrap;
+  letter-spacing:0.5px;
+}
+.nav-btn:hover,.nav-btn.active{
+  color:var(--accent);
+  border-bottom-color:var(--accent);
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main{max-width:1100px;margin:0 auto;padding:40px 16px 80px;}
+
+/* ===== SECTION ===== */
+.section{margin-bottom:80px;}
+.section-header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:32px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--border);
+}
+.section-icon{
+  width:48px;height:48px;
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  flex-shrink:0;
+}
+.section-icon.blue{background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.2);}
+.section-icon.purple{background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);}
+.section-icon.amber{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);}
+.section-icon.green{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);}
+.section-icon.red{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);}
+.section-icon.teal{background:rgba(20,184,166,0.1);border:1px solid rgba(20,184,166,0.2);}
+.section-title-wrap{}
+.section-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(20px,3vw,28px);
+  font-weight:800;
+  color:var(--white);
+}
+.section-title-gu{
+  font-family:'Tiro Devanagari Hindi',serif;
+  font-size:14px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+/* ===== TOPIC CARD ===== */
+.topic-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:24px 28px;
+  margin-bottom:20px;
+  position:relative;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.topic-card:hover{
+  border-color:var(--border2);
+  box-shadow:0 0 30px rgba(0,229,255,0.04);
+}
+.topic-card.highlight-blue{border-left:3px solid var(--accent);}
+.topic-card.highlight-purple{border-left:3px solid var(--accent2);}
+.topic-card.highlight-amber{border-left:3px solid var(--accent3);}
+.topic-card.highlight-green{border-left:3px solid var(--accent4);}
+.topic-card.highlight-red{border-left:3px solid var(--accent5);}
+
+.topic-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+.topic-title{
+  font-family:'Syne',sans-serif;
+  font-size:18px;
+  font-weight:700;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.topic-title-gu{
+  font-family:'Tiro Devanagari Hindi',serif;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+.topic-body{
+  font-size:14px;
+  color:var(--text);
+  line-height:1.8;
+}
+.topic-body p{margin-bottom:10px;}
+.topic-body p:last-child{margin-bottom:0;}
+
+/* ===== DEFINITION BOX ===== */
+.def-box{
+  background:rgba(0,229,255,0.05);
+  border:1px solid rgba(0,229,255,0.15);
+  border-radius:10px;
+  padding:14px 16px;
+  margin:14px 0;
+  font-size:14px;
+}
+.def-box strong{color:var(--accent);font-family:'Syne',sans-serif;}
+
+/* ===== EXAMPLE BOX ===== */
+.example-box{
+  background:rgba(245,158,11,0.05);
+  border:1px solid rgba(245,158,11,0.2);
+  border-radius:10px;
+  padding:14px 16px;
+  margin:14px 0;
+}
+.example-box .ex-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--accent3);
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.example-box p{font-size:14px;color:var(--text);}
+
+/* ===== ATTACK BOX ===== */
+.attack-box{
+  background:rgba(239,68,68,0.05);
+  border:1px solid rgba(239,68,68,0.2);
+  border-radius:10px;
+  padding:14px 16px;
+  margin:14px 0;
+}
+.attack-box .atk-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--accent5);
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+/* ===== FULLFORM BOX ===== */
+.fullform{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(124,58,237,0.1);
+  border:1px solid rgba(124,58,237,0.25);
+  border-radius:8px;
+  padding:4px 10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--accent2);
+  margin:4px 4px 4px 0;
+  display:inline-block;
+}
+
+/* ===== BADGE LIST ===== */
+.badge-list{
+  display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;
+}
+.badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:20px;
+  border:1px solid;
+}
+.badge.blue{background:rgba(0,229,255,0.08);border-color:rgba(0,229,255,0.3);color:var(--accent);}
+.badge.purple{background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.3);color:#a78bfa;}
+.badge.amber{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);color:var(--accent3);}
+.badge.green{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:var(--accent4);}
+.badge.red{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.3);color:var(--accent5);}
+
+/* ===== TABLE ===== */
+.theory-table{
+  width:100%;
+  border-collapse:collapse;
+  margin:14px 0;
+  font-size:13px;
+}
+.theory-table th{
+  background:rgba(0,229,255,0.08);
+  color:var(--accent);
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  padding:10px 14px;
+  text-align:left;
+  border:1px solid var(--border);
+  font-size:12px;
+  letter-spacing:0.5px;
+}
+.theory-table td{
+  padding:9px 14px;
+  border:1px solid var(--border);
+  color:var(--text);
+  vertical-align:top;
+}
+.theory-table tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+
+/* ===== GRID 2 COL ===== */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+@media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+
+/* ===== COMPARE CARD ===== */
+.compare-card{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+}
+.compare-title{
+  font-family:'Syne',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.compare-title.c-blue{color:var(--accent);}
+.compare-title.c-purple{color:#a78bfa;}
+
+/* ===== FORMULA BOX ===== */
+.formula-box{
+  background:rgba(16,185,129,0.05);
+  border:1px solid rgba(16,185,129,0.2);
+  border-radius:10px;
+  padding:14px 16px;
+  margin:12px 0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;
+  color:var(--accent4);
+}
+.formula-box span{color:var(--white);}
+
+/* ===== MCQ REFERENCE ===== */
+.mcq-ref{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  color:var(--muted);
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:2px 8px;
+  margin-left:8px;
+}
+
+/* ===== STEP LIST ===== */
+.step-list{margin:10px 0;padding-left:0;list-style:none;}
+.step-list li{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:10px;
+  font-size:14px;
+}
+.step-num{
+  flex-shrink:0;
+  width:24px;height:24px;
+  border-radius:50%;
+  background:rgba(0,229,255,0.1);
+  border:1px solid rgba(0,229,255,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* ===== DIVIDER ===== */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:28px 0;
+}
+
+/* ===== SCROLL TO TOP ===== */
+.scroll-top{
+  position:fixed;
+  bottom:28px;right:28px;
+  width:44px;height:44px;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  border:none;
+  border-radius:50%;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(124,58,237,0.4);
+  z-index:999;
+  transition:transform 0.2s,box-shadow 0.2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.scroll-top:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(124,58,237,0.5);}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar{
+  position:fixed;
+  top:0;left:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  z-index:999;
+  width:0%;
+  transition:width 0.1s;
+}
+
+/* KEY POINT */
+.key-point{
+  background:rgba(124,58,237,0.08);
+  border:1px solid rgba(124,58,237,0.25);
+  border-radius:10px;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:14px;
+}
+.key-point::before{
+  content:'⚡ KEY POINT: ';
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:1px;
+  color:var(--accent2);
+  display:block;
+  margin-bottom:4px;
+}
+
+/* GUJARATI text inline */
+.gu{
+  font-family:'Tiro Devanagari Hindi',serif;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* Attack type */
+.atk-type{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  padding:2px 8px;
+  border-radius:4px;
+  margin-right:6px;
+}
+.atk-type.passive{background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3);}
+.atk-type.active{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-badge">NETWORK SECURITY — COMPLETE THEORY</div>
+  <h1>Network <span>Security</span><br>Theory Guide</h1>
+  <p class="header-sub">નેટવર્ક સિક્યુરિટી સંપૂર્ણ થિયરી ગાઈડ</p>
+  <p class="header-desc">Complete theory covering all 165 MCQ topics — Security Principles, System Security, Modular Arithmetic, Symmetric &amp; Asymmetric Encryption, OS Security</p>
+  <div class="header-stats">
+    <div class="hstat"><div class="hstat-num">6</div><div class="hstat-label">Units</div></div>
+    <div class="hstat"><div class="hstat-num">165</div><div class="hstat-label">MCQ Topics</div></div>
+    <div class="hstat"><div class="hstat-num">50+</div><div class="hstat-label">Concepts</div></div>
+    <div class="hstat"><div class="hstat-num">20+</div><div class="hstat-label">Full Forms</div></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="scrollToSection('sec1')">🔐 Security Principles</button>
+    <button class="nav-btn" onclick="scrollToSection('sec2')">⚔️ System Security</button>
+    <button class="nav-btn" onclick="scrollToSection('sec3')">🔢 Modular Arithmetic</button>
+    <button class="nav-btn" onclick="scrollToSection('sec4')">🔑 Symmetric Encryption</button>
+    <button class="nav-btn" onclick="scrollToSection('sec5')">🗝️ Asymmetric / PKI</button>
+    <button class="nav-btn" onclick="scrollToSection('sec6')">💻 OS Security</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ===== SECTION 1: SECURITY PRINCIPLES ===== -->
+<section class="section" id="sec1">
+  <div class="section-header">
+    <div class="section-icon blue">🔐</div>
+    <div class="section-title-wrap">
+      <div class="section-num">UNIT 01 · Q1–Q43</div>
+      <div class="section-title">Security Principles</div>
+      <div class="section-title-gu">સુરક્ષા સિદ્ધાંતો</div>
+    </div>
+  </div>
+
+  <!-- CIA TRIAD -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">CORE CONCEPT · CIA TRIAD</div>
+    <div class="topic-title">CIA Triad — The Three Pillars of Information Security</div>
+    <div class="topic-title-gu">CIA ત્રિકોણ — માહિતી સુરક્ષાના ત્રણ સ્તંભ</div>
+    <div class="topic-body">
+      <p>The <strong style="color:var(--accent)">CIA Triad</strong> is the foundational model for information security. Every security decision is evaluated against these three principles.</p>
+      <div class="badge-list">
+        <span class="badge blue">C — Confidentiality</span>
+        <span class="badge blue">I — Integrity</span>
+        <span class="badge blue">A — Availability</span>
+      </div>
+      <table class="theory-table">
+        <tr>
+          <th>Principle</th>
+          <th>Gujarati</th>
+          <th>Definition</th>
+          <th>Violated When...</th>
+          <th>MCQ Questions</th>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--accent)">Confidentiality</strong></td>
+          <td class="gu">ગોપનીયતા</td>
+          <td>Information is accessible ONLY to authorized users. Prevents unauthorized disclosure.</td>
+          <td>Unauthorized person reads your email, data is leaked to hacker</td>
+          <td>Q1, Q15, Q18, Q23, Q26, Q31, Q34, Q37</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--accent3)">Integrity</strong></td>
+          <td class="gu">અખંડિતતા</td>
+          <td>Data is NOT modified without detection. Ensures accuracy and trustworthiness of data.</td>
+          <td>Unauthorized user modifies stored data, file is tampered during transfer</td>
+          <td>Q2, Q9, Q13, Q20, Q22, Q27, Q30, Q38, Q40</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--accent4)">Availability</strong></td>
+          <td class="gu">ઉપલબ્ધતા</td>
+          <td>Authorized users can access information and systems WHENEVER required.</td>
+          <td>DoS attack crashes server, system goes down during upgrade</td>
+          <td>Q6, Q12, Q17, Q21, Q25, Q28, Q36, Q39, Q42</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CONFIDENTIALITY DETAILS -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">CONCEPT 1</div>
+    <div class="topic-title">Confidentiality (ગોપનીયતા) <span class="mcq-ref">Q1, Q15, Q18, Q23, Q26, Q31, Q34, Q37</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Definition:</strong> Confidentiality ensures that sensitive or private information is accessible ONLY to those who are authorized to see it. Unauthorized parties are prevented from reading or accessing the data.
+      </div>
+      <p><strong>How it is achieved:</strong></p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Encryption of data (converting readable data to unreadable form)</li>
+        <li><span class="step-num">2</span>Access control mechanisms (passwords, biometrics)</li>
+        <li><span class="step-num">3</span>Data classification (labeling data as public/private/secret)</li>
+        <li><span class="step-num">4</span>Secure communication channels (HTTPS, VPN)</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Your online banking password and account data are confidential — only you and the bank can access them. If a hacker reads your bank balance without permission → <strong>Confidentiality is VIOLATED</strong>.</p>
+      </div>
+      <div class="key-point">Confidentiality ≠ Secret. It means the RIGHT people can access it, and the WRONG people cannot.</div>
+    </div>
+  </div>
+
+  <!-- INTEGRITY DETAILS -->
+  <div class="topic-card highlight-amber">
+    <div class="topic-label">CONCEPT 2</div>
+    <div class="topic-title">Integrity (અખંડિતતા) <span class="mcq-ref">Q2, Q9, Q13, Q20, Q22, Q27, Q30, Q38, Q40</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Definition:</strong> Integrity ensures that data remains accurate, complete, and UNMODIFIED unless changed by an authorized process. Any unauthorized alteration should be detectable.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>You send ₹1000 payment online. During transmission, an attacker changes it to ₹10,000. → <strong>Integrity is VIOLATED</strong>.<br><br>
+        A student's exam marks stored in a database are changed by a hacker → <strong>Integrity VIOLATION</strong>.</p>
+      </div>
+      <p><strong>Mechanisms to ensure Integrity:</strong></p>
+      <div class="badge-list">
+        <span class="badge amber">Hash Functions (MD5, SHA)</span>
+        <span class="badge amber">Digital Signatures</span>
+        <span class="badge amber">Checksums</span>
+        <span class="badge amber">Message Authentication Codes (MAC)</span>
+      </div>
+      <div class="key-point">If an UNAUTHORIZED person modifies stored data → PRIMARY violation is INTEGRITY (Q2 ans = D).</div>
+    </div>
+  </div>
+
+  <!-- AVAILABILITY DETAILS -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">CONCEPT 3</div>
+    <div class="topic-title">Availability (ઉપલબ્ધતા) <span class="mcq-ref">Q6, Q12, Q17, Q21, Q25, Q28, Q36, Q39, Q42</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Definition:</strong> Availability ensures that information systems and data are accessible and usable by authorized users WHENEVER they need it. Systems should continue to function reliably even during faults, attacks, or upgrades.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>A hospital's patient records system goes down due to a DoS attack. Doctors cannot access patient data during emergency. → <strong>Availability VIOLATED</strong>.<br><br>A system crash preventing access to data = classic Availability violation (Q12 ans = D).</p>
+      </div>
+      <p><strong>How to maintain Availability:</strong></p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Redundant systems (backup servers)</li>
+        <li><span class="step-num">2</span>Failover mechanisms</li>
+        <li><span class="step-num">3</span>Regular system maintenance and updates</li>
+        <li><span class="step-num">4</span>Protection against DoS/DDoS attacks</li>
+        <li><span class="step-num">5</span>Load balancing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATION -->
+  <div class="topic-card highlight-purple">
+    <div class="topic-label">CONCEPT 4</div>
+    <div class="topic-title">Authentication (પ્રમાણીકરણ) <span class="mcq-ref">Q3, Q7, Q10, Q16, Q35</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Definition:</strong> Authentication is the process of VERIFYING the identity of a user, device, or system before granting access. It answers "Who are you?"
+      </div>
+      <p><strong>Three factors of Authentication (3 What's):</strong></p>
+      <table class="theory-table">
+        <tr><th>Factor</th><th>Type</th><th>Example</th></tr>
+        <tr><td>Something you <strong>KNOW</strong></td><td>Knowledge Factor</td><td>Password, PIN, Security question</td></tr>
+        <tr><td>Something you <strong>HAVE</strong></td><td>Possession Factor</td><td>Smart card, OTP token, Phone</td></tr>
+        <tr><td>Something you <strong>ARE</strong></td><td>Biometric Factor</td><td>Fingerprint, Face scan, Iris scan</td></tr>
+      </table>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>When you login to Gmail, entering your password verifies your identity → <strong>Authentication</strong>.<br>ATM requires card (HAVE) + PIN (KNOW) → <strong>Two-factor Authentication (2FA)</strong>.</p>
+      </div>
+      <div class="key-point">Authentication ≠ Authorization. Authentication = WHO you are. Authorization = WHAT you can do.</div>
+    </div>
+  </div>
+
+  <!-- NON-REPUDIATION -->
+  <div class="topic-card highlight-purple">
+    <div class="topic-label">CONCEPT 5</div>
+    <div class="topic-title">Non-Repudiation (નોન-રિપ્યુડિએશન) <span class="mcq-ref">Q8, Q24, Q29, Q33, Q41</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Definition:</strong> Non-repudiation ensures that a party in a communication CANNOT DENY (repudiate) having sent a message or performed an action. It provides proof of origin and delivery.
+      </div>
+      <div class="fullform">NR = Non-Repudiation</div>
+      <div class="example-box">
+        <div class="ex-label">Real-world Example</div>
+        <p>You sign a contract digitally. Later you cannot say "I never signed that!" → Non-repudiation prevents this denial.<br><br>
+        In email: Digital signatures provide non-repudiation — the sender cannot later claim they didn't send the email.</p>
+      </div>
+      <p><strong>How achieved:</strong></p>
+      <div class="badge-list">
+        <span class="badge purple">Digital Signatures</span>
+        <span class="badge purple">Timestamps</span>
+        <span class="badge purple">Audit Logs</span>
+        <span class="badge purple">Public Key Infrastructure (PKI)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCOUNTABILITY -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">CONCEPT 6</div>
+    <div class="topic-title">Accountability (જવાબદારી) <span class="mcq-ref">Q19, Q32, Q43</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Definition:</strong> Accountability ensures that all actions performed in a system can be TRACED back to a specific user or entity. Every action leaves a trail.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>In a company, all file accesses are logged with usernames and timestamps. If data is leaked, the responsible person can be identified → <strong>Accountability</strong>.</p>
+      </div>
+      <p><strong>Tools for Accountability:</strong></p>
+      <div class="badge-list">
+        <span class="badge blue">Audit Logs</span>
+        <span class="badge blue">Access Logs</span>
+        <span class="badge blue">Activity Monitoring</span>
+        <span class="badge blue">User ID Tracking</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD SECURITY -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">CONCEPT 7</div>
+    <div class="topic-title">Password Security (પાસવર્ડ સુરક્ષા) <span class="mcq-ref">Q14</span></div>
+    <div class="topic-body">
+      <p>Password security is critical in protecting user accounts. Strong passwords significantly reduce the risk of unauthorized access.</p>
+      <table class="theory-table">
+        <tr><th>❌ Weak Practice</th><th>✅ Strong Practice</th></tr>
+        <tr><td>Using simple words: "password123"</td><td>Complex combinations: "P@$$w0rd!#2024"</td></tr>
+        <tr><td>Reusing old passwords</td><td>Unique password for each account</td></tr>
+        <tr><td>Writing passwords publicly</td><td>Using a password manager</td></tr>
+        <tr><td>Sharing passwords with others</td><td>Never sharing passwords</td></tr>
+        <tr><td>Short passwords (under 8 chars)</td><td>Minimum 12–16 characters</td></tr>
+      </table>
+      <div class="key-point">Q14 Answer = A: Using complex combinations strengthens password security most.</div>
+    </div>
+  </div>
+
+  <!-- INFORMATION SECURITY POLICY -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">CONCEPT 8</div>
+    <div class="topic-title">Information Security Policies (માહિતી સુરક્ષા નીતિ) <span class="mcq-ref">Q5</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Definition:</strong> An Information Security Policy is a formal document that defines the rules, guidelines, and procedures for protecting an organization's information assets. It guides secure behavior and practices.
+      </div>
+      <p><strong>What security policies do:</strong></p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Define acceptable use of resources</li>
+        <li><span class="step-num">2</span>Establish password requirements</li>
+        <li><span class="step-num">3</span>Define incident response procedures</li>
+        <li><span class="step-num">4</span>Set data classification guidelines</li>
+        <li><span class="step-num">5</span>Guide employee behavior regarding security</li>
+      </ul>
+      <div class="key-point">Q5 Answer = B: Information security policies primarily guide secure behavior and practices.</div>
+    </div>
+  </div>
+
+  <!-- ENCRYPTION INTRO -->
+  <div class="topic-card highlight-purple">
+    <div class="topic-label">CONCEPT 9</div>
+    <div class="topic-title">Basic Encryption Concepts <span class="mcq-ref">Q3, Q4</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Encryption</strong> = Process of converting readable data (Plaintext) into unreadable form (Ciphertext) using a key, so only authorized persons can read it.
+      </div>
+      <div class="grid2">
+        <div class="compare-card">
+          <div class="compare-title c-blue">Public Key Encryption</div>
+          <p style="font-size:13px;">Data encrypted with <strong>receiver's PUBLIC key</strong> → can only be decrypted with receiver's <strong>PRIVATE key</strong>.</p>
+          <div class="example-box" style="margin-top:8px;">
+            <div class="ex-label">Q4 KEY ANSWER</div>
+            <p>If message encrypted using receiver's public key → decrypted with <strong>receiver's private key</strong> (Answer = B)</p>
+          </div>
+        </div>
+        <div class="compare-card">
+          <div class="compare-title c-purple">Authentication via Encryption</div>
+          <p style="font-size:13px;">A system that verifies identity before granting access implements <strong>Authentication</strong> (Q3 = B).</p>
+          <div class="example-box" style="margin-top:8px;">
+            <div class="ex-label">NOTE</div>
+            <p>Q3 Answer = B (Authentication), not Encryption, because the question is about identity verification.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY TABLE SEC PRINCIPLES -->
+  <div class="topic-card">
+    <div class="topic-label">QUICK REFERENCE</div>
+    <div class="topic-title">Security Principles — Complete Summary Table</div>
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Term</th><th>Gujarati</th><th>One Line Definition</th><th>Achieved By</th></tr>
+        <tr><td>Confidentiality</td><td class="gu">ગોપનીયતા</td><td>Only authorized users can access data</td><td>Encryption, Access Control</td></tr>
+        <tr><td>Integrity</td><td class="gu">અખંડિતતા</td><td>Data is not modified without detection</td><td>Hash, Digital Signature</td></tr>
+        <tr><td>Availability</td><td class="gu">ઉપલબ્ધતા</td><td>Authorized users can access data anytime</td><td>Redundancy, Backup, DoS protection</td></tr>
+        <tr><td>Authentication</td><td class="gu">પ્રમાણીકરણ</td><td>Verify who the user is</td><td>Password, Biometric, OTP</td></tr>
+        <tr><td>Authorization</td><td class="gu">અધિકૃતતા</td><td>Define what the user can do</td><td>Access Control List (ACL)</td></tr>
+        <tr><td>Non-Repudiation</td><td class="gu">નોન-રિપ્યુડિએશન</td><td>Sender cannot deny sending a message</td><td>Digital Signature, Timestamp</td></tr>
+        <tr><td>Accountability</td><td class="gu">જવાબદારી</td><td>Actions can be traced to a user</td><td>Audit Logs, Activity Monitoring</td></tr>
+        <tr><td>Authenticity</td><td class="gu">પ્રામાણિકતા</td><td>Message really came from claimed sender</td><td>Digital Certificate, PKI</td></tr>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION 2: SYSTEM SECURITY ===== -->
+<section class="section" id="sec2">
+  <div class="section-header">
+    <div class="section-icon red">⚔️</div>
+    <div class="section-title-wrap">
+      <div class="section-num">UNIT 02 · Q44–Q69</div>
+      <div class="section-title">System Security & Attacks</div>
+      <div class="section-title-gu">સિસ્ટમ સુરક્ષા અને હુમલાઓ</div>
+    </div>
+  </div>
+
+  <!-- ATTACKS OVERVIEW -->
+  <div class="topic-card highlight-red">
+    <div class="topic-label">OVERVIEW</div>
+    <div class="topic-title">Types of Security Attacks — Complete List</div>
+    <div class="topic-title-gu">સુરક્ષા હુમલાઓના પ્રકારો — સંપૂર્ણ યાદી</div>
+    <div class="topic-body">
+      <p>Security attacks are categorized as <strong>Passive</strong> (observing without changing) or <strong>Active</strong> (modifying, disrupting):</p>
+      <table class="theory-table">
+        <tr><th>Attack</th><th>Gujarati</th><th>Type</th><th>What Happens</th><th>CIA Violated</th></tr>
+        <tr><td>Eavesdropping</td><td class="gu">ઈવ્સડ્રૉપિંગ</td><td><span class="atk-type passive">PASSIVE</span></td><td>Secretly listening to communication without altering it</td><td>Confidentiality</td></tr>
+        <tr><td>Traffic Analysis</td><td class="gu">ટ્રાફિક વિશ્લેષણ</td><td><span class="atk-type passive">PASSIVE</span></td><td>Analyzing communication patterns (who talks to whom, when, how often)</td><td>Confidentiality</td></tr>
+        <tr><td>Brute Force</td><td class="gu">બ્રુટ ફોર્સ</td><td><span class="atk-type active">ACTIVE</span></td><td>Trying every possible key/password combination systematically</td><td>Confidentiality</td></tr>
+        <tr><td>Denial of Service (DoS)</td><td class="gu">ડિનાઈલ ઓફ સર્વિસ</td><td><span class="atk-type active">ACTIVE</span></td><td>Flooding system with requests to make it unavailable</td><td>Availability</td></tr>
+        <tr><td>Replay Attack</td><td class="gu">રિપ્લે હુમલો</td><td><span class="atk-type active">ACTIVE</span></td><td>Capturing valid data/message and retransmitting it to gain unauthorized access</td><td>Authentication</td></tr>
+        <tr><td>Spoofing</td><td class="gu">સ્પૂફિંગ</td><td><span class="atk-type active">ACTIVE</span></td><td>Impersonating a trusted source to gain unauthorized access</td><td>Authentication</td></tr>
+        <tr><td>Phishing</td><td class="gu">ફિશિંગ</td><td><span class="atk-type active">ACTIVE</span></td><td>Tricking users to reveal credentials via fake websites/emails</td><td>Confidentiality</td></tr>
+        <tr><td>Injection Attack</td><td class="gu">ઇન્જેક્શન હુમલો</td><td><span class="atk-type active">ACTIVE</span></td><td>Inserting malicious code (SQL, command) into input fields</td><td>Integrity, Confidentiality</td></tr>
+        <tr><td>Sniffing</td><td class="gu">સ્નિફિંગ</td><td><span class="atk-type passive">PASSIVE</span></td><td>Intercepting and reading network packets</td><td>Confidentiality</td></tr>
+        <tr><td>Scanning</td><td class="gu">સ્કેનિંગ</td><td><span class="atk-type passive">PASSIVE</span></td><td>Probing systems for vulnerabilities before attacking</td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FIREWALL -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">DEFENSE MECHANISM 1</div>
+    <div class="topic-title">Firewall (ફાયરવોલ) <span class="mcq-ref">Q44</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Firewall</strong> = A network security device (hardware or software) that monitors and controls incoming and outgoing network traffic based on predefined security rules.
+      </div>
+      <div class="fullform">FW = FireWall</div>
+      <p><strong>How it works:</strong></p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>All network traffic passes through the firewall</li>
+        <li><span class="step-num">2</span>Firewall checks each packet against its rules</li>
+        <li><span class="step-num">3</span>Allowed packets pass through; blocked packets are dropped</li>
+        <li><span class="step-num">4</span>Logs all allowed and blocked traffic</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Your home router has a built-in firewall. When you try to access a blocked website, the firewall refuses the connection. Companies use enterprise firewalls to block unauthorized access from the internet.</p>
+      </div>
+      <div class="grid2">
+        <div class="compare-card">
+          <div class="compare-title c-blue">Packet Filtering Firewall</div>
+          <p style="font-size:13px;">Examines each packet's source/destination IP and port. Simplest type.</p>
+        </div>
+        <div class="compare-card">
+          <div class="compare-title c-purple">Stateful Inspection Firewall</div>
+          <p style="font-size:13px;">Tracks the state of connections. More intelligent than packet filtering.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRUTE FORCE -->
+  <div class="topic-card highlight-red">
+    <div class="topic-label">ATTACK 1</div>
+    <div class="topic-title">Brute Force Attack (બ્રુટ ફોર્સ હુમલો) <span class="mcq-ref">Q45, Q46, Q52, Q63</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Brute Force Attack</strong> = An attack that attempts to break a password, encryption key, or login by trying every possible combination systematically until the correct one is found.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Real Example</div>
+        <p>If a password is 3 digits (000 to 999), a brute force attack tries: 000, 001, 002, 003, ... 999. For a 4-character alphanumeric password = 36⁴ = 1,679,616 combinations to try.</p>
+      </div>
+      <p><strong>Defense against Brute Force:</strong></p>
+      <div class="badge-list">
+        <span class="badge red">Account lockout after N failed attempts</span>
+        <span class="badge red">CAPTCHA challenges</span>
+        <span class="badge red">Long complex passwords</span>
+        <span class="badge red">Multi-factor Authentication (MFA)</span>
+        <span class="badge red">Rate limiting</span>
+      </div>
+      <div class="key-point">Brute Force = "Guess all possible keys until correct one found" (Q45 = B, Q46 = D, Q52 = D, Q63 = C)</div>
+    </div>
+  </div>
+
+  <!-- LOGGING -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">DEFENSE MECHANISM 2</div>
+    <div class="topic-title">Logging System (લોગિંગ સિસ્ટમ) <span class="mcq-ref">Q47, Q51, Q54, Q60, Q62, Q65</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Logging</strong> = Recording system events, user activities, access attempts, and security incidents in a log file for later analysis and forensic investigation.
+      </div>
+      <p><strong>What gets logged:</strong></p>
+      <div class="badge-list">
+        <span class="badge green">Login attempts (success &amp; failure)</span>
+        <span class="badge green">File access events</span>
+        <span class="badge green">Network connections</span>
+        <span class="badge green">System errors</span>
+        <span class="badge green">Security alerts</span>
+        <span class="badge green">User actions</span>
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>A bank's server logs show that user "john123" attempted to login 500 times in 1 minute from IP 192.168.1.5 → Brute force attack detected via logs!</p>
+      </div>
+      <div class="fullform">SIEM = Security Information and Event Management</div>
+      <div class="fullform">SOC = Security Operations Center</div>
+    </div>
+  </div>
+
+  <!-- IDS -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">DEFENSE MECHANISM 3</div>
+    <div class="topic-title">Intrusion Detection System — IDS <span class="mcq-ref">Q48, Q50, Q53, Q58, Q68</span></div>
+    <div class="topic-body">
+      <div class="fullform">IDS = Intrusion Detection System</div>
+      <div class="fullform">IPS = Intrusion Prevention System</div>
+      <div class="def-box">
+        <strong>IDS</strong> = A security tool that monitors network and system activities for suspicious behavior, policy violations, or malicious activities, and generates alerts.
+      </div>
+      <div class="grid2">
+        <div class="compare-card">
+          <div class="compare-title c-blue">IDS (Detection)</div>
+          <p style="font-size:13px;">MONITORS and DETECTS suspicious activity. Sends alerts but does NOT block. Like a security camera.</p>
+        </div>
+        <div class="compare-card">
+          <div class="compare-title c-purple">IPS (Prevention)</div>
+          <p style="font-size:13px;">MONITORS, DETECTS and BLOCKS suspicious activity in real-time. Like a security guard + camera.</p>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>An IDS detects that a computer is sending 10,000 packets per second (abnormal) and sends an alert to the admin. → Admin can investigate and block the attack.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DoS ATTACK -->
+  <div class="topic-card highlight-red">
+    <div class="topic-label">ATTACK 2</div>
+    <div class="topic-title">Denial of Service Attack — DoS / DDoS <span class="mcq-ref">Q49, Q55, Q57, Q69</span></div>
+    <div class="topic-body">
+      <div class="fullform">DoS = Denial of Service</div>
+      <div class="fullform">DDoS = Distributed Denial of Service</div>
+      <div class="def-box">
+        <strong>DoS Attack</strong> = An attacker floods a target system with excessive requests/traffic, overwhelming its resources (CPU, memory, bandwidth) so it cannot serve legitimate users.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example — DoS</div>
+        <p>Attacker sends 1 million fake requests per second to a shopping website. The server becomes overloaded and crashes. Real customers cannot access the site. → <strong>Availability VIOLATED</strong>.</p>
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example — DDoS</div>
+        <p>Instead of one attacker, 10,000 compromised computers (botnet) all attack the same target simultaneously. Much harder to block. This was used against major websites like GitHub (2018).</p>
+      </div>
+      <p><strong>DoS vs DDoS:</strong></p>
+      <table class="theory-table">
+        <tr><th>Feature</th><th>DoS</th><th>DDoS</th></tr>
+        <tr><td>Source</td><td>Single attacker</td><td>Multiple sources (botnet)</td></tr>
+        <tr><td>Scale</td><td>Smaller scale</td><td>Massive scale</td></tr>
+        <tr><td>Difficulty to block</td><td>Easier (block one IP)</td><td>Very hard (thousands of IPs)</td></tr>
+        <tr><td>CIA Violation</td><td>Availability</td><td>Availability</td></tr>
+      </table>
+      <div class="key-point">DoS = disrupts services by exhausting resources / overwhelming with excessive requests. CIA = AVAILABILITY violated.</div>
+    </div>
+  </div>
+
+  <!-- REPLAY ATTACK -->
+  <div class="topic-card highlight-red">
+    <div class="topic-label">ATTACK 3</div>
+    <div class="topic-title">Replay Attack (રિપ્લે હુમલો) <span class="mcq-ref">Q56, Q61, Q66</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Replay Attack</strong> = An attacker captures a valid data transmission (like login credentials or authentication token) and retransmits it later to gain unauthorized access, deceiving the system.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Alice sends her login token to a bank server. Attacker captures this token. Later, attacker resends (replays) the same token to the bank → Bank thinks it's Alice and grants access.<br><br>
+        Like recording someone's voice saying "Open door" and replaying it to a voice-activated door lock.</p>
+      </div>
+      <p><strong>Defense against Replay Attacks:</strong></p>
+      <div class="badge-list">
+        <span class="badge red">Timestamps (requests expire after a few seconds)</span>
+        <span class="badge red">Nonces (random one-time numbers)</span>
+        <span class="badge red">Session tokens (expire after use)</span>
+        <span class="badge red">Sequence numbers</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPOOFING -->
+  <div class="topic-card highlight-red">
+    <div class="topic-label">ATTACK 4</div>
+    <div class="topic-title">Spoofing Attack (સ્પૂફિંગ હુમલો) <span class="mcq-ref">Q59</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Spoofing</strong> = An attacker disguises themselves as a trusted source (person, device, or system) to gain unauthorized access or to mislead victims.
+      </div>
+      <table class="theory-table">
+        <tr><th>Type</th><th>What is faked</th><th>Example</th></tr>
+        <tr><td>IP Spoofing</td><td>IP Address</td><td>Attacker sends packets with fake IP (looks like trusted server)</td></tr>
+        <tr><td>Email Spoofing</td><td>Email sender address</td><td>Email appears to come from "ceo@company.com" but it's fake</td></tr>
+        <tr><td>DNS Spoofing</td><td>Domain name resolution</td><td>Redirects users to fake website</td></tr>
+        <tr><td>ARP Spoofing</td><td>MAC address</td><td>Intercepts network traffic on local network</td></tr>
+        <tr><td>Caller ID Spoofing</td><td>Phone number</td><td>Fake phone call appears to come from bank</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- EAVESDROPPING -->
+  <div class="topic-card highlight-red">
+    <div class="topic-label">ATTACK 5</div>
+    <div class="topic-title">Eavesdropping (ઈવ્સડ્રૉપિંગ) <span class="mcq-ref">Q11, Q67</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Eavesdropping</strong> = Secretly observing/listening to communication WITHOUT altering it. A passive attack that violates Confidentiality.
+      </div>
+      <p><strong>Key characteristic:</strong> <span class="badge red">PASSIVE</span> — attacker only reads/listens, does NOT modify anything.</p>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Attacker on same Wi-Fi network uses packet sniffer to read all network traffic. They see your unencrypted messages → <strong>Eavesdropping</strong>.<br><br>
+        Q11: "Secretly observing communication without altering it" = Eavesdropping (Answer = A)</p>
+      </div>
+      <div class="key-point">Eavesdropping = PASSIVE attack (no modification). Contrast with active attacks that modify data.</div>
+    </div>
+  </div>
+
+  <!-- TRAFFIC ANALYSIS -->
+  <div class="topic-card highlight-red">
+    <div class="topic-label">ATTACK 6</div>
+    <div class="topic-title">Traffic Analysis Attack (ટ્રાફિક વિશ્લેષણ) <span class="mcq-ref">Q64</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Traffic Analysis</strong> = An attack that studies communication PATTERNS (who communicates with whom, when, how often, message length) rather than the actual message content, to extract useful information.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Even if messages are encrypted, an attacker notices: "This computer sends lots of data to a medical server every day at 9 AM." → Can infer the person visits a doctor regularly, even without reading any message content.</p>
+      </div>
+      <div class="key-point">Q64: "Analyzing communication PATTERNS rather than message contents" = Traffic Analysis (Answer = A)</div>
+    </div>
+  </div>
+
+  <!-- AUDIT TRAIL -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">DEFENSE MECHANISM 4</div>
+    <div class="topic-title">Audit Trail (ઓડિટ ટ્રેલ) <span class="mcq-ref">Q51</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Audit Trail</strong> = A chronological record of system activities, including login attempts, access events, file operations, and administrative actions. Used for forensic analysis and compliance.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Bank's audit trail shows: User "admin" logged in at 2:14 AM, accessed 5,000 customer records, then logged out. This unusual access pattern triggers a security review.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION 3: MODULAR ARITHMETIC ===== -->
+<section class="section" id="sec3">
+  <div class="section-header">
+    <div class="section-icon amber">🔢</div>
+    <div class="section-title-wrap">
+      <div class="section-num">UNIT 03 · Q70–Q95</div>
+      <div class="section-title">Modular Arithmetic</div>
+      <div class="section-title-gu">મોડ્યુલર અંકગણિત</div>
+    </div>
+  </div>
+
+  <!-- WHAT IS MODULAR ARITHMETIC -->
+  <div class="topic-card highlight-amber">
+    <div class="topic-label">CORE CONCEPT</div>
+    <div class="topic-title">What is Modular Arithmetic?</div>
+    <div class="topic-title-gu">મોડ્યુલર અંકગણિત શું છે?</div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Modular Arithmetic</strong> = A system of arithmetic where numbers "wrap around" after reaching a certain value called the <strong>modulus</strong>. It deals with remainders.
+      </div>
+      <p><strong>Think of it like a clock:</strong></p>
+      <div class="example-box">
+        <div class="ex-label">Clock Analogy</div>
+        <p>A 12-hour clock uses modulus 12. After 12, it goes back to 1.<br>
+        15:00 in 12-hour format = 15 mod 12 = <strong>3</strong> (3 PM)</p>
+      </div>
+      <div class="formula-box">
+        a mod n = r, where r is the REMAINDER when a is divided by n
+        <br><span style="color:var(--muted)">Example: 17 mod 5 = 2 (because 17 ÷ 5 = 3 remainder 2)</span>
+      </div>
+      <p><strong>Why used in Cryptography?</strong></p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Modulus keeps results within a fixed range (bounded results)</li>
+        <li><span class="step-num">2</span>Mathematical operations stay manageable in size</li>
+        <li><span class="step-num">3</span>Forms the basis of RSA, Diffie-Hellman, and other public key systems</li>
+        <li><span class="step-num">4</span>One-way property: easy to compute forward, hard to reverse</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- HOW TO CALCULATE MOD -->
+  <div class="topic-card highlight-amber">
+    <div class="topic-label">HOW TO CALCULATE</div>
+    <div class="topic-title">Step-by-Step Modular Arithmetic Calculation</div>
+    <div class="topic-body">
+      <div class="formula-box">
+        a mod n = a − (n × ⌊a/n⌋)
+        <br><span style="color:var(--muted)">⌊a/n⌋ = floor (integer part only, no decimal)</span>
+      </div>
+      <p><strong>All MCQ Solutions with Steps:</strong></p>
+      <table class="theory-table">
+        <tr><th>Q#</th><th>Problem</th><th>Calculation</th><th>Answer</th></tr>
+        <tr><td>Q71</td><td>17 mod 5</td><td>17 ÷ 5 = 3 rem <strong>2</strong></td><td>B = 2 ✗ Wait: 17 ÷ 5 = 3.4 → 3×5=15 → 17-15=<strong>2</strong></td></tr>
+        <tr><td>Q73</td><td>45 mod 8</td><td>45 ÷ 8 = 5 rem <strong>5</strong> (5×8=40, 45-40=5)</td><td>C = 5</td></tr>
+        <tr><td>Q75</td><td>64 mod 9</td><td>64 ÷ 9 = 7 rem <strong>1</strong> (7×9=63, 64-63=1)</td><td>A = 1</td></tr>
+        <tr><td>Q76</td><td>53 mod 7</td><td>53 ÷ 7 = 7 rem <strong>4</strong> → Wait: 7×7=49, 53-49=<strong>4</strong>... Hmm, check: 7×7=49, 7×8=56&gt;53. So r=4. But ans=D=6? Let me verify: 53÷7=7.57→7×7=49→53-49=4. Q76 answer per key = D = 6 … likely 53 mod 7: 7×7=49, remainder=4. MCQ may have typo, go with provided answer key = D.</td><td>D (per answer key)</td></tr>
+        <tr><td>Q77</td><td>81 mod 10</td><td>81 ÷ 10 = 8 rem <strong>1</strong> (8×10=80, 81-80=1)</td><td>B = 1</td></tr>
+        <tr><td>Q78</td><td>77 mod 9</td><td>77 ÷ 9 = 8 rem <strong>5</strong> (8×9=72, 77-72=5)</td><td>B = 5</td></tr>
+        <tr><td>Q79</td><td>95 mod 12</td><td>95 ÷ 12 = 7 rem <strong>11</strong> (7×12=84, 95-84=11)</td><td>C = 11</td></tr>
+        <tr><td>Q80</td><td>125 mod 8</td><td>125 ÷ 8 = 15 rem <strong>5</strong> (15×8=120, 125-120=5)</td><td>B = 5</td></tr>
+        <tr><td>Q81</td><td>144 mod 11</td><td>144 ÷ 11 = 13 rem <strong>1</strong> (13×11=143, 144-143=1)</td><td>B = 1</td></tr>
+        <tr><td>Q83</td><td>173 mod 12</td><td>173 ÷ 12 = 14 rem <strong>5</strong>... wait: 14×12=168, 173-168=5. But ans=A=4. Check: 173÷12=14.41→14×12=168→173-168=5. Likely MCQ answer key is A=4 (possible typo), follow answer key.</td><td>A = 4 (per key)</td></tr>
+        <tr><td>Q84</td><td>210 mod 13</td><td>210 ÷ 13 = 16 rem <strong>2</strong> (16×13=208, 210-208=2)</td><td>B = 2</td></tr>
+        <tr><td>Q86</td><td>256 mod 15</td><td>256 ÷ 15 = 17 rem <strong>1</strong> (17×15=255, 256-255=1)</td><td>B = 1</td></tr>
+        <tr><td>Q87</td><td>321 mod 14</td><td>321 ÷ 14 = 22 rem <strong>13</strong>... wait: 22×14=308, 321-308=13. But ans=C=11. 23×14=322&gt;321. So r=13. MCQ key says C=11, follow key.</td><td>C = 11 (per key)</td></tr>
+        <tr><td>Q89</td><td>305 mod 9</td><td>305 ÷ 9 = 33 rem <strong>8</strong> (33×9=297, 305-297=8). Ans key = D = 5.</td><td>D = 5 (per key)</td></tr>
+        <tr><td>Q90</td><td>412 mod 15</td><td>412 ÷ 15 = 27 rem <strong>7</strong> (27×15=405, 412-405=7)</td><td>A = 7</td></tr>
+        <tr><td>Q92</td><td>512 mod 13</td><td>512 ÷ 13 = 39 rem <strong>5</strong> (39×13=507, 512-507=5)</td><td>B = 5</td></tr>
+        <tr><td>Q93</td><td>999 mod 16</td><td>999 ÷ 16 = 62 rem <strong>7</strong> (62×16=992, 999-992=7)</td><td>C = 7</td></tr>
+        <tr><td>Q96</td><td>725 mod 17</td><td>725 ÷ 17 = 42 rem <strong>11</strong> (42×17=714, 725-714=11)</td><td>A = 11</td></tr>
+      </table>
+      <div class="key-point">SHORTCUT: Divide → Find integer quotient → Multiply back → Subtract. That remainder = answer!</div>
+    </div>
+  </div>
+
+  <!-- CONGRUENCE -->
+  <div class="topic-card highlight-amber">
+    <div class="topic-label">CONCEPT</div>
+    <div class="topic-title">Congruence in Modular Arithmetic <span class="mcq-ref">Q72</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>a ≡ b (mod n)</strong> means a and b leave the <strong>SAME REMAINDER</strong> when divided by n. We say "a is congruent to b modulo n."
+      </div>
+      <div class="formula-box">
+        a ≡ b (mod n) ⟺ n divides (a - b) evenly
+        <br><span style="color:var(--muted)">Example: 17 ≡ 2 (mod 5) because both give remainder 2 when divided by 5.</span>
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Is 23 ≡ 3 (mod 5)?<br>23 mod 5 = 3 ✓ and 3 mod 5 = 3 ✓ → YES, they are congruent.<br><br>
+        14 ≡ 2 (mod 4)? 14 mod 4 = 2, 2 mod 4 = 2 → YES</p>
+      </div>
+      <div class="key-point">Q72 Answer = B: a ≡ b (mod n) means a and b leave the same remainder when divided by n.</div>
+    </div>
+  </div>
+
+  <!-- MODULAR PROPERTIES -->
+  <div class="topic-card highlight-amber">
+    <div class="topic-label">PROPERTIES</div>
+    <div class="topic-title">Properties of Modular Arithmetic <span class="mcq-ref">Q74, Q82, Q85, Q88, Q91, Q94, Q95</span></div>
+    <div class="topic-body">
+      <p><strong>Key Properties used in Cryptography:</strong></p>
+      <table class="theory-table">
+        <tr><th>Property</th><th>Formula</th><th>Example</th></tr>
+        <tr><td>Addition</td><td>(a + b) mod n = [(a mod n) + (b mod n)] mod n</td><td>(7+5) mod 4 = [7 mod 4 + 5 mod 4] mod 4 = [3+1] mod 4 = 0</td></tr>
+        <tr><td>Subtraction</td><td>(a - b) mod n = [(a mod n) - (b mod n)] mod n</td><td>(10-3) mod 4 = [2-3] mod 4 = -1 mod 4 = 3</td></tr>
+        <tr><td>Multiplication</td><td>(a × b) mod n = [(a mod n) × (b mod n)] mod n</td><td>(7×5) mod 4 = [3×1] mod 4 = 3</td></tr>
+      </table>
+      <div class="def-box">
+        <strong>Why apply modulus after operations? (Q82, Q85, Q88, Q91, Q95)</strong><br>
+        Modulus is applied to <strong>maintain bounded results</strong> — keeping numbers within a fixed range. In cryptography, this prevents numbers from growing infinitely large during calculations.
+      </div>
+      <div class="key-point">Q74 Answer = C: Distributive property of modulus over addition.<br>Q82/Q85/Q88/Q91/Q95 Answer = B: "To maintain bounded results"</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION 4: SYMMETRIC ENCRYPTION ===== -->
+<section class="section" id="sec4">
+  <div class="section-header">
+    <div class="section-icon purple">🔑</div>
+    <div class="section-title-wrap">
+      <div class="section-num">UNIT 04 · Q97–Q115</div>
+      <div class="section-title">Symmetric Encryption</div>
+      <div class="section-title-gu">સિમેટ્રિક એન્ક્રિપ્શન</div>
+    </div>
+  </div>
+
+  <!-- WHAT IS SYMMETRIC -->
+  <div class="topic-card highlight-purple">
+    <div class="topic-label">CORE CONCEPT</div>
+    <div class="topic-title">What is Symmetric Encryption?</div>
+    <div class="topic-title-gu">સિમેટ્રિક એન્ક્રિપ્શન શું છે?</div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Symmetric Encryption</strong> = A type of encryption where the <strong>SAME single key</strong> is used for BOTH encryption (converting plaintext to ciphertext) and decryption (converting ciphertext back to plaintext). Both sender and receiver must share this secret key securely.
+      </div>
+      <div class="formula-box">
+        Encryption: Plaintext + Secret Key → Ciphertext
+        <br>Decryption: Ciphertext + Same Secret Key → Plaintext
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Simple Example</div>
+        <p>Alice and Bob agree on a shared key: "KEY123".<br>
+        Alice encrypts "HELLO" using KEY123 → sends encrypted gibberish to Bob.<br>
+        Bob decrypts using the SAME KEY123 → reads "HELLO".<br><br>
+        If Eve intercepts, she cannot read it (no key). But if Eve somehow gets KEY123, she can read everything!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYMMETRIC ALGORITHMS -->
+  <div class="topic-card highlight-purple">
+    <div class="topic-label">ALGORITHMS</div>
+    <div class="topic-title">Common Symmetric Encryption Algorithms</div>
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Algorithm</th><th>Full Form</th><th>Key Size</th><th>Note</th></tr>
+        <tr><td><strong>DES</strong></td><td>Data Encryption Standard</td><td>56-bit</td><td>Old, now considered weak (broken by brute force)</td></tr>
+        <tr><td><strong>3DES</strong></td><td>Triple DES</td><td>112/168-bit</td><td>DES applied 3 times, stronger but slow</td></tr>
+        <tr><td><strong>AES</strong></td><td>Advanced Encryption Standard</td><td>128/192/256-bit</td><td>Current standard, fast and very secure</td></tr>
+        <tr><td><strong>RC4</strong></td><td>Rivest Cipher 4</td><td>Variable</td><td>Stream cipher, used in SSL/WEP (now deprecated)</td></tr>
+        <tr><td><strong>Blowfish</strong></td><td>—</td><td>32–448-bit</td><td>Fast block cipher, good for passwords</td></tr>
+      </table>
+      <div class="badge-list">
+        <span class="badge purple">DES = Data Encryption Standard</span>
+        <span class="badge purple">AES = Advanced Encryption Standard</span>
+        <span class="badge purple">3DES = Triple DES</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVANTAGES & DISADVANTAGES -->
+  <div class="topic-card highlight-purple">
+    <div class="topic-label">PROS & CONS</div>
+    <div class="topic-title">Symmetric Encryption — Advantages & Disadvantages <span class="mcq-ref">Q97-Q115</span></div>
+    <div class="topic-body">
+      <div class="grid2">
+        <div class="compare-card">
+          <div class="compare-title c-blue">✅ Advantages</div>
+          <ul style="font-size:13px;padding-left:16px;line-height:1.9;">
+            <li><strong>Fast</strong> — much faster than asymmetric encryption (Q98, Q100, Q108, Q109, Q112)</li>
+            <li>Efficient for <strong>large data volumes</strong> (Q100, Q108, Q109, Q111, Q112, Q113)</li>
+            <li>Simple algorithm design</li>
+            <li>Low computational overhead</li>
+          </ul>
+        </div>
+        <div class="compare-card">
+          <div class="compare-title c-purple">❌ Disadvantages</div>
+          <ul style="font-size:13px;padding-left:16px;line-height:1.9;">
+            <li><strong>Key distribution problem</strong> — how to securely share the key? (Q102, Q107, Q110)</li>
+            <li>If key is compromised, all communications are exposed</li>
+            <li>Scalability — N users need N×(N-1)/2 keys</li>
+            <li>No non-repudiation (both parties have same key)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="def-box">
+        <strong>Key Distribution Problem (Q102, Q107, Q110):</strong><br>
+        Before two parties can use symmetric encryption, they must secretly agree on a shared key. But how? If they meet in person = inconvenient. If they send key over internet = key can be intercepted! This is the main challenge of symmetric encryption.
+      </div>
+      <div class="key-point">Q97 = C (secrecy of shared key) | Q98 = B (faster) | Q99 = B (share secret key securely) | Q100 = A (symmetric faster) | Q101 = B (both encryption &amp; decryption) | Q102 = C (secure key distribution) | Q107 = D (key distribution challenges) | Q110 = B (key distribution)</div>
+    </div>
+  </div>
+
+  <!-- HYBRID ENCRYPTION -->
+  <div class="topic-card highlight-purple">
+    <div class="topic-label">ADVANCED CONCEPT</div>
+    <div class="topic-title">Hybrid Encryption (Symmetric + Asymmetric) <span class="mcq-ref">Q104, Q106</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Hybrid Encryption</strong> = Uses BOTH symmetric and asymmetric encryption together. Asymmetric encryption securely exchanges the symmetric key, then symmetric encryption handles the actual data (for speed).
+      </div>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Generate a random symmetric session key</li>
+        <li><span class="step-num">2</span>Encrypt the symmetric key using receiver's PUBLIC key (asymmetric)</li>
+        <li><span class="step-num">3</span>Send encrypted symmetric key to receiver</li>
+        <li><span class="step-num">4</span>Receiver decrypts it with their PRIVATE key → gets symmetric session key</li>
+        <li><span class="step-num">5</span>Both parties now use symmetric key to encrypt large amounts of data (fast!)</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-label">Real-world Use</div>
+        <p>HTTPS (SSL/TLS) uses hybrid encryption: RSA (asymmetric) to exchange AES key, then AES (symmetric) to encrypt all web traffic.</p>
+      </div>
+      <div class="key-point">Q104 = C: Combination of symmetric and asymmetric for both confidentiality and key exchange. Q106 = C same.</div>
+    </div>
+  </div>
+
+  <!-- BLOCK vs STREAM -->
+  <div class="topic-card">
+    <div class="topic-label">TYPES OF SYMMETRIC CIPHERS</div>
+    <div class="topic-title">Block Cipher vs Stream Cipher</div>
+    <div class="topic-body">
+      <div class="grid2">
+        <div class="compare-card">
+          <div class="compare-title c-blue">Block Cipher</div>
+          <p style="font-size:13px;">Encrypts fixed-size blocks of data (e.g., 128 bits at a time).<br><br>Examples: AES, DES, 3DES, Blowfish<br><br>Better for stored data and files.</p>
+        </div>
+        <div class="compare-card">
+          <div class="compare-title c-purple">Stream Cipher</div>
+          <p style="font-size:13px;">Encrypts one bit or byte at a time, continuously.<br><br>Examples: RC4, ChaCha20<br><br>Better for real-time communication (voice, video).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION 5: ASYMMETRIC / PKI ===== -->
+<section class="section" id="sec5">
+  <div class="section-header">
+    <div class="section-icon blue">🗝️</div>
+    <div class="section-title-wrap">
+      <div class="section-num">UNIT 05 · Q116–Q140</div>
+      <div class="section-title">Asymmetric Encryption & PKI</div>
+      <div class="section-title-gu">અસિમેટ્રિક એન્ક્રિપ્શન અને PKI</div>
+    </div>
+  </div>
+
+  <!-- ASYMMETRIC BASICS -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">CORE CONCEPT</div>
+    <div class="topic-title">What is Asymmetric Encryption?</div>
+    <div class="topic-title-gu">અસિમેટ્રિક એન્ક્રિપ્શન શું છે?</div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Asymmetric Encryption (Public Key Cryptography)</strong> = Uses TWO mathematically related but DIFFERENT keys: a <strong>Public Key</strong> (shared openly) and a <strong>Private Key</strong> (kept secret). Data encrypted with one key can ONLY be decrypted with the other key in the pair.
+      </div>
+      <div class="formula-box">
+        For Confidentiality: Encrypt with Receiver's PUBLIC KEY → Decrypt with Receiver's PRIVATE KEY
+        <br>For Digital Signature: Sign with Sender's PRIVATE KEY → Verify with Sender's PUBLIC KEY
+      </div>
+      <div class="fullform">PKI = Public Key Infrastructure</div>
+      <div class="fullform">RSA = Rivest–Shamir–Adleman</div>
+      <div class="fullform">ECC = Elliptic Curve Cryptography</div>
+    </div>
+  </div>
+
+  <!-- PUBLIC KEY / PRIVATE KEY -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">KEY CONCEPT</div>
+    <div class="topic-title">Public Key vs Private Key <span class="mcq-ref">Q117, Q118, Q122, Q123, Q124, Q127, Q137</span></div>
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Feature</th><th>Public Key (સાર્વજનિક ચાવી)</th><th>Private Key (ખાનગી ચાવી)</th></tr>
+        <tr><td>Visibility</td><td>Shared openly with everyone</td><td>Kept secret by the owner only</td></tr>
+        <tr><td>Used for</td><td>Encrypt messages to the owner; Verify digital signatures</td><td>Decrypt received messages; Create digital signatures</td></tr>
+        <tr><td>Distribution</td><td>Freely distributed (in certificates)</td><td>NEVER shared with anyone</td></tr>
+        <tr><td>MCQ Answers</td><td>Q118=B, Q119=C (verify sig), Q122=B, Q124=B, Q127=C</td><td>Q117=C, Q119=C, Q123=C, Q137=C</td></tr>
+      </table>
+      <div class="example-box">
+        <div class="ex-label">Example — Confidentiality (Sending Secret Message)</div>
+        <p>
+          Bob wants to send a secret message to Alice:<br>
+          1. Bob gets Alice's <strong>PUBLIC KEY</strong> (available to anyone)<br>
+          2. Bob encrypts message using Alice's PUBLIC KEY<br>
+          3. Sends encrypted message to Alice<br>
+          4. Only Alice can decrypt it using her <strong>PRIVATE KEY</strong><br>
+          → Even if intercepted, nobody else can read it!
+        </p>
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example — Digital Signature (Authentication)</div>
+        <p>
+          Alice wants to sign a document:<br>
+          1. Alice signs (encrypts hash) using her <strong>PRIVATE KEY</strong><br>
+          2. Sends signed document to Bob<br>
+          3. Bob verifies signature using Alice's <strong>PUBLIC KEY</strong><br>
+          4. If valid → document truly came from Alice (non-repudiation!)
+        </p>
+      </div>
+      <div class="key-point">RULE: Encrypt with PUBLIC → Decrypt with PRIVATE. Sign with PRIVATE → Verify with PUBLIC.</div>
+    </div>
+  </div>
+
+  <!-- ASYMMETRIC CHARACTERISTICS -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">COMPARISON</div>
+    <div class="topic-title">Asymmetric vs Symmetric — Complete Comparison <span class="mcq-ref">Q111-Q116, Q128-Q132, Q136, Q140</span></div>
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Feature</th><th>Symmetric</th><th>Asymmetric</th></tr>
+        <tr><td>Keys</td><td>1 shared key (same for both)</td><td>2 keys (public + private)</td></tr>
+        <tr><td>Speed</td><td>✅ FAST (Q98, Q100, Q108, Q112, Q115)</td><td>❌ SLOW (Q128, Q130, Q136, Q140)</td></tr>
+        <tr><td>Key distribution</td><td>❌ Hard (must share secretly)</td><td>✅ Easy (public key can be shared openly)</td></tr>
+        <tr><td>Best for</td><td>Large data, bulk encryption</td><td>Key exchange, digital signatures, small data</td></tr>
+        <tr><td>Example algorithms</td><td>AES, DES, 3DES, RC4</td><td>RSA, ECC, Diffie-Hellman</td></tr>
+        <tr><td>Non-repudiation</td><td>❌ No</td><td>✅ Yes (with digital signatures)</td></tr>
+        <tr><td>Scalability</td><td>Poor (N² key pairs for N users)</td><td>Better (each user only needs 1 key pair)</td></tr>
+      </table>
+      <div class="key-point">Q111 = D (symmetric faster for large data) | Q128 = C (asymmetric slower but simplifies key exchange) | Q130 = D / Q131 = C / Q132 = C (asymmetric = 2 different keys)</div>
+    </div>
+  </div>
+
+  <!-- PRIME NUMBERS IN CRYPTO -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">MATHEMATICS</div>
+    <div class="topic-title">Large Prime Numbers in Asymmetric Cryptography <span class="mcq-ref">Q120, Q125, Q133</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Why Prime Numbers?</strong> Asymmetric algorithms like RSA rely on the mathematical difficulty of factoring very large numbers that are products of two large prime numbers. This is called the <strong>Integer Factorization Problem</strong>.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">RSA Example</div>
+        <p>RSA picks two large primes p and q (each hundreds of digits long).<br>
+        n = p × q (public modulus)<br><br>
+        Easy: Given p and q, compute n = p × q in milliseconds.<br>
+        Hard: Given only n, find p and q → takes billions of years with today's computers!<br><br>
+        This one-way difficulty forms the security of RSA.</p>
+      </div>
+      <div class="key-point">Q120 = D, Q125 = B, Q133 = B: Large prime numbers are fundamental to asymmetric algorithms.</div>
+    </div>
+  </div>
+
+  <!-- DIGITAL SIGNATURES -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">CONCEPT</div>
+    <div class="topic-title">Digital Signatures (ડિજિટલ સિગ્નેચર) <span class="mcq-ref">Q119, Q135, Q138</span></div>
+    <div class="topic-body">
+      <div class="fullform">DS = Digital Signature</div>
+      <div class="def-box">
+        <strong>Digital Signature</strong> = A cryptographic mechanism that provides AUTHENTICATION, INTEGRITY, and NON-REPUDIATION for digital documents and messages. Created using the sender's private key.
+      </div>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Sender creates a HASH of the message (e.g., SHA-256)</li>
+        <li><span class="step-num">2</span>Sender encrypts the hash using their PRIVATE KEY → this is the digital signature</li>
+        <li><span class="step-num">3</span>Sender sends: original message + digital signature</li>
+        <li><span class="step-num">4</span>Receiver verifies using sender's PUBLIC KEY → decrypts signature to get hash</li>
+        <li><span class="step-num">5</span>Receiver also hashes the received message and compares → if equal, message is authentic!</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-label">Real World</div>
+        <p>Software downloads often include a digital signature. You can verify the downloaded file is really from the original developer (not tampered) by checking the signature with their public key.</p>
+      </div>
+      <div class="key-point">Q119 = C: Verify digital signature using sender's PUBLIC KEY.<br>Q138 = B: Digital signature ensures both authenticity and integrity.<br>Q135 = C: Digital signature verification confirms authenticity.</div>
+    </div>
+  </div>
+
+  <!-- HASH FUNCTION -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">CONCEPT</div>
+    <div class="topic-title">Hash Functions (હેશ ફંક્શન) <span class="mcq-ref">Q126</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Hash Function</strong> = A mathematical function that takes variable-length input and produces a FIXED-length output (called hash/digest). It is a one-way function (cannot be reversed).
+      </div>
+      <div class="badge-list">
+        <span class="badge green">MD5 = Message Digest 5 (128-bit output)</span>
+        <span class="badge green">SHA-1 = Secure Hash Algorithm 1 (160-bit)</span>
+        <span class="badge green">SHA-256 = 256-bit output</span>
+        <span class="badge green">SHA-3 = Latest SHA standard</span>
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>SHA-256("HELLO") = "185f8db32..."  (64 hex chars = 256 bits, always!)<br>
+        SHA-256("HELLO!") = "3f79bb7b..." (completely different despite tiny change)<br><br>
+        This is called the <strong>Avalanche Effect</strong> — small input change = completely different hash.</p>
+      </div>
+      <div class="key-point">Q126 = C: Hash function produces fixed-length output from variable-length input.</div>
+    </div>
+  </div>
+
+  <!-- KEY SPACE -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">CONCEPT</div>
+    <div class="topic-title">Key Space (કી સ્પેસ) <span class="mcq-ref">Q134, Q139</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Key Space</strong> = The total number of possible keys that can be used in a cipher or encryption system. A larger key space means stronger security (harder to brute force).
+      </div>
+      <div class="formula-box">
+        Key Space = 2^(key length in bits)
+        <br><span style="color:var(--muted)">56-bit DES: 2^56 = ~72 quadrillion keys</span>
+        <br><span style="color:var(--muted)">128-bit AES: 2^128 = impossible to brute force with current tech</span>
+      </div>
+      <div class="key-point">Q134 = D, Q139 = C: Key space = total possible keys usable in a cipher.</div>
+    </div>
+  </div>
+
+  <!-- PKI -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">INFRASTRUCTURE</div>
+    <div class="topic-title">Public Key Infrastructure — PKI <span class="mcq-ref">General</span></div>
+    <div class="topic-body">
+      <div class="fullform">PKI = Public Key Infrastructure</div>
+      <div class="fullform">CA = Certificate Authority</div>
+      <div class="fullform">CRL = Certificate Revocation List</div>
+      <div class="fullform">SSL = Secure Sockets Layer</div>
+      <div class="fullform">TLS = Transport Layer Security</div>
+      <div class="def-box">
+        <strong>PKI</strong> = A system for creating, managing, distributing, and revoking digital certificates. It enables secure public key distribution by verifying that a public key truly belongs to who it claims to.
+      </div>
+      <p><strong>PKI Components:</strong></p>
+      <table class="theory-table">
+        <tr><th>Component</th><th>Role</th></tr>
+        <tr><td>Certificate Authority (CA)</td><td>Issues and signs digital certificates (trusted third party)</td></tr>
+        <tr><td>Digital Certificate</td><td>Binds public key to an entity's identity</td></tr>
+        <tr><td>Registration Authority (RA)</td><td>Verifies identity before CA issues certificate</td></tr>
+        <tr><td>Certificate Revocation List (CRL)</td><td>List of certificates that have been revoked (compromised)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CONFIDENTIALITY IN PKI -->
+  <div class="topic-card highlight-blue">
+    <div class="topic-label">IMPORTANT MCQ CONCEPT</div>
+    <div class="topic-title">Confidentiality vs Authentication in PKI <span class="mcq-ref">Q121, Q122</span></div>
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Goal</th><th>Encrypt/Sign with</th><th>Decrypt/Verify with</th></tr>
+        <tr><td>CONFIDENTIALITY (only receiver can read)</td><td>Receiver's PUBLIC KEY</td><td>Receiver's PRIVATE KEY</td></tr>
+        <tr><td>AUTHENTICATION (prove who sender is)</td><td>Sender's PRIVATE KEY</td><td>Sender's PUBLIC KEY</td></tr>
+      </table>
+      <div class="key-point">Q121 = C: Confidentiality achieved by encrypting with receiver's PUBLIC key.<br>Q122 = B: To send secure message to owner, use their PUBLIC key.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION 6: OS SECURITY ===== -->
+<section class="section" id="sec6">
+  <div class="section-header">
+    <div class="section-icon teal">💻</div>
+    <div class="section-title-wrap">
+      <div class="section-num">UNIT 06 · Q141–Q165</div>
+      <div class="section-title">Operating System Security</div>
+      <div class="section-title-gu">ઓપરેટિંગ સિસ્ટમ સુરક્ષા</div>
+    </div>
+  </div>
+
+  <!-- OS SECURITY OVERVIEW -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">OVERVIEW</div>
+    <div class="topic-title">OS Security Concepts — Complete Map</div>
+    <div class="topic-body">
+      <p>Operating System (OS) security involves mechanisms that protect the OS and the software/data running on it from unauthorized access, modification, or disruption.</p>
+      <div class="badge-list">
+        <span class="badge green">Access Control</span>
+        <span class="badge green">Process Isolation</span>
+        <span class="badge green">Application Control Policy</span>
+        <span class="badge green">Least Privilege Principle</span>
+        <span class="badge green">Permission Management</span>
+        <span class="badge green">Security Updates</span>
+        <span class="badge green">ACL = Access Control List</span>
+      </div>
+      <div class="fullform">OS = Operating System</div>
+      <div class="fullform">ACL = Access Control List</div>
+      <div class="fullform">RBAC = Role-Based Access Control</div>
+      <div class="fullform">DAC = Discretionary Access Control</div>
+      <div class="fullform">MAC = Mandatory Access Control</div>
+    </div>
+  </div>
+
+  <!-- ACCESS CONTROL -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">MECHANISM 1</div>
+    <div class="topic-title">Access Control (ઍક્સેસ કંટ્રોલ) <span class="mcq-ref">Q142, Q143, Q147, Q149, Q151, Q153, Q155, Q157, Q160, Q163</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Access Control</strong> = A security mechanism that restricts users to only the resources and operations they are PERMITTED to access, based on their identity and assigned privileges/roles.
+      </div>
+      <p><strong>Types of Access Control:</strong></p>
+      <table class="theory-table">
+        <tr><th>Type</th><th>Full Form</th><th>How it works</th><th>Example</th></tr>
+        <tr><td>DAC</td><td>Discretionary AC</td><td>Owner decides who can access their resources</td><td>File owner sets read/write permissions</td></tr>
+        <tr><td>MAC</td><td>Mandatory AC</td><td>System enforces access based on labels (Classified, Secret)</td><td>Military/Government systems</td></tr>
+        <tr><td>RBAC</td><td>Role-Based AC</td><td>Access based on user's role (Admin, User, Guest)</td><td>Hospital: Doctors see all records, nurses see limited</td></tr>
+      </table>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>In a company file server:<br>
+        - HR Manager can read/write HR files<br>
+        - Finance team can read/write Finance files<br>
+        - Regular employees can only read shared documents<br>
+        → This is <strong>Role-Based Access Control (RBAC)</strong></p>
+      </div>
+      <div class="def-box">
+        <strong>Access Control List (ACL)</strong> = A list attached to each resource that specifies which users/groups have what permissions (read, write, execute, delete).
+      </div>
+      <div class="key-point">Q142 = D (Access Control limits user actions by role) | Q143 = B (restricts to permitted resources) | Q149 = A, Q153 = A, Q155 = C, Q160 = A (ACL restricts based on permissions)</div>
+    </div>
+  </div>
+
+  <!-- PROCESS ISOLATION -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">MECHANISM 2</div>
+    <div class="topic-title">Process Isolation (પ્રોસેસ આઈસોલેશન) <span class="mcq-ref">Q144, Q154, Q164</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Process Isolation</strong> = An OS mechanism that keeps processes (running programs) separated from each other in memory, preventing one process from accessing or interfering with another's data or code.
+      </div>
+      <p><strong>How it works:</strong></p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Each process gets its own isolated memory space (Virtual Memory)</li>
+        <li><span class="step-num">2</span>Process A cannot read/write Process B's memory</li>
+        <li><span class="step-num">3</span>If Process A crashes, Process B continues running</li>
+        <li><span class="step-num">4</span>Malware in one process cannot easily spread to others</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Your web browser (Chrome) and your music player (Spotify) run as separate isolated processes. A bug in Spotify cannot crash your browser tabs or access your browser passwords → <strong>Process Isolation working!</strong></p>
+      </div>
+      <div class="key-point">Q144 = A, Q154 = B, Q164 = B: Process isolation = OS mechanism to isolate apps and prevent interference.</div>
+    </div>
+  </div>
+
+  <!-- APPLICATION CONTROL POLICY -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">MECHANISM 3</div>
+    <div class="topic-title">Application Control Policy (એપ્લિકેશન કંટ્રોલ) <span class="mcq-ref">Q145, Q146, Q148, Q152, Q156, Q159, Q162</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Application Control Policy / Application Whitelisting</strong> = An OS feature that restricts which programs can be executed or installed on a system, preventing unauthorized software from running.
+      </div>
+      <div class="grid2">
+        <div class="compare-card">
+          <div class="compare-title c-blue">Whitelisting</div>
+          <p style="font-size:13px;">Only <strong>approved</strong> applications are allowed to run. Everything else is blocked by default. More secure but less flexible.</p>
+        </div>
+        <div class="compare-card">
+          <div class="compare-title c-purple">Blacklisting</div>
+          <p style="font-size:13px;">Known <strong>bad</strong> applications are blocked. Everything else is allowed. Less secure (new malware not yet on blacklist can run).</p>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>A company's IT policy says only Microsoft Office, Chrome, and approved business software can run on work computers. An employee cannot install games or unauthorized software. → <strong>Application Whitelisting</strong>.<br><br>
+        Antivirus uses blacklisting — it blocks known viruses/malware.</p>
+      </div>
+      <div class="key-point">Q145 = D, Q146 = D, Q148 = A (permission management), Q152 = A, Q156 = A, Q159 = A, Q162 = A: Application control policy prevents unauthorized application execution.</div>
+    </div>
+  </div>
+
+  <!-- LEAST PRIVILEGE -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">PRINCIPLE</div>
+    <div class="topic-title">Least Privilege Principle (લઘુત્તમ વિશેષાધિકાર) <span class="mcq-ref">Q150, Q158, Q161</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Principle of Least Privilege (PoLP)</strong> = Every user, program, or process should have ONLY the minimum access rights needed to perform its specific job function. No more, no less.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Examples</div>
+        <p>
+          ✅ A data entry clerk should only have READ/WRITE to the data entry form, NOT admin access to the whole database.<br><br>
+          ✅ A program that only needs to read files should NOT have write permissions.<br><br>
+          ❌ BAD PRACTICE: Giving everyone admin/administrator rights "just in case".<br><br>
+          If an account with least privilege is compromised, the attacker can only do limited damage — they don't have access to the whole system!
+        </p>
+      </div>
+      <p><strong>Why important?</strong></p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Limits damage if account is compromised (Q150)</li>
+        <li><span class="step-num">2</span>Reduces attack surface</li>
+        <li><span class="step-num">3</span>Prevents privilege escalation attacks</li>
+        <li><span class="step-num">4</span>Easier to track what each user does (accountability)</li>
+      </ul>
+      <div class="key-point">Q150 = B, Q158 = C, Q161 = A: Least privilege principle = restricts users to minimum required access rights.</div>
+    </div>
+  </div>
+
+  <!-- SECURITY UPDATES -->
+  <div class="topic-card highlight-green">
+    <div class="topic-label">BEST PRACTICE</div>
+    <div class="topic-title">Security Updates & Patch Management <span class="mcq-ref">Q141</span></div>
+    <div class="topic-body">
+      <div class="def-box">
+        <strong>Security Update / Patch</strong> = Software fix released by vendors to correct vulnerabilities, bugs, or security weaknesses in an operating system or application.
+      </div>
+      <div class="example-box">
+        <div class="ex-label">Example</div>
+        <p>Microsoft releases "Patch Tuesday" security updates every month. If your system is not patched, attackers can exploit known vulnerabilities (like EternalBlue used in WannaCry ransomware).<br><br>
+        Always apply security updates promptly → Best OS security practice (Q141 = D)</p>
+      </div>
+      <div class="badge-list">
+        <span class="badge green">OS patches</span>
+        <span class="badge green">Application updates</span>
+        <span class="badge green">Firmware updates</span>
+        <span class="badge green">Driver updates</span>
+        <span class="badge green">Anti-malware definition updates</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OS SECURITY SUMMARY -->
+  <div class="topic-card">
+    <div class="topic-label">QUICK REFERENCE</div>
+    <div class="topic-title">OS Security — Complete MCQ Answer Summary</div>
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Q#</th><th>Topic</th><th>Answer</th><th>Key Concept</th></tr>
+        <tr><td>Q141</td><td>Best OS security practice</td><td>D</td><td>Applying regular security updates</td></tr>
+        <tr><td>Q142</td><td>Limits actions by roles</td><td>D</td><td>Access Control</td></tr>
+        <tr><td>Q143</td><td>Restricts to permitted resources</td><td>B</td><td>Access Control</td></tr>
+        <tr><td>Q144</td><td>Isolates applications</td><td>A</td><td>Process Isolation</td></tr>
+        <tr><td>Q145</td><td>Restricts execution of untrusted programs</td><td>D</td><td>Application Control Policy</td></tr>
+        <tr><td>Q146</td><td>Prevents malicious software execution</td><td>D</td><td>Application Whitelisting</td></tr>
+        <tr><td>Q147</td><td>Restricts actions by privileges</td><td>D</td><td>Access Control Enforcement</td></tr>
+        <tr><td>Q148</td><td>Prevents unauthorized software install</td><td>A</td><td>Permission Management</td></tr>
+        <tr><td>Q149</td><td>Security policies-based access restriction</td><td>A</td><td>Access Control List (ACL)</td></tr>
+        <tr><td>Q150</td><td>Reduces damage if account compromised</td><td>B</td><td>Least Privilege Policy</td></tr>
+        <tr><td>Q151</td><td>Restricts execution by permissions</td><td>A</td><td>Access Control Mechanism</td></tr>
+        <tr><td>Q152</td><td>Prevents unauthorized app execution</td><td>A</td><td>Application Control Policy</td></tr>
+        <tr><td>Q153</td><td>File access restriction by permissions</td><td>A</td><td>Access Control List</td></tr>
+        <tr><td>Q154</td><td>Separates running processes</td><td>B</td><td>Process Isolation</td></tr>
+        <tr><td>Q155</td><td>File access by assigned permissions</td><td>C</td><td>Access Control List</td></tr>
+        <tr><td>Q156</td><td>Prevents unauthorized program execution</td><td>A</td><td>Application Control Policy</td></tr>
+        <tr><td>Q157</td><td>Restricts user access by permissions</td><td>A</td><td>Access Control Mechanism</td></tr>
+        <tr><td>Q158</td><td>Limits damage if account compromised</td><td>C</td><td>Least Privilege Principle</td></tr>
+        <tr><td>Q159</td><td>Prevents unauthorized software from running</td><td>A</td><td>Application Control Policy</td></tr>
+        <tr><td>Q160</td><td>File access restriction by permissions</td><td>A</td><td>Access Control List</td></tr>
+        <tr><td>Q161</td><td>Restricts to minimum access rights</td><td>A</td><td>Least Privilege Principle</td></tr>
+        <tr><td>Q162</td><td>Prevents unauthorized app execution</td><td>A</td><td>Application Control Policy</td></tr>
+        <tr><td>Q163</td><td>Restricts access by permissions</td><td>A</td><td>Access Control Mechanism</td></tr>
+        <tr><td>Q164</td><td>Isolates programs to prevent interference</td><td>B</td><td>Process Isolation</td></tr>
+        <tr><td>Q165</td><td>Restricts software installation privileges</td><td>A</td><td>Permission Enforcement</td></tr>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<!-- MASTER FULL FORMS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-icon amber">📋</div>
+    <div class="section-title-wrap">
+      <div class="section-num">REFERENCE</div>
+      <div class="section-title">Complete Full Forms List</div>
+      <div class="section-title-gu">સંપૂર્ণ ફૂલ ફૉર્મ સૂચિ</div>
+    </div>
+  </div>
+  <div class="topic-card">
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Abbr.</th><th>Full Form</th><th>Context</th></tr>
+        <tr><td>CIA</td><td>Confidentiality, Integrity, Availability</td><td>Core security triad</td></tr>
+        <tr><td>AES</td><td>Advanced Encryption Standard</td><td>Symmetric cipher (current standard)</td></tr>
+        <tr><td>DES</td><td>Data Encryption Standard</td><td>Symmetric cipher (old, 56-bit)</td></tr>
+        <tr><td>3DES</td><td>Triple DES</td><td>DES applied 3 times</td></tr>
+        <tr><td>RSA</td><td>Rivest–Shamir–Adleman</td><td>Asymmetric encryption algorithm</td></tr>
+        <tr><td>ECC</td><td>Elliptic Curve Cryptography</td><td>Efficient asymmetric crypto</td></tr>
+        <tr><td>PKI</td><td>Public Key Infrastructure</td><td>Digital certificate ecosystem</td></tr>
+        <tr><td>CA</td><td>Certificate Authority</td><td>Issues digital certificates</td></tr>
+        <tr><td>IDS</td><td>Intrusion Detection System</td><td>Monitors for suspicious activity</td></tr>
+        <tr><td>IPS</td><td>Intrusion Prevention System</td><td>Detects AND blocks intrusions</td></tr>
+        <tr><td>DoS</td><td>Denial of Service</td><td>Attack disrupting availability</td></tr>
+        <tr><td>DDoS</td><td>Distributed Denial of Service</td><td>DoS from multiple sources</td></tr>
+        <tr><td>MFA</td><td>Multi-Factor Authentication</td><td>Multiple identity verification</td></tr>
+        <tr><td>2FA</td><td>Two-Factor Authentication</td><td>Two-step identity verification</td></tr>
+        <tr><td>SSL</td><td>Secure Sockets Layer</td><td>Older web encryption protocol</td></tr>
+        <tr><td>TLS</td><td>Transport Layer Security</td><td>Modern web encryption (HTTPS)</td></tr>
+        <tr><td>ACL</td><td>Access Control List</td><td>Permission list for resources</td></tr>
+        <tr><td>RBAC</td><td>Role-Based Access Control</td><td>Access based on user role</td></tr>
+        <tr><td>DAC</td><td>Discretionary Access Control</td><td>Owner-managed access</td></tr>
+        <tr><td>MAC</td><td>Mandatory Access Control</td><td>System-enforced label-based access</td></tr>
+        <tr><td>PoLP</td><td>Principle of Least Privilege</td><td>Minimum required access</td></tr>
+        <tr><td>OS</td><td>Operating System</td><td>System software (Windows, Linux)</td></tr>
+        <tr><td>SHA</td><td>Secure Hash Algorithm</td><td>Hash function (SHA-256, SHA-3)</td></tr>
+        <tr><td>MD5</td><td>Message Digest 5</td><td>Hash function (128-bit, now weak)</td></tr>
+        <tr><td>VPN</td><td>Virtual Private Network</td><td>Secure tunnel over internet</td></tr>
+        <tr><td>SIEM</td><td>Security Information and Event Management</td><td>Log analysis platform</td></tr>
+        <tr><td>SOC</td><td>Security Operations Center</td><td>Team monitoring security events</td></tr>
+        <tr><td>CRL</td><td>Certificate Revocation List</td><td>List of revoked certificates</td></tr>
+        <tr><td>OTP</td><td>One-Time Password</td><td>Single-use authentication code</td></tr>
+        <tr><td>SQL</td><td>Structured Query Language</td><td>Database query language (SQL injection attack)</td></tr>
+        <tr><td>CAPTCHA</td><td>Completely Automated Public Turing test to tell Computers and Humans Apart</td><td>Bot prevention</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- MASTER EXAM TIPS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-icon purple">⚡</div>
+    <div class="section-title-wrap">
+      <div class="section-num">EXAM TIPS</div>
+      <div class="section-title">Key Points to Remember</div>
+      <div class="section-title-gu">યાદ રાખવાના મહત્ત્વના મુદ્દા</div>
+    </div>
+  </div>
+  <div class="topic-card">
+    <div class="topic-body">
+      <table class="theory-table">
+        <tr><th>Question Pattern</th><th>Almost Always Answer</th></tr>
+        <tr><td>"Ensures data accessible ONLY to authorized" / "hidden from unauthorized"</td><td>Confidentiality (ગોપનીયતા)</td></tr>
+        <tr><td>"Ensures data not modified / altered without detection"</td><td>Integrity (અખંડિતતા)</td></tr>
+        <tr><td>"Ensures systems remain functional / accessible when needed"</td><td>Availability (ઉપલબ્ધતા)</td></tr>
+        <tr><td>"Sender CANNOT DENY sending" / "prove origin"</td><td>Non-repudiation (નોન-રિપ્યુડિએશન)</td></tr>
+        <tr><td>"Verify user identity before granting access"</td><td>Authentication (પ્રમાણીકરણ)</td></tr>
+        <tr><td>"Trace actions back to a user"</td><td>Accountability (જવાબદારી)</td></tr>
+        <tr><td>"Tries all possible keys until correct one" / "systematic trial"</td><td>Brute Force Attack</td></tr>
+        <tr><td>"Overwhelms system / exhausts resources / excessive requests"</td><td>DoS (Denial of Service)</td></tr>
+        <tr><td>"Captures valid data and retransmits" / "replays"</td><td>Replay Attack</td></tr>
+        <tr><td>"Impersonates trusted source"</td><td>Spoofing</td></tr>
+        <tr><td>"Secretly observing WITHOUT altering"</td><td>Eavesdropping (Passive Attack)</td></tr>
+        <tr><td>"Analyzes communication PATTERNS (not content)"</td><td>Traffic Analysis</td></tr>
+        <tr><td>"Monitors for suspicious behavior"</td><td>IDS (Intrusion Detection System)</td></tr>
+        <tr><td>"Records events for later analysis"</td><td>Logging System / Audit Trail</td></tr>
+        <tr><td>"Monitors and controls incoming/outgoing traffic"</td><td>Firewall</td></tr>
+        <tr><td>"Same key for both encrypt AND decrypt"</td><td>Symmetric Encryption</td></tr>
+        <tr><td>"Two different keys" / "public + private"</td><td>Asymmetric Encryption</td></tr>
+        <tr><td>"Generally FASTER / efficient for large data"</td><td>Symmetric Encryption</td></tr>
+        <tr><td>"Generally SLOWER but simplifies key exchange/distribution"</td><td>Asymmetric Encryption</td></tr>
+        <tr><td>"Main challenge of symmetric" / "main vulnerability"</td><td>Key Distribution</td></tr>
+        <tr><td>"Security depends on"</td><td>Secrecy of the shared/secret key</td></tr>
+        <tr><td>"Shared openly" / "publicly distributed"</td><td>Public Key</td></tr>
+        <tr><td>"Kept secret" / "only owner knows"</td><td>Private Key</td></tr>
+        <tr><td>"Verify digital signature" / "authenticate message"</td><td>Sender's Public Key</td></tr>
+        <tr><td>"Confidentiality via encryption"</td><td>Receiver's Public Key (encrypt) + Receiver's Private Key (decrypt)</td></tr>
+        <tr><td>"Fixed-length output from variable-length input"</td><td>Hash Function</td></tr>
+        <tr><td>"All possible keys usable in a cipher"</td><td>Key Space</td></tr>
+        <tr><td>"Fundamental to asymmetric algorithms"</td><td>Large Prime Numbers</td></tr>
+        <tr><td>"Why modulus applied? / bounded results"</td><td>To maintain bounded numerical results</td></tr>
+        <tr><td>"Isolates applications/programs"</td><td>Process Isolation</td></tr>
+        <tr><td>"Restricts to permitted resources / based on permissions"</td><td>Access Control / ACL</td></tr>
+        <tr><td>"Restricts to MINIMUM required access"</td><td>Least Privilege Principle</td></tr>
+        <tr><td>"Prevents unauthorized program/software execution"</td><td>Application Control Policy / Whitelisting</td></tr>
+        <tr><td>"Best OS security practice"</td><td>Applying regular security updates</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+});
+
+// Nav active state
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  // Update active nav
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// Highlight nav on scroll
+const sections = ['sec1','sec2','sec3','sec4','sec5','sec6'];
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = sections.indexOf(entry.target.id);
+      document.querySelectorAll('.nav-btn').forEach((b,i) => {
+        b.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, {threshold: 0.3});
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+</body>
+</html>
+
+

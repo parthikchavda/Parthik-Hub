@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Technology – Complete Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0f1a;
+  --surface: #111827;
+  --surface2: #1a2236;
+  --border: #1f2d45;
+  --accent: #38bdf8;
+  --accent2: #f59e0b;
+  --accent3: #34d399;
+  --accent4: #f472b6;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --danger: #ef4444;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* ─── HEADER ─── */
+.hero{background:linear-gradient(135deg,#0b0f1a 0%,#0f1e38 50%,#0b0f1a 100%);padding:60px 20px 40px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(56,189,248,.12),transparent);pointer-events:none}
+.hero-tag{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;opacity:.85}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:800;line-height:1.1;background:linear-gradient(135deg,#fff 30%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:620px;margin:0 auto 28px}
+.topic-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
+.pill{padding:6px 14px;border-radius:20px;font-size:.78rem;font-family:'IBM Plex Mono',monospace;border:1px solid;cursor:pointer;transition:all .25s}
+.pill:nth-child(1){border-color:var(--accent);color:var(--accent)}
+.pill:nth-child(2){border-color:var(--accent2);color:var(--accent2)}
+.pill:nth-child(3){border-color:var(--accent3);color:var(--accent3)}
+.pill:nth-child(4){border-color:var(--accent4);color:var(--accent4)}
+.pill:nth-child(5){border-color:#a78bfa;color:#a78bfa}
+.pill:nth-child(6){border-color:#fb923c;color:#fb923c}
+.pill:hover{transform:translateY(-2px);background:rgba(255,255,255,.05)}
+
+/* ─── NAV ─── */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(11,15,26,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 20px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-btn{padding:7px 16px;border-radius:6px;border:none;background:transparent;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.75rem;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.nav-btn:hover,.nav-btn.active{background:var(--surface2);color:var(--text)}
+.nav-btn.active{border-left:2px solid var(--accent)}
+
+/* ─── LAYOUT ─── */
+.page{max-width:1200px;margin:0 auto;padding:40px 20px 80px}
+.section{margin-bottom:70px;scroll-margin-top:70px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.section-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.section-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700}
+.section-subtitle{color:var(--muted);font-size:.9rem;margin-top:2px}
+
+/* ─── TOPIC CARD ─── */
+.topic-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:20px;overflow:hidden;transition:border-color .3s}
+.topic-card:hover{border-color:rgba(56,189,248,.3)}
+.topic-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer;gap:12px}
+.topic-head-left{display:flex;align-items:center;gap:12px}
+.topic-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;padding:3px 10px;border-radius:12px;font-weight:600;flex-shrink:0}
+.topic-name{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700}
+.topic-desc{font-size:.84rem;color:var(--muted);margin-top:2px}
+.chevron{color:var(--muted);transition:transform .3s;font-size:1.1rem}
+.topic-body{display:none;border-top:1px solid var(--border)}
+.topic-body.open{display:block}
+.topic-body-inner{padding:24px 24px 28px}
+
+/* ─── THEORY BLOCKS ─── */
+.theory-block{margin-bottom:24px}
+.theory-block h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.theory-block h4::before{content:'▸';font-size:.8rem}
+.theory-block p{font-size:.9rem;line-height:1.7;color:#cbd5e1;margin-bottom:8px}
+.theory-block ul{padding-left:20px;margin-top:6px}
+.theory-block li{font-size:.9rem;line-height:1.65;color:#cbd5e1;margin-bottom:5px}
+
+/* ─── CODE / EXAMPLE BLOCKS ─── */
+.example-box{background:#0d1423;border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:10px;padding:18px 20px;margin-top:14px}
+.example-box .ex-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--accent2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+.example-box pre{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:#a5f3fc;line-height:1.65;overflow-x:auto;white-space:pre-wrap}
+.example-box p{font-size:.88rem;color:#94a3b8;line-height:1.6}
+
+/* ─── KEY POINTS ─── */
+.key-points{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:16px}
+.kp{background:var(--surface2);border-radius:10px;padding:14px 16px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
+.kp-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.kp-text{font-size:.85rem;color:#cbd5e1;line-height:1.55}
+.kp-text strong{color:var(--text);display:block;margin-bottom:2px;font-size:.88rem}
+
+/* ─── TABLE ─── */
+.compare-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.85rem}
+.compare-table th{background:var(--surface2);padding:11px 14px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)}
+.compare-table td{padding:11px 14px;border-bottom:1px solid var(--border);color:#cbd5e1;line-height:1.5}
+.compare-table tr:hover td{background:rgba(255,255,255,.02)}
+
+/* ─── BADGES ─── */
+.badge-blue{background:rgba(56,189,248,.15);color:var(--accent);border:1px solid rgba(56,189,248,.3)}
+.badge-amber{background:rgba(245,158,11,.15);color:var(--accent2);border:1px solid rgba(245,158,11,.3)}
+.badge-green{background:rgba(52,211,153,.15);color:var(--accent3);border:1px solid rgba(52,211,153,.3)}
+.badge-pink{background:rgba(244,114,182,.15);color:var(--accent4);border:1px solid rgba(244,114,182,.3)}
+.badge-purple{background:rgba(167,139,250,.15);color:#a78bfa;border:1px solid rgba(167,139,250,.3)}
+.badge-orange{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.3)}
+
+/* ─── MCQ COUNT ─── */
+.mcq-count{display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;background:rgba(56,189,248,.08);color:var(--accent);border:1px solid rgba(56,189,248,.2);border-radius:12px;padding:3px 10px;margin-top:6px}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:600px){.key-points{grid-template-columns:1fr}.hero h1{font-size:1.8rem}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Web Technology · Complete Study Guide · Gujarat Police Exam</div>
+  <h1>ASP.NET & Web Technology<br>Master Reference</h1>
+  <p>All topics covered from your MCQ set — theory, examples, key points, and comparisons in one place.</p>
+  <div class="topic-pills">
+    <span class="pill">ASP.NET Core</span>
+    <span class="pill">Classic ASP vs ASP.NET</span>
+    <span class="pill">Visual Studio IDE</span>
+    <span class="pill">State Management</span>
+    <span class="pill">Web Architecture</span>
+    <span class="pill">.NET Framework</span>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<div class="sticky-nav">
+  <div class="nav-inner" id="navBar">
+    <button class="nav-btn active" onclick="scrollTo('t1',this)">1 · ASP.NET Basics</button>
+    <button class="nav-btn" onclick="scrollTo('t2',this)">2 · Classic ASP vs ASP.NET</button>
+    <button class="nav-btn" onclick="scrollTo('t3',this)">3 · .NET Framework & CLR</button>
+    <button class="nav-btn" onclick="scrollTo('t4',this)">4 · Code-Behind & Files</button>
+    <button class="nav-btn" onclick="scrollTo('t5',this)">5 · State Management</button>
+    <button class="nav-btn" onclick="scrollTo('t6',this)">6 · Caching & Performance</button>
+    <button class="nav-btn" onclick="scrollTo('t7',this)">7 · Security & Auth</button>
+    <button class="nav-btn" onclick="scrollTo('t8',this)">8 · Controls & Validation</button>
+    <button class="nav-btn" onclick="scrollTo('t9',this)">9 · Master Pages & Themes</button>
+    <button class="nav-btn" onclick="scrollTo('t10',this)">10 · Globalization</button>
+    <button class="nav-btn" onclick="scrollTo('t11',this)">11 · Deployment</button>
+    <button class="nav-btn" onclick="scrollTo('t12',this)">12 · Visual Studio IDE</button>
+    <button class="nav-btn" onclick="scrollTo('t13',this)">13 · Web Architecture</button>
+    <button class="nav-btn" onclick="scrollTo('t14',this)">14 · Page Lifecycle</button>
+    <button class="nav-btn" onclick="scrollTo('t15',this)">15 · Full Forms A–Z</button>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 1 – ASP.NET BASICS -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t1">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(56,189,248,.12);color:var(--accent)">🌐</div>
+    <div>
+      <div class="section-title">1 · ASP.NET Basics & Features</div>
+      <div class="section-subtitle">Core concepts, advantages, and architecture overview</div>
+    </div>
+  </div>
+
+  <!-- Card 1.1 -->
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-blue">Core</span>
+        <div>
+          <div class="topic-name">What is ASP.NET?</div>
+          <div class="topic-desc">Definition, purpose, and origin</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>Definition</h4>
+          <p>ASP.NET (Active Server Pages .NET) is a <strong>server-side web application framework</strong> developed by Microsoft. It is the successor to Classic ASP (Active Server Pages) and is part of the <strong>.NET Framework</strong>.</p>
+          <ul>
+            <li>Used to build dynamic websites, web apps, and web services.</li>
+            <li>Runs on the server; the browser only receives HTML output.</li>
+            <li>Supported languages: <strong>C#</strong>, VB.NET, J# (any .NET language).</li>
+          </ul>
+        </div>
+        <div class="key-points">
+          <div class="kp"><span class="kp-icon">⚡</span><div class="kp-text"><strong>Compiled (not interpreted)</strong>Code is compiled before execution → much faster than Classic ASP.</div></div>
+          <div class="kp"><span class="kp-icon">🧩</span><div class="kp-text"><strong>Language Independent</strong>Write in C#, VB.NET, or J# — all run on the same CLR.</div></div>
+          <div class="kp"><span class="kp-icon">🎯</span><div class="kp-text"><strong>Event-Driven</strong>Responds to user actions (clicks, form submits) via server-side events.</div></div>
+          <div class="kp"><span class="kp-icon">🛡️</span><div class="kp-text"><strong>Built-in Security</strong>Authentication & Authorization are built right into the framework.</div></div>
+        </div>
+        <div class="example-box" style="margin-top:18px">
+          <div class="ex-label">Example – Simplest ASP.NET page</div>
+          <pre>&lt;%@ Page Language="C#" %&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;% Response.Write("Hello, World!"); %&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 1.2 -->
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-blue">Feature</span>
+        <div>
+          <div class="topic-name">Key Features of ASP.NET</div>
+          <div class="topic-desc">Multi-language, Compiled, Event-driven, Side-by-side execution</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>What it means</th><th>Exam Tip</th></tr>
+          <tr><td><strong>Compiled</strong></td><td>Code is compiled to MSIL → native on first request. Subsequent requests use cached native code.</td><td>Faster than interpreted Classic ASP</td></tr>
+          <tr><td><strong>Multi-language support</strong></td><td>C#, VB.NET, J# all supported via .NET CLR</td><td>"Language Independent"</td></tr>
+          <tr><td><strong>Event-Driven</strong></td><td>Server controls raise events (Button_Click, Page_Load)</td><td>Not sequential/linear</td></tr>
+          <tr><td><strong>Side-by-Side Execution</strong></td><td>Multiple .NET runtime versions can co-exist on same machine</td><td>No DLL Hell</td></tr>
+          <tr><td><strong>Code-Behind</strong></td><td>HTML (ASPX) separated from C# logic (.aspx.cs)</td><td>Separation of concerns</td></tr>
+          <tr><td><strong>Output Caching</strong></td><td>Stores rendered HTML; reused for future requests</td><td>Reduces server load</td></tr>
+          <tr><td><strong>State Management</strong></td><td>Maintain data across HTTP requests</td><td>ViewState, Session, Cookie</td></tr>
+          <tr><td><strong>Validation Controls</strong></td><td>Built-in server-side + client-side validation</td><td>No manual JavaScript needed</td></tr>
+          <tr><td><strong>Master Pages</strong></td><td>Consistent layout across all pages</td><td>Like a template / base page</td></tr>
+          <tr><td><strong>Globalization</strong></td><td>Multi-language / multi-culture support</td><td>Localization & Globalization</td></tr>
+          <tr><td><strong>Auto Recompilation</strong></td><td>Detects config/code changes without server restart</td><td>Dynamic updates</td></tr>
+          <tr><td><strong>Tracing</strong></td><td>Monitor execution, find bugs</td><td>Debugging aid</td></tr>
+        </table>
+        <div class="example-box" style="margin-top:18px">
+          <div class="ex-label">Remember: NOT a feature of ASP.NET</div>
+          <p>"Purely interpreted script-based" — ASP.NET is <strong>compiled</strong>, not purely interpreted. Classic ASP was interpreted.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 2 – Classic ASP vs ASP.NET -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t2">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,158,11,.12);color:var(--accent2)">⚔️</div>
+    <div>
+      <div class="section-title">2 · Classic ASP vs ASP.NET</div>
+      <div class="section-subtitle">Differences, execution models, language support, deployment</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-amber">Comparison</span>
+        <div>
+          <div class="topic-name">Complete Comparison Table</div>
+          <div class="topic-desc">All major differences tested in MCQs</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <table class="compare-table">
+          <tr><th>Aspect</th><th>Classic ASP</th><th>ASP.NET</th></tr>
+          <tr><td><strong>Execution</strong></td><td>Interpreted line-by-line</td><td>Compiled (MSIL → Native)</td></tr>
+          <tr><td><strong>Language</strong></td><td>VBScript (mainly)</td><td>C#, VB.NET, J# (any .NET)</td></tr>
+          <tr><td><strong>Code Style</strong></td><td>Mixed HTML + code ("Spaghetti code")</td><td>Separated via Code-Behind</td></tr>
+          <tr><td><strong>OOP Support</strong></td><td>Weak / Not fully OO</td><td>Fully Object-Oriented</td></tr>
+          <tr><td><strong>Config File</strong></td><td>Global.asa</td><td>Web.config + Global.asax</td></tr>
+          <tr><td><strong>Validation</strong></td><td>Manual JavaScript scripts</td><td>Built-in Validation Controls</td></tr>
+          <tr><td><strong>Debugging</strong></td><td>Response.Write only</td><td>Full Visual Studio Debugger</td></tr>
+          <tr><td><strong>Deployment</strong></td><td>Requires Windows Registry</td><td>XCOPY / Zero-touch deployment</td></tr>
+          <tr><td><strong>Components</strong></td><td>COM components</td><td>.NET Assemblies / NuGet</td></tr>
+          <tr><td><strong>Web Forms</strong></td><td>Not available</td><td>Introduced Web Forms</td></tr>
+          <tr><td><strong>Performance</strong></td><td>Slower (interpreted)</td><td>Faster (compiled + CLR)</td></tr>
+        </table>
+        <div class="key-points" style="margin-top:18px">
+          <div class="kp"><span class="kp-icon">📝</span><div class="kp-text"><strong>Classic ASP Config File</strong>Global.asa (Application-level events)</div></div>
+          <div class="kp"><span class="kp-icon">📝</span><div class="kp-text"><strong>ASP.NET Config Files</strong>Global.asax (events) + Web.config (settings)</div></div>
+          <div class="kp"><span class="kp-icon">🍝</span><div class="kp-text"><strong>Spaghetti Code</strong>Classic ASP mixes HTML and code — hard to maintain. ASP.NET separates them.</div></div>
+          <div class="kp"><span class="kp-icon">🚀</span><div class="kp-text"><strong>XCOPY Deployment</strong>ASP.NET apps can be deployed by simply copying files — no registry needed.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 3 – .NET Framework & CLR -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t3">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(52,211,153,.12);color:var(--accent3)">🏗️</div>
+    <div>
+      <div class="section-title">3 · .NET Framework & CLR</div>
+      <div class="section-subtitle">CLR, CTS, MSIL, BCL — the core runtime components</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-green">Runtime</span>
+        <div>
+          <div class="topic-name">CLR – Common Language Runtime</div>
+          <div class="topic-desc">Execution engine for ASP.NET applications</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>What is CLR?</h4>
+          <p>CLR (Common Language Runtime) is the <strong>execution environment</strong> for ASP.NET applications. It is the runtime component of the .NET Framework that manages the execution of .NET programs.</p>
+          <ul>
+            <li>Provides memory management, garbage collection, security, and exception handling.</li>
+            <li>Converts MSIL code to native machine code via JIT (Just-In-Time) compilation.</li>
+          </ul>
+        </div>
+        <div class="theory-block">
+          <h4>Compilation Flow</h4>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">How ASP.NET compiles and runs</div>
+          <pre>C# / VB.NET Source Code
+        ↓  (C# Compiler)
+MSIL (Microsoft Intermediate Language)
+        ↓  (JIT Compiler in CLR)
+Native Machine Code
+        ↓
+Executes on Server</pre>
+        </div>
+        <div class="key-points" style="margin-top:18px">
+          <div class="kp"><span class="kp-icon">⚙️</span><div class="kp-text"><strong>CLR</strong>Provides execution environment for ASP.NET apps. Manages memory + security.</div></div>
+          <div class="kp"><span class="kp-icon">🔤</span><div class="kp-text"><strong>CTS (Common Type System)</strong>Defines how types are declared and used across .NET languages.</div></div>
+          <div class="kp"><span class="kp-icon">📦</span><div class="kp-text"><strong>MSIL (Microsoft Intermediate Language)</strong>Intermediate code produced by compilers before JIT.</div></div>
+          <div class="kp"><span class="kp-icon">📚</span><div class="kp-text"><strong>BCL (Base Class Library)</strong>Collection of reusable classes, interfaces, and value types.</div></div>
+        </div>
+        <div class="example-box" style="margin-top:16px">
+          <div class="ex-label">Process running ASP.NET on server</div>
+          <p>ASP.NET applications run inside <strong>w3wp.exe</strong> (IIS Worker Process). IIS (Internet Information Services) is an example of an Application Server.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 4 – Code-Behind & Important Files -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t4">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(244,114,182,.12);color:var(--accent4)">📄</div>
+    <div>
+      <div class="section-title">4 · Code-Behind & Key Files</div>
+      <div class="section-subtitle">File extensions, Web.config, Global.asax, .aspx structure</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-pink">Files</span>
+        <div>
+          <div class="topic-name">ASP.NET Important Files</div>
+          <div class="topic-desc">Extensions, roles, and configuration files</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <table class="compare-table">
+          <tr><th>File / Extension</th><th>Role / Purpose</th></tr>
+          <tr><td><code style="color:var(--accent)">.aspx</code></td><td>Web Form page — contains HTML + ASP.NET server controls markup</td></tr>
+          <tr><td><code style="color:var(--accent)">.aspx.cs</code></td><td>Code-Behind file for C# — contains the server-side logic (C#)</td></tr>
+          <tr><td><code style="color:var(--accent)">.aspx.vb</code></td><td>Code-Behind file for VB.NET</td></tr>
+          <tr><td><code style="color:var(--accent)">.cs</code></td><td>C# code file (class files, code-behind)</td></tr>
+          <tr><td><code style="color:var(--accent)">.vb</code></td><td>VB.NET code file</td></tr>
+          <tr><td><code style="color:var(--accent)">Web.config</code></td><td>Application-level configuration settings (XML format)</td></tr>
+          <tr><td><code style="color:var(--accent)">Global.asax</code></td><td>Application/Session events (Application_Start, Session_Start)</td></tr>
+          <tr><td><code style="color:var(--accent)">Global.asa</code></td><td>Same as Global.asax but for Classic ASP</td></tr>
+          <tr><td><code style="color:var(--accent)">.sln</code></td><td>Solution file — manages a group of one or more projects in Visual Studio</td></tr>
+          <tr><td><code style="color:var(--accent)">Machine.config</code></td><td>Machine-level configuration (global, affects all apps on server)</td></tr>
+        </table>
+        <div class="theory-block" style="margin-top:20px">
+          <h4>Code-Behind Model</h4>
+          <p>Code-Behind separates HTML design from programming logic:</p>
+          <ul>
+            <li><strong>MyPage.aspx</strong> — Contains HTML layout + server control tags</li>
+            <li><strong>MyPage.aspx.cs</strong> — Contains C# event handlers and logic</li>
+          </ul>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">Example – Code-Behind structure</div>
+          <pre>// MyPage.aspx (Design/HTML)
+&lt;asp:Button ID="btnHello" runat="server" 
+    Text="Click Me" OnClick="btnHello_Click" /&gt;
+
+// MyPage.aspx.cs (Code-Behind - Logic)
+protected void btnHello_Click(object sender, EventArgs e)
+{
+    Label1.Text = "Hello, World!";
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 5 – State Management -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t5">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(167,139,250,.12);color:#a78bfa">💾</div>
+    <div>
+      <div class="section-title">5 · State Management</div>
+      <div class="section-subtitle">ViewState, Session, Cookies, QueryString, Application</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-purple">State</span>
+        <div>
+          <div class="topic-name">State Management Overview</div>
+          <div class="topic-desc">HTTP is stateless — ASP.NET provides these mechanisms to persist data</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>Why State Management?</h4>
+          <p>HTTP is a <strong>stateless protocol</strong> — each request is independent. State Management addresses the problem of maintaining data across multiple requests from the same user.</p>
+        </div>
+        <table class="compare-table">
+          <tr><th>Mechanism</th><th>Scope</th><th>Storage</th><th>Use Case</th></tr>
+          <tr><td><strong>ViewState</strong></td><td>Single page (across postbacks)</td><td>Hidden field in page HTML</td><td>Preserving control values on same page</td></tr>
+          <tr><td><strong>Session</strong></td><td>Single user, all pages</td><td>Server memory (or DB)</td><td>User login data, shopping cart</td></tr>
+          <tr><td><strong>Cookie</strong></td><td>Single user, persists</td><td>Client (browser)</td><td>Remember preferences, login token</td></tr>
+          <tr><td><strong>QueryString</strong></td><td>Between pages via URL</td><td>URL parameter</td><td>Passing ID between pages</td></tr>
+          <tr><td><strong>Application</strong></td><td>All users, whole app</td><td>Server memory</td><td>Site-wide counters, shared data</td></tr>
+          <tr><td><strong>Cache</strong></td><td>Server-wide</td><td>Server memory</td><td>Expensive database query results</td></tr>
+        </table>
+        <div class="example-box" style="margin-top:16px">
+          <div class="ex-label">ViewState Example</div>
+          <pre>// Storing in ViewState
+ViewState["UserName"] = "Alice";
+
+// Retrieving
+string name = ViewState["UserName"].ToString();
+
+// Session Example
+Session["CartCount"] = 5;
+int count = (int)Session["CartCount"];</pre>
+        </div>
+        <div class="key-points" style="margin-top:16px">
+          <div class="kp"><span class="kp-icon">🔑</span><div class="kp-text"><strong>ViewState</strong>Maintains control values across postbacks on same page. Stored as hidden field.</div></div>
+          <div class="kp"><span class="kp-icon">👤</span><div class="kp-text"><strong>Session</strong>Stores data for a single user across all pages. Server-side storage.</div></div>
+          <div class="kp"><span class="kp-icon">🍪</span><div class="kp-text"><strong>Cookie</strong>Stored in browser. Can persist after browser closes (persistent cookies).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 6 – Caching & Performance -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t6">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(251,146,60,.12);color:#fb923c">⚡</div>
+    <div>
+      <div class="section-title">6 · Caching & Performance</div>
+      <div class="section-subtitle">Output Caching, Data Caching, benefits and usage</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-orange">Caching</span>
+        <div>
+          <div class="topic-name">Output Caching & Data Caching</div>
+          <div class="topic-desc">How caching reduces server load and speeds up responses</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>Output Caching</h4>
+          <p><strong>Purpose:</strong> Stores the rendered HTML output of a page. When the same page is requested again, the cached HTML is returned instead of re-running the server logic.</p>
+          <ul>
+            <li>Dramatically reduces server processing for frequently requested pages.</li>
+            <li>Configured using the <code>@OutputCache</code> directive.</li>
+          </ul>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">Output Caching Directive</div>
+          <pre>&lt;%@ OutputCache Duration="60" VaryByParam="None" %&gt;
+&lt;!-- This page is cached for 60 seconds --&gt;</pre>
+        </div>
+        <div class="theory-block" style="margin-top:18px">
+          <h4>Benefits of Caching</h4>
+          <ul>
+            <li>Faster page responses for users.</li>
+            <li>Reduced database and server CPU load.</li>
+            <li>Better scalability under high traffic.</li>
+          </ul>
+        </div>
+        <div class="key-points">
+          <div class="kp"><span class="kp-icon">🗄️</span><div class="kp-text"><strong>Output Cache</strong>Stores rendered HTML. Reused for subsequent identical requests.</div></div>
+          <div class="kp"><span class="kp-icon">💡</span><div class="kp-text"><strong>Data Cache</strong>Stores objects (like query results) in server memory for reuse.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 7 – Security & Authentication -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t7">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(239,68,68,.12);color:#ef4444">🛡️</div>
+    <div>
+      <div class="section-title">7 · Security — Authentication & Authorization</div>
+      <div class="section-subtitle">Built-in security features for user login and access control</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge" style="background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3)">Security</span>
+        <div>
+          <div class="topic-name">Authentication vs Authorization</div>
+          <div class="topic-desc">Handling user identity and access rights</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Definition</th><th>Example</th></tr>
+          <tr><td><strong>Authentication</strong></td><td>Verifying WHO the user is (identity)</td><td>Login with username + password</td></tr>
+          <tr><td><strong>Authorization</strong></td><td>Determining WHAT the user can access (permission)</td><td>Admin can delete, regular user cannot</td></tr>
+          <tr><td><strong>Tracing</strong></td><td>Monitor execution to find errors (NOT security)</td><td>Page trace output</td></tr>
+        </table>
+        <div class="example-box" style="margin-top:16px">
+          <div class="ex-label">MCQ Tip</div>
+          <p>The question "Which security feature handles user logins?" → Answer is <strong>Both Authentication AND Authorization</strong> (option D in the MCQ). Authentication = who you are; Authorization = what you can do.</p>
+        </div>
+        <div class="theory-block" style="margin-top:16px">
+          <h4>Types of Authentication in ASP.NET</h4>
+          <ul>
+            <li><strong>Windows Authentication</strong> — Uses Windows user accounts</li>
+            <li><strong>Forms Authentication</strong> — Custom login forms with cookies</li>
+            <li><strong>Passport Authentication</strong> — Microsoft-centralized auth (old)</li>
+            <li><strong>Anonymous Access</strong> — No authentication required</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 8 – Controls & Validation -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t8">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(56,189,248,.12);color:var(--accent)">🎛️</div>
+    <div>
+      <div class="section-title">8 · Server Controls & Validation</div>
+      <div class="section-subtitle">Web controls, validation controls, user controls, custom controls</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-blue">Controls</span>
+        <div>
+          <div class="topic-name">Types of Controls in ASP.NET</div>
+          <div class="topic-desc">Server Controls, User Controls, Custom Controls, Validation Controls</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>Server Controls</h4>
+          <p>Controls that are <strong>processed by the server</strong> (not browser-only). They have the <code>runat="server"</code> attribute and generate HTML output.</p>
+          <ul>
+            <li>Examples: TextBox, Button, Label, GridView, <strong>AdRotator</strong></li>
+            <li>AdRotator is a server control used to display rotating advertisements.</li>
+          </ul>
+        </div>
+        <div class="theory-block">
+          <h4>Validation Controls</h4>
+          <p>Built-in controls to <strong>validate user input</strong> on both client and server side:</p>
+        </div>
+        <table class="compare-table">
+          <tr><th>Validation Control</th><th>Purpose</th></tr>
+          <tr><td>RequiredFieldValidator</td><td>Ensures a field is not left empty</td></tr>
+          <tr><td>RangeValidator</td><td>Checks value is within a range</td></tr>
+          <tr><td>RegularExpressionValidator</td><td>Validates against a pattern (email, phone)</td></tr>
+          <tr><td>CompareValidator</td><td>Compares two control values</td></tr>
+          <tr><td>CustomValidator</td><td>Custom validation logic</td></tr>
+          <tr><td>ValidationSummary</td><td>Displays all validation errors</td></tr>
+        </table>
+        <div class="theory-block" style="margin-top:18px">
+          <h4>User Controls vs Custom Controls</h4>
+          <ul>
+            <li><strong>User Controls (.ascx)</strong> — Reusable page fragments created by drag-and-drop. Saved as .ascx files.</li>
+            <li><strong>Custom Controls</strong> — User-defined controls built by <strong>inheriting from existing .NET classes</strong>. Compiled into DLLs.</li>
+          </ul>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">Validation Control Example</div>
+          <pre>&lt;asp:TextBox ID="txtEmail" runat="server" /&gt;
+&lt;asp:RegularExpressionValidator 
+  ControlToValidate="txtEmail"
+  ValidationExpression="\w+@\w+\.\w+"
+  ErrorMessage="Invalid email!"
+  runat="server" /&gt;</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 9 – Master Pages & Themes -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t9">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(52,211,153,.12);color:var(--accent3)">🎨</div>
+    <div>
+      <div class="section-title">9 · Master Pages & Themes</div>
+      <div class="section-subtitle">Consistent layouts across pages, Themes for styling</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-green">Layout</span>
+        <div>
+          <div class="topic-name">Master Pages</div>
+          <div class="topic-desc">Create consistent headers, footers, and navigation across all pages</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>What are Master Pages?</h4>
+          <p>Master Pages allow developers to create a <strong>consistent layout (template) across all pages</strong> of a website. They define the common structure (header, footer, nav) while Content Pages define the unique content for each page.</p>
+          <ul>
+            <li>Master Page file extension: <strong>.master</strong></li>
+            <li>Contains <code>ContentPlaceHolder</code> controls where child pages insert content.</li>
+          </ul>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">Master Page Structure</div>
+          <pre>// Site.master
+&lt;%@ Master Language="C#" %&gt;
+&lt;html&gt;&lt;body&gt;
+  &lt;header&gt;LOGO + NAVBAR&lt;/header&gt;
+  &lt;asp:ContentPlaceHolder ID="MainContent" runat="server" /&gt;
+  &lt;footer&gt;Copyright 2024&lt;/footer&gt;
+&lt;/body&gt;&lt;/html&gt;
+
+// Default.aspx (Content Page)
+&lt;%@ Page MasterPageFile="~/Site.master" %&gt;
+&lt;asp:Content ContentPlaceHolderID="MainContent" runat="server"&gt;
+  Welcome to the Home Page!
+&lt;/asp:Content&gt;</pre>
+        </div>
+        <div class="theory-block" style="margin-top:18px">
+          <h4>Themes</h4>
+          <p>Themes provide a way to apply consistent <strong>visual styling</strong> (colors, fonts, skins) across all pages. Stored in the <code>App_Themes</code> folder.</p>
+        </div>
+        <div class="key-points">
+          <div class="kp"><span class="kp-icon">📐</span><div class="kp-text"><strong>Master Pages</strong>Consistent LAYOUT (structure) — header, footer, nav shared across all pages.</div></div>
+          <div class="kp"><span class="kp-icon">🎨</span><div class="kp-text"><strong>Themes</strong>Consistent VISUAL STYLE — colors, fonts, control appearances.</div></div>
+          <div class="kp"><span class="kp-icon">🧩</span><div class="kp-text"><strong>User Controls</strong>Reusable UI components (.ascx) — like a partial page fragment.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 10 – Globalization & Localization -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t10">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(244,114,182,.12);color:var(--accent4)">🌍</div>
+    <div>
+      <div class="section-title">10 · Globalization & Localization</div>
+      <div class="section-subtitle">Multi-language and multi-culture support in ASP.NET</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-pink">i18n</span>
+        <div>
+          <div class="topic-name">Globalization vs Localization</div>
+          <div class="topic-desc">Making apps work in multiple languages and cultures</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <table class="compare-table">
+          <tr><th>Concept</th><th>Definition</th><th>Example</th></tr>
+          <tr><td><strong>Globalization</strong></td><td>Designing an app to support multiple cultures/languages</td><td>Using resource files instead of hardcoded strings</td></tr>
+          <tr><td><strong>Localization</strong></td><td>Adapting the app for a specific culture</td><td>Displaying dates as DD/MM/YYYY for India</td></tr>
+        </table>
+        <div class="theory-block" style="margin-top:16px">
+          <h4>How it works in ASP.NET</h4>
+          <ul>
+            <li>Resource files (.resx) store translated strings per culture.</li>
+            <li>Set <code>UICulture</code> and <code>Culture</code> in Web.config or Page directive.</li>
+            <li>ASP.NET automatically picks the correct resource file based on user's browser culture.</li>
+          </ul>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">Web.config Globalization Setting</div>
+          <pre>&lt;globalization culture="en-IN" uiCulture="en-IN" /&gt;</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 11 – Deployment -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t11">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(251,146,60,.12);color:#fb923c">🚀</div>
+    <div>
+      <div class="section-title">11 · Deployment</div>
+      <div class="section-subtitle">XCOPY deployment, Zero-touch, Publishing ASP.NET apps</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-orange">Deploy</span>
+        <div>
+          <div class="topic-name">XCOPY Deployment</div>
+          <div class="topic-desc">Simple file-copy deployment — no Registry needed</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>XCOPY / Zero-Touch Deployment</h4>
+          <p>ASP.NET supports <strong>XCOPY deployment</strong> — simply copy application files to the server. No Windows Registry registration needed (unlike Classic ASP with COM components).</p>
+          <ul>
+            <li>Also called "Zero-touch deployment" or "No-touch deployment".</li>
+            <li>Assemblies (DLLs) go in the <strong>Bin</strong> folder — no global registration needed.</li>
+            <li>Much simpler than Classic ASP deployment which required Windows Registry.</li>
+          </ul>
+        </div>
+        <table class="compare-table">
+          <tr><th>Aspect</th><th>Classic ASP</th><th>ASP.NET</th></tr>
+          <tr><td>Component Registration</td><td>Must register in Windows Registry</td><td>DLLs in Bin folder — no registration</td></tr>
+          <tr><td>Deployment Method</td><td>COM registration required</td><td>XCOPY / File copy</td></tr>
+          <tr><td>Config File</td><td>Registry-based</td><td>Web.config (XML)</td></tr>
+          <tr><td>Difficulty</td><td>Complex ("DLL Hell")</td><td>Simple</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 12 – Visual Studio IDE -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t12">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(167,139,250,.12);color:#a78bfa">🖥️</div>
+    <div>
+      <div class="section-title">12 · Visual Studio IDE</div>
+      <div class="section-subtitle">Windows, tools, shortcuts, views, and features of Visual Studio</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-purple">IDE</span>
+        <div>
+          <div class="topic-name">Visual Studio Windows & Tools</div>
+          <div class="topic-desc">Solution Explorer, Toolbox, Properties, Error List, Output, IntelliSense</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <table class="compare-table">
+          <tr><th>Window / Tool</th><th>Purpose</th></tr>
+          <tr><td><strong>Solution Explorer</strong></td><td>Shows all files and projects in your solution (folder tree)</td></tr>
+          <tr><td><strong>Toolbox</strong></td><td>Drag-and-drop controls (TextBox, Button, etc.) onto Design view</td></tr>
+          <tr><td><strong>Properties Window</strong></td><td>View and edit properties of selected control/file</td></tr>
+          <tr><td><strong>Code Editor</strong></td><td>Write C# / VB.NET logic (the main coding window)</td></tr>
+          <tr><td><strong>Error List</strong></td><td>Shows compilation errors, warnings after building project</td></tr>
+          <tr><td><strong>Output Window</strong></td><td>Shows build output messages and debug print statements</td></tr>
+          <tr><td><strong>Server Explorer</strong></td><td>Manage database connections and servers</td></tr>
+          <tr><td><strong>NuGet Manager</strong></td><td>Install external libraries (e.g. Newtonsoft.Json, Entity Framework)</td></tr>
+          <tr><td><strong>Query Builder</strong></td><td>Build complex SQL queries visually (within Server Explorer)</td></tr>
+          <tr><td><strong>IntelliSense</strong></td><td>Code completion / autofill suggestions as you type</td></tr>
+          <tr><td><strong>Object Browser</strong></td><td>Browse available classes and members in assemblies</td></tr>
+        </table>
+        <div class="theory-block" style="margin-top:18px">
+          <h4>Document Window Views</h4>
+          <ul>
+            <li><strong>Design</strong> — Graphical/visual representation of the ASPX page</li>
+            <li><strong>Source</strong> — HTML/ASP.NET markup code view</li>
+            <li><strong>Split</strong> — Both Design and Source side by side simultaneously</li>
+          </ul>
+        </div>
+        <div class="theory-block">
+          <h4>Important Keyboard Shortcuts</h4>
+        </div>
+        <table class="compare-table">
+          <tr><th>Shortcut</th><th>Action</th></tr>
+          <tr><td><code>Ctrl + F</code></td><td>Find (within current file)</td></tr>
+          <tr><td><code>Ctrl + Shift + F</code></td><td>Find in Files (search entire solution)</td></tr>
+          <tr><td><code>Ctrl + S</code></td><td>Save file</td></tr>
+          <tr><td><code>Ctrl + P</code></td><td>Print</td></tr>
+          <tr><td><code>F5</code></td><td>Start Debugging</td></tr>
+          <tr><td><code>F6</code></td><td>Build Solution</td></tr>
+        </table>
+        <div class="theory-block" style="margin-top:18px">
+          <h4>Solution File (.sln)</h4>
+          <p>A <strong>.sln (Solution)</strong> file manages a group of one or more related projects. It is the top-level container in Visual Studio.</p>
+        </div>
+        <div class="key-points">
+          <div class="kp"><span class="kp-icon">🔍</span><div class="kp-text"><strong>IntelliSense</strong>Suggests code completions (autofill). Reduces typing errors.</div></div>
+          <div class="kp"><span class="kp-icon">📦</span><div class="kp-text"><strong>NuGet Manager</strong>Install external packages like Entity Framework, JSON libraries.</div></div>
+          <div class="kp"><span class="kp-icon">🔩</span><div class="kp-text"><strong>MSBuild</strong>The tool that manages the Build process in Visual Studio.</div></div>
+          <div class="kp"><span class="kp-icon">🗂️</span><div class="kp-text"><strong>Docking</strong>Lock/pin windows to a specific side of the IDE.</div></div>
+          <div class="kp"><span class="kp-icon">ℹ️</span><div class="kp-text"><strong>Help Menu</strong>Contains "Check for Updates" option in Visual Studio.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 13 – Web Architecture -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t13">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(56,189,248,.12);color:var(--accent)">🏛️</div>
+    <div>
+      <div class="section-title">13 · Web Architecture</div>
+      <div class="section-subtitle">Client-Server, N-Tier, Web Server, Application Server, Database Server</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-blue">Architecture</span>
+        <div>
+          <div class="topic-name">Client-Server & N-Tier Architecture</div>
+          <div class="topic-desc">Tiers, layers, and server roles in web applications</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>Client-Server Model</h4>
+          <ul>
+            <li><strong>Client</strong> initiates the communication (sends requests).</li>
+            <li><strong>Server</strong> receives and responds to requests.</li>
+            <li>Example: Browser (client) sends HTTP request → IIS (server) responds with HTML.</li>
+          </ul>
+        </div>
+        <div class="theory-block">
+          <h4>3-Tier / N-Tier Architecture</h4>
+        </div>
+        <table class="compare-table">
+          <tr><th>Tier</th><th>Also Called</th><th>Role</th><th>Example</th></tr>
+          <tr><td><strong>Tier 1</strong></td><td>Presentation Tier / Client Tier / UI Tier</td><td>User interface — what user sees</td><td>Browser, HTML, ASPX pages</td></tr>
+          <tr><td><strong>Tier 2</strong></td><td>Logic Tier / Business Tier / Middle Tier</td><td>Business rules and processing</td><td>ASP.NET code-behind, C# classes</td></tr>
+          <tr><td><strong>Tier 3</strong></td><td>Data Tier / Database Tier</td><td>Data storage and retrieval</td><td>SQL Server, MySQL, Oracle</td></tr>
+        </table>
+        <div class="theory-block" style="margin-top:18px">
+          <h4>Server Types</h4>
+        </div>
+        <table class="compare-table">
+          <tr><th>Server Type</th><th>Role</th><th>Example</th></tr>
+          <tr><td><strong>Web Server</strong></td><td>Handles HTTP requests, serves static content</td><td>IIS, Apache, Nginx</td></tr>
+          <tr><td><strong>Application Server</strong></td><td>Runs business logic, processes dynamic requests</td><td>IIS (with ASP.NET), Tomcat</td></tr>
+          <tr><td><strong>Database Server</strong></td><td>Stores and manages data</td><td>SQL Server, MySQL, Oracle</td></tr>
+        </table>
+        <div class="example-box" style="margin-top:16px">
+          <div class="ex-label">MCQ Tip — IIS</div>
+          <p>IIS (Internet Information Services) is an example of both a <strong>Web Server</strong> and an <strong>Application Server</strong>. It runs on Windows and hosts ASP.NET apps.</p>
+        </div>
+        <div class="key-points" style="margin-top:16px">
+          <div class="kp"><span class="kp-icon">💻</span><div class="kp-text"><strong>Client initiates</strong>In Client-Server model, the CLIENT always initiates communication.</div></div>
+          <div class="kp"><span class="kp-icon">🗄️</span><div class="kp-text"><strong>Data Tier</strong>The database layer — where SQL Server / MySQL lives.</div></div>
+          <div class="kp"><span class="kp-icon">⚙️</span><div class="kp-text"><strong>Logic Tier</strong>Where business rules run — the ASP.NET code-behind layer.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 14 – Page Lifecycle -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t14">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,158,11,.12);color:var(--accent2)">🔄</div>
+    <div>
+      <div class="section-title">14 · Page Lifecycle & Events</div>
+      <div class="section-subtitle">Order of events in ASP.NET page execution</div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head" onclick="toggle(this)">
+      <div class="topic-head-left">
+        <span class="topic-badge badge-amber">Lifecycle</span>
+        <div>
+          <div class="topic-name">ASP.NET Page Lifecycle Events</div>
+          <div class="topic-desc">Order of execution from request to response</div>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-body-inner">
+        <div class="theory-block">
+          <h4>Page Event Order (Important for MCQs)</h4>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">ASP.NET Page Lifecycle Order</div>
+          <pre>1. Page_PreInit       ← FIRST EVENT FIRED
+2. Page_Init
+3. Page_InitComplete
+4. Page_PreLoad
+5. Page_Load          ← Most commonly used
+6. Control Events     (Button_Click, etc.)
+7. Page_PreRender
+8. Page_Render
+9. Page_Unload        ← Last event (cleanup)</pre>
+        </div>
+        <div class="key-points" style="margin-top:16px">
+          <div class="kp"><span class="kp-icon">1️⃣</span><div class="kp-text"><strong>Page_PreInit — FIRST</strong>First event fired when a page is requested. Used for themes, master pages.</div></div>
+          <div class="kp"><span class="kp-icon">📥</span><div class="kp-text"><strong>Page_Load</strong>Most commonly used event. ViewState and PostBack data are available here.</div></div>
+          <div class="kp"><span class="kp-icon">🔚</span><div class="kp-text"><strong>Page_Unload — LAST</strong>Cleanup — release resources, close connections.</div></div>
+          <div class="kp"><span class="kp-icon">🔁</span><div class="kp-text"><strong>PostBack</strong>When a page submits to itself (e.g., Button click). Check with IsPostBack.</div></div>
+        </div>
+        <div class="example-box" style="margin-top:16px">
+          <div class="ex-label">IsPostBack Example</div>
+          <pre>protected void Page_Load(object sender, EventArgs e)
+{
+    if (!IsPostBack)
+    {
+        // Runs only on first load, not on button clicks
+        LoadData();
+    }
+}</pre>
+        </div>
+        <div class="theory-block" style="margin-top:18px">
+          <h4>Tracing</h4>
+          <p>Tracing in ASP.NET is used to <strong>monitor execution and find errors</strong>. Enable with <code>Trace="true"</code> in the page directive or in Web.config. It shows page lifecycle events, ViewState size, control tree, and more.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 15 – FULL FORMS A–Z -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section" id="t15">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(52,211,153,.12);color:var(--accent3)">🔤</div>
+    <div>
+      <div class="section-title">15 · Full Forms — A to Z</div>
+      <div class="section-subtitle">Every abbreviation and acronym used in this subject — all in one place</div>
+    </div>
+  </div>
+
+  <!-- Search box -->
+  <div style="margin-bottom:20px;position:relative">
+    <input id="ffSearch" type="text" placeholder="🔍  Search abbreviation or full form…" oninput="filterFF()"
+      style="width:100%;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:.9rem;outline:none;transition:border-color .2s"
+      onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+  </div>
+
+  <!-- Category tabs -->
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px" id="ffTabs">
+    <button class="ff-tab active" onclick="filterCat('all',this)">All</button>
+    <button class="ff-tab" onclick="filterCat('dotnet',this)">.NET / CLR</button>
+    <button class="ff-tab" onclick="filterCat('asp',this)">ASP / Web</button>
+    <button class="ff-tab" onclick="filterCat('ide',this)">IDE / Tools</button>
+    <button class="ff-tab" onclick="filterCat('network',this)">Network / Protocol</button>
+    <button class="ff-tab" onclick="filterCat('db',this)">Database</button>
+    <button class="ff-tab" onclick="filterCat('security',this)">Security</button>
+    <button class="ff-tab" onclick="filterCat('general',this)">General Tech</button>
+  </div>
+
+  <style>
+  .ff-tab{padding:7px 16px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.75rem;cursor:pointer;transition:all .2s}
+  .ff-tab:hover{border-color:var(--accent3);color:var(--accent3)}
+  .ff-tab.active{background:rgba(52,211,153,.15);border-color:var(--accent3);color:var(--accent3)}
+
+  .ff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+  .ff-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start;transition:border-color .25s}
+  .ff-card:hover{border-color:rgba(52,211,153,.35)}
+  .ff-abbr{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:var(--accent3);min-width:90px;flex-shrink:0;line-height:1.2}
+  .ff-right{}
+  .ff-full{font-size:.88rem;font-weight:700;color:var(--text);line-height:1.4}
+  .ff-desc{font-size:.78rem;color:var(--muted);margin-top:3px;line-height:1.45}
+  .ff-cat{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;padding:2px 7px;border-radius:8px;margin-top:5px}
+  .cat-dotnet{background:rgba(56,189,248,.12);color:var(--accent)}
+  .cat-asp{background:rgba(245,158,11,.12);color:var(--accent2)}
+  .cat-ide{background:rgba(167,139,250,.12);color:#a78bfa}
+  .cat-network{background:rgba(52,211,153,.12);color:var(--accent3)}
+  .cat-db{background:rgba(244,114,182,.12);color:var(--accent4)}
+  .cat-security{background:rgba(239,68,68,.12);color:#ef4444}
+  .cat-general{background:rgba(251,146,60,.12);color:#fb923c}
+  .ff-hidden{display:none!important}
+  </style>
+
+  <div class="ff-grid" id="ffGrid">
+
+    <!-- .NET / CLR -->
+    <div class="ff-card" data-cat="dotnet" data-key="asp active server pages">
+      <div class="ff-abbr">ASP</div>
+      <div class="ff-right">
+        <div class="ff-full">Active Server Pages</div>
+        <div class="ff-desc">Microsoft's server-side scripting technology — predecessor to ASP.NET</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="clr common language runtime">
+      <div class="ff-abbr">CLR</div>
+      <div class="ff-right">
+        <div class="ff-full">Common Language Runtime</div>
+        <div class="ff-desc">The execution engine of .NET — manages memory, security, JIT compilation</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="cts common type system">
+      <div class="ff-abbr">CTS</div>
+      <div class="ff-right">
+        <div class="ff-full">Common Type System</div>
+        <div class="ff-desc">Defines how data types are declared and used across all .NET languages</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="cls common language specification">
+      <div class="ff-abbr">CLS</div>
+      <div class="ff-right">
+        <div class="ff-full">Common Language Specification</div>
+        <div class="ff-desc">A set of rules that .NET languages must follow to ensure cross-language interoperability</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="msil microsoft intermediate language">
+      <div class="ff-abbr">MSIL</div>
+      <div class="ff-right">
+        <div class="ff-full">Microsoft Intermediate Language</div>
+        <div class="ff-desc">Intermediate bytecode produced by .NET compilers — converted to native code by JIT</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="il intermediate language">
+      <div class="ff-abbr">IL</div>
+      <div class="ff-right">
+        <div class="ff-full">Intermediate Language</div>
+        <div class="ff-desc">Short form of MSIL — the compiled, platform-neutral bytecode in .NET</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="jit just in time compilation">
+      <div class="ff-abbr">JIT</div>
+      <div class="ff-right">
+        <div class="ff-full">Just-In-Time (Compilation)</div>
+        <div class="ff-desc">CLR's compiler that converts MSIL to native machine code at runtime</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="bcl base class library">
+      <div class="ff-abbr">BCL</div>
+      <div class="ff-right">
+        <div class="ff-full">Base Class Library</div>
+        <div class="ff-desc">Collection of reusable classes, interfaces, and value types in the .NET Framework</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="fcl framework class library">
+      <div class="ff-abbr">FCL</div>
+      <div class="ff-right">
+        <div class="ff-full">Framework Class Library</div>
+        <div class="ff-desc">Complete library of reusable types in .NET — superset of BCL</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="gc garbage collection">
+      <div class="ff-abbr">GC</div>
+      <div class="ff-right">
+        <div class="ff-full">Garbage Collection</div>
+        <div class="ff-desc">Automatic memory management in CLR — frees unused objects from heap</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="dll dynamic link library">
+      <div class="ff-abbr">DLL</div>
+      <div class="ff-right">
+        <div class="ff-full">Dynamic Link Library</div>
+        <div class="ff-desc">Compiled code library (.dll file) containing reusable classes/functions in .NET</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="com component object model">
+      <div class="ff-abbr">COM</div>
+      <div class="ff-right">
+        <div class="ff-full">Component Object Model</div>
+        <div class="ff-desc">Microsoft's older component technology — used heavily in Classic ASP</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="oop object oriented programming">
+      <div class="ff-abbr">OOP</div>
+      <div class="ff-right">
+        <div class="ff-full">Object-Oriented Programming</div>
+        <div class="ff-desc">Programming paradigm using classes and objects — fully supported in ASP.NET</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="dotnet" data-key="oo object orientation">
+      <div class="ff-abbr">OO</div>
+      <div class="ff-right">
+        <div class="ff-full">Object Orientation</div>
+        <div class="ff-desc">Short form of OOP — ASP.NET is fully OO, Classic ASP is not</div>
+        <span class="ff-cat cat-dotnet">.NET / CLR</span>
+      </div>
+    </div>
+
+    <!-- ASP / Web -->
+    <div class="ff-card" data-cat="asp" data-key="aspx active server page extended">
+      <div class="ff-abbr">ASPX</div>
+      <div class="ff-right">
+        <div class="ff-full">Active Server Page eXtended</div>
+        <div class="ff-desc">File extension for ASP.NET Web Form pages — contains HTML + server controls</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="html hypertext markup language">
+      <div class="ff-abbr">HTML</div>
+      <div class="ff-right">
+        <div class="ff-full">HyperText Markup Language</div>
+        <div class="ff-desc">Standard language for creating web page structure and content</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="css cascading style sheets">
+      <div class="ff-abbr">CSS</div>
+      <div class="ff-right">
+        <div class="ff-full">Cascading Style Sheets</div>
+        <div class="ff-desc">Language used to style and format HTML elements on web pages</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="js javascript">
+      <div class="ff-abbr">JS</div>
+      <div class="ff-right">
+        <div class="ff-full">JavaScript</div>
+        <div class="ff-desc">Client-side scripting language — runs in the browser for dynamic effects</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="xml extensible markup language">
+      <div class="ff-abbr">XML</div>
+      <div class="ff-right">
+        <div class="ff-full">eXtensible Markup Language</div>
+        <div class="ff-desc">Format used in Web.config and other .NET configuration files</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="web.config web configuration">
+      <div class="ff-abbr">Web.config</div>
+      <div class="ff-right">
+        <div class="ff-full">Web Configuration File</div>
+        <div class="ff-desc">XML file that stores application-level settings for an ASP.NET application</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="mvc model view controller">
+      <div class="ff-abbr">MVC</div>
+      <div class="ff-right">
+        <div class="ff-full">Model-View-Controller</div>
+        <div class="ff-desc">ASP.NET design pattern separating data (Model), UI (View), and logic (Controller)</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="ui user interface">
+      <div class="ff-abbr">UI</div>
+      <div class="ff-right">
+        <div class="ff-full">User Interface</div>
+        <div class="ff-desc">What the user sees and interacts with — Presentation Tier in N-Tier architecture</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="sln solution file">
+      <div class="ff-abbr">.SLN</div>
+      <div class="ff-right">
+        <div class="ff-full">Solution File</div>
+        <div class="ff-desc">Visual Studio file that manages a group of one or more projects</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="cs csharp file">
+      <div class="ff-abbr">.CS</div>
+      <div class="ff-right">
+        <div class="ff-full">C-Sharp Source File</div>
+        <div class="ff-desc">File extension for C# code files — used for Code-Behind (.aspx.cs)</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="vb visual basic file">
+      <div class="ff-abbr">.VB</div>
+      <div class="ff-right">
+        <div class="ff-full">Visual Basic Source File</div>
+        <div class="ff-desc">File extension for VB.NET code files — alternative language for ASP.NET</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="ascx user control file">
+      <div class="ff-abbr">.ASCX</div>
+      <div class="ff-right">
+        <div class="ff-full">ASP.NET User Control File</div>
+        <div class="ff-desc">File extension for reusable User Control fragments in ASP.NET</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="resx resource file">
+      <div class="ff-abbr">.RESX</div>
+      <div class="ff-right">
+        <div class="ff-full">Resource File (XML-based)</div>
+        <div class="ff-desc">Stores localized strings for Globalization/Localization in ASP.NET</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="php hypertext preprocessor">
+      <div class="ff-abbr">PHP</div>
+      <div class="ff-right">
+        <div class="ff-full">Hypertext Preprocessor</div>
+        <div class="ff-desc">Open-source server-side scripting language — competitor to ASP.NET</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="jsp java server pages">
+      <div class="ff-abbr">JSP</div>
+      <div class="ff-right">
+        <div class="ff-full">Java Server Pages</div>
+        <div class="ff-desc">Java-based server-side web technology — competitor to ASP/ASP.NET</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <!-- IDE / Tools -->
+    <div class="ff-card" data-cat="ide" data-key="ide integrated development environment">
+      <div class="ff-abbr">IDE</div>
+      <div class="ff-right">
+        <div class="ff-full">Integrated Development Environment</div>
+        <div class="ff-desc">Software suite for coding (editor + debugger + compiler) — Visual Studio is an IDE</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="ide" data-key="vs visual studio">
+      <div class="ff-abbr">VS</div>
+      <div class="ff-right">
+        <div class="ff-full">Visual Studio</div>
+        <div class="ff-desc">Microsoft's primary IDE for developing ASP.NET, C#, and VB.NET applications</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="ide" data-key="vscode visual studio code">
+      <div class="ff-abbr">VS Code</div>
+      <div class="ff-right">
+        <div class="ff-full">Visual Studio Code</div>
+        <div class="ff-desc">Lightweight open-source code editor by Microsoft (different from Visual Studio)</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="ide" data-key="nuget package manager">
+      <div class="ff-abbr">NuGet</div>
+      <div class="ff-right">
+        <div class="ff-full">NuGet Package Manager</div>
+        <div class="ff-desc">Tool to search, install, and manage external libraries/packages in Visual Studio</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="ide" data-key="iis internet information services">
+      <div class="ff-abbr">IIS</div>
+      <div class="ff-right">
+        <div class="ff-full">Internet Information Services</div>
+        <div class="ff-desc">Microsoft's web/application server — hosts and runs ASP.NET applications</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="ide" data-key="msbuild microsoft build engine">
+      <div class="ff-abbr">MSBuild</div>
+      <div class="ff-right">
+        <div class="ff-full">Microsoft Build Engine</div>
+        <div class="ff-desc">Tool that manages the build/compile process for .NET projects</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="ide" data-key="ef entity framework orm">
+      <div class="ff-abbr">EF</div>
+      <div class="ff-right">
+        <div class="ff-full">Entity Framework</div>
+        <div class="ff-desc">Microsoft's ORM (Object-Relational Mapper) for database access in .NET apps</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="ide" data-key="orm object relational mapper">
+      <div class="ff-abbr">ORM</div>
+      <div class="ff-right">
+        <div class="ff-full">Object-Relational Mapper</div>
+        <div class="ff-desc">Maps database tables to .NET classes — Entity Framework is an ORM</div>
+        <span class="ff-cat cat-ide">IDE / Tools</span>
+      </div>
+    </div>
+
+    <!-- Network / Protocol -->
+    <div class="ff-card" data-cat="network" data-key="http hypertext transfer protocol">
+      <div class="ff-abbr">HTTP</div>
+      <div class="ff-right">
+        <div class="ff-full">HyperText Transfer Protocol</div>
+        <div class="ff-desc">Stateless protocol for communication between browser (client) and web server</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="https hypertext transfer protocol secure">
+      <div class="ff-abbr">HTTPS</div>
+      <div class="ff-right">
+        <div class="ff-full">HyperText Transfer Protocol Secure</div>
+        <div class="ff-desc">Encrypted version of HTTP using SSL/TLS — secure data transfer</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="url uniform resource locator">
+      <div class="ff-abbr">URL</div>
+      <div class="ff-right">
+        <div class="ff-full">Uniform Resource Locator</div>
+        <div class="ff-desc">Web address used to locate resources — QueryString is appended to URL</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="ip internet protocol address">
+      <div class="ff-abbr">IP</div>
+      <div class="ff-right">
+        <div class="ff-full">Internet Protocol</div>
+        <div class="ff-desc">Addressing protocol for identifying devices on a network (e.g. 192.168.1.1)</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="tcp transmission control protocol">
+      <div class="ff-abbr">TCP</div>
+      <div class="ff-right">
+        <div class="ff-full">Transmission Control Protocol</div>
+        <div class="ff-desc">Reliable, connection-oriented protocol — HTTP runs on top of TCP</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="dns domain name system">
+      <div class="ff-abbr">DNS</div>
+      <div class="ff-right">
+        <div class="ff-full">Domain Name System</div>
+        <div class="ff-desc">Translates human-readable domain names (google.com) to IP addresses</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="ftp file transfer protocol">
+      <div class="ff-abbr">FTP</div>
+      <div class="ff-right">
+        <div class="ff-full">File Transfer Protocol</div>
+        <div class="ff-desc">Protocol for transferring files between computers over a network</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="api application programming interface">
+      <div class="ff-abbr">API</div>
+      <div class="ff-right">
+        <div class="ff-full">Application Programming Interface</div>
+        <div class="ff-desc">Set of rules allowing software components to communicate — Web API in ASP.NET</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="rest representational state transfer">
+      <div class="ff-abbr">REST</div>
+      <div class="ff-right">
+        <div class="ff-full">Representational State Transfer</div>
+        <div class="ff-desc">Architectural style for web APIs — used in ASP.NET Web API</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="soap simple object access protocol">
+      <div class="ff-abbr">SOAP</div>
+      <div class="ff-right">
+        <div class="ff-full">Simple Object Access Protocol</div>
+        <div class="ff-desc">XML-based messaging protocol for web services — older alternative to REST</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="network" data-key="smtp simple mail transfer protocol">
+      <div class="ff-abbr">SMTP</div>
+      <div class="ff-right">
+        <div class="ff-full">Simple Mail Transfer Protocol</div>
+        <div class="ff-desc">Protocol for sending email — used with SmtpClient in ASP.NET</div>
+        <span class="ff-cat cat-network">Network / Protocol</span>
+      </div>
+    </div>
+
+    <!-- Database -->
+    <div class="ff-card" data-cat="db" data-key="sql structured query language">
+      <div class="ff-abbr">SQL</div>
+      <div class="ff-right">
+        <div class="ff-full">Structured Query Language</div>
+        <div class="ff-desc">Language for managing and querying relational databases (SELECT, INSERT, UPDATE)</div>
+        <span class="ff-cat cat-db">Database</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="db" data-key="rdbms relational database management system">
+      <div class="ff-abbr">RDBMS</div>
+      <div class="ff-right">
+        <div class="ff-full">Relational Database Management System</div>
+        <div class="ff-desc">Database system using tables with relationships — SQL Server, MySQL, Oracle</div>
+        <span class="ff-cat cat-db">Database</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="db" data-key="db database">
+      <div class="ff-abbr">DB</div>
+      <div class="ff-right">
+        <div class="ff-full">Database</div>
+        <div class="ff-desc">Organized collection of structured data — the Data Tier in N-Tier architecture</div>
+        <span class="ff-cat cat-db">Database</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="db" data-key="ado active data objects">
+      <div class="ff-abbr">ADO.NET</div>
+      <div class="ff-right">
+        <div class="ff-full">ActiveX Data Objects for .NET</div>
+        <div class="ff-desc">Data access technology in .NET for connecting to and querying databases</div>
+        <span class="ff-cat cat-db">Database</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="db" data-key="crud create read update delete">
+      <div class="ff-abbr">CRUD</div>
+      <div class="ff-right">
+        <div class="ff-full">Create, Read, Update, Delete</div>
+        <div class="ff-desc">Four basic database operations — every database app performs these</div>
+        <span class="ff-cat cat-db">Database</span>
+      </div>
+    </div>
+
+    <!-- Security -->
+    <div class="ff-card" data-cat="security" data-key="ssl secure sockets layer">
+      <div class="ff-abbr">SSL</div>
+      <div class="ff-right">
+        <div class="ff-full">Secure Sockets Layer</div>
+        <div class="ff-desc">Encryption protocol for secure data transfer (predecessor to TLS) — used in HTTPS</div>
+        <span class="ff-cat cat-security">Security</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="security" data-key="tls transport layer security">
+      <div class="ff-abbr">TLS</div>
+      <div class="ff-right">
+        <div class="ff-full">Transport Layer Security</div>
+        <div class="ff-desc">Modern successor to SSL — provides encrypted communication over networks</div>
+        <span class="ff-cat cat-security">Security</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="security" data-key="xss cross site scripting">
+      <div class="ff-abbr">XSS</div>
+      <div class="ff-right">
+        <div class="ff-full">Cross-Site Scripting</div>
+        <div class="ff-desc">Web security attack injecting malicious scripts — ASP.NET has built-in protection</div>
+        <span class="ff-cat cat-security">Security</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="security" data-key="csrf cross site request forgery">
+      <div class="ff-abbr">CSRF</div>
+      <div class="ff-right">
+        <div class="ff-full">Cross-Site Request Forgery</div>
+        <div class="ff-desc">Attack tricking users into executing unwanted actions — ASP.NET uses anti-forgery tokens</div>
+        <span class="ff-cat cat-security">Security</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="security" data-key="2fa two factor authentication">
+      <div class="ff-abbr">2FA</div>
+      <div class="ff-right">
+        <div class="ff-full">Two-Factor Authentication</div>
+        <div class="ff-desc">Security requiring two verification methods — password + OTP/code</div>
+        <span class="ff-cat cat-security">Security</span>
+      </div>
+    </div>
+
+    <!-- General Tech -->
+    <div class="ff-card" data-cat="general" data-key="ram random access memory">
+      <div class="ff-abbr">RAM</div>
+      <div class="ff-right">
+        <div class="ff-full">Random Access Memory</div>
+        <div class="ff-desc">Temporary memory where server stores running processes — used by CLR and sessions</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="os operating system">
+      <div class="ff-abbr">OS</div>
+      <div class="ff-right">
+        <div class="ff-full">Operating System</div>
+        <div class="ff-desc">System software managing hardware resources — Windows Server hosts IIS/ASP.NET</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="cpu central processing unit processor">
+      <div class="ff-abbr">CPU</div>
+      <div class="ff-right">
+        <div class="ff-full">Central Processing Unit</div>
+        <div class="ff-desc">The processor — caching and compiled code reduce CPU usage in ASP.NET</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="gui graphical user interface">
+      <div class="ff-abbr">GUI</div>
+      <div class="ff-right">
+        <div class="ff-full">Graphical User Interface</div>
+        <div class="ff-desc">Visual interface with windows, buttons, icons — Visual Studio has a rich GUI</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="vb.net visual basic .net">
+      <div class="ff-abbr">VB.NET</div>
+      <div class="ff-right">
+        <div class="ff-full">Visual Basic .NET</div>
+        <div class="ff-desc">Microsoft's .NET version of Visual Basic — one of the supported ASP.NET languages</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="c# csharp">
+      <div class="ff-abbr">C#</div>
+      <div class="ff-right">
+        <div class="ff-full">C-Sharp</div>
+        <div class="ff-desc">Primary object-oriented language for ASP.NET development by Microsoft</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="i18n internationalization">
+      <div class="ff-abbr">i18n</div>
+      <div class="ff-right">
+        <div class="ff-full">Internationalization</div>
+        <div class="ff-desc">Short for "i + 18 letters + n" — the process of designing multi-language apps</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="l10n localization">
+      <div class="ff-abbr">L10n</div>
+      <div class="ff-right">
+        <div class="ff-full">Localization</div>
+        <div class="ff-desc">Adapting an app for a specific region/language — dates, currency, strings</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="vbscript visual basic script">
+      <div class="ff-abbr">VBScript</div>
+      <div class="ff-right">
+        <div class="ff-full">Visual Basic Scripting Edition</div>
+        <div class="ff-desc">Primary language of Classic ASP — interpreted, lightweight scripting language</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="xcopy cross copy deployment">
+      <div class="ff-abbr">XCOPY</div>
+      <div class="ff-right">
+        <div class="ff-full">Extended Copy (Command)</div>
+        <div class="ff-desc">Windows command to copy files/folders — ASP.NET uses XCOPY-style deployment (no Registry needed)</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="general" data-key="w3wp worker process">
+      <div class="ff-abbr">w3wp.exe</div>
+      <div class="ff-right">
+        <div class="ff-full">World Wide Web Worker Process</div>
+        <div class="ff-desc">The IIS worker process that runs ASP.NET applications on the server</div>
+        <span class="ff-cat cat-general">General Tech</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="global.asax application events">
+      <div class="ff-abbr">Global.asax</div>
+      <div class="ff-right">
+        <div class="ff-full">Global Application Events File</div>
+        <div class="ff-desc">ASP.NET file handling Application_Start, Session_Start and other app-level events</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+    <div class="ff-card" data-cat="asp" data-key="global.asa application events classic asp">
+      <div class="ff-abbr">Global.asa</div>
+      <div class="ff-right">
+        <div class="ff-full">Global Application (Script) File</div>
+        <div class="ff-desc">Classic ASP equivalent of Global.asax — handles Application and Session events</div>
+        <span class="ff-cat cat-asp">ASP / Web</span>
+      </div>
+    </div>
+
+  </div><!-- end ff-grid -->
+
+  <!-- Count display -->
+  <div style="text-align:center;margin-top:24px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted)" id="ffCount"></div>
+
+</div>
+
+<script>
+// Full Forms filter logic
+function filterFF() {
+  const q = document.getElementById('ffSearch').value.toLowerCase();
+  const cards = document.querySelectorAll('.ff-card');
+  let visible = 0;
+  cards.forEach(c => {
+    const key = (c.dataset.key || '') + ' ' + c.innerText.toLowerCase();
+    const match = key.includes(q);
+    c.classList.toggle('ff-hidden', !match);
+    if (match) visible++;
+  });
+  document.getElementById('ffCount').textContent = visible + ' abbreviations shown';
+  // reset cat tab active
+  if (q) {
+    document.querySelectorAll('.ff-tab').forEach(t => t.classList.remove('active'));
+  }
+}
+
+function filterCat(cat, btn) {
+  document.getElementById('ffSearch').value = '';
+  document.querySelectorAll('.ff-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.ff-card');
+  let visible = 0;
+  cards.forEach(c => {
+    const show = cat === 'all' || c.dataset.cat === cat;
+    c.classList.toggle('ff-hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('ffCount').textContent = visible + ' abbreviations shown';
+}
+
+// Init count
+document.addEventListener('DOMContentLoaded', () => {
+  const total = document.querySelectorAll('.ff-card').length;
+  document.getElementById('ffCount').textContent = total + ' abbreviations shown';
+});
+</script>
+
+<div style="background:var(--surface);border-top:1px solid var(--border);padding:28px 20px;text-align:center">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted)">Web Technology Complete Study Guide · All topics from MCQ set · Gujarat Police Exam Prep</div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--border);margin-top:8px">ASP.NET · Classic ASP · .NET CLR · Visual Studio IDE · State Management · Web Architecture · Page Lifecycle</div>
+</div>
+
+<script>
+function toggle(head) {
+  const body = head.nextElementSibling;
+  const chevron = head.querySelector('.chevron');
+  body.classList.toggle('open');
+  chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function scrollTo(id, btn) {
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Auto-expand first card in each section
+document.querySelectorAll('.topic-head').forEach((h, i) => {
+  if (i === 0) { // open first card
+    h.nextElementSibling.classList.add('open');
+    h.querySelector('.chevron').style.transform = 'rotate(180deg)';
+  }
+});
+
+// Nav highlight on scroll
+const sections = document.querySelectorAll('.section');
+const navBtns = document.querySelectorAll('.nav-btn');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+  });
+  navBtns.forEach((b, i) => {
+    b.classList.toggle('active', 't'+(i+1) === cur);
+  });
+});
+</script>
+</body>
+</html>

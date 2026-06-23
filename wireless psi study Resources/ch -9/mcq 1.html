@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASP.NET MCQ Quiz | એએસપી.નેટ ક્વિઝ - ગુજરાત પોલીસ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 15px;
+    }
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+    .lang-buttons {
+      text-align: center;
+      padding: 12px;
+      background: #f8fafc;
+      border-bottom: 1px solid #ddd;
+    }
+    .lang-btn {
+      padding: 10px 24px;
+      margin: 0 6px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .lang-btn.active {
+      background: #1e40af;
+      color: white;
+    }
+    .question-card {
+      padding: 25px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .question-number {
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 12px;
+    }
+    .question-text {
+      font-size: 1.12rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .option {
+      padding: 16px 20px;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.02rem;
+    }
+    .option:hover {
+      background: #f8fafc;
+    }
+    .option.correct {
+      background: #d1fae5 !important;
+      border-color: #10b981 !important;
+      color: #166534;
+    }
+    .option.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c;
+    }
+    .result {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: none;
+    }
+    .correct-result { background: #ecfdf5; color: #166534; }
+    .wrong-result { background: #fef2f2; color: #b91c1c; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>ASP.NET MCQ Quiz</h1>
+      <p>ગુજરાત પોલીસ તકનીકી ઓપરેટર પરીક્ષા તૈયારી</p>
+    </div>
+
+    <div class="lang-buttons">
+      <button class="lang-btn active" onclick="setLanguage('both')">બંને | Both</button>
+      <button class="lang-btn" onclick="setLanguage('en')">English</button>
+      <button class="lang-btn" onclick="setLanguage('gu')">ગુજરાતી</button>
+    </div>
+
+    <div id="quiz"></div>
+  </div>
+
+<script>
+// Complete 28 MCQs with English + Gujarati
+const mcqs = [
+  {
+    q: "Which of the following best describes the execution model of ASP.NET compared to Classic ASP?",
+    guj: "ASP.NET અને Classic ASP વચ્ચે એક્ઝિક્યુશન મોડલ કયું વધુ સારી રીતે વર્ણવે છે?",
+    optionsEn: [
+      "A. ASP.NET is interpreted line-by-line, whereas Classic ASP is compiled.",
+      "B. Both Classic technologies are strictly interpreted at runtime.",
+      "C. ASP.NET is compiled into MSIL and then machine code, while Classic ASP is interpreted.",
+      "D. ASP.NET uses JIT compilation only for UI elements."
+    ],
+    optionsGuj: [
+      "A. ASP.NET લાઈન-બાય-લાઈન interpreted છે, જ્યારે Classic ASP compiled છે.",
+      "B. બંને ક્લાસિક ટેક્નોલોજી runtime પર strictly interpreted છે.",
+      "C. ASP.NET MSILમાં કમ્પાઈલ થઈને મશીન કોડમાં બને છે, જ્યારે Classic ASP interpreted છે.",
+      "D. ASP.NET માત્ર UI elements માટે JIT compilation વાપરે છે."
+    ],
+    answer: 2
+  },
+  {
+    q: "Which ASP.NET feature allows for the separation of HTML design and server-side logic into different files?",
+    guj: "HTML ડિઝાઈન અને સર્વર-સાઈડ લોજિકને અલગ અલગ ફાઈલમાં રાખવાની સુવિધા કઈ છે?",
+    optionsEn: ["A. Code-Behind", "B. In-line Scripting", "C. Spaghetti Coding", "D. Direct Execution"],
+    optionsGuj: ["A. કોડ-બિહાઈન્ડ", "B. ઈન-લાઈન સ્ક્રિપ્ટિંગ", "C. સ્પાગેટ્ટી કોડિંગ", "D. ડાયરેક્ટ એક્ઝિક્યુશન"],
+    answer: 0
+  },
+  {
+    q: "When a user clicks a button on an ASP.NET page and the page is sent to the server for processing, this action is known as:",
+    guj: "જ્યારે યુઝર બટન ક્લિક કરે છે અને પેજ સર્વર પર પ્રોસેસિંગ માટે મોકલાય છે, તેને શું કહેવાય છે?",
+    optionsEn: ["A. Postback", "B. Caching", "C. Redirect", "D. Get-Request"],
+    optionsGuj: ["A. પોસ્ટબેક", "B. કેશિંગ", "C. રીડાયરેક્ટ", "D. ગેટ-રિક્વેસ્ટ"],
+    answer: 0
+  },
+  {
+    q: "Which state management technique in ASP.NET stores data in a hidden field on the client-side to maintain page values?",
+    guj: "ASP.NETમાં કઈ સ્ટેટ મેનેજમેન્ટ તકનીક ક્લાઈન્ટ સાઈડ પર હિડન ફીલ્ડમાં ડેટા સ્ટોર કરે છે?",
+    optionsEn: ["A. Application State", "B. ViewState", "C. Cookies", "D. Session State"],
+    optionsGuj: ["A. એપ્લિકેશન સ્ટેટ", "B. વ્યૂસ્ટેટ", "C. કુકીઝ", "D. સેશન સ્ટેટ"],
+    answer: 1
+  },
+  {
+    q: "What is the primary role of the Common Language Runtime (CLR) in ASP.NET?",
+    guj: "ASP.NETમાં Common Language Runtime (CLR)ની મુખ્ય ભૂમિકા શું છે?",
+    optionsEn: [
+      "A. To manage the execution of code and provide core services like memory management.",
+      "B. To interpret VBScript for Classic ASP pages.",
+      "C. To design the graphical user interface.",
+      "D. To act as a database server for the Gujarat Police records."
+    ],
+    optionsGuj: [
+      "A. કોડનું એક્ઝિક્યુશન મેનેજ કરવું અને મેમરી મેનેજમેન્ટ જેવી મુખ્ય સેવાઓ પૂરી પાડવી.",
+      "B. Classic ASP પેજ માટે VBScript interpret કરવું.",
+      "C. ગ્રાફિકલ યુઝર ઈન્ટરફેસ ડિઝાઈન કરવું.",
+      "D. ગુજરાત પોલીસ રેકોર્ડ્સ માટે ડેટાબેઝ સર્વર તરીકે કામ કરવું."
+    ],
+    answer: 0
+  },
+  {
+    q: "Which XML-based file is used to manage configuration settings (like database strings) for an ASP.NET application?",
+    guj: "ASP.NET એપ્લિકેશનના કોન્ફિગ્યુરેશન સેટિંગ્સ મેનેજ કરવા માટે કઈ XML ફાઈલ વપરાય છે?",
+    optionsEn: ["A. Settings.txt", "B. Global.asax", "C. Machine.config", "D. Web.config"],
+    optionsGuj: ["A. Settings.txt", "B. Global.asax", "C. Machine.config", "D. વેબ.config"],
+    answer: 3
+  },
+  {
+    q: "Compared to Classic ASP, how does ASP.NET handle structured error handling?",
+    guj: "Classic ASPની સરખામણીમાં ASP.NET સ્ટ્રક્ચર્ડ એરર હેન્ડલિંગ કેવી રીતે કરે છે?",
+    optionsEn: [
+      "A. It uses JavaScript alerts for all server-side errors.",
+      "B. It provides Try-Catch-Finally blocks for robust exception handling.",
+      "C. Errors in ASP.NET cannot be caught and always crash the server.",
+      "D. It uses 'On Error Resume Next' exclusively."
+    ],
+    optionsGuj: [
+      "A. તે તમામ સર્વર-સાઈડ એરર માટે JavaScript alerts વાપરે છે.",
+      "B. તે Try-Catch-Finally બ્લોક્સ પ્રદાન કરે છે મજબૂત exception handling માટે.",
+      "C. ASP.NETમાં એરર પકડી શકાતા નથી અને હંમેશા સર્વર ક્રેશ થાય છે.",
+      "D. તે માત્ર 'On Error Resume Next' વાપરે છે."
+    ],
+    answer: 1
+  },
+  {
+    q: "Which of the following is a key advantage of ASP.NET’s “Compiled” nature?",
+    guj: "ASP.NETના કમ્પાઈલ્ડ સ્વરૂપનો મુખ્ય ફાયદો કયો છે?",
+    optionsEn: [
+      "A. Faster execution and early detection of syntax errors during development.",
+      "B. Source code is visible to everyone using the website.",
+      "C. It requires less RAM than Classic ASP.",
+      "D. It eliminates the need for a web server."
+    ],
+    optionsGuj: [
+      "A. ઝડપી એક્ઝિક્યુશન અને વિકાસ દરમિયાન syntax errorsની વહેલી શોધ.",
+      "B. વેબસાઈટ વાપરનારા દરેકને સોર્સ કોડ દેખાય છે.",
+      "C. તે Classic ASP કરતાં ઓછી RAM જરૂરી છે.",
+      "D. તે વેબ સર્વરની જરૂરિયાત દૂર કરે છે."
+    ],
+    answer: 0
+  },
+  {
+    q: "Which language is NOT natively supported for writing the logic in an ASP.NET application?",
+    guj: "ASP.NETમાં લોજિક લખવા માટે કઈ ભાષા સપોર્ટેડ નથી?",
+    optionsEn: ["A. C#", "B. VB.NET", "C. VBScript", "D. F#"],
+    optionsGuj: ["A. C#", "B. VB.NET", "C. VBScript", "D. F#"],
+    answer: 2
+  },
+  {
+    q: "Which file in an ASP.NET application is used to handle application-level events such as Application_Start and Session_End?",
+    guj: "એપ્લિકેશન લેવલના ઈવેન્ટ્સ (Application_Start, Session_End) હેન્ડલ કરવા માટે કઈ ફાઈલ વપરાય છે?",
+    optionsEn: ["A. Default.aspx", "B. Web.config", "C. Global.asax", "D. MasterPage.master"],
+    optionsGuj: ["A. Default.aspx", "B. Web.config", "C. Global.asax", "D. MasterPage.master"],
+    answer: 2
+  },
+  {
+    q: "During the ASP.NET Page Life Cycle, in which event are all the controls fully initialized and the ViewState restored for a Postback?",
+    guj: "પેજ લાઈફ સાઈકલમાં કયા ઈવેન્ટમાં કંટ્રોલ્સ ફુલી ઈનિશિયલાઈઝ થાય છે અને ViewState રીસ્ટોર થાય છે?",
+    optionsEn: ["A. Page_PreRender", "B. Page_Init", "C. Page_Load", "D. Page_Unload"],
+    optionsGuj: ["A. Page_PreRender", "B. Page_Init", "C. Page_Load", "D. Page_Unload"],
+    answer: 2
+  },
+  {
+    q: "Where are the compiled DLL files (assemblies) of an ASP.NET web application stored by default?",
+    guj: "ASP.NET વેબ એપ્લિકેશનની કમ્પાઈલ્ડ DLL ફાઈલો ક્યાં સ્ટોર થાય છે?",
+    optionsEn: ["A. App_Code folder", "B. App_Data folder", "C. Bin folder", "D. Root Directory"],
+    optionsGuj: ["A. App_Code ફોલ્ડર", "B. App_Data ફોલ્ડર", "C. Bin ફોલ્ડર", "D. રૂટ ડિરેક્ટરી"],
+    answer: 2
+  },
+  {
+    q: "Which configuration file is used to store sensitive information like database connection strings in an XML format?",
+    guj: "ડેટાબેઝ કનેક્શન સ્ટ્રિંગ જેવી સેન્સિટિવ માહિતી કઈ XML ફાઈલમાં સ્ટોર થાય છે?",
+    optionsEn: ["A. Web.config", "B. App.config", "C. Settings.xml", "D. Global.asax"],
+    optionsGuj: ["A. Web.config", "B. App.config", "C. Settings.xml", "D. Global.asax"],
+    answer: 0
+  },
+  {
+    q: "In the Page Life Cycle, which event occurs after the page has been fully rendered and the HTML is sent to the client?",
+    guj: "પેજ પૂર્ણપણે રેન્ડર થઈને HTML ક્લાઈન્ટને મોકલાય પછી કયો ઈવેન્ટ થાય છે?",
+    optionsEn: ["A. Page_PreInit", "B. Page_Unload", "C. Page_Init", "D. Page_Render"],
+    optionsGuj: ["A. Page_PreInit", "B. Page_Unload", "C. Page_Init", "D. Page_Render"],
+    answer: 1
+  },
+  {
+    q: "What is stored in the App_Data folder in a standard ASP.NET project structure?",
+    guj: "App_Data ફોલ્ડરમાં શું સ્ટોર કરવામાં આવે છે?",
+    optionsEn: [
+      "A. Source code files",
+      "B. Compiled binaries and DLLs",
+      "C. JavaScript and CSS files",
+      "D. Application data files such as SQL Server Express .mdf files or XML files"
+    ],
+    optionsGuj: [
+      "A. સોર્સ કોડ ફાઈલ્સ",
+      "B. કમ્પાઈલ્ડ બાઈનરી અને DLLs",
+      "C. JavaScript અને CSS ફાઈલ્સ",
+      "D. એપ્લિકેશન ડેટા ફાઈલ્સ જેમ કે SQL Server Express .mdf અથવા XML ફાઈલ્સ"
+    ],
+    answer: 3
+  },
+  {
+    q: "Which component acts as the 'Container' for a specific area of the page in a Master-Content relationship?",
+    guj: "માસ્ટર-કન્ટેન્ટ સંબંધમાં પેજના ચોક્કસ વિસ્તાર માટે કન્ટેનર તરીકે કયો કમ્પોનન્ટ કામ કરે છે?",
+    optionsEn: ["A. MasterPage", "B. Panel Control", "C. ViewPort", "D. ContentPlaceHolder"],
+    optionsGuj: ["A. MasterPage", "B. Panel Control", "C. ViewPort", "D. ContentPlaceHolder"],
+    answer: 3
+  },
+  {
+    q: "Which directory in an ASP.NET application is used to store shared source code files?",
+    guj: "શેર્ડ સોર્સ કોડ ફાઈલો સ્ટોર કરવા માટે કયો ડિરેક્ટરી વપરાય છે?",
+    optionsEn: ["A. App_Code", "B. Shared", "C. Bin", "D. Resources"],
+    optionsGuj: ["A. App_Code", "B. Shared", "C. Bin", "D. Resources"],
+    answer: 0
+  },
+  {
+    q: "Why is ASP.NET considered more efficient for large-scale police applications?",
+    guj: "મોટા પાયાના પોલીસ એપ્લિકેશન માટે ASP.NET વધુ અસરકારક કેમ માનવામાં આવે છે?",
+    optionsEn: [
+      "A. Because it uses a compiled model that provides better performance and type safety.",
+      "B. Because it uses JavaScript for server-side logic.",
+      "C. Because it only runs on mobile devices.",
+      "D. Because it doesn’t require a web server to run."
+    ],
+    optionsGuj: [
+      "A. કારણ કે તે compiled મોડલ વાપરે છે જે વધુ પર્ફોર્મન્સ અને ટાઈપ સેફ્ટી આપે છે.",
+      "B. કારણ કે તે સર્વર-સાઈડ લોજિક માટે JavaScript વાપરે છે.",
+      "C. કારણ કે તે માત્ર મોબાઈલ ડિવાઈસ પર જ ચાલે છે.",
+      "D. કારણ કે તેને વેબ સર્વરની જરૂર નથી."
+    ],
+    answer: 0
+  },
+  {
+    q: "In the context of the HTTP Pipeline, what is an 'HttpModule' primarily used for?",
+    guj: "HTTP Pipelineમાં HttpModuleનો મુખ્ય ઉપયોગ શું છે?",
+    optionsEn: [
+      "A. To intercept and participate in every request that enters the application.",
+      "B. To design the CSS layout of the website.",
+      "C. To store the database connection string.",
+      "D. To render the HTML for a specific page request."
+    ],
+    optionsGuj: [
+      "A. દરેક રિક્વેસ્ટને ઇન્ટરસેપ્ટ કરવા અને એપ્લિકેશનમાં ભાગ લેવા માટે.",
+      "B. વેબસાઈટનું CSS લેઆઉટ ડિઝાઈન કરવા માટે.",
+      "C. ડેટાબેઝ કનેક્શન સ્ટ્રિંગ સ્ટોર કરવા માટે.",
+      "D. ચોક્કસ પેજ માટે HTML રેન્ડર કરવા માટે."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a standard 3-Tier ASP.NET architecture, which tier is responsible for shielding the database from direct client access?",
+    guj: "3-ટાયર આર્કિટેક્ચરમાં કયો ટાયર ડેટાબેઝને સીધા ક્લાઈન્ટથી સુરક્ષિત કરે છે?",
+    optionsEn: ["A. Presentation Tier", "B. Data Tier", "C. Logic/Application Tier", "D. Client Tier"],
+    optionsGuj: ["A. પ્રેઝન્ટેશન ટાયર", "B. ડેટા ટાયર", "C. લોજિક/એપ્લિકેશન ટાયર", "D. ક્લાઈન્ટ ટાયર"],
+    answer: 2
+  },
+  {
+    q: "Which of the following is a characteristic of a 'Thin Client'?",
+    guj: "'Thin Client'ની વિશેષતા કઈ છે?",
+    optionsEn: [
+      "A. It requires high-end hardware.",
+      "B. It primarily handles the User Interface and relies on server for logic.",
+      "C. Most processing is done on client machine.",
+      "D. It contains local copy of entire database."
+    ],
+    optionsGuj: [
+      "A. તેને હાઈ-એન્ડ હાર્ડવેરની જરૂર છે.",
+      "B. તે મુખ્યત્વે યુઝર ઈન્ટરફેસ હેન્ડલ કરે છે અને લોજિક માટે સર્વર પર આધાર રાખે છે.",
+      "C. મોટા ભાગનું પ્રોસેસિંગ ક્લાઈન્ટ મશીન પર થાય છે.",
+      "D. તેમાં સંપૂર્ણ ડેટાબેઝની લોકલ કોપી હોય છે."
+    ],
+    answer: 1
+  },
+  {
+    q: "What is the primary disadvantage of 2-Tier architecture?",
+    guj: "2-ટાયર આર્કિટેક્ચરનો મુખ્ય ગેરલાભ શું છે?",
+    optionsEn: [
+      "A. It requires more servers.",
+      "B. It is too fast.",
+      "C. Poor scalability and security risks due to direct client-to-database connection.",
+      "D. It does not support HTML."
+    ],
+    optionsGuj: [
+      "A. તેને વધુ સર્વર્સની જરૂર છે.",
+      "B. તે ખૂબ ઝડપી છે.",
+      "C. સ્કેલેબિલિટી ખરાબ અને સીધા ક્લાઈન્ટ-ટુ-ડેટાબેઝ કનેક્શનને કારણે સિક્યોરિટી જોખમ.",
+      "D. તે HTML સપોર્ટ કરતું નથી."
+    ],
+    answer: 2
+  }
+];
+
+let currentLang = 'both';
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quiz');
+  container.innerHTML = '';
+
+  mcqs.forEach((mcq, qIndex) => {
+    let qHTML = `<div class="question-card">
+      <div class="question-number">પ્રશ્ન ${qIndex + 1} | Question ${qIndex + 1}</div>
+      <div class="question-text">`;
+
+    if (currentLang === 'both' || currentLang === 'en') qHTML += `${mcq.q}<br>`;
+    if (currentLang === 'both' || currentLang === 'gu') qHTML += `<strong>${mcq.guj}</strong>`;
+
+    qHTML += `</div><div class="options" id="options-${qIndex}">`;
+
+    for (let i = 0; i < mcq.optionsEn.length; i++) {
+      let displayText = '';
+      if (currentLang === 'both') {
+        displayText = `${mcq.optionsEn[i]}<br><span style="color:#475569; font-size:0.98rem;">${mcq.optionsGuj[i]}</span>`;
+      } else if (currentLang === 'en') {
+        displayText = mcq.optionsEn[i];
+      } else {
+        displayText = mcq.optionsGuj[i];
+      }
+
+      qHTML += `
+        <div class="option" data-q="${qIndex}" data-opt="${i}" 
+             onclick="selectAnswer(${qIndex}, ${i}, this)">
+          ${displayText}
+        </div>`;
+    }
+
+    qHTML += `</div>
+      <div class="result" id="result-${qIndex}"></div>
+    </div>`;
+
+    container.innerHTML += qHTML;
+  });
+}
+
+function selectAnswer(qIndex, selectedIndex, element) {
+  const mcq = mcqs[qIndex];
+  const allOptions = document.querySelectorAll(`#options-${qIndex} .option`);
+  const resultDiv = document.getElementById(`result-${qIndex}`);
+
+  allOptions.forEach(opt => {
+    opt.style.pointerEvents = 'none';
+    const idx = parseInt(opt.getAttribute('data-opt'));
+
+    if (idx === mcq.answer) {
+      opt.classList.add('correct');
+    }
+    if (idx === selectedIndex && selectedIndex !== mcq.answer) {
+      opt.classList.add('wrong');
+    }
+  });
+
+  resultDiv.style.display = 'block';
+  if (selectedIndex === mcq.answer) {
+    resultDiv.className = 'result correct-result';
+    resultDiv.innerHTML = '✅ સાચો જવાબ!';
+  } else {
+    resultDiv.className = 'result wrong-result';
+    resultDiv.innerHTML = `❌ ખોટો જવાબ!<br>સાચો જવાબ: ${mcq.optionsGuj[mcq.answer]}`;
+  }
+}
+
+// Start the quiz
+renderQuiz();
+</script>
+
+</body>
+</html>
