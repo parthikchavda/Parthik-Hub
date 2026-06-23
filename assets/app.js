@@ -19,8 +19,8 @@
    ⚠️ SETUP — fill these three lines in before deploying:
    ============================================================ */
 
-const GITHUB_OWNER  = 'YOUR-GITHUB-USERNAME';   // e.g. 'parthik'
-const GITHUB_REPO   = 'parthik-sites';          // your repo name
+const GITHUB_OWNER  = 'parthikchavda';   // e.g. 'parthik'
+const GITHUB_REPO   = 'first-aid-kit-hub';          // your repo name
 const GITHUB_BRANCH = 'main';                   // 'main' or 'master'
 
 const SITE_TITLE = 'First Aid Kit Hub';
