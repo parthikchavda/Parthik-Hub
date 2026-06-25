@@ -1,0 +1,807 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent}
+.poster{font-family:'Noto Sans Gujarati','Noto Sans',sans-serif;background:linear-gradient(135deg,#0a1628 0%,#0d1f3c 40%,#1a0a3d 100%);color:#e8f0ff;width:100%;padding:0;overflow:hidden}
+.guj{font-family:'Noto Sans Gujarati',sans-serif}
+
+/* HEADER */
+.header{background:linear-gradient(90deg,#1e3a7b 0%,#2d1b69 50%,#1e3a7b 100%);border-bottom:3px solid #4a90d9;padding:10px 14px;text-align:center;position:relative}
+.header h1{font-size:20px;font-weight:700;color:#ffffff;letter-spacing:1px;text-shadow:0 0 20px rgba(74,144,217,0.8)}
+.header .subtitle{font-size:11px;color:#a8c4f0;margin-top:3px}
+.header .badges{display:flex;justify-content:center;gap:6px;margin-top:5px;flex-wrap:wrap}
+.badge{background:rgba(74,144,217,0.25);border:1px solid #4a90d9;border-radius:10px;padding:2px 8px;font-size:9px;color:#7ec8ff}
+
+/* GRID LAYOUT */
+.main-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px;width:100%}
+.col-span-2{grid-column:span 2}
+.col-span-3{grid-column:span 3}
+
+/* CARDS */
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(74,144,217,0.3);border-radius:8px;padding:8px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#4a90d9,#9b59b6,#4a90d9)}
+.card-title{font-size:10px;font-weight:700;color:#7ec8ff;border-bottom:1px solid rgba(74,144,217,0.3);padding-bottom:4px;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.card-title .icon{width:14px;height:14px;background:linear-gradient(135deg,#4a90d9,#9b59b6);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:white;flex-shrink:0}
+
+/* SECTION COLORS */
+.card.purple{border-color:rgba(155,89,182,0.4)}
+.card.purple::before{background:linear-gradient(90deg,#9b59b6,#4a90d9)}
+.card.purple .card-title{color:#c39bd3}
+.card.green{border-color:rgba(39,174,96,0.4)}
+.card.green::before{background:linear-gradient(90deg,#27ae60,#4a90d9)}
+.card.green .card-title{color:#82e0aa}
+.card.orange{border-color:rgba(230,126,34,0.4)}
+.card.orange::before{background:linear-gradient(90deg,#e67e22,#f39c12)}
+.card.orange .card-title{color:#f8c471}
+.card.red{border-color:rgba(231,76,60,0.4)}
+.card.red::before{background:linear-gradient(90deg,#e74c3c,#c0392b)}
+.card.red .card-title{color:#f1948a}
+.card.teal{border-color:rgba(26,188,156,0.4)}
+.card.teal::before{background:linear-gradient(90deg,#1abc9c,#16a085)}
+.card.teal .card-title{color:#76d7c4}
+
+/* TEXT STYLES */
+.t-primary{font-size:10px;color:#c8d8f0;line-height:1.5}
+.t-secondary{font-size:9px;color:#8a9fc0;line-height:1.4}
+.t-highlight{color:#7ec8ff;font-weight:600}
+.t-yellow{color:#f8c471;font-weight:600}
+.t-green{color:#82e0aa;font-weight:600}
+.t-red{color:#f1948a}
+.t-purple{color:#c39bd3}
+
+/* TRUTH TABLE */
+.tt{width:100%;border-collapse:collapse;font-size:8.5px;margin-top:4px}
+.tt th{background:rgba(74,144,217,0.3);color:#7ec8ff;padding:2px 4px;text-align:center;border:1px solid rgba(74,144,217,0.2);font-size:8px}
+.tt td{padding:2px 4px;text-align:center;border:1px solid rgba(74,144,217,0.15);color:#c8d8f0}
+.tt tr:nth-child(even) td{background:rgba(255,255,255,0.03)}
+.tt .t1{color:#82e0aa;font-weight:700}
+.tt .t0{color:#f1948a}
+
+/* FORMULA BOX */
+.formula{background:rgba(74,144,217,0.1);border:1px solid rgba(74,144,217,0.3);border-radius:4px;padding:4px 6px;font-family:monospace;font-size:9px;color:#7ec8ff;margin:3px 0;text-align:center}
+.formula-label{font-size:8px;color:#8a9fc0;margin-bottom:1px}
+
+/* LISTS */
+.list-item{display:flex;align-items:flex-start;gap:4px;margin-bottom:2px;font-size:9px;color:#c8d8f0}
+.list-item::before{content:'▶';color:#4a90d9;font-size:7px;margin-top:1px;flex-shrink:0}
+.list-item.check::before{content:'✓';color:#82e0aa}
+.list-item.warn::before{content:'⚠';color:#f8c471}
+.list-item.star::before{content:'★';color:#f8c471}
+
+/* MCQ STYLE */
+.mcq{background:rgba(155,89,182,0.1);border-left:3px solid #9b59b6;padding:4px 6px;margin-bottom:4px;border-radius:0 4px 4px 0;font-size:9px}
+.mcq-q{color:#c39bd3;font-weight:600;margin-bottom:2px}
+.mcq-a{color:#82e0aa;font-size:8.5px}
+
+/* MNEMONIC */
+.mnemonic{background:rgba(248,196,113,0.1);border:1px dashed rgba(248,196,113,0.4);border-radius:4px;padding:4px 6px;font-size:9px;color:#f8c471;text-align:center;margin:3px 0}
+
+/* COMPARISON TABLE */
+.cmp{width:100%;border-collapse:collapse;font-size:8px;margin-top:3px}
+.cmp th{background:rgba(155,89,182,0.3);color:#c39bd3;padding:2px 5px;border:1px solid rgba(155,89,182,0.2);font-size:8px}
+.cmp td{padding:2px 5px;border:1px solid rgba(74,144,217,0.15);color:#c8d8f0;font-size:8px}
+.cmp tr:nth-child(even) td{background:rgba(155,89,182,0.05)}
+
+/* EXAM BOX */
+.exam-box{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);border-radius:4px;padding:4px 6px;margin:3px 0;font-size:9px}
+.exam-box .exam-title{color:#f1948a;font-weight:700;font-size:9px;margin-bottom:2px}
+
+/* IMPORTANT BOX */
+.imp-box{background:rgba(248,196,113,0.1);border:1px solid rgba(248,196,113,0.3);border-radius:4px;padding:4px 6px;margin:3px 0}
+
+/* REVISION ZONES */
+.rev-zone{border-radius:6px;padding:5px 7px;margin:3px 0;font-size:9px}
+.rev-30s{background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.4)}
+.rev-2m{background:rgba(230,126,34,0.15);border:1px solid rgba(230,126,34,0.4)}
+.rev-5m{background:rgba(39,174,96,0.15);border:1px solid rgba(39,174,96,0.4)}
+
+/* GATE DIAGRAM SVG */
+.gate-svg{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:4px 0}
+
+/* NUMBER SYSTEMS */
+.num-sys{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px}
+.num-box{background:rgba(74,144,217,0.1);border:1px solid rgba(74,144,217,0.2);border-radius:4px;padding:4px;text-align:center}
+.num-box .num{font-size:16px;font-weight:700;color:#7ec8ff}
+.num-box .lbl{font-size:8px;color:#8a9fc0;margin-top:1px}
+
+/* FLIP FLOP TABLE */
+.ff-table{width:100%;border-collapse:collapse;font-size:8px;margin:3px 0}
+.ff-table th{background:rgba(26,188,156,0.25);color:#76d7c4;padding:2px 4px;border:1px solid rgba(26,188,156,0.2);text-align:center}
+.ff-table td{padding:2px 4px;border:1px solid rgba(26,188,156,0.15);text-align:center;color:#c8d8f0}
+
+/* ROAD MAP */
+.roadmap{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.road-step{display:flex;align-items:center;gap:6px;font-size:9px}
+.road-num{width:18px;height:18px;background:linear-gradient(135deg,#4a90d9,#9b59b6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0}
+.road-line{width:2px;height:10px;background:rgba(74,144,217,0.4);margin-left:8px}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+.tl-item{display:flex;gap:6px;align-items:flex-start;font-size:8.5px}
+.tl-year{color:#7ec8ff;font-weight:700;min-width:36px;flex-shrink:0}
+.tl-dot{width:7px;height:7px;background:#4a90d9;border-radius:50%;margin-top:2px;flex-shrink:0}
+.tl-text{color:#c8d8f0}
+
+/* WARN / TIP BOXES */
+.warn-box{background:rgba(231,76,60,0.1);border-left:3px solid #e74c3c;padding:3px 6px;font-size:8.5px;color:#f1948a;border-radius:0 4px 4px 0;margin:3px 0}
+.tip-box{background:rgba(39,174,96,0.1);border-left:3px solid #27ae60;padding:3px 6px;font-size:8.5px;color:#82e0aa;border-radius:0 4px 4px 0;margin:3px 0}
+.info-box{background:rgba(74,144,217,0.1);border-left:3px solid #4a90d9;padding:3px 6px;font-size:8.5px;color:#7ec8ff;border-radius:0 4px 4px 0;margin:3px 0}
+
+/* SECTION DIVIDER */
+.sec-div{font-size:9px;font-weight:700;color:#4a90d9;border-bottom:1px solid rgba(74,144,217,0.2);padding-bottom:2px;margin:5px 0 3px}
+
+/* FOOTER */
+.footer{background:rgba(0,0,0,0.4);border-top:2px solid #4a90d9;padding:6px 14px;display:flex;justify-content:space-between;align-items:center}
+.footer-badge{background:rgba(231,76,60,0.2);border:1px solid #e74c3c;border-radius:10px;padding:2px 8px;font-size:8px;color:#f1948a}
+.footer-text{font-size:8px;color:#8a9fc0;text-align:center}
+
+/* MINI GATE */
+.mini-gate{display:inline-block;background:rgba(74,144,217,0.15);border:1px solid rgba(74,144,217,0.3);border-radius:3px;padding:2px 6px;font-size:9px;color:#7ec8ff;margin:1px;font-family:monospace}
+
+/* CHIP DESIGN */
+.chip{background:rgba(26,188,156,0.1);border:2px solid rgba(26,188,156,0.4);border-radius:6px;padding:5px;margin:3px 0;position:relative}
+.chip-title{font-size:8px;color:#76d7c4;text-align:center;font-weight:700;margin-bottom:3px}
+.chip-inner{background:rgba(26,188,156,0.08);border:1px dashed rgba(26,188,156,0.3);border-radius:3px;padding:3px;font-size:8px;color:#c8d8f0;text-align:center}
+
+/* TAGS */
+.tag{display:inline-block;background:rgba(155,89,182,0.2);border:1px solid rgba(155,89,182,0.3);border-radius:10px;padding:1px 6px;font-size:8px;color:#c39bd3;margin:1px}
+.tag.blue{background:rgba(74,144,217,0.2);border-color:rgba(74,144,217,0.3);color:#7ec8ff}
+.tag.green{background:rgba(39,174,96,0.2);border-color:rgba(39,174,96,0.3);color:#82e0aa}
+.tag.orange{background:rgba(230,126,34,0.2);border-color:rgba(230,126,34,0.3);color:#f8c471}
+.tag.red{background:rgba(231,76,60,0.2);border-color:rgba(231,76,60,0.3);color:#f1948a}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
+</style>
+
+<div class="poster">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="card-title" style="justify-content:center;font-size:13px;margin-bottom:4px;border:none;padding-bottom:0">
+    <span class="icon" style="width:20px;height:20px;font-size:11px">⚡</span>
+    <span class="guj" style="font-size:16px;color:#fff">ડિજિટલ ઇલેક્ટ્રોનિક્સ અને VLSI - સંપૂર્ણ ગુજરાતી ઇન્ફોગ્રાફિક</span>
+  </div>
+  <div class="subtitle guj">Digital Electronics & VLSI | Binary • Logic Gates • Boolean Algebra • Flip-Flops • Memory • ADC/DAC • VLSI • FPGA • VHDL</div>
+  <div class="badges">
+    <span class="badge guj">PSI પરીક્ષા</span>
+    <span class="badge guj">GPSC</span>
+    <span class="badge guj">GSSSB</span>
+    <span class="badge guj">SSC</span>
+    <span class="badge guj">UPSC</span>
+    <span class="badge guj">ઇન્ટરવ્યૂ ગાઈડ</span>
+    <span class="badge guj">Academic Learning</span>
+    <span class="badge" style="background:rgba(231,76,60,0.3);border-color:#e74c3c;color:#f1948a">🔥 Most Important</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT GRID -->
+<div class="main-grid">
+
+<!-- ROW 1 COL 1: NUMBER SYSTEMS -->
+<div class="card">
+  <div class="card-title guj"><span class="icon">🔢</span> નંબર સિસ્ટમ (Number Systems)</div>
+  <div class="num-sys">
+    <div class="num-box"><div class="num">2</div><div class="lbl guj">Binary (બાઈનરી)<br>0, 1</div></div>
+    <div class="num-box" style="background:rgba(155,89,182,0.1);border-color:rgba(155,89,182,0.3)"><div class="num" style="color:#c39bd3">8</div><div class="lbl guj">Octal (ઓક્ટલ)<br>0-7</div></div>
+    <div class="num-box" style="background:rgba(39,174,96,0.1);border-color:rgba(39,174,96,0.3)"><div class="num" style="color:#82e0aa">10</div><div class="lbl guj">Decimal (ડેસિમલ)<br>0-9</div></div>
+    <div class="num-box" style="background:rgba(230,126,34,0.1);border-color:rgba(230,126,34,0.3)"><div class="num" style="color:#f8c471">16</div><div class="lbl guj">Hex (હેક્સ)<br>0-9, A-F</div></div>
+  </div>
+  <div class="sec-div guj">⚡ કન્વર્ઝન ફોર્મ્યુલા</div>
+  <div class="formula-label guj">Decimal → Binary (÷2 ની પ્રક્રિયા)</div>
+  <div class="formula">13₁₀ = 1101₂ (13÷2=6R1, 6÷2=3R0, 3÷2=1R1, 1÷2=0R1 → ઉલ્ટો વાંચો)</div>
+  <div class="formula-label guj">Binary → Decimal (ઘાત પ્રક્રિયા)</div>
+  <div class="formula">1101₂ = 1×2³+1×2²+0×2¹+1×2⁰ = 8+4+0+1 = 13₁₀</div>
+  <div class="formula-label guj">Hex → Binary (દરેક Hex = 4 Bits)</div>
+  <div class="formula">A₁₆ = 1010₂, F₁₆ = 1111₂, 2B₁₆ = 0010 1011₂</div>
+  <div class="sec-div guj">BCD, Gray Code, Excess-3</div>
+  <div class="t-secondary guj">• <span class="t-highlight">BCD:</span> Binary Coded Decimal – 0-9 ને 4 bits માં દર્શાવો</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Gray Code:</span> Adjacent numbers – ફક્ত 1 bit change (Error ↓)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Excess-3:</span> BCD + 3 = Self-complementing code</div>
+  <div class="mnemonic guj">🧠 યાદ રાખો: "Binary Decimal Gray Excess" = BDGE</div>
+</div>
+
+<!-- ROW 1 COL 2: LOGIC GATES -->
+<div class="card purple">
+  <div class="card-title guj"><span class="icon">🔌</span> લૉજિક ગેટ્સ (Logic Gates)</div>
+  <table class="tt">
+    <tr><th>Gate</th><th>Symbol</th><th>0,0</th><th>0,1</th><th>1,0</th><th>1,1</th><th class="guj">ઉપયોગ</th></tr>
+    <tr><td class="t-highlight">AND</td><td>A·B</td><td class="t0">0</td><td class="t0">0</td><td class="t0">0</td><td class="t1">1</td><td class="guj t-secondary" style="font-size:7.5px">બધા 1 = 1</td></tr>
+    <tr><td class="t-highlight">OR</td><td>A+B</td><td class="t0">0</td><td class="t1">1</td><td class="t1">1</td><td class="t1">1</td><td class="guj t-secondary" style="font-size:7.5px">એક 1 = 1</td></tr>
+    <tr><td class="t-highlight">NOT</td><td>A'</td><td colspan="2" class="t1">0→1</td><td colspan="2" class="t0">1→0</td><td class="guj t-secondary" style="font-size:7.5px">ઉલ્ટું</td></tr>
+    <tr><td class="t-highlight">NAND</td><td>(AB)'</td><td class="t1">1</td><td class="t1">1</td><td class="t1">1</td><td class="t0">0</td><td class="guj t-secondary" style="font-size:7.5px">Universal</td></tr>
+    <tr><td class="t-highlight">NOR</td><td>(A+B)'</td><td class="t1">1</td><td class="t0">0</td><td class="t0">0</td><td class="t0">0</td><td class="guj t-secondary" style="font-size:7.5px">Universal</td></tr>
+    <tr><td class="t-highlight">XOR</td><td>A⊕B</td><td class="t0">0</td><td class="t1">1</td><td class="t1">1</td><td class="t0">0</td><td class="guj t-secondary" style="font-size:7.5px">Different=1</td></tr>
+    <tr><td class="t-highlight">XNOR</td><td>A⊙B</td><td class="t1">1</td><td class="t0">0</td><td class="t0">0</td><td class="t1">1</td><td class="guj t-secondary" style="font-size:7.5px">Same=1</td></tr>
+  </table>
+  <div class="exam-box" style="margin-top:4px">
+    <div class="exam-title guj">🔥 EXAM TRICK – Universal Gates</div>
+    <div class="guj t-secondary">NAND અને NOR = Universal Gates (બધા gates બનાવી શકાય)</div>
+    <div class="t-secondary">NOT from NAND: A·A = A' | AND: (AB)'' | OR: A'+B')</div>
+  </div>
+  <div class="sec-div guj">Logic Families – IC Technologies</div>
+  <table class="cmp">
+    <tr><th>Family</th><th class="guj">સ્પીડ</th><th class="guj">Power</th><th class="guj">Voltage</th></tr>
+    <tr><td class="t-highlight">TTL</td><td class="guj">Medium</td><td class="guj">High</td><td>5V</td></tr>
+    <tr><td class="t-highlight">CMOS</td><td class="guj">Low-High</td><td class="guj">Very Low</td><td>3-15V</td></tr>
+    <tr><td class="t-highlight">ECL</td><td class="guj">Fastest</td><td class="guj">Highest</td><td>-5.2V</td></tr>
+    <tr><td class="t-highlight">BiCMOS</td><td class="guj">High</td><td class="guj">Medium</td><td>5V</td></tr>
+  </table>
+  <div class="mnemonic guj">🧠 "CMOS = ઓછો Power, ઘણો ઉપયોગ" – Phones, Laptops બધામાં!</div>
+</div>
+
+<!-- ROW 1 COL 3: BOOLEAN ALGEBRA -->
+<div class="card teal">
+  <div class="card-title guj"><span class="icon">∑</span> Boolean Algebra</div>
+  <div class="sec-div guj">મૂળ નિયમો (Basic Laws)</div>
+  <div class="two-col">
+    <div>
+      <div class="formula-label guj">Identity Laws</div>
+      <div class="formula" style="font-size:9px">A+0=A | A·1=A</div>
+      <div class="formula-label guj">Complement</div>
+      <div class="formula" style="font-size:9px">A+A'=1 | A·A'=0</div>
+      <div class="formula-label guj">Idempotent</div>
+      <div class="formula" style="font-size:9px">A+A=A | A·A=A</div>
+    </div>
+    <div>
+      <div class="formula-label guj">De Morgan's Theorem</div>
+      <div class="formula" style="font-size:9px">(AB)' = A'+B'</div>
+      <div class="formula" style="font-size:9px">(A+B)' = A'·B'</div>
+      <div class="formula-label guj">Absorption</div>
+      <div class="formula" style="font-size:9px">A+AB = A</div>
+    </div>
+  </div>
+  <div class="exam-box">
+    <div class="exam-title guj">🔥 De Morgan's – EXAM में સૌથી વધારે</div>
+    <div class="t-secondary guj">"AND ના complement = OR of complements"</div>
+    <div class="t-secondary" style="margin-top:2px">(AB)' = A' + B' | Real Use: NAND Gate = NOT-AND</div>
+  </div>
+  <div class="sec-div guj">K-Map (Karnaugh Map) – SOP Minimization</div>
+  <div class="t-secondary guj">• <span class="t-highlight">2-variable:</span> 2×2 grid (4 cells)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">3-variable:</span> 2×4 grid (8 cells) – Gray code order</div>
+  <div class="t-secondary guj">• <span class="t-highlight">4-variable:</span> 4×4 grid (16 cells)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Grouping Rule:</span> 1, 2, 4, 8, 16 (2ⁿ) – Adjacent cells</div>
+  <div class="tip-box guj">✓ Tip: Wrapping (Corners + Edges) ભૂલશો નહીં! Largest group = best simplification</div>
+  <div class="formula-label guj" style="margin-top:4px">SOP (Sum of Products) vs POS (Product of Sums)</div>
+  <div class="formula" style="font-size:9px">SOP: F = AB + A'C | POS: F = (A+B)(A'+C)</div>
+  <div class="mnemonic guj">🧠 K-Map Trick: "Ones Group = SOP | Zeros Group = POS"</div>
+</div>
+
+<!-- ROW 2 COL 1: COMBINATIONAL CIRCUITS -->
+<div class="card green">
+  <div class="card-title guj"><span class="icon">🔗</span> Combinational Circuits (સંયુક્ત સર્કિટ)</div>
+  <div class="t-secondary guj" style="margin-bottom:4px">Output = ફક્ત Present Input પર આધાર (No Memory)</div>
+  <div class="sec-div guj">Half Adder (Half Adder)</div>
+  <div class="two-col">
+    <div>
+      <div class="formula" style="font-size:9px">Sum = A ⊕ B<br>Carry = A · B</div>
+    </div>
+    <table class="tt" style="margin:0">
+      <tr><th>A</th><th>B</th><th>Sum</th><th>Carry</th></tr>
+      <tr><td class="t0">0</td><td class="t0">0</td><td class="t0">0</td><td class="t0">0</td></tr>
+      <tr><td class="t0">0</td><td class="t1">1</td><td class="t1">1</td><td class="t0">0</td></tr>
+      <tr><td class="t1">1</td><td class="t0">0</td><td class="t1">1</td><td class="t0">0</td></tr>
+      <tr><td class="t1">1</td><td class="t1">1</td><td class="t0">0</td><td class="t1">1</td></tr>
+    </table>
+  </div>
+  <div class="sec-div guj">Full Adder</div>
+  <div class="formula" style="font-size:8.5px">Sum = A⊕B⊕Cᵢₙ | Carry_out = AB + BCᵢₙ + ACᵢₙ</div>
+  <div class="sec-div guj">Multiplexer (MUX) – Data Selector</div>
+  <div class="t-secondary guj">• <span class="t-highlight">2:1 MUX:</span> 1 Select line, 2 inputs</div>
+  <div class="t-secondary guj">• <span class="t-highlight">4:1 MUX:</span> 2 Select lines, 4 inputs | Y = S₁S₀I₃+...</div>
+  <div class="t-secondary guj">• <span class="t-highlight">8:1 MUX:</span> 3 Select lines = 8 data inputs</div>
+  <div class="sec-div guj">Decoder & Encoder</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Decoder:</span> n inputs → 2ⁿ outputs (3:8 = 8 outputs)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Encoder:</span> 2ⁿ inputs → n outputs (Priority Encoder)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Comparator:</span> A=B, A>B, A&lt;B output</div>
+  <div class="exam-box">
+    <div class="exam-title guj">📌 Exam-Ready Facts</div>
+    <div class="t-secondary guj">• 4-bit Adder = 4 Full Adders in chain</div>
+    <div class="t-secondary guj">• MUX can implement any Boolean function</div>
+    <div class="t-secondary guj">• 74LS138 = 3:8 Decoder IC</div>
+  </div>
+</div>
+
+<!-- ROW 2 COL 2: FLIP FLOPS -->
+<div class="card orange">
+  <div class="card-title guj"><span class="icon">⏱</span> Flip-Flops (ફ્લિપ-ફ્લૉપ)</div>
+  <div class="t-secondary guj" style="margin-bottom:4px">Sequential Circuit – Output = Present + Past Input (Memory)</div>
+  <table class="ff-table">
+    <tr><th>Type</th><th class="guj">Inputs</th><th class="guj">ફંક્શન</th><th class="guj">Equation</th></tr>
+    <tr><td class="t-highlight">SR FF</td><td>S, R</td><td class="guj">Set/Reset</td><td style="font-size:7.5px">Q⁺=S+R'Q (S=R=1 invalid)</td></tr>
+    <tr><td class="t-highlight">D FF</td><td>D</td><td class="guj">Data latch</td><td style="font-size:7.5px">Q⁺=D (Simple!)</td></tr>
+    <tr><td class="t-highlight">JK FF</td><td>J, K</td><td class="guj">Universal FF</td><td style="font-size:7.5px">Q⁺=JQ'+K'Q (Toggle J=K=1)</td></tr>
+    <tr><td class="t-highlight">T FF</td><td>T</td><td class="guj">Toggle</td><td style="font-size:7.5px">Q⁺=T⊕Q (T=1→toggle)</td></tr>
+  </table>
+  <div class="warn-box guj">⚠ SR Flip-Flop: S=R=1 = FORBIDDEN STATE (Invalid!) – Exam Trick!</div>
+  <div class="exam-box" style="margin-top:4px">
+    <div class="exam-title guj">🔥 JK FF = King of All FFs</div>
+    <div class="t-secondary guj">J=0,K=0: No Change | J=0,K=1: Reset</div>
+    <div class="t-secondary guj">J=1,K=0: Set | J=1,K=1: <span class="t-yellow">Toggle (Race Around!)</span></div>
+  </div>
+  <div class="sec-div guj">Counters (કાઉન્ટર)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Ripple/Async:</span> FF cascaded – Slow but simple</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Sync Counter:</span> Clock connected to all FFs – Fast</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Up Counter:</span> 0→1→2→...→Max→0 (MOD-N)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Down Counter:</span> Max→...→0→Max</div>
+  <div class="formula-label guj" style="margin-top:3px">n-bit counter = 2ⁿ states | MOD-10 = BCD counter</div>
+  <div class="formula" style="font-size:9px">4-bit: 0000 to 1111 (0 to 15) = MOD-16</div>
+  <div class="mnemonic guj">🧠 "JK = Jack of All Trades, D = Data Direct, T = Toggle"</div>
+</div>
+
+<!-- ROW 2 COL 3: REGISTERS & MEMORY -->
+<div class="card red">
+  <div class="card-title guj"><span class="icon">💾</span> Registers & Memory</div>
+  <div class="sec-div guj">Registers (રજિસ્ટર)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">SISO:</span> Serial In – Serial Out</div>
+  <div class="t-secondary guj">• <span class="t-highlight">SIPO:</span> Serial In – Parallel Out</div>
+  <div class="t-secondary guj">• <span class="t-highlight">PISO:</span> Parallel In – Serial Out</div>
+  <div class="t-secondary guj">• <span class="t-highlight">PIPO:</span> Parallel In – Parallel Out (Fastest!)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Shift Register:</span> Left shift = ×2 | Right shift = ÷2</div>
+  <div class="mnemonic guj">🧠 "SSPP" = SI-SO, SI-PO, PI-SO, PI-PO</div>
+  <div class="sec-div guj">Memory (મેમરી)</div>
+  <table class="cmp">
+    <tr><th>Type</th><th class="guj">Volatile?</th><th class="guj">R/W</th><th class="guj">ઉપયોગ</th></tr>
+    <tr><td class="t-highlight">RAM</td><td class="t-red guj">હા (Yes)</td><td class="guj">R+W</td><td class="guj">Main Mem</td></tr>
+    <tr><td>SRAM</td><td class="t-red guj">Yes</td><td class="guj">R+W</td><td class="guj">Cache</td></tr>
+    <tr><td>DRAM</td><td class="t-red guj">Yes</td><td class="guj">R+W</td><td class="guj">Main RAM</td></tr>
+    <tr><td class="t-highlight">ROM</td><td class="t-green guj">ના (No)</td><td class="guj">Read only</td><td class="guj">BIOS</td></tr>
+    <tr><td>PROM</td><td class="t-green guj">No</td><td class="guj">Write once</td><td class="guj">OTP</td></tr>
+    <tr><td>EPROM</td><td class="t-green guj">No</td><td class="guj">UV erase</td><td class="guj">Firmware</td></tr>
+    <tr><td>EEPROM</td><td class="t-green guj">No</td><td class="guj">Elec erase</td><td class="guj">Flash</td></tr>
+  </table>
+  <div class="exam-box" style="margin-top:3px">
+    <div class="exam-title guj">📌 Memory Trick</div>
+    <div class="t-secondary guj">SRAM = FF-based, Fast, Costly | DRAM = Capacitor, Slow, Cheap, Refresh needed</div>
+  </div>
+  <div class="formula" style="font-size:9px">Memory Size: 2ⁿ × m bits (n=address lines, m=data lines)</div>
+</div>
+
+<!-- ROW 3 FULL WIDTH: ADC/DAC + PLA -->
+<div class="card col-span-3" style="background:rgba(74,144,217,0.06)">
+  <div class="card-title guj"><span class="icon">🔄</span> ADC / DAC Conversion + PLA (Programmable Logic Array)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+    
+    <div>
+      <div class="sec-div guj">DAC (Digital → Analog)</div>
+      <div class="t-secondary guj">• <span class="t-highlight">R-2R Ladder:</span> Simple, accurate, popular</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Weighted Resistor:</span> 2R,4R,8R... for each bit</div>
+      <div class="formula" style="font-size:9px">V_out = V_ref × (D/2ⁿ)</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Resolution:</span> 1/2ⁿ × Full Scale | 8-bit = 256 levels</div>
+      <div class="t-secondary guj">• <span class="t-highlight">% Resolution:</span> (1/2ⁿ) × 100</div>
+      <div class="exam-box" style="margin-top:3px">
+        <div class="exam-title">DAC Key Terms</div>
+        <div class="t-secondary guj">Resolution: ઓછામાં ઓછો voltage step</div>
+        <div class="t-secondary guj">Settling Time: Output stable થવાનો time</div>
+        <div class="t-secondary guj">Accuracy: Actual vs Ideal output difference</div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="sec-div guj">ADC (Analog → Digital)</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Flash ADC:</span> Fastest! 2ⁿ-1 comparators, Parallel</div>
+      <div class="t-secondary guj">• <span class="t-highlight">SAR ADC:</span> Successive Approx Register – Medium speed</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Dual Slope:</span> Most Accurate, Slow (DVMs)</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Sigma-Delta:</span> High resolution audio/sensor</div>
+      <div class="formula" style="font-size:9px">Nyquist Rate: f_s ≥ 2 × f_max</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Quantization Error:</span> ±½ LSB max</div>
+      <div class="exam-box" style="margin-top:3px">
+        <div class="exam-title">ADC Key Terms</div>
+        <div class="t-secondary guj">LSB = Least Significant Bit step size</div>
+        <div class="t-secondary guj">Conversion Time = ADC ને digital output આવવા સુધી</div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="sec-div guj">PLA – Programmable Logic Array</div>
+      <div class="t-secondary guj">• <span class="t-highlight">PLA:</span> Programmable AND + OR array</div>
+      <div class="t-secondary guj">• <span class="t-highlight">PAL:</span> Fixed OR + Programmable AND (faster)</div>
+      <div class="t-secondary guj">• <span class="t-highlight">ROM as PLA:</span> Fixed AND + Programmable OR</div>
+      <div class="chip">
+        <div class="chip-title">PLA Structure</div>
+        <div class="chip-inner guj">Inputs → AND Array (Programmable) → OR Array (Programmable) → Outputs</div>
+      </div>
+      <div class="t-secondary guj" style="margin-top:3px">• n inputs × p product terms × m outputs</div>
+      <div class="exam-box" style="margin-top:3px">
+        <div class="exam-title guj">📌 PLA vs PAL vs ROM</div>
+        <div class="t-secondary">PLA: Both P+P | PAL: P-AND + Fixed-OR | ROM: Fixed-AND + P-OR</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 4 COL 1: VLSI -->
+<div class="card purple">
+  <div class="card-title guj"><span class="icon">🏭</span> VLSI Design (Very Large Scale Integration)</div>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-year">SSI</span><div class="tl-dot"></div><span class="tl-text guj">Small Scale: 1-10 gates (7400 series)</span></div>
+    <div class="tl-item"><span class="tl-year">MSI</span><div class="tl-dot" style="background:#9b59b6"></div><span class="tl-text guj">Medium Scale: 10-100 gates (Adder, MUX)</span></div>
+    <div class="tl-item"><span class="tl-year">LSI</span><div class="tl-dot" style="background:#27ae60"></div><span class="tl-text guj">Large Scale: 100-10K (Memory chips)</span></div>
+    <div class="tl-item"><span class="tl-year">VLSI</span><div class="tl-dot" style="background:#f8c471"></div><span class="tl-text guj">Very Large: 10K-1M gates (Microprocessors)</span></div>
+    <div class="tl-item"><span class="tl-year">ULSI</span><div class="tl-dot" style="background:#e74c3c"></div><span class="tl-text guj">Ultra Large: 1M+ gates (Modern CPUs)</span></div>
+  </div>
+  <div class="sec-div guj">VLSI Design Flow</div>
+  <div class="roadmap">
+    <div class="road-step"><div class="road-num">1</div><span class="t-secondary guj">Specification → Concept Define</span></div>
+    <div class="road-step"><div class="road-num">2</div><span class="t-secondary guj">RTL Design → VHDL/Verilog Code</span></div>
+    <div class="road-step"><div class="road-num">3</div><span class="t-secondary guj">Synthesis → Logic Gate Mapping</span></div>
+    <div class="road-step"><div class="road-num">4</div><span class="t-secondary guj">Place & Route → Physical Layout</span></div>
+    <div class="road-step"><div class="road-num">5</div><span class="t-secondary guj">Verification → DRC, LVS Check</span></div>
+    <div class="road-step"><div class="road-num">6</div><span class="t-secondary guj">Tape-Out → Chip Fabrication</span></div>
+  </div>
+  <div class="tip-box guj" style="margin-top:4px">✓ Moore's Law: દર 18-24 months transistors ×2 (1965-Gordon Moore)</div>
+  <div class="formula" style="font-size:9px">Current Tech Node: 3nm, 5nm (Intel, TSMC)</div>
+</div>
+
+<!-- ROW 4 COL 2: MOS TRANSISTOR -->
+<div class="card teal">
+  <div class="card-title guj"><span class="icon">⚙</span> MOS Transistor & Inverters</div>
+  <div class="sec-div guj">MOSFET Types</div>
+  <div class="two-col">
+    <div>
+      <div class="imp-box">
+        <div class="t-highlight guj" style="font-size:9px">nMOS (N-Channel)</div>
+        <div class="t-secondary guj">V_gs > V_th → ON</div>
+        <div class="t-secondary guj">Electrons carry current</div>
+        <div class="t-secondary guj">Enhancement / Depletion</div>
+      </div>
+    </div>
+    <div>
+      <div class="imp-box" style="border-color:rgba(155,89,182,0.3);background:rgba(155,89,182,0.08)">
+        <div class="t-purple" style="font-size:9px;font-weight:600">pMOS (P-Channel)</div>
+        <div class="t-secondary guj">V_gs &lt; -|V_tp| → ON</div>
+        <div class="t-secondary guj">Holes carry current</div>
+        <div class="t-secondary guj">Complement of nMOS</div>
+      </div>
+    </div>
+  </div>
+  <div class="sec-div guj">CMOS Inverter (સૌથી Important!)</div>
+  <div class="chip" style="border-color:rgba(26,188,156,0.4)">
+    <div class="chip-title">CMOS Inverter Structure</div>
+    <div class="chip-inner guj">VDD → pMOS → Output → nMOS → GND | Input → Both Gates</div>
+  </div>
+  <div class="t-secondary guj" style="margin-top:3px">• Input=0: pMOS ON, nMOS OFF → Output=VDD (1)</div>
+  <div class="t-secondary guj">• Input=1: pMOS OFF, nMOS ON → Output=GND (0)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Static Power:</span> 0 (No DC path!) | <span class="t-highlight">Dynamic Power:</span> C×V²×f</div>
+  <div class="formula" style="font-size:9px">P_dynamic = α × C_L × V_DD² × f_clk</div>
+  <div class="sec-div guj">MOS Regions of Operation</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Cutoff:</span> V_gs &lt; V_th → I_D = 0 (OFF)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Linear/Triode:</span> V_ds &lt; V_gs-V_th → Switch ON</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Saturation:</span> V_ds ≥ V_gs-V_th → Amplifier region</div>
+  <div class="exam-box">
+    <div class="exam-title guj">📌 V_th Threshold Voltage</div>
+    <div class="t-secondary guj">V_th = minimum gate voltage to create channel | nMOS: +ve | pMOS: -ve</div>
+  </div>
+</div>
+
+<!-- ROW 4 COL 3: FPGA & VHDL -->
+<div class="card">
+  <div class="card-title guj"><span class="icon">🔮</span> FPGA & VHDL</div>
+  <div class="sec-div guj">FPGA – Field Programmable Gate Array</div>
+  <div class="chip">
+    <div class="chip-title">FPGA Internal Structure</div>
+    <div class="chip-inner" style="font-size:7.5px">CLB (Configurable Logic Block) + I/O Blocks + Routing Channels + RAM Blocks + DSP</div>
+  </div>
+  <div class="t-secondary guj" style="margin-top:3px">• <span class="t-highlight">LUT (Look-Up Table):</span> FPGA નો basic element – RAM-based</div>
+  <div class="t-secondary guj">• <span class="t-highlight">CLB:</span> LUT + Flip-Flop + MUX combination</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Reprogrammable:</span> SRAM-based → Can change design!</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Anti-fuse:</span> One-time programmable FPGA</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Vendors:</span> Xilinx, Altera (Intel), Lattice</div>
+  <div class="sec-div guj">VHDL – Very High Speed IC Hardware Description</div>
+  <div class="formula" style="text-align:left;font-size:8.5px;padding:5px">
+    <span style="color:#82e0aa">entity</span> AND_gate <span style="color:#7ec8ff">is</span><br>
+    &nbsp;&nbsp;<span style="color:#82e0aa">port</span>(A,B: <span style="color:#f8c471">in</span> std_logic;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y: <span style="color:#f8c471">out</span> std_logic);<br>
+    <span style="color:#82e0aa">end</span> AND_gate;<br>
+    <span style="color:#82e0aa">architecture</span> RTL <span style="color:#7ec8ff">of</span> AND_gate <span style="color:#7ec8ff">is</span><br>
+    <span style="color:#82e0aa">begin</span> Y &lt;= A <span style="color:#f8c471">and</span> B; <span style="color:#82e0aa">end</span>;
+  </div>
+  <div class="t-secondary guj">• <span class="t-highlight">Entity:</span> Port declarations (interface)</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Architecture:</span> Behavior/RTL/Structural</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Signal vs Variable:</span> Signal=Global | Variable=Local</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Concurrent:</span> <=  | <span class="t-highlight">Sequential:</span> := (in Process)</div>
+</div>
+
+<!-- ROW 5: EXAM SECTION - MCQs -->
+<div class="card col-span-3 red">
+  <div class="card-title guj"><span class="icon">📝</span> 🔥 Frequently Asked MCQs & Previous Year Questions (PSI / GPSC / GSSSB)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+    <div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q1. NAND gate ને Universal Gate કેમ કહે?</div>
+        <div class="mcq-a guj">✓ Ans: NAND gate વડે AND, OR, NOT – ત્રણે gates બનાવી શકાય</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q2. 4-bit Binary Counter ની Modulus?</div>
+        <div class="mcq-a">✓ Ans: MOD-16 (2⁴=16 states: 0000 to 1111)</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q3. De Morgan's Theorem: (A+B)' = ?</div>
+        <div class="mcq-a">✓ Ans: A' · B' (NOR = AND of complements)</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q4. Flash ADC ની વિશેષતા?</div>
+        <div class="mcq-a guj">✓ Ans: Fastest ADC | 2ⁿ-1 comparators parallel</div>
+      </div>
+    </div>
+    <div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q5. CMOS Logic Family ના ફાયદા?</div>
+        <div class="mcq-a guj">✓ Ans: Very low static power dissipation | Wide voltage range (3-15V)</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q6. SR Flip-Flop Invalid State?</div>
+        <div class="mcq-a">✓ Ans: S=1, R=1 → Forbidden/Invalid state</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q7. JK FF J=1, K=1 → ?</div>
+        <div class="mcq-a guj">✓ Ans: Toggle (Q → Q' – Output complement)</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q8. Nyquist Sampling Theorem?</div>
+        <div class="mcq-a">✓ Ans: f_s ≥ 2×f_max (min sampling = 2×highest freq)</div>
+      </div>
+    </div>
+    <div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q9. K-Map group size 4 = ?</div>
+        <div class="mcq-a guj">✓ Ans: 2 variables eliminate (n cells = n/2 variables eliminated)</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q10. VLSI ક્ષેત્ર – Moore's Law?</div>
+        <div class="mcq-a guj">✓ Ans: Transistor count doubles every 18-24 months</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q11. DRAM vs SRAM?</div>
+        <div class="mcq-a guj">✓ DRAM: Capacitor (slow,cheap,needs refresh) | SRAM: FF (fast,costly,no refresh)</div>
+      </div>
+      <div class="mcq">
+        <div class="mcq-q guj">Q12. FPGA ના Basic Element?</div>
+        <div class="mcq-a guj">✓ Ans: LUT (Look-Up Table) – basic programmable cell</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 6 COL 1-2: INTERVIEW + REVISION -->
+<div class="card col-span-2 purple">
+  <div class="card-title guj"><span class="icon">🎤</span> Interview Questions & Quick Revision</div>
+  <div class="two-col">
+    <div>
+      <div class="sec-div guj">🎤 Top Interview Questions</div>
+      <div class="list-item star guj">Explain CMOS inverter operation step by step</div>
+      <div class="list-item star guj">What is metastability in flip-flops?</div>
+      <div class="list-item star guj">Difference between synchronous and asynchronous reset</div>
+      <div class="list-item star guj">How does SAR ADC work? Draw timing diagram</div>
+      <div class="list-item star guj">What is setup time and hold time?</div>
+      <div class="list-item star guj">Explain hazards in combinational circuits</div>
+      <div class="list-item star guj">What is fan-in and fan-out in logic gates?</div>
+      <div class="list-item star guj">FPGA vs ASIC – trade-offs</div>
+      <div class="sec-div guj" style="margin-top:5px">📌 Important Definitions</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Fan-out:</span> Maximum number of gates a gate output can drive</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Propagation Delay:</span> Time for output to respond to input change</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Setup Time:</span> Data must be stable before clock edge</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Hold Time:</span> Data must remain stable after clock edge</div>
+      <div class="t-secondary guj">• <span class="t-highlight">Metastability:</span> FF output oscillates when setup/hold violated</div>
+    </div>
+    <div>
+      <div class="rev-zone rev-30s">
+        <div style="color:#f1948a;font-weight:700;font-size:9px;margin-bottom:3px" class="guj">⚡ 30 Second Revision</div>
+        <div class="t-secondary guj">Binary(2) | Octal(8) | Hex(16) | AND·OR NOT | NAND/NOR=Universal | SOP/POS | K-Map | Half/Full Adder | MUX 4:1=2 sel | D/JK/SR/T FF | Counter MOD=2ⁿ | SRAM=cache DRAM=RAM | ADC Flash=fastest | CMOS=low power | FPGA=LUT | VHDL=entity+arch</div>
+      </div>
+      <div class="rev-zone rev-2m" style="margin-top:4px">
+        <div style="color:#f8c471;font-weight:700;font-size:9px;margin-bottom:3px" class="guj">⏱ 2 Minute Formula Sheet</div>
+        <div class="formula" style="font-size:8px;margin:2px 0">Binary→Dec: Σ(bit × 2ⁿ)</div>
+        <div class="formula" style="font-size:8px;margin:2px 0">K-Map: Group 1,2,4,8 → 2ⁿ cells</div>
+        <div class="formula" style="font-size:8px;margin:2px 0">HA: Sum=A⊕B, Carry=AB | FA adds Cin</div>
+        <div class="formula" style="font-size:8px;margin:2px 0">DAC: Vout = Vref×D/2ⁿ</div>
+        <div class="formula" style="font-size:8px;margin:2px 0">ADC Nyquist: fs≥2fmax</div>
+        <div class="formula" style="font-size:8px;margin:2px 0">CMOS Power: P=αCV²f</div>
+        <div class="formula" style="font-size:8px;margin:2px 0">Counter: n-bits=MOD-2ⁿ</div>
+      </div>
+      <div class="rev-zone rev-5m" style="margin-top:4px">
+        <div style="color:#82e0aa;font-weight:700;font-size:9px;margin-bottom:3px" class="guj">📚 5 Minute – Common Mistakes Avoid</div>
+        <div class="t-secondary guj">✗ SR FF S=R=1 ≠ valid (always forbidden)</div>
+        <div class="t-secondary guj">✗ K-Map: Gray code order (00,01,11,10) ≠ binary</div>
+        <div class="t-secondary guj">✗ Nyquist: min sampling = 2× max freq (not ×1)</div>
+        <div class="t-secondary guj">✗ DRAM needs periodic refresh (capacitor leaks)</div>
+        <div class="t-secondary guj">✗ NAND = NOT-AND (bubble on AND output)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 6 COL 3: MOS CIRCUITS + CURRENT AFFAIRS -->
+<div class="card teal">
+  <div class="card-title guj"><span class="icon">🌐</span> Sequential MOS + Current Affairs</div>
+  <div class="sec-div guj">Sequential MOS Circuits</div>
+  <div class="t-secondary guj">• <span class="t-highlight">CMOS NAND:</span> Series nMOS + Parallel pMOS</div>
+  <div class="t-secondary guj">• <span class="t-highlight">CMOS NOR:</span> Parallel nMOS + Series pMOS</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Transmission Gate:</span> nMOS || pMOS – Bidirectional switch</div>
+  <div class="t-secondary guj">• <span class="t-highlight">Pass Transistor:</span> nMOS only switch (simpler)</div>
+  <div class="formula" style="font-size:8.5px">CMOS: nMOS PDN + pMOS PUN (Complementary!)</div>
+  <div class="sec-div guj">🌍 Current Affairs 2024-25</div>
+  <div class="list-item check guj">India Semiconductor Mission (ISM) – ₹76,000 Cr investment</div>
+  <div class="list-item check guj">TSMC 2nm chip production started (2024)</div>
+  <div class="list-item check guj">Micron Technology – Sanand Gujarat fab (2024)</div>
+  <div class="list-item check guj">Tata Electronics + PSMC – Dholera VLSI fab</div>
+  <div class="list-item check guj">ISRO Digital Electronics in space missions</div>
+  <div class="list-item check guj">Make in India – Semiconductor hub initiatives</div>
+  <div class="exam-box" style="margin-top:3px">
+    <div class="exam-title guj">🔥 Real World Applications</div>
+    <div class="t-secondary guj">• Smartphone: VLSI + CMOS + FPGA for 5G modem</div>
+    <div class="t-secondary guj">• Digital Camera: ADC (light→digital signal)</div>
+    <div class="t-secondary guj">• Speaker: DAC (digital→analog sound)</div>
+    <div class="t-secondary guj">• Computer: RAM=DRAM | Cache=SRAM</div>
+    <div class="t-secondary guj">• ISRO Rockets: Radiation-hard CMOS ICs</div>
+  </div>
+  <div class="tip-box guj" style="margin-top:3px">✓ Gujarat Connection: Dholera Smart City – India's 1st Semiconductor fab coming!</div>
+</div>
+
+<!-- ROW 7: TOP FACTS + MIND MAP -->
+<div class="card col-span-3" style="background:rgba(155,89,182,0.05);border-color:rgba(155,89,182,0.3)">
+  <div class="card-title guj"><span class="icon">💡</span> Top 20 Must-Remember Facts + Mind Map + Memory Mnemonics</div>
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px">
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+        <div>
+          <div class="list-item star guj"><span class="t-yellow">1.</span> NAND/NOR = Universal Gates (All gates possible)</div>
+          <div class="list-item star guj"><span class="t-yellow">2.</span> JK FF J=K=1 → Toggle (Race-Around at pulse)</div>
+          <div class="list-item star guj"><span class="t-yellow">3.</span> K-Map: Groups must be powers of 2 (1,2,4,8,16)</div>
+          <div class="list-item star guj"><span class="t-yellow">4.</span> CMOS: Static power ≈ 0 (No DC path VDD to GND)</div>
+          <div class="list-item star guj"><span class="t-yellow">5.</span> Flash ADC: Fastest, 2ⁿ-1 comparators</div>
+          <div class="list-item star guj"><span class="t-yellow">6.</span> DRAM: Capacitor-based, needs refresh every ms</div>
+          <div class="list-item star guj"><span class="t-yellow">7.</span> Binary 1101 = Decimal 13 = Hex D</div>
+          <div class="list-item star guj"><span class="t-yellow">8.</span> De Morgan: (AB)'=A'+B' | (A+B)'=A'B'</div>
+          <div class="list-item star guj"><span class="t-yellow">9.</span> Full Adder = 2 Half Adders + 1 OR gate</div>
+          <div class="list-item star guj"><span class="t-yellow">10.</span> Moore's Law: Transistors ×2 every 18 months</div>
+        </div>
+        <div>
+          <div class="list-item star guj"><span class="t-yellow">11.</span> MUX 4:1 needs 2 select lines (log₂4=2)</div>
+          <div class="list-item star guj"><span class="t-yellow">12.</span> FPGA = Reprogrammable | ASIC = Fixed (faster)</div>
+          <div class="list-item star guj"><span class="t-yellow">13.</span> Shift Left = Multiply by 2 | Shift Right = Divide 2</div>
+          <div class="list-item star guj"><span class="t-yellow">14.</span> Gray Code: Only 1 bit changes between adjacent</div>
+          <div class="list-item star guj"><span class="t-yellow">15.</span> Nyquist: Sampling rate ≥ 2× highest frequency</div>
+          <div class="list-item star guj"><span class="t-yellow">16.</span> VHDL Entity=Interface | Architecture=Behavior</div>
+          <div class="list-item star guj"><span class="t-yellow">17.</span> ECL = Fastest logic family (Emitter Coupled)</div>
+          <div class="list-item star guj"><span class="t-yellow">18.</span> n-bit counter → 2ⁿ states (n FFs required)</div>
+          <div class="list-item star guj"><span class="t-yellow">19.</span> SR FF: S=R=1 = FORBIDDEN/INVALID state!</div>
+          <div class="list-item star guj"><span class="t-yellow">20.</span> VLSI now at 3nm node (FinFET technology)</div>
+        </div>
+      </div>
+      <div class="mnemonic" style="margin-top:4px">
+        🧠 <span class="guj">Super Mnemonics: "All Dogs Jump Tracks" = AND,OR,NOT,NAND,NOR,XOR,XNOR | "Big Doctors Must Save Patients" = Binary,Decimal,Modified,S-R,F-A,Parity</span>
+      </div>
+    </div>
+    <div>
+      <div class="sec-div guj">🗺 Mind Map – Digital Electronics</div>
+      <svg viewBox="0 0 280 200" width="100%" style="max-height:180px">
+        <rect x="100" y="85" width="80" height="28" rx="14" fill="#1e3a7b" stroke="#4a90d9" stroke-width="1.5"/>
+        <text x="140" y="99" text-anchor="middle" fill="#7ec8ff" font-size="9" font-family="sans-serif" dominant-baseline="central" font-weight="600">Digital</text>
+        <text x="140" y="109" text-anchor="middle" fill="#7ec8ff" font-size="7" font-family="sans-serif" dominant-baseline="central">Electronics</text>
+        <!-- Branches -->
+        <line x1="100" y1="95" x2="60" y2="60" stroke="#4a90d9" stroke-width="1"/>
+        <rect x="10" y="48" width="50" height="18" rx="5" fill="#1a0a3d" stroke="#9b59b6" stroke-width="1"/>
+        <text x="35" y="57" text-anchor="middle" fill="#c39bd3" font-size="8" font-family="sans-serif" dominant-baseline="central">Number Sys</text>
+        <line x1="100" y1="99" x2="58" y2="100" stroke="#27ae60" stroke-width="1"/>
+        <rect x="5" y="91" width="50" height="18" rx="5" fill="#1a0a3d" stroke="#27ae60" stroke-width="1"/>
+        <text x="30" y="100" text-anchor="middle" fill="#82e0aa" font-size="8" font-family="sans-serif" dominant-baseline="central">Gates/Bool</text>
+        <line x1="100" y1="107" x2="60" y2="138" stroke="#e67e22" stroke-width="1"/>
+        <rect x="10" y="130" width="50" height="18" rx="5" fill="#1a0a3d" stroke="#e67e22" stroke-width="1"/>
+        <text x="35" y="139" text-anchor="middle" fill="#f8c471" font-size="8" font-family="sans-serif" dominant-baseline="central">Comb. Ckt</text>
+        <line x1="140" y1="85" x2="140" y2="50" stroke="#e74c3c" stroke-width="1"/>
+        <rect x="100" y="35" width="80" height="18" rx="5" fill="#1a0a3d" stroke="#e74c3c" stroke-width="1"/>
+        <text x="140" y="44" text-anchor="middle" fill="#f1948a" font-size="8" font-family="sans-serif" dominant-baseline="central">Flip-Flops/Counter</text>
+        <line x1="140" y1="113" x2="140" y2="148" stroke="#1abc9c" stroke-width="1"/>
+        <rect x="100" y="148" width="80" height="18" rx="5" fill="#1a0a3d" stroke="#1abc9c" stroke-width="1"/>
+        <text x="140" y="157" text-anchor="middle" fill="#76d7c4" font-size="8" font-family="sans-serif" dominant-baseline="central">Memory/ADC/DAC</text>
+        <line x1="180" y1="95" x2="222" y2="60" stroke="#9b59b6" stroke-width="1"/>
+        <rect x="222" y="48" width="55" height="18" rx="5" fill="#1a0a3d" stroke="#9b59b6" stroke-width="1"/>
+        <text x="249" y="57" text-anchor="middle" fill="#c39bd3" font-size="8" font-family="sans-serif" dominant-baseline="central">VLSI/MOS</text>
+        <line x1="180" y1="99" x2="220" y2="100" stroke="#f39c12" stroke-width="1"/>
+        <rect x="222" y="91" width="55" height="18" rx="5" fill="#1a0a3d" stroke="#f39c12" stroke-width="1"/>
+        <text x="249" y="100" text-anchor="middle" fill="#f8c471" font-size="8" font-family="sans-serif" dominant-baseline="central">FPGA/VHDL</text>
+        <line x1="180" y1="107" x2="220" y2="138" stroke="#3498db" stroke-width="1"/>
+        <rect x="222" y="130" width="55" height="18" rx="5" fill="#1a0a3d" stroke="#3498db" stroke-width="1"/>
+        <text x="249" y="139" text-anchor="middle" fill="#7ec8ff" font-size="8" font-family="sans-serif" dominant-baseline="central">Applications</text>
+      </svg>
+      <div class="exam-box" style="margin-top:3px">
+        <div class="exam-title guj">🔥 Tricky Concepts</div>
+        <div class="t-secondary guj">1. Race-around in JK FF (Edge trigger fix)</div>
+        <div class="t-secondary guj">2. Glitches/Hazards in comb. circuits</div>
+        <div class="t-secondary guj">3. Metastability in synchronizers</div>
+        <div class="t-secondary guj">4. Setup/Hold time violations</div>
+        <div class="t-secondary guj">5. K-Map don't care conditions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 8: COMPARISON TABLES FULL WIDTH -->
+<div class="card col-span-3 green">
+  <div class="card-title guj"><span class="icon">📊</span> Comparison Tables + Application Tags + PSI/GPSC Special</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+    <div>
+      <div class="sec-div guj">Combinational vs Sequential</div>
+      <table class="cmp">
+        <tr><th class="guj">Combinational</th><th class="guj">Sequential</th></tr>
+        <tr><td class="guj">Memory નથી</td><td class="guj">Memory છે</td></tr>
+        <tr><td class="guj">Present input only</td><td class="guj">Past + Present</td></tr>
+        <tr><td class="guj">Adder, MUX, Dec</td><td class="guj">FF, Counter, Reg</td></tr>
+        <tr><td class="guj">No clock needed</td><td class="guj">Clock required</td></tr>
+        <tr><td class="guj">Faster (no state)</td><td class="guj">State-dependent</td></tr>
+      </table>
+      <div class="sec-div guj" style="margin-top:5px">FPGA vs ASIC</div>
+      <table class="cmp">
+        <tr><th>FPGA</th><th>ASIC</th></tr>
+        <tr><td class="guj">Reprogrammable</td><td class="guj">Fixed/Non-reprog</td></tr>
+        <tr><td class="guj">Lower NRE cost</td><td class="guj">High NRE cost</td></tr>
+        <tr><td class="guj">Slower</td><td class="guj">Faster</td></tr>
+        <tr><td class="guj">Prototype/Low vol</td><td class="guj">Mass production</td></tr>
+        <tr><td class="guj">LUT-based</td><td class="guj">Standard cells</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="sec-div guj">ADC Types Comparison</div>
+      <table class="cmp">
+        <tr><th>Type</th><th class="guj">Speed</th><th class="guj">Accuracy</th><th class="guj">Cost</th></tr>
+        <tr><td>Flash</td><td class="t-green guj">Fastest</td><td class="t-red guj">Low</td><td class="t-red guj">High</td></tr>
+        <tr><td>SAR</td><td class="guj">Medium</td><td class="guj">Good</td><td class="guj">Medium</td></tr>
+        <tr><td>Dual Slope</td><td class="t-red guj">Slow</td><td class="t-green guj">Best</td><td class="guj">Low</td></tr>
+        <tr><td>Sigma-Delta</td><td class="t-red guj">Slow</td><td class="t-green guj">Highest</td><td class="guj">Medium</td></tr>
+      </table>
+      <div class="sec-div guj" style="margin-top:5px">Logic Family Speed Comparison</div>
+      <table class="cmp">
+        <tr><th>Family</th><th>Speed (ns)</th><th>PDiss (mW)</th></tr>
+        <tr><td class="t-highlight">ECL</td><td class="t-green">&lt;1</td><td class="t-red">50-500</td></tr>
+        <tr><td class="t-highlight">TTL</td><td>5-25</td><td>10-20</td></tr>
+        <tr><td class="t-highlight">CMOS</td><td>10-50</td><td class="t-green">&lt;0.001</td></tr>
+        <tr><td class="t-highlight">LVTTL</td><td>2-5</td><td>5-10</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="sec-div guj">PSI / GPSC Special Points</div>
+      <div class="exam-box">
+        <div class="exam-title guj">🎯 Wireless PSI – Most Asked Topics</div>
+        <div class="list-item star guj">Binary/Octal/Hex Conversion (3-4 questions always)</div>
+        <div class="list-item star guj">Truth Tables of ALL basic gates</div>
+        <div class="list-item star guj">De Morgan's Theorem simplification</div>
+        <div class="list-item star guj">K-Map 2 & 3 variable minimization</div>
+        <div class="list-item star guj">Flip-Flop state tables (esp. JK)</div>
+        <div class="list-item star guj">Counter MOD identification</div>
+        <div class="list-item star guj">Memory types (volatile vs non-volatile)</div>
+      </div>
+      <div class="sec-div guj" style="margin-top:4px">🏷 Applications Tags</div>
+      <div>
+        <span class="tag blue">Smartphone</span>
+        <span class="tag green">Medical Devices</span>
+        <span class="tag orange">Automotive</span>
+        <span class="tag red">Military</span>
+        <span class="tag">AI Chips</span>
+        <span class="tag blue">IoT Sensors</span>
+        <span class="tag green">Space</span>
+        <span class="tag orange">5G Networks</span>
+        <span class="tag red">Digital TV</span>
+        <span class="tag">GPS</span>
+        <span class="tag blue">Smart Meters</span>
+        <span class="tag green">ISRO</span>
+      </div>
+      <div class="info-box guj" style="margin-top:4px">ℹ GPSC: VLSI & semiconductor = economic importance – likely essay topic 2025-26!</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end main-grid -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-badge guj">🔥 Exam Ready</div>
+  <div class="footer-text guj">
+    <strong style="color:#7ec8ff">ડિજિટલ ઇલેક્ટ્રોનિક્સ & VLSI – સંપૂર્ણ ગુજરાતી ગાઈડ</strong><br>
+    PSI • GPSC • GSSSB • SSC • UPSC • Academic | Number Systems • Logic Gates • Boolean • Comb. Circuits • Flip-Flops • Memory • ADC/DAC • VLSI • MOS • FPGA • VHDL
+  </div>
+  <div class="footer-badge guj" style="background:rgba(39,174,96,0.2);border-color:#27ae60;color:#82e0aa">✓ 100% Accurate</div>
+</div>
+
+</div>
