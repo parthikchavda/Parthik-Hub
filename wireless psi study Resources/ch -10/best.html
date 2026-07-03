@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="gu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Application Development - સંપૂર્ણ ગાઈડ</title>
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            padding: 30px 40px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            background: linear-gradient(135deg, #0b3d0b, #2d7d2d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom: 3px solid #2d7d2d;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            color: #0b3d0b;
+            border-left: 6px solid #2d7d2d;
+            padding-left: 16px;
+            margin-top: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #1e4a1e;
+            margin-top: 2rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            color: #2d5a2d;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul,
+        ol {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        th {
+            background: #1e4a1e;
+            color: white;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        pre,
+        code {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        pre {
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 1.2rem 0;
+            background: #0f172a;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .code-block {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 1.2rem 0;
+            overflow-x: auto;
+        }
+
+        .highlight-box {
+            background: #f0fdf4;
+            border-left: 6px solid #2d7d2d;
+            padding: 1.2rem 1.8rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 6px solid #f59e0b;
+            padding: 1.2rem 1.8rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .tip-box {
+            background: #e0f2fe;
+            border-left: 6px solid #0ea5e9;
+            padding: 1.2rem 1.8rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .toc {
+            background: #f1f5f9;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+
+        .toc ul {
+            columns: 2;
+            column-gap: 2rem;
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 0.4rem;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: #1e4a1e;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+            color: #0b3d0b;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #2d7d2d;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.4rem;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 2rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .mnemonic {
+            background: #fef9c3;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 600;
+            color: #854d0e;
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th,
+            td {
+                padding: 8px 10px;
+            }
+        }
+
+        /* smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            padding: 10px 0;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-nav a {
+            background: #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e293b;
+            transition: 0.2s;
+        }
+
+        .section-nav a:hover {
+            background: #2d7d2d;
+            color: white;
+        }
+
+        /* mcq styling */
+        .mcq {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .mcq strong {
+            color: #0b3d0b;
+        }
+
+        .answer {
+            color: #2d7d2d;
+            font-weight: 600;
+            background: #dcfce7;
+            padding: 0.1rem 0.6rem;
+            border-radius: 16px;
+        }
+
+        /* ફક્ત MCQ માટેના વિશિષ્ટ સ્ટાઇલ ફેરફારો */
+        .mcq ul {
+            list-style-type: none;
+            /* ડિફોલ્ટ બુલેટ્સ હટાવવા માટે */
+            padding-left: 0;
+        }
+
+        .mcq li {
+            padding: 6px 12px;
+            margin: 6px 0;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+        /* શરૂઆતમાં રાઇટ માર્ક (✓) છુપાયેલો રહેશે */
+        .mcq .answer {
+            display: none;
+            color: #2d7d2d;
+            font-weight: 600;
+            background: #dcfce7;
+            padding: 0.1rem 0.6rem;
+            border-radius: 16px;
+            margin-left: 10px;
+        }
+
+        /* જ્યારે 'show-ans' ક્લાસ એડ થાય ત્યારે સાચો ઓપ્શન હાઇલાઇટ થશે */
+        .mcq.show-ans .correct-option {
+            background-color: #dcfce7;
+            /* આછો લીલો બેકગ્રાઉન્ડ */
+            border: 1px dashed #2d7d2d;
+        }
+
+        /* સાચો માર્ક બતાવવા માટે */
+        .mcq.show-ans .answer {
+            display: inline-block;
+        }
+
+        /* બટનનું આધુનિક સ્ટાઇલિંગ */
+        .btn-ans {
+            background-color: #2d7d2d;
+            /* તમારી થીમનો ગ્રીન કલર */
+            color: white;
+            border: none;
+            padding: 7px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-ans:hover {
+            background-color: #0b3d0b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>📱 Android Application Development</h1>
+        <p style="font-size:1.2rem; color:#475569;">PSI / Gujarat Police Wireless Exam — સંપૂર્ણ ઊંડાણપૂર્ણ અભ્યાસ ગાઈડ
+        </p>
+
+        <!-- Navigation bar -->
+        <div class="section-nav">
+            <a href="#intro">પરિચય</a>
+            <a href="#os">Android OS</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#activities">Activities &amp; Lifecycle</a>
+            <a href="#ui">UI Design</a>
+            <a href="#advanced">Advanced UI</a>
+            <a href="#toast">Toast, Menu, Dialog</a>
+            <a href="#list">List &amp; Adapters</a>
+            <a href="#database">Database</a>
+            <a href="#gujarat">Gujarat Police</a>
+            <a href="#formula">Formulas</a>
+            <a href="#golden">Golden Rules</a>
+            <a href="#mcqs">MCQs</a>
+            <a href="#mindmap">Mind Map</a>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3 style="margin-top:0;">📑 સામગ્રી (Table of Contents)</h3>
+            <ul>
+                <li><a href="#intro">1. પરિચય</a></li>
+                <li><a href="#os">2. Android OS Concepts</a></li>
+                <li><a href="#architecture">3. Android Architecture</a></li>
+                <li><a href="#activities">4. Activities, Lifecycle &amp; Intent</a></li>
+                <li><a href="#ui">5. UI Design – Layouts &amp; Widgets</a></li>
+                <li><a href="#advanced">6. Advanced UI Programming</a></li>
+                <li><a href="#toast">7. Toast, Menu, Dialog</a></li>
+                <li><a href="#list">8. List &amp; Adapters</a></li>
+                <li><a href="#database">9. Working with Database (SQLite)</a></li>
+                <li><a href="#gujarat">10. Gujarat Police Context</a></li>
+                <li><a href="#formula">11. Formula Sheet &amp; Calculations</a></li>
+                <li><a href="#golden">12. Exam Golden Rules</a></li>
+                <li><a href="#mcqs">13. Practice MCQs</a></li>
+                <li><a href="#mindmap">14. Mind Map Recap</a></li>
+            </ul>
+        </div>
+
+        <!-- ======================== 1. INTRODUCTION ======================== -->
+        <section id="intro">
+            <h2>1. પરિચય (Introduction)</h2>
+            <h3>🤔 આ શું છે?</h3>
+            <p><strong>Android</strong> એ Google દ્વારા બનાવવામાં આવેલું મોબાઇલ ઓપરેટિંગ સિસ્ટમ છે.</p>
+
+            <h3>📝 સરળ વ્યાખ્યા</h3>
+            <p>એક એવું સોફ્ટવેર જે તમારા ફોનને ચલાવે છે અને એપ્સને કામ કરવા દે છે.</p>
+            <div class="highlight-box">
+                <strong>રોજિંદા ઉદાહરણ:</strong><br>
+                • જેમ શરીરમાં મગજ કામ કરે છે, તેમ ફોનમાં Android કામ કરે છે.<br>
+                • જેમ ઘરમાં વીજળીનું વાયરિંગ બધા ઉપકરણોને જોડે છે, તેમ Android બધી એપ્સને ફોન સાથે જોડે છે.
+            </div>
+
+            <h3>🎯 તેનો અર્થ</h3>
+            <ul>
+                <li><strong>Open Source</strong> – કોઈ પણ વ્યક્તિ તેને જોઈ, બદલી અને વાપરી શકે છે.</li>
+                <li><strong>Linux-based</strong> – તે Linux નામના બીજા સિસ્ટમ પર બનેલું છે.</li>
+                <li><strong>Mobile OS</strong> – ખાસ મોબાઇલ ફોન માટે બનાવેલું.</li>
+            </ul>
+
+            <h3>❓ શા માટે જરૂરી છે?</h3>
+            <ul>
+                <li>ફોનને સમજવા માટે</li>
+                <li>એપ્સ ચલાવવા માટે</li>
+                <li>હાર્ડવેર (કેમેરા, સ્ક્રીન, બ્લૂટૂથ)ને કંટ્રોલ કરવા</li>
+            </ul>
+
+            <h3>📍 ઉપયોગ ક્યાં થાય છે?</h3>
+            <table>
+                <tr>
+                    <th>સ્થળ</th>
+                    <th>ઉપયોગ</th>
+                </tr>
+                <tr>
+                    <td>📱 Smartphones</td>
+                    <td>વોટ્સએપ, ઇન્સ્ટાગ્રામ, ગેમ્સ</td>
+                </tr>
+                <tr>
+                    <td>📟 Tablets</td>
+                    <td>શિક્ષણ, વાંચન, મૂવી</td>
+                </tr>
+                <tr>
+                    <td>📺 Smart TVs</td>
+                    <td>Netflix, YouTube, Streaming</td>
+                </tr>
+                <tr>
+                    <td>🚗 Car Systems</td>
+                    <td>GPS, Music, Calling</td>
+                </tr>
+                <tr>
+                    <td>🏦 Police Devices</td>
+                    <td>e-Challan, FIR, Biometric</td>
+                </tr>
+            </table>
+
+            <h3>📜 ઇતિહાસ (History)</h3>
+            <ul>
+                <li><strong>2003</strong> – Android Inc. શરૂ થઈ</li>
+                <li><strong>2005</strong> – Google એ Android ખરીદી લીધું</li>
+                <li><strong>2007</strong> – Open Handset Alliance (OHA) બનાવ્યું</li>
+                <li><strong>2008</strong> – પહેલો Android ફોન (HTC Dream) આવ્યો</li>
+                <li><strong>2009-2013</strong> – Cupcake, Donut, Eclair, Froyo, Gingerbread, Honeycomb, Ice Cream
+                    Sandwich, Jelly Bean</li>
+                <li><strong>2014</strong> – KitKat</li>
+                <li><strong>2015</strong> – Lollipop (Android 5.0) – <strong>ART</strong> આવ્યો</li>
+                <li><strong>2016</strong> – Marshmallow</li>
+                <li><strong>2017-2018</strong> – Nougat, Oreo</li>
+                <li><strong>2019</strong> – Pie</li>
+                <li><strong>2020-2025</strong> – Android 10 થી 15</li>
+            </ul>
+
+            <h3>⭐ મહત્વ</h3>
+            <ul>
+                <li><strong>80%+</strong> ફોનમાં Android છે</li>
+                <li><strong>2.5 અબજ+</strong> ઉપકરણો Android ચલાવે છે</li>
+                <li><strong>ગુજરાત પોલીસ</strong> "Pocket Cop", e-Challan, FIR માટે Android વાપરે છે</li>
+            </ul>
+        </section>
+
+        <!-- ======================== 2. ANDROID OS CONCEPTS ======================== -->
+        <section id="os">
+            <h2>2. Android OS Concepts</h2>
+            <h3>🧠 મુખ્ય ખ્યાલ (Core Concepts)</h3>
+            <ul>
+                <li><strong>Linux Kernel</strong> પર બનેલું <strong>Open-source</strong> OS</li>
+                <li><strong>Java, Kotlin, C++</strong> માં એપ્સ લખાય</li>
+                <li><strong>Android Studio</strong> એ Official IDE</li>
+            </ul>
+            <h3>Open Handset Alliance (OHA)</h3>
+            <p>Google + 80+ કંપનીઓ (Samsung, Qualcomm, etc.) – Android ને ફ્રી અને ઓપન રાખવાનું કામ.</p>
+
+            <h3>🔑 મુખ્ય ભાગો (Core Components) – "ASBC"</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>કામ</th>
+                    <th>રોજિંદું ઉદાહરણ</th>
+                </tr>
+                <tr>
+                    <td><strong>A</strong>ctivity</td>
+                    <td>સ્ક્રીન બતાવે, User સાથે વાત કરે</td>
+                    <td>WhatsApp Chat સ્ક્રીન</td>
+                </tr>
+                <tr>
+                    <td><strong>S</strong>ervice</td>
+                    <td>Background માં કામ કરે</td>
+                    <td>Music Player background માં ગાણું વગાડે</td>
+                </tr>
+                <tr>
+                    <td><strong>B</strong>roadcast Receiver</td>
+                    <td>System Events સાંભળે</td>
+                    <td>Battery Low મેસેજ</td>
+                </tr>
+                <tr>
+                    <td><strong>C</strong>ontent Provider</td>
+                    <td>Apps વચ્ચે Data શેર કરે</td>
+                    <td>Contacts List બીજી એપ્સને આપે</td>
+                </tr>
+            </table>
+            <div class="tip-box"><strong>💡 Exam Tip:</strong> જો MCQ માં "App Components" પૂછે તો ફક્ત આ 4 જ યાદ રાખો.
+                Intent/Fragment એ distractor છે!</div>
+
+            <h3>⚙️ Compilation Process</h3>
+            <div class="code-block">
+                Java/Kotlin Code → Java Bytecode (.class) → Dalvik Executable (.dex) → APK File
+            </div>
+
+            <h3>📊 Android Versions (Quick Reference)</h3>
+            <table>
+                <tr>
+                    <th>Version Name</th>
+                    <th>API Level</th>
+                    <th>નોંધ</th>
+                </tr>
+                <tr>
+                    <td>Cupcake</td>
+                    <td>3</td>
+                    <td>પહેલો version</td>
+                </tr>
+                <tr>
+                    <td>Donut</td>
+                    <td>4</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Eclair</td>
+                    <td>5-7</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Froyo</td>
+                    <td>8</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Gingerbread</td>
+                    <td>9-10</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Honeycomb</td>
+                    <td>11-13</td>
+                    <td>ફક્ત Tablets</td>
+                </tr>
+                <tr>
+                    <td>Ice Cream Sandwich</td>
+                    <td>14-15</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Jelly Bean</td>
+                    <td>16-18</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>KitKat</td>
+                    <td>19</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Lollipop</td>
+                    <td>21-22</td>
+                    <td><strong>ART</strong> આવ્યો (Dalvik ની જગ્યાએ)</td>
+                </tr>
+                <tr>
+                    <td>Marshmallow</td>
+                    <td>23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Nougat</td>
+                    <td>24-25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Oreo</td>
+                    <td>26-27</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Pie</td>
+                    <td>28</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Android 10-15</td>
+                    <td>29-35</td>
+                    <td>આધુનિક</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ======================== 3. ARCHITECTURE ======================== -->
+        <section id="architecture">
+            <h2>3. Android Architecture</h2>
+            <h3>🏗️ 5 Layers Architecture (Bottom → Top)</h3>
+            <div class="code-block" style="background:#1e293b; color:#e2e8f0; line-height:1.8;">
+                ┌─────────────────────────────────────────────┐
+                │ 🟢 APPLICATIONS LAYER │ ← Top
+                │ (Dialer, Camera, WhatsApp, Games) │
+                ├─────────────────────────────────────────────┤
+                │ 🟡 APPLICATION FRAMEWORK │
+                │ (Activity Manager, Content Providers, │
+                │ View System, Notification Manager) │
+                ├─────────────────────────────────────────────┤
+                │ 🟠 LIBRARIES + ANDROID RUNTIME (ART) │
+                │ (SQLite, WebKit, OpenGL, Media, ART) │
+                ├─────────────────────────────────────────────┤
+                │ 🔵 HARDWARE ABSTRACTION LAYER (HAL) │
+                │ (Camera, Bluetooth, Audio, Sensors) │
+                ├─────────────────────────────────────────────┤
+                │ 🔴 LINUX KERNEL │ ← Bottom
+                │ (Security, Memory, Process, Drivers) │
+                └─────────────────────────────────────────────┘
+            </div>
+
+            <h3>🔴 Linux Kernel (Base Layer)</h3>
+            <ul>
+                <li>🔒 Security – ફોનને સુરક્ષિત રાખે</li>
+                <li>💾 Memory Management – RAM મેનેજ કરે</li>
+                <li>⚙️ Process Management – કઈ એપ ક્યારે ચાલે</li>
+                <li>📡 Drivers – કેમેરા, Wi-Fi, Bluetooth ને કંટ્રોલ કરે</li>
+            </ul>
+            <div class="highlight-box"><strong>રોજિંદું ઉદાહરણ:</strong> જેમ ઘરનો પાયો આખું ઘર ટકાવે, તેમ Linux Kernel
+                આખા Android સિસ્ટમને ટકાવે છે.</div>
+
+            <h3>🔵 Hardware Abstraction Layer (HAL)</h3>
+            <p>કેમેરા, બ્લૂટૂથ, Audio, Sensors માટે Standard Interface આપે. Android Framework ને Hardware થી અલગ રાખે.
+            </p>
+            <div class="highlight-box"><strong>રોજિંદું ઉદાહરણ:</strong> જેમ અનુવાદક બે વ્યક્તિ વચ્ચે વાત કરાવે, તેમ HAL
+                Hardware અને Android વચ્ચે વાત કરાવે છે.</div>
+
+            <h3>🟠 Android Runtime (ART) &amp; Native Libraries</h3>
+            <p><strong>Dalvik vs ART:</strong></p>
+            <table>
+                <tr>
+                    <th>Dalvik (Old)</th>
+                    <th>ART (New – Android 5.0+)</th>
+                </tr>
+                <tr>
+                    <td>JIT (Just-In-Time)</td>
+                    <td>AOT (Ahead-Of-Time)</td>
+                </tr>
+                <tr>
+                    <td>એપ ચાલતી વખતે કોડ કન્વર્ટ થાય</td>
+                    <td>ઇન્સ્ટોલ થતાં જ કોડ કન્વર્ટ થાય</td>
+                </tr>
+                <tr>
+                    <td>ધીમું</td>
+                    <td>ઝડપી ⚡</td>
+                </tr>
+                <tr>
+                    <td>વધુ Battery વપરાશ</td>
+                    <td>ઓછો Battery વપરાશ</td>
+                </tr>
+            </table>
+            <div class="highlight-box"><strong>રોજિંદું ઉદાહરણ:</strong> Dalvik = રસ્તા પર ચાલતી વખતે નકશો વાંચવો
+                (ધીમું); ART = જતાં પહેલાં રસ્તો યાદ કરી લેવો (ઝડપી).</div>
+
+            <h4>Native Libraries</h4>
+            <table>
+                <tr>
+                    <th>Library</th>
+                    <th>કામ</th>
+                </tr>
+                <tr>
+                    <td>SQLite</td>
+                    <td>Database (Contacts, Messages)</td>
+                </tr>
+                <tr>
+                    <td>WebKit</td>
+                    <td>Web Browser Engine (WebView)</td>
+                </tr>
+                <tr>
+                    <td>OpenGL ES</td>
+                    <td>2D/3D Graphics (ગેમ્સ, Animation)</td>
+                </tr>
+                <tr>
+                    <td>Media Framework</td>
+                    <td>Audio/Video (Music Player)</td>
+                </tr>
+            </table>
+
+            <h3>🟡 Application Framework</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>કામ</th>
+                </tr>
+                <tr>
+                    <td>Activity Manager</td>
+                    <td>Activities Manage કરે</td>
+                </tr>
+                <tr>
+                    <td>Content Providers</td>
+                    <td>Apps વચ્ચે Data શેર કરે</td>
+                </tr>
+                <tr>
+                    <td>View System</td>
+                    <td>UI Components બનાવે</td>
+                </tr>
+                <tr>
+                    <td>Notification Manager</td>
+                    <td>Notifications બતાવે</td>
+                </tr>
+                <tr>
+                    <td>Package Manager</td>
+                    <td>Apps Install/Uninstall કરે</td>
+                </tr>
+            </table>
+
+            <h3>🟢 Applications Layer</h3>
+            <p>Phone, Home Screen, Email, Camera, Browser, Third-party Apps</p>
+
+            <h3>🎯 Architecture Mnemonic</h3>
+            <div class="mnemonic">"Little Hardware Requires Fast Apps"</div>
+            <ul>
+                <li><strong>L</strong> – Linux Kernel</li>
+                <li><strong>H</strong> – Hardware Abstraction Layer</li>
+                <li><strong>R</strong> – Runtime/Libraries</li>
+                <li><strong>F</strong> – Framework</li>
+                <li><strong>A</strong> – Apps</li>
+            </ul>
+        </section>
+
+        <!-- ======================== 4. ACTIVITIES, LIFECYCLE, INTENT ======================== -->
+        <section id="activities">
+            <h2>4. Activities, Lifecycle &amp; Intent</h2>
+            <h3>🖥️ Activity શું છે?</h3>
+            <p>Activity = <strong>એક સ્ક્રીન</strong> (e.g., WhatsApp Chat Screen, Settings Screen).</p>
+            <p><strong>AndroidManifest.xml</strong> માં Declare કરવી:</p>
+            <div class="code-block">
+                &lt;activity android:name=".MainActivity"&gt;
+                &lt;intent-filter&gt;
+                &lt;action android:name="android.intent.action.MAIN" /&gt;
+                &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+                &lt;/intent-filter&gt;
+                &lt;/activity&gt;
+            </div>
+
+            <h3>🔄 Activity Lifecycle (7 Methods)</h3>
+            <div class="mnemonic">"Cops Start Running Past Suspect's Door"</div>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>ક્યારે Call થાય</th>
+                    <th>શું કરવું?</th>
+                </tr>
+                <tr>
+                    <td><strong>onCreate()</strong></td>
+                    <td>પહેલીવાર બને ત્યારે</td>
+                    <td>UI Setup (setContentView)</td>
+                </tr>
+                <tr>
+                    <td><strong>onStart()</strong></td>
+                    <td>User ને Visible થાય</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>onResume()</strong></td>
+                    <td>User Interact કરી શકે</td>
+                    <td>App ચાલુ કરો</td>
+                </tr>
+                <tr>
+                    <td><strong>onPause()</strong></td>
+                    <td>બીજી Activity આવે (Partial Cover)</td>
+                    <td>Data Save કરો</td>
+                </tr>
+                <tr>
+                    <td><strong>onStop()</strong></td>
+                    <td>સંપૂર્ણ Hidden થાય</td>
+                    <td>Heavy Work રોકો</td>
+                </tr>
+                <tr>
+                    <td><strong>onRestart()</strong></td>
+                    <td>Stop થયા પછી ફરી શરૂ થાય</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>onDestroy()</strong></td>
+                    <td>Memory માંથી Remove થાય</td>
+                    <td>Cleanup કરો</td>
+                </tr>
+            </table>
+            <div class="code-block" style="background:#0f172a; color:#e2e8f0; line-height:1.6;">
+                onCreate() → onStart() → onResume() → (Running)
+                ↓
+                onPause()
+                ↓
+                onStop()
+                ↙ ↘
+                onRestart() onDestroy()
+                ↓
+                onStart()
+            </div>
+            <div class="tip-box"><strong>🎯 Golden Rule:</strong> onPause() = Partial Visible, onStop() = Completely
+                Hidden.</div>
+
+            <h3>🎭 Intent</h3>
+            <p>Intent = <strong>મેસેજ</strong> જે એક Activity થી બીજી Activity માં જાય છે.</p>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>શું છે?</th>
+                    <th>ઉદાહરણ</th>
+                </tr>
+                <tr>
+                    <td><strong>Explicit Intent</strong></td>
+                    <td>ચોક્કસ Activity ખોલે</td>
+                    <td>MainActivity → SecondActivity</td>
+                </tr>
+                <tr>
+                    <td><strong>Implicit Intent</strong></td>
+                    <td>System યોગ્ય Activity શોધે</td>
+                    <td>"View Map" → Google Maps</td>
+                </tr>
+            </table>
+            <div class="code-block">
+                // Explicit
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+
+                // Implicit
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("https://gujaratpolice.gujarat.gov.in"));
+                startActivity(intent);
+            </div>
+
+            <h3>📚 Launch Modes</h3>
+            <table>
+                <tr>
+                    <th>Mode</th>
+                    <th>શું કરે?</th>
+                </tr>
+                <tr>
+                    <td>standard</td>
+                    <td>દર વખતે નવી Activity બને</td>
+                </tr>
+                <tr>
+                    <td>singleTop</td>
+                    <td>ટોચ પર હોય તો નવી ન બને</td>
+                </tr>
+                <tr>
+                    <td>singleTask</td>
+                    <td>માત્ર એક જ Instance રહે</td>
+                </tr>
+                <tr>
+                    <td>singleInstance</td>
+                    <td>સૌથી કડક – એકલી જ Task માં</td>
+                </tr>
+            </table>
+
+            <h3>⚠️ ANR (Application Not Responding)</h3>
+            <p><strong>કારણ:</strong> Main Thread <strong>5 સેકન્ડ</strong> થી વધુ Block થાય. <strong>ઉપાય:</strong>
+                Heavy work Background Thread માં કરો.</p>
+        </section>
+
+        <!-- ======================== 5. UI DESIGN ======================== -->
+        <section id="ui">
+            <h2>5. UI Design – Layouts &amp; Widgets</h2>
+            <h3>🏗️ Layout Types</h3>
+            <table>
+                <tr>
+                    <th>Layout</th>
+                    <th>કામ</th>
+                    <th>ક્યાં વાપરવું?</th>
+                </tr>
+                <tr>
+                    <td>LinearLayout</td>
+                    <td>Row/Column માં ગોઠવે</td>
+                    <td>Simple List, Form</td>
+                </tr>
+                <tr>
+                    <td>RelativeLayout</td>
+                    <td>Relative Position</td>
+                    <td>Complex Positioning</td>
+                </tr>
+                <tr>
+                    <td>ConstraintLayout ⭐</td>
+                    <td>Flat Hierarchy, Flexible</td>
+                    <td>Modern Apps</td>
+                </tr>
+                <tr>
+                    <td>FrameLayout</td>
+                    <td>Single View/Overlay</td>
+                    <td>Loading Screen</td>
+                </tr>
+            </table>
+            <div class="code-block">
+                &lt;LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"&gt;
+
+                &lt;TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello World!" /&gt;
+
+                &lt;Button
+                android:id="@+id/btnClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click Me" /&gt;
+                &lt;/LinearLayout&gt;
+            </div>
+
+            <h3>🧩 Basic UI Widgets</h3>
+            <table>
+                <tr>
+                    <th>Widget</th>
+                    <th>કામ</th>
+                </tr>
+                <tr>
+                    <td>TextView</td>
+                    <td>Text બતાવે</td>
+                </tr>
+                <tr>
+                    <td>EditText</td>
+                    <td>User Input લે</td>
+                </tr>
+                <tr>
+                    <td>Button</td>
+                    <td>Click Action</td>
+                </tr>
+                <tr>
+                    <td>ImageView</td>
+                    <td>Image બતાવે</td>
+                </tr>
+                <tr>
+                    <td>CheckBox</td>
+                    <td>Selection</td>
+                </tr>
+                <tr>
+                    <td>RadioButton</td>
+                    <td>એક વિકલ્પ</td>
+                </tr>
+            </table>
+
+            <h3>📏 UI Units</h3>
+            <table>
+                <tr>
+                    <th>Unit</th>
+                    <th>કામ</th>
+                    <th>સ્પષ્ટતા</th>
+                </tr>
+                <tr>
+                    <td>dp/dip</td>
+                    <td>Size/Dimensions</td>
+                    <td>બધી Screens પર સરખું</td>
+                </tr>
+                <tr>
+                    <td>sp</td>
+                    <td>Text Size</td>
+                    <td>User Font Setting મુજબ</td>
+                </tr>
+                <tr>
+                    <td>px</td>
+                    <td>Pixels</td>
+                    <td>Avoid</td>
+                </tr>
+            </table>
+            <div class="highlight-box"><strong>Standard Touch Target:</strong> <strong>48dp × 48dp</strong> ⭐ (MCQ માં
+                વારંવાર પૂછાય)</div>
+
+            <h3>🧮 DP to PX Conversion</h3>
+            <div class="code-block">px = dp × (dpi / 160)</div>
+            <p><strong>Density Buckets:</strong></p>
+            <table>
+                <tr>
+                    <th>Density</th>
+                    <th>dpi</th>
+                    <th>Scale Factor</th>
+                </tr>
+                <tr>
+                    <td>ldpi</td>
+                    <td>~120</td>
+                    <td>0.75</td>
+                </tr>
+                <tr>
+                    <td>mdpi</td>
+                    <td>~160</td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td>hdpi</td>
+                    <td>~240</td>
+                    <td>1.5</td>
+                </tr>
+                <tr>
+                    <td>xhdpi</td>
+                    <td>~320</td>
+                    <td>2.0</td>
+                </tr>
+                <tr>
+                    <td>xxhdpi</td>
+                    <td>~480</td>
+                    <td>3.0</td>
+                </tr>
+                <tr>
+                    <td>xxxhdpi</td>
+                    <td>~640</td>
+                    <td>4.0</td>
+                </tr>
+            </table>
+            <h3>🔢 DPI Calculation</h3>
+            <div class="code-block">DPI = √(Width² + Height²) / Diagonal Size (inches)</div>
+            <p><strong>ઉદાહરણ:</strong> 1080×1920, 5 inch → DPI = 440.58 (xxhdpi)</p>
+        </section>
+
+        <!-- ======================== 6. ADVANCED UI ======================== -->
+        <section id="advanced">
+            <h2>6. Advanced UI Programming</h2>
+            <h3>🧩 Fragment</h3>
+            <p>Fragment = <strong>Activity નો ભાગ</strong> જે Reusable છે.</p>
+            <table>
+                <tr>
+                    <th>Activity</th>
+                    <th>Fragment</th>
+                </tr>
+                <tr>
+                    <td>સંપૂર્ણ સ્ક્રીન</td>
+                    <td>સ્ક્રીનનો ભાગ</td>
+                </tr>
+                <tr>
+                    <td>Reusable નથી</td>
+                    <td>Reusable છે</td>
+                </tr>
+                <tr>
+                    <td>Manifest માં Declare</td>
+                    <td>Activity માં Add</td>
+                </tr>
+            </table>
+            <div class="code-block">
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container, new MyFragment());
+                ft.commit();
+            </div>
+
+            <h3>📋 RecyclerView (Modern List)</h3>
+            <table>
+                <tr>
+                    <th>ListView (Old)</th>
+                    <th>RecyclerView (New)</th>
+                </tr>
+                <tr>
+                    <td>ધીમું</td>
+                    <td>ઝડપી ⚡</td>
+                </tr>
+                <tr>
+                    <td>Memory વધુ વાપરે</td>
+                    <td>Memory ઓછી વાપરે</td>
+                </tr>
+                <tr>
+                    <td>ViewHolder Optional</td>
+                    <td>ViewHolder Mandatory</td>
+                </tr>
+            </table>
+            <p><strong>Layout Managers:</strong> LinearLayoutManager, GridLayoutManager, StaggeredGridLayoutManager.</p>
+            <div class="code-block">
+                RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                recyclerView.setAdapter(new MyAdapter(dataList));
+            </div>
+
+            <h3>🎨 Material Design</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>કામ</th>
+                </tr>
+                <tr>
+                    <td>CardView</td>
+                    <td>Cards જેવું UI</td>
+                </tr>
+                <tr>
+                    <td>FloatingActionButton (FAB)</td>
+                    <td>+ Button</td>
+                </tr>
+                <tr>
+                    <td>NavigationDrawer</td>
+                    <td>Side Menu</td>
+                </tr>
+                <tr>
+                    <td>BottomNavigationView</td>
+                    <td>Bottom Tabs</td>
+                </tr>
+                <tr>
+                    <td>Snackbar</td>
+                    <td>Interactive Message</td>
+                </tr>
+            </table>
+            <div class="tip-box"><strong>Snackbar vs Toast:</strong> Toast = only info; Snackbar = info + action (e.g.,
+                "UNDO").</div>
+        </section>
+
+        <!-- ======================== 7. TOAST, MENU, DIALOG ======================== -->
+        <section id="toast">
+            <h2>7. Toast, Menu, Dialog</h2>
+            <h3>💬 Toast</h3>
+            <p>Toast = <strong>પોપ-અપ</strong> મેસેજ જે 2-3 સેકન્ડમાં ગાયબ થઈ જાય.</p>
+            <ul>
+                <li>Toast.LENGTH_SHORT → ~2 sec</li>
+                <li>Toast.LENGTH_LONG → ~3.5 sec</li>
+            </ul>
+            <div class="code-block">
+                Toast.makeText(getApplicationContext(), "Hello!", Toast.LENGTH_SHORT).show();
+            </div>
+            <div class="warning-box"><strong>⚠️ The Toast Trap:</strong> .show() વગર Toast <strong>દેખાશે નહીં!</strong>
+            </div>
+
+            <h3>📋 Menu – 3 પ્રકાર</h3>
+            <table>
+                <tr>
+                    <th>Menu Type</th>
+                    <th>ક્યાં દેખાય?</th>
+                    <th>ક્યારે ખુલે?</th>
+                </tr>
+                <tr>
+                    <td>Options Menu</td>
+                    <td>App Bar (Top Right)</td>
+                    <td>3 Dots Click</td>
+                </tr>
+                <tr>
+                    <td>Context Menu</td>
+                    <td>Floating</td>
+                    <td>Long-click on Item</td>
+                </tr>
+                <tr>
+                    <td>Popup Menu</td>
+                    <td>View ની નીચે</td>
+                    <td>Click on View</td>
+                </tr>
+            </table>
+
+            <h3>🪟 Dialog</h3>
+            <table>
+                <tr>
+                    <th>Dialog Type</th>
+                    <th>કામ</th>
+                </tr>
+                <tr>
+                    <td>AlertDialog</td>
+                    <td>Message + Buttons (Yes/No)</td>
+                </tr>
+                <tr>
+                    <td>DatePickerDialog</td>
+                    <td>Date Select</td>
+                </tr>
+                <tr>
+                    <td>TimePickerDialog</td>
+                    <td>Time Select</td>
+                </tr>
+            </table>
+            <div class="code-block">
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Confirm")
+                .setMessage("Are you sure?")
+                .setPositiveButton("Yes", (dialog, which) -> finish())
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
+            </div>
+            <div class="warning-box"><strong>⚠️ Dialog + Service Warning:</strong> Service માંથી Dialog Show કરવાથી
+                BadTokenException આવે – કારણ: Activity Context જોઈએ.</div>
+        </section>
+
+        <!-- ======================== 8. LIST & ADAPTERS ======================== -->
+        <section id="list">
+            <h2>8. List &amp; Adapters</h2>
+            <h3>🧩 Adapter</h3>
+            <p>Adapter = <strong>Bridge</strong> (સેતુ) Data અને UI વચ્ચે.</p>
+            <div class="code-block">
+                Data Source (ArrayList/Cursor)
+                ↓
+                Adapter (ArrayAdapter/BaseAdapter)
+                ↓
+                ListView/RecyclerView
+                ↓
+                Display
+            </div>
+            <h3>🔄 getView() Method</h3>
+            <div class="code-block">
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View row = inflater.inflate(R.layout.list_item, parent, false);
+                TextView tv = row.findViewById(R.id.tvItem);
+                tv.setText(data.get(position));
+                return row;
+                }
+            </div>
+            <h3>📝 Adapter Types</h3>
+            <table>
+                <tr>
+                    <th>Adapter</th>
+                    <th>ક્યાં વાપરવું?</th>
+                </tr>
+                <tr>
+                    <td>ArrayAdapter</td>
+                    <td>Simple Array/List Data</td>
+                </tr>
+                <tr>
+                    <td>BaseAdapter</td>
+                    <td>Custom Complex Data</td>
+                </tr>
+                <tr>
+                    <td>CursorAdapter</td>
+                    <td>SQLite Cursor Data</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ======================== 9. DATABASE ======================== -->
+        <section id="database">
+            <h2>9. Working with Database (SQLite)</h2>
+            <h3>📊 SQLite શું છે?</h3>
+            <p>Lightweight, Server-less, Zero Configuration, Single File Database. <strong>રોજિંદું ઉદાહરણ:</strong> જેમ
+                ડાયરીમાં નોંધ લખો, તેમ SQLite ફોનમાં Data સેવ કરે છે.</p>
+
+            <h3>🔧 SQLiteOpenHelper – "C.U.D."</h3>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>ક્યારે Call થાય?</th>
+                    <th>શું કરે?</th>
+                </tr>
+                <tr>
+                    <td><strong>C</strong> → onCreate()</td>
+                    <td>પહેલીવાર Database બને</td>
+                    <td>Tables Create કરે</td>
+                </tr>
+                <tr>
+                    <td><strong>U</strong> → onUpgrade()</td>
+                    <td>Version વધે</td>
+                    <td>Schema Update કરે</td>
+                </tr>
+                <tr>
+                    <td><strong>D</strong> → onDowngrade()</td>
+                    <td>Version ઘટે</td>
+                    <td>Schema Downgrade કરે</td>
+                </tr>
+            </table>
+            <div class="code-block">
+                public class DBHelper extends SQLiteOpenHelper {
+                private static final String DB_NAME = "MyDatabase.db";
+                private static final int DB_VERSION = 1;
+
+                @Override
+                public void onCreate(SQLiteDatabase db) {
+                String CREATE_TABLE = "CREATE TABLE Student(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name TEXT," +
+                "marks INTEGER)";
+                db.execSQL(CREATE_TABLE);
+                }
+                }
+            </div>
+
+            <h3>✏️ CRUD Operations</h3>
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Method</th>
+                    <th>ઉદાહરણ</th>
+                </tr>
+                <tr>
+                    <td>Create</td>
+                    <td>insert()</td>
+                    <td>db.insert("Student", null, cv)</td>
+                </tr>
+                <tr>
+                    <td>Read</td>
+                    <td>rawQuery()</td>
+                    <td>db.rawQuery("SELECT * FROM Student", null)</td>
+                </tr>
+                <tr>
+                    <td>Update</td>
+                    <td>update()</td>
+                    <td>db.update("Student", cv, "id=?", new String[]{"1"})</td>
+                </tr>
+                <tr>
+                    <td>Delete</td>
+                    <td>delete()</td>
+                    <td>db.delete("Student", "id=?", new String[]{"1"})</td>
+                </tr>
+            </table>
+
+            <h3>🔍 SQL Injection Protection</h3>
+            <div class="code-block">
+                // ✅ Safe – Using Selection Arguments
+                db.rawQuery("SELECT * FROM users WHERE name = ?", new String[]{"Raj"});
+            </div>
+
+            <h3>📌 Cursor Golden Rule</h3>
+            <div class="warning-box">
+                <strong>Always call cursor.moveToFirst() before reading data!</strong> Without it →
+                CursorIndexOutOfBoundsException.
+            </div>
+            <div class="code-block">
+                Cursor cursor = db.rawQuery("SELECT * FROM Student", null);
+                if (cursor.moveToFirst()) {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                }
+                cursor.close(); // Always close cursor!
+            </div>
+
+            <h3>🚀 Advanced Trends</h3>
+            <table>
+                <tr>
+                    <th>Keyword</th>
+                    <th>શું છે? (વિગતવાર વન-લાઇનર અને ઉદાહરણ)</th>
+                </tr>
+                <tr>
+                    <td><strong>Room</strong></td>
+                    <td>
+                        <strong>વન-લાઇનર:</strong> એન્ડ્રોઇડમાં ડેટાબેઝ (SQLite) વાપરવા માટે ગૂગલ દ્વારા બનાવવામાં
+                        આવેલું એક સરળ અને આધુનિક કવર (Jetpack Component / Abstraction Layer).
+                        <br><br>
+                        <strong>ઉદાહરણ:</strong> પહેલાના સમયમાં ડેટાબેઝ બનાવવા માટે લાંબો અને અઘરો કોડ લખવો પડતો હતો,
+                        પરંતુ Room ની મદદથી તમે ખૂબ જ ઓછા અને સાદા કોડથી મોબાઈલની અંદર ડેટા કાયમ માટે સેવ કરી શકો છો
+                        (જેમ કે યુઝર પ્રોફાઇલ કે ઑફલાઇન ચેટ્સ).
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>DAO</strong></td>
+                    <td>
+                        <strong>વન-લાઇનર:</strong> Data Access Object - ડેટાબેઝમાં ડેટા ઉમેરવા, સુધારવા કે ડીલીટ કરવા
+                        માટેની ક્વેરીઝ (Queries) લખવાની જગ્યા અથવા ઇન્ટરફેસ.
+                        <br><br>
+                        <strong>ઉદાહરણ:</strong> આ એક એવા મેનેજર જેવું છે જેને તમે ઓર્ડર આપો કે "નવો યુઝર ઉમેરો" અથવા
+                        "બધા ગુનેગારોનું લિસ્ટ લાવો", એટલે તે બેકગ્રાઉન્ડમાં જઈને ડેટાબેઝમાંથી એ કામ કરી આપે. આના માટે
+                        આપણે @Insert અથવા @Query જેવા ટેગ વાપરીએ છીએ.
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Entity</strong></td>
+                    <td>
+                        <strong>વન-લાઇનર:</strong> ડેટાબેઝની અંદર બનનારા ટેબલ (Table) ને દર્શાવતો એક સાદો ક્લાસ (Class).
+                        <br><br>
+                        <strong>ઉદાહરણ:</strong> જો તમારે યુઝરનો ડેટા સાચવવો હોય, તો તમે User નામનો એક ક્લાસ બનાવશો
+                        જેમાં id, name અને phone વેરિએબલ હશે. Room આ ક્લાસને જોઈને ઓટોમેટિક ડેટાબેઝમાં User નામનું ટેબલ
+                        અને તેના કોલમ બનાવી દેશે.
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>SQLCipher</strong></td>
+                    <td>
+                        <strong>વન-લાઇનર:</strong> રૂમ ડેટાબેઝની આખેઆખી ફાઇલને કોઈ ચોરી ન શકે તે માટે તેને 256-bit AES
+                        એન્ક્રિપ્શન થી સુરક્ષિત (લોક) કરતું સોફ્ટવેર.
+                        <br><br>
+                        <strong>ઉદાહરણ:</strong> જો કોઈ પોલીસ એપનો ડેટાબેઝ હોય, તો SQLCipher વગર કોઈ પણ હેકર ફોનમાંથી એ
+                        ફાઇલ ખોલીને બધી વિગતો વાંચી શકે છે. પણ આ ફીચર ચાલુ કરવાથી, પાસવર્ડ કે કી વગર ડેટાબેઝ ઓપન જ થતો
+                        નથી, બધું લખાણ લોક થઈ જાય છે.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ======================== 10. GUJARAT POLICE CONTEXT ======================== -->
+        <section id="gujarat">
+            <h2>10. Gujarat Police Context</h2>
+            <h3>📱 Police Mobile Applications</h3>
+            <ul>
+                <!-- Police Mobile Applications -->
+                <li>
+                    <strong>"Pocket Cop" – Mobile Data Terminals (MDTs)</strong>
+                    <br>-> ઓન-ફિલ્ડ ઉભેલા પોલીસ અધિકારીઓ માટે રસ્તા પર જ લાઈવ ડેટા ચેક કરવાનું મિની-કોમ્પ્યુટર.
+                    <br>ઉદાહરણ: રાત્રે નાકાબંધી દરમિયાન પોલીસે કોઈ શંકાસ્પદ ગાડી રોકી, તો Pocket Cop એપમાં તેનો નંબર
+                    નાખતા જ લાઈવ ખબર પડી જશે કે ગાડી ચોરીની છે કે નહીં.
+                </li>
+                <br>
+                <li>
+                    <strong>e-Challan – Digital Traffic Challan</strong>
+                    <br>-> ટ્રાફિકના નિયમો તોડનારા લોકો માટેનું ઓનલાઈન અને પેપરલેસ દંડ મશીન.
+                    <br>ઉદાહરણ: જો કોઈ વ્યક્તિ હેલ્મેટ વગર સિગ્નલ ક્રોસ કરે, તો સીસીટીવી કેમેરા તેનો નંબર સ્કેન કરીને
+                    સીધો જ તેના મોબાઈલ પર ઈ-મેમો (દંડ) મોકલી દે છે.
+                </li>
+                <br>
+                <li>
+                    <strong>FIR System – Digital FIR Registration</strong>
+                    <br>-> કોઈપણ ગુનાની પ્રાથમિક ફરિયાદ (FIR) ચોપડાના બદલે સીધી ઓનલાઈન અને સેફ સર્વર પર નોંધવાની
+                    સિસ્ટમ.
+                    <br>ઉદાહરણ: કોઈ મોટી ચોરી કે અકસ્માત થાય ત્યારે પોલીસ ઘટનાસ્થળેથી જ ટેબ્લેટ દ્વારા લાઈવ FIR લોક કરી
+                    શકે છે, જેથી ડેટામાં કોઈ છેડચાડ ન થઈ શકે.
+                </li>
+                <br>
+                <li>
+                    <strong>Biometric API – Fingerprint Scanners with Criminal Databases</strong>
+                    <br>-> મોબાઈલ સ્કેનર પર અંગૂઠાની છાપ લઈ સેકન્ડોમાં ગુનેગારનો રેકોર્ડ શોધવાની ટેક્નોલોજી.
+                    <br>ઉદાહરણ: રસ્તા પર કોઈ શંકાસ્પદ વ્યક્તિ પોતાનું ખોટું નામ બતાવે, ત્યારે પોલીસ તેના ફિંગરપ્રિન્ટ
+                    સ્કેન કરીને સેન્ટ્રલ ડેટાબેઝમાંથી તેની અસલી કુંડળી અને ક્રિમિનલ હિસ્ટ્રી બહાર કાઢી લે છે.
+                </li>
+                <br>
+                <li>
+                    <strong>e-GujCop – Police Database Integration</strong>
+                    <br>-> આખા ગુજરાતના તમામ પોલીસ સ્ટેશનો અને ડેટાને એકબીજા સાથે જોડતું વિશાળ ડિજિટલ નેટવર્ક.
+                    <br>ઉદાહરણ: જો કોઈ ગુનેગાર અમદાવાદમાં ચોરી કરીને રાજકોટ ભાગી જાય, તો રાજકોટ પોલીસ e-GujCop માં સર્ચ
+                    કરીને તેની સામે થયેલી અમદાવાદની FIR અને તેનો ફોટો લાઈવ જોઈ શકે છે.
+                </li>
+                <br>
+
+                <!-- Security Features -->
+                <li>
+                    <strong>MDM (Mobile Device Management)</strong>
+                    <br>-> ઓફિસમાંથી જ પોલીસના ફોનને રિમોટલી કંટ્રોલ અને લોક કરવા માટેનું સોફ્ટવેર.
+                    <br>ઉદાહરણ: જો કોઈ પોલીસ અધિકારીનો ફોન ખોવાઈ જાય, તો હેડ-ઓફિસ ત્યાં બેઠા-બેઠા જ એ ફોનનો બધો જ ડેટા
+                    ડિલીટ (Wipe) કરી શકે છે જેથી કોઈના હાથમાં ન આવે.
+                </li>
+                <br>
+                <li>
+                    <strong>SQLCipher</strong>
+                    <br>-> મોબાઈલની અંદર સ્ટોર થતા ડેટાબેઝને મજબૂત તાળું (256-bit AES Encryption) મારવા માટે.
+                    <br>ઉદાહરણ: એપમાં સચવાયેલું ગુનેગારોનું લિસ્ટ જો કોઈ હેકર ચોરી પણ લે, તો પણ પાસવર્ડ (Key) વગર તેને
+                    ખોલી શકતો નથી, તેને બધું અવાચ્ય કચરા (Gibberish) જેવું દેખાશે.
+                </li>
+                <br>
+                <li>
+                    <strong>Project Treble</strong>
+                    <br>-> ફોનમાં ગૂગલ તરફથી આવતા સિક્યોરિટી અપડેટ્સ ખૂબ જ ઝડપથી ઇન્સ્ટોલ કરવાની સિસ્ટમ.
+                    <br>ઉદાહરણ: જ્યારે કોઈ નવો ખતરનાક વાયરસ માર્કેટમાં આવે, ત્યારે મહિનાઓ સુધી રાહ જોયા વગર ફોનમાં ૨ જ
+                    દિવસમાં નવો સિક્યોરિટી પેચ (પ્રોટેક્શન) અપડેટ થઈ જાય છે.
+                </li>
+                <br>
+                <li>
+                    <strong>BiometricPrompt</strong>
+                    <br>-> ફોનના ફિંગરપ્રિન્ટ કે ફેસ લોક સેન્સરનો ઉપયોગ કરીને એપને સુરક્ષિત રીતે ઓપન કરવાની
+                    સિસ્ટમ.
+                    <br>ઉદાહરણ: પોલીસ અધિકારી જ્યારે 'Pocket Cop' એપ ઓપન કરે, ત્યારે દર વખતે પાસવર્ડ ટાઈપ કરવાના બદલે
+                    માત્ર અંગૂઠો (Fingerprint) અડાડીને સેકન્ડમાં લોગિન કરી શકે છે.
+                </li>
+            </ul>
+            <h3>🔒 Security Features</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>MDM</td>
+                    <td>Mobile Device Management – Lockdown Police Devices</td>
+                </tr>
+                <tr>
+                    <td>SQLCipher</td>
+                    <td>256-bit AES Encryption for Sensitive Data</td>
+                </tr>
+                <tr>
+                    <td>Project Treble</td>
+                    <td>Faster Security Updates</td>
+                </tr>
+                <tr>
+                    <td>BiometricPrompt</td>
+                    <td>Fingerprint Authentication</td>
+                </tr>
+            </table>
+            <h3>🌐 Modern Technologies</h3>
+            <ul>
+                <li><strong>5G &amp; Edge Computing</strong> – Low latency for dashcam/bodycam streaming</li>
+                <li><strong>Room Database</strong> – Compile-time SQL verification</li>
+                <li><strong>RecyclerView</strong> – Smooth scrolling for large FIR lists</li>
+            </ul>
+        </section>
+
+        <!-- ======================== 11. FORMULA SHEET ======================== -->
+        <section id="formula">
+            <h2>11. Formula Sheet &amp; Calculations</h2>
+            <h3>📐 DP to PX</h3>
+            <div class="code-block">px = dp × (dpi / 160)</div>
+            <p><strong>યાદ રાખો:</strong> 160 dpi પર, 1 dp = 1 px</p>
+
+            <h3>🧮 DPI Calculation</h3>
+            <div class="code-block">DPI = √(Width² + Height²) / Diagonal Size (inches)</div>
+            <p><strong>ઉદાહરણ:</strong> 1080×1920, 5 inch → DPI = 440.58 (xxhdpi)</p>
+
+            <h3>📏 Scale Factor Example</h3>
+            <p>xxhdpi (Scale factor = 3.0): 100dp → 100 × 3.0 = <strong>300 px</strong></p>
+
+            <h3>📊 Memory Size Calculations</h3>
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Calculation</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td>10,000 integers (16 bytes each)</td>
+                    <td>10,000 × 16</td>
+                    <td>160 KB</td>
+                </tr>
+                <tr>
+                    <td>100×100 Bitmap (ARGB_8888, 4 bytes/pixel)</td>
+                    <td>10,000 × 4</td>
+                    <td>~40 KB</td>
+                </tr>
+                <tr>
+                    <td>2 MB CursorWindow, 500 KB BLOB rows</td>
+                    <td>2048 / 500</td>
+                    <td>4 rows</td>
+                </tr>
+                <tr>
+                    <td>400ms query, 60Hz (16.6ms/frame)</td>
+                    <td>400 / 16.67</td>
+                    <td>~24 frames skipped</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ======================== 12. GOLDEN RULES ======================== -->
+        <section id="golden">
+            <h2>12. Exam Golden Rules</h2>
+            <div class="highlight-box">
+                <strong>⭐ Golden Rules</strong>
+                <ul>
+                    <li><strong>Lifecycles Rule:</strong> onPause() = Partial Visible, onStop() = Completely Hidden.
+                    </li>
+                    <li><strong>Cursor Rule:</strong> Data Extract પહેલાં <em>moveToFirst()</em> mandatory.</li>
+                    <li><strong>Toast Trap:</strong> .show() વગર Toast દેખાશે નહીં.</li>
+                    <li><strong>SQL Injection:</strong> ? Use કરો, Direct String નહીં.</li>
+                    <li><strong>Components:</strong> ફક્ત 4: Activity, Service, Broadcast, ContentProvider.</li>
+                </ul>
+            </div>
+            <h3>🎯 Mnemonics</h3>
+            <ul>
+                <li><strong>Architecture:</strong> "Little Hardware Requires Fast Apps"</li>
+                <li><strong>Lifecycle:</strong> "Cops Start Running Past Suspect's Door"</li>
+                <li><strong>SQLiteOpenHelper:</strong> "C.U.D." = onCreate, onUpgrade, onDowngrade</li>
+                <li><strong>Components:</strong> "A S B C"</li>
+            </ul>
+        </section>
+
+        <!-- ======================== 13. PRACTICE MCQs ======================== -->
+        <!-- ======================== 13. PRACTICE MCQs ======================== -->
+        <section id="mcqs">
+            <h2>13. Practice MCQs</h2>
+
+            <div class="mcq">
+                <p><strong>Q1. Android કયા kernel પર બનેલું છે?</strong></p>
+                <ul>
+                    <li>A) Windows Kernel</li>
+                    <li class="correct-option">B) Linux Kernel <span class="answer">✓</span></li>
+                    <li>C) Mac Kernel</li>
+                    <li>D) Unix Kernel</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q2. Android Architecture માં કેટલા layers છે?</strong></p>
+                <ul>
+                    <li>A) 3</li>
+                    <li>B) 4</li>
+                    <li class="correct-option">C) 5 <span class="answer">✓</span></li>
+                    <li>D) 7</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q3. Dalvik VM ને replace કરનાર runtime કયો છે?</strong></p>
+                <ul>
+                    <li>A) JVM</li>
+                    <li class="correct-option">B) ART <span class="answer">✓</span></li>
+                    <li>C) CLR</li>
+                    <li>D) NDK</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q4. User Back button દબાવે ત્યારે કયો sequence call થાય?</strong></p>
+                <ul>
+                    <li class="correct-option">A) onPause() → onStop() → onDestroy() <span class="answer">✓</span></li>
+                    <li>B) onDestroy() → onStop()</li>
+                    <li>C) onStop() → onPause()</li>
+                    <li>D) onPause() → onResume()</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q5. Standard minimum touch target size શું છે?</strong></p>
+                <ul>
+                    <li>A) 32dp × 32dp</li>
+                    <li class="correct-option">B) 48dp × 48dp <span class="answer">✓</span></li>
+                    <li>C) 64dp × 64dp</li>
+                    <li>D) 24dp × 24dp</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q6. SQLiteOpenHelper ની mandatory methods કઈ છે?</strong></p>
+                <ul>
+                    <li class="correct-option">A) onCreate(), onUpgrade() <span class="answer">✓</span></li>
+                    <li>B) onCreate(), onDelete()</li>
+                    <li>C) onStart(), onStop()</li>
+                    <li>D) onUpdate(), onDowngrade()</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q7. Cursor માંથી data extract કરતાં પહેલાં કઈ method call કરવી જોઈએ?</strong></p>
+                <ul>
+                    <li>A) cursor.start()</li>
+                    <li class="correct-option">B) cursor.moveToFirst() <span class="answer">✓</span></li>
+                    <li>C) cursor.initialize()</li>
+                    <li>D) cursor.begin()</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q8. Toast ને screen પર display કરવા કઈ method call કરવી?</strong></p>
+                <ul>
+                    <li>A) display()</li>
+                    <li class="correct-option">B) show() <span class="answer">✓</span></li>
+                    <li>C) visible()</li>
+                    <li>D) render()</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q9. xxhdpi device (scale factor 3.0) પર 100dp width કેટલા physical pixels થાય?</strong></p>
+                <ul>
+                    <li>A) 100 px</li>
+                    <li>B) 200 px</li>
+                    <li class="correct-option">C) 300 px <span class="answer">✓</span></li>
+                    <li>D) 400 px</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+
+            <div class="mcq">
+                <p><strong>Q10. 1080×1920, 5 inch screen નો DPI શું થાય?</strong></p>
+                <ul>
+                    <li>A) ~300 dpi</li>
+                    <li class="correct-option">B) ~440 dpi <span class="answer">✓</span></li>
+                    <li>C) ~200 dpi</li>
+                    <li>D) ~600 dpi</li>
+                </ul>
+                <button class="btn-ans" onclick="toggleAnswer(this)">Show Answer</button>
+            </div>
+        </section>
+
+        <!-- આ સ્ક્રિપ્ટ ટેગને </body> ની બરાબર ઉપર મુકો -->
+        <script>
+            function toggleAnswer(button) {
+                var mcqDiv = button.parentElement;
+                mcqDiv.classList.toggle('show-ans');
+
+                if (mcqDiv.classList.contains('show-ans')) {
+                    button.innerText = "Hide Answer";
+                    button.style.backgroundColor = "#e11d48"; // Hide વખતે બટન લાલ થશે
+                } else {
+                    button.innerText = "Show Answer";
+                    button.style.backgroundColor = "#2d7d2d"; // Show વખતે પાછો ગ્રીન કલર
+                }
+            }
+        </script>
+
+        <!-- ======================== 14. MIND MAP ======================== -->
+        <section id="mindmap">
+            <h2>14. Mind Map Recap</h2>
+            <div class="code-block" style="background:#f1f5f9; color:#1e293b; line-height:2;">
+                <strong>ANDROID APPLICATION DEVELOPMENT</strong>
+                │
+                ├──1. <strong>Android OS Concepts</strong>
+                │ ├── Open-source, Linux-based, OHA
+                │ └── 4 Core Components: A-S-B-C
+                │
+                ├──2. <strong>Android Architecture</strong> (5 Layers)
+                │ └── Linux Kernel → HAL → Libraries+ART → Framework → Apps
+                │
+                ├──3. <strong>Activities &amp; UI Design</strong>
+                │ ├── Activity Lifecycle (7 methods)
+                │ ├── Intent (Explicit / Implicit)
+                │ └── Layouts (Linear, Relative, Constraint) + Widgets
+                │
+                ├──4. <strong>Advanced UI</strong>
+                │ ├── Fragment
+                │ ├── RecyclerView (ViewHolder)
+                │ ├── Custom View
+                │ ├── Animation (Tween/Property/Frame)
+                │ └── Material Design
+                │
+                ├──5. <strong>Toast, Menu, Dialog</strong>
+                │ ├── Toast → Auto-dismiss message
+                │ ├── Menu → Options / Context / Popup
+                │ └── Dialog → AlertDialog, DatePicker, TimePicker
+                │
+                ├──6. <strong>List &amp; Adapters</strong>
+                │ ├── ListView + Adapter (bridge)
+                │ └── ArrayAdapter / BaseAdapter / CursorAdapter
+                │
+                └──7. <strong>Database (SQLite)</strong>
+                ├── SQLiteOpenHelper (onCreate, onUpgrade)
+                ├── CRUD: insert(), update(), delete(), rawQuery()
+                ├── Room / DAO / Entity / SQLCipher (Advanced Trends)
+                └── Content Provider (data sharing)
+            </div>
+        </section>
+
+        <!-- ======================== FOOTER ======================== -->
+        <div class="footer">
+            <p><strong>🔑 Android = Open Source + Linux-based + Google + Mobile OS</strong></p>
+            <p>💪 Best of Luck for Your Exam! — <em>PSI / Gujarat Police Wireless Exam</em></p>
+            <p style="margin-top:1rem; font-size:0.8rem;">📝 Created for comprehensive revision. All content compiled
+                from official study material.</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

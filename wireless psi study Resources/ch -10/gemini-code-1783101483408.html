@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Development - One-Liners & Examples</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1e293b; padding: 20px; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { text-align: center; color: #1e3a8a; border-bottom: 4px solid #3b82f6; padding-bottom: 15px; }
+        h2 { color: #2563eb; background: #eff6ff; padding: 10px; border-left: 5px solid #2563eb; margin-top: 30px; border-radius: 0 8px 8px 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 10px; background: #ffffff; }
+        th, td { border: 1px solid #cbd5e1; padding: 14px; text-align: left; vertical-align: top; }
+        th { background: #3b82f6; color: white; font-weight: 600; width: 25%; }
+        tr:nth-child(even) { background: #f8fafc; }
+        strong { color: #0f172a; }
+        .ex { margin-top: 8px; color: #475569; font-style: italic; background: #f1f5f9; padding: 6px 10px; border-radius: 4px; border-left: 3px solid #64748b; }
+        .badge { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📱 Android Development: Complete Revision Guide</h1>
+
+    <h2>1. Android Basics & Core Architecture</h2>
+    <table>
+        <tr>
+            <th>Keyword / Component</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>Android OS</strong></td>
+            <td>Google દ્વારા સ્માર્ટફોન અને ટેબ્લેટ ચલાવવા માટે બનાવેલી ઓપરેટિંગ સિસ્ટમ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જેમ કોમ્પ્યુટરમાં Windows કે લિનોક્સ કામ કરે છે, તેમ મોબાઈલમાં Android કામ કરે છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Open Source &amp; OHA</strong></td>
+            <td>કોઈપણ કંપની આને મફતમાં વાપરી-બદલી શકે તે માટે 80+ કંપનીઓનું બનેલું ગ્રુપ (Open Handset Alliance).<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> Samsung, OnePlus કે MI પોતાની મરજી મુજબ એન્ડ્રોઇડની ડિઝાઇન બદલીને પોતાના ફોનમાં વાપરી શકે છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Linux Kernel</strong></td>
+            <td>એન્ડ્રોઇડ આર્કિટેક્ચરનું સૌથી નીચેનું લેયર જે હાર્ડવેર, મેમરી (RAM) અને સિક્યોરિટી સંભાળે છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ઘરનો મજબૂત પાયો જેના પર આખી ઇમારત ટકે છે; આ હાર્ડવેર અને સોફ્ટવેરને જોડે છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>HAL (Hardware Abstraction Layer)</strong></td>
+            <td>એન્ડ્રોઇડના સોફ્ટવેર કોડ અને મોબાઈલના અસલી હાર્ડવેર પાર્ટ્સ વચ્ચે વાતચીત કરાવતો વચેટિયો.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જ્યારે તમે એપમાં 'Camera Button' દબાવો, ત્યારે HAL અસલી કેમેરાના લેન્સને ફોટો પાડવાનો ઓર્ડર આપે છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>ART vs Dalvik (Runtime)</strong></td>
+            <td><strong>Dalvik (જૂનું):</strong> એપ ચાલતી વખતે કોડ કન્વર્ટ કરે (ધીમું). <strong>ART (નવું):</strong> ઇન્સ્ટોલ વખતે જ કન્વર્ટ કરી લે (AOT - Ahead Of Time) જેથી એપ ફાસ્ટ ચાલે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> મહેમાન આવે ત્યારે રસોઈ બનાવવી (Dalvik) વિરુદ્ધ મહેમાન આવે તે પહેલા જ રસોઈ તૈયાર રાખવી (ART).</div></td>
+        </tr>
+        <tr>
+            <td><strong>Application Framework</strong></td>
+            <td>ડેવલપર્સને એપ્લિકેશન બનાવવા માટે ગૂગલ તરફથી મળતા ઇન-બિલ્ટ સરકારી ટૂલ્સ અને મેનેજર્સ (દા.ત. NotificationManager).<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> બિલ્ડિંગ બનાવવા માટે મળતા રેડીમેડ સાધનો કે સિમેન્ટ-ઈંટો, જેથી બધું જાતે લોજીકથી ન બનાવવું પડે.</div></td>
+        </tr>
+    </table>
+
+    <h2>2. Android OS Core Components ("ASBC")</h2>
+    <table>
+        <tr>
+            <th>Component</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>Activity</strong></td>
+            <td>એપની અંદર યુઝરને દેખાતી દરેક સિંગલ આખી સ્ક્રીન (User Interface).<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> WhatsApp ઓપન કરતા જ સામે દેખાતી 'Chats Screen' કે 'Settings Screen'.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Service</strong></td>
+            <td>કોઈપણ સ્ક્રીન વગર બેકગ્રાઉન્ડમાં લાંબા સમય સુધી ચાલતું કામ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> એપ બંધ કરી દીધા પછી પણ હેડફોનમાં ગીતો (Music Player) ચાલુ રહેવા.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Broadcast Receiver</strong></td>
+            <td>એન્ડ્રોઇડ સિસ્ટમ કે અન્ય એપ્સ તરફથી આવતી જાહેરાતો કે સિગ્નલને સાંભળનારો ઘટક.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ફોન ચાર્જિંગમાં મુકતા જ સિસ્ટમ સિગ્નલ મોકલે અને એપ બેટરી ફૂલ થવાનો અવાજ (Alert) કરે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Content Provider</strong></td>
+            <td>એક એપ્લિકેશનનો ડેટા બીજી એપ્લિકેશન સાથે સુરક્ષિત રીતે શેર કરવાની ઓફિશિયલ સિસ્ટમ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> WhatsApp તમારા ફોનની ઇન-બિલ્ટ Contacts/Phonebook એપમાંથી બધા મિત્રોના નંબર વાંચે છે તે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>AndroidManifest.xml</strong></td>
+            <td>એપની આખી કુંડળી (મેઈન કોન્ફિગરેશન ફાઇલ) જેમાં બધી એક્ટિવિટી, પરમિશન અને પેકેજનું નામ નોંધાયેલું હોય છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> શાળાનું રજિસ્ટર કે ઘરનો દસ્તાવેજ, જેમાં ઘરમાં કોણ કોણ રહે છે અને કોની પાસે શું સત્તા છે તેની વિગત હોય.</div></td>
+        </tr>
+    </table>
+
+    <h2>3. Activity Lifecycle, Intents & Threads</h2>
+    <table>
+        <tr>
+            <th>Lifecycle / Concept</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>Activity Lifecycle</strong></td>
+            <td>એક સ્ક્રીન ચાલુ થવાથી લઈને કાયમ માટે બંધ થાય ત્યાં સુધીની 7 મુખ્ય સ્ટેજ કે મેથડ્સ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> <span class="badge">onCreate()</span> મેમરી લોડ, <span class="badge">onResume()</span> ક્લિક ચાલુ, <span class="badge">onPause()</span> પોપ-અપ આવવું, <span class="badge">onDestroy()</span> બંધ થવું.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Explicit Intent</strong></td>
+            <td>એપની અંદર જ એક સ્ક્રીન પરથી બીજી ચોક્કસ (નામ ફિક્સ હોય તેવી) સ્ક્રીન પર જવા માટેનો કમાન્ડ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> Login બટન પર ક્લિક કરવાથી સીધા જ 'DashboardActivity' પેજ પર પહોંચવું.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Implicit Intent</strong></td>
+            <td>ચોક્કસ નામ લીધા વગર સિસ્ટમને ફક્ત કામ સોંપવું, જેથી સિસ્ટમ યોગ્ય એપ શોધીને ઓપન કરે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> "આ લિંક ખોલો" એવું કહેતા જ ફોન પૂછે કે Chrome માં ખોલવી છે કે Opera બ્રાઉઝરમાં.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Main UI Thread vs Background Thread</strong></td>
+            <td><strong>Main Thread:</strong> સ્ક્રીનની ડિઝાઇન અને ટચ સંભાળે. <strong>Background Thread:</strong> ભારે કામો પાછળથી ચલાવે જેથી એપ હેંગ ન થાય.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> હોટેલનો વેઈટર ઓર્ડર લે (Main Thread) અને રસોઈયો પાછળ કિચનમાં રસોઈ બનાવે (Background Thread).</div></td>
+        </tr>
+        <tr>
+            <td><strong>ANR (Application Not Responding)</strong></td>
+            <td>જો તમે મેઈન યુઝર ઇન્ટરફેસ (UI) થ્રેડને <strong>5 સેકન્ડ</strong> કરતા વધુ સમય બ્લોક રાખો, તો સિસ્ટમ એપ બંધ કરવાનું પોપ-અપ બતાવે છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જો વેઈટર કિચનમાં શાક સુધારવા બેસી જાય, તો ટેબલ પર ગ્રાહકો ગુસ્સે થઈને હોટેલ છોડી દેશે.</div></td>
+        </tr>
+    </table>
+
+    <h2>4. UI Designing - Layouts, Units & Widgets</h2>
+    <table>
+        <tr>
+            <th>Layout / Unit</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>LinearLayout</strong></td>
+            <td>બધી વસ્તુઓ (બટન, ટેક્સ્ટ) ને સીધી રેખામાં કાં તો એકની નીચે એક (Vertical) અથવા બાજુ-બાજુમાં (Horizontal) ગોઠવતું લેઆઉટ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> સાદું લોગિન ફોર્મ જેમાં ઉપર ઇમેઇલ આઇડી, નીચે પાસવર્ડ અને તેની નીચે સબમિટ બટન હોય.</div></td>
+        </tr>
+        <tr>
+            <td><strong>RelativeLayout</strong></td>
+            <td>વસ્તુઓને એકબીજાની સાપેક્ષમાં (ડાબે, જમણે, ઉપર, નીચે) અથવા મેઈન સ્ક્રીનની કિનારીના સંદર્ભમાં ગોઠવતું લેઆઉટ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> "આ સેવ બટનને કેન્સલ બટનની બરાબર જમણી બાજુએ અને સ્ક્રીનની સાવ નીચે રાખો."</div></td>
+        </tr>
+        <tr>
+            <td><strong>ConstraintLayout</strong></td>
+            <td>મોટી અને અઘરી સ્ક્રીન ડિઝાઇન કરવા માટેનું આધુનિક ફ્લેક્સિબલ લેઆઉટ જે વસ્તુઓને ચારેય બાજુથી દોરી (Constraints) વડે બાંધે છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> દરેક સાઇઝના નાના-મોટા મોબાઈલ સ્ક્રીનમાં ડિઝાઇન આપોઆપ એડજસ્ટ (Responsive) થઈ જાય તે માટે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>FrameLayout</strong></td>
+            <td>એક ખાલી બ્લોક કે કન્ટેનર, જેમાં એકથી વધુ વસ્તુઓ મુકતા તે એકબીજાની ઉપર (Overlap) ગોઠવાઈ જાય છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> કોઈ ફોટોની ઉપર 'Loading Icon' બતાવવો અથવા સ્ક્રીન પર 'Fragments' લોડ કરવા.</div></td>
+        </tr>
+        <tr>
+            <td><strong>dp / dip (Density-independent Pixels)</strong></td>
+            <td>બટન, ઈમેજ કે વ્યુઝની લંબાઈ-પહોળાઈ માપવાનો એકમ, જે બધા મોબાઈલમાં એકસરખી સાઈઝ જાળવી રાખે છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જો બટન 150dp નું બનાવશો તો સસ્તા નાના ફોનમાં કે મોંઘા મોટા ફોનમાં પણ તેનું માપ સરખું જ દેખાશે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>sp (Scale-independent Pixels)</strong></td>
+            <td>માત્ર અને માત્ર લખાણ (Text Size) માપવા માટેનો એકમ, જે યુઝરના મોબાઈલના ફોન્ટ સેટિંગ્સ પ્રમાણે મોટું-નાનું થાય છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જો કોઈ મોટી ઉંમરના વ્યક્તિએ ફોનના સેટિંગ્સમાં જઈને ફોન્ટ મોટા કર્યા હશે, તો એપના અક્ષરો પણ આપોઆપ મોટા થઈ જશે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>px (Pixels)</strong></td>
+            <td>સ્ક્રીન પરના અસલી ભૌતિક ટપકાં (પિક્સલ્સ), જેનો ઉપયોગ એન્ડ્રોઇડ ડિઝાઇનમાં **કરવાની સખત મનાઈ છે (Avoid)**.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> 50px ની વસ્તુ હાઈ-રિઝોલ્યુશન ફોનમાં સાવ કીડી જેવી નાની થઈ જશે અને લો-રિઝોલ્યુશન ફોનમાં બહુ મોટી દેખાશે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Touch Target Size</strong></td>
+            <td>યુઝર કોઈ પણ ભૂલ વગર આરામથી આંગળી વડે ક્લિક કરી શકે તે માટે બટનનું સ્ટાન્ડર્ડ માપ ઓછામાં ઓછું <strong>48dp × 48dp</strong> હોવું જોઈએ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જો એપમાં નાનું ચોકડી (X) નું બટન બહુ નાનું હોય તો ક્લિક કરવામાં તકલીફ પડે છે, તેથી તેનું ટાર્ગેટ એરિયા મોટો રખાય છે.</div></td>
+        </tr>
+    </table>
+
+    <h2>5. Advanced UI - RecyclerView, Fragment &amp; Dialogs</h2>
+    <table>
+        <tr>
+            <th>Component</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>Fragment</strong></td>
+            <td>એક આખી એક્ટિવિટી સ્ક્રીનનો એક નાનો, સ્વતંત્ર અને રીયુઝેબલ (બીજી જગ્યાએ ફરી વાપરી શકાય તેવો) ભાગ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> WhatsApp માં ઉપર દેખાતા ત્રણ સેક્શન - Chats, Updates અને Calls એ ત્રણ અલગ ફ્રેગમેન્ટ્સ છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>RecyclerView</strong></td>
+            <td>હજારો આઇટમ્સની મોટી લિસ્ટને મેમરી બગાડ્યા વગર અને ફોન હેંગ કર્યા વગર એકદમ સ્મૂધ સ્ક્રૉલ કરતું એડવાન્સ લિસ્ટ વ્યુ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> Instagram કે Facebook ની અંદર અનલિમિટેડ નીચે સુધી જતી યુઝર્સની પોસ્ટ અને ફોટોઝનું લિસ્ટ.</div></td>
+        </tr>
+        <tr>
+            <td><strong>ViewHolder Pattern</strong></td>
+            <td>RecyclerView નો એવો ભાગ જે સ્ક્રીનથી ઉપર ગયેલી ડિઝાઇનની મેમરી સાચવી રાખીને, નીચેથી આવતા નવા ડેટા માટે ફરી વાપરે (Recycle) છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> લિસ્ટમાં ૧૦૦૦ વસ્તુ હોય પણ ડિઝાઇન ફક્ત ૭ જ બને, સ્ક્રોલ કરતા ડેટા બદલાય પણ ખોખું (ડિઝાઇન) એ જ રહે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Toast</strong></td>
+            <td>સ્ક્રીનની નીચે થોડી સેકન્ડ માટે આવતો નાનો કાળો પોપ-અપ મેસેજ, જે આપોઆપ ગાયબ થઈ જાય છે અને તેના પર ક્લિક નથી થતું.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> કોઈ ફાઇલ સેવ કરો ત્યારે નીચે લખાણ આવે: "File Saved Successfully". (કોડમાં `.show()` લખવું ફરજિયાત છે).</div></td>
+        </tr>
+        <tr>
+            <td><strong>AlertDialog</strong></td>
+            <td>યુઝરનું ધ્યાન ખેંચવા માટે સ્ક્રીનની વચ્ચે ખુલતું બોક્સ, જે યુઝર પાસે હા કે ના (Yes/No) નો નિર્ણય લેવડાવે છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> એપમાંથી બહાર નીકળતી વખતે આવતું પોપ-અપ: "Are you sure you want to Exit? [Yes] [No]".</div></td>
+        </tr>
+        <tr>
+            <td><strong>Menus (Options / Context)</strong></td>
+            <td><strong>Options Menu:</strong> ટોચ પર જમણી બાજુ ૩ ટપકાં પર આવે. <strong>Context Menu:</strong> કોઈપણ આઇટમ પર લાંબો સમય દબાવી રાખવાથી (Long-press) ખુલે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ચેટ પર લોન્ગ પ્રેસ કરતા ઉપર Delete અને Mute ના ઓપ્શન્સ આવવા (Context Menu).</div></td>
+        </tr>
+        <tr>
+            <td><strong>Animations (Tween / Frame)</strong></td>
+            <td><strong>Tween Animation:</strong> એક જ વસ્તુને મોટી-નાની, ફેરવવી કે આછી કરવી. <strong>Frame Animation:</strong> એક પછી એક ફોટા બદલીને કાર્ટૂન જેવી ઇફેક્ટ આપવી.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> એપ લોડ થતી વખતે ગોળ-ગોળ ફરતું ચક્ર (Tween) અથવા દોડતા માણસના ૫ ફોટા ફટાફટ બદલીને વીડિયો જેવું બતાવવું (Frame).</div></td>
+        </tr>
+    </table>
+
+    <h2>6. Data Storage: SharedPreferences &amp; Database</h2>
+    <table>
+        <tr>
+            <th>Storage Tool</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>SharedPreferences</strong></td>
+            <td>નાનો અને સાદો સ્ટેટિક ડેટા (Key-Value Pair) કાયમી સેવ કરવા માટેનું નાનું લોકલ સ્ટોરેજ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> એપમાં યુઝરનું લોગિન આઈડી, ડાર્ક મોડ સેટિંગ (True/False) કે ગેમનો હાઈ-સ્કોર સેવ રાખવા.</div></td>
+        </tr>
+        <tr>
+            <td><strong>SQLite Database</strong></td>
+            <td>મોબાઈલ ફોનની અંદર જ ડેટાને રો અને કોલમ (કોષ્ટક) ના ફોર્મેટમાં સેવ કરવા માટેનો ઇન-બિલ્ટ, નાનો અને લાઈટવેઈટ ડેટાબેઝ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ઇન્ટરનેટ વગર પણ એપની અંદર યુઝરની પ્રોફાઇલ, હિસ્ટ્રી કે મેસેજીસ ઑફલાઇન સેવ રાખવા.</div></td>
+        </tr>
+        <tr>
+            <td><strong>SQLiteOpenHelper</strong></td>
+            <td>SQLite ડેટાબેઝ ફાઇલ બનાવવા અને તેના વર્ઝનને હેન્ડલ કરવા માટેનો મેઈન મદદગાર ક્લાસ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> આ ક્લાસની અંદર <span class="badge">onCreate()</span> માં પહેલીવાર ટેબલ બને છે અને <span class="badge">onUpgrade()</span> માં જૂનું ટેબલ બદલાય છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>ContentValues</strong></td>
+            <td>ડેટાબેઝના ટેબલમાં આખેઆખી નવી લાઈન (Row) ઇન્સર્ટ કરવા માટે ડેટાને કોલમના નામ સાથે પેક કરવાનું એક પાકીટ (ઓબ્જેક્ટ).<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> `values.put("name", "Raj")` અને `values.put("age", 25)` લખીને સીધું ટેબલમાં મોકલવું.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Cursor (moveToFirst)</strong></td>
+            <td>ડેટાબેઝમાંથી ક્વેરી દ્વારા જે ડેટા બહાર આવે, તેની લાઈનો પર એક પછી એક આગળ વધવા માટેનું પોઇન્ટર.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ટેબલમાંથી ડેટા વાંચતા પહેલા હંમેશા `cursor.moveToFirst()` લખવું પડે છે જેથી પોઇન્ટર પહેલી લાઇન પર સેટ થાય.</div></td>
+        </tr>
+        <tr>
+            <td><strong>SQL Injection Protection</strong></td>
+            <td>હેકર્સ ટેક્સ્ટ બોક્સમાં ખોટો કોડ નાખીને ડેટાબેઝ હેક ન કરી શકે તે માટે ડાયરેક્ટ વેલ્યુના બદલે ક્વેશ્ચન માર્ક `?` (Selection Args) વાપરવાની સિક્યોરિટી પદ્ધતિ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> `SELECT * FROM Users WHERE id = ?` વાપરવું, જેથી `?` ની જગ્યાએ યુઝર ગમે તે લખે તો પણ સિસ્ટમ તેને ફક્ત ડેટા જ ગણે, કોડ ન ગણે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Room Database</strong></td>
+            <td>SQLite ની ઉપર બનેલું ગૂગલનું નવું અને આધુનિક કવર (Jetpack Component), જે ડેટાબેઝ બનાવવાનો કોડ બહુ જ ટૂંકો અને સરળ કરી દે છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> એડવાન્સ એપમાં લાંબો SQLite કોડ લખવાના બદલે સીધું જ Room વાપરવામાં આવે છે જે ભૂલો પકડી પાડે છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Entity (Room)</strong></td>
+            <td>રૂમ ડેટાબેઝની અંદર કયું ટેબલ બનાવવું છે, તે નક્કી કરતો એક સાદો ક્લાસ (Class).<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> `@Entity` ટેગ સાથે `User` નામનો ક્લાસ બનાવતા જ ડેટાબેઝમાં `User` નામનું ટેબલ ઓટોમેટિક બની જશે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>DAO (Data Access Object)</strong></td>
+            <td>ડેટાબેઝમાં ડેટા ઇન્સર્ટ, અપડેટ કે ક્વેરી કરવા માટેની રીતો લખવાનો એક ઇન્ટરફેસ (નકશો).<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ફંક્શનની ઉપર ફક્ત `@Insert` અથવા `@Delete` લખવાથી રૂમ સમજી જાય છે કે ડેટાબેઝમાં શું કરવાનું છે.</div></td>
+        </tr>
+    </table>
+
+    <h2>7. Gujarat Police Smart Applications &amp; Security Features</h2>
+    <table>
+        <tr>
+            <th>Application / Feature</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>"Pocket Cop" (MDT)</strong></td>
+            <td>ઓન-ફિલ્ડ ફરજ બજાવતા પોલીસ અધિકારીઓ માટે રસ્તા પર જ સ્થળ પર લાઈવ તપાસ કરવાનું મિની-કોમ્પ્યુટર સાધન.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> રાત્રે નાકાબંધીમાં શંકાસ્પદ બાઇક રોકીને એપમાં નંબર નાખતા જ લાઈવ ખબર પડી જાય કે બાઇક ચોરીનું છે કે ઓરિજિનલ.</div></td>
+        </tr>
+        <tr>
+            <td><strong>e-Challan</strong></td>
+            <td>ટ્રાફિકના નિયમો તોડનારા વાહનચાલકોને દંડ કરવા માટેની સંપૂર્ણ ઓનલાઈન અને ડિજિટલ સિસ્ટમ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> હેલ્મેટ વગર કે ચાલુ ચાલુ સિગ્નલે કેમેરામાં પકડાઈ જતાં જ સીધો જ મોબાઈલ પર દંડનો મેસેજ (ઈ-મેમો) આવી જવો.</div></td>
+        </tr>
+        <tr>
+            <td><strong>FIR System (Digital)</strong></td>
+            <td>કોઈપણ ગુનાની પ્રાથમિક ફરિયાદ (FIR) ચોપડામાં લખવાના બદલે ઓનલાઈન સેન્ટ્રલ સર્વર પર લોક કરવાની પેપરલેસ સિસ્ટમ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ગુનો બનતા જ પોલીસ ઘટનાસ્થળેથી જ ટેબ્લેટ વડે લાઈવ FIR નોંધી શકે છે જેથી પાછળથી તેમાં કોઈ છેડછાડ ન થાય.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Biometric API</strong></td>
+            <td>મોબાઈલ સાથે નાનું સ્કેનર જોડીને રસ્તા પર જ ગુનેગારોના ફિંગરપ્રિન્ટ સ્કેન કરીને હિસ્ટ્રી ચેક કરવાની ટેક્નોલોજી.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> પકડાયેલો શંકાસ્પદ માણસ ખોટું નામ-સરનામું આપે તો અંગૂઠો મુકાવીને આખા દેશના ડેટાબેઝમાંથી તેની અસલી ઓળખ શોધી કઢાય છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>e-GujCop</strong></td>
+            <td>આખા ગુજરાત રાજ્યના તમામ પોલીસ સ્ટેશનો, જેલ અને ક્રિમિનલ ડેટાને એક જગ્યાએ જોડતો એક વિશાળ મહા-ડેટાબેઝ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> અમદાવાદમાં ગુનો કરીને રાજકોટ ભાગી ગયેલા આરોપીની વિગત રાજકોટ પોલીસ આ નેટવર્ક ખોલીને લાઈવ જોઈ શકે છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>MDM (Mobile Device Management)</strong></td>
+            <td>પોલીસ ફોર્સને આપેલા સરકારી મોબાઈલોનો ખોટો ઉપયોગ અટકાવવા અને તેને મુખ્ય ઓફિસથી કંટ્રોલ કરવાનું લોકડાઉન સોફ્ટવેર.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જો કોઈ પોલીસવાળાનો ફોન ગુમ થાય, તો હેડ-ઓફિસ બેઠા-બેઠા જ એ ફોનનો બધો જ ગુપ્ત ડેટા ડિલીટ (Wipe) કરી શકે છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>SQLCipher</strong></td>
+            <td>મોબાઈલની અંદર સ્ટોર થતી રૂમ કે SQLite ડેટાબેઝ ફાઇલને સુરક્ષિત રાખવા માટેનું મજબૂત <strong>256-bit AES એન્ક્રિપ્શન (તાળું)</strong>.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જો કોઈ હેકર પોલીસ ફોનમાંથી ગુનેગારોની ફાઇલ ચોરી પણ લે, તો પણ પાસવર્ડ કી વગર તેને ફાઇલમાં કચરો (Gibberish) જ દેખાશે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Project Treble</strong></td>
+            <td>એન્ડ્રોઇડ ઓપરેટિંગ સિસ્ટમનું નવું માળખું જે કંપનીઓની માથાકૂટ વગર ફોનમાં સિક્યોરિટી અપડેટ્સ (Patches) બહુ જ ઝડપથી ઇન્સ્ટોલ કરી આપે છે.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> માર્કેટમાં કોઈ નવો ખતરનાક વાયરસ આવ્યો, તો ફોનમાં મહિનાઓ સુધી રાહ જોયા વગર ૨ જ દિવસમાં નવું પ્રોટેક્શન અપડેટ થઈ જશે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>BiometricPrompt</strong></td>
+            <td>ફોનની અંદર રહેલા ફિંગરપ્રિન્ટ કે ફેસ આઈડી હાર્ડવેરનો ઉપયોગ કરીને પોલીસ એપને સિક્યોર લોગિન પાવર આપતી ઓફિશિયલ સિસ્ટમ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> ડ્યુટી પર હાજર અધિકારીએ 'Pocket Cop' ખોલવા દર વખતે મોટો પાસવર્ડ નાખવો નથી પડતો, બસ અંગૂઠો અડાડતા જ એપ સેકન્ડમાં ખુલી જાય.</div></td>
+        </tr>
+    </table>
+
+    <h2>8. Android Testing, Debugging Tools &amp; Permissions</h2>
+    <table>
+        <tr>
+            <th>Tool / Concept</th>
+            <th>One-Liner (સરળ અર્થ) &amp; Practical Example (ઉદાહરણ)</th>
+        </tr>
+        <tr>
+            <td><strong>Logcat</strong></td>
+            <td>એપ ચાલુ હોય ત્યારે બેકગ્રાઉન્ડમાં શું પ્રોસેસ ચાલે છે અને ક્યાં એરર (Crash) આવી, તેનું લાઈવ લિસ્ટ બતાવતી કોમ્પ્યુટર વિન્ડો.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> જેમ ડોક્ટર દર્દીના હૃદયના ધબકારા જોવા માટે ECG મશીન જુએ છે, તેમ ડેવલપર એપની લાઈવ હેલ્થ જોવા Logcat જુએ છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>DDMS (Android Studio Profiler)</strong></td>
+            <td>એપ ચાલતી વખતે ફોનની કેટલી રેમ (RAM), પ્રોસેસર (CPU) અને ઇન્ટરનેટ ડેટા વાપરે છે તેનું લાઈવ માપન કરતું ટૂલ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> આ ટૂલ દ્વારા ખબર પડે છે કે આપણી એપ ચાલુ થતાં જ ફોન કેમ ગરમ થઈ જાય છે અથવા બેટરી કેમ વધુ ખવાય છે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>ADB (Android Debug Bridge)</strong></td>
+            <td>કોમ્પ્યુટર અને અસલી એન્ડ્રોઇડ ફોનને વાયર (USB) અથવા વાઇફાઇથી જોડીને કમાન્ડ વડે એપ ઇન્સ્ટોલ કે ટેસ્ટ કરવાનું ટૂલ.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> કોમ્પ્યુટરમાં કોડ લખીને સીધો જ રન બટન દબાવતા એપ વાયર દ્વારા તમારા હાથમાં રહેલા અસલી ફોનમાં ચાલુ થઈ જાય તે.</div></td>
+        </tr>
+        <tr>
+            <td><strong>Normal vs Dangerous Permissions</strong></td>
+            <td><strong>Normal:</strong> ઇન્ટરનેટ જેવી સાદી પરમિશન (આપોઆપ મળી જાય). <strong>Dangerous:</strong> કેમેરા, લોકેશન, કોન્ટેક્ટ્સ જેવી યુઝરને પૂછીને મળતી પરમિશન.<br>
+            <div class="ex"><strong>ઉદાહરણ:</strong> પોલીસ એપ ખોલતા જ સ્ક્રીન પર પોપ-અપ આવે: "Allow Pocket Cop to access this device's location? [Allow] [Deny]".</div></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
