@@ -1,1098 +1,2067 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="gu">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ભારતની શાસન વ્યવસ્થા — Updated Master Chart 2026</title>
-    <style>
-      :root {
-        --saffron: #ff9933;
-        --saffron-deep: #c25e00;
-        --white: #fdfbf6;
-        --green: #138808;
-        --green-deep: #0b5c05;
-        --navy: #0b1f3a;
-        --ink: #1c2430;
-        --paper: #fffcf6;
-        --card: #ffffff;
-        --line: #e4dcc8;
-        --gold: #b8860b;
-        --chakra: #003399;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: "Noto Sans Gujarati", "Shruti", "Segoe UI", sans-serif;
-        background:
-          radial-gradient(
-            1200px 600px at 10% -10%,
-            rgba(255, 153, 51, 0.1),
-            transparent 60%
-          ),
-          radial-gradient(
-            1200px 600px at 90% 10%,
-            rgba(19, 136, 8, 0.09),
-            transparent 60%
-          ),
-          var(--paper);
-        color: var(--ink);
-        line-height: 1.6;
-      }
-      .wrap {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 20px 18px 80px;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ભારતીય બંધારણ — સંપૂર્ણ અભ્યાસ માર્ગદર્શિકા</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800&family=Noto+Serif+Gujarati:wght@500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap');
 
-      /* HERO */
-      .hero {
-        position: relative;
-        border-radius: 18px;
-        overflow: hidden;
-        background: linear-gradient(180deg, var(--navy) 0%, #142b4d 100%);
-        color: #fff;
-        padding: 34px 28px 26px;
-        margin-bottom: 26px;
-        box-shadow: 0 12px 30px rgba(11, 31, 58, 0.25);
-      }
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          90deg,
-          var(--saffron) 0 33.3%,
-          var(--white) 33.3% 66.6%,
-          var(--green) 66.6% 100%
-        );
-        opacity: 0.1;
-      }
-      .hero-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        position: relative;
-        flex-wrap: wrap;
-      }
-      .chakra {
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        border: 3px solid var(--chakra);
-        position: relative;
-        flex: none;
-        background: radial-gradient(
-          circle at center,
-          transparent 0 8px,
-          var(--chakra) 8px 9px,
-          transparent 9px
-        );
-      }
-      .chakra::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: repeating-conic-gradient(
-          var(--chakra) 0deg 3deg,
-          transparent 3deg 15deg
-        );
-        border-radius: 50%;
-        mask: radial-gradient(circle, transparent 0 15px, #000 16px);
-        -webkit-mask: radial-gradient(circle, transparent 0 15px, #000 16px);
-      }
-      h1 {
-        font-size: clamp(24px, 4vw, 36px);
-        margin: 10px 0 2px;
-        letter-spacing: 0.3px;
-        position: relative;
-      }
-      .sub {
-        color: #cfe0ff;
-        font-size: 14px;
-        position: relative;
-        margin: 0 0 2px;
-      }
-      .updated-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255, 153, 51, 0.18);
-        border: 1px solid rgba(255, 153, 51, 0.55);
-        color: #ffd9a6;
-        padding: 6px 14px;
-        border-radius: 999px;
-        font-size: 12.5px;
-        font-weight: 600;
-        margin-top: 12px;
-        position: relative;
-      }
-      .updated-badge .dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #5cd65c;
-        box-shadow: 0 0 0 3px rgba(92, 214, 92, 0.25);
-      }
+:root{
+  --ink:#1c2b24;
+  --paper:#f6f2e8;
+  --paper2:#efe8d8;
+  --saffron:#c9622a;
+  --saffron-dark:#a34b1c;
+  --green-deep:#1f4d3a;
+  --green-line:#2f6b50;
+  --gold:#b48a2e;
+  --card:#fffdf7;
+  --line:#ddd3ba;
+  --muted:#6b6152;
+  --shadow: 0 8px 24px rgba(28,43,36,.08);
+  --radius: 10px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans Gujarati','Noto Sans',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.65;
+}
+::selection{background:#e7c9a8;}
 
-      /* CHANGE LOG BOX */
-      .changelog {
-        background: #fff7ec;
-        border: 1.5px solid var(--saffron);
-        border-radius: 14px;
-        padding: 18px 20px;
-        margin: 0 0 28px;
-      }
-      .changelog h2 {
-        margin: 0 0 10px;
-        font-size: 17px;
-        color: var(--saffron-deep);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .changelog table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
-      }
-      .changelog th {
-        text-align: left;
-        padding: 8px 10px;
-        background: var(--saffron);
-        color: #fff;
-        font-weight: 600;
-      }
-      .changelog th:first-child,
-      .changelog td:first-child {
-        text-align: left;
-      }
-      .changelog td {
-        padding: 8px 10px;
-        border-bottom: 1px solid var(--line);
-      }
-      .changelog tr:last-child td {
-        border-bottom: none;
-      }
-      .old {
-        color: #a33;
-        text-decoration: line-through;
-        opacity: 0.75;
-      }
-      .new {
-        color: var(--green-deep);
-        font-weight: 700;
-      }
+/* ---------- Layout ---------- */
+.app{display:flex; min-height:100vh;}
 
-      /* SECTION HEADERS */
-      .section-title {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 38px 0 16px;
-      }
-      .section-title .bar {
-        width: 6px;
-        height: 28px;
-        border-radius: 4px;
-        background: linear-gradient(180deg, var(--saffron), var(--green));
-      }
-      .section-title h2 {
-        margin: 0;
-        font-size: 20px;
-        color: var(--navy);
-      }
-      .section-title small {
-        display: block;
-        color: #8a8272;
-        font-size: 12.5px;
-        font-weight: 400;
-      }
+.sidebar{
+  width:300px; flex-shrink:0;
+  background:linear-gradient(180deg,var(--green-deep),#163b2c);
+  color:#eef3ee;
+  position:fixed; top:0; left:0; bottom:0;
+  overflow-y:auto; overflow-x:hidden;
+  z-index:50;
+  transition:width .28s cubic-bezier(.4,0,.2,1), transform .28s ease;
+  border-right:4px solid var(--gold);
+}
+.sidebar::-webkit-scrollbar{width:6px;}
+.sidebar::-webkit-scrollbar-thumb{background:#3a6e57;border-radius:4px;}
 
-      /* THREE ORGANS */
-      .organs {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-      .organ-card {
-        background: var(--card);
-        border-radius: 14px;
-        border-top: 5px solid var(--saffron);
-        padding: 18px 16px;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-      }
-      .organ-card.exec {
-        border-top-color: var(--gold);
-      }
-      .organ-card.jud {
-        border-top-color: var(--green);
-      }
-      .organ-card h3 {
-        margin: 0 0 8px;
-        font-size: 16.5px;
-        color: var(--navy);
-      }
-      .organ-card ul {
-        margin: 8px 0 0;
-        padding-right: 18px;
-        font-size: 14px;
-      }
-      .article-tag {
-        display: inline-block;
-        margin-top: 10px;
-        background: #eff3ff;
-        color: var(--chakra);
-        font-size: 12px;
-        font-weight: 700;
-        padding: 3px 10px;
-        border-radius: 999px;
-      }
+/* ---------- Mini (collapsed) sidebar ---------- */
+.sidebar.mini{width:72px;}
+.sidebar.mini .brand{padding:20px 0 14px; text-align:center;}
+.sidebar.mini .brand .ashoka{margin:0 auto 0;}
+.sidebar.mini .brand h1, .sidebar.mini .brand p{display:none;}
+.sidebar.mini .search-wrap .full-search{display:none;}
+.sidebar.mini .search-wrap{padding:12px 0; display:flex; justify-content:center;}
+.sidebar.mini .search-count{display:none;}
+.sidebar.mini .search-hint{display:none;}
+.sidebar.mini .mini-search-btn{display:flex;}
+.sidebar.mini .cat-label{
+  display:flex; justify-content:center; align-items:center; margin:14px 0 6px; padding:0;
+}
+.sidebar.mini .cat-label .label-text{display:none;}
+.sidebar.mini .cat-label .cat-dot{display:block;}
+.sidebar.mini .toc a{justify-content:center; padding:9px 0; gap:0;}
+.sidebar.mini .toc a .label-text{display:none;}
+.sidebar.mini .toc a .num{min-width:26px;}
+.sidebar.mini ~ .main{margin-left:72px;}
 
-      /* POST CARDS GRID */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 16px;
-      }
-      .post-card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 16px 18px;
-        position: relative;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
-        transition:
-          transform 0.15s ease,
-          box-shadow 0.15s ease;
-      }
-      .post-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      }
-      .post-card h3 {
-        margin: 0 0 6px;
-        font-size: 16px;
-        color: var(--navy);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-      }
-      .post-card ul {
-        margin: 6px 0 10px;
-        padding-right: 18px;
-        font-size: 13.6px;
-        color: #3a4150;
-      }
-      .post-card ul li {
-        margin-bottom: 3px;
-      }
-      .current-name {
-        background: linear-gradient(90deg, #fff3e0, #eaf7ea);
-        border-right: 4px solid var(--green);
-        padding: 8px 12px;
-        border-radius: 8px;
-        font-size: 14.5px;
-        font-weight: 700;
-        color: var(--green-deep);
-        margin-top: 6px;
-      }
-      .current-name small {
-        display: block;
-        font-weight: 400;
-        color: #666;
-        font-size: 11.5px;
-        margin-top: 2px;
-      }
-      .art-badge {
-        background: var(--chakra);
-        color: #fff;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 2px 9px;
-        border-radius: 999px;
-        white-space: nowrap;
-      }
-      .meta-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 8px;
-      }
-      .chip {
-        font-size: 11.5px;
-        background: #f3f1e8;
-        color: #6b6350;
-        padding: 3px 9px;
-        border-radius: 8px;
-        border: 1px solid var(--line);
-      }
+.sidebar-toggle-row{
+  display:flex; align-items:center; justify-content:flex-end; padding:8px 10px 0;
+}
+.collapse-btn{
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:#eef3ee;
+  width:30px; height:30px; border-radius:7px; cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, transform .28s;
+}
+.collapse-btn:hover{background:rgba(255,255,255,.16);}
+.sidebar.mini .sidebar-toggle-row{justify-content:center; padding:8px 0 0;}
+.sidebar.mini .collapse-btn{transform:rotate(180deg);}
 
-      /* JUDICIARY FLOW */
-      .flow {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        background: var(--card);
-        border-radius: 14px;
-        padding: 26px 18px;
-        border: 1px solid var(--line);
-      }
-      .flow-step {
-        background: linear-gradient(90deg, #0b1f3a, #173a66);
-        color: #fff;
-        padding: 12px 26px;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 15px;
-        text-align: center;
-        min-width: 220px;
-        box-shadow: 0 4px 10px rgba(11, 31, 58, 0.2);
-      }
-      .flow-step small {
-        display: block;
-        font-weight: 400;
-        color: #b9cbe8;
-        font-size: 11.5px;
-        margin-top: 3px;
-      }
-      .flow-arrow {
-        color: var(--saffron-deep);
-        font-size: 20px;
-        margin: 4px 0;
-      }
+.mini-search-btn{
+  display:none; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
+  color:#eef3ee; width:36px; height:36px; border-radius:8px; cursor:pointer; font-size:15px;
+  align-items:center; justify-content:center;
+}
+.mini-search-btn:hover{background:rgba(255,255,255,.16);}
 
-      /* TABLE STYLE (UT) */
-      table.ut {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
-        background: var(--card);
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      table.ut th {
-        background: var(--navy);
-        color: #fff;
-        padding: 10px 12px;
-        text-align: right;
-      }
-      table.ut td {
-        padding: 9px 12px;
-        border-bottom: 1px solid var(--line);
-        text-align: right;
-      }
-      table.ut tr:nth-child(even) {
-        background: #faf8f1;
-      }
+/* Tooltip shown when hovering icons in mini mode */
+.tooltip-flyout{
+  position:fixed; left:76px; background:var(--ink); color:#fff; font-size:12.5px;
+  padding:6px 11px; border-radius:6px; white-space:nowrap; pointer-events:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.25); z-index:200; opacity:0; transform:translateX(-6px);
+  transition:opacity .12s ease, transform .12s ease;
+}
+.tooltip-flyout.show{opacity:1; transform:translateX(0);}
 
-      /* LOCAL SELF GOVT */
-      .ladder {
-        display: flex;
-        gap: 26px;
-        flex-wrap: wrap;
-      }
-      .ladder-col {
-        flex: 1;
-        min-width: 260px;
-        background: var(--card);
-        border-radius: 14px;
-        padding: 18px;
-        border: 1px solid var(--line);
-      }
-      .ladder-col h4 {
-        margin: 0 0 12px;
-        color: var(--saffron-deep);
-        font-size: 15.5px;
-      }
-      .step-line {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 9px 0;
-        border-bottom: 1px dashed var(--line);
-        font-size: 14px;
-      }
-      .step-line:last-child {
-        border-bottom: none;
-      }
-      .step-num {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: var(--green);
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 700;
-        flex: none;
-      }
+.brand{
+  padding:22px 20px 16px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  transition:padding .2s;
+}
+.brand .ashoka{
+  width:34px;height:34px;border-radius:50%;
+  border:2.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:10px;
+  color:var(--gold);font-size:16px;font-weight:800;
+  flex-shrink:0;
+}
+.brand h1{
+  font-family:'Noto Serif Gujarati',serif;
+  font-size:18px; margin:0 0 4px; font-weight:700; color:#fff;
+  letter-spacing:.2px;
+}
+.brand p{margin:0;font-size:12px;color:#b9ccc0;}
 
-      /* FOOT NOTE */
-      .footnote {
-        margin-top: 40px;
-        padding: 16px 20px;
-        background: #f3f1e8;
-        border-radius: 12px;
-        font-size: 12.5px;
-        color: #6b6350;
-        text-align: center;
-      }
+.search-wrap{padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.12);}
+.search-wrap .full-search{position:relative;}
+.search-wrap input{
+  width:100%; padding:10px 34px 10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08); color:#fff; font-size:14px; font-family:inherit;
+  outline:none;
+}
+.search-wrap .clear-btn{
+  position:absolute; right:6px; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:#a9beb1; font-size:16px; cursor:pointer;
+  display:none; padding:4px 6px;
+}
+.search-wrap .clear-btn.show{display:block;}
+.search-wrap input::placeholder{color:#a9beb1;}
+.search-wrap input:focus{border-color:var(--gold); background:rgba(255,255,255,.13);}
+.search-count{font-size:11px;color:#9fb6a8;margin-top:6px;}
+.search-hint{font-size:10.5px;color:#7fa091;margin-top:4px; line-height:1.4;}
 
-      @media (max-width: 820px) {
-        .organs {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <!-- HERO -->
+nav.toc{padding:6px 10px 28px;}
+.cat-label{
+  font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--gold); font-weight:700; margin:16px 10px 6px; opacity:.9;
+  display:flex; align-items:center; gap:6px;
+}
+.cat-label .cat-dot{
+  display:none; width:8px;height:8px;border-radius:50%;background:var(--gold);
+}
+.toc a{
+  display:flex; align-items:center; gap:8px;
+  padding:8px 10px; border-radius:7px; color:#dbe8e0;
+  text-decoration:none; font-size:13.5px;
+  transition:background .15s;
+  position:relative;
+}
+.toc a .num{color:var(--gold); font-size:11px; min-width:20px; font-weight:700; flex-shrink:0; text-align:center;}
+.toc a .label-text{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.toc a .match-score{margin-left:auto; font-size:9.5px; color:#7fa091; flex-shrink:0;}
+.toc a:hover{background:rgba(255,255,255,.08);}
+.toc a.active{background:var(--saffron); color:#fff;}
+.toc a.active .num{color:#fff;}
+.toc a.hidden{display:none;}
+
+/* ---------- Main ---------- */
+.main{margin-left:300px; flex:1; min-width:0;}
+.topbar{
+  position:sticky; top:0; z-index:40;
+  background:rgba(246,242,232,.92); backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  padding:12px 28px;
+  display:flex; align-items:center; gap:14px;
+}
+.menu-btn{
+  display:none; background:var(--green-deep); color:#fff; border:none;
+  width:38px;height:38px;border-radius:8px; font-size:18px; cursor:pointer;
+}
+.topbar .path{font-size:13px; color:var(--muted);}
+.topbar .path b{color:var(--saffron-dark);}
+
+.content{max-width:920px; margin:0 auto; padding:34px 30px 100px;}
+
+.hero{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px 28px; margin-bottom:26px; box-shadow:var(--shadow);
+  border-left:5px solid var(--saffron);
+}
+.hero h2{font-family:'Noto Serif Gujarati',serif; margin:0 0 8px; font-size:26px; color:var(--green-deep);}
+.hero p{margin:0; color:var(--muted); font-size:14.5px;}
+.hero .stripe{display:flex;gap:4px;margin-top:14px;}
+.hero .stripe span{height:4px;flex:1;border-radius:2px;}
+.hero .stripe span:nth-child(1){background:var(--saffron);}
+.hero .stripe span:nth-child(2){background:#fff;border:1px solid var(--line);}
+.hero .stripe span:nth-child(3){background:var(--green-deep);}
+
+.topic{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:24px 26px; margin-bottom:20px; scroll-margin-top:80px;
+  box-shadow:var(--shadow);
+}
+.topic h3{
+  font-family:'Noto Serif Gujarati',serif; font-size:20px; margin:0 0 4px;
+  color:var(--green-deep); display:flex; align-items:center; gap:10px;
+}
+.topic h3 .idx{
+  background:var(--green-deep); color:#fff; font-size:12px; font-weight:700;
+  width:26px;height:26px;border-radius:50%; display:flex;align-items:center;justify-content:center;
+  flex-shrink:0; font-family:'Noto Sans Gujarati';
+}
+.topic .en{font-size:12px; color:var(--muted); margin:0 0 14px 36px; font-style:italic;}
+.topic .art-badge{
+  display:inline-block; background:var(--paper2); color:var(--saffron-dark);
+  border:1px solid var(--line); font-size:12px; padding:2px 10px; border-radius:20px;
+  margin:0 0 14px 36px; font-weight:600;
+}
+.topic-body{margin-left:36px; font-size:14.5px;}
+.topic-body p{margin:0 0 10px;}
+.topic-body ul{margin:6px 0 12px; padding-left:20px;}
+.topic-body li{margin-bottom:6px;}
+.topic-body .sub{font-weight:700; color:var(--green-line); display:block; margin:14px 0 6px;}
+.topic-body table{width:100%; border-collapse:collapse; margin:10px 0 14px; font-size:13.5px;}
+.topic-body table th, .topic-body table td{border:1px solid var(--line); padding:7px 10px; text-align:left;}
+.topic-body table th{background:var(--paper2); color:var(--green-deep);}
+mark{background:#f3d9ae; color:var(--ink); padding:0 2px; border-radius:2px;}
+.note{
+  background:#fbf3e4; border-left:3px solid var(--gold); padding:8px 12px;
+  font-size:13px; margin-top:10px; border-radius:4px; color:#6b5423;
+}
+
+.no-results{text-align:center; padding:60px 20px; color:var(--muted);}
+
+footer.foot{
+  text-align:center; padding:26px; color:var(--muted); font-size:12px;
+  border-top:1px solid var(--line);
+}
+
+.overlay{display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:45;}
+
+@media (max-width: 900px){
+  .sidebar{transform:translateX(-100%); width:300px !important;}
+  .sidebar.open{transform:translateX(0);}
+  .sidebar.mini{width:300px;}
+  .sidebar.mini .brand h1, .sidebar.mini .brand p{display:block;}
+  .sidebar.mini .brand{padding:22px 20px 16px; text-align:left;}
+  .sidebar.mini .brand .ashoka{margin:0 0 10px;}
+  .sidebar.mini .search-wrap .full-search{display:block;}
+  .sidebar.mini .search-wrap{padding:14px 16px; display:block;}
+  .sidebar.mini .search-count{display:block;}
+  .sidebar.mini .search-hint{display:block;}
+  .sidebar.mini .mini-search-btn{display:none;}
+  .sidebar.mini .cat-label{justify-content:flex-start; margin:16px 10px 6px;}
+  .sidebar.mini .cat-label .label-text{display:inline;}
+  .sidebar.mini .cat-label .cat-dot{display:none;}
+  .sidebar.mini .toc a{justify-content:flex-start; padding:8px 10px; gap:8px;}
+  .sidebar.mini .toc a .label-text{display:inline;}
+  .sidebar-toggle-row{display:none;}
+  .main{margin-left:0;}
+  .sidebar.mini ~ .main{margin-left:0;}
+  .menu-btn{display:block;}
+  .overlay.show{display:block;}
+  .content{padding:22px 16px 80px;}
+  .topic{padding:18px 16px;}
+  .topic-body, .en, .art-badge{margin-left:0;}
+  .topic h3{font-size:18px;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="overlay" id="overlay"></div>
+  <div class="tooltip-flyout" id="tooltipFlyout"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-toggle-row">
+      <button class="collapse-btn" id="collapseBtn" title="સાઇડબાર સંકોચો/વિસ્તારો">◀</button>
+    </div>
+    <div class="brand">
+      <div class="ashoka">॥</div>
+      <h1>ભારતીય બંધારણ</h1>
+      <p>PSI / GPSC સંપૂર્ણ અભ્યાસ યાદી</p>
+    </div>
+    <div class="search-wrap">
+      <div class="full-search">
+        <input type="text" id="searchInput" placeholder="ટોપિક શોધો... (દા.ત. રાષ્ટ્રપતિ, અનુચ્છેદ 356)">
+        <button class="clear-btn" id="clearSearch" title="સાફ કરો">✕</button>
+      </div>
+      <button class="mini-search-btn" id="miniSearchBtn" title="શોધો">🔍</button>
+      <div class="search-count" id="searchCount"></div>
+      <div class="search-hint">ફઝી શોધ સક્રિય — જોડણી ભૂલ / આંશિક શબ્દ પણ ચાલશે</div>
+    </div>
+    <nav class="toc" id="toc"></nav>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <div class="path">વર્તમાન વિભાગ: <b id="currentTitle">પરિચય</b></div>
+    </div>
+
+    <div class="content">
       <div class="hero">
-        <div class="hero-top">
-          <div class="chakra"></div>
-          <div style="text-align: left">
-            <div class="sub">Wireless PSI Exam Prep · Indian Polity</div>
-          </div>
-        </div>
-        <h1>ભારતની શાસન વ્યવસ્થા — Master Chart (Updated)</h1>
-        <p class="sub">
-          બંધારણીય કલમો સાથે, તમામ હોદ્દેદારોના વર્તમાન (Current, July 2026) નામ
-          સાથે અપડેટ કરેલ ચાર્ટ
-        </p>
-        <div class="updated-badge">
-          <span class="dot"></span> Last verified: July 2026
-        </div>
+        <h2>ભારતીય બંધારણ — સંપૂર્ણ અભ્યાસ સામગ્રી</h2>
+        <p>PSI (Wireless/Technical) અને GPSC પરીક્ષા માટે તૈયાર કરેલ — તમામ 45 વિષયો, અનુચ્છેદ ક્રમાંક, અનુસૂચિઓ અને મહત્વના મુદ્દાઓ સાથે. ડાબી બાજુ મેનુમાંથી ટોપિક પસંદ કરો અથવા સર્ચ કરો.</p>
+        <div class="stripe"><span></span><span></span><span></span></div>
       </div>
 
-       <!-- CHANGE LOG -->
-      <div class="changelog">
-        <table>
-          <tr>
-            <th>હોદ્દો</th>
-            <th>વર્તમાન (Updated)</th>
-          </tr>
-          <tr>
-            <td>ઉપરાષ્ટ્રપતિ / રાજ્યસભા સભાપતિ</td>
-            <td class="new">સી. પી. રાધાકૃષ્ણન (15મા)</td>
-          </tr>
-          <tr>
-            <td>મુખ્ય ન્યાયાધીશ (CJI)</td>
-            <td class="new">જસ્ટિસ સૂર્ય કાંત (53મા)</td>
-          </tr>
-          <tr>
-            <td>CAG</td>
-            <td class="new">કે. સંજય મૂર્તિ</td>
-          </tr>
-          <tr>
-            <td>મુખ્ય ચૂંટણી કમિશનર</td>
-            <td class="new">જ્ઞાનેશ કુમાર (26મા)</td>
-          </tr>
-          <tr>
-            <td>UPSC અધ્યક્ષ</td>
-            <td class="new">અજય કુમાર</td>
-          </tr>
-        </table>
-      </div>
+      <div id="topicsContainer"></div>
 
-      <!-- SECTION: 3 ORGANS -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>ભારતના 3 મુખ્ય અંગો</h2>
-          <small>Three Organs of the State — Constitutional Basis</small>
-        </div>
-      </div>
-      <div class="organs">
-        <div class="organ-card">
-          <h3>🏛️ વિધાન અંગ (Legislature)</h3>
-          <ul>
-            <li>કાયદા બનાવે</li>
-            <li>કેન્દ્ર → સંસદ (Parliament)</li>
-            <li>રાજ્ય → રાજ્ય ધારાસભા</li>
-          </ul>
-          <span class="article-tag"
-            >કલમ 79 (સંસદ) · કલમ 168 (રાજ્ય ધારાસભા)</span
-          >
-        </div>
-        <div class="organ-card exec">
-          <h3>👨‍💼 કાર્યપાલિકા (Executive)</h3>
-          <ul>
-            <li>કાયદાનો અમલ કરે</li>
-            <li>કેન્દ્ર → રાષ્ટ્રપતિ + વડાપ્રધાન + મંત્રીમંડળ</li>
-            <li>રાજ્ય → રાજ્યપાલ + મુખ્યમંત્રી + મંત્રીમંડળ</li>
-          </ul>
-          <span class="article-tag"
-            >કલમ 52-78 (કેન્દ્ર) · કલમ 153-167 (રાજ્ય)</span
-          >
-        </div>
-        <div class="organ-card jud">
-          <h3>⚖️ ન્યાયપાલિકા (Judiciary)</h3>
-          <ul>
-            <li>બંધારણનું રક્ષણ</li>
-            <li>કાયદાનું અર્થઘટન</li>
-            <li>ન્યાય આપે</li>
-          </ul>
-          <span class="article-tag"
-            >કલમ 124 (સુપ્રીમ કોર્ટ) · કલમ 214 (હાઈકોર્ટ)</span
-          >
-        </div>
-      </div>
-
-      <!-- SECTION: UNION GOVT -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>🇮🇳 કેન્દ્ર સરકાર (Union Government)</h2>
-          <small>તમામ વર્તમાન હોદ્દેદારો + સંબંધિત કલમો</small>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="post-card">
-          <h3>👤 રાષ્ટ્રપતિ <span class="art-badge">કલમ 52-62</span></h3>
-          <ul>
-            <li>દેશના પ્રથમ નાગરિક, બંધારણીય વડા</li>
-            <li>સેનાના સર્વોચ્ચ કમાન્ડર (કલમ 53)</li>
-            <li>સંસદ બોલાવે, બિલને મંજૂરી આપે (કલમ 111)</li>
-            <li>ઓર્ડિનન્સ બહાર પાડે (કલમ 123)</li>
-            <li>વડાપ્રધાન, રાજ્યપાલો, CJI ની નિમણૂક કરે</li>
-            <li>ચૂંટણી: પરોક્ષ, ઇલેક્ટોરલ કોલેજ દ્વારા (કલમ 54-55)</li>
-            <li>મહાભિયોગ (Impeachment): કલમ 61</li>
-          </ul>
-          <div class="current-name">
-            દ્રૌપદી મુર્મુ <small>15મા રાષ્ટ્રપતિ · કાર્યકાળ 5 વર્ષ</small>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>👤 ઉપરાષ્ટ્રપતિ <span class="art-badge">કલમ 63-71</span></h3>
-          <ul>
-            <li>રાજ્યસભાના પદેન સભાપતિ (Ex-officio Chairman)</li>
-            <li>રાષ્ટ્રપતિ ગેરહાજર/અસમર્થ હોય ત્યારે કાર્ય કરે (કલમ 65)</li>
-            <li>ચૂંટણી: સંસદના બંને ગૃહો દ્વારા (કલમ 66)</li>
-            <li>કાર્યકાળ 5 વર્ષ (કલમ 67)</li>
-          </ul>
-          <div class="current-name">
-            સી. પી. રાધાકૃષ્ણન
-            <small
-              >15મા ઉપરાષ્ટ્રપતિ · સપ્ટે. 2025માં ચૂંટાયા (જગદીપ ધનખડના રાજીનામા
-              બાદ)</small
-            >
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>👤 વડાપ્રધાન <span class="art-badge">કલમ 74-75</span></h3>
-          <ul>
-            <li>સરકારના વાસ્તવિક વડા, મંત્રીમંડળના વડા</li>
-            <li>રાષ્ટ્રપતિ દ્વારા નિમણૂક (કલમ 75)</li>
-            <li>લોકસભાને સામૂહિક રીતે જવાબદાર</li>
-            <li>નીતિઓ નક્કી કરે, પ્રશાસન ચલાવે</li>
-          </ul>
-          <div class="current-name">
-            નરેન્દ્ર મોદી <small>ત્રીજી ટર્મ (2024થી)</small>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>
-            👥 કેન્દ્રીય મંત્રીમંડળ <span class="art-badge">કલમ 74-75</span>
-          </h3>
-          <ul>
-            <li>ગૃહમંત્રી – અમિત શાહ</li>
-            <li>રક્ષામંત્રી – રાજનાથ સિંહ</li>
-            <li>નાણામંત્રી – નિર્મલા સીતારમણ</li>
-            <li>વિદેશમંત્રી – એસ. જયશંકર</li>
-            <li>શિક્ષણમંત્રી – ધર્મેન્દ્ર પ્રધાન</li>
-            <li>આરોગ્યમંત્રી – જે. પી. નડ્ડા</li>
-            <li>કૃષિમંત્રી – શિવરાજ સિંહ ચૌહાણ</li>
-            <li>માર્ગ પરિવહન મંત્રી – નીતિન ગડકરી</li>
-          </ul>
-          <span class="chip"
-            >મંત્રીમંડળની કુલ સંખ્યા ≤ લોકસભાના 15% (91મો સુધારો)</span
-          >
-        </div>
-
-        <div class="post-card">
-          <h3>
-            ⚖️ મુખ્ય ન્યાયાધીશ (CJI) <span class="art-badge">કલમ 124</span>
-          </h3>
-          <ul>
-            <li>સુપ્રીમ કોર્ટના વડા, "Master of Roster"</li>
-            <li>નિવૃત્તિ વય: 65 વર્ષ</li>
-            <li>નિમણૂક: રાષ્ટ્રપતિ દ્વારા, વરિષ્ઠતાના સિદ્ધાંત મુજબ</li>
-          </ul>
-          <div class="current-name">
-            જસ્ટિસ સૂર્ય કાંત
-            <small>53મા CJI · 24 નવે. 2025થી · નિવૃત્તિ: 9 ફેબ્રુ. 2027</small>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>
-            📑 CAG (નિયંત્રક અને મહાલેખા પરીક્ષક)
-            <span class="art-badge">કલમ 148-151</span>
-          </h3>
-          <ul>
-            <li>સરકારી ખર્ચનું ઓડિટ, જાહેર નાણાંનું નિરીક્ષણ</li>
-            <li>કાર્યકાળ: 6 વર્ષ અથવા 65 વર્ષ (જે વહેલું હોય)</li>
-            <li>સંસદને અહેવાલ આપે (Public Accounts Committee મારફતે)</li>
-          </ul>
-          <div class="current-name">
-            કે. સંજય મૂર્તિ <small>21 નવે. 2024થી પદભાર</small>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>🗳️ મુખ્ય ચૂંટણી કમિશનર <span class="art-badge">કલમ 324</span></h3>
-          <ul>
-            <li>ચૂંટણી પંચના વડા, લોકસભા/રાજ્યસભા/રાષ્ટ્રપતિ ચૂંટણી કરાવે</li>
-            <li>કાર્યકાળ: 6 વર્ષ અથવા 65 વર્ષ</li>
-            <li>
-              નિમણૂક: 2023ના કાયદા મુજબ પસંદગી સમિતિ (PM+વિપક્ષ નેતા+કેબિનેટ
-              મંત્રી)
-            </li>
-          </ul>
-          <div class="current-name">
-            જ્ઞાનેશ કુમાર <small>26મા CEC · ફેબ્રુ. 2025થી</small>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>📚 UPSC અધ્યક્ષ <span class="art-badge">કલમ 315-323</span></h3>
-          <ul>
-            <li>IAS, IPS, IFS, IRS વગેરે માટે પરીક્ષા લે</li>
-            <li>કાર્યકાળ: 6 વર્ષ અથવા 65 વર્ષ</li>
-          </ul>
-          <div class="current-name">
-            અજય કુમાર <small>પૂર્વ સંરક્ષણ સચિવ</small>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>
-            💰 નાણાં પંચ (Finance Commission)
-            <span class="art-badge">કલમ 280</span>
-          </h3>
-          <ul>
-            <li>કેન્દ્ર-રાજ્ય વચ્ચે કરની આવકની વહેંચણી ભલામણ કરે</li>
-            <li>દર 5 વર્ષે નવું પંચ રચાય</li>
-          </ul>
-          <div class="current-name">
-            ડૉ. અરવિંદ પનાગરિયા
-            <small>16મા નાણાં પંચના અધ્યક્ષ (2026-31)</small>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <h3>⚖️ એટોર્ની જનરલ <span class="art-badge">કલમ 76</span></h3>
-          <ul>
-            <li>ભારત સરકારના મુખ્ય કાનૂની સલાહકાર</li>
-            <li>સુપ્રીમ કોર્ટમાં સરકારનું પ્રતિનિધિત્વ કરે</li>
-          </ul>
-          <div class="current-name">
-            આર. વેંકટરમણી <small>16મા એટોર્ની જનરલ</small>
-          </div>
-        </div>
-      </div>
-
-      <!-- PARLIAMENT -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>🏛️ સંસદ (Parliament)</h2>
-          <small>કલમ 79-122</small>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="post-card">
-          <h3>લોકસભા <span class="art-badge">કલમ 81</span></h3>
-          <ul>
-            <li>Lower House, સીધી ચૂંટણી</li>
-            <li>મહત્તમ 552 સભ્યો, હાલમાં 543 ચૂંટાયેલા</li>
-            <li>કાર્યકાળ 5 વર્ષ (કલમ 83)</li>
-            <li>અવિશ્વાસ પ્રસ્તાવ અહીં લાવી શકાય</li>
-          </ul>
-          <div class="meta-row">
-            <span class="chip">સ્પીકર: ઓમ બિરલા</span>
-            <span class="chip"
-              >ડેપ્યુટી સ્પીકર: ખાલી (છેલ્લા: એમ. થમ્બીદુરાઈ)</span
-            >
-          </div>
-        </div>
-        <div class="post-card">
-          <h3>રાજ્યસભા <span class="art-badge">કલમ 80</span></h3>
-          <ul>
-            <li>Upper House, કાયમી ગૃહ (never dissolved)</li>
-            <li>મહત્તમ 250 સભ્યો, હાલમાં 245 સુધી</li>
-            <li>દર 2 વર્ષે 1/3 સભ્યો નિવૃત્ત</li>
-          </ul>
-          <div class="meta-row">
-            <span class="chip"
-              >સભાપતિ (પદેન): સી.પી. રાધાકૃષ્ણન (ઉપરાષ્ટ્રપતિ)</span
-            >
-            <span class="chip">ઉપસભાપતિ: હરિવંશ નારાયણ સિંહ</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- JUDICIARY FLOW -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>⚖️ ન્યાયપાલિકાનું માળખું</h2>
-          <small>Hierarchy of Courts in India</small>
-        </div>
-      </div>
-      <div class="flow">
-        <div class="flow-step">
-          સુપ્રીમ કોર્ટ <small>કલમ 124 · CJI: જસ્ટિસ સૂર્ય કાંત</small>
-        </div>
-        <div class="flow-arrow">▼</div>
-        <div class="flow-step">હાઈકોર્ટ <small>કલમ 214</small></div>
-        <div class="flow-arrow">▼</div>
-        <div class="flow-step">જિલ્લા કોર્ટ</div>
-        <div class="flow-arrow">▼</div>
-        <div class="flow-step">સેશન કોર્ટ</div>
-        <div class="flow-arrow">▼</div>
-        <div class="flow-step">સિવિલ કોર્ટ</div>
-        <div class="flow-arrow">▼</div>
-        <div class="flow-step">જુડિશિયલ મેજિસ્ટ્રેટ</div>
-        <div class="flow-arrow">▼</div>
-        <div class="flow-step">લોક અદાલત / પરિવાર કોર્ટ / વિશેષ કોર્ટ</div>
-      </div>
-
-      <!-- STATE GOVT -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>🏛️ રાજ્ય સરકાર (State Government)</h2>
-          <small>કલમ 153-237</small>
-        </div>
-      </div>
-      <div class="grid">
-        <div class="post-card">
-          <h3>રાજ્યપાલ <span class="art-badge">કલમ 153-162</span></h3>
-          <ul>
-            <li>રાજ્યના બંધારણીય વડા</li>
-            <li>રાષ્ટ્રપતિ દ્વારા નિમણૂક</li>
-            <li>કાર્યકાળ: 5 વર્ષ (રાષ્ટ્રપતિની ઈચ્છા સુધી)</li>
-          </ul>
-        </div>
-        <div class="post-card">
-          <h3>મુખ્યમંત્રી <span class="art-badge">કલમ 163-164</span></h3>
-          <ul>
-            <li>રાજ્ય સરકારના વાસ્તવિક વડા</li>
-            <li>વિધાનસભાને જવાબદાર</li>
-          </ul>
-        </div>
-        <div class="post-card">
-          <h3>રાજ્ય ધારાસભા <span class="art-badge">કલમ 168</span></h3>
-          <ul>
-            <li>વિધાનસભા (સીધી ચૂંટણી, કાર્યકાળ 5 વર્ષ)</li>
-            <li>
-              વિધાન પરિષદ (6 રાજ્યોમાં: UP, બિહાર, મહારાષ્ટ્ર, કર્ણાટક,
-              તેલંગાણા, આંધ્રપ્રદેશ)
-            </li>
-          </ul>
-        </div>
-        <div class="post-card">
-          <h3>હાઈકોર્ટ <span class="art-badge">કલમ 214-231</span></h3>
-          <ul>
-            <li>રાજ્યની સર્વોચ્ચ કોર્ટ</li>
-            <li>કેટલાક હાઈકોર્ટ એક કરતાં વધુ રાજ્ય માટે સામાન્ય</li>
-          </ul>
-        </div>
-        <div class="post-card">
-          <h3>એડવોકેટ જનરલ <span class="art-badge">કલમ 165</span></h3>
-          <ul>
-            <li>રાજ્યના મુખ્ય કાનૂની સલાહકાર</li>
-          </ul>
-        </div>
-        <div class="post-card">
-          <h3>રાજ્ય ચૂંટણી પંચ <span class="art-badge">કલમ 243K</span></h3>
-          <ul>
-            <li>પંચાયત અને નગરપાલિકા ચૂંટણીઓ કરાવે</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- UNION TERRITORIES -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>🇮🇳 કેન્દ્રશાસિત પ્રદેશો (8)</h2>
-          <small>કલમ 239-241</small>
-        </div>
-      </div>
-      <table class="ut">
-        <tr>
-          <th>ક્રમ</th>
-          <th>કેન્દ્રશાસિત પ્રદેશ</th>
-          <th>વડા</th>
-          <th>વિધાનસભા</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>અંડમાન અને નિકોબાર દ્વીપસમૂહ</td>
-          <td>લેફ્ટનન્ટ ગવર્નર</td>
-          <td>નથી</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>ચંદીગઢ</td>
-          <td>પ્રશાસક</td>
-          <td>નથી</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>દાદરા-નગર હવેલી અને દમણ-દીવ</td>
-          <td>પ્રશાસક</td>
-          <td>નથી</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>દિલ્હી (NCT)</td>
-          <td>લેફ્ટનન્ટ ગવર્નર</td>
-          <td>છે</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>જમ્મુ અને કાશ્મીર</td>
-          <td>લેફ્ટનન્ટ ગવર્નર</td>
-          <td>છે</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>લદ્દાખ</td>
-          <td>લેફ્ટનન્ટ ગવર્નર</td>
-          <td>નથી</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>લક્ષદ્વીપ</td>
-          <td>પ્રશાસક</td>
-          <td>નથી</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>પુડુચેરી</td>
-          <td>લેફ્ટનન્ટ ગવર્નર</td>
-          <td>છે</td>
-        </tr>
-      </table>
-
-      <!-- LOCAL SELF GOVT -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>🏘️ સ્થાનિક સ્વરાજ્ય</h2>
-          <small>73મો સુધારો (ગ્રામ્ય, 1992) · 74મો સુધારો (શહેરી, 1992)</small>
-        </div>
-      </div>
-      <div class="ladder">
-        <div class="ladder-col">
-          <h4>ગ્રામ્ય (Rural) — કલમ 243</h4>
-          <div class="step-line"><span class="step-num">1</span> ગ્રામસભા</div>
-          <div class="step-line">
-            <span class="step-num">2</span> ગ્રામ પંચાયત
-          </div>
-          <div class="step-line">
-            <span class="step-num">3</span> તાલુકા પંચાયત
-          </div>
-          <div class="step-line">
-            <span class="step-num">4</span> જિલ્લા પંચાયત
-          </div>
-        </div>
-        <div class="ladder-col">
-          <h4>શહેરી (Urban) — કલમ 243P</h4>
-          <div class="step-line">
-            <span class="step-num">1</span> નગર પંચાયત
-          </div>
-          <div class="step-line"><span class="step-num">2</span> નગરપાલિકા</div>
-          <div class="step-line">
-            <span class="step-num">3</span> મહાનગરપાલિકા
-          </div>
-        </div>
-      </div>
-      <!-- GOVERNANCE TREE -->
-      <div class="section-title">
-        <div class="bar"></div>
-        <div>
-          <h2>🌳 ભારતની શાસન વ્યવસ્થાનું વૃક્ષાકાર માળખું</h2>
-          <small>Hierarchical Tree Structure — Overview</small>
-        </div>
-      </div>
-
-      <div
-        class="tree-container"
-        style="
-          background: var(--card);
-          border-radius: 14px;
-          padding: 28px 24px;
-          border: 1px solid var(--line);
-          margin-bottom: 32px;
-          overflow-x: auto;
-        "
-      >
-        <pre
-          style="
-            font-family: monospace;
-            font-size: 15px;
-            line-height: 1.55;
-            color: var(--ink);
-            white-space: pre;
-            tab-size: 2;
-            margin: 0;
-            padding: 0;
-          "
-        >
-      ભારત (Republic of India)
-      │
-      ├── 🇮🇳 કેન્દ્ર સરકાર (Central Government)
-      │ │
-      │ ├── રાષ્ટ્રપતિ
-      │ │ └── વર્તમાન: દ્રૌપદી મુર્મુ (15મા)
-      │ │
-      │ ├── ઉપરાષ્ટ્રપતિ
-      │ │ └── વર્તમાન: સી.પી. રાધાકૃષ્ણન (15મા) — સપ્ટે. 2025માં ચૂંટાયા (જગદીપ ધનખડના રાજીનામા બાદ)
-      │ │
-      │ ├── વડાપ્રધાન
-      │ │ └── વર્તમાન: નરેન્દ્ર મોદી (ત્રીજી ટર્મ)
-      │ │
-      │ ├── કેન્દ્રીય મંત્રીમંડળ
-      │ │ ├── ગૃહમંત્રી → અમિત શાહ
-      │ │ ├── રક્ષામંત્રી → રાજનાથ સિંહ
-      │ │ ├── નાણામંત્રી → નિર્મલા સીતારમણ
-      │ │ ├── વિદેશમંત્રી → એસ. જયશંકર
-      │ │ ├── શિક્ષણમંત્રી → ધર્મેન્દ્ર પ્રધાન
-      │ │ ├── રેલવેમંત્રી → અશ્વિની વૈષ્ણવ
-      │ │ ├── કૃષિમંત્રી → શિવરાજ સિંહ ચૌહાણ
-      │ │ ├── આરોગ્યમંત્રી → જે.પી. નડ્ડા
-      │ │ └── અન્ય મંત્રીઓ
-      │ │
-      │ ├── સંસદ (Parliament)
-      │ │ │
-      │ │ ├── રાષ્ટ્રપતિ → દ્રૌપદી મુર્મુ
-      │ │ ├── લોકસભા (Lower House)
-      │ │ │ ├── સ્પીકર → ઓમ બિરલા
-      │ │ │ ├── ડેપ્યુટી સ્પીકર → પદ ખાલી (છેલ્લા: એમ. થમ્બીદુરાઈ)
-      │ │ │ └── વિરોધ પક્ષના નેતા → રાહુલ ગાંધી
-      │ │ │
-      │ │ └── રાજ્યસભા (Upper House)
-      │ │ ├── સભાપતિ → સી.પી. રાધાકૃષ્ણન (ઉપરાષ્ટ્રપતિ, પદેન)
-      │ │ └── ઉપસભાપતિ → હરિવંશ નારાયણ સિંહ
-      │ │
-      │ ├── સુપ્રીમ કોર્ટ
-      │ │ └── મુખ્ય ન્યાયાધીશ (CJI) → જસ્ટિસ સૂર્ય કાંત (53મા, 24 નવે. 2025થી)
-      │ │
-      │ ├── CAG
-      │ │ └── Comptroller & Auditor General → કે. સંજય મૂર્તિ
-      │ │
-      │ ├── ચૂંટણી પંચ (Election Commission)
-      │ │ └── મુખ્ય ચૂંટણી કમિશનર (CEC) → જ્ઞાનેશ કુમાર (26મા)
-      │ │
-      │ ├── UPSC
-      │ │ └── અધ્યક્ષ → અજય કુમાર
-      │ │
-      │ ├── નાણાં પંચ (Finance Commission)
-      │ │ └── અધ્યક્ષ → ડૉ. અરવિંદ પનાગરિયા (16મા પંચ, 2026-31)
-      │ │
-      │ └── એટોર્ની જનરલ (Attorney General)
-      │     └── આર. વેંકટરમણી (16મા)
-      │
-      ├── 🏛️ રાજ્ય સરકાર (State Government)
-      │ │
-      │ ├── રાજ્યપાલ
-      │ │
-      │ ├── મુખ્યમંત્રી
-      │ │
-      │ ├── રાજ્ય મંત્રીમંડળ
-      │ │ ├── ગૃહમંત્રી
-      │ │ ├── નાણામંત્રી
-      │ │ ├── શિક્ષણમંત્રી
-      │ │ ├── આરોગ્યમંત્રી
-      │ │ ├── કૃષિમંત્રી
-      │ │ └── અન્ય મંત્રીઓ
-      │ │
-      │ ├── રાજ્ય ધારાસભા
-      │ │ ├── વિધાનસભા (MLA)
-      │ │ └── વિધાન પરિષદ (માત્ર 6 રાજ્યોમાં: UP, બિહાર, મહારાષ્ટ્ર, કર્ણાટક, તેલંગાણા, આંધ્રપ્રદેશ)
-      │ │
-      │ ├── હાઈકોર્ટ
-      │ │ └── મુખ્ય ન્યાયમૂર્તિ
-      │ │
-      │ ├── રાજ્ય ચૂંટણી પંચ
-      │ │
-      │ └── રાજ્ય જાહેર સેવા આયોગ (GPSC, MPSC વગેરે)
-      │
-      ├── 🇮🇳 કેન્દ્રશાસિત પ્રદેશો (Union Territories - કુલ 8)
-      │ │
-      │ ├── અંડમાન અને નિકોબાર દ્વીપસમૂહ
-      │ ├── ચંદીગઢ
-      │ ├── દાદરા અને નગર હવેલી અને દમણ અને દીવ
-      │ ├── દિલ્હી (NCT of Delhi)
-      │ ├── જમ્મુ અને કાશ્મીર
-      │ ├── લદ્દાખ
-      │ ├── લક્ષદ્વીપ
-      │ └── પુડુચેરી
-      │
-      └── 🏘️ સ્થાનિક સ્વરાજ્ય (Local Self Government)
-          │
-          ├── ગ્રામ્ય વિસ્તાર (Rural)
-          │ ├── ગ્રામસભા
-          │ ├── ગ્રામ પંચાયત
-          │ │ ├── સરપંચ
-          │ │ ├── ઉપસરપંચ
-          │ │ ├── પંચ સભ્યો
-          │ │ └── ગ્રામ સેવક / તલાટી-કમ-મંત્રી
-          │ │
-          │ ├── તાલુકા પંચાયત
-          │ │ ├── પ્રમુખ
-          │ │ ├── ઉપપ્રમુખ
-          │ │ ├── સભ્યો
-          │ │ └── તાલુકા વિકાસ અધિકારી (TDO)
-          │ │
-          │ └── જિલ્લા પંચાયત
-          │     ├── પ્રમુખ
-          │     ├── ઉપપ્રમુખ
-          │     ├── સભ્યો
-          │     └── જિલ્લા વિકાસ અધિકારી (DDO)
-          │
-          └── શહેરી વિસ્તાર (Urban)
-                ├── નગર પંચાયત
-                │ ├── પ્રમુખ
-                │ └── મુખ્ય અધિકારી
-                │
-                ├── નગરપાલિકા
-                │ ├── પ્રમુખ
-                │ ├── ઉપપ્રમુખ
-                │ ├── કાઉન્સિલરો
-                │ └── મુખ્ય અધિકારી (Chief Officer)
-                │
-                └── મહાનગરપાલિકા
-                        ├── મેયર
-                        ├── ડેપ્યુટી મેયર
-                        ├── કોર્પોરેટરો
-                        └── મ્યુનિસિપલ કમિશનર
-  </pre
-        >
-      </div>
-      <div class="footnote">
-        📌 નોંધ: આ ચાર્ટ જુલાઈ 2026 મુજબ ચકાસેલ માહિતી પર આધારિત છે.
-        હોદ્દેદારોના નામ સરકારી ફેરબદલ/નિવૃત્તિ સાથે બદલાઈ શકે છે — પરીક્ષા
-        પહેલાં ફરી ચકાસી લેવું. મંત્રીમંડળના મંત્રીઓની યાદી આંશિક છે (મુખ્ય
-        પોર્ટફોલિયો દર્શાવેલ છે).
+      <div class="no-results" id="noResults" style="display:none;">
+        આ શબ્દ સાથે મેળ ખાતું કોઈ ટોપિક મળ્યું નથી.
       </div>
     </div>
-  </body>
+
+    <footer class="foot">બંધારણ અભ્યાસ માર્ગદર્શિકા · PSI / GPSC સ્પર્ધાત્મક પરીક્ષા તૈયારી માટે</footer>
+  </div>
+</div>
+
+<script>
+const DATA = [
+{cat:"બંધારણ સામાન્ય માહિતી", items:[
+{t:"બંધારણ સભા", en:"Constituent Assembly", art:"સ્થાપના: 1946", body:`
+<p>ભારતના બંધારણનું ઘડતર બંધારણ સભા દ્વારા કરવામાં આવ્યું, જેની રચના <mark>કેબિનેટ મિશન યોજના 1946</mark> મુજબ થઈ. આ સભા પ્રત્યક્ષ જનતા દ્વારા નહીં પરંતુ પ્રાંતીય ધારાસભાઓ દ્વારા પરોક્ષ રીતે ચૂંટાયેલી હતી.</p>
+<span class="sub">રચના અને સભ્યસંખ્યા</span>
+<ul>
+<li>કુલ સભ્યો: 389 (ભાગલા પછી ઘટીને 299)</li>
+<li>બ્રિટિશ પ્રાંતોમાંથી: 296, દેશી રજવાડાંમાંથી: 93</li>
+<li>પ્રથમ બેઠક: 9 ડિસેમ્બર 1946, અધ્યક્ષ — ડૉ. સચ્ચિદાનંદ સિન્હા (કામચલાઉ/હંગામી અધ્યક્ષ)</li>
+<li>કાયમી અધ્યક્ષ: ડૉ. રાજેન્દ્ર પ્રસાદ (11 ડિસેમ્બર 1946થી)</li>
+</ul>
+<span class="sub">મહત્વની સમિતિઓ અને અધ્યક્ષો</span>
+<ul>
+<li>ડ્રાફ્ટિંગ કમિટી (મુસદ્દા સમિતિ) — અધ્યક્ષ: <mark>ડૉ. ભીમરાવ આંબેડકર</mark> (7 સભ્યો)</li>
+<li>બંધારણીય સલાહકાર: બી.એન. રાવ</li>
+<li>ધ્વજ સમિતિના અધ્યક્ષ: ડૉ. રાજેન્દ્ર પ્રસાદ</li>
+<li>સંઘ સત્તા સમિતિ — જવાહરલાલ નહેરુ</li>
+<li>પ્રાંતીય બંધારણ સમિતિ — સરદાર વલ્લભભાઈ પટેલ</li>
+<li>મૂળભૂત અધિકાર સમિતિ — સરદાર વલ્લભભાઈ પટેલ</li>
+<li>સંચાલન સમિતિ (Steering Committee) — ડૉ. રાજેન્દ્ર પ્રસાદ</li>
+</ul>
+<span class="sub">મહત્વની તારીખો</span>
+<table><tr><th>ઘટના</th><th>તારીખ</th></tr>
+<tr><td>પ્રથમ બેઠક</td><td>9 ડિસેમ્બર 1946</td></tr>
+<tr><td>ઉદ્દેશ ઠરાવ (Objectives Resolution) રજૂ</td><td>13 ડિસેમ્બર 1946 (નહેરુ દ્વારા)</td></tr>
+<tr><td>બંધારણ પસાર થયું</td><td>26 નવેમ્બર 1949</td></tr>
+<tr><td>બંધારણ અમલમાં આવ્યું</td><td>26 જાન્યુઆરી 1950</td></tr>
+<tr><td>કુલ સમય લાગ્યો</td><td>2 વર્ષ, 11 મહિના, 18 દિવસ</td></tr>
+<tr><td>કુલ બેઠકો</td><td>11 સત્ર, 166 દિવસ</td></tr>
+</table>
+<div class="note">GPSC ટીપ: બંધારણ સભાના બંધારણીય સલાહકાર બી.એન. રાવ હતા, જ્યારે ડ્રાફ્ટિંગ કમિટીના અધ્યક્ષ ડૉ. આંબેડકર — બંને અલગ પ્રશ્નો તરીકે પુછાય છે.</div>
+`},
+{t:"બંધારણનું ઘડતર અને અમલ", en:"Making & Enforcement", art:"26 જાન્યુઆરી 1950", body:`
+<p>ભારતનું બંધારણ વિશ્વનું સૌથી લાંબુ લિખિત બંધારણ છે — મૂળમાં 395 અનુચ્છેદ, 22 ભાગ અને 8 અનુસૂચિ હતાં.</p>
+<span class="sub">વર્તમાન સ્વરૂપ (સુધારા બાદ)</span>
+<ul>
+<li>હાલમાં આશરે 470+ અનુચ્છેદ, 25 ભાગ, 12 અનુસૂચિ</li>
+<li>26 જાન્યુઆરી પસંદ કરવાનું કારણ: 1930માં લાહોર અધિવેશનમાં પૂર્ણ સ્વરાજની ઘોષણા દિવસ (26 જાન્યુ 1930)</li>
+<li>26 નવેમ્બરને "બંધારણ દિવસ / સંવિધાન દિવસ" તરીકે ઉજવાય છે (2015થી)</li>
+<li>બંધારણની મૂળ નકલ હાથે લખાયેલી અને સુશોભિત — પ્રેમ બિહારી નારાયણ રાયઝાદાએ કેલિગ્રાફીથી લખી, નંદલાલ બોઝ અને શાંતિનિકેતનના કલાકારોએ સુશોભિત કરી</li>
+<li>હિન્દી અને અંગ્રેજી બંને હસ્તલિખિત મૂળ નકલો સંસદ ભવનની લાઈબ્રેરીમાં હિલિયમથી ભરેલા કેસમાં સચવાયેલી છે</li>
+</ul>
+<span class="sub">મહત્વના તથ્યો</span>
+<ul>
+<li>ડૉ. આંબેડકરને "બંધારણના પિતા / Father of Indian Constitution" કહેવાય છે</li>
+<li>26 જાન્યુઆરી 1950ના રોજ ડૉ. રાજેન્દ્ર પ્રસાદ ભારતના પ્રથમ રાષ્ટ્રપતિ બન્યા</li>
+<li>ભારત તે જ દિવસે સંપૂર્ણ પ્રજાસત્તાક (Republic) બન્યું</li>
+</ul>
+`},
+{t:"બંધારણની પ્રસ્તાવના", en:"Preamble", art:"પ્રસ્તાવના", body:`
+<p>પ્રસ્તાવના બંધારણનો પરિચય/આત્મા ગણાય છે — તેને <mark>42મા સુધારા (1976)</mark> દ્વારા સંશોધિત કરાઈ, જે એકમાત્ર વખત પ્રસ્તાવનામાં ફેરફાર થયો.</p>
+<span class="sub">પ્રસ્તાવનામાં ઉમેરાયેલા શબ્દો (42મો સુધારો, 1976)</span>
+<ul>
+<li>સમાજવાદી (Socialist)</li>
+<li>બિનસાંપ્રદાયિક (Secular)</li>
+<li>અખંડિતતા (Integrity)</li>
+</ul>
+<span class="sub">પ્રસ્તાવનાના મુખ્ય શબ્દોના અર્થ</span>
+<ul>
+<li>સાર્વભૌમ (Sovereign) — ભારત આંતરિક-બાહ્ય બાબતોમાં કોઈની ગુલામ નથી, સ્વતંત્ર સત્તા</li>
+<li>સમાજવાદી — આર્થિક સમાનતા, લોકતાંત્રિક સમાજવાદ (સામ્યવાદ નહીં)</li>
+<li>બિનસાંપ્રદાયિક — રાજ્યનો પોતાનો ધર્મ નહીં, તમામ ધર્મો પ્રત્યે સમાન વર્તન</li>
+<li>લોકતાંત્રિક — જનતા દ્વારા, જનતા માટે શાસન</li>
+<li>ગણરાજ્ય (Republic) — રાષ્ટ્રપ્રમુખ ચૂંટાયેલ, વારસાગત નહીં</li>
+<li>ન્યાય (સામાજિક, આર્થિક, રાજકીય)</li>
+<li>સ્વતંત્રતા (વિચાર, અભિવ્યક્તિ, માન્યતા, ધર્મ, ઉપાસના)</li>
+<li>સમાનતા (દરજ્જા અને તકની)</li>
+<li>બંધુત્વ (Fraternity) — વ્યક્તિનું ગૌરવ અને રાષ્ટ્રની એકતા-અખંડિતતા</li>
+</ul>
+<span class="sub">મહત્વના તથ્યો</span>
+<ul>
+<li>પ્રસ્તાવના અમેરિકાના બંધારણથી પ્રેરિત છે</li>
+<li>"અમે ભારતના લોકો" (We, the People of India) થી શરૂ થાય છે</li>
+<li>પ્રસ્તાવના ન્યાયાલયમાં લાગુ કરી શકાય તેવી (enforceable) નથી</li>
+</ul>
+<div class="note">પ્રસ્તાવના બંધારણનો ભાગ છે — કેશવાનંદ ભારતી કેસ (1973)માં સર્વોચ્ચ અદાલતે ચુકાદો આપ્યો. બેરુબારી કેસ (1960)માં અગાઉ કહેવાયું હતું કે તે ભાગ નથી.</div>
+`},
+{t:"બંધારણના સ્ત્રોત", en:"Sources of Constitution", art:"ઉધારેલ જોગવાઈઓ", body:`
+<p>ભારતીય બંધારણને ઘણીવાર "ઉછીના થેલા" (Bag of Borrowings) તરીકે ઓળખવામાં આવે છે કારણ કે તેણે વિશ્વના અનેક બંધારણોમાંથી શ્રેષ્ઠ જોગવાઈઓ લીધી છે.</p>
+<table><tr><th>દેશ</th><th>લેવાયેલ જોગવાઈ</th></tr>
+<tr><td>બ્રિટન</td><td>સંસદીય શાસનપ્રણાલી, કાયદાનું શાસન, એકલ નાગરિકતા, સ્પીકર પદ, દ્વિગૃહ પ્રણાલી</td></tr>
+<tr><td>અમેરિકા</td><td>મૂળભૂત અધિકારો, ન્યાયિક સમીક્ષા, સ્વતંત્ર ન્યાયતંત્ર, ઉપરાષ્ટ્રપતિ પદ, મહાભિયોગ</td></tr>
+<tr><td>આયર્લેન્ડ</td><td>રાજ્યનીતિના માર્ગદર્શક સિદ્ધાંતો, રાષ્ટ્રપતિ ચૂંટણી પદ્ધતિ, રાજ્યસભામાં નામાંકન</td></tr>
+<tr><td>કેનેડા</td><td>સંઘીય પ્રણાલી (કેન્દ્ર તરફી ઝુકાવ), શેષ સત્તા કેન્દ્ર પાસે</td></tr>
+<tr><td>ઓસ્ટ્રેલિયા</td><td>સમવર્તી યાદી, વેપાર-વાણિજ્યની સ્વતંત્રતા, સંસદના બંને ગૃહોની સંયુક્ત બેઠક</td></tr>
+<tr><td>જર્મની (વાઈમર)</td><td>કટોકટીની જોગવાઈઓ, મૂળભૂત અધિકારો સ્થગિત કરવાની સત્તા</td></tr>
+<tr><td>દક્ષિણ આફ્રિકા</td><td>બંધારણ સુધારાની પ્રક્રિયા, રાજ્યસભા સભ્યોની ચૂંટણી</td></tr>
+<tr><td>સોવિયેત રશિયા (USSR)</td><td>મૂળભૂત ફરજો, પંચવર્ષીય યોજના, પ્રસ્તાવનાનો ન્યાયનો આદર્શ</td></tr>
+<tr><td>ફ્રાન્સ</td><td>સ્વતંત્રતા, સમાનતા, બંધુત્વ (ગણરાજ્યનો ખ્યાલ)</td></tr>
+<tr><td>જાપાન</td><td>કાયદા દ્વારા સ્થાપિત પ્રક્રિયા (Procedure Established by Law) — અનુ. 21</td></tr>
+<tr><td>વાઈમર જર્મની</td><td>કટોકટીકાળ દરમિયાન મૂળભૂત અધિકારો સ્થગિત</td></tr>
+</table>
+`},
+{t:"બંધારણની વિશેષતાઓ", en:"Salient Features", art:"વિશેષતાઓ", body:`
+<ul>
+<li>વિશ્વનું સૌથી લાંબુ લિખિત બંધારણ</li>
+<li>સંઘાત્મક માળખું પરંતુ એકાત્મક ઝુકાવ ("અર્ધ-સંઘીય" — K.C. Wheare દ્વારા "quasi-federal" કહેવાયું)</li>
+<li>સંસદીય શાસનપ્રણાલી (કેન્દ્ર અને રાજ્ય બંને) — Westminster Model</li>
+<li>એકલ નાગરિકતા (અમેરિકાથી વિપરીત)</li>
+<li>સ્વતંત્ર અને એકીકૃત ન્યાયતંત્ર (Integrated Judiciary)</li>
+<li>પુખ્ત મતાધિકાર (18 વર્ષ — 61મા સુધારાથી, અગાઉ 21 વર્ષ)</li>
+<li>લવચીક તથા કઠોર બંધારણનું મિશ્રણ (સુધારા પ્રક્રિયા — અનુ. 368)</li>
+<li>બિનસાંપ્રદાયિક રાજ્ય (Secular State)</li>
+<li>મૂળભૂત અધિકારો અને ફરજો</li>
+<li>સ્વતંત્ર બંધારણીય સંસ્થાઓ — ચૂંટણી પંચ, CAG, UPSC</li>
+<li>કટોકટીની જોગવાઈઓ</li>
+<li>પંચાયતી રાજ (73મો-74મો સુધારો)</li>
+<li>સહકારી સંઘવાદ (Cooperative Federalism) — GST કાઉન્સિલ જેવા ઉદાહરણો</li>
+</ul>
+`},
+{t:"બંધારણના ભાગો (Parts)", en:"Parts of the Constitution", art:"કુલ 25 ભાગ", body:`
+<table><tr><th>ભાગ</th><th>વિષય</th><th>અનુચ્છેદ</th></tr>
+<tr><td>I</td><td>સંઘ અને તેનું ક્ષેત્ર</td><td>1–4</td></tr>
+<tr><td>II</td><td>નાગરિકતા</td><td>5–11</td></tr>
+<tr><td>III</td><td>મૂળભૂત અધિકારો</td><td>12–35</td></tr>
+<tr><td>IV</td><td>રાજ્યનીતિના માર્ગદર્શક સિદ્ધાંતો</td><td>36–51</td></tr>
+<tr><td>IVA</td><td>મૂળભૂત ફરજો</td><td>51A</td></tr>
+<tr><td>V</td><td>સંઘ (કારોબારી, સંસદ, ન્યાયતંત્ર, CAG)</td><td>52–151</td></tr>
+<tr><td>VI</td><td>રાજ્યો (કારોબારી, વિધાનમંડળ, વડી અદાલત)</td><td>152–237</td></tr>
+<tr><td>VII</td><td>પ્રથમ અનુસૂચિના ભાગ B રાજ્યો (રદ)</td><td>238 (રદ)</td></tr>
+<tr><td>VIII</td><td>કેન્દ્રશાસિત પ્રદેશો</td><td>239–241</td></tr>
+<tr><td>IX</td><td>પંચાયતો</td><td>243–243O</td></tr>
+<tr><td>IXA</td><td>નગરપાલિકાઓ</td><td>243P–243ZG</td></tr>
+<tr><td>IXB</td><td>સહકારી મંડળીઓ</td><td>243ZH–243ZT</td></tr>
+<tr><td>X</td><td>અનુસૂચિત અને જનજાતિ વિસ્તારો</td><td>244–244A</td></tr>
+<tr><td>XI</td><td>કેન્દ્ર-રાજ્ય સંબંધો</td><td>245–263</td></tr>
+<tr><td>XII</td><td>નાણાં, સંપત્તિ, કરાર, દાવા</td><td>264–300A</td></tr>
+<tr><td>XIII</td><td>ભારતના પ્રદેશમાં વેપાર-વાણિજ્યની સ્વતંત્રતા</td><td>301–307</td></tr>
+<tr><td>XIV</td><td>સંઘ-રાજ્ય હેઠળની સેવાઓ</td><td>308–323</td></tr>
+<tr><td>XIVA</td><td>ટ્રિબ્યુનલ</td><td>323A–323B</td></tr>
+<tr><td>XV</td><td>ચૂંટણી</td><td>324–329A</td></tr>
+<tr><td>XVI</td><td>અમુક વર્ગો માટે વિશેષ જોગવાઈ</td><td>330–342</td></tr>
+<tr><td>XVII</td><td>સત્તાવાર ભાષા</td><td>343–351</td></tr>
+<tr><td>XVIII</td><td>કટોકટીની જોગવાઈઓ</td><td>352–360</td></tr>
+<tr><td>XIX</td><td>પ્રકીર્ણ</td><td>361–367</td></tr>
+<tr><td>XX</td><td>બંધારણ સુધારા</td><td>368</td></tr>
+<tr><td>XXI</td><td>કામચલાઉ, સંક્રમણકારી, ખાસ જોગવાઈ</td><td>369–392</td></tr>
+<tr><td>XXII</td><td>ટૂંકું નામ, પ્રારંભ, હિન્દી પ્રમાણભૂત પાઠ, રદ</td><td>393–395</td></tr>
+</table>
+`},
+{t:"અનુસૂચિઓ (Schedules)", en:"Schedules of Constitution", art:"કુલ 12 અનુસૂચિ", body:`
+<table><tr><th>અનુસૂચિ</th><th>વિષય</th></tr>
+<tr><td>1લી</td><td>રાજ્યો અને કેન્દ્રશાસિત પ્રદેશોની યાદી તથા તેમના પ્રદેશ</td></tr>
+<tr><td>2જી</td><td>રાષ્ટ્રપતિ, રાજ્યપાલ, ન્યાયાધીશો, CAG વગેરેના પગાર-ભથ્થાં</td></tr>
+<tr><td>3જી</td><td>શપથ અને પ્રતિજ્ઞાના નમૂના</td></tr>
+<tr><td>4થી</td><td>રાજ્યસભામાં રાજ્ય/કેન્દ્રશાસિત પ્રદેશવાર બેઠકોની ફાળવણી</td></tr>
+<tr><td>5મી</td><td>અનુસૂચિત વિસ્તારો અને અનુસૂચિત જનજાતિના વહીવટ-નિયંત્રણ અંગે</td></tr>
+<tr><td>6ઠ્ઠી</td><td>આસામ, મેઘાલય, ત્રિપુરા, મિઝોરમના જનજાતિ વિસ્તારોનો વહીવટ (સ્વાયત્ત જિલ્લા/પ્રાદેશિક પરિષદ)</td></tr>
+<tr><td>7મી</td><td>સંઘ યાદી (100), રાજ્ય યાદી (61), સમવર્તી યાદી (52)</td></tr>
+<tr><td>8મી</td><td>બંધારણ માન્ય 22 ભાષાઓ</td></tr>
+<tr><td>9મી</td><td>જમીન સુધારા કાયદા — ન્યાયિક સમીક્ષાથી મુક્ત (1લા સુધારાથી ઉમેરાઈ, 1951)</td></tr>
+<tr><td>10મી</td><td>પક્ષપલટા વિરોધી કાયદો (52મો સુધારો, 1985)</td></tr>
+<tr><td>11મી</td><td>પંચાયતોને લગતા 29 વિષયો (73મો સુધારો, 1992)</td></tr>
+<tr><td>12મી</td><td>નગરપાલિકાઓને લગતા 18 વિષયો (74મો સુધારો, 1992)</td></tr>
+</table>
+<div class="note">GPSC ટીપ: 9મી અનુસૂચિ 1લા સુધારાથી ઉમેરાઈ; I.R. Coelho કેસ (2007)માં SCએ ચુકાદો આપ્યો કે 9મી અનુસૂચિમાં સમાવિષ્ટ કાયદા પણ ન્યાયિક સમીક્ષાને પાત્ર બની શકે જો તે મૂળભૂત માળખાનું ઉલ્લંઘન કરે.</div>
+`}
+]},
+
+{cat:"નાગરિકતા (Citizenship)", items:[
+{t:"નાગરિકતા", en:"Citizenship", art:"અનુચ્છેદ 5–11, ભાગ II", body:`
+<p>ભારતમાં <b>એકલ નાગરિકતા</b> (Single Citizenship) છે — બ્રિટનમાંથી લેવાયેલ, અમેરિકાથી વિપરીત (જ્યાં દ્વિ-નાગરિકતા — સંઘ + રાજ્ય). બંધારણમાં નાગરિકતાની વિગતવાર જોગવાઈ નથી — સંસદને કાયદો બનાવવાની સત્તા (અનુ. 11).</p>
+<span class="sub">બંધારણીય જોગવાઈ (અનુ. 5–11)</span>
+<ul>
+<li>અનુ. 5 — બંધારણ અમલમાં આવ્યું ત્યારે નાગરિકતા</li>
+<li>અનુ. 6 — પાકિસ્તાનથી સ્થળાંતરિત વ્યક્તિઓના અધિકાર</li>
+<li>અનુ. 7 — પાકિસ્તાનમાં સ્થળાંતરિત વ્યક્તિઓના અધિકાર</li>
+<li>અનુ. 8 — વિદેશમાં રહેતા ભારતીય મૂળના વ્યક્તિના અધિકાર</li>
+<li>અનુ. 9 — સ્વૈચ્છિક રીતે વિદેશી નાગરિકતા લેનાર ભારતીય નાગરિક ન રહે</li>
+<li>અનુ. 10 — નાગરિકતાના અધિકારોનું ચાલુ રહેવું</li>
+<li>અનુ. 11 — સંસદને નાગરિકતા અંગે કાયદો બનાવવાની સત્તા</li>
+</ul>
+<span class="sub">નાગરિકતા અધિનિયમ 1955 હેઠળ પ્રાપ્તિની 5 રીતો</span>
+<ul>
+<li>જન્મથી (By Birth)</li>
+<li>વંશથી (By Descent)</li>
+<li>નોંધણીથી (By Registration)</li>
+<li>દેશીયકરણથી (By Naturalisation)</li>
+<li>પ્રદેશ સમાવેશથી (By Incorporation of Territory)</li>
+</ul>
+<span class="sub">નાગરિકતા ગુમાવવાની 3 રીતો</span>
+<ul>
+<li>ત્યાગથી (Renunciation)</li>
+<li>સમાપ્તિથી (Termination) — અન્ય દેશની નાગરિકતા સ્વીકારવાથી</li>
+<li>વંચનાથી (Deprivation) — સરકાર દ્વારા છીનવી લેવાય</li>
+</ul>
+<div class="note">નાગરિકતા (સંશોધન) અધિનિયમ, 2019 (CAA) — પાકિસ્તાન, અફઘાનિસ્તાન, બાંગ્લાદેશથી 31 ડિસેમ્બર 2014 પહેલાં આવેલા હિન્દુ, શીખ, બૌદ્ધ, જૈન, પારસી, ખ્રિસ્તી શરણાર્થીઓને નાગરિકતા આપવાની જોગવાઈ — GPSC માટે અગત્યનું કરંટ ટોપિક.</div>
+`},
+{t:"OCI અને NRI", en:"Overseas Citizen of India", art:"નાગરિકતા અધિનિયમ, 1955", body:`
+<ul>
+<li>NRI (Non-Resident Indian) — ભારતીય નાગરિક જે વિદેશમાં વસવાટ કરે</li>
+<li>PIO (Person of Indian Origin) — યોજના 2015માં OCI સાથે ભેળવી દેવાઈ</li>
+<li>OCI (Overseas Citizen of India) — દ્વિ-નાગરિકતા નહીં, પરંતુ આજીવન વિઝા જેવો દરજ્જો; મતદાનનો અધિકાર નહીં, બંધારણીય પદ પર ચૂંટાઈ શકે નહીં</li>
+</ul>
+`}
+]},
+
+{cat:"મૂળભૂત અધિકારો અને ફરજો", items:[
+{t:"મૂળભૂત અધિકારો — સામાન્ય", en:"Fundamental Rights — Overview", art:"અનુચ્છેદ 12–35, ભાગ III", body:`
+<p>અમેરિકાના બંધારણમાંથી પ્રેરિત, ભાગ III માં આપેલા છે — તેને ભારતનું "મેગ્ના કાર્ટા" કહેવાય છે. મૂળે 7 હતા, <mark>44મા સુધારા (1978)</mark> દ્વારા સંપત્તિનો અધિકાર (અનુ. 31) દૂર કરી હાલ 6 મૂળભૂત અધિકારો છે.</p>
+<table><tr><th>અધિકાર</th><th>અનુચ્છેદ</th></tr>
+<tr><td>સમાનતાનો અધિકાર</td><td>14–18</td></tr>
+<tr><td>સ્વતંત્રતાનો અધિકાર</td><td>19–22</td></tr>
+<tr><td>શોષણ સામે અધિકાર</td><td>23–24</td></tr>
+<tr><td>ધાર્મિક સ્વતંત્રતાનો અધિકાર</td><td>25–28</td></tr>
+<tr><td>સાંસ્કૃતિક અને શૈક્ષણિક અધિકાર</td><td>29–30</td></tr>
+<tr><td>બંધારણીય ઉપચારનો અધિકાર</td><td>32</td></tr>
+</table>
+<span class="sub">લક્ષણો</span>
+<ul>
+<li>અનુ. 12 — "રાજ્ય" ની વ્યાખ્યા (સરકાર, સંસદ, સ્થાનિક સંસ્થાઓ સહિત)</li>
+<li>અનુ. 13 — મૂળભૂત અધિકાર વિરુદ્ધના કાયદા રદબાતલ</li>
+<li>મોટા ભાગના અધિકારો ફક્ત રાજ્ય વિરુદ્ધ લાગુ, કેટલાક (23, 24) ખાનગી વ્યક્તિ સામે પણ</li>
+<li>અનુ. 20, 21 કટોકટીમાં પણ સ્થગિત ન થાય (44મો સુધારો)</li>
+<li>વિદેશીઓને પણ અમુક અધિકારો મળે (અનુ. 14, 20, 21, 22, 25) પરંતુ અનુ. 15,16,19,29,30 ફક્ત નાગરિકો માટે</li>
+</ul>
+`},
+{t:"સમાનતાનો અધિકાર (અનુ. 14–18)", en:"Right to Equality", art:"અનુચ્છેદ 14–18", body:`
+<ul>
+<li>અનુ. 14 — કાયદા સમક્ષ સમાનતા અને કાયદાનું સમાન રક્ષણ (Equality before Law + Equal Protection of Laws)</li>
+<li>અનુ. 15 — ધર્મ, જાતિ, જ્ઞાતિ, લિંગ, જન્મસ્થળના આધારે ભેદભાવ પર પ્રતિબંધ; મહિલા-બાળકો-પછાત વર્ગ માટે વિશેષ જોગવાઈ કરી શકાય</li>
+<li>અનુ. 16 — જાહેર નોકરીમાં તક-સમાનતા; અનામતની જોગવાઈ (16(4))</li>
+<li>અનુ. 17 — અસ્પૃશ્યતા નાબૂદી અને તેને શિક્ષાપાત્ર અપરાધ જાહેર</li>
+<li>અનુ. 18 — લશ્કરી/શૈક્ષણિક સિવાયના ખિતાબ (ટાઇટલ) નાબૂદ — "ભારત રત્ન" ખિતાબ નથી ગણાતું</li>
+</ul>
+`},
+{t:"સ્વતંત્રતાનો અધિકાર (અનુ. 19–22)", en:"Right to Freedom", art:"અનુચ્છેદ 19–22", body:`
+<span class="sub">અનુ. 19 — 6 સ્વતંત્રતાઓ</span>
+<ul>
+<li>વાણી અને અભિવ્યક્તિની સ્વતંત્રતા — 19(1)(a)</li>
+<li>શાંતિપૂર્ણ રીતે એકત્ર થવાની સ્વતંત્રતા (શસ્ત્ર વગર) — 19(1)(b)</li>
+<li>સંગઠન/મંડળ બનાવવાની સ્વતંત્રતા — 19(1)(c)</li>
+<li>ભારતમાં ગમે ત્યાં હલનચલનની સ્વતંત્રતા — 19(1)(d)</li>
+<li>ભારતમાં ગમે ત્યાં વસવાટની સ્વતંત્રતા — 19(1)(e)</li>
+<li>કોઈપણ વ્યવસાય/ધંધો કરવાની સ્વતંત્રતા — 19(1)(g)</li>
+<li>(મૂળ 7મી સ્વતંત્રતા — સંપત્તિ રાખવાની — 44મા સુધારાથી દૂર)</li>
+</ul>
+<span class="sub">અન્ય અનુચ્છેદ</span>
+<ul>
+<li>અનુ. 20 — અપરાધની સજા બાબતે રક્ષણ (Ex-post-facto કાયદો નહીં, ડબલ જિયોપાર્ડી નહીં, સ્વ-દોષારોપણ સામે રક્ષણ)</li>
+<li>અનુ. 21 — જીવન અને વ્યક્તિગત સ્વતંત્રતાનો અધિકાર ("કાયદા દ્વારા સ્થાપિત પ્રક્રિયા" સિવાય નહીં) — મેનકા ગાંધી કેસ (1978) બાદ વ્યાપક અર્થઘટન</li>
+<li>અનુ. 21A — શિક્ષણનો અધિકાર (86મો સુધારો, 2002, 6-14 વર્ષ — મફત-ફરજિયાત શિક્ષણ)</li>
+<li>અનુ. 22 — ધરપકડ અને અટકાયત સામે રક્ષણ (24 કલાકમાં મેજિસ્ટ્રેટ સમક્ષ રજૂ કરવા સહિત)</li>
+</ul>
+`},
+{t:"શોષણ સામે અધિકાર (અનુ. 23–24)", en:"Right against Exploitation", art:"અનુચ્છેદ 23–24", body:`
+<ul>
+<li>અનુ. 23 — માનવ વેપાર (Trafficking) અને વેઠ મજૂરી (Begar) પર પ્રતિબંધ</li>
+<li>અનુ. 24 — 14 વર્ષથી નાના બાળકોને કારખાના/ખાણ/જોખમી કામમાં રોકવા પર પ્રતિબંધ</li>
+<li>આ બે અધિકારો ખાનગી વ્યક્તિઓ સામે પણ લાગુ પડે છે</li>
+</ul>
+`},
+{t:"ધાર્મિક સ્વતંત્રતાનો અધિકાર (અનુ. 25–28)", en:"Right to Freedom of Religion", art:"અનુચ્છેદ 25–28", body:`
+<ul>
+<li>અનુ. 25 — અંતઃકરણની સ્વતંત્રતા અને ધર્મ પાળવા-આચરવા-પ્રચાર કરવાની સ્વતંત્રતા</li>
+<li>અનુ. 26 — ધાર્મિક બાબતોનું સંચાલન કરવાની સ્વતંત્રતા (ધાર્મિક સંસ્થા સ્થાપવી, મિલકત ધરાવવી)</li>
+<li>અનુ. 27 — ધર્મના પ્રચાર માટે કર ભરવાની ફરજમાંથી મુક્તિ</li>
+<li>અનુ. 28 — સરકારી શૈક્ષણિક સંસ્થાઓમાં ધાર્મિક શિક્ષણ પર પ્રતિબંધ</li>
+</ul>
+`},
+{t:"સાંસ્કૃતિક-શૈક્ષણિક અધિકાર (અનુ. 29–30)", en:"Cultural & Educational Rights", art:"અનુચ્છેદ 29–30", body:`
+<ul>
+<li>અનુ. 29 — લઘુમતીઓની ભાષા, લિપિ, સંસ્કૃતિ સાચવવાનો અધિકાર</li>
+<li>અનુ. 30 — ધાર્મિક અને ભાષાકીય લઘુમતીઓને પોતાની શૈક્ષણિક સંસ્થા સ્થાપવા-સંચાલિત કરવાનો અધિકાર</li>
+</ul>
+`},
+{t:"બંધારણીય ઉપચારનો અધિકાર — રિટ", en:"Right to Constitutional Remedies", art:"અનુચ્છેદ 32, 226", body:`
+<p>ડૉ. આંબેડકરે અનુ. 32ને "બંધારણનું હૃદય અને આત્મા" કહ્યું — મૂળભૂત અધિકારના ભંગ સામે સીધા સર્વોચ્ચ અદાલતમાં જવાનો અધિકાર.</p>
+<span class="sub">5 પ્રકારના રિટ</span>
+<ul>
+<li><b>Habeas Corpus (બંદી પ્રત્યક્ષીકરણ)</b> — ગેરકાયદે અટકાયત સામે, વ્યક્તિને અદાલત સમક્ષ રજૂ કરવા આદેશ</li>
+<li><b>Mandamus (પરમાદેશ)</b> — જાહેર અધિકારીને પોતાની ફરજ બજાવવા આદેશ</li>
+<li><b>Prohibition (પ્રતિષેધ)</b> — નીચલી અદાલતને અધિકારક્ષેત્ર બહાર જતાં રોકવા (ઉચ્ચ અદાલત દ્વારા)</li>
+<li><b>Certiorari (ઉત્પ્રેષણ)</b> — નીચલી અદાલતનો ચુકાદો રદ કરવા</li>
+<li><b>Quo Warranto (અધિકારપૃચ્છા)</b> — ગેરકાયદે પદ ધારણ કરનાર સામે — "કયા અધિકારથી?"</li>
+</ul>
+<div class="note">અનુ. 32 — સર્વોચ્ચ અદાલત; અનુ. 226 — વડી અદાલત (વ્યાપક અધિકારક્ષેત્ર, મૂળભૂત અધિકાર ઉપરાંત અન્ય કાયદાકીય અધિકાર માટે પણ રિટ જારી કરી શકે). કટોકટીમાં અનુ. 32 સ્થગિત થઈ શકે (359).</div>
+`},
+{t:"મૂળભૂત ફરજો", en:"Fundamental Duties", art:"અનુચ્છેદ 51A, ભાગ IVA", body:`
+<p><mark>42મા સુધારા (1976)</mark> દ્વારા સ્વર્ણ સિંહ સમિતિની ભલામણથી ઉમેરાઈ — સોવિયેત રશિયાના બંધારણથી પ્રેરિત. મૂળે 10, <mark>86મા સુધારા (2002)</mark>થી 11મી ફરજ ઉમેરાઈ. કુલ 11 ફરજો.</p>
+<ul>
+<li>બંધારણનું પાલન અને રાષ્ટ્રધ્વજ-રાષ્ટ્રગીતનું સન્માન</li>
+<li>સ્વતંત્રતાની ચળવળના ઉમદા આદર્શોને અનુસરવું</li>
+<li>રાષ્ટ્રની એકતા-અખંડિતતા જાળવવી અને રક્ષવી</li>
+<li>દેશની રક્ષા કરવી અને હાકલ થાય ત્યારે રાષ્ટ્રીય સેવા આપવી</li>
+<li>ધર્મ-ભાષા-પ્રદેશ-વર્ગની વિવિધતાથી પર સંવાદિતા-ભાઈચારાની ભાવના કેળવવી, સ્ત્રીના ગૌરવને હાનિકારક પ્રથાનો ત્યાગ</li>
+<li>સમૃદ્ધ સંયુક્ત સાંસ્કૃતિક વારસાનું જતન</li>
+<li>પર્યાવરણ, જંગલો, ઝીલો, નદીઓ, વન્યજીવોનું રક્ષણ-સંવર્ધન, જીવો પ્રત્યે દયા</li>
+<li>વૈજ્ઞાનિક દૃષ્ટિકોણ, માનવતાવાદ અને જિજ્ઞાસા-સુધારાની ભાવના કેળવવી</li>
+<li>જાહેર સંપત્તિનું રક્ષણ, હિંસાનો ત્યાગ</li>
+<li>વ્યક્તિગત-સામૂહિક પ્રવૃત્તિના તમામ ક્ષેત્રે શ્રેષ્ઠતા તરફ પ્રયત્ન</li>
+<li>6-14 વર્ષના પોતાના બાળક/વોર્ડને શિક્ષણની તક પૂરી પાડવી (86મો સુધારો, 2002)</li>
+</ul>
+<div class="note">મૂળભૂત ફરજો ન્યાયાલયમાં લાગુ ન કરી શકાય (Non-justiciable) — પરંતુ કાયદા દ્વારા તેનો અમલ કરાવી શકાય.</div>
+`},
+{t:"રાજ્યનીતિના માર્ગદર્શક સિદ્ધાંતો (DPSP)", en:"Directive Principles", art:"અનુચ્છેદ 36–51, ભાગ IV", body:`
+<p>આયર્લેન્ડના બંધારણમાંથી લેવાયેલ — ન્યાયાલયમાં લાગુ ન કરી શકાય તેવા (Non-justiciable — અનુ. 37) પરંતુ શાસન માટે મૂળભૂત ગણાય.</p>
+<span class="sub">વર્ગીકરણ</span>
+<ul>
+<li><b>સમાજવાદી સિદ્ધાંતો</b> — અનુ. 38 (સામાજિક-આર્થિક ન્યાય), 39 (સમાન વેતન, સંસાધનોની વહેંચણી), 41 (કામ-શિક્ષણ-જાહેર સહાયનો અધિકાર), 42 (પ્રસૂતિ સહાય), 43 (લઘુત્તમ વેતન)</li>
+<li><b>ગાંધીવાદી સિદ્ધાંતો</b> — અનુ. 40 (ગ્રામ પંચાયતની રચના), 43 (કુટીર ઉદ્યોગ), 46 (SC/ST/નબળા વર્ગનું કલ્યાણ), 47 (પોષણ-જીવનધોરણ, દારૂબંધી), 48 (કૃષિ-પશુપાલન, ગૌ-હત્યા પ્રતિબંધ)</li>
+<li><b>ઉદારમતવાદી-બૌદ્ધિક સિદ્ધાંતો</b> — અનુ. 44 (સમાન નાગરિક સંહિતા), 45 (પ્રારંભિક બાળ સંભાળ-શિક્ષણ), 48A (પર્યાવરણ સંરક્ષણ), 49 (ઐતિહાસિક સ્મારક રક્ષણ), 50 (કારોબારી-ન્યાયતંત્ર અલગ), 51 (આંતરરાષ્ટ્રીય શાંતિ-સલામતી)</li>
+</ul>
+<div class="note">અનુ. 44 — સમાન નાગરિક સંહિતા (Uniform Civil Code) હજુ સંપૂર્ણ દેશમાં અમલમાં નથી (ગોવામાં લાગુ, ઉત્તરાખંડે 2024માં UCC લાગુ કર્યો) — સ્પર્ધાત્મક પરીક્ષામાં અગત્યનું.</div>
+<span class="sub">DPSP vs મૂળભૂત અધિકાર</span>
+<ul>
+<li>ગોલકનાથ કેસ (1967) — DPSP માટે મૂળભૂત અધિકાર સંશોધિત ન કરી શકાય</li>
+<li>24મો, 25મો સુધારો (1971) — DPSP અમલ માટે અમુક મૂળભૂત અધિકાર મર્યાદિત કરી શકાય (અનુ. 31C)</li>
+<li>મિનર્વા મિલ્સ કેસ (1980) — મૂળભૂત અધિકાર અને DPSP વચ્ચે સંતુલન જરૂરી — બંને બંધારણનું મૂળભૂત માળખું</li>
+</ul>
+`}
+]},
+
+{cat:"સંઘ કારોબારી", items:[
+{t:"રાષ્ટ્રપતિ", en:"President of India", art:"અનુચ્છેદ 52–62", body:`
+<p>ભારતના પ્રથમ નાગરિક, રાજ્યના બંધારણીય વડા (Nominal/Constitutional Head), સંઘની સમગ્ર કારોબારી સત્તા રાષ્ટ્રપતિમાં નિહિત (અનુ. 53) — પરંતુ વાસ્તવમાં મંત્રીમંડળની સલાહથી કાર્ય કરે (અનુ. 74).</p>
+<span class="sub">લાયકાત (કોણ બની શકે) — અનુ. 58</span>
+<ul>
+<li>ભારતીય નાગરિક હોવો જોઈએ</li>
+<li>35 વર્ષની ઉંમર પૂર્ણ</li>
+<li>લોકસભા સભ્ય બનવાની લાયકાત ધરાવતા હોવા જોઈએ</li>
+<li>સરકાર હેઠળ કોઈ લાભનું પદ (Office of Profit) ધરાવતા ન હોવા જોઈએ (રાષ્ટ્રપતિ, ઉપરાષ્ટ્રપતિ, રાજ્યપાલ, મંત્રી પદ અપવાદ)</li>
+</ul>
+<span class="sub">ચૂંટણી — અનુ. 54, 55</span>
+<ul>
+<li>પરોક્ષ ચૂંટણી — ઈલેક્ટોરલ કૉલેજ દ્વારા: લોકસભા+રાજ્યસભાના ચૂંટાયેલ સભ્યો + રાજ્યો/દિલ્હી/પુડુચેરીની વિધાનસભાના ચૂંટાયેલ સભ્યો (નામાંકિત સભ્યો ભાગ લેતા નથી)</li>
+<li>પદ્ધતિ: પ્રમાણસર પ્રતિનિધિત્વ પદ્ધતિ મુજબ એકલ સંક્રમણીય મત (Single Transferable Vote) દ્વારા, ગુપ્ત મતદાનથી</li>
+<li>મૂલ્ય-સમાનતાનું સિદ્ધાંત — સાંસદ અને ધારાસભ્યના મતનું મૂલ્ય રાજ્યની વસ્તી પ્રમાણે નક્કી થાય (ફોર્મ્યુલા આધારિત)</li>
+<li>ચૂંટણી વિવાદ — ફક્ત સર્વોચ્ચ અદાલતમાં પડકારી શકાય (અનુ. 71)</li>
+</ul>
+<span class="sub">શપથ — અનુ. 60</span>
+<ul>
+<li>સર્વોચ્ચ અદાલતના મુખ્ય ન્યાયાધીશ (ગેરહાજરીમાં વરિષ્ઠતમ ન્યાયાધીશ) લેવડાવે</li>
+<li>બંધારણનું જતન, રક્ષણ અને સંરક્ષણ કરવાના શપથ</li>
+</ul>
+<span class="sub">કાર્યકાળ અને પદ ક્યારે ખાલી પડે — અનુ. 56</span>
+<ul>
+<li>કાર્યકાળ: 5 વર્ષ, પુનઃચૂંટણી માટે અમર્યાદિત વખત પાત્ર</li>
+<li>પદ ખાલી પડે: મુદ્દત પૂરી થવાથી, મૃત્યુથી, રાજીનામાથી, મહાભિયોગથી, ચૂંટણી રદબાતલ થવાથી</li>
+<li>રાજીનામું — ઉપરાષ્ટ્રપતિને સંબોધીને લેખિતમાં (અનુ. 56(1)(a))</li>
+<li>પદ ખાલી પડે ત્યારે ઉપરાષ્ટ્રપતિ કાર્યકારી રાષ્ટ્રપતિ બને; બંને ગેરહાજર હોય તો CJI (અથવા વરિષ્ઠતમ ન્યાયાધીશ)</li>
+<li>નવા રાષ્ટ્રપતિની ચૂંટણી 6 મહિનામાં ફરજિયાત (અનુ. 62)</li>
+</ul>
+<span class="sub">પદ પરથી દૂર કરવાની પ્રક્રિયા — મહાભિયોગ (અનુ. 61)</span>
+<ul>
+<li>એકમાત્ર આધાર: "બંધારણ ભંગ" (Violation of Constitution)</li>
+<li>સંસદના કોઈપણ ગૃહમાં આરોપ મૂકી શકાય — કુલ સભ્યોના 1/4 દ્વારા સહી કરેલ, 14 દિવસ અગાઉ નોટિસ</li>
+<li>તે ગૃહમાં કુલ સભ્યોના 2/3 બહુમતીથી ઠરાવ પસાર થવો જોઈએ</li>
+<li>પછી બીજા ગૃહમાં તપાસ, ત્યાં પણ 2/3 બહુમતીથી પસાર થાય તો પદભ્રષ્ટ</li>
+<li>ભારતમાં આજ સુધી કોઈ રાષ્ટ્રપતિ સામે મહાભિયોગ થયો નથી</li>
+</ul>
+<span class="sub">સત્તાઓ અને કાર્યો</span>
+<ul>
+<li><b>કારોબારી સત્તા</b> — વડાપ્રધાન અને મંત્રીમંડળની નિમણૂક, રાજ્યપાલ-CAG-CEC-જજની નિમણૂક</li>
+<li><b>કાયદાકીય સત્તા</b> — સંસદ બોલાવવી/સ્થગિત/વિસર્જિત કરવી, સંસદને સંબોધન, વટહુકમ બહાર પાડવો (અનુ. 123)</li>
+<li><b>ન્યાયિક સત્તા</b> — ક્ષમાદાનની સત્તા (અનુ. 72) — માફી, વિરામ, પરિવર્તન, સ્થગન, સજા હળવી કરવી — મૃત્યુદંડ સહિત</li>
+<li><b>નાણાકીય સત્તા</b> — બજેટ સંસદ સમક્ષ રજૂ કરાવવો, નાણાં પંચની રચના (અનુ. 280), આકસ્મિક ફંડ</li>
+<li><b>રાજદ્વારી-લશ્કરી સત્તા</b> — સંધિ-કરાર, સંરક્ષણ દળોના સર્વોચ્ચ સેનાપતિ (અનુ. 53(2))</li>
+<li><b>કટોકટીની સત્તાઓ</b> — રાષ્ટ્રીય કટોકટી (અનુ. 352), રાજ્ય કટોકટી/રાષ્ટ્રપતિ શાસન (અનુ. 356), નાણાકીય કટોકટી (અનુ. 360)</li>
+<li><b>વીટો સત્તા</b> — સામાન્ય વિધેયક પર 3 પ્રકારના વીટો: Absolute Veto (સંમતિ નકારવી), Suspensive Veto (પુનર્વિચાર માટે પરત), Pocket Veto (કોઈ કાર્યવાહી ન કરવી — સમય મર્યાદા નથી); ધનવિધેયક પર ફક્ત Absolute Veto કે સંમતિ</li>
+</ul>
+<span class="sub">પગાર-ભથ્થાં</span>
+<ul>
+<li>પગાર: ₹5,00,000 પ્રતિ માસ (2018થી સુધારેલ) — 2જી અનુસૂચિ મુજબ, સંસદ કાયદાથી બદલી શકે પણ કાર્યકાળ દરમિયાન ઘટાડી ન શકે</li>
+</ul>
+<span class="sub">મહત્વના તથ્યો</span>
+<ul>
+<li>પ્રથમ રાષ્ટ્રપતિ — ડૉ. રાજેન્દ્ર પ્રસાદ (એકમાત્ર 2 વખત ચૂંટાયેલા)</li>
+<li>પ્રથમ મહિલા રાષ્ટ્રપતિ — પ્રતિભા પાટીલ</li>
+<li>સૌથી ઓછી ઉંમરના રાષ્ટ્રપતિ — નીલમ સંજીવ રેડ્ડી (બિનહરીફ ચૂંટાયેલા એકમાત્ર)</li>
+<li>વર્તમાન રાષ્ટ્રપતિ અંગે નવીનતમ માહિતી માટે ચકાસો (સર્ચ કરો)</li>
+</ul>
+<div class="note">GPSC ટીપ: રાષ્ટ્રપતિની ચૂંટણી અંગેના વિવાદ સિવાય, રાષ્ટ્રપતિએ લીધેલા કોઈપણ નિર્ણયની કાયદેસરતા અંગે અદાલતમાં પ્રશ્ન ન કરી શકાય (અનુ. 361 — વ્યક્તિગત જવાબદારીમાંથી મુક્તિ).</div>
+`},
+{t:"ઉપરાષ્ટ્રપતિ", en:"Vice President", art:"અનુચ્છેદ 63–71", body:`
+<p>ભારતના બીજા સર્વોચ્ચ બંધારણીય પદાધિકારી — અમેરિકાના બંધારણથી પ્રેરિત પદ.</p>
+<span class="sub">લાયકાત</span>
+<ul>
+<li>ભારતીય નાગરિક, 35 વર્ષની ઉંમર</li>
+<li>રાજ્યસભા સભ્ય બનવાની લાયકાત ધરાવતા હોવા જોઈએ</li>
+<li>લાભનું પદ ધરાવતા ન હોવા જોઈએ</li>
+</ul>
+<span class="sub">ચૂંટણી</span>
+<ul>
+<li>લોકસભા + રાજ્યસભાના તમામ સભ્યો (ચૂંટાયેલ + નામાંકિત બંને) ધરાવતી ઈલેક્ટોરલ કૉલેજ દ્વારા — રાજ્ય વિધાનસભાના સભ્યો સામેલ નથી (રાષ્ટ્રપતિ ચૂંટણીથી આ મુખ્ય તફાવત)</li>
+<li>એકલ સંક્રમણીય મત પદ્ધતિ, ગુપ્ત મતદાન</li>
+</ul>
+<span class="sub">શપથ</span>
+<ul>
+<li>રાષ્ટ્રપતિ દ્વારા (અથવા તેમના દ્વારા નિયુક્ત વ્યક્તિ)</li>
+</ul>
+<span class="sub">કાર્યકાળ અને પદમુક્તિ</span>
+<ul>
+<li>કાર્યકાળ: 5 વર્ષ; પુનઃચૂંટણી માટે પાત્ર</li>
+<li>રાજીનામું — રાષ્ટ્રપતિને સંબોધીને</li>
+<li>પદમુક્તિ (Removal) — રાજ્યસભામાં ઠરાવ (તત્કાલીન બહુમતી) દ્વારા, જેને લોકસભાની સંમતિ મળે — 14 દિવસ અગાઉ નોટિસ જરૂરી; મહાભિયોગ જેવી કડક પ્રક્રિયા નથી</li>
+</ul>
+<span class="sub">કાર્યો</span>
+<ul>
+<li>પદેન રાજ્યસભાના અધ્યક્ષ (Chairman) — ગૃહનું સંચાલન, નિર્ણાયક મત (Casting Vote)</li>
+<li>રાષ્ટ્રપતિની ગેરહાજરી/મૃત્યુ/રાજીનામા/મહાભિયોગ વખતે કાર્યકારી રાષ્ટ્રપતિ (વધુમાં વધુ 6 મહિના)</li>
+</ul>
+<div class="note">GPSC ટીપ: ડૉ. સર્વપલ્લી રાધાકૃષ્ણન ભારતના પ્રથમ ઉપરાષ્ટ્રપતિ હતા.</div>
+`},
+{t:"વડાપ્રધાન", en:"Prime Minister", art:"અનુચ્છેદ 74–75", body:`
+<p>વાસ્તવિક કારોબારી વડા (Real Executive Head) — મંત્રીમંડળના અધ્યક્ષ, સરકારના વડા.</p>
+<span class="sub">લાયકાત</span>
+<ul>
+<li>ભારતીય નાગરિક, લોકસભા/રાજ્યસભા સભ્ય બનવાની લાયકાત (25/30 વર્ષ)</li>
+<li>સંસદના કોઈપણ ગૃહના સભ્ય હોવા જરૂરી (નિમણૂક વખતે સભ્ય ન હોય તો 6 મહિનામાં સભ્ય બનવું પડે)</li>
+</ul>
+<span class="sub">નિમણૂક</span>
+<ul>
+<li>રાષ્ટ્રપતિ દ્વારા — સામાન્ય રીતે લોકસભામાં બહુમતી ધરાવતા પક્ષ/ગઠબંધનના નેતા</li>
+<li>ત્રિશંકુ પરિસ્થિતિમાં રાષ્ટ્રપતિનો વિવેકાધિકાર</li>
+</ul>
+<span class="sub">શપથ</span>
+<ul>
+<li>રાષ્ટ્રપતિ દ્વારા શપથ (પદ અને ગુપ્તતાના શપથ)</li>
+</ul>
+<span class="sub">કાર્યકાળ અને પદમુક્તિ</span>
+<ul>
+<li>નિશ્ચિત કાર્યકાળ નથી — જ્યાં સુધી લોકસભામાં બહુમતી હોય ત્યાં સુધી (સામાન્ય રીતે 5 વર્ષ)</li>
+<li>રાજીનામું — રાષ્ટ્રપતિને; અવિશ્વાસ ઠરાવ પસાર થાય તો સમગ્ર મંત્રીમંડળે રાજીનામું આપવું પડે</li>
+</ul>
+<span class="sub">કાર્યો અને સત્તાઓ</span>
+<ul>
+<li>વડાપ્રધાન અને મંત્રીમંડળ સામૂહિક રીતે લોકસભાને જવાબદાર (અનુ. 75(3))</li>
+<li>રાષ્ટ્રપતિ અને મંત્રીમંડળ વચ્ચેની કડી (અનુ. 78 — રાષ્ટ્રપતિને માહિતી પૂરી પાડવી)</li>
+<li>મંત્રીમંડળની રચના, મંત્રીઓની ફાળવણી-ફેરબદલ અંગે રાષ્ટ્રપતિને સલાહ</li>
+<li>નીતિ આયોગના અધ્યક્ષ, રાષ્ટ્રીય સુરક્ષા પરિષદ અને CCS (કેબિનેટ કમિટી ઓન સિક્યુરિટી)ના અધ્યક્ષ</li>
+</ul>
+<div class="note">GPSC ટીપ: પં. જવાહરલાલ નહેરુ ભારતના પ્રથમ અને સૌથી લાંબા સમય સેવા આપનાર વડાપ્રધાન હતા.</div>
+`},
+{t:"મંત્રીમંડળ", en:"Council of Ministers", art:"અનુચ્છેદ 74–75", body:`
+<span class="sub">રચના</span>
+<ul>
+<li>વડાપ્રધાનની સલાહ પર રાષ્ટ્રપતિ મંત્રીઓની નિમણૂક કરે (અનુ. 75(1))</li>
+<li>ત્રણ સ્તર: કેબિનેટ મંત્રી, રાજ્ય કક્ષાના મંત્રી (સ્વતંત્ર હવાલો/વગર), ઉપ મંત્રી</li>
+</ul>
+<span class="sub">કદ અને જવાબદારી</span>
+<ul>
+<li>91મો સુધારો (2003) — મંત્રીમંડળનું કદ લોકસભાના કુલ સભ્યોના 15% થી વધુ ન હોઈ શકે</li>
+<li>સામૂહિક જવાબદારીનો સિદ્ધાંત (Collective Responsibility) — અનુ. 75(3) — બ્રિટનથી લેવાયેલ</li>
+<li>વ્યક્તિગત જવાબદારી — રાષ્ટ્રપતિની મરજી સુધી પદ (અનુ. 75(2))</li>
+<li>મંત્રી સંસદ સભ્ય ન હોય તો 6 મહિનામાં સભ્ય બનવું જરૂરી (અનુ. 75(5))</li>
+</ul>
+`},
+{t:"એટર્ની જનરલ", en:"Attorney General of India", art:"અનુચ્છેદ 76", body:`
+<span class="sub">નિમણૂક-લાયકાત</span>
+<ul>
+<li>ભારત સરકારના સર્વોચ્ચ કાયદા અધિકારી (Highest Law Officer)</li>
+<li>રાષ્ટ્રપતિ દ્વારા નિમણૂક — સર્વોચ્ચ અદાલતના ન્યાયાધીશ બનવાની લાયકાત જરૂરી</li>
+</ul>
+<span class="sub">કાર્યકાળ અને પદમુક્તિ</span>
+<ul>
+<li>કાર્યકાળ નિશ્ચિત નથી — રાષ્ટ્રપતિની મરજી સુધી; રાજીનામું રાષ્ટ્રપતિને</li>
+</ul>
+<span class="sub">કાર્યો</span>
+<ul>
+<li>ભારત સરકારને કાયદાકીય બાબતોમાં સલાહ આપવી</li>
+<li>સંસદની કાર્યવાહીમાં ભાગ લેવાનો અધિકાર, પરંતુ મતદાનનો અધિકાર નહીં</li>
+<li>સંસદ સભ્ય જેવા વિશેષાધિકારો ભોગવે, પરંતુ સંસદ સભ્ય નથી</li>
+<li>ખાનગી પ્રેક્ટિસ પર આંશિક પ્રતિબંધ (સરકાર વિરુદ્ધ કેસ ન લડી શકે)</li>
+</ul>
+<div class="note">સોલિસિટર જનરલ અને એડિશનલ સોલિસિટર જનરલ — બંધારણીય પદ નથી, વૈધાનિક/કારોબારી નિમણૂક, એટર્ની જનરલને મદદ કરે.</div>
+`}
+]},
+
+{cat:"સંસદ (Parliament)", items:[
+{t:"સંસદ — સામાન્ય માળખું", en:"Parliament — Structure", art:"અનુચ્છેદ 79", body:`
+<ul>
+<li>સંસદ = રાષ્ટ્રપતિ + લોકસભા + રાજ્યસભા (અનુ. 79) — રાષ્ટ્રપતિ સંસદનો ભાગ ગણાય પણ સભ્ય નહીં</li>
+<li>સત્રો — સામાન્ય રીતે વર્ષમાં 3: બજેટ સત્ર, ચોમાસુ સત્ર, શિયાળુ સત્ર</li>
+<li>બંને ગૃહો વચ્ચે 6 મહિનાથી વધુ અંતર ન હોવું જોઈએ (અનુ. 85)</li>
+<li>સત્રાવસાન (Prorogation), સ્થગન (Adjournment), વિસર્જન (Dissolution) — અલગ-અલગ ખ્યાલો</li>
+<li>ગણપૂર્તિ ન થાય તો ગૃહની કાર્યવાહી સ્થગિત</li>
+<li>પ્રશ્નકાળ (Question Hour) અને શૂન્યકાળ (Zero Hour — ભારતીય સંસદીય નવીનતા, બંધારણમાં ઉલ્લેખ નથી)</li>
+</ul>
+`},
+{t:"લોકસભા", en:"Lok Sabha", art:"અનુચ્છેદ 81", body:`
+<ul>
+<li>નિમ્ન ગૃહ, પ્રત્યક્ષ ચૂંટાયેલ ગૃહ ("જનતાનું ગૃહ") — First-Past-The-Post પદ્ધતિ</li>
+<li>મહત્તમ સભ્યસંખ્યા: 552 (530 રાજ્યોમાંથી + 20 કેન્દ્રશાસિત + અગાઉ 2 એંગ્લો-ઈન્ડિયન નામાંકિત — 104મા સુધારાથી નાબૂદ, 2020)</li>
+<li>વર્તમાન સંખ્યા: 543 ચૂંટાયેલ સભ્યો</li>
+<li>કાર્યકાળ: 5 વર્ષ (કટોકટીમાં કાયદાથી 1 વર્ષ સુધી લંબાવી શકાય — અનુ. 83)</li>
+<li>લાયકાત: 25 વર્ષની ઉંમર, ભારતીય નાગરિક, અન્ય લાયકાત (અનુ. 84, 102)</li>
+<li>ગણપૂર્તિ (Quorum): કુલ સભ્યોના 1/10</li>
+<li>અધ્યક્ષ — સ્પીકર, ઉપાધ્યક્ષ — ડેપ્યુટી સ્પીકર</li>
+<li>વિસર્જન — રાષ્ટ્રપતિ દ્વારા (વડાપ્રધાનની સલાહ પર)</li>
+</ul>
+`},
+{t:"રાજ્યસભા", en:"Rajya Sabha", art:"અનુચ્છેદ 80", body:`
+<ul>
+<li>ઉચ્ચ ગૃહ, કાયમી ગૃહ (Permanent House) — ક્યારેય સંપૂર્ણ વિસર્જિત થતું નથી (Council of States)</li>
+<li>મહત્તમ સભ્યસંખ્યા: 250 (238 રાજ્યો/કેન્દ્રશાસિતના પ્રતિનિધિ + 12 રાષ્ટ્રપતિ દ્વારા નામાંકિત — કલા, સાહિત્ય, વિજ્ઞાન, સમાજસેવા ક્ષેત્રે)</li>
+<li>વર્તમાન: 245 સભ્યો (233 ચૂંટાયેલ + 12 નામાંકિત)</li>
+<li>1/3 સભ્યો દર 2 વર્ષે નિવૃત્ત થાય (કાર્યકાળ 6 વર્ષ પ્રત્યેક સભ્યનો)</li>
+<li>ચૂંટણી: રાજ્ય વિધાનસભાના ચૂંટાયેલ સભ્યો દ્વારા પરોક્ષ, પ્રમાણસર પ્રતિનિધિત્વ (એકલ સંક્રમણીય મત)</li>
+<li>લાયકાત: 30 વર્ષની ઉંમર</li>
+<li>ધનવિધેયક બાબતે મર્યાદિત સત્તા, વિસર્જિત ન થાય, રાજ્યોના હિતોનું પ્રતિનિધિત્વ</li>
+</ul>
+<div class="note">રાજ્યસભાને અનુ. 249 હેઠળ વિશેષ સત્તા — રાષ્ટ્રીય હિતમાં રાજ્ય યાદીના વિષય પર કાયદો બનાવવા સંસદને અધિકૃત કરી શકે (2/3 બહુમતીથી ઠરાવ).</div>
+`},
+{t:"લોકસભા અધ્યક્ષ (સ્પીકર)", en:"Speaker of Lok Sabha", art:"અનુચ્છેદ 93–97", body:`
+<span class="sub">ચૂંટણી-લાયકાત</span>
+<ul>
+<li>લોકસભાના સભ્યો દ્વારા પોતાનામાંથી ચૂંટાય (સામાન્ય રીતે પ્રથમ બેઠકમાં)</li>
+</ul>
+<span class="sub">કાર્યકાળ અને પદમુક્તિ</span>
+<ul>
+<li>લોકસભાના કાર્યકાળ સાથે, પરંતુ લોકસભા વિસર્જિત થાય ત્યાં સુધી પદ પર રહે (નવી લોકસભા ભેગી ન થાય ત્યાં સુધી)</li>
+<li>રાજીનામું — ઉપાધ્યક્ષને સંબોધીને</li>
+<li>પદમુક્તિ — લોકસભાના તત્કાલીન કુલ સભ્યોની બહુમતીથી ઠરાવ (14 દિવસ અગાઉ નોટિસ જરૂરી)</li>
+</ul>
+<span class="sub">કાર્યો-સત્તાઓ</span>
+<ul>
+<li>ગૃહની કાર્યવાહીનું સંચાલન, શિસ્ત જાળવવી</li>
+<li>નિર્ણાયક મત (Casting Vote) ધરાવે (સમાનતાના કિસ્સામાં જ, સામાન્ય મત નહીં)</li>
+<li>ધનવિધેયક (Money Bill) છે કે નહીં તે નક્કી કરવાની અંતિમ સત્તા સ્પીકર પાસે (અનુ. 110)</li>
+<li>પક્ષપલટા વિરોધી કાયદા (10મી અનુસૂચિ) હેઠળ ગેરલાયકાત અંગે નિર્ણય લે</li>
+<li>સંયુક્ત બેઠકની અધ્યક્ષતા કરે (અનુ. 108)</li>
+</ul>
+<div class="note">ગણેશ વાસુદેવ માવળંકર ભારતની પ્રથમ લોકસભાના પ્રથમ સ્પીકર હતા.</div>
+`},
+{t:"રાજ્યસભા અધ્યક્ષ", en:"Chairman of Rajya Sabha", art:"અનુચ્છેદ 89–90", body:`
+<ul>
+<li>ભારતના ઉપરાષ્ટ્રપતિ પદેન (Ex-officio) રાજ્યસભાના અધ્યક્ષ (Chairman) હોય છે — સભ્ય નથી</li>
+<li>ઉપાધ્યક્ષ (Deputy Chairman) રાજ્યસભાના સભ્યોમાંથી ચૂંટાય, પદમુક્તિ બહુમતી ઠરાવથી</li>
+<li>નિર્ણાયક મત (Casting Vote) નો અધિકાર ધરાવે</li>
+</ul>
+`},
+{t:"સંસદીય કાર્યપ્રણાલી — બિલ પસાર થવાની પ્રક્રિયા", en:"Legislative Procedure", art:"અનુચ્છેદ 107–111", body:`
+<span class="sub">સામાન્ય વિધેયક (Ordinary Bill) — અનુ. 107–108</span>
+<ul>
+<li>પ્રથમ વાચન (રજૂઆત) → બીજું વાચન (સામાન્ય ચર્ચા + સમિતિ તપાસ + કલમવાર ચર્ચા) → ત્રીજું વાચન (પસાર)</li>
+<li>બંને ગૃહમાં પસાર થવું જરૂરી, પછી રાષ્ટ્રપતિની સંમતિ (અનુ. 111)</li>
+<li>ગૃહો વચ્ચે મતભેદ હોય તો સંયુક્ત બેઠક (અનુ. 108) — લોકસભા સ્પીકર અધ્યક્ષતા કરે, અત્યાર સુધી 3 વખત યોજાયેલ</li>
+</ul>
+<span class="sub">ધનવિધેયક (Money Bill) — અનુ. 109–110</span>
+<ul>
+<li>ફક્ત લોકસભામાં જ રજૂ થઈ શકે, રાષ્ટ્રપતિની ભલામણથી</li>
+<li>રાજ્યસભા 14 દિવસમાં ભલામણ મોકલી શકે, પરંતુ નકારી કે સંશોધિત કરી શકે નહીં</li>
+</ul>
+<span class="sub">નાણાકીય વિધેયક (Financial Bill)</span>
+<ul>
+<li>પ્રકાર I (અનુ. 117(1)) — ધનવિધેયક જેવી પ્રક્રિયા, પણ રાજ્યસભા સંશોધિત/નકારી શકે</li>
+<li>પ્રકાર II (અનુ. 117(3)) — બંને ગૃહમાં સામાન્ય વિધેયકની જેમ</li>
+</ul>
+<span class="sub">બંધારણ સુધારા વિધેયક — અનુ. 368</span>
+<ul>
+<li>બંને ગૃહમાં અલગ-અલગ પસાર થવું જરૂરી (સંયુક્ત બેઠક નહીં), રાષ્ટ્રપતિ પાસે વીટોની સત્તા નથી</li>
+</ul>
+`},
+{t:"સંસદીય સમિતિઓ", en:"Parliamentary Committees", art:"સમિતિ પ્રણાલી", body:`
+<ul>
+<li><b>જાહેર હિસાબ સમિતિ (PAC)</b> — 22 સભ્યો (15 લોકસભા+7 રાજ્યસભા), અધ્યક્ષ સામાન્ય રીતે વિપક્ષમાંથી — CAGના અહેવાલોની ચકાસણી</li>
+<li><b>અંદાજ સમિતિ (Estimates Committee)</b> — 30 સભ્યો, ફક્ત લોકસભાના સભ્યો — બજેટ અંદાજની આર્થિક કાર્યક્ષમતા તપાસે</li>
+<li><b>જાહેર સાહસો સમિતિ (COPU)</b> — 22 સભ્યો — જાહેર ક્ષેત્રના સાહસોની કામગીરી તપાસે</li>
+<li><b>વિભાગીય સ્થાયી સમિતિઓ (Departmental Standing Committees)</b> — 24 સમિતિઓ, દરેક મંત્રાલય/વિભાગ સંલગ્ન</li>
+<li>આ ત્રણ નાણાકીય સમિતિ (PAC, Estimates, COPU) ને "ફાઈનાન્સિયલ કમિટીની ટ્રિનિટી" કહેવાય</li>
+</ul>
+`},
+{t:"સંસદ સભ્યોની ગેરલાયકાત અને પક્ષપલટા વિરોધી કાયદો", en:"Disqualification & Anti-Defection Law", art:"અનુચ્છેદ 102, 191, 10મી અનુસૂચિ", body:`
+<span class="sub">ગેરલાયકાતના સામાન્ય કારણો (અનુ. 102)</span>
+<ul>
+<li>લાભનું પદ ધારણ કરવું</li>
+<li>અસ્વસ્થ મગજ (અદાલત દ્વારા જાહેર)</li>
+<li>અનફર્ડ ઇન્સોલ્વન્ટ (નાદાર જાહેર)</li>
+<li>ભારતીય નાગરિકતા ન હોવી અથવા વિદેશી નાગરિકતા સ્વીકારવી</li>
+<li>સંસદ દ્વારા બનાવેલા કાયદા હેઠળ ગેરલાયક ઠરવું</li>
+</ul>
+<span class="sub">10મી અનુસૂચિ — પક્ષપલટા વિરોધી કાયદો (52મો સુધારો, 1985)</span>
+<ul>
+<li>સ્વૈચ્છિક રીતે પક્ષનું સભ્યપદ છોડવાથી અથવા પક્ષની સૂચના વિરુદ્ધ મતદાન કરવાથી ગેરલાયક ઠરે</li>
+<li>અપવાદ — પક્ષનું વિલીનીકરણ (2/3 સભ્યો સંમત હોય તો)</li>
+<li>નિર્ણય લેવાની સત્તા — સ્પીકર/અધ્યક્ષ પાસે (91મા સુધારાથી કડક બનાવાયું)</li>
+</ul>
+`},
+{t:"સંસદીય વિશેષાધિકારો", en:"Parliamentary Privileges", art:"અનુચ્છેદ 105, 194", body:`
+<ul>
+<li>અનુ. 105 — સંસદ સભ્યોના વિશેષાધિકારો (વાણી સ્વાતંત્ર્ય, કાર્યવાહી માટે અદાલતમાં જવાબદાર નહીં)</li>
+<li>અનુ. 194 — રાજ્ય વિધાનમંડળના સભ્યોના વિશેષાધિકારો</li>
+<li>સત્ર દરમિયાન અને 40 દિવસ પહેલાં-પછી સિવિલ કેસમાં ધરપકડમાંથી મુક્તિ (ફોજદારી કેસમાં નહીં)</li>
+</ul>
+`}
+]},
+
+{cat:"રાજ્ય કારોબારી", items:[
+{t:"રાજ્યપાલ", en:"Governor", art:"અનુચ્છેદ 153–162", body:`
+<p>રાજ્યના બંધારણીય/નામમાત્ર વડા — કેન્દ્ર અને રાજ્ય વચ્ચેની કડી ગણાય.</p>
+<span class="sub">લાયકાત</span>
+<ul>
+<li>ભારતીય નાગરિક, 35 વર્ષની ઉંમર</li>
+<li>સંસદ/રાજ્ય વિધાનમંડળના સભ્ય ન હોવા જોઈએ, લાભનું પદ ન ધરાવતા હોવા જોઈએ</li>
+</ul>
+<span class="sub">નિમણૂક</span>
+<ul>
+<li>રાષ્ટ્રપતિ દ્વારા (કેન્દ્ર સરકારની ભલામણથી) — ચૂંટણી નહીં, નિમણૂક</li>
+<li>એક જ વ્યક્તિ બે કે વધુ રાજ્યોના રાજ્યપાલ બની શકે (7મો સુધારો, 1956)</li>
+</ul>
+<span class="sub">શપથ</span>
+<ul>
+<li>સંબંધિત વડી અદાલતના મુખ્ય ન્યાયાધીશ (ગેરહાજરીમાં વરિષ્ઠતમ ન્યાયાધીશ) લેવડાવે</li>
+</ul>
+<span class="sub">કાર્યકાળ અને પદમુક્તિ</span>
+<ul>
+<li>કાર્યકાળ: 5 વર્ષ, પરંતુ રાષ્ટ્રપતિની મરજી સુધી (Doctrine of Pleasure) — ગમે ત્યારે બદલી/બરતરફ થઈ શકે</li>
+<li>રાજીનામું — રાષ્ટ્રપતિને સંબોધીને</li>
+<li>પદ ખાલી પડે તો સંબંધિત વડી અદાલતના મુખ્ય ન્યાયાધીશ કાર્યકારી રાજ્યપાલ બને</li>
+</ul>
+<span class="sub">સત્તાઓ અને કાર્યો</span>
+<ul>
+<li>વટહુકમ બહાર પાડવાની સત્તા (અનુ. 213)</li>
+<li>રાષ્ટ્રપતિ શાસનની ભલામણ કરવાની સત્તા (અનુ. 356)</li>
+<li>રાજ્ય વિધેયકને સંમતિ આપવી / રોકવી / રાષ્ટ્રપતિ માટે અનામત રાખવાની સત્તા (અનુ. 200)</li>
+<li>ક્ષમાદાનની સત્તા (અનુ. 161) — મૃત્યુદંડ સામે નહીં (એ ફક્ત રાષ્ટ્રપતિ પાસે)</li>
+<li>વિવેકાધિકાર (Discretionary Powers) — મુખ્યમંત્રીની નિમણૂક (ત્રિશંકુ સ્થિતિમાં), વિધાનસભા વિસર્જન, રાષ્ટ્રપતિ શાસનની ભલામણ</li>
+</ul>
+<div class="note">GPSC ટીપ: રાજ્યપાલના પગાર-ભથ્થાં રાજ્યની સંચિત ફંડ (Consolidated Fund)માંથી અપાય છે, કેન્દ્રમાંથી નહીં.</div>
+`},
+{t:"મુખ્યમંત્રી", en:"Chief Minister", art:"અનુચ્છેદ 163–164", body:`
+<span class="sub">નિમણૂક-લાયકાત</span>
+<ul>
+<li>રાજ્યપાલ દ્વારા નિમણૂક — સામાન્ય રીતે વિધાનસભામાં બહુમતી પક્ષના નેતા</li>
+<li>ધારાસભ્ય ન હોય તો 6 મહિનામાં સભ્ય બનવું ફરજિયાત</li>
+</ul>
+<span class="sub">શપથ</span>
+<ul>
+<li>રાજ્યપાલ દ્વારા</li>
+</ul>
+<span class="sub">કાર્યકાળ-પદમુક્તિ</span>
+<ul>
+<li>નિશ્ચિત નથી — વિધાનસભામાં બહુમતી હોય ત્યાં સુધી</li>
+<li>રાજીનામું — રાજ્યપાલને; અવિશ્વાસ ઠરાવ પસાર થાય તો રાજીનામું ફરજિયાત</li>
+</ul>
+<span class="sub">કાર્યો</span>
+<ul>
+<li>રાજ્યના વાસ્તવિક કારોબારી વડા, મંત્રીમંડળના અધ્યક્ષ</li>
+<li>રાજ્યપાલ અને મંત્રીમંડળ વચ્ચેની કડી (અનુ. 167 — રાજ્યપાલને માહિતી પૂરી પાડવી)</li>
+<li>વિધાનસભાને સામૂહિક રીતે જવાબદાર (અનુ. 164(2))</li>
+</ul>
+`},
+{t:"રાજ્ય મંત્રીમંડળ", en:"State Council of Ministers", art:"અનુચ્છેદ 163–164", body:`
+<ul>
+<li>91મો સુધારો (2003) — રાજ્ય મંત્રીમંડળનું કદ વિધાનસભાના કુલ સભ્યોના 15% થી વધુ ન હોઈ શકે (ન્યૂનતમ 12 મંત્રી)</li>
+<li>મુખ્યમંત્રીની સલાહ પર રાજ્યપાલ નિમણૂક કરે</li>
+<li>સામૂહિક જવાબદારીનો સિદ્ધાંત વિધાનસભા પ્રત્યે</li>
+</ul>
+`},
+{t:"એડવોકેટ જનરલ", en:"Advocate General", art:"અનુચ્છેદ 165", body:`
+<ul>
+<li>રાજ્યના સર્વોચ્ચ કાયદા અધિકારી — રાજ્યપાલ દ્વારા નિમણૂક (મુખ્યમંત્રીની સલાહથી)</li>
+<li>વડી અદાલતના ન્યાયાધીશ બનવાની લાયકાત જરૂરી</li>
+<li>કાર્યકાળ નિશ્ચિત નથી — રાજ્યપાલની મરજી સુધી</li>
+<li>રાજ્ય વિધાનસભાની કાર્યવાહીમાં ભાગ લેવાનો અધિકાર, મતદાનનો અધિકાર નહીં</li>
+</ul>
+`}
+]},
+
+{cat:"રાજ્ય વિધાનમંડળ", items:[
+{t:"વિધાનસભા", en:"Legislative Assembly (Vidhan Sabha)", art:"અનુચ્છેદ 170", body:`
+<ul>
+<li>રાજ્યનું નિમ્ન ગૃહ, પ્રત્યક્ષ ચૂંટાયેલ</li>
+<li>સભ્યસંખ્યા: 60 થી 500 વચ્ચે (રાજ્ય પ્રમાણે બદલાય; ગોવા/સિક્કિમ જેવા નાના રાજ્યોમાં અપવાદરૂપે ઓછી)</li>
+<li>કાર્યકાળ: 5 વર્ષ (કટોકટીમાં લંબાવી શકાય)</li>
+<li>લાયકાત: 25 વર્ષની ઉંમર, ભારતીય નાગરિક</li>
+<li>ગુજરાત વિધાનસભા — કુલ 182 બેઠકો</li>
+<li>વિસર્જન — રાજ્યપાલ દ્વારા (મુખ્યમંત્રીની સલાહ પર)</li>
+</ul>
+`},
+{t:"વિધાનપરિષદ", en:"Legislative Council (Vidhan Parishad)", art:"અનુચ્છેદ 169", body:`
+<ul>
+<li>રાજ્યનું ઉચ્ચ ગૃહ — તમામ રાજ્યોમાં નથી (વૈકલ્પિક ગૃહ)</li>
+<li>હાલમાં 6 રાજ્યોમાં અસ્તિત્વ ધરાવે: ઉત્તર પ્રદેશ, બિહાર, મહારાષ્ટ્ર, કર્ણાટક, આંધ્ર પ્રદેશ, તેલંગાણા</li>
+<li>સ્થાપના/નાબૂદી — રાજ્ય વિધાનસભાના ઠરાવ (વિશેષ બહુમતી) બાદ સંસદના સાદા કાયદાથી</li>
+<li>સભ્યસંખ્યા વિધાનસભાના 1/3 થી વધુ ન હોઈ શકે, ન્યૂનતમ 40</li>
+<li>સ્થાયી ગૃહ — 1/3 સભ્યો દર 2 વર્ષે નિવૃત્ત, કાર્યકાળ 6 વર્ષ</li>
+<li>ચૂંટણી પદ્ધતિ: 1/3 સ્થાનિક સંસ્થાઓ દ્વારા, 1/12 સ્નાતકો દ્વારા, 1/12 શિક્ષકો દ્વારા, 1/3 વિધાનસભા સભ્યો દ્વારા, બાકી રાજ્યપાલ દ્વારા નામાંકિત</li>
+</ul>
+`},
+{t:"વિધાનસભા અધ્યક્ષ", en:"Speaker of Vidhan Sabha", art:"અનુચ્છેદ 178", body:`
+<ul>
+<li>વિધાનસભાના સભ્યો દ્વારા ચૂંટાય</li>
+<li>ગૃહની કાર્યવાહી ચલાવે, નિર્ણાયક મતનો અધિકાર</li>
+<li>પદમુક્તિ — તત્કાલીન કુલ સભ્યોની બહુમતીથી ઠરાવ, 14 દિવસ નોટિસ</li>
+<li>પક્ષપલટા વિરોધી કાયદા હેઠળ નિર્ણય લેવાની સત્તા</li>
+<li>ધનવિધેયક હોવા અંગેનો નિર્ણય લે (અનુ. 199)</li>
+</ul>
+`}
+]},
+
+{cat:"ન્યાયતંત્ર (Judiciary)", items:[
+{t:"સર્વોચ્ચ અદાલત અને મુખ્ય ન્યાયાધીશ (CJI)", en:"Supreme Court & CJI", art:"અનુચ્છેદ 124–147", body:`
+<p>ભારતનું સૌથી ઉચ્ચ ન્યાયિક તંત્ર — સ્વતંત્ર અને એકીકૃત ન્યાયતંત્રનું શિખર.</p>
+<span class="sub">સ્થાપના-રચના</span>
+<ul>
+<li>સ્થાપના: 28 જાન્યુઆરી 1950, નવી દિલ્હી</li>
+<li>ભારતના મુખ્ય ન્યાયાધીશ (CJI) + અન્ય ન્યાયાધીશો (વર્તમાનમાં 34 સુધી — CJI સહિત)</li>
+</ul>
+<span class="sub">નિમણૂક-લાયકાત (અનુ. 124)</span>
+<ul>
+<li>રાષ્ટ્રપતિ દ્વારા (કોલેજિયમ પ્રણાલી હેઠળ ભલામણ — CJI + 4 વરિષ્ઠતમ ન્યાયાધીશ)</li>
+<li>લાયકાત: વડી અદાલતના ન્યાયાધીશ તરીકે 5 વર્ષ, અથવા વડી અદાલતમાં 10 વર્ષ વકીલાત, અથવા રાષ્ટ્રપતિના મતે વિખ્યાત ન્યાયવિદ</li>
+<li>CJIની નિમણૂક — પરંપરાગત રીતે વરિષ્ઠતમ ન્યાયાધીશ</li>
+</ul>
+<span class="sub">શપથ, કાર્યકાળ, પદમુક્તિ</span>
+<ul>
+<li>શપથ — રાષ્ટ્રપતિ દ્વારા</li>
+<li>નિવૃત્તિ વય: 65 વર્ષ</li>
+<li>રાજીનામું — રાષ્ટ્રપતિને; પદમુક્તિ — સાબિત ગેરવર્તણૂક/અસમર્થતાના આધારે મહાભિયોગ (સંસદના બંને ગૃહમાં 2/3 વિશેષ બહુમતી + રાષ્ટ્રપતિનો આદેશ — અનુ. 124(4))</li>
+</ul>
+<span class="sub">અધિકારક્ષેત્ર</span>
+<ul>
+<li><b>મૂળ (Original)</b> — કેન્દ્ર-રાજ્ય/રાજ્ય-રાજ્ય વિવાદ (અનુ. 131)</li>
+<li><b>અપીલ (Appellate)</b> — બંધારણીય, દીવાની, ફોજદારી કેસમાં</li>
+<li><b>સલાહકારી (Advisory)</b> — રાષ્ટ્રપતિ સલાહ માંગે (અનુ. 143)</li>
+<li><b>રિટ અધિકારક્ષેત્ર</b> — મૂળભૂત અધિકારના રક્ષણ માટે (અનુ. 32)</li>
+</ul>
+<span class="sub">મહત્વના તથ્યો</span>
+<ul>
+<li>રેકોર્ડ કોર્ટ (Court of Record) — તેના ચુકાદા તમામ અદાલતોને બંધનકર્તા (અનુ. 141), તિરસ્કારની સત્તા (અનુ. 129)</li>
+<li>પ્રથમ CJI — હરિલાલ જે. કાનિયા</li>
+<li>પગાર-ભથ્થાં ભારતની સંચિત ફંડ પર બોજ (Charged Expenditure) — સંસદની મંજૂરી વગર</li>
+</ul>
+`},
+{t:"વડી અદાલત", en:"High Court", art:"અનુચ્છેદ 214–231", body:`
+<span class="sub">રચના-નિમણૂક</span>
+<ul>
+<li>રાજ્યની સર્વોચ્ચ ન્યાયિક સંસ્થા — દરેક રાજ્ય માટે એક (કેટલાક રાજ્યો સંયુક્ત વડી અદાલત ધરાવે — દા.ત. પંજાબ-હરિયાણા)</li>
+<li>નિમણૂક: રાષ્ટ્રપતિ દ્વારા, CJI અને રાજ્યપાલની સલાહથી (કોલેજિયમ પ્રણાલી)</li>
+<li>લાયકાત: 10 વર્ષ ન્યાયિક પદ અથવા 10 વર્ષ વડી અદાલતમાં વકીલાત</li>
+</ul>
+<span class="sub">કાર્યકાળ-પદમુક્તિ</span>
+<ul>
+<li>નિવૃત્તિ વય: 62 વર્ષ</li>
+<li>પદમુક્તિ — CJIની જેમ મહાભિયોગ પ્રક્રિયા (સંસદ દ્વારા)</li>
+<li>એક વડી અદાલતના ન્યાયાધીશની બદલી બીજી વડી અદાલતમાં થઈ શકે (અનુ. 222)</li>
+</ul>
+<span class="sub">અધિકારક્ષેત્ર</span>
+<ul>
+<li>રિટ જારી કરવાની સત્તા (અનુ. 226) — સર્વોચ્ચ અદાલત કરતાં વ્યાપક (મૂળભૂત અધિકાર ઉપરાંત અન્ય કાયદાકીય અધિકાર માટે પણ)</li>
+<li>ગુજરાત વડી અદાલત — અમદાવાદ ખાતે, સ્થાપના 1960</li>
+</ul>
+`},
+{t:"જિલ્લા અદાલત અને ગૌણ ન્યાયતંત્ર", en:"District & Subordinate Courts", art:"અનુચ્છેદ 233–237", body:`
+<ul>
+<li>જિલ્લા સ્તરે ગૌણ ન્યાયતંત્રનું સંચાલન — જિલ્લા ન્યાયાધીશ</li>
+<li>નિમણૂક: રાજ્યપાલ દ્વારા વડી અદાલતના પરામર્શમાં (અનુ. 233)</li>
+<li>સિવિલ અને ફોજદારી બંને પ્રકારના કેસ — સિવિલ માટે "જિલ્લા ન્યાયાધીશ", ફોજદારી માટે "સેશન્સ જજ"</li>
+<li>લોક અદાલત — કાનૂની સેવા સત્તા મંડળ અધિનિયમ, 1987 હેઠળ — સમાધાનકારી ન્યાય</li>
+<li>ગ્રામ ન્યાયાલય અધિનિયમ, 2008 — ગ્રામ કક્ષાએ ઝડપી ન્યાય</li>
+</ul>
+`},
+{t:"ન્યાયિક સમીક્ષા અને મૂળભૂત માળખું", en:"Judicial Review & Basic Structure", art:"અનુચ્છેદ 13, 32, 226, 368", body:`
+<ul>
+<li>અમેરિકાના બંધારણમાંથી લેવાયેલ સિદ્ધાંત</li>
+<li>સંસદ/વિધાનસભા દ્વારા પસાર કાયદો બંધારણ વિરુદ્ધ હોય તો અદાલત તેને રદ કરી શકે (અનુ. 13)</li>
+<li>મૂળભૂત માળખાનો સિદ્ધાંત (Basic Structure Doctrine) — કેશવાનંદ ભારતી કેસ (1973)માં 13 જજની બેન્ચે સ્થાપિત</li>
+<li>સંસદ અનુ. 368 હેઠળ બંધારણ સુધારી શકે, પરંતુ મૂળભૂત માળખું બદલી શકે નહીં</li>
+<li>મૂળભૂત માળખાના ઉદાહરણો — બંધારણની સર્વોચ્ચતા, ધર્મનિરપેક્ષતા, સત્તાનું વિભાજન, સંઘીય માળખું, ન્યાયિક સમીક્ષા</li>
+</ul>
+<div class="note">GPSC ટીપ: ગોલકનાથ કેસ (1967) → 24મો સુધારો (1971) → કેશવાનંદ ભારતી કેસ (1973) → 42મો સુધારો (1976) → મિનર્વા મિલ્સ કેસ (1980) — આ ક્રમ યાદ રાખવો.</div>
+`},
+{t:"ટ્રિબ્યુનલ અને વૈકલ્પિક વિવાદ નિરાકરણ", en:"Tribunals", art:"અનુચ્છેદ 323A–323B", body:`
+<ul>
+<li>અનુ. 323A — વહીવટી ટ્રિબ્યુનલ (દા.ત. કેન્દ્રીય વહીવટી ટ્રિબ્યુનલ - CAT), 42મા સુધારાથી ઉમેરાયું</li>
+<li>અનુ. 323B — અન્ય બાબતો માટે ટ્રિબ્યુનલ (કર, જમીન સુધારા, ચૂંટણી વગેરે)</li>
+<li>NGT (National Green Tribunal) — પર્યાવરણ સંબંધિત, 2010ના કાયદાથી</li>
+</ul>
+`}
+]},
+
+{cat:"સ્થાનિક સ્વરાજ્ય", items:[
+{t:"પંચાયતી રાજ", en:"Panchayati Raj (73rd Amendment)", art:"અનુચ્છેદ 243, ભાગ IX", body:`
+<p><mark>73મો બંધારણીય સુધારો (1992)</mark> — ગ્રામ્ય સ્થાનિક સ્વરાજ્યને બંધારણીય દરજ્જો આપ્યો, બલવંતરાય મહેતા સમિતિ (1957)ની ભલામણ પર આધારિત.</p>
+<span class="sub">ત્રિ-સ્તરીય માળખું</span>
+<ul>
+<li>ગ્રામ પંચાયત (ગામ સ્તર) — સરપંચ</li>
+<li>તાલુકા/બ્લોક પંચાયત (મધ્યવર્તી સ્તર) — પ્રમુખ</li>
+<li>જિલ્લા પંચાયત (જિલ્લા સ્તર) — પ્રમુખ</li>
+</ul>
+<span class="sub">મુખ્ય જોગવાઈઓ</span>
+<ul>
+<li>દર 5 વર્ષે ચૂંટણી ફરજિયાત (અનુ. 243E)</li>
+<li>મહિલાઓ માટે 1/3 બેઠકો અનામત (ગુજરાત સહિત ઘણા રાજ્યોમાં 50%)</li>
+<li>SC/ST માટે વસ્તી પ્રમાણે અનામત</li>
+<li>રાજ્ય ચૂંટણી પંચ ચૂંટણી સંચાલિત કરે (અનુ. 243K)</li>
+<li>રાજ્ય નાણાં પંચ — પંચાયતોને નાણાં ફાળવણી અંગે ભલામણ (અનુ. 243I)</li>
+<li>ગ્રામસભા — તમામ મતદારોની બનેલી, ગામનું પાયાનું એકમ (અનુ. 243A)</li>
+<li>11મી અનુસૂચિ — પંચાયતોને લગતા 29 વિષયો</li>
+</ul>
+`},
+{t:"નગરપાલિકા/મહાનગરપાલિકા", en:"Municipalities (74th Amendment)", art:"અનુચ્છેદ 243P, ભાગ IXA", body:`
+<p><mark>74મો બંધારણીય સુધારો (1992)</mark> — શહેરી સ્થાનિક સ્વરાજ્યને બંધારણીય દરજ્જો.</p>
+<span class="sub">ત્રણ પ્રકારની શહેરી સંસ્થાઓ</span>
+<ul>
+<li>નગર પંચાયત (ગ્રામ્યથી શહેરી બનતા વિસ્તાર માટે)</li>
+<li>નગરપાલિકા (નાના શહેરી વિસ્તાર)</li>
+<li>મહાનગરપાલિકા (મોટા શહેરી વિસ્તાર — 10 લાખથી વધુ વસ્તી)</li>
+</ul>
+<ul>
+<li>12મી અનુસૂચિ — 18 વિષયો</li>
+<li>વોર્ડ સમિતિ (Ward Committee) — 3 લાખથી વધુ વસ્તીવાળી નગરપાલિકામાં ફરજિયાત</li>
+<li>DPC (જિલ્લા આયોજન સમિતિ - અનુ. 243ZD) અને MPC (મહાનગર આયોજન સમિતિ - અનુ. 243ZE)</li>
+<li>મહિલાઓ અને SC/ST માટે અનામતની જોગવાઈ</li>
+</ul>
+`},
+{t:"સહકારી મંડળીઓ", en:"Co-operative Societies", art:"અનુચ્છેદ 243ZH–243ZT, ભાગ IXB", body:`
+<ul>
+<li>97મો બંધારણીય સુધારો (2011) દ્વારા ઉમેરાયું</li>
+<li>સહકારી મંડળી સ્થાપવાનો અધિકાર મૂળભૂત અધિકાર (અનુ. 19(1)(c)) તરીકે માન્ય</li>
+<li>સહકારી મંડળીની ચૂંટણી, બોર્ડનો કાર્યકાળ (5 વર્ષ), ઓડિટ અંગે જોગવાઈ</li>
+</ul>
+`}
+]},
+
+{cat:"બંધારણીય અને વૈધાનિક સંસ્થાઓ", items:[
+{t:"ચૂંટણી પંચ અને મુખ્ય ચૂંટણી કમિશનર", en:"Election Commission of India", art:"અનુચ્છેદ 324–329", body:`
+<p>સંસદ, રાજ્ય વિધાનમંડળ, રાષ્ટ્રપતિ અને ઉપરાષ્ટ્રપતિની ચૂંટણીઓનું સંચાલન-દેખરેખ-નિયંત્રણ કરતી સ્વતંત્ર બંધારણીય સંસ્થા.</p>
+<span class="sub">રચના-નિમણૂક</span>
+<ul>
+<li>મુખ્ય ચૂંટણી કમિશનર (CEC) + અન્ય ચૂંટણી કમિશનરો (વર્તમાનમાં 3 સભ્યોનું પંચ)</li>
+<li>નિમણૂક: રાષ્ટ્રપતિ દ્વારા (કેન્દ્ર સરકારની ભલામણથી, નવા 2023ના કાયદા મુજબ સમિતિ દ્વારા)</li>
+</ul>
+<span class="sub">કાર્યકાળ-પદમુક્તિ</span>
+<ul>
+<li>કાર્યકાળ 6 વર્ષ અથવા 65 વર્ષની ઉંમર, જે વહેલું હોય</li>
+<li>મુખ્ય ચૂંટણી કમિશનરને સર્વોચ્ચ અદાલતના ન્યાયાધીશની જેમ પદ પરથી દૂર કરાય (મહાભિયોગ સિવાય નહીં) — સ્વતંત્રતાનું રક્ષણ</li>
+<li>અન્ય કમિશનરોને CECની ભલામણથી દૂર કરી શકાય</li>
+</ul>
+<span class="sub">કાર્યો</span>
+<ul>
+<li>મતદાર યાદી તૈયાર કરવી-સુધારવી, મતવિસ્તારની હદ નક્કી કરવી</li>
+<li>રાજકીય પક્ષોની નોંધણી અને ચૂંટણી ચિહ્ન ફાળવણી</li>
+<li>આદર્શ આચારસંહિતા લાગુ કરવી</li>
+</ul>
+<div class="note">GPSC ટીપ: સુકુમાર સેન ભારતના પ્રથમ મુખ્ય ચૂંટણી કમિશનર હતા (1950).</div>
+`},
+{t:"નાણાં પંચ", en:"Finance Commission", art:"અનુચ્છેદ 280", body:`
+<ul>
+<li>રાષ્ટ્રપતિ દ્વારા દર 5 વર્ષે (અથવા જરૂર જણાય ત્યારે) રચના</li>
+<li>અધ્યક્ષ + 4 સભ્યો</li>
+<li>લાયકાત: અધ્યક્ષ જાહેર બાબતોમાં અનુભવ ધરાવતા હોવા જોઈએ</li>
+<li>કેન્દ્ર અને રાજ્યો વચ્ચે કરની આવકની વહેંચણીની ભલામણ કરે</li>
+<li>રાજ્યોને સહાયક અનુદાન (Grants-in-aid) અંગે ભલામણ (અનુ. 275)</li>
+<li>16મા નાણાં પંચની ભલામણ હાલમાં લાગુ પ્રક્રિયામાં (અધ્યક્ષ અંગે નવીનતમ માહિતી માટે સર્ચ કરો)</li>
+</ul>
+`},
+{t:"CAG — કંટ્રોલર એન્ડ ઓડિટર જનરલ", en:"Comptroller and Auditor General", art:"અનુચ્છેદ 148–151", body:`
+<span class="sub">નિમણૂક-લાયકાત</span>
+<ul>
+<li>ભારતના "તિજોરીના રખેવાળ" (Guardian of Public Purse) — ડૉ. આંબેડકરે તેને બંધારણ હેઠળ સૌથી મહત્વનું પદ ગણાવ્યું</li>
+<li>રાષ્ટ્રપતિ દ્વારા નિમણૂક</li>
+</ul>
+<span class="sub">કાર્યકાળ-પદમુક્તિ</span>
+<ul>
+<li>કાર્યકાળ 6 વર્ષ અથવા 65 વર્ષની ઉંમર</li>
+<li>પદમુક્તિ — સર્વોચ્ચ અદાલતના ન્યાયાધીશની જેમ (મહાભિયોગ — સાબિત ગેરવર્તણૂક/અસમર્થતા)</li>
+</ul>
+<span class="sub">કાર્યો</span>
+<ul>
+<li>કેન્દ્ર અને રાજ્ય સરકારના ખર્ચનું ઓડિટ કરે</li>
+<li>અહેવાલ રાષ્ટ્રપતિ/રાજ્યપાલને સુપરત, પછી સંસદ/વિધાનસભા સમક્ષ રજૂ, PACમાં ચકાસણી</li>
+<li>નિવૃત્તિ બાદ સરકારી નોકરી માટે અપાત્ર</li>
+</ul>
+`},
+{t:"UPSC અને GPSC", en:"Union & State Public Service Commission", art:"અનુચ્છેદ 315–323", body:`
+<span class="sub">રચના</span>
+<ul>
+<li>UPSC — સંઘ સરકારની ભરતી પરીક્ષાઓ (IAS, IPS, IFS વગેરે) સંચાલિત કરે</li>
+<li>GPSC — ગુજરાત રાજ્ય જાહેર સેવા આયોગ — રાજ્ય કક્ષાની ભરતી પરીક્ષાઓ (PSI, નાયબ કલેક્ટર, મામલતદાર વગેરે)</li>
+</ul>
+<span class="sub">નિમણૂક-કાર્યકાળ</span>
+<ul>
+<li>અધ્યક્ષ અને સભ્યોની નિમણૂક રાષ્ટ્રપતિ (UPSC) / રાજ્યપાલ (GPSC) દ્વારા</li>
+<li>UPSC સભ્યની નિવૃત્તિ વય: 65 વર્ષ, GPSC સભ્યની: 62 વર્ષ</li>
+<li>પદમુક્તિ — રાષ્ટ્રપતિ દ્વારા, ગેરવર્તણૂક સાબિત થાય તો સર્વોચ્ચ અદાલતની તપાસ બાદ (અનુ. 317)</li>
+</ul>
+<span class="sub">કાર્યો</span>
+<ul>
+<li>સરકારી નોકરીની ભરતી પરીક્ષા લેવી, ઇન્ટરવ્યૂ, પ્રમોશન-બદલી અંગે સલાહ</li>
+<li>શિસ્તભંગની બાબતોમાં સલાહકારી ભૂમિકા</li>
+</ul>
+`},
+{t:"રાષ્ટ્રીય માનવ અધિકાર આયોગ", en:"National Human Rights Commission (NHRC)", art:"કાયદો — 1993 (વૈધાનિક સંસ્થા)", body:`
+<ul>
+<li>બંધારણીય નહીં, પરંતુ વૈધાનિક સંસ્થા — માનવ અધિકાર સંરક્ષણ અધિનિયમ, 1993 હેઠળ સ્થાપિત</li>
+<li>અધ્યક્ષ — સર્વોચ્ચ અદાલતના નિવૃત્ત મુખ્ય ન્યાયાધીશ, કાર્યકાળ 3 વર્ષ અથવા 70 વર્ષની ઉંમર</li>
+<li>માનવ અધિકારના ઉલ્લંઘનની તપાસ કરે, ભલામણ કરે (ભલામણ બંધનકર્તા નહીં, ફક્ત ભલામણ સ્વરૂપ)</li>
+<li>રાજ્ય કક્ષાએ રાજ્ય માનવ અધિકાર આયોગ (SHRC) પણ કાર્યરત</li>
+</ul>
+`},
+{t:"નીતિ આયોગ", en:"NITI Aayog", art:"કારોબારી ઠરાવ (બંધારણેતર)", body:`
+<ul>
+<li>1 જાન્યુઆરી 2015થી આયોજન પંચ (Planning Commission)ના સ્થાને સ્થપાયેલ — બંધારણીય કે વૈધાનિક નહીં, ફક્ત કારોબારી ઠરાવથી</li>
+<li>અધ્યક્ષ — વડાપ્રધાન; ઉપાધ્યક્ષ, CEO અને સભ્યો</li>
+<li>નીતિ ઘડતરમાં "થિંક ટેન્ક" ભૂમિકા, સહકારી સંઘવાદને પ્રોત્સાહન — રાજ્યોના મુખ્યમંત્રીઓની ગવર્નિંગ કાઉન્સિલ</li>
+<li>ફંડ ફાળવણીની સત્તા નથી (અગાઉ આયોજન પંચ પાસે હતી) — એ સત્તા હવે નાણાં મંત્રાલય/નાણાં પંચ પાસે</li>
+</ul>
+`},
+{t:"GST કાઉન્સિલ", en:"GST Council", art:"અનુચ્છેદ 279A", body:`
+<ul>
+<li>101મા બંધારણીય સુધારા (2016) દ્વારા ઉમેરાયેલ — GSTના દર-નિયમો નક્કી કરવા</li>
+<li>અધ્યક્ષ — કેન્દ્રીય નાણાં મંત્રી; સભ્યો — રાજ્યોના નાણાં/હવાલો ધરાવતા મંત્રીઓ</li>
+<li>સહકારી સંઘવાદનું ઉત્તમ ઉદાહરણ — કેન્દ્રનો મત 1/3 વજન, રાજ્યોનો સંયુક્ત મત 2/3 વજન</li>
+<li>નિર્ણય માટે 3/4 બહુમતી જરૂરી</li>
+</ul>
+`},
+{t:"કેન્દ્રીય તકેદારી આયોગ (CVC)", en:"Central Vigilance Commission", art:"CVC અધિનિયમ, 2003", body:`
+<ul>
+<li>વૈધાનિક સંસ્થા (સંથાનમ સમિતિની ભલામણ પર 1964માં કારોબારી ઠરાવથી સ્થપાયેલ, 2003માં વૈધાનિક દરજ્જો)</li>
+<li>મુખ્ય તકેદારી કમિશનર + 2 તકેદારી કમિશનર</li>
+<li>નિમણૂક — રાષ્ટ્રપતિ દ્વારા, વડાપ્રધાન-ગૃહમંત્રી-વિપક્ષ નેતાની સમિતિની ભલામણથી</li>
+<li>ભ્રષ્ટાચાર વિરોધી કાર્યવાહી પર દેખરેખ, CBI પર સુપરવિઝન (મર્યાદિત)</li>
+</ul>
+`},
+{t:"CBI — કેન્દ્રીય તપાસ પંચ", en:"Central Bureau of Investigation", art:"DSPE અધિનિયમ, 1946", body:`
+<ul>
+<li>બંધારણીય કે વૈધાનિક સંસ્થા નથી — દિલ્હી સ્પેશિયલ પોલીસ એસ્ટાબ્લિશમેન્ટ (DSPE) અધિનિયમ, 1946 હેઠળ કાર્યરત</li>
+<li>ભ્રષ્ટાચાર, ગંભીર ફોજદારી ગુના, આર્થિક અપરાધની તપાસ કરે</li>
+<li>નિયામક (Director)ની નિમણૂક — વડાપ્રધાન, વિપક્ષ નેતા, CJI ધરાવતી સમિતિ દ્વારા, કાર્યકાળ 2 વર્ષ</li>
+<li>રાજ્યમાં તપાસ માટે રાજ્ય સરકારની સંમતિ જરૂરી (સામાન્ય સંમતિ પાછી ખેંચી શકાય)</li>
+</ul>
+`},
+{t:"લોકપાલ અને લોકાયુક્ત", en:"Lokpal & Lokayukta", art:"લોકપાલ અધિનિયમ, 2013", body:`
+<ul>
+<li>વૈધાનિક સંસ્થા — લોકપાલ અને લોકાયુક્ત અધિનિયમ, 2013 હેઠળ — ભ્રષ્ટાચાર વિરોધી ઓમ્બડ્સમેન</li>
+<li>લોકપાલ — કેન્દ્ર સ્તરે; અધ્યક્ષ + વધુમાં વધુ 8 સભ્યો (50% ન્યાયિક)</li>
+<li>લોકાયુક્ત — રાજ્ય સ્તરે, રાજ્ય કાયદા હેઠળ સ્થપાય</li>
+<li>નિમણૂક સમિતિ — વડાપ્રધાન, લોકસભા સ્પીકર, વિપક્ષ નેતા, CJI, વિખ્યાત ન્યાયવિદ</li>
+</ul>
+`},
+{t:"રાષ્ટ્રીય આયોગો — SC/ST/મહિલા/પછાત વર્ગ/લઘુમતી", en:"National Commissions", art:"અનુચ્છેદ 338, 338A, 340", body:`
+<ul>
+<li><b>રાષ્ટ્રીય SC આયોગ</b> (અનુ. 338) — 89મા સુધારાથી (2003) અલગ બંધારણીય સંસ્થા</li>
+<li><b>રાષ્ટ્રીય ST આયોગ</b> (અનુ. 338A) — 89મા સુધારાથી અલગ થયેલ (અગાઉ SC સાથે સંયુક્ત)</li>
+<li><b>રાષ્ટ્રીય પછાત વર્ગ આયોગ</b> (અનુ. 338B) — 102મા સુધારાથી (2018) બંધારણીય દરજ્જો</li>
+<li><b>રાષ્ટ્રીય મહિલા આયોગ</b> — વૈધાનિક સંસ્થા (1990ના કાયદાથી), બંધારણીય નહીં</li>
+<li><b>રાષ્ટ્રીય લઘુમતી આયોગ</b> — વૈધાનિક સંસ્થા (1992ના કાયદાથી)</li>
+<li>તમામનું કાર્ય — સંબંધિત વર્ગના રક્ષણાત્મક પગલાંની દેખરેખ, ફરિયાદ તપાસ, ભલામણ</li>
+</ul>
+`}
+]},
+
+{cat:"કેન્દ્ર-રાજ્ય સંબંધો અને કટોકટી", items:[
+{t:"કેન્દ્ર-રાજ્ય સંબંધો", en:"Centre-State Relations", art:"અનુચ્છેદ 245–263, ભાગ XI", body:`
+<span class="sub">કાયદાકીય સંબંધો — 7મી અનુસૂચિ</span>
+<table><tr><th>યાદી</th><th>વિષયો</th><th>સત્તા</th></tr>
+<tr><td>સંઘ યાદી</td><td>100 વિષયો (સંરક્ષણ, વિદેશ બાબત, રેલવે)</td><td>ફક્ત સંસદ</td></tr>
+<tr><td>રાજ્ય યાદી</td><td>61 વિષયો (પોલીસ, જાહેર આરોગ્ય, કૃષિ)</td><td>ફક્ત રાજ્ય વિધાનમંડળ</td></tr>
+<tr><td>સમવર્તી યાદી</td><td>52 વિષયો (શિક્ષણ, વન, લગ્ન)</td><td>બંને — સંઘર્ષમાં કેન્દ્રનો કાયદો પ્રબળ (અનુ. 254)</td></tr>
+</table>
+<ul>
+<li>શેષ સત્તા (Residuary Power) — કેન્દ્ર પાસે (અનુ. 248) — કેનેડાના મોડલથી પ્રેરિત</li>
+</ul>
+<p><b>વહીવટી સંબંધો</b> — અનુ. 256–263 (કેન્દ્રના નિર્દેશો, અખિલ ભારતીય સેવાઓ)</p>
+<p><b>નાણાકીય સંબંધો</b> — અનુ. 268–293 (કરની વહેંચણી, અનુદાન)</p>
+<div class="note">આંતરરાજ્ય પરિષદ (Inter-State Council) — અનુ. 263 — રાષ્ટ્રપતિ દ્વારા સ્થાપી શકાય, વિવાદ નિરાકરણ અને સંકલન માટે.</div>
+`},
+{t:"કટોકટીની જોગવાઈઓ", en:"Emergency Provisions", art:"અનુચ્છેદ 352, 356, 360", body:`
+<table><tr><th>પ્રકાર</th><th>અનુચ્છેદ</th><th>કારણ</th></tr>
+<tr><td>રાષ્ટ્રીય કટોકટી</td><td>352</td><td>યુદ્ધ, બાહ્ય આક્રમણ, સશસ્ત્ર બળવો (44મા સુધારાથી "આંતરિક અશાંતિ"ને બદલે)</td></tr>
+<tr><td>રાજ્ય કટોકટી (રાષ્ટ્રપતિ શાસન)</td><td>356</td><td>રાજ્યમાં બંધારણીય તંત્ર ભાંગી પડવું</td></tr>
+<tr><td>નાણાકીય કટોકટી</td><td>360</td><td>ભારત/કોઈ ભાગની નાણાકીય સ્થિરતાને ખતરો</td></tr>
+</table>
+<span class="sub">રાષ્ટ્રીય કટોકટી — વિગત</span>
+<ul>
+<li>રાષ્ટ્રપતિ મંત્રીમંડળની લેખિત સલાહથી જાહેર કરે, 1 મહિનામાં સંસદની મંજૂરી જરૂરી (વિશેષ બહુમતી)</li>
+<li>અસર — કેન્દ્ર-રાજ્ય સત્તાનું સંતુલન કેન્દ્ર તરફ ઢળે, મૂળભૂત અધિકાર (અનુ. 19) સ્થગિત, અનુ. 20-21 સિવાયના અધિકારો સ્થગિત કરી શકાય (અનુ. 359)</li>
+<li>અત્યાર સુધી 3 વખત જાહેર (1962 ચીન યુદ્ધ, 1971 પાકિસ્તાન યુદ્ધ, 1975 આંતરિક કટોકટી)</li>
+</ul>
+<span class="sub">રાષ્ટ્રપતિ શાસન — વિગત</span>
+<ul>
+<li>રાજ્યપાલના અહેવાલ કે અન્ય માહિતીના આધારે રાષ્ટ્રપતિ જાહેર કરે</li>
+<li>2 મહિનામાં સંસદની મંજૂરી જરૂરી, પ્રથમ 6 મહિના માટે, દર 6 મહિને લંબાવી શકાય</li>
+<li>મહત્તમ 3 વર્ષ સુધી લંબાવી શકાય (44મા સુધારા બાદ કડક શરતો)</li>
+<li>S.R. Bommai કેસ (1994) — રાષ્ટ્રપતિ શાસનની ન્યાયિક સમીક્ષા શક્ય, વિધાનસભા વિસર્જન પહેલાં સંસદની મંજૂરી જરૂરી</li>
+</ul>
+<span class="sub">નાણાકીય કટોકટી</span>
+<ul>
+<li>નાણાકીય કટોકટી આજ સુધી ક્યારેય જાહેર થઈ નથી</li>
+<li>સંસદની મંજૂરી બાદ અનિશ્ચિત સમય સુધી ચાલુ રહી શકે, દર 2 મહિને પુનઃમંજૂરીની જરૂર નથી</li>
+</ul>
+`},
+{t:"બંધારણીય સુધારા", en:"Constitutional Amendments", art:"અનુચ્છેદ 368", body:`
+<span class="sub">સુધારાની 3 પદ્ધતિઓ</span>
+<ul>
+<li>સાદી બહુમતીથી (સામાન્ય કાયદાની જેમ, અનુ. 368ની બહાર) — દા.ત. નવા રાજ્યની રચના, નાગરિકતા</li>
+<li>વિશેષ બહુમતીથી (સંસદના દરેક ગૃહના 2/3 હાજર-મતદાન સભ્યો + કુલ સભ્યોની બહુમતી)</li>
+<li>વિશેષ બહુમતી + અડધા રાજ્યોની વિધાનસભાની સંમતિ — સંઘીય માળખાને લગતા મુદ્દા (દા.ત. રાષ્ટ્રપતિની ચૂંટણી, ન્યાયતંત્ર, 7મી અનુસૂચિ)</li>
+</ul>
+<span class="sub">મહત્વના સુધારા</span>
+<table><tr><th>સુધારો</th><th>વર્ષ</th><th>વિષય</th></tr>
+<tr><td>1લો</td><td>1951</td><td>જમીન સુધારા, અભિવ્યક્તિ સ્વતંત્રતા મર્યાદા, 9મી અનુસૂચિ ઉમેરાઈ</td></tr>
+<tr><td>7મો</td><td>1956</td><td>રાજ્ય પુનર્ગઠન, ભાષાવાર રાજ્યો</td></tr>
+<tr><td>42મો</td><td>1976</td><td>"મિની બંધારણ" — સમાજવાદી, બિનસાંપ્રદાયિક, અખંડિતતા શબ્દો, મૂળભૂત ફરજો, DPSPને પ્રાધાન્ય</td></tr>
+<tr><td>44મો</td><td>1978</td><td>સંપત્તિનો અધિકાર દૂર (કાયદાકીય અધિકાર બન્યો — અનુ. 300A)</td></tr>
+<tr><td>52મો</td><td>1985</td><td>પક્ષપલટા વિરોધી કાયદો (10મી અનુસૂચિ)</td></tr>
+<tr><td>61મો</td><td>1989</td><td>મતાધિકાર વય 21થી 18 વર્ષ</td></tr>
+<tr><td>73મો/74મો</td><td>1992</td><td>પંચાયતી રાજ / નગરપાલિકા</td></tr>
+<tr><td>86મો</td><td>2002</td><td>શિક્ષણનો અધિકાર (અનુ. 21A)</td></tr>
+<tr><td>91મો</td><td>2003</td><td>મંત્રીમંડળનું કદ 15% મર્યાદિત</td></tr>
+<tr><td>97મો</td><td>2011</td><td>સહકારી મંડળીઓ</td></tr>
+<tr><td>101મો</td><td>2016</td><td>GST</td></tr>
+<tr><td>103મો</td><td>2019</td><td>EWS 10% અનામત</td></tr>
+<tr><td>104મો</td><td>2020</td><td>એંગ્લો-ઈન્ડિયન નામાંકન નાબૂદ, SC/ST અનામત 10 વર્ષ લંબાવ્યું</td></tr>
+</table>
+`},
+{t:"જમ્મુ-કાશ્મીર અને વિશેષ જોગવાઈઓ", en:"Article 370 & Special Provisions", art:"અનુચ્છેદ 370, 371", body:`
+<ul>
+<li>અનુ. 370 — જમ્મુ-કાશ્મીરને વિશેષ દરજ્જો આપતી કામચલાઉ જોગવાઈ (ભાગ XXI, "કામચલાઉ, સંક્રમણકારી અને ખાસ જોગવાઈ")</li>
+<li>5 ઓગસ્ટ 2019ના રાષ્ટ્રપતિ આદેશથી અનુ. 370ની જોગવાઈઓ નિષ્ક્રિય, જમ્મુ-કાશ્મીર પુનર્ગઠન અધિનિયમ 2019 હેઠળ 2 કેન્દ્રશાસિત પ્રદેશમાં વિભાજન (J&K અને લડાખ)</li>
+<li>અનુ. 371, 371A-J — વિવિધ રાજ્યો (મહારાષ્ટ્ર, ગુજરાત, નાગાલેન્ડ, આસામ, મણિપુર, આંધ્રપ્રદેશ, સિક્કિમ, મિઝોરમ, અરુણાચલ, ગોવા, કર્ણાટક) માટે વિશેષ જોગવાઈઓ</li>
+<li>અનુ. 371 — મહારાષ્ટ્ર-ગુજરાત માટે વિદર્ભ, મરાઠવાડા, સૌરાષ્ટ્ર, કચ્છ માટે અલગ વિકાસ બોર્ડની જોગવાઈ કરવાની રાજ્યપાલને સત્તા</li>
+</ul>
+`}
+]},
+
+{cat:"અનુસૂચિઓ, ભાગો અને ઝડપી સંદર્ભ", items:[
+{t:"મહત્વના અનુચ્છેદ — ઝડપી સંદર્ભ (ટોપ 40)", en:"Important Articles Quick Reference", art:"સ્પર્ધાત્મક પરીક્ષા માટે", body:`
+<table><tr><th>અનુચ્છેદ</th><th>વિષય</th></tr>
+<tr><td>1</td><td>ભારત — રાજ્યોનું સંઘ (Union of States)</td></tr>
+<tr><td>3</td><td>નવા રાજ્યની રચના / હદ ફેરફાર — સંસદની સત્તા</td></tr>
+<tr><td>12</td><td>"રાજ્ય"ની વ્યાખ્યા</td></tr>
+<tr><td>13</td><td>મૂળભૂત અધિકાર વિરુદ્ધના કાયદા રદબાતલ</td></tr>
+<tr><td>14</td><td>કાયદા સમક્ષ સમાનતા</td></tr>
+<tr><td>17</td><td>અસ્પૃશ્યતા નાબૂદી</td></tr>
+<tr><td>19</td><td>6 સ્વતંત્રતાઓ</td></tr>
+<tr><td>21</td><td>જીવન અને વ્યક્તિગત સ્વતંત્રતા</td></tr>
+<tr><td>21A</td><td>શિક્ષણનો અધિકાર</td></tr>
+<tr><td>32</td><td>બંધારણીય ઉપચાર (રિટ)</td></tr>
+<tr><td>40</td><td>ગ્રામ પંચાયતની રચના (DPSP)</td></tr>
+<tr><td>44</td><td>સમાન નાગરિક સંહિતા</td></tr>
+<tr><td>51A</td><td>મૂળભૂત ફરજો</td></tr>
+<tr><td>52</td><td>રાષ્ટ્રપતિ પદની જોગવાઈ</td></tr>
+<tr><td>61</td><td>રાષ્ટ્રપતિ મહાભિયોગ પ્રક્રિયા</td></tr>
+<tr><td>72</td><td>રાષ્ટ્રપતિની ક્ષમાદાન સત્તા</td></tr>
+<tr><td>74</td><td>વડાપ્રધાનની અધ્યક્ષતામાં મંત્રીમંડળ</td></tr>
+<tr><td>76</td><td>એટર્ની જનરલ</td></tr>
+<tr><td>78</td><td>રાષ્ટ્રપતિને માહિતી આપવાની PMની ફરજ</td></tr>
+<tr><td>79</td><td>સંસદની રચના</td></tr>
+<tr><td>80</td><td>રાજ્યસભાની રચના</td></tr>
+<tr><td>81</td><td>લોકસભાની રચના</td></tr>
+<tr><td>110</td><td>ધનવિધેયકની વ્યાખ્યા</td></tr>
+<tr><td>123</td><td>રાષ્ટ્રપતિની વટહુકમ સત્તા</td></tr>
+<tr><td>124</td><td>સર્વોચ્ચ અદાલતની રચના</td></tr>
+<tr><td>141</td><td>SCના ચુકાદા બંધનકર્તા</td></tr>
+<tr><td>143</td><td>રાષ્ટ્રપતિની સલાહકારી અધિકારક્ષેત્ર</td></tr>
+<tr><td>148</td><td>CAG</td></tr>
+<tr><td>153</td><td>રાજ્યપાલ</td></tr>
+<tr><td>163</td><td>મુખ્યમંત્રી અને મંત્રીમંડળ</td></tr>
+<tr><td>200</td><td>રાજ્યપાલની વિધેયક પર સંમતિ</td></tr>
+<tr><td>213</td><td>રાજ્યપાલની વટહુકમ સત્તા</td></tr>
+<tr><td>226</td><td>વડી અદાલતની રિટ સત્તા</td></tr>
+<tr><td>243</td><td>પંચાયતી રાજ</td></tr>
+<tr><td>243P</td><td>નગરપાલિકા</td></tr>
+<tr><td>262</td><td>આંતરરાજ્ય નદી જળ વિવાદ</td></tr>
+<tr><td>263</td><td>આંતરરાજ્ય પરિષદ</td></tr>
+<tr><td>269-281</td><td>નાણાકીય જોગવાઈઓ, નાણાં પંચ (280)</td></tr>
+<tr><td>300A</td><td>સંપત્તિનો કાયદાકીય અધિકાર</td></tr>
+<tr><td>312</td><td>અખિલ ભારતીય સેવાઓ</td></tr>
+<tr><td>315-323</td><td>UPSC/GPSC</td></tr>
+<tr><td>324</td><td>ચૂંટણી પંચ</td></tr>
+<tr><td>326</td><td>પુખ્ત મતાધિકાર</td></tr>
+<tr><td>343</td><td>સંઘની સત્તાવાર ભાષા — હિન્દી</td></tr>
+<tr><td>352</td><td>રાષ્ટ્રીય કટોકટી</td></tr>
+<tr><td>356</td><td>રાષ્ટ્રપતિ શાસન</td></tr>
+<tr><td>360</td><td>નાણાકીય કટોકટી</td></tr>
+<tr><td>368</td><td>બંધારણ સુધારા પ્રક્રિયા</td></tr>
+<tr><td>370</td><td>જમ્મુ-કાશ્મીર વિશેષ દરજ્જો (2019માં નિષ્ક્રિય)</td></tr>
+<tr><td>395</td><td>ભારત સરકાર અધિનિયમ 1935 અને અન્ય કાયદા રદ</td></tr>
+</table>
+`},
+{t:"અખિલ ભારતીય સેવાઓ", en:"All India Services", art:"અનુચ્છેદ 312", body:`
+<ul>
+<li>IAS (Indian Administrative Service) — 1946 (અગાઉ ICS)</li>
+<li>IPS (Indian Police Service) — 1948</li>
+<li>IFoS (Indian Forest Service) — 1966</li>
+<li>ભરતી કેન્દ્ર દ્વારા (UPSC મારફતે), પરંતુ સેવા રાજ્ય કેડરમાં ફાળવાય — કેન્દ્ર-રાજ્ય બંનેને જવાબદાર</li>
+<li>અખિલ ભારતીય સેવાના અધિકારીની શિસ્તભંગ કાર્યવાહી કેન્દ્ર સરકારના હાથમાં</li>
+</ul>
+`},
+{t:"સત્તાવાર ભાષા", en:"Official Language", art:"અનુચ્છેદ 343–351, ભાગ XVII", body:`
+<ul>
+<li>અનુ. 343 — સંઘની સત્તાવાર ભાષા હિન્દી (દેવનાગરી લિપિમાં), અંગ્રેજી 1965 સુધી સહાયક ભાષા તરીકે ચાલુ રહેવાની જોગવાઈ (પછી કાયદાથી લંબાવાયું)</li>
+<li>અનુ. 345 — રાજ્ય પોતાની સત્તાવાર ભાષા નક્કી કરી શકે</li>
+<li>અનુ. 348 — સર્વોચ્ચ/વડી અદાલત અને કાયદાની સત્તાવાર ભાષા અંગ્રેજી</li>
+<li>અનુ. 350A — પ્રાથમિક શિક્ષણમાં માતૃભાષામાં શિક્ષણની સવલત</li>
+<li>8મી અનુસૂચિ — 22 માન્ય ભાષાઓ (મૂળે 14, પાછળથી ઉમેરાઈ)</li>
+</ul>
+`}
+]},
+
+{cat:"તમામ અનુચ્છેદ — વિગતવાર યાદી (1 થી 395)", items:[
+{t:"ભાગ I-II — સંઘ, ક્ષેત્ર અને નાગરિકતા (અનુ. 1–11)", en:"Articles 1-11", art:"ભાગ I-II", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>1</td><td>ભારત એટલે રાજ્યોનું સંઘ (Union of States)</td></tr>
+<tr><td>2</td><td>નવા રાજ્યોનો પ્રવેશ/સ્થાપના — સંસદની સત્તા</td></tr>
+<tr><td>2A</td><td>સિક્કિમને સંઘમાં સામેલ કરવા અંગે (રદ)</td></tr>
+<tr><td>3</td><td>નવા રાજ્યની રચના, હદ-નામ ફેરફાર — સંસદની સાદી બહુમતીથી સત્તા</td></tr>
+<tr><td>4</td><td>અનુ. 2-3 હેઠળના કાયદા 1લી-4થી અનુસૂચિમાં સુધારા કરી શકે</td></tr>
+<tr><td>5</td><td>બંધારણ અમલમાં આવ્યું ત્યારે નાગરિકતા</td></tr>
+<tr><td>6</td><td>પાકિસ્તાનથી સ્થળાંતરિત વ્યક્તિની નાગરિકતા</td></tr>
+<tr><td>7</td><td>પાકિસ્તાનમાં સ્થળાંતરિત વ્યક્તિની નાગરિકતા</td></tr>
+<tr><td>8</td><td>વિદેશમાં વસતા ભારતીય મૂળના વ્યક્તિની નાગરિકતા</td></tr>
+<tr><td>9</td><td>સ્વૈચ્છિક વિદેશી નાગરિકતા લેનાર ભારતીય નાગરિક ન રહે</td></tr>
+<tr><td>10</td><td>નાગરિકતાના અધિકારો ચાલુ રહેવા</td></tr>
+<tr><td>11</td><td>સંસદને નાગરિકતા અંગે કાયદો બનાવવાની સત્તા</td></tr>
+</table>
+`},
+{t:"ભાગ III — મૂળભૂત અધિકારો (અનુ. 12–35)", en:"Articles 12-35", art:"ભાગ III", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>12</td><td>"રાજ્ય"ની વ્યાખ્યા</td></tr>
+<tr><td>13</td><td>મૂળભૂત અધિકાર વિરુદ્ધના કાયદા રદબાતલ</td></tr>
+<tr><td>14</td><td>કાયદા સમક્ષ સમાનતા અને સમાન રક્ષણ</td></tr>
+<tr><td>15</td><td>ધર્મ-જાતિ-જ્ઞાતિ-લિંગ-જન્મસ્થળના આધારે ભેદભાવ પ્રતિબંધ</td></tr>
+<tr><td>16</td><td>જાહેર નોકરીમાં તક-સમાનતા</td></tr>
+<tr><td>17</td><td>અસ્પૃશ્યતા નાબૂદી</td></tr>
+<tr><td>18</td><td>ખિતાબ (ટાઇટલ) નાબૂદી</td></tr>
+<tr><td>19</td><td>6 સ્વતંત્રતાઓ (વાણી, એકત્રીકરણ, સંગઠન, હલનચલન, વસવાટ, વ્યવસાય)</td></tr>
+<tr><td>20</td><td>અપરાધની સજા બાબતે રક્ષણ</td></tr>
+<tr><td>21</td><td>જીવન અને વ્યક્તિગત સ્વતંત્રતાનો અધિકાર</td></tr>
+<tr><td>21A</td><td>6-14 વર્ષ માટે શિક્ષણનો અધિકાર</td></tr>
+<tr><td>22</td><td>ધરપકડ-અટકાયત સામે રક્ષણ</td></tr>
+<tr><td>23</td><td>માનવ વેપાર અને વેઠ મજૂરી પર પ્રતિબંધ</td></tr>
+<tr><td>24</td><td>બાળ મજૂરી પર પ્રતિબંધ</td></tr>
+<tr><td>25</td><td>અંતઃકરણ અને ધર્મ પાળવાની સ્વતંત્રતા</td></tr>
+<tr><td>26</td><td>ધાર્મિક બાબતોના સંચાલનની સ્વતંત્રતા</td></tr>
+<tr><td>27</td><td>ધર્મ પ્રચાર માટે કર ભરવામાંથી મુક્તિ</td></tr>
+<tr><td>28</td><td>સરકારી સંસ્થામાં ધાર્મિક શિક્ષણ પ્રતિબંધ</td></tr>
+<tr><td>29</td><td>લઘુમતીની ભાષા-સંસ્કૃતિ સાચવવાનો અધિકાર</td></tr>
+<tr><td>30</td><td>લઘુમતીને શૈક્ષણિક સંસ્થા સ્થાપવાનો અધિકાર</td></tr>
+<tr><td>31</td><td>સંપત્તિનો અધિકાર (44મા સુધારાથી રદ)</td></tr>
+<tr><td>31A</td><td>જમીન સુધારા કાયદાનું રક્ષણ</td></tr>
+<tr><td>31B</td><td>9મી અનુસૂચિના કાયદાનું રક્ષણ</td></tr>
+<tr><td>31C</td><td>DPSP અમલ માટે અમુક અધિકાર મર્યાદિત</td></tr>
+<tr><td>32</td><td>બંધારણીય ઉપચાર — રિટ અધિકારક્ષેત્ર (SC)</td></tr>
+<tr><td>33</td><td>સંરક્ષણ દળો માટે અધિકારોમાં ફેરફારની સંસદ સત્તા</td></tr>
+<tr><td>34</td><td>લશ્કરી કાયદો (Martial Law) લાગુ હોય ત્યારે અધિકારો પર નિયંત્રણ</td></tr>
+<tr><td>35</td><td>ભાગ III અમલ માટે કાયદો બનાવવાની સંસદ સત્તા</td></tr>
+</table>
+`},
+{t:"ભાગ IV-IVA — DPSP અને મૂળભૂત ફરજો (અનુ. 36–51A)", en:"Articles 36-51A", art:"ભાગ IV-IVA", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>36</td><td>"રાજ્ય"ની વ્યાખ્યા (ભાગ IV માટે)</td></tr>
+<tr><td>37</td><td>DPSP ન્યાયાલયમાં લાગુ ન કરી શકાય પણ શાસન માટે મૂળભૂત</td></tr>
+<tr><td>38</td><td>સામાજિક-આર્થિક ન્યાયવાળી સામાજિક વ્યવસ્થા</td></tr>
+<tr><td>39</td><td>સમાન આજીવિકા સાધન, સંપત્તિની ન્યાયી વહેંચણી, સમાન વેતન</td></tr>
+<tr><td>39A</td><td>સમાન ન્યાય અને મફત કાનૂની સહાય</td></tr>
+<tr><td>40</td><td>ગ્રામ પંચાયતની રચના</td></tr>
+<tr><td>41</td><td>કામ, શિક્ષણ, જાહેર સહાયનો અધિકાર</td></tr>
+<tr><td>42</td><td>ન્યાયી-માનવીય કામની શરતો, પ્રસૂતિ સહાય</td></tr>
+<tr><td>43</td><td>કામદારો માટે લઘુત્તમ વેતન, કુટીર ઉદ્યોગ</td></tr>
+<tr><td>43A</td><td>ઉદ્યોગોના સંચાલનમાં કામદારોની ભાગીદારી</td></tr>
+<tr><td>43B</td><td>સહકારી મંડળીઓને પ્રોત્સાહન</td></tr>
+<tr><td>44</td><td>સમાન નાગરિક સંહિતા</td></tr>
+<tr><td>45</td><td>પ્રારંભિક બાળ સંભાળ-શિક્ષણ (6 વર્ષ સુધી)</td></tr>
+<tr><td>46</td><td>SC/ST/નબળા વર્ગના શૈક્ષણિક-આર્થિક હિતોનું રક્ષણ</td></tr>
+<tr><td>47</td><td>પોષણ-જીવનધોરણ સુધારવું, દારૂબંધી</td></tr>
+<tr><td>48</td><td>કૃષિ-પશુપાલનનું આધુનિકીકરણ, ગૌ-હત્યા પ્રતિબંધ</td></tr>
+<tr><td>48A</td><td>પર્યાવરણ અને વન્યજીવોનું રક્ષણ</td></tr>
+<tr><td>49</td><td>ઐતિહાસિક-રાષ્ટ્રીય મહત્વના સ્મારકોનું રક્ષણ</td></tr>
+<tr><td>50</td><td>કારોબારી અને ન્યાયતંત્ર અલગ રાખવા</td></tr>
+<tr><td>51</td><td>આંતરરાષ્ટ્રીય શાંતિ-સલામતીને પ્રોત્સાહન</td></tr>
+<tr><td>51A</td><td>11 મૂળભૂત ફરજો (ભાગ IVA)</td></tr>
+</table>
+`},
+{t:"ભાગ V — સંઘ કારોબારી (અનુ. 52–78)", en:"Articles 52-78", art:"ભાગ V (Executive)", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>52</td><td>ભારતના રાષ્ટ્રપતિ પદની જોગવાઈ</td></tr>
+<tr><td>53</td><td>સંઘની કારોબારી સત્તા રાષ્ટ્રપતિમાં નિહિત</td></tr>
+<tr><td>54</td><td>રાષ્ટ્રપતિની ચૂંટણી</td></tr>
+<tr><td>55</td><td>ચૂંટણીની પદ્ધતિ (પ્રમાણસર પ્રતિનિધિત્વ)</td></tr>
+<tr><td>56</td><td>રાષ્ટ્રપતિનો કાર્યકાળ</td></tr>
+<tr><td>57</td><td>પુનઃચૂંટણી માટે પાત્રતા</td></tr>
+<tr><td>58</td><td>રાષ્ટ્રપતિ બનવાની લાયકાત</td></tr>
+<tr><td>59</td><td>રાષ્ટ્રપતિ પદની શરતો (અન્ય પદ ધારણ ન કરવું)</td></tr>
+<tr><td>60</td><td>રાષ્ટ્રપતિના શપથ</td></tr>
+<tr><td>61</td><td>રાષ્ટ્રપતિ સામે મહાભિયોગ પ્રક્રિયા</td></tr>
+<tr><td>62</td><td>પદ ખાલી પડે ત્યારે ચૂંટણીનો સમય</td></tr>
+<tr><td>63</td><td>ભારતના ઉપરાષ્ટ્રપતિ પદની જોગવાઈ</td></tr>
+<tr><td>64</td><td>ઉપરાષ્ટ્રપતિ પદેન રાજ્યસભા અધ્યક્ષ</td></tr>
+<tr><td>65</td><td>રાષ્ટ્રપતિની ગેરહાજરીમાં ઉપરાષ્ટ્રપતિ કાર્યકારી</td></tr>
+<tr><td>66</td><td>ઉપરાષ્ટ્રપતિની ચૂંટણી</td></tr>
+<tr><td>67</td><td>ઉપરાષ્ટ્રપતિનો કાર્યકાળ અને પદમુક્તિ</td></tr>
+<tr><td>68</td><td>ઉપરાષ્ટ્રપતિ પદ ખાલી પડે ત્યારે ચૂંટણી</td></tr>
+<tr><td>69</td><td>ઉપરાષ્ટ્રપતિના શપથ</td></tr>
+<tr><td>70</td><td>રાષ્ટ્રપતિ કાર્યોના નિર્વહન અંગે અન્ય જોગવાઈ</td></tr>
+<tr><td>71</td><td>રાષ્ટ્રપતિ/ઉપરાષ્ટ્રપતિ ચૂંટણી અંગેની બાબતો — ફક્ત SC નિર્ણય કરે</td></tr>
+<tr><td>72</td><td>રાષ્ટ્રપતિની ક્ષમાદાન સત્તા</td></tr>
+<tr><td>73</td><td>સંઘની કારોબારી સત્તાનો વ્યાપ</td></tr>
+<tr><td>74</td><td>રાષ્ટ્રપતિને સહાય-સલાહ આપવા મંત્રીમંડળ</td></tr>
+<tr><td>75</td><td>મંત્રીઓ અંગેની જોગવાઈ (નિમણૂક, જવાબદારી, કદ)</td></tr>
+<tr><td>76</td><td>ભારતના એટર્ની જનરલ</td></tr>
+<tr><td>77</td><td>ભારત સરકારના કારોબારના સંચાલન</td></tr>
+<tr><td>78</td><td>રાષ્ટ્રપતિને માહિતી પૂરી પાડવાની વડાપ્રધાનની ફરજ</td></tr>
+</table>
+`},
+{t:"ભાગ V — સંસદ (અનુ. 79–122)", en:"Articles 79-122", art:"ભાગ V (Parliament)", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>79</td><td>સંસદની રચના (રાષ્ટ્રપતિ+2 ગૃહ)</td></tr>
+<tr><td>80</td><td>રાજ્યસભાની રચના</td></tr>
+<tr><td>81</td><td>લોકસભાની રચના</td></tr>
+<tr><td>82</td><td>દરેક વસ્તી ગણતરી બાદ પુનર્ગઠન</td></tr>
+<tr><td>83</td><td>ગૃહોનો કાર્યકાળ</td></tr>
+<tr><td>84</td><td>સંસદ સભ્ય બનવાની લાયકાત</td></tr>
+<tr><td>85</td><td>સંસદનું સત્ર, સત્રાવસાન, વિસર્જન</td></tr>
+<tr><td>86</td><td>રાષ્ટ્રપતિનું ગૃહને સંબોધન/સંદેશ</td></tr>
+<tr><td>87</td><td>રાષ્ટ્રપતિનું વિશેષ સંબોધન</td></tr>
+<tr><td>88</td><td>મંત્રીઓ-AGનો ગૃહની કાર્યવાહીમાં ભાગ લેવાનો અધિકાર</td></tr>
+<tr><td>89</td><td>રાજ્યસભાના અધ્યક્ષ અને ઉપાધ્યક્ષ</td></tr>
+<tr><td>90</td><td>ઉપાધ્યક્ષની પદમુક્તિ-રાજીનામું</td></tr>
+<tr><td>93</td><td>લોકસભાના સ્પીકર અને ડેપ્યુટી સ્પીકર</td></tr>
+<tr><td>94</td><td>સ્પીકર/ડેપ્યુટી સ્પીકરની પદમુક્તિ-રાજીનામું</td></tr>
+<tr><td>96</td><td>પોતાની પદમુક્તિ અંગેની ચર્ચામાં સ્પીકર અધ્યક્ષતા ન કરે</td></tr>
+<tr><td>97</td><td>સ્પીકર-ડેપ્યુટી સ્પીકરના પગાર-ભથ્થાં</td></tr>
+<tr><td>99</td><td>સભ્યોના શપથ/પ્રતિજ્ઞા</td></tr>
+<tr><td>100</td><td>ગૃહમાં મતદાન, ખાલી જગ્યા છતાં કાર્યવાહી, ગણપૂર્તિ</td></tr>
+<tr><td>101</td><td>સભ્યપદ ખાલી પડવાના સંજોગો</td></tr>
+<tr><td>102</td><td>સંસદ સભ્યની ગેરલાયકાત</td></tr>
+<tr><td>103</td><td>ગેરલાયકાત અંગેનો પ્રશ્ન — રાષ્ટ્રપતિ EC સલાહથી નિર્ણય કરે</td></tr>
+<tr><td>105</td><td>સંસદ સભ્યોના વિશેષાધિકારો</td></tr>
+<tr><td>107-111</td><td>વિધેયક પસાર થવાની પ્રક્રિયા (સામાન્ય, ધન, નાણાકીય)</td></tr>
+<tr><td>108</td><td>અમુક કિસ્સામાં બંને ગૃહની સંયુક્ત બેઠક</td></tr>
+<tr><td>112</td><td>વાર્ષિક નાણાકીય પત્રક (બજેટ)</td></tr>
+<tr><td>113</td><td>અંદાજપત્રમાં અંદાજની પ્રક્રિયા</td></tr>
+<tr><td>114</td><td>વિનિયોગ વિધેયક (Appropriation Bill)</td></tr>
+<tr><td>115</td><td>અનુપૂરક-વધારાની અનુદાન</td></tr>
+<tr><td>116</td><td>વોટ ઓન એકાઉન્ટ, વોટ ઓફ ક્રેડિટ</td></tr>
+<tr><td>117</td><td>નાણાકીય વિધેયક અંગે વિશેષ જોગવાઈ</td></tr>
+<tr><td>118</td><td>સંસદની કાર્યવાહી નિયમો બનાવવાની સત્તા</td></tr>
+<tr><td>121</td><td>ન્યાયાધીશના વર્તન અંગે ચર્ચા પર પ્રતિબંધ</td></tr>
+<tr><td>123</td><td>રાષ્ટ્રપતિની વટહુકમ બહાર પાડવાની સત્તા</td></tr>
+</table>
+`},
+{t:"ભાગ V — સંઘ ન્યાયતંત્ર અને CAG (અનુ. 124–151)", en:"Articles 124-151", art:"ભાગ V (Judiciary)", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>124</td><td>સર્વોચ્ચ અદાલતની રચના, નિમણૂક</td></tr>
+<tr><td>124A</td><td>રાષ્ટ્રીય ન્યાયિક નિમણૂક આયોગ (NJAC — SC દ્વારા 2015માં રદબાતલ)</td></tr>
+<tr><td>125</td><td>ન્યાયાધીશોના પગાર</td></tr>
+<tr><td>126</td><td>કાર્યકારી CJI</td></tr>
+<tr><td>127</td><td>ઍડ-હોક ન્યાયાધીશની નિમણૂક</td></tr>
+<tr><td>128</td><td>નિવૃત્ત ન્યાયાધીશની હાજરી</td></tr>
+<tr><td>129</td><td>SC — રેકોર્ડ કોર્ટ, તિરસ્કારની સત્તા</td></tr>
+<tr><td>130</td><td>SCનું સ્થળ</td></tr>
+<tr><td>131</td><td>SCનું મૂળ અધિકારક્ષેત્ર</td></tr>
+<tr><td>132-134</td><td>અપીલ અધિકારક્ષેત્ર (બંધારણીય, દીવાની, ફોજદારી)</td></tr>
+<tr><td>136</td><td>વિશેષ રજા અરજી (Special Leave Petition)</td></tr>
+<tr><td>137</td><td>SC પોતાના ચુકાદાની પુનર્વિચારણા કરી શકે</td></tr>
+<tr><td>141</td><td>SCના ચુકાદા તમામ અદાલતોને બંધનકર્તા</td></tr>
+<tr><td>142</td><td>SC સંપૂર્ણ ન્યાય માટે હુકમ કરી શકે</td></tr>
+<tr><td>143</td><td>રાષ્ટ્રપતિની સલાહકારી અધિકારક્ષેત્ર</td></tr>
+<tr><td>144</td><td>તમામ સત્તાધિકારીઓ SCને સહાય કરે</td></tr>
+<tr><td>148</td><td>CAGની નિમણૂક-કાર્યકાળ</td></tr>
+<tr><td>149</td><td>CAGના કાર્યો-સત્તા</td></tr>
+<tr><td>150</td><td>સંઘ-રાજ્યના હિસાબોનું સ્વરૂપ</td></tr>
+<tr><td>151</td><td>CAGનો અહેવાલ</td></tr>
+</table>
+`}
+]},
+
+{cat:"તમામ અનુચ્છેદ — ભાગ VI થી XI (અનુ. 152–263)", items:[
+{t:"ભાગ VI — રાજ્ય કારોબારી (અનુ. 152–167)", en:"Articles 152-167", art:"ભાગ VI", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>152</td><td>"રાજ્ય"ની વ્યાખ્યા (J&K સિવાય)</td></tr>
+<tr><td>153</td><td>દરેક રાજ્ય માટે રાજ્યપાલ</td></tr>
+<tr><td>154</td><td>રાજ્યની કારોબારી સત્તા રાજ્યપાલમાં નિહિત</td></tr>
+<tr><td>155</td><td>રાજ્યપાલની નિમણૂક — રાષ્ટ્રપતિ દ્વારા</td></tr>
+<tr><td>156</td><td>રાજ્યપાલનો કાર્યકાળ — રાષ્ટ્રપતિની મરજી સુધી</td></tr>
+<tr><td>157</td><td>રાજ્યપાલ બનવાની લાયકાત</td></tr>
+<tr><td>158</td><td>રાજ્યપાલ પદની શરતો</td></tr>
+<tr><td>159</td><td>રાજ્યપાલના શપથ</td></tr>
+<tr><td>160</td><td>અમુક સંજોગોમાં કાર્યકારી રાજ્યપાલ</td></tr>
+<tr><td>161</td><td>રાજ્યપાલની ક્ષમાદાન સત્તા</td></tr>
+<tr><td>162</td><td>રાજ્યની કારોબારી સત્તાનો વ્યાપ</td></tr>
+<tr><td>163</td><td>રાજ્યપાલને સહાય-સલાહ આપવા મંત્રીમંડળ</td></tr>
+<tr><td>164</td><td>રાજ્ય મંત્રીઓ અંગેની જોગવાઈ</td></tr>
+<tr><td>165</td><td>રાજ્યના એડવોકેટ જનરલ</td></tr>
+<tr><td>166</td><td>રાજ્ય સરકારના કારોબારના સંચાલન</td></tr>
+<tr><td>167</td><td>રાજ્યપાલને માહિતી પૂરી પાડવાની મુખ્યમંત્રીની ફરજ</td></tr>
+</table>
+`},
+{t:"ભાગ VI — રાજ્ય વિધાનમંડળ (અનુ. 168–212)", en:"Articles 168-212", art:"ભાગ VI", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>168</td><td>રાજ્ય વિધાનમંડળની રચના</td></tr>
+<tr><td>169</td><td>વિધાનપરિષદની રચના-નાબૂદી</td></tr>
+<tr><td>170</td><td>વિધાનસભાની રચના</td></tr>
+<tr><td>171</td><td>વિધાનપરિષદની રચના-બંધારણ</td></tr>
+<tr><td>172</td><td>રાજ્ય વિધાનમંડળનો કાર્યકાળ</td></tr>
+<tr><td>173</td><td>વિધાનમંડળ સભ્ય બનવાની લાયકાત</td></tr>
+<tr><td>174</td><td>સત્ર, સત્રાવસાન, વિસર્જન</td></tr>
+<tr><td>175-176</td><td>રાજ્યપાલનું સંબોધન-સંદેશ</td></tr>
+<tr><td>178-179</td><td>વિધાનસભા સ્પીકર-ડેપ્યુટી સ્પીકર</td></tr>
+<tr><td>181</td><td>પોતાની પદમુક્તિ ચર્ચામાં સ્પીકર અધ્યક્ષતા ન કરે</td></tr>
+<tr><td>182-184</td><td>વિધાનપરિષદ ચેરમેન-ડેપ્યુટી ચેરમેન</td></tr>
+<tr><td>187</td><td>રાજ્ય વિધાનમંડળ સચિવાલય</td></tr>
+<tr><td>188</td><td>સભ્યોના શપથ</td></tr>
+<tr><td>189</td><td>ગૃહમાં મતદાન, ગણપૂર્તિ</td></tr>
+<tr><td>190</td><td>સભ્યપદ ખાલી પડવાના સંજોગો</td></tr>
+<tr><td>191</td><td>વિધાનમંડળ સભ્યની ગેરલાયકાત</td></tr>
+<tr><td>192</td><td>ગેરલાયકાત અંગેનો પ્રશ્ન — રાજ્યપાલ EC સલાહથી નિર્ણય કરે</td></tr>
+<tr><td>194</td><td>વિધાનમંડળ સભ્યોના વિશેષાધિકારો</td></tr>
+<tr><td>196-201</td><td>વિધેયક પસાર થવાની પ્રક્રિયા</td></tr>
+<tr><td>200</td><td>રાજ્યપાલની વિધેયક પર સંમતિ/અનામત/પરત</td></tr>
+<tr><td>202-207</td><td>રાજ્યનું અંદાજપત્ર, વિનિયોગ વિધેયક, નાણાકીય વિધેયક</td></tr>
+<tr><td>208</td><td>કાર્યવાહી નિયમો બનાવવાની સત્તા</td></tr>
+<tr><td>212</td><td>વિધાનમંડળની કાર્યવાહી અંગે અદાલતમાં પ્રશ્ન ન થાય</td></tr>
+<tr><td>213</td><td>રાજ્યપાલની વટહુકમ સત્તા</td></tr>
+</table>
+`},
+{t:"ભાગ VI — રાજ્ય વડી અદાલત (અનુ. 214–237)", en:"Articles 214-237", art:"ભાગ VI", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>214</td><td>દરેક રાજ્ય માટે વડી અદાલત</td></tr>
+<tr><td>215</td><td>વડી અદાલત — રેકોર્ડ કોર્ટ</td></tr>
+<tr><td>216</td><td>વડી અદાલતની રચના</td></tr>
+<tr><td>217</td><td>વડી અદાલત ન્યાયાધીશની નિમણૂક-શરતો</td></tr>
+<tr><td>219</td><td>વડી અદાલત ન્યાયાધીશના શપથ</td></tr>
+<tr><td>222</td><td>ન્યાયાધીશની એક વડી અદાલતથી બીજીમાં બદલી</td></tr>
+<tr><td>224</td><td>ઍડ-હોક/વધારાના ન્યાયાધીશની નિમણૂક</td></tr>
+<tr><td>226</td><td>વડી અદાલતની રિટ જારી કરવાની સત્તા</td></tr>
+<tr><td>227</td><td>વડી અદાલતની ગૌણ અદાલતો પર દેખરેખ સત્તા</td></tr>
+<tr><td>233</td><td>જિલ્લા ન્યાયાધીશની નિમણૂક</td></tr>
+<tr><td>235</td><td>ગૌણ અદાલતો પર વડી અદાલતનું નિયંત્રણ</td></tr>
+</table>
+`},
+{t:"ભાગ VIII-XI — કેન્દ્રશાસિત, પંચાયત, નગરપાલિકા, અનુસૂચિત વિસ્તાર, કેન્દ્ર-રાજ્ય સંબંધો", en:"Articles 239-263", art:"ભાગ VIII-XI", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>239</td><td>કેન્દ્રશાસિત પ્રદેશોનું વહીવટ — રાષ્ટ્રપતિ દ્વારા</td></tr>
+<tr><td>239A</td><td>અમુક કેન્દ્રશાસિત પ્રદેશ માટે વિધાનમંડળ/મંત્રીમંડળ</td></tr>
+<tr><td>239AA</td><td>દિલ્હી માટે વિશેષ જોગવાઈ (NCT)</td></tr>
+<tr><td>240</td><td>અમુક કેન્દ્રશાસિત પ્રદેશ માટે નિયમો બનાવવાની રાષ્ટ્રપતિ સત્તા</td></tr>
+<tr><td>241</td><td>કેન્દ્રશાસિત પ્રદેશો માટે વડી અદાલત</td></tr>
+<tr><td>243</td><td>પંચાયત — વ્યાખ્યાઓ</td></tr>
+<tr><td>243A</td><td>ગ્રામસભા</td></tr>
+<tr><td>243B-C</td><td>પંચાયતની રચના-બંધારણ</td></tr>
+<tr><td>243D</td><td>પંચાયતમાં બેઠકોનું અનામત</td></tr>
+<tr><td>243E</td><td>પંચાયતનો કાર્યકાળ — 5 વર્ષ</td></tr>
+<tr><td>243G</td><td>પંચાયતને સત્તા-જવાબદારીની ફાળવણી</td></tr>
+<tr><td>243I</td><td>રાજ્ય નાણાં પંચની રચના</td></tr>
+<tr><td>243K</td><td>પંચાયત ચૂંટણી — રાજ્ય ચૂંટણી પંચ</td></tr>
+<tr><td>243P-Q</td><td>નગરપાલિકાની વ્યાખ્યા-રચના</td></tr>
+<tr><td>243T</td><td>નગરપાલિકામાં બેઠકોનું અનામત</td></tr>
+<tr><td>243W</td><td>નગરપાલિકાને સત્તા-જવાબદારીની ફાળવણી</td></tr>
+<tr><td>243ZD</td><td>જિલ્લા આયોજન સમિતિ</td></tr>
+<tr><td>243ZE</td><td>મહાનગર આયોજન સમિતિ</td></tr>
+<tr><td>244</td><td>અનુસૂચિત અને જનજાતિ વિસ્તારોનું વહીવટ</td></tr>
+<tr><td>244A</td><td>આસામમાં સ્વાયત્ત રાજ્યની રચના</td></tr>
+<tr><td>245</td><td>સંસદ-વિધાનમંડળના કાયદાની હદ</td></tr>
+<tr><td>246</td><td>સંઘ, રાજ્ય, સમવર્તી યાદી હેઠળ કાયદો બનાવવાની સત્તા</td></tr>
+<tr><td>248</td><td>શેષ સત્તા — સંસદ પાસે</td></tr>
+<tr><td>249</td><td>રાષ્ટ્રીય હિતમાં રાજ્ય યાદી પર સંસદનો કાયદો (રાજ્યસભા ઠરાવ)</td></tr>
+<tr><td>250</td><td>રાષ્ટ્રીય કટોકટી દરમિયાન રાજ્ય યાદી પર સંસદનો કાયદો</td></tr>
+<tr><td>252</td><td>2+ રાજ્યોની સંમતિથી સંસદનો કાયદો</td></tr>
+<tr><td>253</td><td>આંતરરાષ્ટ્રીય કરાર અમલ માટે સંસદનો કાયદો</td></tr>
+<tr><td>254</td><td>સંઘ-રાજ્ય કાયદા વચ્ચે વિસંગતતા — સંઘનો કાયદો પ્રબળ</td></tr>
+<tr><td>256-257</td><td>સંઘના નિર્દેશોનું રાજ્યો દ્વારા પાલન</td></tr>
+<tr><td>262</td><td>આંતરરાજ્ય નદી જળ વિવાદ</td></tr>
+<tr><td>263</td><td>આંતરરાજ્ય પરિષદની રચના</td></tr>
+</table>
+`}
+]},
+
+{cat:"તમામ અનુચ્છેદ — ભાગ XII થી XXII (અનુ. 264–395)", items:[
+{t:"ભાગ XII — નાણાં, સંપત્તિ (અનુ. 264–300A)", en:"Articles 264-300A", art:"ભાગ XII", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>264</td><td>ભાગ XII માટે વ્યાખ્યાઓ</td></tr>
+<tr><td>265</td><td>કાયદા વગર કર વસૂલી ન શકાય</td></tr>
+<tr><td>266</td><td>સંચિત ફંડ (Consolidated Fund) અને જાહેર ખાતું</td></tr>
+<tr><td>267</td><td>આકસ્મિક ફંડ (Contingency Fund)</td></tr>
+<tr><td>268-270</td><td>સંઘ દ્વારા વસૂલાતા-વહેંચાતા કર</td></tr>
+<tr><td>275</td><td>રાજ્યોને સંઘ તરફથી અનુદાન</td></tr>
+<tr><td>280</td><td>નાણાં પંચની રચના-કાર્યો</td></tr>
+<tr><td>281</td><td>નાણાં પંચનો અહેવાલ સંસદ સમક્ષ</td></tr>
+<tr><td>282</td><td>જાહેર હેતુ માટે સંઘ/રાજ્યનો ખર્ચ</td></tr>
+<tr><td>293</td><td>રાજ્યો દ્વારા ધિરાણ (ઉધાર) લેવાની સત્તા</td></tr>
+<tr><td>300</td><td>સંઘ/રાજ્ય પર દાવો કરવાનો અધિકાર</td></tr>
+<tr><td>300A</td><td>સંપત્તિનો કાયદાકીય અધિકાર (44મા સુધારાથી)</td></tr>
+</table>
+`},
+{t:"ભાગ XIII-XVII — વેપાર સ્વતંત્રતા, સેવાઓ, ટ્રિબ્યુનલ, ચૂંટણી, ભાષા (અનુ. 301–351)", en:"Articles 301-351", art:"ભાગ XIII-XVII", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>301</td><td>સમગ્ર ભારતમાં વેપાર-વાણિજ્યની સ્વતંત્રતા</td></tr>
+<tr><td>302-304</td><td>વેપાર સ્વતંત્રતા પર નિયંત્રણની સંસદ/રાજ્ય સત્તા</td></tr>
+<tr><td>307</td><td>વેપાર સ્વતંત્રતા માટે સત્તાધિકારીની નિમણૂક</td></tr>
+<tr><td>308-314</td><td>સંઘ-રાજ્ય સેવાઓ અંગેની જોગવાઈ</td></tr>
+<tr><td>309</td><td>સેવાની ભરતી-શરતો અંગે કાયદો બનાવવાની સત્તા</td></tr>
+<tr><td>310</td><td>સેવા "રાષ્ટ્રપતિ/રાજ્યપાલની મરજી સુધી" (Doctrine of Pleasure)</td></tr>
+<tr><td>311</td><td>સિવિલ સેવક બરતરફી સામે રક્ષણ</td></tr>
+<tr><td>312</td><td>અખિલ ભારતીય સેવાઓ</td></tr>
+<tr><td>315</td><td>સંઘ અને રાજ્ય જાહેર સેવા આયોગ (UPSC/SPSC)</td></tr>
+<tr><td>316</td><td>સભ્યોની નિમણૂક-કાર્યકાળ</td></tr>
+<tr><td>317</td><td>સભ્યની પદમુક્તિ</td></tr>
+<tr><td>320</td><td>PSCના કાર્યો</td></tr>
+<tr><td>323</td><td>PSCનો અહેવાલ</td></tr>
+<tr><td>323A-B</td><td>વહીવટી અને અન્ય ટ્રિબ્યુનલ</td></tr>
+<tr><td>324</td><td>ચૂંટણી પંચની રચના-કાર્યો</td></tr>
+<tr><td>325</td><td>ધર્મ-જાતિ-લિંગના ભેદ વગર એક મતદાર યાદી</td></tr>
+<tr><td>326</td><td>પુખ્ત મતાધિકાર (18 વર્ષ)</td></tr>
+<tr><td>327-328</td><td>ચૂંટણી અંગે કાયદો બનાવવાની સંસદ/વિધાનમંડળ સત્તા</td></tr>
+<tr><td>329</td><td>ચૂંટણી બાબતોમાં અદાલતી હસ્તક્ષેપ પર પ્રતિબંધ</td></tr>
+<tr><td>330-332</td><td>લોકસભા-વિધાનસભામાં SC/ST માટે બેઠક અનામત</td></tr>
+<tr><td>335</td><td>નોકરીમાં SC/STના દાવા</td></tr>
+<tr><td>338</td><td>રાષ્ટ્રીય SC આયોગ</td></tr>
+<tr><td>338A</td><td>રાષ્ટ્રીય ST આયોગ</td></tr>
+<tr><td>338B</td><td>રાષ્ટ્રીય પછાત વર્ગ આયોગ</td></tr>
+<tr><td>340</td><td>પછાત વર્ગની સ્થિતિ તપાસવા આયોગ</td></tr>
+<tr><td>343</td><td>સંઘની સત્તાવાર ભાષા — હિન્દી</td></tr>
+<tr><td>345</td><td>રાજ્યની સત્તાવાર ભાષા</td></tr>
+<tr><td>348</td><td>SC/HC અને કાયદાની ભાષા — અંગ્રેજી</td></tr>
+<tr><td>350A</td><td>પ્રાથમિક શિક્ષણમાં માતૃભાષા સવલત</td></tr>
+<tr><td>351</td><td>હિન્દી ભાષાના વિકાસ માટે સંઘની ફરજ</td></tr>
+</table>
+`},
+{t:"ભાગ XVIII-XXII — કટોકટી, પ્રકીર્ણ, સુધારા, અંતિમ જોગવાઈ (અનુ. 352–395)", en:"Articles 352-395", art:"ભાગ XVIII-XXII", body:`
+<table><tr><th>અનુ.</th><th>એક લાઈન સમજૂતી</th></tr>
+<tr><td>352</td><td>રાષ્ટ્રીય કટોકટીની ઘોષણા</td></tr>
+<tr><td>353</td><td>રાષ્ટ્રીય કટોકટીની અસર — કારોબારી-કાયદાકીય સત્તા કેન્દ્ર તરફ</td></tr>
+<tr><td>354</td><td>કટોકટી દરમિયાન કરની વહેંચણી અંગે ફેરફાર</td></tr>
+<tr><td>355</td><td>બાહ્ય આક્રમણ-આંતરિક અશાંતિ સામે રાજ્યનું રક્ષણ કરવાની સંઘની ફરજ</td></tr>
+<tr><td>356</td><td>રાજ્યમાં બંધારણીય તંત્ર નિષ્ફળ જાય ત્યારે રાષ્ટ્રપતિ શાસન</td></tr>
+<tr><td>357</td><td>રાષ્ટ્રપતિ શાસન દરમિયાન વિધાનકીય સત્તાનો ઉપયોગ</td></tr>
+<tr><td>358</td><td>રાષ્ટ્રીય કટોકટીમાં અનુ. 19 સ્થગિત</td></tr>
+<tr><td>359</td><td>કટોકટીમાં અન્ય મૂળભૂત અધિકાર (20,21 સિવાય) સ્થગિત કરવાની સત્તા</td></tr>
+<tr><td>360</td><td>નાણાકીય કટોકટીની ઘોષણા</td></tr>
+<tr><td>361</td><td>રાષ્ટ્રપતિ-રાજ્યપાલને વ્યક્તિગત જવાબદારીમાંથી રક્ષણ</td></tr>
+<tr><td>361A</td><td>સંસદ-વિધાનમંડળની કાર્યવાહીના પ્રકાશન અંગે રક્ષણ</td></tr>
+<tr><td>361B</td><td>પક્ષપલટા બદલ ગેરલાયક ઠરેલ સભ્યને લાભના પદ પર પ્રતિબંધ</td></tr>
+<tr><td>363</td><td>રજવાડાં સાથેના કરાર અંગે અદાલતી હસ્તક્ષેપ પર પ્રતિબંધ</td></tr>
+<tr><td>365</td><td>સંઘના નિર્દેશોનું પાલન ન કરે તો પરિણામ</td></tr>
+<tr><td>368</td><td>બંધારણ સુધારાની પ્રક્રિયા અને સંસદની સત્તા</td></tr>
+<tr><td>369</td><td>અમુક બાબતો પર કામચલાઉ સમવર્તી સત્તા</td></tr>
+<tr><td>370</td><td>જમ્મુ-કાશ્મીર માટે કામચલાઉ વિશેષ જોગવાઈ (2019માં નિષ્ક્રિય)</td></tr>
+<tr><td>371-371J</td><td>વિવિધ રાજ્યો માટે વિશેષ જોગવાઈ</td></tr>
+<tr><td>372</td><td>વર્તમાન કાયદા ચાલુ રહેવા</td></tr>
+<tr><td>373</td><td>અટકાયતી હુકમ અંગે રાષ્ટ્રપતિની સત્તા (કામચલાઉ)</td></tr>
+<tr><td>377</td><td>CAG અંગે કામચલાઉ જોગવાઈ</td></tr>
+<tr><td>378</td><td>PSC અંગે કામચલાઉ જોગવાઈ</td></tr>
+<tr><td>379-391</td><td>સંક્રમણકારી કામચલાઉ સંસદ, પ્રથમ ચૂંટણી વગેરે (મોટાભાગે રદ/નિષ્ક્રિય)</td></tr>
+<tr><td>392</td><td>મુશ્કેલી દૂર કરવાની રાષ્ટ્રપતિ સત્તા (કામચલાઉ)</td></tr>
+<tr><td>393</td><td>ટૂંકું નામ — "ભારતનું બંધારણ"</td></tr>
+<tr><td>394</td><td>પ્રારંભ</td></tr>
+<tr><td>395</td><td>ભારત સરકાર અધિનિયમ 1935 અને અન્ય કાયદા રદ</td></tr>
+</table>
+<div class="note">GPSC ટીપ: 379-391 ના મોટા ભાગના અનુચ્છેદ કામચલાઉ/સંક્રમણકારી હતા અને પ્રથમ સંસદ-ચૂંટણી બાદ નિષ્ક્રિય/રદ થઈ ગયા — પરીક્ષામાં ભાગ્યે જ પુછાય છે.</div>
+`}
+]},
+];
+
+/* ---------- Build DOM ---------- */
+const tocEl = document.getElementById('toc');
+const containerEl = document.getElementById('topicsContainer');
+let flatItems = [];
+
+let globalIdx = 0;
+DATA.forEach(section=>{
+  const label = document.createElement('div');
+  label.className = 'cat-label';
+  label.innerHTML = `<span class="cat-dot"></span><span class="label-text">${section.cat}</span>`;
+  tocEl.appendChild(label);
+
+  section.items.forEach(item=>{
+    globalIdx++;
+    const id = 'topic-' + globalIdx;
+    item._id = id;
+    item._num = globalIdx;
+    flatItems.push(item);
+
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.dataset.id = id;
+    a.innerHTML = `<span class="num">${String(globalIdx).padStart(2,'0')}</span><span class="label-text">${item.t}</span>`;
+    tocEl.appendChild(a);
+
+    const card = document.createElement('div');
+    card.className = 'topic';
+    card.id = id;
+    const plainBody = item.body.replace(/<[^>]+>/g, ' ');
+    item._searchText = (item.t + ' ' + item.en + ' ' + item.art + ' ' + plainBody).replace(/\s+/g,' ').trim();
+    card.dataset.search = item._searchText.toLowerCase();
+    card.innerHTML = `
+      <h3><span class="idx">${globalIdx}</span>${item.t}</h3>
+      <p class="en">${item.en}</p>
+      <span class="art-badge">${item.art}</span>
+      <div class="topic-body">${item.body}</div>
+    `;
+    containerEl.appendChild(card);
+  });
+});
+
+/* ---------- Fuzzy multilingual search engine ---------- */
+// Levenshtein edit distance (works char-by-char for both Gujarati & English strings)
+function editDistance(a, b){
+  const al = a.length, bl = b.length;
+  if(al === 0) return bl;
+  if(bl === 0) return al;
+  let prev = new Array(bl + 1);
+  let cur = new Array(bl + 1);
+  for(let j=0;j<=bl;j++) prev[j] = j;
+  for(let i=1;i<=al;i++){
+    cur[0] = i;
+    const ac = a.charCodeAt(i-1);
+    for(let j=1;j<=bl;j++){
+      const cost = (ac === b.charCodeAt(j-1)) ? 0 : 1;
+      cur[j] = Math.min(
+        prev[j] + 1,      // deletion
+        cur[j-1] + 1,     // insertion
+        prev[j-1] + cost  // substitution
+      );
+    }
+    [prev, cur] = [cur, prev];
+  }
+  return prev[bl];
+}
+
+// similarity 0..1 between two tokens, tolerant to typos/partial words
+function tokenSimilarity(query, token){
+  if(!query || !token) return 0;
+  if(token === query) return 1;
+  if(token.startsWith(query) || query.startsWith(token)){
+    // partial word match (e.g. "bandh" -> "bandharan"), score by coverage
+    const shorter = Math.min(query.length, token.length);
+    const longer = Math.max(query.length, token.length);
+    return 0.72 + 0.25 * (shorter / longer);
+  }
+  if(token.includes(query) && query.length >= 3) return 0.65;
+  const dist = editDistance(query, token);
+  const maxLen = Math.max(query.length, token.length);
+  if(maxLen === 0) return 0;
+  const sim = 1 - dist / maxLen;
+  // allow typo tolerance roughly proportional to word length
+  const allowedDist = query.length <= 3 ? 1 : (query.length <= 6 ? 2 : 3);
+  if(dist <= allowedDist) return Math.max(sim, 0.55);
+  return sim > 0 ? sim * 0.4 : 0; // steep dropoff for weak/no match
+}
+
+// precompute tokens per item (unique words, deduped, lowercased)
+flatItems.forEach(item=>{
+  const raw = item._searchText.toLowerCase();
+  item._fullTextLower = raw;
+  const words = raw.split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>0);
+  item._tokens = Array.from(new Set(words));
+});
+
+// score a single item against the (already tokenized) query
+function scoreItem(item, queryTokens, rawQuery){
+  if(queryTokens.length === 0) return 1; // empty query -> neutral, everything shows
+  // strong bonus: exact substring of the whole query (handles multi-word exact phrases)
+  const exactPhrase = item._fullTextLower.includes(rawQuery);
+
+  let totalScore = 0;
+  let matchedTokens = 0;
+  for(const qt of queryTokens){
+    let best = 0;
+    for(const tk of item._tokens){
+      const s = tokenSimilarity(qt, tk);
+      if(s > best) best = s;
+      if(best === 1) break;
+    }
+    if(best >= 0.5) matchedTokens++;
+    totalScore += best;
+  }
+  const avgScore = totalScore / queryTokens.length;
+  const coverage = matchedTokens / queryTokens.length; // fraction of query words found
+  let finalScore = avgScore * 0.7 + coverage * 0.3;
+  if(exactPhrase) finalScore = Math.min(1, finalScore + 0.35);
+  // require at least half the query words to have a reasonable match
+  if(coverage < 0.5 && !exactPhrase) finalScore *= 0.15;
+  return finalScore;
+}
+
+const searchInput = document.getElementById('searchInput');
+const clearSearch = document.getElementById('clearSearch');
+const searchCount = document.getElementById('searchCount');
+const noResults = document.getElementById('noResults');
+const tocLinks = Array.from(tocEl.querySelectorAll('a'));
+const topicCards = Array.from(containerEl.querySelectorAll('.topic'));
+const catLabels = Array.from(tocEl.querySelectorAll('.cat-label'));
+
+// keep original DOM order so we can restore grouped-by-category view when search clears
+const originalTocOrder = Array.from(tocEl.children);
+const originalCardOrder = Array.from(containerEl.children);
+
+function restoreOriginalOrder(){
+  originalTocOrder.forEach(el=>tocEl.appendChild(el));
+  originalCardOrder.forEach(el=>containerEl.appendChild(el));
+  catLabels.forEach(label=>label.style.display = '');
+}
+
+function runSearch(){
+  const rawQuery = searchInput.value.trim().toLowerCase();
+  clearSearch.classList.toggle('show', rawQuery.length > 0);
+
+  if(!rawQuery){
+    restoreOriginalOrder();
+    tocLinks.forEach(a=>a.classList.remove('hidden'));
+    topicCards.forEach(c=>c.style.display = '');
+    noResults.style.display = 'none';
+    searchCount.textContent = `કુલ ${flatItems.length} ટોપિક`;
+    return;
+  }
+
+  const queryTokens = rawQuery.split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>0);
+
+  const scored = flatItems.map(item=>({
+    item,
+    score: scoreItem(item, queryTokens, rawQuery)
+  }));
+
+  const THRESHOLD = 0.32;
+  scored.sort((a,b)=> b.score - a.score);
+
+  let visibleCount = 0;
+  scored.forEach(({item, score})=>{
+    const a = tocEl.querySelector(`a[data-id="${item._id}"]`);
+    const card = document.getElementById(item._id);
+    const match = score >= THRESHOLD;
+    if(match){
+      visibleCount++;
+      tocEl.appendChild(a);       // reorder: best matches first
+      containerEl.appendChild(card);
+      a.classList.remove('hidden');
+      card.style.display = '';
+      let scoreEl = a.querySelector('.match-score');
+      if(!scoreEl){
+        scoreEl = document.createElement('span');
+        scoreEl.className = 'match-score';
+        a.appendChild(scoreEl);
+      }
+      scoreEl.textContent = Math.round(score * 100) + '%';
+    } else {
+      a.classList.add('hidden');
+      card.style.display = 'none';
+    }
+  });
+
+  // hide category labels entirely while searching (flat ranked list is clearer)
+  catLabels.forEach(label=>{ label.style.display = 'none'; });
+
+  noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+  searchCount.textContent = `${visibleCount} ટોપિક મળ્યા (સુસંગતતા મુજબ ક્રમાંકિત)`;
+}
+
+let searchDebounce;
+searchInput.addEventListener('input', ()=>{
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(runSearch, 90);
+});
+clearSearch.addEventListener('click', ()=>{
+  searchInput.value = '';
+  runSearch();
+  searchInput.focus();
+});
+searchCount.textContent = `કુલ ${flatItems.length} ટોપિક`;
+
+/* ---------- Active link on scroll ---------- */
+const currentTitleEl = document.getElementById('currentTitle');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      tocLinks.forEach(a=>a.classList.toggle('active', a.dataset.id === id));
+      const item = flatItems.find(i=>i._id===id);
+      if(item) currentTitleEl.textContent = item.t;
+    }
+  });
+},{rootMargin:'-15% 0px -70% 0px', threshold:0});
+topicCards.forEach(c=>observer.observe(c));
+
+/* ---------- Mobile sidebar ---------- */
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const menuBtn = document.getElementById('menuBtn');
+function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+menuBtn.addEventListener('click', ()=>{
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+});
+overlay.addEventListener('click', closeSidebar);
+
+/* ---------- Collapsible sidebar: full <-> mini, with localStorage memory ---------- */
+const collapseBtn = document.getElementById('collapseBtn');
+const miniSearchBtn = document.getElementById('miniSearchBtn');
+const SIDEBAR_KEY = 'constitutionSidebarMode';
+const isMobile = () => window.innerWidth <= 900;
+
+function setSidebarMode(mode, persist){
+  if(isMobile()) return; // mobile always uses the full drawer overlay
+  sidebar.classList.toggle('mini', mode === 'mini');
+  if(persist) localStorage.setItem(SIDEBAR_KEY, mode);
+}
+
+// restore last saved state on load (desktop only)
+(function initSidebarMode(){
+  if(isMobile()) return;
+  const saved = localStorage.getItem(SIDEBAR_KEY);
+  if(saved === 'mini') sidebar.classList.add('mini');
+})();
+
+collapseBtn.addEventListener('click', ()=>{
+  const nowMini = !sidebar.classList.contains('mini');
+  setSidebarMode(nowMini ? 'mini' : 'full', true);
+});
+
+miniSearchBtn.addEventListener('click', ()=>{
+  setSidebarMode('full', true);
+  setTimeout(()=>searchInput.focus(), 260);
+});
+
+// Auto-collapse to mini sidebar once a topic is opened (from search or menu click)
+// so the reading area gets more room — as requested: search -> click topic -> auto mini.
+tocEl.addEventListener('click', (e)=>{
+  const link = e.target.closest('a');
+  if(!link) return;
+  closeSidebar(); // for mobile drawer
+  if(!isMobile()){
+    setSidebarMode('mini', true);
+  }
+});
+
+/* ---------- Tooltip flyout for mini-mode hover ---------- */
+const tooltipFlyout = document.getElementById('tooltipFlyout');
+function showTooltip(el, text){
+  if(!sidebar.classList.contains('mini') || isMobile()) return;
+  const rect = el.getBoundingClientRect();
+  tooltipFlyout.textContent = text;
+  tooltipFlyout.style.top = (rect.top + rect.height/2 - 12) + 'px';
+  tooltipFlyout.classList.add('show');
+}
+function hideTooltip(){ tooltipFlyout.classList.remove('show'); }
+
+tocLinks.forEach(a=>{
+  const labelText = a.querySelector('.label-text')?.textContent || a.textContent.trim();
+  a.addEventListener('mouseenter', ()=>showTooltip(a, labelText));
+  a.addEventListener('mouseleave', hideTooltip);
+});
+catLabels.forEach(label=>{
+  label.addEventListener('mouseenter', ()=>showTooltip(label, label.textContent.trim()));
+  label.addEventListener('mouseleave', hideTooltip);
+});
+document.querySelector('.brand .ashoka').addEventListener('mouseenter', (e)=>{
+  showTooltip(e.currentTarget, 'ભારતીય બંધારણ — PSI / GPSC અભ્યાસ યાદી');
+});
+document.querySelector('.brand .ashoka').addEventListener('mouseleave', hideTooltip);
+
+window.addEventListener('resize', ()=>{
+  if(isMobile()) hideTooltip();
+});
+</script>
+</body>
 </html>
