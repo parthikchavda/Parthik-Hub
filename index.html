@@ -864,6 +864,42 @@
       background: #2a9d63;
     }
 
+    .tag-doc {
+      background: #2b579a;
+    }
+
+    .tag-sheet {
+      background: #1d6f42;
+    }
+
+    .tag-slide {
+      background: #d24726;
+    }
+
+    .tag-text {
+      background: #6b7280;
+    }
+
+    .tag-data {
+      background: #b58900;
+    }
+
+    .tag-video {
+      background: #7c3aed;
+    }
+
+    .tag-audio {
+      background: #db2777;
+    }
+
+    .tag-archive {
+      background: #92400e;
+    }
+
+    .tag-app {
+      background: #0f766e;
+    }
+
     /* Visit count badge */
     .node-file__visits {
       font-size: 9px;
@@ -1241,6 +1277,69 @@
       object-fit: contain;
       border-radius: 8px;
       box-shadow: var(--shadow);
+    }
+
+    .content__media-wrap {
+      position: absolute;
+      inset: 36px 0 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: var(--bg-soft);
+    }
+
+    .content__media-wrap video {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      background: #000;
+    }
+
+    .content__media-wrap audio {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .content__download-panel {
+      position: absolute;
+      inset: 36px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .content__download-panel svg {
+      width: 46px;
+      height: 46px;
+      stroke: var(--text-faint);
+    }
+
+    .content__download-btn {
+      margin-top: 6px;
+      height: 36px;
+      padding: 0 18px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-grad);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(201, 42, 53, 0.28);
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+    }
+
+    .content__download-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(201, 42, 53, 0.34);
     }
 
     /* Split View */
@@ -2247,6 +2346,15 @@
             <button class="filter-chip" data-type="html">WEB</button>
             <button class="filter-chip" data-type="pdf">PDF</button>
             <button class="filter-chip" data-type="image">IMG</button>
+            <button class="filter-chip" data-type="doc">DOC</button>
+            <button class="filter-chip" data-type="sheet">XLS</button>
+            <button class="filter-chip" data-type="slide">PPT</button>
+            <button class="filter-chip" data-type="video">VID</button>
+            <button class="filter-chip" data-type="audio">AUD</button>
+            <button class="filter-chip" data-type="text">TXT</button>
+            <button class="filter-chip" data-type="data">DATA</button>
+            <button class="filter-chip" data-type="archive">ZIP</button>
+            <button class="filter-chip" data-type="app">APP</button>
           </div>
         </div>
 
@@ -2499,8 +2607,21 @@
     const FILE_TYPES = {
       html: { exts: ['html', 'htm'], tag: 'WEB', tagClass: 'tag-web' },
       pdf: { exts: ['pdf'], tag: 'PDF', tagClass: 'tag-pdf' },
-      image: { exts: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'], tag: 'IMG', tagClass: 'tag-img' },
+      image: { exts: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'tif', 'webp', 'svg', 'heic', 'ico', 'psd', 'ai'], tag: 'IMG', tagClass: 'tag-img' },
+      doc: { exts: ['doc', 'docx', 'rtf', 'odt'], tag: 'DOC', tagClass: 'tag-doc' },
+      sheet: { exts: ['xls', 'xlsx', 'ods'], tag: 'XLS', tagClass: 'tag-sheet' },
+      slide: { exts: ['ppt', 'pptx', 'odp'], tag: 'PPT', tagClass: 'tag-slide' },
+      text: { exts: ['txt', 'md'], tag: 'TXT', tagClass: 'tag-text' },
+      data: { exts: ['csv', 'json', 'xml', 'sql'], tag: 'DATA', tagClass: 'tag-data' },
+      video: { exts: ['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', 'mpeg', 'mpg', '3gp', 'm4v'], tag: 'VID', tagClass: 'tag-video' },
+      audio: { exts: ['mp3', 'wav', 'aac', 'flac', 'ogg', 'm4a', 'wma'], tag: 'AUD', tagClass: 'tag-audio' },
+      archive: { exts: ['zip', 'rar', '7z', 'tar', 'gz', 'iso'], tag: 'ZIP', tagClass: 'tag-archive' },
+      app: { exts: ['apk', 'exe'], tag: 'APP', tagClass: 'tag-app' },
     };
+    // Extensions rendered via an embedded Office/Google-viewer iframe
+    const OFFICE_VIEW_TYPES = new Set(['doc', 'sheet', 'slide']);
+    // Extensions that can't be previewed in-browser — offer a download instead
+    const DOWNLOAD_ONLY_TYPES = new Set(['archive', 'app']);
     const IGNORE_PREFIXES = ['/assets/', '/.github/'];
     const IGNORE_FILES = ['/index.html', '/README.md', '/.gitignore'];
 
@@ -2981,6 +3102,13 @@
     function iconFile(type) {
       if (type === 'pdf') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>`;
       if (type === 'image') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`;
+      if (type === 'doc' || type === 'text') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>`;
+      if (type === 'sheet' || type === 'data') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>`;
+      if (type === 'slide') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>`;
+      if (type === 'video') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/></svg>`;
+      if (type === 'audio') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`;
+      if (type === 'archive') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M9 7h1M9 11h1M9 15h1"/></svg>`;
+      if (type === 'app') return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg>`;
       return `<svg class="node-file__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>`;
     }
     const iconStar = () => `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
@@ -3157,6 +3285,34 @@
         wrap.innerHTML = `<img src="${fullUrl}" alt="${humanLabel(node.name)}">`;
         container.appendChild(wrap);
         contentToolbar.style.display = 'none';
+      } else if (node.fileType === 'video') {
+        const wrap = document.createElement('div'); wrap.className = 'content__media-wrap';
+        wrap.innerHTML = `<video src="${fullUrl}" controls autoplay="false" style="width:100%;height:100%"></video>`;
+        container.appendChild(wrap);
+        contentToolbar.style.display = 'none';
+      } else if (node.fileType === 'audio') {
+        const wrap = document.createElement('div'); wrap.className = 'content__media-wrap';
+        wrap.innerHTML = `<audio src="${fullUrl}" controls></audio>`;
+        container.appendChild(wrap);
+        contentToolbar.style.display = 'none';
+      } else if (DOWNLOAD_ONLY_TYPES.has(node.fileType)) {
+        const wrap = document.createElement('div'); wrap.className = 'content__download-panel';
+        wrap.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <div class="placeholder__title">${humanLabel(node.name)}</div>
+          <div class="placeholder__sub">This file type can't be previewed in the browser. Download it to open it.</div>
+          <a class="content__download-btn" href="${fullUrl}" download>Download File</a>`;
+        container.appendChild(wrap);
+        contentToolbar.style.display = 'none';
+      } else if (OFFICE_VIEW_TYPES.has(node.fileType)) {
+        const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fullUrl);
+        const frame = document.createElement('iframe');
+        frame.className = 'content__frame'; frame.id = 'contentFrame';
+        frame.src = viewerUrl; frame.title = humanLabel(node.name);
+        container.appendChild(frame);
+        contentToolbar.style.display = 'flex';
+        currentZoom = 100;
+        document.getElementById('zoomDisplay').textContent = '100%';
       } else {
         const savedScroll = getScrollPos(node.path);
         const frame = document.createElement('iframe');
@@ -3214,6 +3370,10 @@
       if (existing) existing.remove();
       const existing2 = contentEl.querySelector('.content__image-wrap');
       if (existing2) existing2.remove();
+      const existing3 = contentEl.querySelector('.content__media-wrap');
+      if (existing3) existing3.remove();
+      const existing4 = contentEl.querySelector('.content__download-panel');
+      if (existing4) existing4.remove();
       contentEl.appendChild(left);
       contentEl.appendChild(right);
       updateBreadcrumb(node);
