@@ -1411,23 +1411,89 @@
       position: absolute;
       inset: 36px 0 0 0;
       overflow-y: auto;
-      padding: 24px;
+      padding: 28px 28px 44px;
+    }
+
+    .dash-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .dash-header__greet {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+    }
+
+    .dash-header__date {
+      font-size: 13px;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    .dash-qa {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .dash-qa__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-raised);
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: all .18s var(--ease);
+    }
+
+    .dash-qa__btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      flex-shrink: 0;
+    }
+
+    .dash-qa__btn:hover {
+      border-color: var(--accent-soft-border);
+      color: var(--accent);
+      background: var(--accent-soft);
     }
 
     .dash-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .dash-card {
+      position: relative;
       background: var(--bg-raised);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      text-align: center;
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 14px;
+      overflow: hidden;
       transition: box-shadow .22s var(--ease), transform .22s var(--ease), border-color .22s var(--ease);
+    }
+
+    .dash-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: var(--accent-grad);
     }
 
     .dash-card:hover {
@@ -1436,11 +1502,20 @@
       border-color: var(--accent-soft-border);
     }
 
+    .dash-card__icon {
+      width: 19px;
+      height: 19px;
+      stroke: var(--accent);
+      margin-bottom: 10px;
+      display: block;
+    }
+
     .dash-card__num {
       font-family: var(--font-display);
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       letter-spacing: -.02em;
+      line-height: 1;
       background: var(--accent-grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1450,11 +1525,29 @@
     .dash-card__label {
       font-size: 12px;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 6px;
+    }
+
+    .dash-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 720px) {
+      .dash-cols {
+        grid-template-columns: 1fr;
+      }
     }
 
     .dash-section {
-      margin-bottom: 20px;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 16px;
     }
 
     .dash-title {
@@ -1462,27 +1555,40 @@
       font-size: 13.5px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       letter-spacing: -.005em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dash-title__count {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-faint);
+      background: var(--bg-soft);
+      padding: 2px 9px;
+      border-radius: 20px;
     }
 
     .dash-list {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
     .dash-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      background: var(--bg-raised);
-      border: 1px solid var(--border);
+      padding: 9px 12px;
+      border-radius: 9px;
+      background: var(--bg-soft);
+      border: 1px solid transparent;
       font-size: 12.5px;
       cursor: pointer;
-      transition: background .1s;
+      transition: background .14s, border-color .14s;
     }
 
     .dash-row:hover {
@@ -1501,13 +1607,99 @@
     .dash-row__count {
       font-size: 11px;
       color: var(--text-faint);
+      flex-shrink: 0;
     }
 
-    .dash-bar {
-      height: 4px;
-      border-radius: 2px;
-      background: var(--accent-grad);
-      margin-top: 3px;
+    .dash-empty {
+      font-size: 12.5px;
+      color: var(--text-faint);
+      padding: 16px 8px;
+      text-align: center;
+    }
+
+    /* File-type breakdown bars */
+    .dash-typebar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 0;
+    }
+
+    .dash-typebar__tag {
+      width: 46px;
+      flex-shrink: 0;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-align: center;
+      padding: 2px 0;
+      border-radius: 5px;
+      color: #fff;
+      letter-spacing: .02em;
+    }
+
+    .dash-typebar__track {
+      flex: 1;
+      height: 8px;
+      border-radius: 6px;
+      background: var(--bg-soft);
+      overflow: hidden;
+    }
+
+    .dash-typebar__fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width .5s var(--ease);
+    }
+
+    .dash-typebar__count {
+      width: 28px;
+      text-align: right;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .dash-folder-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 12.5px;
+      background: var(--bg-soft);
+      border: 1px solid transparent;
+      transition: background .14s, border-color .14s;
+    }
+
+    .dash-folder-row:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent-soft-border);
+    }
+
+    .dash-folder-row svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-faint);
+      flex-shrink: 0;
+    }
+
+    .dash-folder-row__name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text);
+    }
+
+    .dash-folder-row__count {
+      font-size: 10.5px;
+      color: var(--text-faint);
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 20px;
+      flex-shrink: 0;
     }
 
     .state-panel__title {
@@ -2622,6 +2814,12 @@
     const OFFICE_VIEW_TYPES = new Set(['doc', 'sheet', 'slide']);
     // Extensions that can't be previewed in-browser — offer a download instead
     const DOWNLOAD_ONLY_TYPES = new Set(['archive', 'app']);
+    // Hex colors matching the .tag-* classes, used for dashboard charts
+    const TYPE_COLORS = {
+      html: '#2a9d63', pdf: '#c92a35', image: '#2f7fd8', doc: '#2b579a',
+      sheet: '#1d6f42', slide: '#d24726', text: '#6b7280', data: '#b58900',
+      video: '#7c3aed', audio: '#db2777', archive: '#92400e', app: '#0f766e',
+    };
     const IGNORE_PREFIXES = ['/assets/', '/.github/'];
     const IGNORE_FILES = ['/index.html', '/README.md', '/.gitignore'];
 
@@ -3384,6 +3582,15 @@
     // ============================================================
     // Dashboard
     // ============================================================
+    function dashRowHtml(f, extraHtml) {
+      const def = FILE_TYPES[f.fileType];
+      return `<div class="dash-row" data-path="${f.path}">
+        <span class="node-file__tag ${def?.tagClass || ''}" style="font-size:8px">${def?.tag || '?'}</span>
+        <span class="dash-row__name">${humanLabel(f.name)}</span>
+        ${extraHtml || ''}
+      </div>`;
+    }
+
     function showDashboard() {
       Array.from(contentEl.children).forEach(c => { if (!c.classList.contains('breadcrumb') && !c.classList.contains('content-toolbar')) c.remove(); });
       contentToolbar.style.display = 'none';
@@ -3391,47 +3598,108 @@
       activePath = null; activeNode = null;
 
       const visits = lsGet(LS.VISITS, {});
-      const htmlCount = flatFiles.filter(f => f.fileType === 'html').length;
-      const pdfCount = flatFiles.filter(f => f.fileType === 'pdf').length;
-      const imgCount = flatFiles.filter(f => f.fileType === 'image').length;
-      const folders = [...new Set(flatFiles.map(f => f.path.split('/').slice(0, -1).join('/')))].length;
+      const folders = [...new Set(flatFiles.map(f => f.path.split('/').slice(0, -1).join('/')).filter(Boolean))].length;
+      const totalOpens = Object.values(visits).reduce((a, b) => a + b, 0);
+      const favs = getFavs();
 
-      const topFiles = [...flatFiles].sort((a, b) => (visits[b.path] || 0) - (visits[a.path] || 0)).slice(0, 5);
-      const maxVisit = topFiles[0] ? visits[topFiles[0].path] || 1 : 1;
+      const typeCounts = Object.keys(FILE_TYPES)
+        .map(t => ({ type: t, def: FILE_TYPES[t], count: flatFiles.filter(f => f.fileType === t).length }))
+        .filter(t => t.count > 0)
+        .sort((a, b) => b.count - a.count);
+      const maxTypeCount = typeCounts[0] ? typeCounts[0].count : 1;
+
+      const topFiles = [...flatFiles].filter(f => visits[f.path]).sort((a, b) => (visits[b.path] || 0) - (visits[a.path] || 0)).slice(0, 6);
+
+      const recentPaths = lsGet(LS.RECENT, []);
+      const recentNodes = recentPaths.map(p => flatFiles.find(f => f.path === p)).filter(Boolean).slice(0, 6);
+
+      const folderCounts = {};
+      flatFiles.forEach(f => {
+        const parts = f.path.split('/').filter(Boolean);
+        if (parts.length > 1) { const folder = parts.slice(0, -1).join('/'); folderCounts[folder] = (folderCounts[folder] || 0) + 1; }
+      });
+      const topFolders = Object.entries(folderCounts).sort((a, b) => b[1] - a[1]).slice(0, 6);
+
+      const hour = new Date().getHours();
+      const greeting = hour < 5 ? 'Burning the midnight oil' : hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : hour < 21 ? 'Good evening' : 'Working late';
+      const dateStr = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
       const d = document.createElement('div'); d.className = 'dashboard';
       d.innerHTML = `
-    <div class="dash-grid">
-      <div class="dash-card"><div class="dash-card__num">${flatFiles.length}</div><div class="dash-card__label">Total Files</div></div>
-      <div class="dash-card"><div class="dash-card__num">${folders}</div><div class="dash-card__label">Folders</div></div>
-      <div class="dash-card"><div class="dash-card__num">${htmlCount}</div><div class="dash-card__label">Web Files</div></div>
-      <div class="dash-card"><div class="dash-card__num">${pdfCount}</div><div class="dash-card__label">PDFs</div></div>
-      <div class="dash-card"><div class="dash-card__num">${imgCount}</div><div class="dash-card__label">Images</div></div>
-      <div class="dash-card"><div class="dash-card__num">${getFavs().size}</div><div class="dash-card__label">Favorites</div></div>
-    </div>
-    ${topFiles.length ? `
-    <div class="dash-section">
-      <div class="dash-title">🔥 Most Visited</div>
-      <div class="dash-list" id="dashTopList">
-        ${topFiles.map(f => `
-          <div class="dash-row" data-path="${f.path}">
-            <span class="dash-row__name">${humanLabel(f.name)}</span>
-            <span class="dash-row__count">${visits[f.path] || 0}×</span>
-          </div>
-          <div class="dash-bar" style="width:${Math.round(((visits[f.path] || 0) / maxVisit) * 100)}%"></div>
-        `).join('')}
+    <div class="dash-header">
+      <div>
+        <div class="dash-header__greet">${greeting} 👋</div>
+        <div class="dash-header__date">${dateStr} · ${flatFiles.length} files across ${folders} folder${folders === 1 ? '' : 's'}</div>
       </div>
-    </div>`: ''}
+      <div class="dash-qa">
+        <button class="dash-qa__btn" id="dashQaRefresh"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Refresh</button>
+        <button class="dash-qa__btn" id="dashQaBulk"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Select</button>
+        <button class="dash-qa__btn" id="dashQaDark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Theme</button>
+        <button class="dash-qa__btn" id="dashQaPrint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card"><svg class="dash-card__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><div class="dash-card__num">${flatFiles.length}</div><div class="dash-card__label">Total Files</div></div>
+      <div class="dash-card"><svg class="dash-card__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><div class="dash-card__num">${folders}</div><div class="dash-card__label">Folders</div></div>
+      <div class="dash-card"><svg class="dash-card__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="dash-card__num">${favs.size}</div><div class="dash-card__label">Favorites</div></div>
+      <div class="dash-card"><svg class="dash-card__icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><div class="dash-card__num">${totalOpens}</div><div class="dash-card__label">Total Opens</div></div>
+    </div>
+
     <div class="dash-section">
-      <div class="dash-title">⭐ Favorites</div>
-      <div class="dash-list" id="dashFavList">
-        ${[...getFavs()].map(path => { const n = flatFiles.find(f => f.path === path); return n ? `<div class="dash-row" data-path="${path}"><span class="dash-row__name">${humanLabel(n.name)}</span></div>` : ''; }).join('') || '<div style="font-size:13px;color:var(--text-faint);padding:8px">No favorites yet. Star files in the sidebar.</div>'}
+      <div class="dash-title">📊 File Types<span class="dash-title__count">${typeCounts.length} type${typeCounts.length === 1 ? '' : 's'}</span></div>
+      ${typeCounts.length ? typeCounts.map(t => `
+        <div class="dash-typebar">
+          <span class="dash-typebar__tag" style="background:${TYPE_COLORS[t.type] || '#888'}">${t.def.tag}</span>
+          <div class="dash-typebar__track"><div class="dash-typebar__fill" style="width:${Math.max(3, Math.round((t.count / maxTypeCount) * 100))}%;background:${TYPE_COLORS[t.type] || '#888'}"></div></div>
+          <div class="dash-typebar__count">${t.count}</div>
+        </div>`).join('') : '<div class="dash-empty">No files yet — push something to the repo.</div>'}
+    </div>
+
+    <div class="dash-cols">
+      <div class="dash-section">
+        <div class="dash-title">🕓 Recently Opened</div>
+        <div class="dash-list">${recentNodes.length ? recentNodes.map(f => dashRowHtml(f)).join('') : '<div class="dash-empty">Nothing opened yet.</div>'}</div>
+      </div>
+      <div class="dash-section">
+        <div class="dash-title">🔥 Most Visited</div>
+        <div class="dash-list">${topFiles.length ? topFiles.map(f => dashRowHtml(f, `<span class="dash-row__count">${visits[f.path] || 0}×</span>`)).join('') : '<div class="dash-empty">Open some files to see trends.</div>'}</div>
+      </div>
+    </div>
+
+    <div class="dash-cols">
+      <div class="dash-section">
+        <div class="dash-title">⭐ Favorites<span class="dash-title__count">${favs.size}</span></div>
+        <div class="dash-list">${[...favs].length ? [...favs].map(path => { const n = flatFiles.find(f => f.path === path); return n ? dashRowHtml(n) : ''; }).join('') : '<div class="dash-empty">No favorites yet. Star files in the sidebar.</div>'}</div>
+      </div>
+      <div class="dash-section">
+        <div class="dash-title">📁 Top Folders</div>
+        <div class="dash-list">
+          ${topFolders.length ? topFolders.map(([folder, count]) => `
+            <div class="dash-folder-row" data-folder="${folder}">${iconFolder()}<span class="dash-folder-row__name">${folder.split('/').pop()}</span><span class="dash-folder-row__count">${count} file${count === 1 ? '' : 's'}</span></div>`).join('') : '<div class="dash-empty">No subfolders yet.</div>'}
+        </div>
       </div>
     </div>`;
       contentEl.appendChild(d);
+
       d.querySelectorAll('.dash-row[data-path]').forEach(row => {
         row.addEventListener('click', () => { const n = flatFiles.find(f => f.path === row.dataset.path); if (n) openFile(n); });
       });
+      d.querySelectorAll('.dash-folder-row[data-folder]').forEach(row => {
+        row.addEventListener('click', () => {
+          const folder = row.dataset.folder;
+          const segs = folder.split('/').filter(Boolean); let acc = '';
+          segs.forEach(seg => { acc = acc ? acc + '/' + seg : seg; openFolders.add(acc); });
+          lsSet(LS.OPEN_FOLDERS, [...openFolders]);
+          refreshSidebar();
+          openSidebar();
+          toast(`Expanded "${folder.split('/').pop()}"`);
+        });
+      });
+      document.getElementById('dashQaRefresh')?.addEventListener('click', init);
+      document.getElementById('dashQaBulk')?.addEventListener('click', () => document.getElementById('bulkBtn').click());
+      document.getElementById('dashQaDark')?.addEventListener('click', () => applyDark(!document.documentElement.classList.contains('dark')));
+      document.getElementById('dashQaPrint')?.addEventListener('click', () => document.getElementById('printBtn')?.click());
     }
 
     document.getElementById('dashBtn').addEventListener('click', showDashboard);
